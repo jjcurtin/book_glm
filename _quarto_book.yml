@@ -25,7 +25,8 @@ book:
   reader-mode: true
   chapters:
     - index.qmd
-    - 001_overview.qmd
+    - 01_overview.qmd
+    - 02_sampling_distributions.qmd
     - part: Appendices
       chapters:
         - app_terminology.qmd
