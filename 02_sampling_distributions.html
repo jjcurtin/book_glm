@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="book.css">
 </head>
@@ -178,6 +207,9 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#inferential-statistics" id="toc-inferential-statistics" class="nav-link active" data-scroll-target="#inferential-statistics"><span class="header-section-number">2.1</span> Inferential Statistics</a></li>
+  <li><a href="#populations" id="toc-populations" class="nav-link" data-scroll-target="#populations"><span class="header-section-number">2.2</span> Populations</a></li>
+  <li><a href="#population-parameters" id="toc-population-parameters" class="nav-link" data-scroll-target="#population-parameters"><span class="header-section-number">2.3</span> (Population) Parameters</a></li>
+  <li><a href="#samples-parameter-estimates" id="toc-samples-parameter-estimates" class="nav-link" data-scroll-target="#samples-parameter-estimates"><span class="header-section-number">2.4</span> Samples &amp; Parameter Estimates</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/02_sampling_distributions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -213,6 +245,41 @@ In inferential statistics, we use these parameter estimates to test hypotheses (
 These predictions about the size of population parameters typically map directly onto research questions about (causal) relationships between variables (IVs and DV).<br>
 <br>
 Answers from inferential statistics are <strong>probabilistic</strong>. In other words, all answers have the potential to be wrong and you will provide an index of that probability along with your results.</p>
+<hr>
+</section>
+<section id="populations" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="populations"><span class="header-section-number">2.2</span> Populations</h2>
+<p>A population is any clearly defined set of objects or events (people, occurrences, animals, etc.). Populations usually represent all events in a particular class (e.g., all college students, all alcoholics, all depressed people, all people). It is often an abstract concept because in many/most instances you will never have access to the entire population.<br>
+<br>
+For example, many of our studies may have the population of all people as its target.<br>
+<br>
+Nonetheless, researchers usually want to describe or draw conclusions about populations (e.g., We don’t care if some new drug is an effective treatment for 100 people in your sample. Will it work, on average, for everyone we might treat?).</p>
+<hr>
+</section>
+<section id="population-parameters" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="population-parameters"><span class="header-section-number">2.3</span> (Population) Parameters</h2>
+<p>A parameter is a value used to describe a certain characteristic of a population. It is usually unknown and therefore has to be estimated.<br>
+<br>
+For example, the population mean is a parameter that is often used to indicate the average/typical value of a variable in the population.<br>
+<br>
+Within a population, a parameter is a fixed value which does not vary within the population at the time of measurement (e.g., the mean height of people in the US at the present moment).<br>
+<br>
+You typically can’t calculate these parameters directly because you don’t have access to the entire population.<br>
+<br>
+We use Greek letters to represent population parameters (<span class="math inline">\(\sigma\)</span>, <span class="math inline">\(\sigma^2\)</span>, <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_j\)</span>).</p>
+<hr>
+</section>
+<section id="samples-parameter-estimates" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="samples-parameter-estimates"><span class="header-section-number">2.4</span> Samples &amp; Parameter Estimates</h2>
+<p>A sample is a finite group of units (e.g., participants) selected from the population of interest.<br>
+<br>
+A sample is generally selected for a study because the population is too large to study in its entirety. We typically have only one sample in a study.<br>
+<br>
+We use the sample to estimate and test parameters in the population.<br>
+<br>
+These estimates are called parameter estimates.<br>
+<br>
+We use Roman letters to represent sample parameter estimates (<span class="math inline">\(\overline{X}\)</span>, <span class="math inline">\(s\)</span>, <span class="math inline">\(s^2\)</span>, <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_j\)</span>).</p>
 <hr>
 
 

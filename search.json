@@ -28,5 +28,35 @@
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#populations",
+    "href": "02_sampling_distributions.html#populations",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.2 Populations",
+    "text": "2.2 Populations\nA population is any clearly defined set of objects or events (people, occurrences, animals, etc.). Populations usually represent all events in a particular class (e.g., all college students, all alcoholics, all depressed people, all people). It is often an abstract concept because in many/most instances you will never have access to the entire population.\n\nFor example, many of our studies may have the population of all people as its target.\n\nNonetheless, researchers usually want to describe or draw conclusions about populations (e.g., We don’t care if some new drug is an effective treatment for 100 people in your sample. Will it work, on average, for everyone we might treat?).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#population-parameters",
+    "href": "02_sampling_distributions.html#population-parameters",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.3 (Population) Parameters",
+    "text": "2.3 (Population) Parameters\nA parameter is a value used to describe a certain characteristic of a population. It is usually unknown and therefore has to be estimated.\n\nFor example, the population mean is a parameter that is often used to indicate the average/typical value of a variable in the population.\n\nWithin a population, a parameter is a fixed value which does not vary within the population at the time of measurement (e.g., the mean height of people in the US at the present moment).\n\nYou typically can’t calculate these parameters directly because you don’t have access to the entire population.\n\nWe use Greek letters to represent population parameters (\\(\\sigma\\), \\(\\sigma^2\\), \\(\\beta_0\\), \\(\\beta_j\\)).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#samples-parameter-estimates",
+    "href": "02_sampling_distributions.html#samples-parameter-estimates",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.4 Samples & Parameter Estimates",
+    "text": "2.4 Samples & Parameter Estimates\nA sample is a finite group of units (e.g., participants) selected from the population of interest.\n\nA sample is generally selected for a study because the population is too large to study in its entirety. We typically have only one sample in a study.\n\nWe use the sample to estimate and test parameters in the population.\n\nThese estimates are called parameter estimates.\n\nWe use Roman letters to represent sample parameter estimates (\\(\\overline{X}\\), \\(s\\), \\(s^2\\), \\(b_0\\), \\(b_j\\)).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
   }
 ]
