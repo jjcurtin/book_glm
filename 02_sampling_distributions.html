@@ -210,6 +210,9 @@ window.Quarto = {
   <li><a href="#populations" id="toc-populations" class="nav-link" data-scroll-target="#populations"><span class="header-section-number">2.2</span> Populations</a></li>
   <li><a href="#population-parameters" id="toc-population-parameters" class="nav-link" data-scroll-target="#population-parameters"><span class="header-section-number">2.3</span> (Population) Parameters</a></li>
   <li><a href="#samples-parameter-estimates" id="toc-samples-parameter-estimates" class="nav-link" data-scroll-target="#samples-parameter-estimates"><span class="header-section-number">2.4</span> Samples &amp; Parameter Estimates</a></li>
+  <li><a href="#sampling-error" id="toc-sampling-error" class="nav-link" data-scroll-target="#sampling-error"><span class="header-section-number">2.5</span> Sampling Error</a></li>
+  <li><a href="#hypothetical-sampling-distribution" id="toc-hypothetical-sampling-distribution" class="nav-link" data-scroll-target="#hypothetical-sampling-distribution"><span class="header-section-number">2.6</span> Hypothetical Sampling Distribution</a></li>
+  <li><a href="#what-if-we-didnt-need-samples" id="toc-what-if-we-didnt-need-samples" class="nav-link" data-scroll-target="#what-if-we-didnt-need-samples"><span class="header-section-number">2.7</span> What if we didn’t need samples?</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/02_sampling_distributions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -281,6 +284,31 @@ These estimates are called parameter estimates.<br>
 <br>
 We use Roman letters to represent sample parameter estimates (<span class="math inline">\(\overline{X}\)</span>, <span class="math inline">\(s\)</span>, <span class="math inline">\(s^2\)</span>, <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_j\)</span>).</p>
 <hr>
+</section>
+<section id="sampling-error" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="sampling-error"><span class="header-section-number">2.5</span> Sampling Error</h2>
+<p>Since a sample does not include all members of the population, parameter estimates generally differ from parameters on the entire population (e.g., use mean height of a sample of 1000 people to estimate mean height of US population).<br>
+<br>
+The difference between the (sample) parameter estimate and the (population) parameter is sampling error.<br>
+<br>
+You will not be able to calculate the sampling error of your parameter estimate directly because you don’t know the value of the population parameter. However, you can estimate it by probabilistic modeling of the <em>hypothetical sampling distibution</em> for that parameter.</p>
+<hr>
+</section>
+<section id="hypothetical-sampling-distribution" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="hypothetical-sampling-distribution"><span class="header-section-number">2.6</span> Hypothetical Sampling Distribution</h2>
+<p>A sampling distribution is a probability distribution for a parameter estimate drawn from all possible samples of size <span class="math inline">\(N\)</span> taken from a population.<br>
+<br>
+A sampling distribution can be formed for any population parameter.<br>
+<br>
+Each time you draw a sample of size <span class="math inline">\(N\)</span> from a population you can calculate an estimate of that population parameter from that sample.<br>
+<br>
+Because of sampling error, these parameter estimates will not exactly equal the population parameter. They will not equal each other either. They will form a distribution.<br>
+<br>
+A sampling distribution, like a population, is an abstract concept that represents the outcome of repeated (infinite) sampling. You will typically only have one sample.</p>
+<hr>
+</section>
+<section id="what-if-we-didnt-need-samples" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="what-if-we-didnt-need-samples"><span class="header-section-number">2.7</span> What if we didn’t need samples?</h2>
 
 
 </section>

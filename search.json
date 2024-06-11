@@ -58,5 +58,35 @@
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#sampling-error",
+    "href": "02_sampling_distributions.html#sampling-error",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.5 Sampling Error",
+    "text": "2.5 Sampling Error\nSince a sample does not include all members of the population, parameter estimates generally differ from parameters on the entire population (e.g., use mean height of a sample of 1000 people to estimate mean height of US population).\n\nThe difference between the (sample) parameter estimate and the (population) parameter is sampling error.\n\nYou will not be able to calculate the sampling error of your parameter estimate directly because you don’t know the value of the population parameter. However, you can estimate it by probabilistic modeling of the hypothetical sampling distibution for that parameter.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#hypothetical-sampling-distribution",
+    "href": "02_sampling_distributions.html#hypothetical-sampling-distribution",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.6 Hypothetical Sampling Distribution",
+    "text": "2.6 Hypothetical Sampling Distribution\nA sampling distribution is a probability distribution for a parameter estimate drawn from all possible samples of size \\(N\\) taken from a population.\n\nA sampling distribution can be formed for any population parameter.\n\nEach time you draw a sample of size \\(N\\) from a population you can calculate an estimate of that population parameter from that sample.\n\nBecause of sampling error, these parameter estimates will not exactly equal the population parameter. They will not equal each other either. They will form a distribution.\n\nA sampling distribution, like a population, is an abstract concept that represents the outcome of repeated (infinite) sampling. You will typically only have one sample.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#what-if-we-didnt-need-samples",
+    "href": "02_sampling_distributions.html#what-if-we-didnt-need-samples",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.7 What if we didn’t need samples?",
+    "text": "2.7 What if we didn’t need samples?",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
   }
 ]
