@@ -1,7 +1,24 @@
 --- 
 output: html_document 
 editor_options:  
-  chunk_output_type: console 
+  chunk_output_type: console
 --- 
  
 # Sampling Distributions, Parameters, and Parameter Estimates 
+
+-----
+
+## Inferential Statistics
+
+Inferential statistics are used to estimate *parameters* in the population from parameter estimates in a sample drawn from that population. 
+\
+\
+In inferential statistics, we use these parameter estimates to test hypotheses (predictions; null and alternative hypotheses) about the size of the population parameter. 
+\
+\
+These predictions about the size of population parameters typically map directly onto research questions about (causal) relationships between variables (IVs and DV).
+\
+\
+Answers from inferential statistics are **probabilistic**. In other words, all answers have the potential to be wrong and you will provide an index of that probability along with your results. 
+
+-----
