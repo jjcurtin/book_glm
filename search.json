@@ -18,5 +18,15 @@
     "crumbs": [
       "Course Syllabus"
     ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html",
+    "href": "02_sampling_distributions.html",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "",
+    "text": "2.1 Inferential Statistics\nInferential statistics are used to estimate parameters in the population from parameter estimates in a sample drawn from that population.\n\nIn inferential statistics, we use these parameter estimates to test hypotheses (predictions; null and alternative hypotheses) about the size of the population parameter.\n\nThese predictions about the size of population parameters typically map directly onto research questions about (causal) relationships between variables (IVs and DV).\n\nAnswers from inferential statistics are probabilistic. In other words, all answers have the potential to be wrong and you will provide an index of that probability along with your results.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
   }
 ]
