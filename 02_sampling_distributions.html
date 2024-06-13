@@ -249,6 +249,7 @@ window.Quarto = {
   <li><a href="#what-if-we-didnt-need-samples" id="toc-what-if-we-didnt-need-samples" class="nav-link" data-scroll-target="#what-if-we-didnt-need-samples"><span class="header-section-number">2.7</span> What if we didn’t need samples?</a></li>
   <li><a href="#ocean-liking-scale-scores-in-full-population" id="toc-ocean-liking-scale-scores-in-full-population" class="nav-link" data-scroll-target="#ocean-liking-scale-scores-in-full-population"><span class="header-section-number">2.8</span> Ocean Liking Scale Scores in Full Population</a></li>
   <li><a href="#parameter-estimation-and-testing" id="toc-parameter-estimation-and-testing" class="nav-link" data-scroll-target="#parameter-estimation-and-testing"><span class="header-section-number">2.9</span> Parameter Estimation and Testing</a></li>
+  <li><a href="#obtain-a-sample" id="toc-obtain-a-sample" class="nav-link" data-scroll-target="#obtain-a-sample"><span class="header-section-number">2.10</span> Obtain a Sample</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/02_sampling_distributions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -559,11 +560,11 @@ $ like_15 &lt;dbl&gt; -8.6085538, 5.9880386, 45.5367907, 20.8864415, 5.8350596, 
 <pre><code># A tibble: 5 × 3
   subid like_0 like_15
   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-1  2502   7.86    22.9
-2   809  15.1     30.1
-3  8514  29.1     44.1
-4  3728  10.2     25.2
-5  7338 -32.9    -17.9</code></pre>
+1  6346 -40.7   -25.7 
+2  3090 -43.3   -28.3 
+3  1921 -13.7     1.30
+4  3743   6.23   21.2 
+5     2  -9.01    5.99</code></pre>
 </div>
 </div>
 <hr>
@@ -611,8 +612,8 @@ Question: What do you conclude?
 <div class="callout-body-container callout-body">
 <details class="code-fold">
 <summary>Show Answer</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Inhabitants of the island ***are*** neutral on average on the Ocean Liking Scale;</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>$\mu$ = 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>print("Inhabitants of the island ***are*** neutral on average on the Ocean Liking Scale;")</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>print("$\mu$ = 0")</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -631,8 +632,8 @@ Question: How confident are you about this conclusion?
 <div class="callout-body-container callout-body">
 <details class="code-fold">
 <summary>Show Answer</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Excluding issues of measurement of the scale (i.e., reliability), you are 100%</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>confident that the population mean score on this scale is 0 ($\mu$ = 0). </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>print("Excluding issues of measurement of the scale (i.e., reliability), you are 100%")</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>print("confident that the population mean score on this scale is 0 ($\mu$ = 0).") </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -660,6 +661,10 @@ Question: Of course, this approach to answering a research question is not typic
 </div>
 </div>
 </div>
+<hr>
+</section>
+<section id="obtain-a-sample" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="obtain-a-sample"><span class="header-section-number">2.10</span> Obtain a Sample</h2>
 
 
 </section>
