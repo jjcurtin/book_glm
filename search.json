@@ -44,7 +44,7 @@
     "href": "02_sampling_distributions.html#population-parameters",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "2.3 (Population) Parameters",
-    "text": "2.3 (Population) Parameters\nA parameter is a value used to describe a certain characteristic of a population. It is usually unknown and therefore has to be estimated.\n\nFor example, the population mean is a parameter that is often used to indicate the average/typical value of a variable in the population.\n\nWithin a population, a parameter is a fixed value which does not vary within the population at the time of measurement (e.g., the mean height of people in the US at the present moment).\n\nYou typically can’t calculate these parameters directly because you don’t have access to the entire population.\n\nWe use Greek letters to represent population parameters (\\(\\sigma\\), \\(\\sigma^2\\), \\(\\beta_0\\), \\(\\beta_j\\)).",
+    "text": "2.3 (Population) Parameters\nA parameter is a value used to describe a certain characteristic of a population. It is usually unknown and therefore has to be estimated.\n\nFor example, the population mean is a parameter that is often used to indicate the average/typical value of a variable in the population.\n\nWithin a population, a parameter is a fixed value which does not vary within the population at the time of measurement (e.g., the mean height of people in the US at the present moment).\n\nYou typically can’t calculate these parameters directly because you don’t have access to the entire population.\n\nWe use Greek letters to represent population parameters (\\(\\mu\\), \\(\\sigma\\), \\(\\sigma^2\\), \\(\\beta_0\\), \\(\\beta_j\\)).",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -84,7 +84,17 @@
     "href": "02_sampling_distributions.html#what-if-we-didnt-need-samples",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "2.7 What if we didn’t need samples?",
-    "text": "2.7 What if we didn’t need samples?",
+    "text": "2.7 What if we didn’t need samples?\nResearch question: How do inhabitants of a remote pacific island feel about the ocean? Population size = 10,000.\n\nDependent measure: Ocean liking scale scores that range from -100 (strongly dislike) to 100 (strongly like). 0 represents neutral.\n\nHypotheses: \\(H_0\\): \\(\\mu\\) = 0; \\(H_a\\): \\(\\mu\\) &lt;&gt; 0\n\n\n\n\n\n\nQuestion: How would you answer this question if you had unlimited resources (e.g., time, money, and patience)?\n\n\n\n\n\n\n\nShow Answer\nAdminister the Ocean liking scale to all 10,000 inhabitants in the population \nand calculate the population mean score. Is it 0?  If not, the inhabitants are \nnot neutral on average.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#ocean-liking-scale-scores-in-full-population",
+    "href": "02_sampling_distributions.html#ocean-liking-scale-scores-in-full-population",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.8 Ocean Liking Scale Scores in Full Population",
+    "text": "2.8 Ocean Liking Scale Scores in Full Population\n\nlibrary(tidyverse)\n\n\n1\n\nThis path points to where your data is and should be a relative path from your R project.\n\n2\n\nwe use the here() function in the here package (here::here()) to define paths within a function. This approach (vs. file.path) works well when using R Projects.\n\n3\n\nglimpse() is a useful function that you can pipe tibbles into when first reading them in. It shows you useful information, like number of rows and column, variable (column) names, a sample of what the data look like, and the class of each variable (e.g., double, character, factor).\n\n\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n1path_data &lt;- \"data_lecture\"\n\n2data &lt;- read_csv(here::here(path_data, \"2_sampling_distributions_like.csv\"),\n                 show_col_types = FALSE) |&gt; \n3   glimpse()\n\nRows: 10,000\nColumns: 3\n$ SubID  &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, …\n$ Like0  &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 23.66712…\n$ Like15 &lt;dbl&gt; -8.6085538, 5.9880386, 45.5367907, 20.8864415, 5.8350596, 38.66…",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
