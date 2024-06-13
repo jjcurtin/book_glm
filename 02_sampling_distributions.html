@@ -258,6 +258,7 @@ window.Quarto = {
   <li><a href="#raw-score-distribution-vs.-sampling-distribution" id="toc-raw-score-distribution-vs.-sampling-distribution" class="nav-link" data-scroll-target="#raw-score-distribution-vs.-sampling-distribution"><span class="header-section-number">2.12</span> Raw Score Distribution vs.&nbsp;Sampling Distribution</a></li>
   <li><a href="#sampling-distribution-of-the-mean-2" id="toc-sampling-distribution-of-the-mean-2" class="nav-link" data-scroll-target="#sampling-distribution-of-the-mean-2"><span class="header-section-number">2.13</span> Sampling Distribution of the Mean</a></li>
   <li><a href="#standard-errorse" id="toc-standard-errorse" class="nav-link" data-scroll-target="#standard-errorse"><span class="header-section-number">2.14</span> Standard Error(SE)</a></li>
+  <li><a href="#shape-of-the-sampling-distribution" id="toc-shape-of-the-sampling-distribution" class="nav-link" data-scroll-target="#shape-of-the-sampling-distribution"><span class="header-section-number">2.15</span> Shape of the Sampling Distribution</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/02_sampling_distributions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1068,6 +1069,81 @@ Question: What would happen to SE if there was no variation in population scores
 </div>
 </div>
 </div>
+<hr>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question: What is the relationship between sample size and SE?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<details class="code-fold">
+<summary>Show Answer</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>As the sample size increases, the SE for the statistic will decrease.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question: What would the SE be if the sample size equalled population size?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<details class="code-fold">
+<summary>Show Answer</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>If the sample contained all participants from the population, the SE would be equal </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>to 0 because each sample mean would have exactly the same value as the overall population </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>mean (because all same scores).</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question: What would happen if the samples contained only 1 participant?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<details class="code-fold">
+<summary>Show Answer</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>If each sample contained only 1 participant, the SE would be equal to the variation </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>($\sigma$) observed within the population.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="shape-of-the-sampling-distribution" class="level2" data-number="2.15">
+<h2 data-number="2.15" class="anchored" data-anchor-id="shape-of-the-sampling-distribution"><span class="header-section-number">2.15</span> Shape of the Sampling Distribution</h2>
+<p><strong><em>Central Limit Theorem:</em></strong> The shape of the sampling distribution approaches normal as N increases.<br>
+<br>
+The shape is roughly normal even for moderate sample sizes assuming that the original distribution isn’t really weird (i.e., non-normal).</p>
+<hr>
 
 
 </section>
