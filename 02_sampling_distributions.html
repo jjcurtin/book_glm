@@ -248,6 +248,7 @@ window.Quarto = {
   <li><a href="#hypothetical-sampling-distribution" id="toc-hypothetical-sampling-distribution" class="nav-link" data-scroll-target="#hypothetical-sampling-distribution"><span class="header-section-number">2.6</span> Hypothetical Sampling Distribution</a></li>
   <li><a href="#what-if-we-didnt-need-samples" id="toc-what-if-we-didnt-need-samples" class="nav-link" data-scroll-target="#what-if-we-didnt-need-samples"><span class="header-section-number">2.7</span> What if we didn’t need samples?</a></li>
   <li><a href="#ocean-liking-scale-scores-in-full-population" id="toc-ocean-liking-scale-scores-in-full-population" class="nav-link" data-scroll-target="#ocean-liking-scale-scores-in-full-population"><span class="header-section-number">2.8</span> Ocean Liking Scale Scores in Full Population</a></li>
+  <li><a href="#ocean-liking-scale-scores-in-full-population-1" id="toc-ocean-liking-scale-scores-in-full-population-1" class="nav-link" data-scroll-target="#ocean-liking-scale-scores-in-full-population-1"><span class="header-section-number">2.9</span> Ocean Liking Scale Scores in Full Population</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/02_sampling_distributions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -402,11 +403,186 @@ Question: How would you answer this question if you had unlimited resources (e.g
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 10,000
 Columns: 3
-$ SubID  &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, …
-$ Like0  &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 23.66712…
-$ Like15 &lt;dbl&gt; -8.6085538, 5.9880386, 45.5367907, 20.8864415, 5.8350596, 38.66…</code></pre>
+$ subid   &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,…
+$ like_0  &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 23.6671…
+$ like_15 &lt;dbl&gt; -8.6085538, 5.9880386, 45.5367907, 20.8864415, 5.8350596, 38.6…</code></pre>
 </div>
 </div>
+<hr>
+</section>
+<section id="ocean-liking-scale-scores-in-full-population-1" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="ocean-liking-scale-scores-in-full-population-1"><span class="header-section-number">2.9</span> Ocean Liking Scale Scores in Full Population</h2>
+<p><code>skim</code> functions in the <code>skimr</code> package are helpful for quick summaries of your data (e.g., missingness, distribution, type of data)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">10000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 10%">
+<col style="width: 14%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">subid</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5000.5</td>
+<td style="text-align: right;">2886.90</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2500.75</td>
+<td style="text-align: right;">5000.5</td>
+<td style="text-align: right;">7500.25</td>
+<td style="text-align: right;">10000.00</td>
+<td style="text-align: left;">▇▇▇▇▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">like_0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">23.67</td>
+<td style="text-align: right;">-86.64</td>
+<td style="text-align: right;">-16.08</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">16.14</td>
+<td style="text-align: right;">84.46</td>
+<td style="text-align: left;">▁▃▇▃▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">like_15</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">15.0</td>
+<td style="text-align: right;">23.67</td>
+<td style="text-align: right;">-71.64</td>
+<td style="text-align: right;">-1.08</td>
+<td style="text-align: right;">15.1</td>
+<td style="text-align: right;">31.14</td>
+<td style="text-align: right;">99.46</td>
+<td style="text-align: left;">▁▃▇▃▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>You can also pull out a few rows to look at your data. This can be done using <code>slice_head</code> to pull out <span class="math inline">\(n\)</span> top rows of the data set, <code>slice_tail</code> to pull out <span class="math inline">\(n\)</span> bottom rows of the data set, or <code>slice_sample</code> to pull out a random <span class="math inline">\(n\)</span> of rows from the data set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   subid like_0 like_15
+   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+ 1     1 -23.6   -8.61 
+ 2     2  -9.01   5.99 
+ 3     3  30.5   45.5  
+ 4     4   5.89  20.9  
+ 5     5  -9.16   5.84 
+ 6     6  23.7   38.7  
+ 7     7 -10.1    4.87 
+ 8     8 -14.1    0.851
+ 9     9   8.11  23.1  
+10    10  15.7   30.7  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_tail</span>(<span class="at">n =</span> <span class="dv">10</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   subid like_0 like_15
+   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+ 1  9991  28.3    43.3 
+ 2  9992  13.7    28.7 
+ 3  9993 -12.4     2.62
+ 4  9994   7.69   22.7 
+ 5  9995 -53.4   -38.4 
+ 6  9996 -16.6    -1.63
+ 7  9997  -8.37    6.63
+ 8  9998  18.6    33.6 
+ 9  9999 -16.2    -1.19
+10 10000 -17.0    -2.03</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   subid like_0 like_15
+   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+ 1  8499  42.9   57.9  
+ 2  9859 -14.1    0.894
+ 3   302  15.4   30.4  
+ 4  3874  -6.15   8.85 
+ 5  4371 -40.3  -25.3  
+ 6  4550 -23.6   -8.62 
+ 7  8823   6.06  21.1  
+ 8  8911  46.2   61.2  
+ 9   822  15.9   30.9  
+10  6225  15.8   30.8  </code></pre>
+</div>
+</div>
+<hr>
 
 
 </section>
