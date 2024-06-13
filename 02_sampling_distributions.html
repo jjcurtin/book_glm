@@ -559,11 +559,11 @@ $ like_15 &lt;dbl&gt; -8.6085538, 5.9880386, 45.5367907, 20.8864415, 5.8350596, 
 <pre><code># A tibble: 5 × 3
   subid like_0 like_15
   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-1  3904   5.73    20.7
-2   978 -36.3    -21.3
-3  1012  12.8     27.8
-4  7460  -2.94    12.1
-5   749  74.1     89.1</code></pre>
+1  6602  23.9    38.9 
+2  2771  -7.70    7.30
+3  3877   1.62   16.6 
+4  8644  16.1    31.1 
+5  8498  38.8    53.8 </code></pre>
 </div>
 </div>
 <hr>
@@ -585,10 +585,6 @@ $ like_15 &lt;dbl&gt; -8.6085538, 5.9880386, 45.5367907, 20.8864415, 5.8350596, 
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> like_0)) <span class="sc">+</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"light grey"</span>, <span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span> </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -613,11 +609,11 @@ Question: What do you conclude?
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<div class="cell">
+<div class="cell" data-resuresults="asis">
 <details class="code-fold">
 <summary>Show Answer</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Inhabitants of the island ***are*** neutral on average on the Ocean Liking Scale;</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>$\mu$ = 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Inhabitants of the island are neutral on average on the Ocean Liking Scale;</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>$\mu$ = 0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -638,8 +634,8 @@ Question: How confident are you about this conclusion?
 <div class="cell">
 <details class="code-fold">
 <summary>Show Answer</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Administer the Ocean liking scale to all 10,000 inhabitants in the population and </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>calculate the population mean score. Is it 0?  If not, the inhabitants are not neutral on average.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Administer the Ocean liking scale to all 10,000 inhabitants in the population and </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>calculate the population mean score. Is it 0?  If not, the inhabitants are not neutral on average.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -660,8 +656,8 @@ Question: Of course, this approach to answering a research question is not typic
 <div class="cell">
 <details class="code-fold">
 <summary>Show Answer</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Administer the Ocean liking scale to all 10,000 inhabitants in the population and </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>calculate the population mean score. Is it 0?  If not, the inhabitants are not neutral on average.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Administer the Ocean liking scale to all 10,000 inhabitants in the population and </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>calculate the population mean score. Is it 0?  If not, the inhabitants are not neutral on average.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
