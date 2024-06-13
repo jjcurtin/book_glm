@@ -247,8 +247,10 @@ window.Quarto = {
   <li><a href="#sampling-error" id="toc-sampling-error" class="nav-link" data-scroll-target="#sampling-error"><span class="header-section-number">2.5</span> Sampling Error</a></li>
   <li><a href="#hypothetical-sampling-distribution" id="toc-hypothetical-sampling-distribution" class="nav-link" data-scroll-target="#hypothetical-sampling-distribution"><span class="header-section-number">2.6</span> Hypothetical Sampling Distribution</a></li>
   <li><a href="#what-if-we-didnt-need-samples" id="toc-what-if-we-didnt-need-samples" class="nav-link" data-scroll-target="#what-if-we-didnt-need-samples"><span class="header-section-number">2.7</span> What if we didn’t need samples?</a></li>
-  <li><a href="#ocean-liking-scale-scores-in-full-population" id="toc-ocean-liking-scale-scores-in-full-population" class="nav-link" data-scroll-target="#ocean-liking-scale-scores-in-full-population"><span class="header-section-number">2.8</span> Ocean Liking Scale Scores in Full Population</a></li>
-  <li><a href="#ocean-liking-scale-scores-in-full-population-1" id="toc-ocean-liking-scale-scores-in-full-population-1" class="nav-link" data-scroll-target="#ocean-liking-scale-scores-in-full-population-1"><span class="header-section-number">2.9</span> Ocean Liking Scale Scores in Full Population</a></li>
+  <li><a href="#ocean-liking-scale-scores-in-full-population" id="toc-ocean-liking-scale-scores-in-full-population" class="nav-link" data-scroll-target="#ocean-liking-scale-scores-in-full-population"><span class="header-section-number">2.8</span> Ocean Liking Scale Scores in Full Population</a>
+  <ul class="collapse">
+  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also"><span class="header-section-number">2.8.1</span> See also:</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/02_sampling_distributions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -409,9 +411,8 @@ $ like_15 &lt;dbl&gt; -8.6085538, 5.9880386, 45.5367907, 20.8864415, 5.8350596, 
 </div>
 </div>
 <hr>
-</section>
-<section id="ocean-liking-scale-scores-in-full-population-1" class="level2" data-number="2.9">
-<h2 data-number="2.9" class="anchored" data-anchor-id="ocean-liking-scale-scores-in-full-population-1"><span class="header-section-number">2.9</span> Ocean Liking Scale Scores in Full Population</h2>
+<section id="see-also" class="level3" data-number="2.8.1">
+<h3 data-number="2.8.1" class="anchored" data-anchor-id="see-also"><span class="header-section-number">2.8.1</span> See also:</h3>
 <p><code>skim</code> functions in the <code>skimr</code> package are helpful for quick summaries of your data (e.g., missingness, distribution, type of data)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
@@ -570,21 +571,22 @@ $ like_15 &lt;dbl&gt; -8.6085538, 5.9880386, 45.5367907, 20.8864415, 5.8350596, 
 <pre><code># A tibble: 10 × 3
    subid like_0 like_15
    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
- 1  8499  42.9   57.9  
- 2  9859 -14.1    0.894
- 3   302  15.4   30.4  
- 4  3874  -6.15   8.85 
- 5  4371 -40.3  -25.3  
- 6  4550 -23.6   -8.62 
- 7  8823   6.06  21.1  
- 8  8911  46.2   61.2  
- 9   822  15.9   30.9  
-10  6225  15.8   30.8  </code></pre>
+ 1  4523  31.1    46.1 
+ 2  6607 -17.6    -2.63
+ 3  8399  -9.35    5.65
+ 4  7212 -21.7    -6.71
+ 5  3391   8.03   23.0 
+ 6  4112 -21.1    -6.11
+ 7  2984 -20.9    -5.91
+ 8  7253 -31.1   -16.1 
+ 9  3363   4.80   19.8 
+10  3251  25.5    40.5 </code></pre>
 </div>
 </div>
 <hr>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
