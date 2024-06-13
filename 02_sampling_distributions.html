@@ -1151,102 +1151,6 @@ The shape is roughly normal even for moderate sample sizes assuming that the ori
 <h2 data-number="2.16" class="anchored" data-anchor-id="normal-population-and-various-sampling-distributions"><span class="header-section-number">2.16</span> Normal Population and Various Sampling Distributions</h2>
 <p><strong>Population size: 100,000; Simulated 10,000 samples.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate population data</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>data_sim <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">normal =</span> <span class="fu">rnorm</span>(<span class="dv">100000</span>, <span class="dv">100</span>, <span class="dv">10</span>), <span class="co"># normal dist with mean = 100</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">uniform =</span> <span class="fu">runif</span>(<span class="dv">100000</span>, <span class="at">min=</span><span class="dv">60</span>, <span class="at">max=</span><span class="dv">140</span>), <span class="co"># uniform distribution with min = 60, max  = 140</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">skewed =</span> <span class="fu">rexp</span>(<span class="dv">100000</span>, <span class="at">rate =</span> <span class="dv">1</span>)<span class="sc">*</span><span class="dv">100</span> <span class="co"># positive skew (exponential distribution * 100) </span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate sampling distributions</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>samp_norm_5 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span> <span class="sc">|&gt;</span> </span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(i) <span class="fu">get_sample_mean</span>(<span class="at">data =</span> data_sim[, <span class="st">"normal"</span>], <span class="at">n_sub =</span> <span class="dv">5</span>)) <span class="sc">|&gt;</span>  </span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() </span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>samp_norm_10 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span> <span class="sc">|&gt;</span> </span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(i) <span class="fu">get_sample_mean</span>(<span class="at">data =</span> data_sim[, <span class="st">"normal"</span>], <span class="at">n_sub =</span> <span class="dv">10</span>)) <span class="sc">|&gt;</span>  </span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() </span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>samp_norm_20 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span> <span class="sc">|&gt;</span> </span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(i) <span class="fu">get_sample_mean</span>(<span class="at">data =</span> data_sim[, <span class="st">"normal"</span>], <span class="at">n_sub =</span> <span class="dv">20</span>)) <span class="sc">|&gt;</span>  </span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() </span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>samp_norm_50 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span> <span class="sc">|&gt;</span> </span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(i) <span class="fu">get_sample_mean</span>(<span class="at">data =</span> data_sim[, <span class="st">"normal"</span>], <span class="at">n_sub =</span> <span class="dv">50</span>)) <span class="sc">|&gt;</span>  </span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() </span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>samp_norm_100 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10000</span> <span class="sc">|&gt;</span> </span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(i) <span class="fu">get_sample_mean</span>(<span class="at">data =</span> data_sim[, <span class="st">"normal"</span>], <span class="at">n_sub =</span> <span class="dv">100</span>)) <span class="sc">|&gt;</span>  </span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plots</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>pop_norm_plot <span class="ot">&lt;-</span> data_sim <span class="sc">|&gt;</span> </span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> normal)) <span class="sc">+</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"light grey"</span>, <span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Normal Population"</span>,</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="fu">str_c</span>(<span class="st">"M="</span>, <span class="fu">round</span>(<span class="fu">mean</span>(data_sim<span class="sc">$</span>normal)), <span class="st">" SD="</span>,</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(<span class="fu">sd</span>(data_sim<span class="sc">$</span>normal)), <span class="st">" Skew="</span>, </span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">skewness</span>(data_sim<span class="sc">$</span>normal)),</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>                      <span class="st">" Kurtosis="</span>,  <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">kurtosis</span>((data_sim<span class="sc">$</span>normal))))) <span class="sc">+</span></span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">50</span>, <span class="dv">150</span>)</span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>samp_norm_5_plot <span class="ot">&lt;-</span> samp_norm_5 <span class="sc">|&gt;</span> </span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean)) <span class="sc">+</span></span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"light grey"</span>, <span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Sampling Distribution, N=5"</span>,</span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="fu">str_c</span>(<span class="st">"M="</span>, <span class="fu">round</span>(<span class="fu">mean</span>(samp_norm_5<span class="sc">$</span>mean)), <span class="st">" SD="</span>,</span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(<span class="fu">sd</span>(samp_norm_5<span class="sc">$</span>mean)), <span class="st">" Skew="</span>, </span>
-<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">skewness</span>(samp_norm_5<span class="sc">$</span>mean)),</span>
-<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>                      <span class="st">" Kurtosis="</span>,  <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">kurtosis</span>((samp_norm_5<span class="sc">$</span>mean))))) <span class="sc">+</span></span>
-<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">50</span>, <span class="dv">150</span>)</span>
-<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>samp_norm_10_plot <span class="ot">&lt;-</span> samp_norm_10 <span class="sc">|&gt;</span> </span>
-<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean)) <span class="sc">+</span></span>
-<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"light grey"</span>, <span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Sampling Distribution, N=10"</span>,</span>
-<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="fu">str_c</span>(<span class="st">"M="</span>, <span class="fu">round</span>(<span class="fu">mean</span>(samp_norm_10<span class="sc">$</span>mean)), <span class="st">" SD="</span>,</span>
-<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(<span class="fu">sd</span>(samp_norm_10<span class="sc">$</span>mean)), <span class="st">" Skew="</span>, </span>
-<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">skewness</span>(samp_norm_10<span class="sc">$</span>mean)),</span>
-<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>                      <span class="st">" Kurtosis="</span>,  <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">kurtosis</span>((samp_norm_10<span class="sc">$</span>mean))))) <span class="sc">+</span></span>
-<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">50</span>, <span class="dv">150</span>)</span>
-<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a>samp_norm_20_plot <span class="ot">&lt;-</span> samp_norm_20 <span class="sc">|&gt;</span> </span>
-<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean)) <span class="sc">+</span></span>
-<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"light grey"</span>, <span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Sampling Distribution, N=20"</span>,</span>
-<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="fu">str_c</span>(<span class="st">"M="</span>, <span class="fu">round</span>(<span class="fu">mean</span>(samp_norm_20<span class="sc">$</span>mean)), <span class="st">" SD="</span>,</span>
-<span id="cb36-37"><a href="#cb36-37" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(<span class="fu">sd</span>(samp_norm_20<span class="sc">$</span>mean)), <span class="st">" Skew="</span>, </span>
-<span id="cb36-38"><a href="#cb36-38" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">skewness</span>(samp_norm_20<span class="sc">$</span>mean)),</span>
-<span id="cb36-39"><a href="#cb36-39" aria-hidden="true" tabindex="-1"></a>                      <span class="st">" Kurtosis="</span>,  <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">kurtosis</span>((samp_norm_20<span class="sc">$</span>mean))))) <span class="sc">+</span></span>
-<span id="cb36-40"><a href="#cb36-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">50</span>, <span class="dv">150</span>)</span>
-<span id="cb36-41"><a href="#cb36-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-42"><a href="#cb36-42" aria-hidden="true" tabindex="-1"></a>samp_norm_50_plot <span class="ot">&lt;-</span> samp_norm_50 <span class="sc">|&gt;</span> </span>
-<span id="cb36-43"><a href="#cb36-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean)) <span class="sc">+</span></span>
-<span id="cb36-44"><a href="#cb36-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"light grey"</span>, <span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb36-45"><a href="#cb36-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Sampling Distribution, N=50"</span>,</span>
-<span id="cb36-46"><a href="#cb36-46" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="fu">str_c</span>(<span class="st">"M="</span>, <span class="fu">round</span>(<span class="fu">mean</span>(samp_norm_50<span class="sc">$</span>mean)), <span class="st">" SD="</span>,</span>
-<span id="cb36-47"><a href="#cb36-47" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(<span class="fu">sd</span>(samp_norm_50<span class="sc">$</span>mean)), <span class="st">" Skew="</span>, </span>
-<span id="cb36-48"><a href="#cb36-48" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">skewness</span>(samp_norm_50<span class="sc">$</span>mean)),</span>
-<span id="cb36-49"><a href="#cb36-49" aria-hidden="true" tabindex="-1"></a>                      <span class="st">" Kurtosis="</span>,  <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">kurtosis</span>((samp_norm_50<span class="sc">$</span>mean))))) <span class="sc">+</span></span>
-<span id="cb36-50"><a href="#cb36-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">50</span>, <span class="dv">150</span>)</span>
-<span id="cb36-51"><a href="#cb36-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-52"><a href="#cb36-52" aria-hidden="true" tabindex="-1"></a>samp_norm_100_plot <span class="ot">&lt;-</span> samp_norm_100 <span class="sc">|&gt;</span> </span>
-<span id="cb36-53"><a href="#cb36-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean)) <span class="sc">+</span></span>
-<span id="cb36-54"><a href="#cb36-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"light grey"</span>, <span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb36-55"><a href="#cb36-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Sampling Distribution, N=100"</span>,</span>
-<span id="cb36-56"><a href="#cb36-56" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="fu">str_c</span>(<span class="st">"M="</span>, <span class="fu">round</span>(<span class="fu">mean</span>(samp_norm_100<span class="sc">$</span>mean)), </span>
-<span id="cb36-57"><a href="#cb36-57" aria-hidden="true" tabindex="-1"></a>                       <span class="st">" SD="</span>,</span>
-<span id="cb36-58"><a href="#cb36-58" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(<span class="fu">sd</span>(samp_norm_100<span class="sc">$</span>mean)), <span class="st">" Skew="</span>, </span>
-<span id="cb36-59"><a href="#cb36-59" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">skewness</span>(samp_norm_100<span class="sc">$</span>mean)),</span>
-<span id="cb36-60"><a href="#cb36-60" aria-hidden="true" tabindex="-1"></a>                      <span class="st">" Kurtosis="</span>,  <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">kurtosis</span>((samp_norm_100<span class="sc">$</span>mean))))) <span class="sc">+</span></span>
-<span id="cb36-61"><a href="#cb36-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">50</span>, <span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>(pop_norm_plot <span class="sc">+</span> samp_norm_5_plot <span class="sc">+</span> samp_norm_10_plot) <span class="sc">/</span> </span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>(samp_norm_20_plot <span class="sc">+</span> samp_norm_50_plot <span class="sc">+</span> samp_norm_100_plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1261,13 +1165,13 @@ The shape is roughly normal even for moderate sample sizes assuming that the ori
 <h2 data-number="2.17" class="anchored" data-anchor-id="uniform-population-and-various-sampling-distributions"><span class="header-section-number">2.17</span> Uniform Population and Various Sampling Distributions</h2>
 <p><strong>Population size: 100,000; Simulated 10,000 samples.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>pop_unif_plot <span class="ot">&lt;-</span> data_sim <span class="sc">|&gt;</span> </span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> uniform)) <span class="sc">+</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"light grey"</span>, <span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">str_c</span>(<span class="st">"Normal Population M="</span>, <span class="fu">round</span>(<span class="fu">mean</span>(data_sim<span class="sc">$</span>uniform)), <span class="st">" SD="</span>,</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(<span class="fu">sd</span>(data_sim<span class="sc">$</span>uniform)), <span class="st">" Skew="</span>, </span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">skewness</span>(data_sim<span class="sc">$</span>uniform)),</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>                      <span class="st">" Kurtosis="</span>,  <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">kurtosis</span>((data_sim<span class="sc">$</span>uniform)))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_sampling_distributions_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <hr>
 </section>
@@ -1275,13 +1179,13 @@ The shape is roughly normal even for moderate sample sizes assuming that the ori
 <h2 data-number="2.18" class="anchored" data-anchor-id="skewed-population-and-various-sampling-distributions"><span class="header-section-number">2.18</span> Skewed Population and Various Sampling Distributions</h2>
 <p><strong>Population size: 100,000; Simulated 10,000 samples.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>pop_skew_plot <span class="ot">&lt;-</span> data_sim <span class="sc">|&gt;</span> </span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> skewed)) <span class="sc">+</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"light grey"</span>, <span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">str_c</span>(<span class="st">"Normal Population M="</span>, <span class="fu">round</span>(<span class="fu">mean</span>(data_sim<span class="sc">$</span>skewed)), <span class="st">" SD="</span>,</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(<span class="fu">sd</span>(data_sim<span class="sc">$</span>skewed)), <span class="st">" Skew="</span>, </span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">skewness</span>(data_sim<span class="sc">$</span>skewed)),</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>                      <span class="st">" Kurtosis="</span>,  <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">kurtosis</span>((data_sim<span class="sc">$</span>skewed)))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>pop_skew_plot <span class="ot">&lt;-</span> data_sim <span class="sc">|&gt;</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> skewed)) <span class="sc">+</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"light grey"</span>, <span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">str_c</span>(<span class="st">"Normal Population M="</span>, <span class="fu">round</span>(<span class="fu">mean</span>(data_sim<span class="sc">$</span>skewed)), <span class="st">" SD="</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(<span class="fu">sd</span>(data_sim<span class="sc">$</span>skewed)), <span class="st">" Skew="</span>, </span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">skewness</span>(data_sim<span class="sc">$</span>skewed)),</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                      <span class="st">" Kurtosis="</span>,  <span class="fu">round</span>(e1071<span class="sc">::</span><span class="fu">kurtosis</span>((data_sim<span class="sc">$</span>skewed)))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 
