@@ -247,10 +247,7 @@ window.Quarto = {
   <li><a href="#sampling-error" id="toc-sampling-error" class="nav-link" data-scroll-target="#sampling-error"><span class="header-section-number">2.5</span> Sampling Error</a></li>
   <li><a href="#hypothetical-sampling-distribution" id="toc-hypothetical-sampling-distribution" class="nav-link" data-scroll-target="#hypothetical-sampling-distribution"><span class="header-section-number">2.6</span> Hypothetical Sampling Distribution</a></li>
   <li><a href="#what-if-we-didnt-need-samples" id="toc-what-if-we-didnt-need-samples" class="nav-link" data-scroll-target="#what-if-we-didnt-need-samples"><span class="header-section-number">2.7</span> What if we didn’t need samples?</a></li>
-  <li><a href="#ocean-liking-scale-scores-in-full-population" id="toc-ocean-liking-scale-scores-in-full-population" class="nav-link" data-scroll-target="#ocean-liking-scale-scores-in-full-population"><span class="header-section-number">2.8</span> Ocean Liking Scale Scores in Full Population</a>
-  <ul class="collapse">
-  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also"><span class="header-section-number">2.8.1</span> See also:</a></li>
-  </ul></li>
+  <li><a href="#ocean-liking-scale-scores-in-full-population" id="toc-ocean-liking-scale-scores-in-full-population" class="nav-link" data-scroll-target="#ocean-liking-scale-scores-in-full-population"><span class="header-section-number">2.8</span> Ocean Liking Scale Scores in Full Population</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/02_sampling_distributions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -411,8 +408,7 @@ $ like_15 &lt;dbl&gt; -8.6085538, 5.9880386, 45.5367907, 20.8864415, 5.8350596, 
 </div>
 </div>
 <hr>
-<section id="see-also" class="level3" data-number="2.8.1">
-<h3 data-number="2.8.1" class="anchored" data-anchor-id="see-also"><span class="header-section-number">2.8.1</span> See also:</h3>
+<p><strong><em>See also:</em></strong></p>
 <p><code>skim</code> functions in the <code>skimr</code> package are helpful for quick summaries of your data (e.g., missingness, distribution, type of data)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
@@ -529,64 +525,49 @@ $ like_15 &lt;dbl&gt; -8.6085538, 5.9880386, 45.5367907, 20.8864415, 5.8350596, 
 </table>
 </div>
 </div>
+<hr>
 <p>You can also pull out a few rows to look at your data. This can be done using <code>slice_head</code> to pull out <span class="math inline">\(n\)</span> top rows of the data set, <code>slice_tail</code> to pull out <span class="math inline">\(n\)</span> bottom rows of the data set, or <code>slice_sample</code> to pull out a random <span class="math inline">\(n\)</span> of rows from the data set.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 3
-   subid like_0 like_15
-   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
- 1     1 -23.6   -8.61 
- 2     2  -9.01   5.99 
- 3     3  30.5   45.5  
- 4     4   5.89  20.9  
- 5     5  -9.16   5.84 
- 6     6  23.7   38.7  
- 7     7 -10.1    4.87 
- 8     8 -14.1    0.851
- 9     9   8.11  23.1  
-10    10  15.7   30.7  </code></pre>
+<pre><code># A tibble: 5 × 3
+  subid like_0 like_15
+  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1     1 -23.6    -8.61
+2     2  -9.01    5.99
+3     3  30.5    45.5 
+4     4   5.89   20.9 
+5     5  -9.16    5.84</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_tail</span>(<span class="at">n =</span> <span class="dv">10</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_tail</span>(<span class="at">n =</span> <span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 3
-   subid like_0 like_15
-   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
- 1  9991  28.3    43.3 
- 2  9992  13.7    28.7 
- 3  9993 -12.4     2.62
- 4  9994   7.69   22.7 
- 5  9995 -53.4   -38.4 
- 6  9996 -16.6    -1.63
- 7  9997  -8.37    6.63
- 8  9998  18.6    33.6 
- 9  9999 -16.2    -1.19
-10 10000 -17.0    -2.03</code></pre>
+<pre><code># A tibble: 5 × 3
+  subid like_0 like_15
+  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1  9996 -16.6    -1.63
+2  9997  -8.37    6.63
+3  9998  18.6    33.6 
+4  9999 -16.2    -1.19
+5 10000 -17.0    -2.03</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 3
-   subid like_0 like_15
-   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
- 1  4523  31.1    46.1 
- 2  6607 -17.6    -2.63
- 3  8399  -9.35    5.65
- 4  7212 -21.7    -6.71
- 5  3391   8.03   23.0 
- 6  4112 -21.1    -6.11
- 7  2984 -20.9    -5.91
- 8  7253 -31.1   -16.1 
- 9  3363   4.80   19.8 
-10  3251  25.5    40.5 </code></pre>
+<pre><code># A tibble: 5 × 3
+  subid  like_0 like_15
+  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1  5606  41.8     56.8 
+2  4446 -42.7    -27.7 
+3  1123  19.4     34.4 
+4  1599 -21.9     -6.94
+5  1566  -0.690   14.3 </code></pre>
 </div>
 </div>
 <hr>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
