@@ -134,7 +134,7 @@
     "href": "02_sampling_distributions.html#raw-score-distribution-vs.-sampling-distribution",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "2.12 Raw Score Distribution vs. Sampling Distribution",
-    "text": "2.12 Raw Score Distribution vs. Sampling Distribution\nThe distinction between the raw score distribution and your sample distribution is very important to keep clear in your mind!\n\n1library(patchwork)\n\n\n1\n\nThe patchwork package is an easy and customizable way to combine ggplot objects. For more information see https://patchwork.data-imaginist.com/.",
+    "text": "2.12 Raw Score Distribution vs. Sampling Distribution\nThe distinction between the raw score distribution and your sample distribution is very important to keep clear in your mind!\n\n1library(patchwork)\n\n\n1\n\nThe patchwork package is an easy and customizable way to combine ggplot objects. For more information see https://patchwork.data-imaginist.com/.\n\n\n\n\n\nplot_raw &lt;- data |&gt; \n  ggplot(aes(x = like_0)) +\n  geom_histogram(color = \"black\", fill = \"light grey\", bins = 20) + \n  scale_x_continuous(limits = c(-100, 100)) \n\nplot_samples &lt;- samples |&gt; \n  ggplot(aes(x = mean)) +\n  geom_histogram(color = \"black\", fill = \"light grey\", bins = 20) + \n  scale_x_continuous(\"samples\", limits = c(-100, 100))\n\nplot_raw + plot_samples",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
