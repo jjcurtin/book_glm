@@ -263,6 +263,13 @@ window.Quarto = {
   <li><a href="#uniform-population-and-various-sampling-distributions" id="toc-uniform-population-and-various-sampling-distributions" class="nav-link" data-scroll-target="#uniform-population-and-various-sampling-distributions"><span class="header-section-number">2.17</span> Uniform Population and Various Sampling Distributions</a></li>
   <li><a href="#skewed-population-and-various-sampling-distributions" id="toc-skewed-population-and-various-sampling-distributions" class="nav-link" data-scroll-target="#skewed-population-and-various-sampling-distributions"><span class="header-section-number">2.18</span> Skewed Population and Various Sampling Distributions</a></li>
   <li><a href="#an-important-normal-distribution-z-scores" id="toc-an-important-normal-distribution-z-scores" class="nav-link" data-scroll-target="#an-important-normal-distribution-z-scores"><span class="header-section-number">2.19</span> An Important Normal Distribution: Z-scores</a></li>
+  <li><a href="#probability-of-parameter-estimate-given-h_0" id="toc-probability-of-parameter-estimate-given-h_0" class="nav-link" data-scroll-target="#probability-of-parameter-estimate-given-h_0"><span class="header-section-number">2.20</span> Probability of Parameter Estimate Given <span class="math inline">\(H_0\)</span></a></li>
+  <li><a href="#hypothetical-sampling-distribution-for-h_0" id="toc-hypothetical-sampling-distribution-for-h_0" class="nav-link" data-scroll-target="#hypothetical-sampling-distribution-for-h_0"><span class="header-section-number">2.21</span> Hypothetical Sampling Distribution for <span class="math inline">\(H_0\)</span></a></li>
+  <li><a href="#our-first-inferential-test-the-z-test" id="toc-our-first-inferential-test-the-z-test" class="nav-link" data-scroll-target="#our-first-inferential-test-the-z-test"><span class="header-section-number">2.22</span> Our First Inferential Test: The z-test</a></li>
+  <li><a href="#t-vs.-z" id="toc-t-vs.-z" class="nav-link" data-scroll-target="#t-vs.-z"><span class="header-section-number">2.23</span> t vs.&nbsp;z</a></li>
+  <li><a href="#our-second-inferential-test-one-sample-t-test" id="toc-our-second-inferential-test-one-sample-t-test" class="nav-link" data-scroll-target="#our-second-inferential-test-one-sample-t-test"><span class="header-section-number">2.24</span> Our Second Inferential Test: One Sample t-test</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">2.25</span> <!--t vs. z continued--></a></li>
+  <li><a href="#null-hypothesis-significance-testing-nhst" id="toc-null-hypothesis-significance-testing-nhst" class="nav-link" data-scroll-target="#null-hypothesis-significance-testing-nhst"><span class="header-section-number">2.26</span> Null Hypothesis Significance Testing (NHST)</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/02_sampling_distributions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1180,18 +1187,6 @@ The shape is roughly normal even for moderate sample sizes assuming that the ori
 <h2 data-number="2.18" class="anchored" data-anchor-id="skewed-population-and-various-sampling-distributions"><span class="header-section-number">2.18</span> Skewed Population and Various Sampling Distributions</h2>
 <p><strong>Population size: 100,000; Simulated 10,000 samples.</strong></p>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 953 rows containing non-finite outside the scale range
-(`stat_bin()`).</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 245 rows containing non-finite outside the scale range
-(`stat_bin()`).</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 9 rows containing non-finite outside the scale range
-(`stat_bin()`).</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1204,6 +1199,74 @@ The shape is roughly normal even for moderate sample sizes assuming that the ori
 </section>
 <section id="an-important-normal-distribution-z-scores" class="level2" data-number="2.19">
 <h2 data-number="2.19" class="anchored" data-anchor-id="an-important-normal-distribution-z-scores"><span class="header-section-number">2.19</span> An Important Normal Distribution: Z-scores</h2>
+<p>The Z distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.<br>
+<br>
+You can therefore think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.<br>
+<br>
+The probability distribution is known for the Z distribution.</p>
+<hr>
+</section>
+<section id="probability-of-parameter-estimate-given-h_0" class="level2" data-number="2.20">
+<h2 data-number="2.20" class="anchored" data-anchor-id="probability-of-parameter-estimate-given-h_0"><span class="header-section-number">2.20</span> Probability of Parameter Estimate Given <span class="math inline">\(H_0\)</span></h2>
+<hr>
+</section>
+<section id="hypothetical-sampling-distribution-for-h_0" class="level2" data-number="2.21">
+<h2 data-number="2.21" class="anchored" data-anchor-id="hypothetical-sampling-distribution-for-h_0"><span class="header-section-number">2.21</span> Hypothetical Sampling Distribution for <span class="math inline">\(H_0\)</span></h2>
+<hr>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question: If <span class="math inline">\(H_0\)</span> is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<details class="code-fold">
+<summary>Show Answer</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Pretty likely…</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>But we can do better than that!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="our-first-inferential-test-the-z-test" class="level2" data-number="2.22">
+<h2 data-number="2.22" class="anchored" data-anchor-id="our-first-inferential-test-the-z-test"><span class="header-section-number">2.22</span> Our First Inferential Test: The z-test</h2>
+<hr>
+</section>
+<section id="t-vs.-z" class="level2" data-number="2.23">
+<h2 data-number="2.23" class="anchored" data-anchor-id="t-vs.-z"><span class="header-section-number">2.23</span> t vs.&nbsp;z</h2>
+<hr>
+<!--questions-->
+<hr>
+</section>
+<section id="our-second-inferential-test-one-sample-t-test" class="level2" data-number="2.24">
+<h2 data-number="2.24" class="anchored" data-anchor-id="our-second-inferential-test-one-sample-t-test"><span class="header-section-number">2.24</span> Our Second Inferential Test: One Sample t-test</h2>
+<hr>
+</section>
+<section id="section" class="level2" data-number="2.25">
+<h2 data-number="2.25" class="anchored" data-anchor-id="section"><span class="header-section-number">2.25</span> <!--t vs. z continued--></h2>
+</section>
+<section id="null-hypothesis-significance-testing-nhst" class="level2" data-number="2.26">
+<h2 data-number="2.26" class="anchored" data-anchor-id="null-hypothesis-significance-testing-nhst"><span class="header-section-number">2.26</span> Null Hypothesis Significance Testing (NHST)</h2>
+<ol type="1">
+<li><p>Divide reality regarding the size of the population parameter into two non-overlapping possibilities: Null hypothesis (<span class="math inline">\(H_0\)</span>) &amp; Alternate hypothesis (<span class="math inline">\(H_a\)</span>).</p></li>
+<li><p>Assume that <span class="math inline">\(H_0\)</span> is true.</p></li>
+<li><p>Collect data.</p></li>
+<li><p>Calculate the probability (<span class="math inline">\(p\)</span>-value) of obtaining your parameter estimate (or a more extreme estimate) given your assumption (i.e., <span class="math inline">\(H_0\)</span> is true)</p></li>
+<li><p>Compare probability to some cut-off value (alpha level).</p></li>
+<li><ol type="a">
+<li><p>If this parameter estimate is less probable than cut-off value, reject <span class="math inline">\(H_0\)</span> in favor of <span class="math inline">\(H_a\)</span>.</p></li>
+<li><p>If data is not less probable, fail to reject <span class="math inline">\(H_0\)</span>.</p></li>
+</ol></li>
+</ol>
 
 
 </section>

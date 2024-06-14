@@ -194,7 +194,7 @@
     "href": "02_sampling_distributions.html#skewed-population-and-various-sampling-distributions",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "2.18 Skewed Population and Various Sampling Distributions",
-    "text": "2.18 Skewed Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.\n\n\nWarning: Removed 953 rows containing non-finite outside the scale range\n(`stat_bin()`).\n\n\nWarning: Removed 245 rows containing non-finite outside the scale range\n(`stat_bin()`).\n\n\nWarning: Removed 9 rows containing non-finite outside the scale range\n(`stat_bin()`).",
+    "text": "2.18 Skewed Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -204,7 +204,77 @@
     "href": "02_sampling_distributions.html#an-important-normal-distribution-z-scores",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "2.19 An Important Normal Distribution: Z-scores",
-    "text": "2.19 An Important Normal Distribution: Z-scores",
+    "text": "2.19 An Important Normal Distribution: Z-scores\nThe Z distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.\n\nYou can therefore think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.\n\nThe probability distribution is known for the Z distribution.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#probability-of-parameter-estimate-given-h_0",
+    "href": "02_sampling_distributions.html#probability-of-parameter-estimate-given-h_0",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.20 Probability of Parameter Estimate Given \\(H_0\\)",
+    "text": "2.20 Probability of Parameter Estimate Given \\(H_0\\)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#hypothetical-sampling-distribution-for-h_0",
+    "href": "02_sampling_distributions.html#hypothetical-sampling-distribution-for-h_0",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.21 Hypothetical Sampling Distribution for \\(H_0\\)",
+    "text": "2.21 Hypothetical Sampling Distribution for \\(H_0\\)\n\n\n\n\n\n\n\nQuestion: If \\(H_0\\) is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?\n\n\n\n\n\n\n\nShow Answer\nPretty likely…\nBut we can do better than that!",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#our-first-inferential-test-the-z-test",
+    "href": "02_sampling_distributions.html#our-first-inferential-test-the-z-test",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.22 Our First Inferential Test: The z-test",
+    "text": "2.22 Our First Inferential Test: The z-test",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#t-vs.-z",
+    "href": "02_sampling_distributions.html#t-vs.-z",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.23 t vs. z",
+    "text": "2.23 t vs. z",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#our-second-inferential-test-one-sample-t-test",
+    "href": "02_sampling_distributions.html#our-second-inferential-test-one-sample-t-test",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.24 Our Second Inferential Test: One Sample t-test",
+    "text": "2.24 Our Second Inferential Test: One Sample t-test",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#section",
+    "href": "02_sampling_distributions.html#section",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.25 ",
+    "text": "2.25",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#null-hypothesis-significance-testing-nhst",
+    "href": "02_sampling_distributions.html#null-hypothesis-significance-testing-nhst",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.26 Null Hypothesis Significance Testing (NHST)",
+    "text": "2.26 Null Hypothesis Significance Testing (NHST)\n\nDivide reality regarding the size of the population parameter into two non-overlapping possibilities: Null hypothesis (\\(H_0\\)) & Alternate hypothesis (\\(H_a\\)).\nAssume that \\(H_0\\) is true.\nCollect data.\nCalculate the probability (\\(p\\)-value) of obtaining your parameter estimate (or a more extreme estimate) given your assumption (i.e., \\(H_0\\) is true)\nCompare probability to some cut-off value (alpha level).\n\nIf this parameter estimate is less probable than cut-off value, reject \\(H_0\\) in favor of \\(H_a\\).\nIf data is not less probable, fail to reject \\(H_0\\).",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
