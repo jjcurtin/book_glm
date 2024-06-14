@@ -1203,6 +1203,9 @@ The shape is roughly normal even for moderate sample sizes assuming that the ori
 You can therefore think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.<br>
 <br>
 The probability distribution is known for the Z distribution.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># insert three figures of probability distributions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <hr>
 </section>
 <section id="probability-of-parameter-estimate-given-h_0" class="level2" data-number="2.20">
@@ -1216,21 +1219,6 @@ Think about it……</p>
 <h2 data-number="2.21" class="anchored" data-anchor-id="hypothetical-sampling-distribution-for-h_0"><span class="header-section-number">2.21</span> Hypothetical Sampling Distribution for <span class="math inline">\(H_0\)</span></h2>
 <p>If <span class="math inline">\(H_0\)</span> is true; the sampling distribution has a mean of 0 and standard deviation of <span class="math inline">\(\frac{\sigma}{\sqrt{N_sample}} =  \frac{23.7}{\sqrt{10}}  =  7.5\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>mean_val <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">mean</span>(samples<span class="sc">$</span>mean),<span class="dv">2</span>)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>sd_val <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">sd</span>(samples<span class="sc">$</span>mean),<span class="dv">2</span>)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>hist_samples <span class="ot">&lt;-</span> samples <span class="sc">|&gt;</span> </span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean)) <span class="sc">+</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)), </span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"light grey"</span>, <span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span> </span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> mean_val, <span class="at">sd =</span> sd_val),  <span class="at">color =</span> <span class="st">"blue"</span>,</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size =</span> .<span class="dv">9</span>) <span class="sc">+</span></span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">"like_score sample means"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">50</span>, <span class="dv">50</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-ℹ Please use `linewidth` instead.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>hist_samples</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1253,10 +1241,6 @@ Question: If <span class="math inline">\(H_0\)</span> is true and this is the sa
 <div id="callout-16" class="callout-16-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>hist_samples_vline <span class="ot">&lt;-</span> hist_samples <span class="sc">+</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">2.4</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> .<span class="dv">9</span>)</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>hist_samples_vline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1268,8 +1252,8 @@ Question: If <span class="math inline">\(H_0\)</span> is true and this is the sa
 <div class="cell">
 <details class="code-fold">
 <summary>Show Answer</summary>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>Pretty likely…</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>But we can do better than that!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>Pretty likely…</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>But we can do better than that!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -1281,7 +1265,7 @@ Question: If <span class="math inline">\(H_0\)</span> is true and this is the sa
 <h2 data-number="2.22" class="anchored" data-anchor-id="our-first-inferential-test-the-z-test"><span class="header-section-number">2.22</span> Our First Inferential Test: The z-test</h2>
 <p><span class="math inline">\(z = \frac{2.4 - 0}{7.5} = 0.32; p \le .749\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">0.32</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">2</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">0.32</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">2</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7489683</code></pre>
 </div>
@@ -1315,8 +1299,8 @@ Question: Where did we get the 2.4 from in our z-test?
 <div class="cell">
 <details class="code-fold">
 <summary>Show Answer</summary>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>Our sample mean from our study. This is our parameter estimate of the population</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>mean of OLS (like_score) scores.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>Our sample mean from our study. This is our parameter estimate of the population</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>mean of OLS (like_score) scores.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -1337,8 +1321,8 @@ Question: Where did we get the 7.5 from in our z-test and what is the problem wi
 <div class="cell">
 <details class="code-fold">
 <summary>Show Answer</summary>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>This was our estimate of the standard deviation of the sampling distribution. $\frac{\sigma}{\sqrt{N_sample}}$ </span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>We do not know $\sigma$.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>This was our estimate of the standard deviation of the sampling distribution. $\frac{\sigma}{\sqrt{N_sample}}$ </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>We do not know $\sigma$.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -1360,8 +1344,8 @@ Question: How can we estimate <span class="math inline">\(\sigma\)</span>?
 <div class="cell">
 <details class="code-fold">
 <summary>Show Answer</summary>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>We can use our sample standard deviation ($s$), but $s$ is a negatively biased parameter</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>estimate.  On average, it will underestimate $\sigma$.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>We can use our sample standard deviation ($s$), but $s$ is a negatively biased parameter</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>estimate.  On average, it will underestimate $\sigma$.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -1382,12 +1366,12 @@ Question: So what do we do?
 <div class="cell">
 <details class="code-fold">
 <summary>Show Answer</summary>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>We account for this underestimation of $\sigma$ and therefore of the standard deviation</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>(standard error) of the sampling distribution by using the t distribution rather than </span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>the z distribution to calculate the probability of our parameter estimate if $H_0$ is </span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>true.   </span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>The t distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>We account for this underestimation of $\sigma$ and therefore of the standard deviation</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>(standard error) of the sampling distribution by using the t distribution rather than </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>the z distribution to calculate the probability of our parameter estimate if $H_0$ is </span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>true.   </span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>The t distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -1402,9 +1386,6 @@ Question: So what do we do?
 Where <span class="math inline">\(SE\)</span> is estimated using <span class="math inline">\(s\)</span> from sample data.<br>
 <span class="math inline">\(df = N – P = 10 - 1 = 9\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="fl">6.7</span>,<span class="fl">6.7</span>,.<span class="dv">001</span>),<span class="at">y=</span><span class="fu">dnorm</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="fl">6.7</span>,<span class="fl">6.7</span>,.<span class="dv">001</span>),<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">xlim=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">6</span>,<span class="dv">6</span>),<span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span> <span class="st">'blue'</span>, <span class="at">xlab=</span> <span class="st">'z or t score'</span>, <span class="at">ylab=</span> <span class="st">'Probability'</span>)</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="fl">6.7</span>,<span class="fl">6.7</span>,.<span class="dv">001</span>),<span class="at">y=</span><span class="fu">dt</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="fl">6.7</span>,<span class="fl">6.7</span>,.<span class="dv">001</span>), <span class="at">df=</span><span class="dv">9</span>), <span class="at">col=</span> <span class="st">'red'</span>)</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'z'</span>, <span class="st">'t'</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">'blue'</span>, <span class="st">'red'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1416,11 +1397,6 @@ Where <span class="math inline">\(SE\)</span> is estimated using <span class="ma
 <hr>
 <p>The bias in <span class="math inline">\(s\)</span> decreases with increasing <span class="math inline">\(N\)</span>. Therefore, <span class="math inline">\(t\)</span> approaches <span class="math inline">\(z\)</span> with larger sample sizes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>,.<span class="dv">001</span>),<span class="at">y=</span><span class="fu">dnorm</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>,.<span class="dv">001</span>),<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">xlim=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>),<span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span> <span class="st">'blue'</span>, <span class="at">xlab=</span> <span class="st">'z or t score'</span>, <span class="at">ylab=</span> <span class="st">'Probability'</span>)</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>,.<span class="dv">001</span>),<span class="at">y=</span><span class="fu">dt</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>,.<span class="dv">001</span>), <span class="at">df=</span><span class="dv">1</span>), <span class="at">col=</span> <span class="st">'red'</span>)</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>,.<span class="dv">001</span>),<span class="at">y=</span><span class="fu">dt</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>,.<span class="dv">001</span>), <span class="at">df=</span><span class="dv">10</span>), <span class="at">col=</span> <span class="st">'green'</span>)</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>,.<span class="dv">001</span>),<span class="at">y=</span><span class="fu">dt</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>,.<span class="dv">001</span>), <span class="at">df=</span><span class="dv">100</span>), <span class="at">col=</span> <span class="st">'yellow'</span>)</span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">'topright'</span>, <span class="fu">c</span>(<span class="st">'z'</span>, <span class="st">'t(df=1)'</span>, <span class="st">'t(df=10)'</span>, <span class="st">'t(df=100)'</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">'blue'</span>, <span class="st">'red'</span>, <span class="st">'green'</span>, <span class="st">'yellow'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

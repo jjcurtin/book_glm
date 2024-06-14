@@ -204,7 +204,7 @@
     "href": "02_sampling_distributions.html#an-important-normal-distribution-z-scores",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "2.19 An Important Normal Distribution: Z-scores",
-    "text": "2.19 An Important Normal Distribution: Z-scores\nThe Z distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.\n\nYou can therefore think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.\n\nThe probability distribution is known for the Z distribution.",
+    "text": "2.19 An Important Normal Distribution: Z-scores\nThe Z distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.\n\nYou can therefore think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.\n\nThe probability distribution is known for the Z distribution.\n\n# insert three figures of probability distributions",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -224,7 +224,7 @@
     "href": "02_sampling_distributions.html#hypothetical-sampling-distribution-for-h_0",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "2.21 Hypothetical Sampling Distribution for \\(H_0\\)",
-    "text": "2.21 Hypothetical Sampling Distribution for \\(H_0\\)\nIf \\(H_0\\) is true; the sampling distribution has a mean of 0 and standard deviation of \\(\\frac{\\sigma}{\\sqrt{N_sample}} =  \\frac{23.7}{\\sqrt{10}}  =  7.5\\).\n\nmean_val &lt;- round(mean(samples$mean),2)\nsd_val &lt;- round(sd(samples$mean),2)\n\nhist_samples &lt;- samples |&gt; \n  ggplot(aes(x = mean)) +\n  geom_histogram(aes(y = after_stat(density)), \n                 color = \"black\", fill = \"light grey\", bins = 20) + \n  stat_function(fun = dnorm, args = list(mean = mean_val, sd = sd_val),  color = \"blue\",\n                 size = .9) +\n  scale_x_continuous(\"like_score sample means\", limits = c(-50, 50)) \n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead.\n\nhist_samples\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuestion: If \\(H_0\\) is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?\n\n\n\n\n\n\nhist_samples_vline &lt;- hist_samples +\n  geom_vline(xintercept = 2.4, color = \"red\", size = .9)\n\nhist_samples_vline\n\n\n\n\n\n\n\n\n\n\nShow Answer\nPretty likely…\nBut we can do better than that!",
+    "text": "2.21 Hypothetical Sampling Distribution for \\(H_0\\)\nIf \\(H_0\\) is true; the sampling distribution has a mean of 0 and standard deviation of \\(\\frac{\\sigma}{\\sqrt{N_sample}} =  \\frac{23.7}{\\sqrt{10}}  =  7.5\\).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuestion: If \\(H_0\\) is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nShow Answer\nPretty likely…\nBut we can do better than that!",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -254,7 +254,7 @@
     "href": "02_sampling_distributions.html#our-second-inferential-test-one-sample-t-test",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "2.24 Our Second Inferential Test: One Sample t-test",
-    "text": "2.24 Our Second Inferential Test: One Sample t-test\n\\(t(df)\\) = \\(\\frac{Parameter estimate – Parameter: H_0}{Standard error of parameter estimate}\\)\n \nWhere \\(SE\\) is estimated using \\(s\\) from sample data.\n\\(df = N – P = 10 - 1 = 9\\)\n\nplot(x=seq(-6.7,6.7,.001),y=dnorm(seq(-6.7,6.7,.001),0,1), xlim= c(-6,6),type='l', col= 'blue', xlab= 'z or t score', ylab= 'Probability')\nlines(x=seq(-6.7,6.7,.001),y=dt(seq(-6.7,6.7,.001), df=9), col= 'red')\nlegend('topright', c('z', 't'), lwd=2, col = c('blue', 'red'))\n\n\n\n\n\n\n\n\n\nThe bias in \\(s\\) decreases with increasing \\(N\\). Therefore, \\(t\\) approaches \\(z\\) with larger sample sizes.\n\nplot(x=seq(-3,3,.001),y=dnorm(seq(-3,3,.001),0,1), xlim= c(-3,3),type='l', col= 'blue', xlab= 'z or t score', ylab= 'Probability')\nlines(x=seq(-3,3,.001),y=dt(seq(-3,3,.001), df=1), col= 'red')\nlines(x=seq(-3,3,.001),y=dt(seq(-3,3,.001), df=10), col= 'green')\nlines(x=seq(-3,3,.001),y=dt(seq(-3,3,.001), df=100), col= 'yellow')\nlegend('topright', c('z', 't(df=1)', 't(df=10)', 't(df=100)'), lwd=2, col = c('blue', 'red', 'green', 'yellow'))",
+    "text": "2.24 Our Second Inferential Test: One Sample t-test\n\\(t(df)\\) = \\(\\frac{Parameter estimate – Parameter: H_0}{Standard error of parameter estimate}\\)\n \nWhere \\(SE\\) is estimated using \\(s\\) from sample data.\n\\(df = N – P = 10 - 1 = 9\\)\n\n\n\n\n\n\n\n\n\n\nThe bias in \\(s\\) decreases with increasing \\(N\\). Therefore, \\(t\\) approaches \\(z\\) with larger sample sizes.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
