@@ -194,7 +194,17 @@
     "href": "02_sampling_distributions.html#skewed-population-and-various-sampling-distributions",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "2.18 Skewed Population and Various Sampling Distributions",
-    "text": "2.18 Skewed Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.\n\n\nWarning: Removed 2360 rows containing non-finite outside the scale range\n(`stat_bin()`).\n\n\nWarning: Removed 953 rows containing non-finite outside the scale range\n(`stat_bin()`).\n\n\nWarning: Removed 245 rows containing non-finite outside the scale range\n(`stat_bin()`).\n\n\nWarning: Removed 9 rows containing non-finite outside the scale range\n(`stat_bin()`).",
+    "text": "2.18 Skewed Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.\n\n\nWarning: Removed 953 rows containing non-finite outside the scale range\n(`stat_bin()`).\n\n\nWarning: Removed 245 rows containing non-finite outside the scale range\n(`stat_bin()`).\n\n\nWarning: Removed 9 rows containing non-finite outside the scale range\n(`stat_bin()`).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#an-important-normal-distribution-z-scores",
+    "href": "02_sampling_distributions.html#an-important-normal-distribution-z-scores",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.19 An Important Normal Distribution: Z-scores",
+    "text": "2.19 An Important Normal Distribution: Z-scores",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
