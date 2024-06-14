@@ -214,7 +214,7 @@
     "href": "02_sampling_distributions.html#probability-of-parameter-estimate-given-h_0",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "2.20 Probability of Parameter Estimate Given \\(H_0\\)",
-    "text": "2.20 Probability of Parameter Estimate Given \\(H_0\\)",
+    "text": "2.20 Probability of Parameter Estimate Given \\(H_0\\)\nHow could you use the Z distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of N=10 from a population of Ocean Liking scores with a population mean (parameter) of 0?\n\nThink about it……",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -224,7 +224,7 @@
     "href": "02_sampling_distributions.html#hypothetical-sampling-distribution-for-h_0",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "2.21 Hypothetical Sampling Distribution for \\(H_0\\)",
-    "text": "2.21 Hypothetical Sampling Distribution for \\(H_0\\)\n\n\n\n\n\n\n\nQuestion: If \\(H_0\\) is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?\n\n\n\n\n\n\n\nShow Answer\nPretty likely…\nBut we can do better than that!",
+    "text": "2.21 Hypothetical Sampling Distribution for \\(H_0\\)\nIf \\(H_0\\) is true; the sampling distribution has a mean of 0 and standard deviation of \\(\\frac{\\sigma}{\\sqrt{N_sample}} =  \\frac{23.7}{\\sqrt{10}}  =  7.5\\).\n\nmean_val &lt;- round(mean(samples$mean),2)\nsd_val &lt;- round(sd(samples$mean),2)\n\nhist_samples &lt;- samples |&gt; \n  ggplot(aes(x = mean)) +\n  geom_histogram(aes(y = after_stat(density)), \n                 color = \"black\", fill = \"light grey\", bins = 20) + \n  stat_function(fun = dnorm, args = list(mean = mean_val, sd = sd_val),  color = \"blue\",\n                 size = .9) +\n  scale_x_continuous(\"like_score sample means\", limits = c(-50, 50)) \n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead.\n\nhist_samples\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQuestion: If \\(H_0\\) is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?\n\n\n\n\n\n\nhist_samples_vline &lt;- hist_samples +\n  geom_vline(xintercept = 2.4, color = \"red\", size = .9)\n\nhist_samples_vline\n\n\n\n\n\n\n\n\n\n\nShow Answer\nPretty likely…\nBut we can do better than that!",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -234,7 +234,7 @@
     "href": "02_sampling_distributions.html#our-first-inferential-test-the-z-test",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "2.22 Our First Inferential Test: The z-test",
-    "text": "2.22 Our First Inferential Test: The z-test",
+    "text": "2.22 Our First Inferential Test: The z-test\n\\(z = \\frac{2.4 - 0}{7.5} = 0.32; p \\le .749\\)\n\npnorm(0.32, mean=0, sd=1, lower.tail=FALSE) * 2 \n\n[1] 0.7489683",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -244,7 +244,7 @@
     "href": "02_sampling_distributions.html#t-vs.-z",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "2.23 t vs. z",
-    "text": "2.23 t vs. z",
+    "text": "2.23 t vs. z\n\\(z = \\frac{2.4 - 0}{7.5} = 0.32\\)\n\n\n\n\n\n\nQuestion: Where did we get the 2.4 from in our z-test?\n\n\n\n\n\n\n\nShow Answer\nOur sample mean from our study. This is our parameter estimate of the population\nmean of OLS (like_score) scores.\n\n\n\n\n\n\n\n\n\n\n\nQuestion: Where did we get the 7.5 from in our z-test and what is the problem with this?\n\n\n\n\n\n\n\nShow Answer\nThis was our estimate of the standard deviation of the sampling distribution. $\\frac{\\sigma}{\\sqrt{N_sample}}$ \nWe do not know $\\sigma$.\n\n\n\n\n\n\n\n\n\n\n\n\nQuestion: How can we estimate \\(\\sigma\\)?\n\n\n\n\n\n\n\nShow Answer\nWe can use our sample standard deviation ($s$), but $s$ is a negatively biased parameter\nestimate.  On average, it will underestimate $\\sigma$.\n\n\n\n\n\n\n\n\n\n\n\nQuestion: So what do we do?\n\n\n\n\n\n\n\nShow Answer\nWe account for this underestimation of $\\sigma$ and therefore of the standard deviation\n(standard error) of the sampling distribution by using the t distribution rather than \nthe z distribution to calculate the probability of our parameter estimate if $H_0$ is \ntrue.   \n\nThe t distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -254,17 +254,7 @@
     "href": "02_sampling_distributions.html#our-second-inferential-test-one-sample-t-test",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "2.24 Our Second Inferential Test: One Sample t-test",
-    "text": "2.24 Our Second Inferential Test: One Sample t-test",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
-    ]
-  },
-  {
-    "objectID": "02_sampling_distributions.html#section",
-    "href": "02_sampling_distributions.html#section",
-    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.25 ",
-    "text": "2.25",
+    "text": "2.24 Our Second Inferential Test: One Sample t-test\n\\(t(df)\\) = \\(\\frac{Parameter estimate – Parameter: H_0}{Standard error of parameter estimate}\\)\n \nWhere \\(SE\\) is estimated using \\(s\\) from sample data.\n\\(df = N – P = 10 - 1 = 9\\)\n\nplot(x=seq(-6.7,6.7,.001),y=dnorm(seq(-6.7,6.7,.001),0,1), xlim= c(-6,6),type='l', col= 'blue', xlab= 'z or t score', ylab= 'Probability')\nlines(x=seq(-6.7,6.7,.001),y=dt(seq(-6.7,6.7,.001), df=9), col= 'red')\nlegend('topright', c('z', 't'), lwd=2, col = c('blue', 'red'))\n\n\n\n\n\n\n\n\n\nThe bias in \\(s\\) decreases with increasing \\(N\\). Therefore, \\(t\\) approaches \\(z\\) with larger sample sizes.\n\nplot(x=seq(-3,3,.001),y=dnorm(seq(-3,3,.001),0,1), xlim= c(-3,3),type='l', col= 'blue', xlab= 'z or t score', ylab= 'Probability')\nlines(x=seq(-3,3,.001),y=dt(seq(-3,3,.001), df=1), col= 'red')\nlines(x=seq(-3,3,.001),y=dt(seq(-3,3,.001), df=10), col= 'green')\nlines(x=seq(-3,3,.001),y=dt(seq(-3,3,.001), df=100), col= 'yellow')\nlegend('topright', c('z', 't(df=1)', 't(df=10)', 't(df=100)'), lwd=2, col = c('blue', 'red', 'green', 'yellow'))",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -273,8 +263,8 @@
     "objectID": "02_sampling_distributions.html#null-hypothesis-significance-testing-nhst",
     "href": "02_sampling_distributions.html#null-hypothesis-significance-testing-nhst",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.26 Null Hypothesis Significance Testing (NHST)",
-    "text": "2.26 Null Hypothesis Significance Testing (NHST)\n\nDivide reality regarding the size of the population parameter into two non-overlapping possibilities: Null hypothesis (\\(H_0\\)) & Alternate hypothesis (\\(H_a\\)).\nAssume that \\(H_0\\) is true.\nCollect data.\nCalculate the probability (\\(p\\)-value) of obtaining your parameter estimate (or a more extreme estimate) given your assumption (i.e., \\(H_0\\) is true)\nCompare probability to some cut-off value (alpha level).\n\nIf this parameter estimate is less probable than cut-off value, reject \\(H_0\\) in favor of \\(H_a\\).\nIf data is not less probable, fail to reject \\(H_0\\).",
+    "section": "2.25 Null Hypothesis Significance Testing (NHST)",
+    "text": "2.25 Null Hypothesis Significance Testing (NHST)\n\nDivide reality regarding the size of the population parameter into two non-overlapping possibilities: Null hypothesis (\\(H_0\\)) & Alternate hypothesis (\\(H_a\\)).\nAssume that \\(H_0\\) is true.\nCollect data.\nCalculate the probability (\\(p\\)-value) of obtaining your parameter estimate (or a more extreme estimate) given your assumption (i.e., \\(H_0\\) is true)\nCompare probability to some cut-off value (alpha level).\n\nIf this parameter estimate is less probable than cut-off value, reject \\(H_0\\) in favor of \\(H_a\\).\nIf data is not less probable, fail to reject \\(H_0\\).",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
