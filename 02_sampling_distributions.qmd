@@ -22,3 +22,1091 @@ These predictions about the size of population parameters typically map directly
 Answers from inferential statistics are **probabilistic**. In other words, all answers have the potential to be wrong and you will provide an index of that probability along with your results. 
 
 -----
+
+## Populations
+
+A population is any clearly defined set of objects or events (people, occurrences, animals, etc.). Populations usually represent all events in a particular class (e.g., all college students, all alcoholics, all depressed people, all people). It is often an abstract concept because in many/most instances you will never have access to the entire population.
+\
+\
+For example, many of our studies may have the population of all people as its target.
+\
+\
+Nonetheless, researchers usually want to describe or draw conclusions about populations (e.g., We don't care if some new drug is an effective treatment for 100 people in your sample. Will it work, on average, for everyone we might treat?). 
+
+-----
+
+## (Population) Parameters
+
+A parameter is a value used to describe a certain characteristic of a population. It is usually unknown and therefore has to be estimated.
+\
+\
+For example, the population mean is a parameter that is often used to indicate the average/typical value of a variable in the population.
+\
+\
+Within a population, a parameter is a fixed value which does not vary within the population at the time of measurement (e.g., the mean height of people in the US at the present moment).
+\
+\
+You typically can't calculate these parameters directly because you don't have access to the entire population.
+\
+\
+We use Greek letters to represent population parameters ($\mu$, $\sigma$, $\sigma^2$, $\beta_0$, $\beta_j$).
+
+-----
+
+## Samples & Parameter Estimates
+
+A sample is a finite group of units (e.g., participants) selected from the population of interest.
+\
+\
+A sample is generally selected for a study because the population is too large to study in its entirety. We typically have only one sample in a study.
+\
+\
+We use the sample to estimate and test parameters in the population. 
+\
+\
+These estimates are called parameter estimates.
+\
+\
+We use Roman letters to represent sample parameter estimates ($\overline{X}$, $s$, $s^2$, $b_0$, $b_j$).
+
+-----
+
+## Sampling Error
+
+Since a sample does not include all members of the population, parameter estimates generally differ from parameters on the entire population (e.g., use mean height of a sample of 1000 people to estimate mean height of US population).
+\
+\
+The difference between the (sample) parameter estimate and the (population) parameter is sampling error.
+\
+\
+You will not be able to calculate the sampling error of your parameter estimate directly because you don't know the value of the population parameter. However, you can estimate it by probabilistic modeling of the *hypothetical sampling distibution* for that parameter.
+
+-----
+
+## Hypothetical Sampling Distribution
+
+A sampling distribution is a probability distribution for a parameter estimate drawn from all possible samples of size $N$ taken from a population.
+\
+\
+A sampling distribution can be formed for any population parameter.
+\
+\
+Each time you draw a sample of size $N$ from a population you can calculate an estimate of that population parameter from that sample.
+\
+\
+Because of sampling error, these parameter estimates will not exactly equal the population parameter. They will not equal each other either. They will form a distribution.
+\
+\
+A sampling distribution, like a population, is an abstract concept that represents the outcome of repeated (infinite) sampling. You will typically only have one sample.
+
+-----
+
+## What if we didn't need samples?
+
+***Research question:*** How do inhabitants of a remote pacific island feel about the ocean? Population size = 10,000.
+\
+\
+***Dependent measure:*** Ocean liking scale scores that range from -100 (strongly dislike) to 100 (strongly like). 0 represents neutral.
+\
+\
+***Hypotheses:*** $H_0$: $\mu$ = 0; $H_a$: $\mu$ <> 0
+
+
+::: {.callout-important collapse="false"}
+### Question: How would you answer this question if you had unlimited resources (e.g., time, money, and patience)?
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+Administer the Ocean liking scale to all 10,000 inhabitants in the population 
+and calculate the population mean score. Is it 0?  If not, the inhabitants are 
+not neutral on average.
+```
+:::
+
+-----
+
+## Ocean Liking Scale Scores in Full Population
+
+```{r}
+#| message: false
+
+library(tidyverse)
+path_data <- "data_lecture"  # <1> 
+
+data <- read_csv(here::here(path_data, "2_sampling_distributions_like_clean.csv"), # <2>
+                 show_col_types = FALSE) |> 
+   glimpse() #<3>
+```
+1. This path points to where your data is and should be a relative path from your R project. 
+2. we use the `here()` function in the `here` package (`here::here()`) to define paths within a function. This approach (vs. `file.path`) works well when using R Projects. 
+3. `glimpse()` is a useful function that you can pipe tibbles into when first reading them in. It shows you useful information, like number of rows and column, variable (column) names, a sample of what the data look like, and the class of each variable (e.g., double, character, factor).
+
+-----
+
+***See also:***  
+
+`skim` functions in the `skimr` package are helpful for quick summaries of your data (e.g., missingness, distribution, type of data)
+```{r}
+data |> 
+  skimr::skim()
+```
+
+-----
+
+If we want less information about the distribution we can use `summarise` and specify the descriptive statistics we want.
+```{r}
+data |> 
+  summarise(n = n(),
+            mean = mean(like_score),
+            sd = sd(like_score))
+```
+
+
+-----
+
+You can also pull out a few rows to look at your data. This can be done using `slice_head` to pull out $n$ top rows of the data set, `slice_tail` to pull out $n$ bottom rows of the data set, or `slice_sample` to pull out a random $n$ of rows from the data set.
+
+```{r}
+data |> 
+  slice_head(n = 5) 
+
+data |> 
+  slice_tail(n = 5) 
+
+set.seed(101) # <1>
+data |> 
+  slice_sample(n = 5)
+```
+
+1. Whenever you are using random numbers it is important to set a seed first (`set.seed()). This ensures you can reproduce that randomness!
+
+-----
+
+```{r}
+plot_raw <- data |> 
+  ggplot(aes(x = like_score)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 20) + 
+  scale_x_continuous(limits = c(-100, 100)) +
+  theme_classic() #<1>
+```
+1. We can use themes to customize the output of our figures. This can be piped into your `ggplot()` code or set globally at the top of your script using the code below:
+
+```{r}
+theme_set(theme_classic()) 
+```
+
+```{r}
+plot_raw
+```
+
+
+-----
+
+<!--KW: fix mu formatting in answer code block-->
+
+## Parameter Estimation and Testing
+
+::: {.callout-important collapse="false"}
+### Question: What do you conclude?
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+Inhabitants of the island are neutral on average on the Ocean Liking Scale;
+$\mu$ = 0
+```
+:::
+
+::: {.callout-important collapse="false"}
+### Question: How confident are you about this conclusion?
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+Excluding issues of measurement of the scale (i.e., reliability), you are 100%
+confident that the population mean score on this scale is 0 ($\mu$ = 0). 
+```
+:::
+
+::: {.callout-important collapse="false"}
+### Question: Of course, this approach to answering a research question is not typical. Why? And how would you normally answer this question?
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+You will very rarely have access to all scores in the population. Instead, you 
+have to use inferential statistics to “infer” (estimate) the size of the population
+parameter from a sample.
+```
+:::
+
+-----
+
+## Obtain a Sample
+
+You are a poor graduate student. All you can afford is $N$ = 10. 
+
+```{r}
+set.seed(2005) 
+data_sample_1 <- data |> 
+   slice_sample(n = 10)
+
+data_sample_1 |> 
+  summarise(n = n(),
+            mean = mean(like_score),
+            sd = sd(like_score))
+```
+
+::: {.callout-important collapse="false"}
+### Question: What do you conclude and why?
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+A sample mean of 2.14 is not 0. However, you know that the sample mean will not
+match the population mean exactly. How likely is it to get a sample mean of 2.14 
+if the population mean is 0 (think about it!)?
+```
+:::
+
+-----
+
+Your friend is a poor graduate student too. All she can afford is $N$ = 10 too.
+
+```{r}
+data_sample_2 <- data |> 
+   slice_sample(n = 10)
+
+data_sample_2 |> 
+  summarise(n = n(),
+            mean = mean(like_score),
+            sd = sd(like_score))
+```
+
+::: {.callout-important collapse="false"}
+### Question: What does she conclude and why?
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+A sample mean of 1.74 is not 0. However, she knows that the sample mean will not
+match the population mean exactly. It is more likely to get a sample mean of 1.74
+than 2.14 if the population mean is 0 but she still doesn’t know how likely either
+outcome is. What if she obtained a sample with mean of 30?
+```
+:::
+
+-----
+
+## Sampling Distribution of the Mean
+
+You can construct a sampling distribution for any parameter estimate (e.g., mean, $s$, min, max, $r$, $b_0$, $b_1$).
+\
+\
+For the mean, you can think of the sampling distribution conceptually as follows:  
+
+1. Imagine drawing many samples (lets say 1000 samples but in theory, the sampling distribution is infinite) of $N$=10 participants (10 participants in each sample) from your population.
+2. Next, calculate the mean for each of these samples of 10 participants.
+3. Finally, create a histogram (or density plot) of these sample means.
+
+-----
+
+### 1000 Samples of $N$=10
+
+```{r}
+get_sample_mean <- function(data, n_sub) { # <1>
+  data |> 
+  slice_sample(n = n_sub) |> 
+  summarise(across(everything(), list(mean = mean, sd = sd), .names = "{fn}")) |> 
+  mutate(n = n_sub) 
+}
+```
+
+1. Here we are writing a function that we will use to generate descriptive statistics over 1000 samples. We are keeping this function generic because we are going to use this function again later in the chapter for more simulation examples!
+
+```{r}
+set.seed(101)
+samples <- 1:1000 |> 
+  map(\(i) get_sample_mean(data = data[, "like_score"], n_sub = 10)) |>  #<1>
+  list_rbind()
+
+samples
+```
+
+1. We use the `map()` function to repeat our function 1000 times. 
+
+-----
+
+### Sampling Distribution of the Mean
+
+```{r}
+samples |> 
+  summarise(n = n(), 
+            mean_m = mean(mean), 
+            sd = sd(mean))
+
+plot_samples <- samples |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 20) + 
+  scale_x_continuous("sample means", limits = c(-100, 100))
+
+plot_samples
+```
+
+**Note: In your research, you don't form a sampling distribution by repeated sampling. You (typically) only have one sample.**
+
+-----
+
+## Raw Score Distribution vs. Sampling Distribution
+
+The distinction between the raw score distribution and your sample distribution is very important to keep clear in your mind!
+
+
+```{r}
+library(patchwork) # <1> 
+```
+
+1. The `patchwork` package is an easy and customizable way to combine `ggplot` objects. For more information see <https://patchwork.data-imaginist.com/>.
+
+```{r}
+plot_raw + plot_samples
+```
+
+-----
+
+## Sampling Distribution of the Mean
+
+
+::: {.callout-important collapse="false"}
+### Question: What will the mean of the sample means be?  In other words, what is the mean of the sampling distribution?
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+The mean of the sample means (i.e., the mean of the sampling distribution) will 
+equal the population mean of raw scores on the dependent measure.  This is important 
+because it indicates that the sample mean is an unbiased estimator of the population 
+mean.
+```
+:::
+
+-----
+
+***The mean is an unbiased estimator:*** The mean of the sample means will equal the mean of the population. Therefore, individual sample means will neither systematically under or overestimate the population mean.
+\
+\
+***Raw Ocean Liking Scores:***
+```{r}
+#| echo: false
+
+data |> 
+  summarise(n = n(), 
+            mean_m = round(mean(like_score), 2), 
+            sd = sd(like_score))
+```
+\
+***Sample (N=10) Means:***
+```{r}
+#| echo: false
+
+samples |> 
+  summarise(n = n(), 
+            mean_m = round(mean(mean), 2), 
+            sd = sd(mean))
+```
+
+The sample variance ($s^2$; with n-1 denominator) is also an unbiased estimator of the population variance ($\sigma^2$). In other words, the mean of the sample $s^2$’s will approximate the population variance. Sample $s$ is negatively biased.
+
+-----
+
+::: {.callout-important collapse="false"}
+### Question: Will all of the sample means be the same?
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+No, there was a distribution of means that varied from each other. The mean of the 
+sampling distribution was the population mean but the standard deviation was not zero.
+```
+:::
+
+-----
+
+## Standard Error(SE)
+
+The standard deviation of the sampling distribution (i.e., standard deviation of the infinite sample means) is equal to:   
+\
+$\frac{\sigma}{\sqrt{N_sample}}$
+\
+\
+Where $\sigma$ is the standard deviation of the population raw scores.  
+\
+\
+This variability in the sampling distribution is due to sampling error.  
+\
+\
+Therefore, because we use parameter estimates calculated in our sample to estimate population parameters, we would like to minimize sampling error.
+\
+\
+The standard deviation of the sampling distribution for a parameter estimate has a technical name.  It is called the standard error of the parameter estimate.  Here, we are talking about the standard error of the mean.
+
+-----
+
+::: {.callout-important collapse="false"}
+### Question: What factors affect the size of the sampling error of the mean (i.e., the standard error)?
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+The standard deviation of the population raw scores and the sample size.
+```
+:::
+
+-----
+
+::: {.callout-important collapse="false"}
+### Question: Variation among raw scores for a variable in the population is broadly caused by two factors. What  are they?
+
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+1.  Individual differences
+2.  Measurement error (the opposite of reliability)
+
+```
+:::
+
+::: {.callout-important collapse="false"}
+### Question: What is the relationship between population variability ($\sigma$) and SE?
+
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+As the variability of the variable increases in the population, the SE increases.
+```
+:::
+
+::: {.callout-important collapse="false"}
+### Question: What would happen to SE if there was no variation in population scores?
+
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+The SE would equal 0 no matter which participants you sampled. They would all have 
+the same scores!
+```
+:::
+
+-----
+
+::: {.callout-important collapse="false"}
+### Question: What is the relationship between sample size and SE?
+
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+As the sample size increases, the SE for the statistic will decrease.
+```
+:::
+
+::: {.callout-important collapse="false"}
+### Question: What would the SE be if the sample size equalled population size?
+
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+If the sample contained all participants from the population, the SE would be equal 
+to 0 because each sample mean would have exactly the same value as the overall population 
+mean (because all same scores).
+```
+:::
+
+::: {.callout-important collapse="false"}
+### Question: What would happen if the samples contained only 1 participant?
+
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+If each sample contained only 1 participant, the SE would be equal to the variation 
+($\sigma$) observed within the population.
+```
+:::
+
+-----
+
+## Shape of the Sampling Distribution
+
+***Central Limit Theorem:*** The shape of the sampling distribution approaches normal as N increases. 
+\
+\
+The shape is roughly normal even for moderate sample sizes assuming that the original distribution isn’t really weird (i.e., non-normal). 
+
+-----
+
+## Normal Population and Various Sampling Distributions
+
+**Population size: 100,000; Simulated 10,000 samples.**
+
+```{r}
+#| echo: false
+
+# Simulate population data
+set.seed(101)
+data_sim <- tibble(
+  normal = rnorm(100000, 100, 10), # normal dist with mean = 100
+  uniform = runif(100000, min=60, max=140), # uniform distribution with min = 60, max  = 140
+  skewed = rexp(100000, rate = 1)*100 # positive skew (exponential distribution * 100) 
+)
+```
+
+```{r}
+#| echo: false
+
+# Simulate sampling distributions
+samp_norm_5 <- 1:10000 |> 
+  map(\(i) get_sample_mean(data = data_sim[, "normal"], n_sub = 5)) |>  
+  list_rbind() 
+
+samp_norm_10 <- 1:10000 |> 
+  map(\(i) get_sample_mean(data = data_sim[, "normal"], n_sub = 10)) |>  
+  list_rbind() 
+
+samp_norm_20 <- 1:10000 |> 
+  map(\(i) get_sample_mean(data = data_sim[, "normal"], n_sub = 20)) |>  
+  list_rbind() 
+
+samp_norm_50 <- 1:10000 |> 
+  map(\(i) get_sample_mean(data = data_sim[, "normal"], n_sub = 50)) |>  
+  list_rbind() 
+
+samp_norm_100 <- 1:10000 |> 
+  map(\(i) get_sample_mean(data = data_sim[, "normal"], n_sub = 100)) |>  
+  list_rbind() 
+```
+
+
+```{r}
+#| echo: false
+
+# Create plots
+pop_norm_plot <- data_sim |> 
+  ggplot(aes(x = normal)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Normal Population",
+       caption = str_c("M=", round(mean(data_sim$normal), 1), " SD=",
+                      round(sd(data_sim$normal), 1), " Skew=", 
+                      round(e1071::skewness(data_sim$normal), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(data_sim$normal), 1))) +
+  xlim(50, 150)
+
+samp_norm_5_plot <- samp_norm_5 |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Sampling Distribution",
+       subtitle = "N=5",
+       caption = str_c("M=", round(mean(samp_norm_5$mean), 1), " SD=",
+                      round(sd(samp_norm_5$mean), 1), " Skew=", 
+                      round(e1071::skewness(samp_norm_5$mean), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(samp_norm_5$mean), 1))) +
+  scale_x_continuous("sample mean", limits = c(50, 150))
+
+samp_norm_10_plot <- samp_norm_10 |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Sampling Distribution",
+       subtitle = "N=10",
+       caption = str_c("M=", round(mean(samp_norm_10$mean), 1), " SD=",
+                      round(sd(samp_norm_10$mean), 1), " Skew=", 
+                      round(e1071::skewness(samp_norm_10$mean), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(samp_norm_10$mean), 1))) +
+  scale_x_continuous("sample mean", limits = c(50, 150))
+
+samp_norm_20_plot <- samp_norm_20 |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Sampling Distribution",
+       subtitle = "N=20",
+       caption = str_c("M=", round(mean(samp_norm_20$mean), 1), " SD=",
+                      round(sd(samp_norm_20$mean), 1), " Skew=", 
+                      round(e1071::skewness(samp_norm_20$mean), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(samp_norm_20$mean), 1))) +
+  scale_x_continuous("sample mean", limits = c(50, 150))
+
+samp_norm_50_plot <- samp_norm_50 |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Sampling Distribution",
+       subtitle = "N=50",
+       caption = str_c("M=", round(mean(samp_norm_50$mean)), " SD=",
+                      round(sd(samp_norm_50$mean)), " Skew=", 
+                      round(e1071::skewness(samp_norm_50$mean)),
+                      " Kurtosis=",  round(e1071::kurtosis(samp_norm_50$mean), 1))) +
+  scale_x_continuous("sample mean", limits = c(50, 150))
+
+samp_norm_100_plot <- samp_norm_100 |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Sampling Distribution",
+       subtitle = "N=100",
+       caption = str_c("M=", round(mean(samp_norm_100$mean), 1), 
+                       " SD=",
+                      round(sd(samp_norm_100$mean), 1), " Skew=", 
+                      round(e1071::skewness(samp_norm_100$mean), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(samp_norm_100$mean), 1))) +
+  scale_x_continuous("sample mean", limits = c(50, 150))
+```
+
+```{r}
+#| echo: false
+
+(pop_norm_plot + samp_norm_5_plot + samp_norm_10_plot) / 
+(samp_norm_20_plot + samp_norm_50_plot + samp_norm_100_plot)
+```
+
+
+-----
+
+## Uniform Population and Various Sampling Distributions
+
+**Population size: 100,000; Simulated 10,000 samples.**
+
+```{r}
+#| echo: false
+
+# Simulate sampling distributions
+samp_unif_5 <- 1:10000 |> 
+  map(\(i) get_sample_mean(data = data_sim[, "uniform"], n_sub = 5)) |>  
+  list_rbind() 
+
+samp_unif_10 <- 1:10000 |> 
+  map(\(i) get_sample_mean(data = data_sim[, "uniform"], n_sub = 10)) |>  
+  list_rbind() 
+
+samp_unif_20 <- 1:10000 |> 
+  map(\(i) get_sample_mean(data = data_sim[, "uniform"], n_sub = 20)) |>  
+  list_rbind() 
+
+samp_unif_50 <- 1:10000 |> 
+  map(\(i) get_sample_mean(data = data_sim[, "uniform"], n_sub = 50)) |>  
+  list_rbind() 
+
+samp_unif_100 <- 1:10000 |> 
+  map(\(i) get_sample_mean(data = data_sim[, "uniform"], n_sub = 100)) |>  
+  list_rbind() 
+```
+
+
+```{r}
+#| echo: false
+
+# Create plots
+pop_unif_plot <- data_sim |> 
+  ggplot(aes(x = uniform)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Uniform Population",
+       caption = str_c("M=", round(mean(data_sim$uniform), 1), " SD=",
+                      round(sd(data_sim$uniform), 1), " Skew=", 
+                      round(e1071::skewness(data_sim$uniform), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(data_sim$uniform), 1))) +
+  xlim(50, 150)
+
+samp_unif_5_plot <- samp_unif_5 |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Sampling Distribution",
+       subtitle = "N=5",
+       caption = str_c("M=", round(mean(samp_unif_5$mean), 1), " SD=",
+                      round(sd(samp_unif_5$mean), 1), " Skew=", 
+                      round(e1071::skewness(samp_unif_5$mean), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(samp_unif_5$mean), 1))) +
+  scale_x_continuous("sample mean", limits = c(50, 150))
+
+samp_unif_10_plot <- samp_unif_10 |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Sampling Distribution",
+       subtitle = "N=10",
+       caption = str_c("M=", round(mean(samp_unif_10$mean), 1), " SD=",
+                      round(sd(samp_unif_10$mean), 1), " Skew=", 
+                      round(e1071::skewness(samp_unif_10$mean), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(samp_unif_10$mean), 1))) +
+  scale_x_continuous("sample mean", limits = c(50, 150))
+
+samp_unif_20_plot <- samp_unif_20 |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Sampling Distribution",
+       subtitle = "N=20",
+       caption = str_c("M=", round(mean(samp_unif_20$mean), 1), " SD=",
+                      round(sd(samp_unif_20$mean), 1), " Skew=", 
+                      round(e1071::skewness(samp_unif_20$mean), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(samp_unif_20$mean), 1))) +
+  scale_x_continuous("sample mean", limits = c(50, 150))
+
+samp_unif_50_plot <- samp_unif_50 |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Sampling Distribution",
+       subtitle = "N=50",
+       caption = str_c("M=", round(mean(samp_unif_50$mean), 1), " SD=",
+                      round(sd(samp_unif_50$mean), 1), " Skew=", 
+                      round(e1071::skewness(samp_unif_50$mean), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(samp_unif_50$mean), 1))) +
+  scale_x_continuous("sample mean", limits = c(50, 150))
+
+samp_unif_100_plot <- samp_unif_100 |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Sampling Distribution",
+       subtitle = "N=100",
+       caption = str_c("M=", round(mean(samp_unif_100$mean), 1), 
+                       " SD=",
+                      round(sd(samp_unif_100$mean), 1), " Skew=", 
+                      round(e1071::skewness(samp_unif_100$mean), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(samp_unif_100$mean, 1)))) +
+  scale_x_continuous("sample mean", limits = c(50, 150))
+```
+
+```{r}
+#| echo: false
+
+(pop_unif_plot + samp_unif_5_plot + samp_unif_10_plot) / 
+(samp_unif_20_plot + samp_unif_50_plot + samp_unif_100_plot)
+```
+
+
+
+-----
+
+## Skewed Population and Various Sampling Distributions
+
+**Population size: 100,000; Simulated 10,000 samples.**
+
+```{r}
+#| echo: false
+
+# Simulate sampling distributions
+samp_skew_5 <- 1:10000 |> 
+  map(\(i) get_sample_mean(data = data_sim[, "skewed"], n_sub = 5)) |>  
+  list_rbind() 
+
+samp_skew_10 <- 1:10000 |> 
+  map(\(i) get_sample_mean(data = data_sim[, "skewed"], n_sub = 10)) |>  
+  list_rbind() 
+
+samp_skew_20 <- 1:10000 |> 
+  map(\(i) get_sample_mean(data = data_sim[, "skewed"], n_sub = 20)) |>  
+  list_rbind() 
+
+samp_skew_50 <- 1:10000 |> 
+  map(\(i) get_sample_mean(data = data_sim[, "skewed"], n_sub = 50)) |>  
+  list_rbind() 
+
+samp_skew_100 <- 1:10000 |> 
+  map(\(i) get_sample_mean(data = data_sim[, "skewed"], n_sub = 100)) |>  
+  list_rbind() 
+```
+
+
+```{r}
+#| echo: false
+
+# Create plots
+pop_skew_plot <- data_sim |> 
+  ggplot(aes(x = skewed)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Skewed Population",
+       caption = str_c("M=", round(mean(data_sim$skewed), 1), " SD=",
+                      round(sd(data_sim$skewed), 1), " Skew=", 
+                      round(e1071::skewness(data_sim$skewed), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(data_sim$skewed), 1)))
+
+samp_skew_5_plot <- samp_skew_5 |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Sampling Distribution",
+       subtitle = "N=5",
+       caption = str_c("M=", round(mean(samp_skew_5$mean), 1), " SD=",
+                      round(sd(samp_skew_5$mean), 1), " Skew=", 
+                      round(e1071::skewness(samp_skew_5$mean), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(samp_skew_5$mean), 1))) +
+  scale_x_continuous("sample mean")
+
+samp_skew_10_plot <- samp_skew_10 |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Sampling Distribution",
+       subtitle = "N=10",
+       caption = str_c("M=", round(mean(samp_skew_10$mean), 1), " SD=",
+                      round(sd(samp_skew_10$mean), 1), " Skew=", 
+                      round(e1071::skewness(samp_skew_10$mean), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(samp_skew_10$mean), 1))) +
+  scale_x_continuous("sample mean")
+
+samp_skew_20_plot <- samp_skew_20 |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Sampling Distribution",
+       subtitle = "N=20",
+       caption = str_c("M=", round(mean(samp_skew_20$mean), 1), " SD=",
+                      round(sd(samp_skew_20$mean), 1), " Skew=", 
+                      round(e1071::skewness(samp_skew_20$mean), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(samp_skew_20$mean), 1))) +
+  scale_x_continuous("sample mean")
+
+samp_skew_50_plot <- samp_skew_50 |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Sampling Distribution",
+       subtitle = "N=50",
+       caption = str_c("M=", round(mean(samp_skew_50$mean), 1), " SD=",
+                      round(sd(samp_skew_50$mean), 1), " Skew=", 
+                      round(e1071::skewness(samp_skew_50$mean), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(samp_skew_50$mean), 1))) +
+  scale_x_continuous("sample mean")
+
+samp_skew_100_plot <- samp_skew_100 |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(color = "black", fill = "light grey", bins = 30) +
+  labs(title = "Sampling Distribution",
+       subtitle = "N=100",
+       caption = str_c("M=", round(mean(samp_skew_100$mean), 1), 
+                       " SD=",
+                      round(sd(samp_skew_100$mean), 1), " Skew=", 
+                      round(e1071::skewness(samp_skew_100$mean), 1),
+                      " Kurtosis=",  round(e1071::kurtosis(samp_skew_100$mean, 1)))) +
+  scale_x_continuous("sample mean")
+```
+
+```{r}
+#| echo: false
+
+(pop_skew_plot + samp_skew_5_plot + samp_skew_10_plot) / 
+(samp_skew_20_plot + samp_skew_50_plot + samp_skew_100_plot)
+```
+
+-----
+
+## An Important Normal Distribution: Z-scores
+
+The Z distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.
+\
+\
+You can therefore think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.
+\
+\
+The probability distribution is known for the Z distribution.
+
+```{r}
+# insert three figures of probability distributions
+```
+
+
+-----
+
+## Probability of Parameter Estimate Given $H_0$
+
+How could you use the Z distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of N=10 from a population of Ocean Liking scores with a population mean (parameter) of 0?
+\
+\
+Think about it……
+
+-----
+
+## Hypothetical Sampling Distribution for $H_0$
+
+If $H_0$ is true; the sampling distribution has a mean of 0 and standard deviation of $\frac{\sigma}{\sqrt{N_sample}} =  \frac{23.7}{\sqrt{10}}  =  7.5$.   
+
+
+```{r}
+#| echo: false
+
+mean_val <- round(mean(samples$mean),2)
+sd_val <- round(sd(samples$mean),2)
+
+hist_samples <- samples |> 
+  ggplot(aes(x = mean)) +
+  geom_histogram(aes(y = after_stat(density)), 
+                 color = "black", fill = "light grey", bins = 20) + 
+  stat_function(fun = dnorm, args = list(mean = mean_val, sd = sd_val),  color = "blue",
+                 linewidth = .9) +
+  scale_x_continuous("like_score sample means", limits = c(-50, 50)) 
+
+hist_samples
+```
+
+-----
+
+::: {.callout-important collapse="false"}
+### Question: If $H_0$ is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?
+
+```{r}
+#| echo: false
+
+hist_samples_vline <- hist_samples +
+  geom_vline(xintercept = 2.4, color = "red", linewidth = .9)
+
+hist_samples_vline
+```
+
+
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+Pretty likely…
+But we can do better than that!
+```
+:::
+
+-----
+
+## Our First Inferential Test: The z-test
+
+$z = \frac{2.4 - 0}{7.5} = 0.32; p \le .749$  
+
+```{r}
+pnorm(0.32, mean=0, sd=1, lower.tail=FALSE) * 2 
+```
+
+
+```{r}
+#| warning: false
+#| echo: false
+
+# still need to annotate probability plot with percentages
+probability <- tibble(x=seq(-6.7,6.7,.001),
+       y=dnorm(seq(-6.7,6.7,.001),0,1)) |> 
+ggplot() +
+geom_line(aes(x = x, y = y), color = "blue") +
+geom_vline(xintercept=0.32, lwd=.9, col='red') +
+geom_vline(xintercept=-0.32, lwd=.9, col='red') +
+scale_x_continuous("Z", limits = c(-6,6), breaks = c(-6, -4, -2, 0, 2, 4, 6)) +
+ylab("Probability")
+
+
+hist_samples_vline + probability
+```
+
+
+-----
+
+## t vs. z
+
+$z = \frac{2.4 - 0}{7.5} = 0.32$  
+
+::: {.callout-important collapse="false"}
+### Question: Where did we get the 2.4 from in our z-test?
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+Our sample mean from our study. This is our parameter estimate of the population
+mean of OLS (like_score) scores.
+
+```
+:::
+
+
+::: {.callout-important collapse="false"}
+### Question: Where did we get the 7.5 from in our z-test and what is the problem with this?
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+This was our estimate of the standard deviation of the sampling distribution. $\frac{\sigma}{\sqrt{N_sample}}$ 
+We do not know $\sigma$.
+
+```
+:::
+
+
+-----
+
+::: {.callout-important collapse="false"}
+### Question: How can we estimate $\sigma$?
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+We can use our sample standard deviation ($s$), but $s$ is a negatively biased parameter
+estimate.  On average, it will underestimate $\sigma$.
+```
+:::
+
+
+::: {.callout-important collapse="false"}
+### Question: So what do we do?
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+We account for this underestimation of $\sigma$ and therefore of the standard deviation
+(standard error) of the sampling distribution by using the t distribution rather than 
+the z distribution to calculate the probability of our parameter estimate if $H_0$ is 
+true.   
+
+The t distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.
+```
+:::
+
+-----
+
+## Our Second Inferential Test: One Sample t-test
+
+$t(df)$ = $\frac{Parameter estimate – Parameter: H_0}{Standard error of parameter estimate}$   
+\          
+Where $SE$ is estimated using $s$ from sample data.
+\
+$df = N – P = 10 - 1 = 9$
+
+
+```{r}
+#| echo: false
+
+# still need to convert to ggplot
+plot(x=seq(-6.7,6.7,.001),y=dnorm(seq(-6.7,6.7,.001),0,1), xlim= c(-6,6),type='l', col= 'blue', xlab= 'z or t score', ylab= 'Probability')
+lines(x=seq(-6.7,6.7,.001),y=dt(seq(-6.7,6.7,.001), df=9), col= 'red')
+legend('topright', c('z', 't'), lwd=2, col = c('blue', 'red'))
+```
+
+-----
+
+The bias in $s$ decreases with increasing $N$.  Therefore, $t$ approaches $z$ with larger sample sizes.
+
+```{r}
+#| echo: false
+
+# still need to convert to ggplot
+plot(x=seq(-3,3,.001),y=dnorm(seq(-3,3,.001),0,1), xlim= c(-3,3),type='l', col= 'blue', xlab= 'z or t score', ylab= 'Probability')
+lines(x=seq(-3,3,.001),y=dt(seq(-3,3,.001), df=1), col= 'red')
+lines(x=seq(-3,3,.001),y=dt(seq(-3,3,.001), df=10), col= 'green')
+lines(x=seq(-3,3,.001),y=dt(seq(-3,3,.001), df=100), col= 'yellow')
+legend('topright', c('z', 't(df=1)', 't(df=10)', 't(df=100)'), lwd=2, col = c('blue', 'red', 'green', 'yellow'))
+```
+
+
+-----
+
+## Null Hypothesis Significance Testing (NHST)
+
+1. Divide reality regarding the size of the population parameter into two non-overlapping possibilities: Null hypothesis ($H_0$) & Alternate hypothesis ($H_a$).    
+
+2. Assume that $H_0$ is true.
+
+3. Collect data.
+
+4. Calculate the probability ($p$-value) of  obtaining your parameter estimate (or a more extreme estimate) given your assumption (i.e., $H_0$ is true)
+
+5. Compare probability to some cut-off value (alpha level).
+
+6. (a) If this parameter estimate is less probable than cut-off value, reject $H_0$ in favor of $H_a$.
+
+   (b) If data is not less probable, fail to reject $H_0$.

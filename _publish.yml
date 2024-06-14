@@ -1,0 +1,4 @@
+- source: 02_sampling_distributions.qmd
+  quarto-pub:
+    - id: 524d6fcd-0102-4ef4-aca6-e445ba9adc69
+      url: 'https://kendra-wyant.quarto.pub/02_sampling_distributions'
