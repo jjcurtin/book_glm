@@ -830,7 +830,7 @@ For the mean, you can think of the sampling distribution conceptually as follows
 </div>
 </div>
 </div>
-<p><strong>Note: In your research, you don’t form a sampling distribution by repeated sampling. You (typically) only have one sample.</strong></p>
+<p><em>Note: In your research, you don’t form a sampling distribution by repeated sampling. You (typically) only have one sample.</em></p>
 <hr>
 </section>
 </section>
@@ -948,7 +948,7 @@ Question: Will all of the sample means be the same?
 <h2 data-number="2.14" class="anchored" data-anchor-id="standard-errorse"><span class="header-section-number">2.14</span> Standard Error(SE)</h2>
 <p>The standard deviation of the sampling distribution (i.e., standard deviation of the infinite sample means) is equal to:<br>
 <br>
-<span class="math inline">\(\frac{\sigma}{\sqrt{N_{sample}}\)</span><br>
+<span class="math inline">\(\frac{\sigma}{\sqrt{N_{sample}}}\)</span><br>
 <br>
 Where <span class="math inline">\(\sigma\)</span> is the standard deviation of the population raw scores.<br>
 <br>
@@ -1130,11 +1130,11 @@ The shape is roughly normal even for moderate sample sizes assuming that the ori
 </section>
 <section id="an-important-normal-distribution-z-scores" class="level2" data-number="2.19">
 <h2 data-number="2.19" class="anchored" data-anchor-id="an-important-normal-distribution-z-scores"><span class="header-section-number">2.19</span> An Important Normal Distribution: Z-scores</h2>
-<p>The <span class="math inline">\(Z\)</span> distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.<br>
+<p>The <span class="math inline">\(z\)</span> distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.<br>
 <br>
 You can therefore think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.<br>
 <br>
-The probability distribution is known for the <span class="math inline">\(Z\)</span> distribution.</p>
+The probability distribution is known for the <span class="math inline">\(z\)</span> distribution.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># insert three figures of probability distributions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1142,7 +1142,7 @@ The probability distribution is known for the <span class="math inline">\(Z\)</s
 </section>
 <section id="probability-of-parameter-estimate-given-h_0" class="level2" data-number="2.20">
 <h2 data-number="2.20" class="anchored" data-anchor-id="probability-of-parameter-estimate-given-h_0"><span class="header-section-number">2.20</span> Probability of Parameter Estimate Given <span class="math inline">\(H_0\)</span></h2>
-<p>How could you use the <span class="math inline">\(Z\)</span> distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of <span class="math inline">\(N=10\)</span> from a population of Ocean Liking scores with a population mean (parameter) of 0?<br>
+<p>How could you use the <span class="math inline">\(z\)</span> distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of <span class="math inline">\(N=10\)</span> from a population of Ocean Liking scores with a population mean (parameter) of 0?<br>
 <br>
 Think about it……</p>
 <hr>
@@ -1285,7 +1285,7 @@ Question: So what do we do?
 </section>
 <section id="our-second-inferential-test-one-sample-t-test" class="level2" data-number="2.24">
 <h2 data-number="2.24" class="anchored" data-anchor-id="our-second-inferential-test-one-sample-t-test"><span class="header-section-number">2.24</span> Our Second Inferential Test: One Sample t-test</h2>
-<p><span class="math inline">\(t(df)\)</span> = <span class="math inline">\(\frac{Parameter estimate – Parameter: H_0}{Standard error of parameter estimate}\)</span><br>
+<p><span class="math inline">\(t(df)\)</span> = <span class="math inline">\(\frac{\text{Parameter estimate – Parameter:} H_0}{\text{Standard error of parameter estimate}}\)</span><br>
 &nbsp;<br>
 Where <span class="math inline">\(SE\)</span> is estimated using <span class="math inline">\(s\)</span> from sample data.<br>
 <span class="math inline">\(df = N – P = 10 - 1 = 9\)</span></p>
