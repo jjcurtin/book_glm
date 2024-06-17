@@ -109,18 +109,18 @@ A sampling distribution, like a population, is an abstract concept that represen
 ***Dependent measure:*** Ocean liking scale scores that range from -100 (strongly dislike) to 100 (strongly like). 0 represents neutral.
 \
 \
-***Hypotheses:*** $H_0$: $\mu$ = 0; $H_a$: $\mu$ <> 0
+***Hypotheses:*** $H_0: \mu = 0; H_a: \mu \neq 0$ 
 
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: How would you answer this question if you had unlimited resources (e.g., time, money, and patience)?
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-Administer the Ocean liking scale to all 10,000 inhabitants in the population 
+```{r}
+#| echo: false
+#| results: asis
+
+cat("Administer the Ocean liking scale to all 10,000 inhabitants in the population 
 and calculate the population mean score. Is it 0?  If not, the inhabitants are 
-not neutral on average.
+not neutral on average.")
 ```
 :::
 
@@ -139,14 +139,15 @@ data <- read_csv(here::here(path_data, "2_sampling_distributions_like_clean.csv"
    glimpse() #<3>
 ```
 1. This path points to where your data is and should be a relative path from your R project. 
-2. we use the `here()` function in the `here` package (`here::here()`) to define paths within a function. This approach (vs. `file.path`) works well when using R Projects. 
+2. we use the `here()` function in the `here` package (`here::here()`) to define paths within a function. This approach (vs. `file.path()`) works well when using R Projects. 
 3. `glimpse()` is a useful function that you can pipe tibbles into when first reading them in. It shows you useful information, like number of rows and column, variable (column) names, a sample of what the data look like, and the class of each variable (e.g., double, character, factor).
 
 -----
 
-***See also:***  
+***See also:***    
+`view()` allows you to open up the data frame in rstudio.    
 
-`skim` functions in the `skimr` package are helpful for quick summaries of your data (e.g., missingness, distribution, type of data)
+`skim()` and other functions in the `skimr` package are helpful for quick summaries of your data (e.g., missingness, distribution, type of data)
 ```{r}
 data |> 
   skimr::skim()
@@ -165,7 +166,7 @@ data |>
 
 -----
 
-You can also pull out a few rows to look at your data. This can be done using `slice_head` to pull out $n$ top rows of the data set, `slice_tail` to pull out $n$ bottom rows of the data set, or `slice_sample` to pull out a random $n$ of rows from the data set.
+You can also pull out a few rows to look at your data. This can be done using `slice_head()` to pull out $n$ top rows of the data set, `slice_tail()` to pull out $n$ bottom rows of the data set, or `slice_sample()` to pull out a random $n$ of rows from the data set.
 
 ```{r}
 data |> 
@@ -179,7 +180,7 @@ data |>
   slice_sample(n = 5)
 ```
 
-1. Whenever you are using random numbers it is important to set a seed first (`set.seed()). This ensures you can reproduce that randomness!
+1. Whenever you are using random numbers it is important to set a seed first (`set.seed()`). This ensures you can reproduce that randomness!
 
 -----
 
@@ -203,41 +204,42 @@ plot_raw
 
 -----
 
-<!--KW: fix mu formatting in answer code block-->
 
 ## Parameter Estimation and Testing
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: What do you conclude?
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-Inhabitants of the island are neutral on average on the Ocean Liking Scale;
-$\mu$ = 0
+```{r}
+#| echo: false
+#| results: asis
+
+cat("Inhabitants of the island are neutral on average on the Ocean Liking Scale; 
+$\\mu$ = 0.")
 ```
 :::
 
-::: {.callout-important collapse="false"}
-### Question: How confident are you about this conclusion?
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-Excluding issues of measurement of the scale (i.e., reliability), you are 100%
-confident that the population mean score on this scale is 0 ($\mu$ = 0). 
+
+::: {.callout-important collapse="true"}
+### Question:  How confident are you about this conclusion?
+```{r}
+#| echo: false
+#| results: asis
+
+cat("Excluding issues of measurement of the scale (i.e., reliability), you are 100% confident 
+    that the population mean score on this scale is 0 ($\\mu$ = 0).")
 ```
 :::
 
-::: {.callout-important collapse="false"}
+
+::: {.callout-important collapse="true"}
 ### Question: Of course, this approach to answering a research question is not typical. Why? And how would you normally answer this question?
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-You will very rarely have access to all scores in the population. Instead, you 
+```{r}
+#| echo: false
+#| results: asis
+
+cat("You will very rarely have access to all scores in the population. Instead, you 
 have to use inferential statistics to “infer” (estimate) the size of the population
-parameter from a sample.
+parameter from a sample.")
 ```
 :::
 
@@ -245,7 +247,7 @@ parameter from a sample.
 
 ## Obtain a Sample
 
-You are a poor graduate student. All you can afford is $N$ = 10. 
+You are a poor graduate student. All you can afford is $N = 10$. 
 
 ```{r}
 set.seed(2005) 
@@ -258,21 +260,21 @@ data_sample_1 |>
             sd = sd(like_score))
 ```
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: What do you conclude and why?
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-A sample mean of 2.14 is not 0. However, you know that the sample mean will not
+```{r}
+#| echo: false
+#| results: asis
+
+cat("A sample mean of 2.14 is not 0. However, you know that the sample mean will not
 match the population mean exactly. How likely is it to get a sample mean of 2.14 
-if the population mean is 0 (think about it!)?
+if the population mean is 0 (think about it!)?")
 ```
 :::
 
 -----
 
-Your friend is a poor graduate student too. All she can afford is $N$ = 10 too.
+Your friend is a poor graduate student too. All she can afford is $N = 10$ too.
 
 ```{r}
 data_sample_2 <- data |> 
@@ -284,16 +286,16 @@ data_sample_2 |>
             sd = sd(like_score))
 ```
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: What does she conclude and why?
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-A sample mean of 1.74 is not 0. However, she knows that the sample mean will not
+```{r}
+#| echo: false
+#| results: asis
+
+cat("A sample mean of 1.74 is not 0. However, she knows that the sample mean will not
 match the population mean exactly. It is more likely to get a sample mean of 1.74
 than 2.14 if the population mean is 0 but she still doesn’t know how likely either
-outcome is. What if she obtained a sample with mean of 30?
+outcome is. What if she obtained a sample with mean of 30?")
 ```
 :::
 
@@ -367,7 +369,7 @@ The distinction between the raw score distribution and your sample distribution 
 library(patchwork) # <1> 
 ```
 
-1. The `patchwork` package is an easy and customizable way to combine `ggplot` objects. For more information see <https://patchwork.data-imaginist.com/>.
+1. The `patchwork` package is an easy and customizable way to combine `ggplot()` objects. For more information see <https://patchwork.data-imaginist.com/>.
 
 ```{r}
 plot_raw + plot_samples
@@ -378,17 +380,24 @@ plot_raw + plot_samples
 ## Sampling Distribution of the Mean
 
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: What will the mean of the sample means be?  In other words, what is the mean of the sampling distribution?
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-The mean of the sample means (i.e., the mean of the sampling distribution) will 
+```{r}
+#| echo: false
+#| results: asis
+
+cat("The mean of the sample means (i.e., the mean of the sampling distribution) will 
 equal the population mean of raw scores on the dependent measure.  This is important 
 because it indicates that the sample mean is an unbiased estimator of the population 
-mean.
+mean.")
 ```
+
+```{r}
+#| echo: false
+
+plot_samples
+```
+
 :::
 
 -----
@@ -420,14 +429,25 @@ The sample variance ($s^2$; with n-1 denominator) is also an unbiased estimator 
 
 -----
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: Will all of the sample means be the same?
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-No, there was a distribution of means that varied from each other. The mean of the 
-sampling distribution was the population mean but the standard deviation was not zero.
+```{r}
+#| echo: false
+#| results: asis
+
+cat("No, there was a distribution of means that varied from each other. The mean of the 
+sampling distribution was the population mean but the standard deviation was not zero.")
+```
+
+```{r}
+#| echo: false
+
+samples |> 
+  summarise(n = n(), 
+            mean_m = round(mean(mean), 2), 
+            sd = sd(mean))
+
+plot_samples
 ```
 :::
 
@@ -437,7 +457,7 @@ sampling distribution was the population mean but the standard deviation was not
 
 The standard deviation of the sampling distribution (i.e., standard deviation of the infinite sample means) is equal to:   
 \
-$\frac{\sigma}{\sqrt{N_sample}}$
+$\frac{\sigma}{\sqrt{N_{sample}}}$
 \
 \
 Where $\sigma$ is the standard deviation of the population raw scores.  
@@ -453,89 +473,89 @@ The standard deviation of the sampling distribution for a parameter estimate has
 
 -----
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: What factors affect the size of the sampling error of the mean (i.e., the standard error)?
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-The standard deviation of the population raw scores and the sample size.
+```{r}
+#| echo: false
+#| results: asis
+
+cat("The standard deviation of the population raw scores and the sample size.")
 ```
 :::
 
 -----
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: Variation among raw scores for a variable in the population is broadly caused by two factors. What  are they?
 
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-1.  Individual differences
-2.  Measurement error (the opposite of reliability)
+```{r}
+#| echo: false
+#| results: asis
+
+cat("1.  Individual differences
+2.  Measurement error (the opposite of reliability)")
 
 ```
 :::
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: What is the relationship between population variability ($\sigma$) and SE?
 
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-As the variability of the variable increases in the population, the SE increases.
+```{r}
+#| echo: false
+#| results: asis
+
+cat("As the variability of the variable increases in the population, the SE increases.")
 ```
 :::
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: What would happen to SE if there was no variation in population scores?
 
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-The SE would equal 0 no matter which participants you sampled. They would all have 
-the same scores!
+```{r}
+#| echo: false
+#| results: asis
+
+cat("The SE would equal 0 no matter which participants you sampled. They would all have 
+the same scores!")
 ```
 :::
 
 -----
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: What is the relationship between sample size and SE?
 
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-As the sample size increases, the SE for the statistic will decrease.
+```{r}
+#| echo: false
+#| results: asis
+
+cat("As the sample size increases, the SE for the statistic will decrease.")
 ```
 :::
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: What would the SE be if the sample size equalled population size?
 
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-If the sample contained all participants from the population, the SE would be equal 
+```{r}
+#| echo: false
+#| results: asis
+
+cat("If the sample contained all participants from the population, the SE would be equal 
 to 0 because each sample mean would have exactly the same value as the overall population 
-mean (because all same scores).
+mean (because all same scores).")
 ```
 :::
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: What would happen if the samples contained only 1 participant?
 
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-If each sample contained only 1 participant, the SE would be equal to the variation 
-($\sigma$) observed within the population.
+```{r}
+#| echo: false
+#| results: asis
+
+cat("If each sample contained only 1 participant, the SE would be equal to the variation 
+($\\sigma$) observed within the population.")
 ```
 :::
 
@@ -543,7 +563,7 @@ If each sample contained only 1 participant, the SE would be equal to the variat
 
 ## Shape of the Sampling Distribution
 
-***Central Limit Theorem:*** The shape of the sampling distribution approaches normal as N increases. 
+***Central Limit Theorem:*** The shape of the sampling distribution approaches normal as $N$ increases. 
 \
 \
 The shape is roughly normal even for moderate sample sizes assuming that the original distribution isn’t really weird (i.e., non-normal). 
@@ -552,7 +572,7 @@ The shape is roughly normal even for moderate sample sizes assuming that the ori
 
 ## Normal Population and Various Sampling Distributions
 
-**Population size: 100,000; Simulated 10,000 samples.**
+Population size: 100,000; Simulated 10,000 samples.
 
 ```{r}
 #| echo: false
@@ -675,7 +695,7 @@ samp_norm_100_plot <- samp_norm_100 |>
 
 ## Uniform Population and Various Sampling Distributions
 
-**Population size: 100,000; Simulated 10,000 samples.**
+Population size: 100,000; Simulated 10,000 samples.
 
 ```{r}
 #| echo: false
@@ -787,7 +807,7 @@ samp_unif_100_plot <- samp_unif_100 |>
 
 ## Skewed Population and Various Sampling Distributions
 
-**Population size: 100,000; Simulated 10,000 samples.**
+Population size: 100,000; Simulated 10,000 samples.
 
 ```{r}
 #| echo: false
@@ -896,13 +916,13 @@ samp_skew_100_plot <- samp_skew_100 |>
 
 ## An Important Normal Distribution: Z-scores
 
-The Z distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.
+The $Z$ distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.
 \
 \
 You can therefore think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.
 \
 \
-The probability distribution is known for the Z distribution.
+The probability distribution is known for the $Z$ distribution.
 
 ```{r}
 # insert three figures of probability distributions
@@ -913,7 +933,7 @@ The probability distribution is known for the Z distribution.
 
 ## Probability of Parameter Estimate Given $H_0$
 
-How could you use the Z distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of N=10 from a population of Ocean Liking scores with a population mean (parameter) of 0?
+How could you use the $Z$ distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of $N=10$ from a population of Ocean Liking scores with a population mean (parameter) of 0?
 \
 \
 Think about it……
@@ -922,7 +942,7 @@ Think about it……
 
 ## Hypothetical Sampling Distribution for $H_0$
 
-If $H_0$ is true; the sampling distribution has a mean of 0 and standard deviation of $\frac{\sigma}{\sqrt{N_sample}} =  \frac{23.7}{\sqrt{10}}  =  7.5$.   
+If $H_0$ is true; the sampling distribution has a mean of 0 and standard deviation of $\frac{\sigma}{\sqrt{N_{sample}}} =  \frac{23.7}{\sqrt{10}}  =  7.5$.   
 
 
 ```{r}
@@ -998,31 +1018,31 @@ hist_samples_vline + probability
 
 -----
 
-## t vs. z
+## $t$ vs. $z$
 
 $z = \frac{2.4 - 0}{7.5} = 0.32$  
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: Where did we get the 2.4 from in our z-test?
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-Our sample mean from our study. This is our parameter estimate of the population
-mean of OLS (like_score) scores.
+```{r}
+#| echo: false
+#| results: asis
+
+cat("Our sample mean from our study. This is our parameter estimate of the population
+mean of OLS (like_score) scores.")
 
 ```
 :::
 
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: Where did we get the 7.5 from in our z-test and what is the problem with this?
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-This was our estimate of the standard deviation of the sampling distribution. $\frac{\sigma}{\sqrt{N_sample}}$ 
-We do not know $\sigma$.
+```{r}
+#| echo: false
+#| results: asis
+
+cat("This was our estimate of the standard deviation of the sampling distribution. $\\frac{\\sigma}{\\sqrt{N_{sample}}}$ 
+We do not know $\\sigma$.")
 
 ```
 :::
@@ -1030,30 +1050,31 @@ We do not know $\sigma$.
 
 -----
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: How can we estimate $\sigma$?
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-We can use our sample standard deviation ($s$), but $s$ is a negatively biased parameter
-estimate.  On average, it will underestimate $\sigma$.
+```{r}
+#| echo: false
+#| results: asis
+
+cat("We can use our sample standard deviation ($s$), but $s$ is a negatively biased parameter
+estimate.  On average, it will underestimate $\\sigma$.")
 ```
 :::
 
 
-::: {.callout-important collapse="false"}
+::: {.callout-important collapse="true"}
 ### Question: So what do we do?
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-We account for this underestimation of $\sigma$ and therefore of the standard deviation
-(standard error) of the sampling distribution by using the t distribution rather than 
-the z distribution to calculate the probability of our parameter estimate if $H_0$ is 
-true.   
+```{r}
+#| echo: false
+#| results: asis
 
-The t distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.
+cat("We account for this underestimation of $\\sigma$ and therefore of the standard deviation
+(standard error) of the sampling distribution by using the t distribution rather than 
+the $z$ distribution to calculate the probability of our parameter estimate if $H_0$ is 
+true.")   
+
+cat("The t distribution is slightly wider, particularly for small sample sizes to correct for our 
+underestimate of the standard deviation.")
 ```
 :::
 
@@ -1061,7 +1082,7 @@ The t distribution is slightly wider, particularly for small sample sizes to cor
 
 ## Our Second Inferential Test: One Sample t-test
 
-$t(df)$ = $\frac{Parameter estimate – Parameter: H_0}{Standard error of parameter estimate}$   
+$t(df)$ = $\frac{\text{Parameter estimate – Parameter:} H_0}{\text{Standard error of parameter estimate}}$   
 \          
 Where $SE$ is estimated using $s$ from sample data.
 \
