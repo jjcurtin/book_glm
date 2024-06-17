@@ -266,7 +266,7 @@ window.Quarto = {
   <li><a href="#probability-of-parameter-estimate-given-h_0" id="toc-probability-of-parameter-estimate-given-h_0" class="nav-link" data-scroll-target="#probability-of-parameter-estimate-given-h_0"><span class="header-section-number">2.20</span> Probability of Parameter Estimate Given <span class="math inline">\(H_0\)</span></a></li>
   <li><a href="#hypothetical-sampling-distribution-for-h_0" id="toc-hypothetical-sampling-distribution-for-h_0" class="nav-link" data-scroll-target="#hypothetical-sampling-distribution-for-h_0"><span class="header-section-number">2.21</span> Hypothetical Sampling Distribution for <span class="math inline">\(H_0\)</span></a></li>
   <li><a href="#our-first-inferential-test-the-z-test" id="toc-our-first-inferential-test-the-z-test" class="nav-link" data-scroll-target="#our-first-inferential-test-the-z-test"><span class="header-section-number">2.22</span> Our First Inferential Test: The z-test</a></li>
-  <li><a href="#t-vs.-z" id="toc-t-vs.-z" class="nav-link" data-scroll-target="#t-vs.-z"><span class="header-section-number">2.23</span> t vs.&nbsp;z</a></li>
+  <li><a href="#t-vs.-z" id="toc-t-vs.-z" class="nav-link" data-scroll-target="#t-vs.-z"><span class="header-section-number">2.23</span> <span class="math inline">\(t\)</span> vs.&nbsp;<span class="math inline">\(z\)</span></a></li>
   <li><a href="#our-second-inferential-test-one-sample-t-test" id="toc-our-second-inferential-test-one-sample-t-test" class="nav-link" data-scroll-target="#our-second-inferential-test-one-sample-t-test"><span class="header-section-number">2.24</span> Our Second Inferential Test: One Sample t-test</a></li>
   <li><a href="#null-hypothesis-significance-testing-nhst" id="toc-null-hypothesis-significance-testing-nhst" class="nav-link" data-scroll-target="#null-hypothesis-significance-testing-nhst"><span class="header-section-number">2.25</span> Null Hypothesis Significance Testing (NHST)</a></li>
   </ul>
@@ -948,7 +948,7 @@ Question: Will all of the sample means be the same?
 <h2 data-number="2.14" class="anchored" data-anchor-id="standard-errorse"><span class="header-section-number">2.14</span> Standard Error(SE)</h2>
 <p>The standard deviation of the sampling distribution (i.e., standard deviation of the infinite sample means) is equal to:<br>
 <br>
-<span class="math inline">\(\frac{\sigma}{\sqrt{N_sample}}\)</span><br>
+<span class="math inline">\(\frac{\sigma}{\sqrt{N_{sample}}\)</span><br>
 <br>
 Where <span class="math inline">\(\sigma\)</span> is the standard deviation of the population raw scores.<br>
 <br>
@@ -990,7 +990,8 @@ Question: Variation among raw scores for a variable in the population is broadly
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Individual differences2. Measurement error (the opposite of reliability)</li>
+<li>Individual differences</li>
+<li>Measurement error (the opposite of reliability)</li>
 </ol>
 </div>
 </div>
@@ -1087,7 +1088,7 @@ The shape is roughly normal even for moderate sample sizes assuming that the ori
 </section>
 <section id="normal-population-and-various-sampling-distributions" class="level2" data-number="2.16">
 <h2 data-number="2.16" class="anchored" data-anchor-id="normal-population-and-various-sampling-distributions"><span class="header-section-number">2.16</span> Normal Population and Various Sampling Distributions</h2>
-<p><strong>Population size: 100,000; Simulated 10,000 samples.</strong></p>
+<p>Population size: 100,000; Simulated 10,000 samples.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1101,7 +1102,7 @@ The shape is roughly normal even for moderate sample sizes assuming that the ori
 </section>
 <section id="uniform-population-and-various-sampling-distributions" class="level2" data-number="2.17">
 <h2 data-number="2.17" class="anchored" data-anchor-id="uniform-population-and-various-sampling-distributions"><span class="header-section-number">2.17</span> Uniform Population and Various Sampling Distributions</h2>
-<p><strong>Population size: 100,000; Simulated 10,000 samples.</strong></p>
+<p>Population size: 100,000; Simulated 10,000 samples.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1115,7 +1116,7 @@ The shape is roughly normal even for moderate sample sizes assuming that the ori
 </section>
 <section id="skewed-population-and-various-sampling-distributions" class="level2" data-number="2.18">
 <h2 data-number="2.18" class="anchored" data-anchor-id="skewed-population-and-various-sampling-distributions"><span class="header-section-number">2.18</span> Skewed Population and Various Sampling Distributions</h2>
-<p><strong>Population size: 100,000; Simulated 10,000 samples.</strong></p>
+<p>Population size: 100,000; Simulated 10,000 samples.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1129,11 +1130,11 @@ The shape is roughly normal even for moderate sample sizes assuming that the ori
 </section>
 <section id="an-important-normal-distribution-z-scores" class="level2" data-number="2.19">
 <h2 data-number="2.19" class="anchored" data-anchor-id="an-important-normal-distribution-z-scores"><span class="header-section-number">2.19</span> An Important Normal Distribution: Z-scores</h2>
-<p>The Z distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.<br>
+<p>The <span class="math inline">\(Z\)</span> distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.<br>
 <br>
 You can therefore think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.<br>
 <br>
-The probability distribution is known for the Z distribution.</p>
+The probability distribution is known for the <span class="math inline">\(Z\)</span> distribution.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># insert three figures of probability distributions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1141,14 +1142,14 @@ The probability distribution is known for the Z distribution.</p>
 </section>
 <section id="probability-of-parameter-estimate-given-h_0" class="level2" data-number="2.20">
 <h2 data-number="2.20" class="anchored" data-anchor-id="probability-of-parameter-estimate-given-h_0"><span class="header-section-number">2.20</span> Probability of Parameter Estimate Given <span class="math inline">\(H_0\)</span></h2>
-<p>How could you use the Z distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of <span class="math inline">\(N=10\)</span> from a population of Ocean Liking scores with a population mean (parameter) of 0?<br>
+<p>How could you use the <span class="math inline">\(Z\)</span> distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of <span class="math inline">\(N=10\)</span> from a population of Ocean Liking scores with a population mean (parameter) of 0?<br>
 <br>
 Think about it……</p>
 <hr>
 </section>
 <section id="hypothetical-sampling-distribution-for-h_0" class="level2" data-number="2.21">
 <h2 data-number="2.21" class="anchored" data-anchor-id="hypothetical-sampling-distribution-for-h_0"><span class="header-section-number">2.21</span> Hypothetical Sampling Distribution for <span class="math inline">\(H_0\)</span></h2>
-<p>If <span class="math inline">\(H_0\)</span> is true; the sampling distribution has a mean of 0 and standard deviation of <span class="math inline">\(\frac{\sigma}{\sqrt{N_sample}} =  \frac{23.7}{\sqrt{10}}  =  7.5\)</span>.</p>
+<p>If <span class="math inline">\(H_0\)</span> is true; the sampling distribution has a mean of 0 and standard deviation of <span class="math inline">\(\frac{\sigma}{\sqrt{N_{sample}}} =  \frac{23.7}{\sqrt{10}}  =  7.5\)</span>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1213,7 +1214,7 @@ Question: If <span class="math inline">\(H_0\)</span> is true and this is the sa
 <hr>
 </section>
 <section id="t-vs.-z" class="level2" data-number="2.23">
-<h2 data-number="2.23" class="anchored" data-anchor-id="t-vs.-z"><span class="header-section-number">2.23</span> t vs.&nbsp;z</h2>
+<h2 data-number="2.23" class="anchored" data-anchor-id="t-vs.-z"><span class="header-section-number">2.23</span> <span class="math inline">\(t\)</span> vs.&nbsp;<span class="math inline">\(z\)</span></h2>
 <p><span class="math inline">\(z = \frac{2.4 - 0}{7.5} = 0.32\)</span></p>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
@@ -1243,7 +1244,7 @@ Question: Where did we get the 7.5 from in our z-test and what is the problem wi
 </div>
 <div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>This was our estimate of the standard deviation of the sampling distribution. <span class="math inline">\(\frac{\sigma}{\sqrt{N_sample}}\)</span> We do not know <span class="math inline">\(\sigma\)</span>.</p>
+<p>This was our estimate of the standard deviation of the sampling distribution. <span class="math inline">\(\frac{\sigma}{\sqrt{N_{sample}}}\)</span> We do not know <span class="math inline">\(\sigma\)</span>.</p>
 </div>
 </div>
 </div>
@@ -1276,7 +1277,7 @@ Question: So what do we do?
 </div>
 <div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>We account for this underestimation of <span class="math inline">\(\sigma\)</span> and therefore of the standard deviation (standard error) of the sampling distribution by using the t distribution rather than the z distribution to calculate the probability of our parameter estimate if <span class="math inline">\(H_0\)</span> is true.The t distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.</p>
+<p>We account for this underestimation of <span class="math inline">\(\sigma\)</span> and therefore of the standard deviation (standard error) of the sampling distribution by using the t distribution rather than the <span class="math inline">\(z\)</span> distribution to calculate the probability of our parameter estimate if <span class="math inline">\(H_0\)</span> is true.The t distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.</p>
 </div>
 </div>
 </div>
