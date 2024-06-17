@@ -925,7 +925,51 @@ You can therefore think of any specific z-score as telling you the position of t
 The probability distribution is known for the $z$ distribution.
 
 ```{r}
-# insert three figures of probability distributions
+#| echo: false
+
+probability_1sd <- tibble(x=seq(-6.7,6.7,.001),
+       y=dnorm(seq(-6.7,6.7,.001),0,1)) |> 
+ggplot() +
+geom_line(aes(x = x, y = y)) +
+geom_vline(xintercept= 1, lwd=.9, col='red') +
+geom_vline(xintercept= -1, lwd=.9, col='red') +
+scale_x_continuous("Z", limits = c(-4,4), breaks = c(-4, -2, 0, 2, 4)) +
+ylab("Probability") +
+annotate("text", x = -3, y = .2, label = "16%", size = 4) +
+annotate("text", x = 3, y = .2, label = "16%", size = 4) +
+annotate("text", x = 0, y = .2, label = "68%", size = 4, color = "red")
+
+probability_2sd <- tibble(x=seq(-6.7,6.7,.001),
+       y=dnorm(seq(-6.7,6.7,.001),0,1)) |> 
+ggplot() +
+geom_line(aes(x = x, y = y)) +
+geom_vline(xintercept= 1, lwd=.9, col='green') +
+geom_vline(xintercept= -1, lwd=.9, col='green') +
+scale_x_continuous("Z", limits = c(-4,4), breaks = c(-4, -2, 0, 2, 4)) +
+ylab("Probability") +
+annotate("text", x = -2, y = .2, label = "2.5%", size = 4) +
+annotate("text", x = 2, y = .2, label = "2.5%", size = 4) +
+annotate("text", x = 0, y = .2, label = "95%", size = 4, color = "green")
+
+probability_3sd <- tibble(x=seq(-6.7,6.7,.001),
+       y=dnorm(seq(-6.7,6.7,.001),0,1)) |> 
+ggplot() +
+geom_line(aes(x = x, y = y)) +
+geom_vline(xintercept= 3, lwd=.9, col='blue') +
+geom_vline(xintercept= -3, lwd=.9, col='blue') +
+scale_x_continuous("Z", limits = c(-4,4), breaks = c(-4, -2, 0, 2, 4)) +
+ylab("Probability") +
+annotate("text", x = -3.75, y = .2, label = "0.5%", size = 4) +
+annotate("text", x = 3.75, y = .2, label = "0.5%", size = 4) +
+annotate("text", x = 0, y = .2, label = "99%", size = 4, color = "blue")
+
+```
+
+```{r}
+#| echo: false
+#| warning: false
+
+probability_1sd + probability_2sd + probability_3sd
 ```
 
 
@@ -1004,12 +1048,14 @@ pnorm(0.32, mean=0, sd=1, lower.tail=FALSE) * 2
 # still need to annotate probability plot with percentages
 probability <- tibble(x=seq(-6.7,6.7,.001),
        y=dnorm(seq(-6.7,6.7,.001),0,1)) |> 
-ggplot() +
-geom_line(aes(x = x, y = y), color = "blue") +
-geom_vline(xintercept=0.32, lwd=.9, col='red') +
-geom_vline(xintercept=-0.32, lwd=.9, col='red') +
-scale_x_continuous("Z", limits = c(-6,6), breaks = c(-6, -4, -2, 0, 2, 4, 6)) +
-ylab("Probability")
+  ggplot() +
+  geom_line(aes(x = x, y = y)) +
+  geom_vline(xintercept=0.32, lwd=.9, col='red') +
+  geom_vline(xintercept=-0.32, lwd=.9, col='red') +
+  scale_x_continuous("Z", limits = c(-6,6), breaks = c(-6, -4, -2, 0, 2, 4, 6)) +
+  ylab("Probability") +
+  annotate("text", x = -4, y = .2, label = "37.4%", size = 6) +
+  annotate("text", x = 4, y = .2, label = "37.4%", size = 6)
 
 
 hist_samples_vline + probability
