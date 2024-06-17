@@ -356,7 +356,7 @@ plot_samples <- samples |>
 plot_samples
 ```
 
-**Note: In your research, you don't form a sampling distribution by repeated sampling. You (typically) only have one sample.**
+*Note: In your research, you don't form a sampling distribution by repeated sampling. You (typically) only have one sample.*
 
 -----
 
@@ -916,13 +916,13 @@ samp_skew_100_plot <- samp_skew_100 |>
 
 ## An Important Normal Distribution: Z-scores
 
-The $Z$ distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.
+The $z$ distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.
 \
 \
 You can therefore think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.
 \
 \
-The probability distribution is known for the $Z$ distribution.
+The probability distribution is known for the $z$ distribution.
 
 ```{r}
 # insert three figures of probability distributions
@@ -933,7 +933,7 @@ The probability distribution is known for the $Z$ distribution.
 
 ## Probability of Parameter Estimate Given $H_0$
 
-How could you use the $Z$ distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of $N=10$ from a population of Ocean Liking scores with a population mean (parameter) of 0?
+How could you use the $z$ distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of $N=10$ from a population of Ocean Liking scores with a population mean (parameter) of 0?
 \
 \
 Think about it……
