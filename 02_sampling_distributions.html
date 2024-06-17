@@ -1136,7 +1136,13 @@ You can therefore think of any specific z-score as telling you the position of t
 <br>
 The probability distribution is known for the <span class="math inline">\(z\)</span> distribution.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># insert three figures of probability distributions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_sampling_distributions_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <hr>
 </section>
@@ -1154,7 +1160,7 @@ Think about it……</p>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_sampling_distributions_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_sampling_distributions_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1176,7 +1182,7 @@ Question: If <span class="math inline">\(H_0\)</span> is true and this is the sa
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_sampling_distributions_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_sampling_distributions_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1184,8 +1190,8 @@ Question: If <span class="math inline">\(H_0\)</span> is true and this is the sa
 <div class="cell">
 <details class="code-fold">
 <summary>Show Answer</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Pretty likely…</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>But we can do better than that!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Pretty likely…</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>But we can do better than that!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -1197,7 +1203,7 @@ Question: If <span class="math inline">\(H_0\)</span> is true and this is the sa
 <h2 data-number="2.22" class="anchored" data-anchor-id="our-first-inferential-test-the-z-test"><span class="header-section-number">2.22</span> Our First Inferential Test: The z-test</h2>
 <p><span class="math inline">\(z = \frac{2.4 - 0}{7.5} = 0.32; p \le .749\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">0.32</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">2</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">0.32</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">2</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7489683</code></pre>
 </div>
@@ -1206,7 +1212,7 @@ Question: If <span class="math inline">\(H_0\)</span> is true and this is the sa
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_sampling_distributions_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_sampling_distributions_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1293,7 +1299,7 @@ Where <span class="math inline">\(SE\)</span> is estimated using <span class="ma
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_sampling_distributions_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_sampling_distributions_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1304,7 +1310,7 @@ Where <span class="math inline">\(SE\)</span> is estimated using <span class="ma
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_sampling_distributions_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="02_sampling_distributions_files/figure-html/unnamed-chunk-56-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

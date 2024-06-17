@@ -204,7 +204,7 @@
     "href": "02_sampling_distributions.html#an-important-normal-distribution-z-scores",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "2.19 An Important Normal Distribution: Z-scores",
-    "text": "2.19 An Important Normal Distribution: Z-scores\nThe \\(z\\) distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.\n\nYou can therefore think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.\n\nThe probability distribution is known for the \\(z\\) distribution.\n\n# insert three figures of probability distributions",
+    "text": "2.19 An Important Normal Distribution: Z-scores\nThe \\(z\\) distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.\n\nYou can therefore think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.\n\nThe probability distribution is known for the \\(z\\) distribution.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
