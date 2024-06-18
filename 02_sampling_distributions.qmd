@@ -946,9 +946,9 @@ geom_line(aes(x = x, y = y)) +
 geom_vline(xintercept= 1, lwd=.9, col='green') +
 geom_vline(xintercept= -1, lwd=.9, col='green') +
 scale_x_continuous("Z", limits = c(-4,4), breaks = c(-4, -2, 0, 2, 4)) +
-ylab("Probability") +
-annotate("text", x = -2, y = .2, label = "2.5%", size = 4) +
-annotate("text", x = 2, y = .2, label = "2.5%", size = 4) +
+ylab("") +
+annotate("text", x = -2.5, y = .2, label = "2.5%", size = 4) +
+annotate("text", x = 2.5, y = .2, label = "2.5%", size = 4) +
 annotate("text", x = 0, y = .2, label = "95%", size = 4, color = "green")
 
 probability_3sd <- tibble(x=seq(-6.7,6.7,.001),
@@ -958,7 +958,7 @@ geom_line(aes(x = x, y = y)) +
 geom_vline(xintercept= 3, lwd=.9, col='blue') +
 geom_vline(xintercept= -3, lwd=.9, col='blue') +
 scale_x_continuous("Z", limits = c(-4,4), breaks = c(-4, -2, 0, 2, 4)) +
-ylab("Probability") +
+ylab("") +
 annotate("text", x = -3.75, y = .2, label = "0.5%", size = 4) +
 annotate("text", x = 3.75, y = .2, label = "0.5%", size = 4) +
 annotate("text", x = 0, y = .2, label = "99%", size = 4, color = "blue")
@@ -968,6 +968,8 @@ annotate("text", x = 0, y = .2, label = "99%", size = 4, color = "blue")
 ```{r}
 #| echo: false
 #| warning: false
+#| fig-height: 4
+#| fig-width: 8
 
 probability_1sd + probability_2sd + probability_3sd
 ```
@@ -1045,7 +1047,6 @@ pnorm(0.32, mean=0, sd=1, lower.tail=FALSE) * 2
 #| warning: false
 #| echo: false
 
-# still need to annotate probability plot with percentages
 probability <- tibble(x=seq(-6.7,6.7,.001),
        y=dnorm(seq(-6.7,6.7,.001),0,1)) |> 
   ggplot() +
@@ -1137,11 +1138,20 @@ $df = N – P = 10 - 1 = 9$
 
 ```{r}
 #| echo: false
+#| warning: false
 
-# still need to convert to ggplot
-plot(x=seq(-6.7,6.7,.001),y=dnorm(seq(-6.7,6.7,.001),0,1), xlim= c(-6,6),type='l', col= 'blue', xlab= 'z or t score', ylab= 'Probability')
-lines(x=seq(-6.7,6.7,.001),y=dt(seq(-6.7,6.7,.001), df=9), col= 'red')
-legend('topright', c('z', 't'), lwd=2, col = c('blue', 'red'))
+tibble(x=seq(-6.7,6.7,.001),
+       y=dnorm(seq(-6.7,6.7,.001),0,1),
+       group = "z") |> 
+bind_rows(tibble(x=seq(-6.7,6.7,.001),
+       y=dt(seq(-6.7,6.7,.001), df=9),
+       group = "t")) |> 
+mutate(group = factor(group, levels = c("z", "t"))) |> 
+  ggplot() +
+  geom_line(aes(x = x, y = y, color = group)) +
+  scale_x_continuous("z or t score", limits = c(-6,6), breaks = c(-6, -4, -2, 0, 2, 4, 6)) +
+  ylab("Probability") +
+  scale_color_manual(values = c("blue", "red"))
 ```
 
 -----
@@ -1150,13 +1160,26 @@ The bias in $s$ decreases with increasing $N$.  Therefore, $t$ approaches $z$ wi
 
 ```{r}
 #| echo: false
+#| warning: false
 
-# still need to convert to ggplot
-plot(x=seq(-3,3,.001),y=dnorm(seq(-3,3,.001),0,1), xlim= c(-3,3),type='l', col= 'blue', xlab= 'z or t score', ylab= 'Probability')
-lines(x=seq(-3,3,.001),y=dt(seq(-3,3,.001), df=1), col= 'red')
-lines(x=seq(-3,3,.001),y=dt(seq(-3,3,.001), df=10), col= 'green')
-lines(x=seq(-3,3,.001),y=dt(seq(-3,3,.001), df=100), col= 'yellow')
-legend('topright', c('z', 't(df=1)', 't(df=10)', 't(df=100)'), lwd=2, col = c('blue', 'red', 'green', 'yellow'))
+tibble(x=seq(-6.7,6.7,.001),
+       y=dnorm(seq(-6.7,6.7,.001),0,1),
+       group = "z") |> 
+bind_rows(tibble(x=seq(-6.7,6.7,.001),
+       y=dt(seq(-6.7,6.7,.001), df=1),
+       group = "t(df=1)")) |> 
+bind_rows(tibble(x=seq(-6.7,6.7,.001),
+       y=dt(seq(-6.7,6.7,.001), df=10),
+       group = "t(df=10)")) |> 
+bind_rows(tibble(x=seq(-6.7,6.7,.001),
+       y=dt(seq(-6.7,6.7,.001), df=100),
+       group = "t(df=100)")) |> 
+mutate(group = factor(group, levels = c("z", "t(df=1)", "t(df=10)", "t(df=100)"))) |> 
+  ggplot() +
+  geom_line(aes(x = x, y = y, color = group)) +
+  scale_x_continuous("z or t score", limits = c(-6,6), breaks = c(-6, -4, -2, 0, 2, 4, 6)) +
+  ylab("Probability") +
+  scale_color_manual(values = c("blue", "red", "green", "yellow"))
 ```
 
 
