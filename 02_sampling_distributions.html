@@ -1085,6 +1085,287 @@ Question: What would happen if the samples contained only 1 participant?
 <br>
 The shape is roughly normal even for moderate sample sizes assuming that the original distribution isn’t really weird (i.e., non-normal).</p>
 <hr>
+<!-- ## Normal Population and Various Sampling Distributions -->
+<!-- Population size: 100,000; Simulated 10,000 samples. -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- # Simulate population data -->
+<!-- set.seed(101) -->
+<!-- data_sim <- tibble( -->
+<!--   normal = rnorm(100000, 100, 10), # normal dist with mean = 100 -->
+<!--   uniform = runif(100000, min=60, max=140), # uniform distribution with min = 60, max  = 140 -->
+<!--   skewed = rexp(100000, rate = 1)*100 # positive skew (exponential distribution * 100)  -->
+<!-- ) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- # Simulate sampling distributions -->
+<!-- samp_norm_5 <- 1:10000 |>  -->
+<!--   map(\(i) get_sample_mean(data = data_sim[, "normal"], n_sub = 5)) |>   -->
+<!--   list_rbind()  -->
+<!-- samp_norm_10 <- 1:10000 |>  -->
+<!--   map(\(i) get_sample_mean(data = data_sim[, "normal"], n_sub = 10)) |>   -->
+<!--   list_rbind()  -->
+<!-- samp_norm_20 <- 1:10000 |>  -->
+<!--   map(\(i) get_sample_mean(data = data_sim[, "normal"], n_sub = 20)) |>   -->
+<!--   list_rbind()  -->
+<!-- samp_norm_50 <- 1:10000 |>  -->
+<!--   map(\(i) get_sample_mean(data = data_sim[, "normal"], n_sub = 50)) |>   -->
+<!--   list_rbind()  -->
+<!-- samp_norm_100 <- 1:10000 |>  -->
+<!--   map(\(i) get_sample_mean(data = data_sim[, "normal"], n_sub = 100)) |>   -->
+<!--   list_rbind()  -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- # Create plots -->
+<!-- pop_norm_plot <- data_sim |>  -->
+<!--   ggplot(aes(x = normal)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Normal Population", -->
+<!--        caption = str_c("M=", round(mean(data_sim$normal), 1), " SD=", -->
+<!--                       round(sd(data_sim$normal), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(data_sim$normal), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(data_sim$normal), 1))) + -->
+<!--   xlim(50, 150) -->
+<!-- samp_norm_5_plot <- samp_norm_5 |>  -->
+<!--   ggplot(aes(x = mean)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Sampling Distribution", -->
+<!--        subtitle = "N=5", -->
+<!--        caption = str_c("M=", round(mean(samp_norm_5$mean), 1), " SD=", -->
+<!--                       round(sd(samp_norm_5$mean), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(samp_norm_5$mean), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(samp_norm_5$mean), 1))) + -->
+<!--   scale_x_continuous("sample mean", limits = c(50, 150)) -->
+<!-- samp_norm_10_plot <- samp_norm_10 |>  -->
+<!--   ggplot(aes(x = mean)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Sampling Distribution", -->
+<!--        subtitle = "N=10", -->
+<!--        caption = str_c("M=", round(mean(samp_norm_10$mean), 1), " SD=", -->
+<!--                       round(sd(samp_norm_10$mean), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(samp_norm_10$mean), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(samp_norm_10$mean), 1))) + -->
+<!--   scale_x_continuous("sample mean", limits = c(50, 150)) -->
+<!-- samp_norm_20_plot <- samp_norm_20 |>  -->
+<!--   ggplot(aes(x = mean)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Sampling Distribution", -->
+<!--        subtitle = "N=20", -->
+<!--        caption = str_c("M=", round(mean(samp_norm_20$mean), 1), " SD=", -->
+<!--                       round(sd(samp_norm_20$mean), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(samp_norm_20$mean), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(samp_norm_20$mean), 1))) + -->
+<!--   scale_x_continuous("sample mean", limits = c(50, 150)) -->
+<!-- samp_norm_50_plot <- samp_norm_50 |>  -->
+<!--   ggplot(aes(x = mean)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Sampling Distribution", -->
+<!--        subtitle = "N=50", -->
+<!--        caption = str_c("M=", round(mean(samp_norm_50$mean)), " SD=", -->
+<!--                       round(sd(samp_norm_50$mean)), " Skew=",  -->
+<!--                       round(e1071::skewness(samp_norm_50$mean)), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(samp_norm_50$mean), 1))) + -->
+<!--   scale_x_continuous("sample mean", limits = c(50, 150)) -->
+<!-- samp_norm_100_plot <- samp_norm_100 |>  -->
+<!--   ggplot(aes(x = mean)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Sampling Distribution", -->
+<!--        subtitle = "N=100", -->
+<!--        caption = str_c("M=", round(mean(samp_norm_100$mean), 1),  -->
+<!--                        " SD=", -->
+<!--                       round(sd(samp_norm_100$mean), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(samp_norm_100$mean), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(samp_norm_100$mean), 1))) + -->
+<!--   scale_x_continuous("sample mean", limits = c(50, 150)) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- (pop_norm_plot + samp_norm_5_plot + samp_norm_10_plot) /  -->
+<!-- (samp_norm_20_plot + samp_norm_50_plot + samp_norm_100_plot) -->
+<!-- ``` -->
+<!-- ----- -->
+<!-- ## Uniform Population and Various Sampling Distributions -->
+<!-- Population size: 100,000; Simulated 10,000 samples. -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- # Simulate sampling distributions -->
+<!-- samp_unif_5 <- 1:10000 |>  -->
+<!--   map(\(i) get_sample_mean(data = data_sim[, "uniform"], n_sub = 5)) |>   -->
+<!--   list_rbind()  -->
+<!-- samp_unif_10 <- 1:10000 |>  -->
+<!--   map(\(i) get_sample_mean(data = data_sim[, "uniform"], n_sub = 10)) |>   -->
+<!--   list_rbind()  -->
+<!-- samp_unif_20 <- 1:10000 |>  -->
+<!--   map(\(i) get_sample_mean(data = data_sim[, "uniform"], n_sub = 20)) |>   -->
+<!--   list_rbind()  -->
+<!-- samp_unif_50 <- 1:10000 |>  -->
+<!--   map(\(i) get_sample_mean(data = data_sim[, "uniform"], n_sub = 50)) |>   -->
+<!--   list_rbind()  -->
+<!-- samp_unif_100 <- 1:10000 |>  -->
+<!--   map(\(i) get_sample_mean(data = data_sim[, "uniform"], n_sub = 100)) |>   -->
+<!--   list_rbind()  -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- # Create plots -->
+<!-- pop_unif_plot <- data_sim |>  -->
+<!--   ggplot(aes(x = uniform)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Uniform Population", -->
+<!--        caption = str_c("M=", round(mean(data_sim$uniform), 1), " SD=", -->
+<!--                       round(sd(data_sim$uniform), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(data_sim$uniform), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(data_sim$uniform), 1))) + -->
+<!--   xlim(50, 150) -->
+<!-- samp_unif_5_plot <- samp_unif_5 |>  -->
+<!--   ggplot(aes(x = mean)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Sampling Distribution", -->
+<!--        subtitle = "N=5", -->
+<!--        caption = str_c("M=", round(mean(samp_unif_5$mean), 1), " SD=", -->
+<!--                       round(sd(samp_unif_5$mean), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(samp_unif_5$mean), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(samp_unif_5$mean), 1))) + -->
+<!--   scale_x_continuous("sample mean", limits = c(50, 150)) -->
+<!-- samp_unif_10_plot <- samp_unif_10 |>  -->
+<!--   ggplot(aes(x = mean)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Sampling Distribution", -->
+<!--        subtitle = "N=10", -->
+<!--        caption = str_c("M=", round(mean(samp_unif_10$mean), 1), " SD=", -->
+<!--                       round(sd(samp_unif_10$mean), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(samp_unif_10$mean), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(samp_unif_10$mean), 1))) + -->
+<!--   scale_x_continuous("sample mean", limits = c(50, 150)) -->
+<!-- samp_unif_20_plot <- samp_unif_20 |>  -->
+<!--   ggplot(aes(x = mean)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Sampling Distribution", -->
+<!--        subtitle = "N=20", -->
+<!--        caption = str_c("M=", round(mean(samp_unif_20$mean), 1), " SD=", -->
+<!--                       round(sd(samp_unif_20$mean), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(samp_unif_20$mean), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(samp_unif_20$mean), 1))) + -->
+<!--   scale_x_continuous("sample mean", limits = c(50, 150)) -->
+<!-- samp_unif_50_plot <- samp_unif_50 |>  -->
+<!--   ggplot(aes(x = mean)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Sampling Distribution", -->
+<!--        subtitle = "N=50", -->
+<!--        caption = str_c("M=", round(mean(samp_unif_50$mean), 1), " SD=", -->
+<!--                       round(sd(samp_unif_50$mean), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(samp_unif_50$mean), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(samp_unif_50$mean), 1))) + -->
+<!--   scale_x_continuous("sample mean", limits = c(50, 150)) -->
+<!-- samp_unif_100_plot <- samp_unif_100 |>  -->
+<!--   ggplot(aes(x = mean)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Sampling Distribution", -->
+<!--        subtitle = "N=100", -->
+<!--        caption = str_c("M=", round(mean(samp_unif_100$mean), 1),  -->
+<!--                        " SD=", -->
+<!--                       round(sd(samp_unif_100$mean), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(samp_unif_100$mean), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(samp_unif_100$mean, 1)))) + -->
+<!--   scale_x_continuous("sample mean", limits = c(50, 150)) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- (pop_unif_plot + samp_unif_5_plot + samp_unif_10_plot) /  -->
+<!-- (samp_unif_20_plot + samp_unif_50_plot + samp_unif_100_plot) -->
+<!-- ``` -->
+<!-- ----- -->
+<!-- ## Skewed Population and Various Sampling Distributions -->
+<!-- Population size: 100,000; Simulated 10,000 samples. -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- # Simulate sampling distributions -->
+<!-- samp_skew_5 <- 1:10000 |>  -->
+<!--   map(\(i) get_sample_mean(data = data_sim[, "skewed"], n_sub = 5)) |>   -->
+<!--   list_rbind()  -->
+<!-- samp_skew_10 <- 1:10000 |>  -->
+<!--   map(\(i) get_sample_mean(data = data_sim[, "skewed"], n_sub = 10)) |>   -->
+<!--   list_rbind()  -->
+<!-- samp_skew_20 <- 1:10000 |>  -->
+<!--   map(\(i) get_sample_mean(data = data_sim[, "skewed"], n_sub = 20)) |>   -->
+<!--   list_rbind()  -->
+<!-- samp_skew_50 <- 1:10000 |>  -->
+<!--   map(\(i) get_sample_mean(data = data_sim[, "skewed"], n_sub = 50)) |>   -->
+<!--   list_rbind()  -->
+<!-- samp_skew_100 <- 1:10000 |>  -->
+<!--   map(\(i) get_sample_mean(data = data_sim[, "skewed"], n_sub = 100)) |>   -->
+<!--   list_rbind()  -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- # Create plots -->
+<!-- pop_skew_plot <- data_sim |>  -->
+<!--   ggplot(aes(x = skewed)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Skewed Population", -->
+<!--        caption = str_c("M=", round(mean(data_sim$skewed), 1), " SD=", -->
+<!--                       round(sd(data_sim$skewed), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(data_sim$skewed), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(data_sim$skewed), 1))) -->
+<!-- samp_skew_5_plot <- samp_skew_5 |>  -->
+<!--   ggplot(aes(x = mean)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Sampling Distribution", -->
+<!--        subtitle = "N=5", -->
+<!--        caption = str_c("M=", round(mean(samp_skew_5$mean), 1), " SD=", -->
+<!--                       round(sd(samp_skew_5$mean), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(samp_skew_5$mean), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(samp_skew_5$mean), 1))) + -->
+<!--   scale_x_continuous("sample mean") -->
+<!-- samp_skew_10_plot <- samp_skew_10 |>  -->
+<!--   ggplot(aes(x = mean)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Sampling Distribution", -->
+<!--        subtitle = "N=10", -->
+<!--        caption = str_c("M=", round(mean(samp_skew_10$mean), 1), " SD=", -->
+<!--                       round(sd(samp_skew_10$mean), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(samp_skew_10$mean), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(samp_skew_10$mean), 1))) + -->
+<!--   scale_x_continuous("sample mean") -->
+<!-- samp_skew_20_plot <- samp_skew_20 |>  -->
+<!--   ggplot(aes(x = mean)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Sampling Distribution", -->
+<!--        subtitle = "N=20", -->
+<!--        caption = str_c("M=", round(mean(samp_skew_20$mean), 1), " SD=", -->
+<!--                       round(sd(samp_skew_20$mean), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(samp_skew_20$mean), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(samp_skew_20$mean), 1))) + -->
+<!--   scale_x_continuous("sample mean") -->
+<!-- samp_skew_50_plot <- samp_skew_50 |>  -->
+<!--   ggplot(aes(x = mean)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Sampling Distribution", -->
+<!--        subtitle = "N=50", -->
+<!--        caption = str_c("M=", round(mean(samp_skew_50$mean), 1), " SD=", -->
+<!--                       round(sd(samp_skew_50$mean), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(samp_skew_50$mean), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(samp_skew_50$mean), 1))) + -->
+<!--   scale_x_continuous("sample mean") -->
+<!-- samp_skew_100_plot <- samp_skew_100 |>  -->
+<!--   ggplot(aes(x = mean)) + -->
+<!--   geom_histogram(color = "black", fill = "light grey", bins = 30) + -->
+<!--   labs(title = "Sampling Distribution", -->
+<!--        subtitle = "N=100", -->
+<!--        caption = str_c("M=", round(mean(samp_skew_100$mean), 1),  -->
+<!--                        " SD=", -->
+<!--                       round(sd(samp_skew_100$mean), 1), " Skew=",  -->
+<!--                       round(e1071::skewness(samp_skew_100$mean), 1), -->
+<!--                       " Kurtosis=",  round(e1071::kurtosis(samp_skew_100$mean, 1)))) + -->
+<!--   scale_x_continuous("sample mean") -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- (pop_skew_plot + samp_skew_5_plot + samp_skew_10_plot) /  -->
+<!-- (samp_skew_20_plot + samp_skew_50_plot + samp_skew_100_plot) -->
+<!-- ``` -->
 <hr>
 </section>
 <section id="an-important-normal-distribution-z-scores" class="level2" data-number="2.16">
@@ -1212,8 +1493,8 @@ Question: Where did we get the 7.5 from in our z-test and what is the problem wi
 <div class="callout-body-container callout-body">
 <details class="code-fold">
 <summary>Show Answer</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>This was our estimate of the standard deviation of the sampling distribution. $<span class="sc">\\</span>frac{<span class="sc">\\</span>sigma}{<span class="sc">\\</span>sqrt{N_{sample}}}$ </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>We do not know $<span class="sc">\\</span>sigma$.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>This was our estimate of the standard deviation of the sampling distribution. $\frac{\sigma}{\sqrt{N_{sample}}}$ </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>We do not know $\sigma$.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
