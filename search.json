@@ -224,7 +224,7 @@
     "href": "02_sampling_distributions.html#hypothetical-sampling-distribution-for-h_0",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "2.21 Hypothetical Sampling Distribution for \\(H_0\\)",
-    "text": "2.21 Hypothetical Sampling Distribution for \\(H_0\\)\nIf \\(H_0\\) is true; the sampling distribution has a mean of 0 and standard deviation of \\(\\frac{\\sigma}{\\sqrt{N_{sample}}} =  \\frac{23.7}{\\sqrt{10}}  =  7.5\\).\n\n\n\n\n\n\n\n\n\n\n\n2.21.1 Question: If \\(H_0\\) is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n\n\nShow answer\n\n\nPretty likely…\nBut we can do better than that!",
+    "text": "2.21 Hypothetical Sampling Distribution for \\(H_0\\)\nIf \\(H_0\\) is true; the sampling distribution has a mean of 0 and standard deviation of \\(\\frac{\\sigma}{\\sqrt{N_{sample}}} =  \\frac{23.7}{\\sqrt{10}}  =  7.5\\).\n\n\n\n\n\n\n\n\n\n\n\n2.21.1 Question: If \\(H_0\\) is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQ + A\n\n\n\n\n\n\n\nPretty likely…\nBut we can do better than that!",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
