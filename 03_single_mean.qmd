@@ -1,0 +1,30 @@
+--- 
+output: html_document 
+editor_options:  
+  chunk_output_type: console
+--- 
+ 
+# Inferences About a Single Mean (1 Parameter Models) 
+
+-----
+
+## Units 3-4 Organization
+
+
+
+
+
+
+
+
+
+
+
+### <span style="color: red;">Question: What do you conclude?</span>
+
+-----
+
+**Inhabitants of the island are neutral on average on the Ocean Liking Scale; $\mu$ = 0.**
+
+
+-----
