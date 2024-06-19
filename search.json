@@ -324,7 +324,7 @@
     "href": "03_single_mean.html#total-error",
     "title": "3  Inferences About a Single Mean (1 Parameter Models)",
     "section": "3.5 Total Error",
-    "text": "3.5 Total Error\nSum of errors across all scores in the population isn’t ideal because positive and negative errors will tend to cancel each other out.\n\\(\\sum(Y_i-\\hat{Y}_i)\\)\n\n\nSum of absolute values of errors could work. If we selected \\(\\beta_0\\) to minimize the sum of the absolute value of errors, \\(\\beta_0\\) would equal the median of the population.\n\\(\\sum(|Y_i-\\hat{Y}_i|)\\)\n\n\n\nSum of squared errors (SSE) could work. If we selected \\(\\beta_0\\) to minimize the sum of squared errors, \\(\\beta_0\\) would equal the mean of the population.\n\\(\\sum(Y_i-\\hat{Y}_i)^2\\)",
+    "text": "3.5 Total Error\nSum of errors across all scores in the population isn’t ideal because positive and negative errors will tend to cancel each other out.\n\\(\\sum(Y_i-\\hat{Y}_i)\\)\nSum of absolute values of errors could work. If we selected \\(\\beta_0\\) to minimize the sum of the absolute value of errors, \\(\\beta_0\\) would equal the median of the population.\n\\(\\sum(|Y_i-\\hat{Y}_i|)\\)\nSum of squared errors (SSE) could work. If we selected \\(\\beta_0\\) to minimize the sum of squared errors, \\(\\beta_0\\) would equal the mean of the population.\n\\(\\sum(Y_i-\\hat{Y}_i)^2\\)",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
     ]
