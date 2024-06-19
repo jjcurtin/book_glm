@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Key Terminology and Concepts – Introduction to the General Linear Model</title>
+<title>3&nbsp; Inferences About a Single Mean (1 Parameter Models) – Introduction to the General Linear Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./03_single_mean.html" rel="prev">
+<link href="./app_terminology.html" rel="next">
+<link href="./02_sampling_distributions.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -68,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="book.css">
 </head>
@@ -81,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app_terminology.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app_terminology.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Key Terminology and Concepts</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03_single_mean.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Inferences About a Single Mean (1 Parameter Models)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -151,7 +181,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_single_mean.html" class="sidebar-item-text sidebar-link">
+  <a href="./03_single_mean.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Inferences About a Single Mean (1 Parameter Models)</span></span></a>
   </div>
 </li>
@@ -166,7 +196,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app_terminology.html" class="sidebar-item-text sidebar-link active">
+  <a href="./app_terminology.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Key Terminology and Concepts</span></span></a>
   </div>
 </li>
@@ -177,15 +207,34 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#units-3-4-organization" id="toc-units-3-4-organization" class="nav-link active" data-scroll-target="#units-3-4-organization"><span class="header-section-number">3.1</span> Units 3-4 Organization</a></li>
+  <li><a href="#linear-models-as-models" id="toc-linear-models-as-models" class="nav-link" data-scroll-target="#linear-models-as-models"><span class="header-section-number">3.2</span> Linear Models as Models</a></li>
+  <li><a href="#fear-potential-startle" id="toc-fear-potential-startle" class="nav-link" data-scroll-target="#fear-potential-startle"><span class="header-section-number">3.3</span> Fear Potential Startle</a></li>
+  <li><a href="#fear-potentiated-startle-one-parameter-model" id="toc-fear-potentiated-startle-one-parameter-model" class="nav-link" data-scroll-target="#fear-potentiated-startle-one-parameter-model"><span class="header-section-number">3.4</span> Fear Potentiated Startle: One parameter model</a>
+  <ul class="collapse">
+  <li><a href="#question-in-the-context-of-data-model-error-how-can-we-quantify-best" id="toc-question-in-the-context-of-data-model-error-how-can-we-quantify-best" class="nav-link" data-scroll-target="#question-in-the-context-of-data-model-error-how-can-we-quantify-best"><span class="header-section-number">3.4.1</span> <span style="color: red;">Question: In the context of DATA = MODEL + ERROR, how can we quantify <em>best</em>?</span></a></li>
+  <li><a href="#question-how-can-we-quantify-total-model-error" id="toc-question-how-can-we-quantify-total-model-error" class="nav-link" data-scroll-target="#question-how-can-we-quantify-total-model-error"><span class="header-section-number">3.4.2</span> <span style="color: red;">Question: How can we quantify total model error?</span></a></li>
+  </ul></li>
+  <li><a href="#total-error" id="toc-total-error" class="nav-link" data-scroll-target="#total-error"><span class="header-section-number">3.5</span> Total Error</a></li>
+  <li><a href="#one-parameter-model-for-fps" id="toc-one-parameter-model-for-fps" class="nav-link" data-scroll-target="#one-parameter-model-for-fps"><span class="header-section-number">3.6</span> One Parameter Model for FPS</a>
+  <ul class="collapse">
+  <li><a href="#question-what-is-the-problem-with-this-model-and-how-can-we-fix-this-problem" id="toc-question-what-is-the-problem-with-this-model-and-how-can-we-fix-this-problem" class="nav-link" data-scroll-target="#question-what-is-the-problem-with-this-model-and-how-can-we-fix-this-problem"><span class="header-section-number">3.6.1</span> <span style="color: red;">Question: What is the problem with this model and how can we fix this problem?</span></a></li>
+  </ul></li>
+  <li><a href="#model-parameter-estimation" id="toc-model-parameter-estimation" class="nav-link" data-scroll-target="#model-parameter-estimation"><span class="header-section-number">3.7</span> Model Parameter Estimation</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/03_single_mean.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app_terminology.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app_terminology.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Key Terminology and Concepts</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Key Terminology and Concepts</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Inferences About a Single Mean (1 Parameter Models)</span></h1>
 </div>
 
 
@@ -202,8 +251,100 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<hr>
+<section id="units-3-4-organization" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="units-3-4-organization"><span class="header-section-number">3.1</span> Units 3-4 Organization</h2>
+<ul>
+<li>First, consider details of simplest model (one parameter estimate; mean-only model; no <span class="math inline">\(X\)</span>s).</li>
+<li>Next, examine simple regression (two parameter estimates; one <span class="math inline">\(X\)</span> for one quantitative predictor variable).</li>
+<li>These provide a critical foundation for all linear models.</li>
+<li>Subsequent units will generalize to one dichotomous variable (<em>Unit 5</em>), multiple predictor variables (<em>Units 6-7</em>), and beyond…</li>
+</ul>
+<hr>
+</section>
+<section id="linear-models-as-models" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="linear-models-as-models"><span class="header-section-number">3.2</span> Linear Models as Models</h2>
+<p>Linear models (including regression) are <em>models</em>.<br>
+<br>
+<strong>DATA = MODEL + ERROR</strong><br>
+<br>
+Three general uses for models:</p>
+<ol type="1">
+<li><strong><em>Describe</em></strong> and summarize DATA (<span class="math inline">\(Y\)</span>s) in a simpler form using MODEL.</li>
+<li><strong><em>Predict</em></strong> DATA (<span class="math inline">\(Y\)</span>s) from MODEL.</li>
+<li><strong><em>Understand</em></strong> (test inferences about) complex relationships between individual regressors (<span class="math inline">\(X\)</span>s) in MODEL and the DATA (<span class="math inline">\(Y\)</span>s). How precise are estimates of relationship?<br>
+<br>
+MODELS are simplifications of reality. As such, there is ERROR. They also make assumptions that must be evaluated.</li>
+</ol>
+<hr>
+</section>
+<section id="fear-potential-startle" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="fear-potential-startle"><span class="header-section-number">3.3</span> Fear Potential Startle</h2>
+<p>We are interested in producing anxiety in the laboratory.<br>
+<br>
+To do this, we develop a procedure where we expose people to periods of unpredictable electric shock administration alternating with periods of safety.<br>
+<br>
+We measure their startle response in the shock and safe periods.<br>
+<br>
+We use the difference between their startle during shock – safe to determine if they are anxious.<br>
+<br>
+This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure works if FPS &gt; 0. We need a model of FPS scores to determine if FPS &gt; 0.</p>
+<hr>
+</section>
+<section id="fear-potentiated-startle-one-parameter-model" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="fear-potentiated-startle-one-parameter-model"><span class="header-section-number">3.4</span> Fear Potentiated Startle: One parameter model</h2>
+<p>A very simple model for the population of FPS scores would predict the same value for everyone in the population.</p>
+<p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span></p>
+<p>We would like this value to be the <em>best</em> prediction.<br>
+<br>
+</p>
+<section id="question-in-the-context-of-data-model-error-how-can-we-quantify-best" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="question-in-the-context-of-data-model-error-how-can-we-quantify-best"><span class="header-section-number">3.4.1</span> <span style="color: red;">Question: In the context of DATA = MODEL + ERROR, how can we quantify <em>best</em>?</span></h3>
+<hr>
+<p><strong>We want to predict some characteristic about the population of FPS scores that minimizes the ERROR from our model.</strong></p>
+<p><strong>ERROR = DATA – MODEL</strong></p>
+<p><strong><span class="math inline">\(\varepsilon_i=Y_i-\hat{Y}_i\)</span>; There is an error (<span class="math inline">\(\varepsilon_i\)</span>) for each population score.</strong></p>
+</section>
+<section id="question-how-can-we-quantify-total-model-error" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="question-how-can-we-quantify-total-model-error"><span class="header-section-number">3.4.2</span> <span style="color: red;">Question: How can we quantify total model error?</span></h3>
+<hr>
+</section>
+</section>
+<section id="total-error" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="total-error"><span class="header-section-number">3.5</span> Total Error</h2>
+<p><strong><em>Sum of errors</em></strong> across all scores in the population isn’t ideal because positive and negative errors will tend to cancel each other out.</p>
+<p><span class="math inline">\(\sum(Y_i-\hat{Y}_i)\)</span></p>
+<p><br>
+<br>
+<strong><em>Sum of absolute values of errors</em></strong> could work. If we selected <span class="math inline">\(\beta_0\)</span> to minimize the sum of the absolute value of errors, <span class="math inline">\(\beta_0\)</span> would equal the median of the population.</p>
+<p><span class="math inline">\(\sum(|Y_i-\hat{Y}_i|)\)</span></p>
+<p><br>
+<br>
+</p>
+<p><strong><em>Sum of squared errors (SSE)</em></strong> could work. If we selected <span class="math inline">\(\beta_0\)</span> to minimize the sum of squared errors, <span class="math inline">\(\beta_0\)</span> would equal the mean of the population.</p>
+<p><span class="math inline">\(\sum(Y_i-\hat{Y}_i)^2\)</span></p>
+<hr>
+</section>
+<section id="one-parameter-model-for-fps" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="one-parameter-model-for-fps"><span class="header-section-number">3.6</span> One Parameter Model for FPS</h2>
+<p>For the moment, lets assume we prefer to minimize SSE (more on that in a moment). You should predict the population mean FPS for everyone.</p>
+<p><span class="math inline">\(\hat{Y}=\beta_0\)</span> where <span class="math inline">\(\beta_0 = \mu\)</span><br>
+<br>
+</p>
+<section id="question-what-is-the-problem-with-this-model-and-how-can-we-fix-this-problem" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="question-what-is-the-problem-with-this-model-and-how-can-we-fix-this-problem"><span class="header-section-number">3.6.1</span> <span style="color: red;">Question: What is the problem with this model and how can we fix this problem?</span></h3>
+<hr>
+<p><strong>We don’t know the population mean for FPS scores (<span class="math inline">\(\mu\)</span>).</strong><br>
+<br>
+<strong>We can collect a sample from the population and use the sample mean (<span class="math inline">\(\overline{X}\)</span>) as an estimate of the population mean (<span class="math inline">\(\mu\)</span>). <span class="math inline">\(\overline{X}\)</span> is an unbiased estimate for <span class="math inline">\(\mu\)</span>.</strong></p>
+<hr>
+</section>
+</section>
+<section id="model-parameter-estimation" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="model-parameter-estimation"><span class="header-section-number">3.7</span> Model Parameter Estimation</h2>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -628,11 +769,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./03_single_mean.html" class="pagination-link" aria-label="Inferences About a Single Mean (1 Parameter Models)">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Inferences About a Single Mean (1 Parameter Models)</span></span>
+      <a href="./02_sampling_distributions.html" class="pagination-link" aria-label="Sampling Distributions, Parameters, and Parameter Estimates">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sampling Distributions, Parameters, and Parameter Estimates</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./app_terminology.html" class="pagination-link" aria-label="Key Terminology and Concepts">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Key Terminology and Concepts</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -640,4 +784,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/app_terminology.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/03_single_mean.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

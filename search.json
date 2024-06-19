@@ -268,5 +268,85 @@
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
+  },
+  {
+    "objectID": "03_single_mean.html",
+    "href": "03_single_mean.html",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "",
+    "text": "3.1 Units 3-4 Organization",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
+  },
+  {
+    "objectID": "03_single_mean.html#units-3-4-organization",
+    "href": "03_single_mean.html#units-3-4-organization",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "",
+    "text": "First, consider details of simplest model (one parameter estimate; mean-only model; no \\(X\\)s).\nNext, examine simple regression (two parameter estimates; one \\(X\\) for one quantitative predictor variable).\nThese provide a critical foundation for all linear models.\nSubsequent units will generalize to one dichotomous variable (Unit 5), multiple predictor variables (Units 6-7), and beyond…",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
+  },
+  {
+    "objectID": "03_single_mean.html#linear-models-as-models",
+    "href": "03_single_mean.html#linear-models-as-models",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "3.2 Linear Models as Models",
+    "text": "3.2 Linear Models as Models\nLinear models (including regression) are models.\n\nDATA = MODEL + ERROR\n\nThree general uses for models:\n\nDescribe and summarize DATA (\\(Y\\)s) in a simpler form using MODEL.\nPredict DATA (\\(Y\\)s) from MODEL.\nUnderstand (test inferences about) complex relationships between individual regressors (\\(X\\)s) in MODEL and the DATA (\\(Y\\)s). How precise are estimates of relationship?\n\nMODELS are simplifications of reality. As such, there is ERROR. They also make assumptions that must be evaluated.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
+  },
+  {
+    "objectID": "03_single_mean.html#fear-potential-startle",
+    "href": "03_single_mean.html#fear-potential-startle",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "3.3 Fear Potential Startle",
+    "text": "3.3 Fear Potential Startle\nWe are interested in producing anxiety in the laboratory.\n\nTo do this, we develop a procedure where we expose people to periods of unpredictable electric shock administration alternating with periods of safety.\n\nWe measure their startle response in the shock and safe periods.\n\nWe use the difference between their startle during shock – safe to determine if they are anxious.\n\nThis is called Fear potentiated startle (FPS). Our procedure works if FPS &gt; 0. We need a model of FPS scores to determine if FPS &gt; 0.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
+  },
+  {
+    "objectID": "03_single_mean.html#fear-potentiated-startle-one-parameter-model",
+    "href": "03_single_mean.html#fear-potentiated-startle-one-parameter-model",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "3.4 Fear Potentiated Startle: One parameter model",
+    "text": "3.4 Fear Potentiated Startle: One parameter model\nA very simple model for the population of FPS scores would predict the same value for everyone in the population.\n\\(\\hat{Y}_i=\\beta_0\\)\nWe would like this value to be the best prediction.\n\n\n\n3.4.1 Question: In the context of DATA = MODEL + ERROR, how can we quantify best?\n\nWe want to predict some characteristic about the population of FPS scores that minimizes the ERROR from our model.\nERROR = DATA – MODEL\n\\(\\varepsilon_i=Y_i-\\hat{Y}_i\\); There is an error (\\(\\varepsilon_i\\)) for each population score.\n\n\n3.4.2 Question: How can we quantify total model error?",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
+  },
+  {
+    "objectID": "03_single_mean.html#total-error",
+    "href": "03_single_mean.html#total-error",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "3.5 Total Error",
+    "text": "3.5 Total Error\nSum of errors across all scores in the population isn’t ideal because positive and negative errors will tend to cancel each other out.\n\\(\\sum(Y_i-\\hat{Y}_i)\\)\n\n\nSum of absolute values of errors could work. If we selected \\(\\beta_0\\) to minimize the sum of the absolute value of errors, \\(\\beta_0\\) would equal the median of the population.\n\\(\\sum(|Y_i-\\hat{Y}_i|)\\)\n\n\n\nSum of squared errors (SSE) could work. If we selected \\(\\beta_0\\) to minimize the sum of squared errors, \\(\\beta_0\\) would equal the mean of the population.\n\\(\\sum(Y_i-\\hat{Y}_i)^2\\)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
+  },
+  {
+    "objectID": "03_single_mean.html#one-parameter-model-for-fps",
+    "href": "03_single_mean.html#one-parameter-model-for-fps",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "3.6 One Parameter Model for FPS",
+    "text": "3.6 One Parameter Model for FPS\nFor the moment, lets assume we prefer to minimize SSE (more on that in a moment). You should predict the population mean FPS for everyone.\n\\(\\hat{Y}=\\beta_0\\) where \\(\\beta_0 = \\mu\\)\n\n\n\n3.6.1 Question: What is the problem with this model and how can we fix this problem?\n\nWe don’t know the population mean for FPS scores (\\(\\mu\\)).\n\nWe can collect a sample from the population and use the sample mean (\\(\\overline{X}\\)) as an estimate of the population mean (\\(\\mu\\)). \\(\\overline{X}\\) is an unbiased estimate for \\(\\mu\\).",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
+  },
+  {
+    "objectID": "03_single_mean.html#model-parameter-estimation",
+    "href": "03_single_mean.html#model-parameter-estimation",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "3.7 Model Parameter Estimation",
+    "text": "3.7 Model Parameter Estimation",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
   }
 ]
