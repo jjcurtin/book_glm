@@ -294,7 +294,7 @@
     "href": "03_single_mean.html#linear-models-as-models",
     "title": "3  Inferences About a Single Mean (1 Parameter Models)",
     "section": "3.2 Linear Models as Models",
-    "text": "3.2 Linear Models as Models\nLinear models (including regression) are models.\n\nDATA = MODEL + ERROR\n\nThree general uses for models:\n\nDescribe and summarize DATA (\\(Y\\)s) in a simpler form using MODEL.\nPredict DATA (\\(Y\\)s) from MODEL.\nUnderstand (test inferences about) complex relationships between individual regressors (\\(X\\)s) in MODEL and the DATA (\\(Y\\)s). How precise are estimates of relationship?\n\nMODELS are simplifications of reality. As such, there is ERROR. They also make assumptions that must be evaluated.",
+    "text": "3.2 Linear Models as Models\nLinear models (including regression) are models.\n\nDATA = MODEL + ERROR\n\nThree general uses for models:\n\nDescribe and summarize DATA (\\(Y\\)s) in a simpler form using MODEL.\nPredict DATA (\\(Y\\)s) from MODEL.\nUnderstand (test inferences about) complex relationships between individual regressors (\\(X\\)s) in MODEL and the DATA (\\(Y\\)s). How precise are estimates of relationship?\n\n\n\nMODELS are simplifications of reality. As such, there is ERROR. They also make assumptions that must be evaluated.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
     ]
