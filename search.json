@@ -314,7 +314,7 @@
     "href": "03_single_mean.html#fear-potentiated-startle-one-parameter-model",
     "title": "3  Inferences About a Single Mean (1 Parameter Models)",
     "section": "3.4 Fear Potentiated Startle: One parameter model",
-    "text": "3.4 Fear Potentiated Startle: One parameter model\nA very simple model for the population of FPS scores would predict the same value for everyone in the population.\n\\(\\hat{Y}_i=\\beta_0\\)\nWe would like this value to be the best prediction.\n\n\n\n3.4.1 Question: In the context of DATA = MODEL + ERROR, how can we quantify best?\n\nWe want to predict some characteristic about the population of FPS scores that minimizes the ERROR from our model.\nERROR = DATA – MODEL\n\\(\\varepsilon_i=Y_i-\\hat{Y}_i\\); There is an error (\\(\\varepsilon_i\\)) for each population score.\n\n\n3.4.2 Question: How can we quantify total model error?",
+    "text": "3.4 Fear Potentiated Startle: One parameter model\nA very simple model for the population of FPS scores would predict the same value for everyone in the population.\n\\(\\hat{Y}_i=\\beta_0\\)\nWe would like this value to be the best prediction.\n\n\n\n3.4.1 Question: In the context of DATA = MODEL + ERROR, how can we quantify best?\n\nWe want to predict some characteristic about the population of FPS scores that minimizes the ERROR from our model.\nERROR = DATA – MODEL\n\\(\\varepsilon_i=Y_i-\\hat{Y}_i\\); There is an error (\\(\\varepsilon_i\\)) for each population score.\n\n\n\n\n3.4.2 Question: How can we quantify total model error?",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
     ]
@@ -334,7 +334,7 @@
     "href": "03_single_mean.html#one-parameter-model-for-fps",
     "title": "3  Inferences About a Single Mean (1 Parameter Models)",
     "section": "3.6 One Parameter Model for FPS",
-    "text": "3.6 One Parameter Model for FPS\nFor the moment, lets assume we prefer to minimize SSE (more on that in a moment). You should predict the population mean FPS for everyone.\n\\(\\hat{Y}=\\beta_0\\) where \\(\\beta_0 = \\mu\\)\n\n\n\n3.6.1 Question: What is the problem with this model and how can we fix this problem?\n\nWe don’t know the population mean for FPS scores (\\(\\mu\\)).\n\nWe can collect a sample from the population and use the sample mean (\\(\\overline{X}\\)) as an estimate of the population mean (\\(\\mu\\)). \\(\\overline{X}\\) is an unbiased estimate for \\(\\mu\\).",
+    "text": "3.6 One Parameter Model for FPS\nFor the moment, lets assume we prefer to minimize SSE (more on that in a moment). You should predict the population mean FPS for everyone.\n\\(\\hat{Y}_i=\\beta_0\\) where \\(\\beta_0=\\mu\\)\n\n\n\n3.6.1 Question: What is the problem with this model and how can we fix this problem?\n\nWe don’t know the population mean for FPS scores (\\(\\mu\\)).\n\nWe can collect a sample from the population and use the sample mean (\\(\\overline{X}\\)) as an estimate of the population mean (\\(\\mu\\)). \\(\\overline{X}\\) is an unbiased estimate for \\(\\mu\\).",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
     ]
@@ -344,7 +344,37 @@
     "href": "03_single_mean.html#model-parameter-estimation",
     "title": "3  Inferences About a Single Mean (1 Parameter Models)",
     "section": "3.7 Model Parameter Estimation",
-    "text": "3.7 Model Parameter Estimation",
+    "text": "3.7 Model Parameter Estimation\nPopulation model\n\\(\\hat{Y}_i=\\beta_0\\) where \\(\\beta_0=\\mu\\)\n\\(Y_i=\\beta_0+\\varepsilon_i\\)\nEstimate population parameters from sample\n\\(Y_i=b_0\\) where \\(b_0=\\overline{X}\\)\n\\(Y_i=b_0+e_i\\)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
+  },
+  {
+    "objectID": "03_single_mean.html#least-squares-criterion",
+    "href": "03_single_mean.html#least-squares-criterion",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "3.8 Least Squares Criterion",
+    "text": "3.8 Least Squares Criterion\nIn ordinary least squares (OLS) regression and other least squares linear models, the model parameter estimates (e.g., \\(b_0\\)) are calculated such that they minimize the sum of squared errors (SSE) in the sample in which you estimate the model.\n\\(\\text{SSE}=\\sum(Y_i-\\hat{Y}_i)^2\\)\n\\(\\text{SSE}=\\sum e_i^2\\)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
+  },
+  {
+    "objectID": "03_single_mean.html#properties-of-parameter-estimates",
+    "href": "03_single_mean.html#properties-of-parameter-estimates",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "3.9 Properties of Parameter Estimates",
+    "text": "3.9 Properties of Parameter Estimates\nThere are three properties that make a parameter estimate attractive.\n\nUnbiased: Mean of the sampling distribution for the parameter estimate is equal to the value for that parameter in the population.\n\nEfficient: The sample estimates are close to the population parameter. In other words, the narrower the sampling distribution for any specific sample size \\(N\\), the more efficient the estimator. Efficient means small \\(SE\\) for parameter estimate.\n\nConsistent: As the sample size increases, the sampling distribution becomes narrower (more efficient). Consistent means as \\(N\\) increases, \\(SE\\) for parameter estimate decreases",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
+  },
+  {
+    "objectID": "03_single_mean.html#least-squares-criterion-continued",
+    "href": "03_single_mean.html#least-squares-criterion-continued",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "3.10 Least Squares Criterion (Continued)",
+    "text": "3.10 Least Squares Criterion (Continued)",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
     ]

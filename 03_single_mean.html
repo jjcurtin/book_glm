@@ -226,6 +226,9 @@ window.Quarto = {
   <li><a href="#question-what-is-the-problem-with-this-model-and-how-can-we-fix-this-problem" id="toc-question-what-is-the-problem-with-this-model-and-how-can-we-fix-this-problem" class="nav-link" data-scroll-target="#question-what-is-the-problem-with-this-model-and-how-can-we-fix-this-problem"><span class="header-section-number">3.6.1</span> <span style="color: red;">Question: What is the problem with this model and how can we fix this problem?</span></a></li>
   </ul></li>
   <li><a href="#model-parameter-estimation" id="toc-model-parameter-estimation" class="nav-link" data-scroll-target="#model-parameter-estimation"><span class="header-section-number">3.7</span> Model Parameter Estimation</a></li>
+  <li><a href="#least-squares-criterion" id="toc-least-squares-criterion" class="nav-link" data-scroll-target="#least-squares-criterion"><span class="header-section-number">3.8</span> Least Squares Criterion</a></li>
+  <li><a href="#properties-of-parameter-estimates" id="toc-properties-of-parameter-estimates" class="nav-link" data-scroll-target="#properties-of-parameter-estimates"><span class="header-section-number">3.9</span> Properties of Parameter Estimates</a></li>
+  <li><a href="#least-squares-criterion-continued" id="toc-least-squares-criterion-continued" class="nav-link" data-scroll-target="#least-squares-criterion-continued"><span class="header-section-number">3.10</span> Least Squares Criterion (Continued)</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/03_single_mean.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -304,7 +307,9 @@ This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure wo
 <hr>
 <p><strong>We want to predict some characteristic about the population of FPS scores that minimizes the ERROR from our model.</strong></p>
 <p><strong>ERROR = DATA – MODEL</strong></p>
-<p><strong><span class="math inline">\(\varepsilon_i=Y_i-\hat{Y}_i\)</span>; There is an error (<span class="math inline">\(\varepsilon_i\)</span>) for each population score.</strong></p>
+<p><strong><span class="math inline">\(\varepsilon_i=Y_i-\hat{Y}_i\)</span>; There is an error (<span class="math inline">\(\varepsilon_i\)</span>) for each population score.</strong><br>
+<br>
+</p>
 </section>
 <section id="question-how-can-we-quantify-total-model-error" class="level3" data-number="3.4.2">
 <h3 data-number="3.4.2" class="anchored" data-anchor-id="question-how-can-we-quantify-total-model-error"><span class="header-section-number">3.4.2</span> <span style="color: red;">Question: How can we quantify total model error?</span></h3>
@@ -324,7 +329,7 @@ This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure wo
 <section id="one-parameter-model-for-fps" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="one-parameter-model-for-fps"><span class="header-section-number">3.6</span> One Parameter Model for FPS</h2>
 <p>For the moment, lets assume we prefer to minimize SSE (more on that in a moment). You should predict the population mean FPS for everyone.</p>
-<p><span class="math inline">\(\hat{Y}=\beta_0\)</span> where <span class="math inline">\(\beta_0 = \mu\)</span><br>
+<p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span> where <span class="math inline">\(\beta_0=\mu\)</span><br>
 <br>
 </p>
 <section id="question-what-is-the-problem-with-this-model-and-how-can-we-fix-this-problem" class="level3" data-number="3.6.1">
@@ -338,6 +343,35 @@ This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure wo
 </section>
 <section id="model-parameter-estimation" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="model-parameter-estimation"><span class="header-section-number">3.7</span> Model Parameter Estimation</h2>
+<p><strong><em>Population model</em></strong></p>
+<p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span> where <span class="math inline">\(\beta_0=\mu\)</span></p>
+<p><span class="math inline">\(Y_i=\beta_0+\varepsilon_i\)</span></p>
+<p><strong><em>Estimate population parameters from sample</em></strong></p>
+<p><span class="math inline">\(Y_i=b_0\)</span> where <span class="math inline">\(b_0=\overline{X}\)</span></p>
+<p><span class="math inline">\(Y_i=b_0+e_i\)</span></p>
+<hr>
+</section>
+<section id="least-squares-criterion" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="least-squares-criterion"><span class="header-section-number">3.8</span> Least Squares Criterion</h2>
+<p>In ordinary least squares (OLS) regression and other least squares linear models, the model parameter estimates (e.g., <span class="math inline">\(b_0\)</span>) are calculated such that they minimize the sum of squared errors (SSE) in the sample in which you estimate the model.</p>
+<p><span class="math inline">\(\text{SSE}=\sum(Y_i-\hat{Y}_i)^2\)</span></p>
+<p><span class="math inline">\(\text{SSE}=\sum e_i^2\)</span></p>
+<hr>
+</section>
+<section id="properties-of-parameter-estimates" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="properties-of-parameter-estimates"><span class="header-section-number">3.9</span> Properties of Parameter Estimates</h2>
+<p>There are three properties that make a parameter estimate attractive.</p>
+<ol type="1">
+<li><strong><em>Unbiased:</em></strong> Mean of the sampling distribution for the parameter estimate is equal to the value for that parameter in the population.<br>
+</li>
+<li><strong><em>Efficient:</em></strong> The sample estimates are close to the population parameter. In other words, the narrower the sampling distribution for any specific sample size <span class="math inline">\(N\)</span>, the more efficient the estimator. Efficient means small <span class="math inline">\(SE\)</span> for parameter estimate.<br>
+</li>
+<li><strong><em>Consistent:</em></strong> As the sample size increases, the sampling distribution becomes narrower (more efficient). Consistent means as <span class="math inline">\(N\)</span> increases, <span class="math inline">\(SE\)</span> for parameter estimate decreases</li>
+</ol>
+<hr>
+</section>
+<section id="least-squares-criterion-continued" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="least-squares-criterion-continued"><span class="header-section-number">3.10</span> Least Squares Criterion (Continued)</h2>
 
 
 </section>
