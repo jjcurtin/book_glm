@@ -271,6 +271,9 @@ window.Quarto = {
   <li><a href="#question-describe-the-logic-of-how-this-was-determined-given-your-understanding-of-sampling-distributions" id="toc-question-describe-the-logic-of-how-this-was-determined-given-your-understanding-of-sampling-distributions" class="nav-link" data-scroll-target="#question-describe-the-logic-of-how-this-was-determined-given-your-understanding-of-sampling-distributions"><span class="header-section-number">3.14.1</span> <span style="color: red;">Question: Describe the logic of how this was determined given your understanding of sampling distributions?</span></a></li>
   </ul></li>
   <li><a href="#sampling-distribution-testing-inferences-about-beta_0" id="toc-sampling-distribution-testing-inferences-about-beta_0" class="nav-link" data-scroll-target="#sampling-distribution-testing-inferences-about-beta_0"><span class="header-section-number">3.15</span> Sampling Distribution: Testing Inferences About <span class="math inline">\(\beta_0\)</span></a></li>
+  <li><a href="#statistical-inference-and-model-comparisons" id="toc-statistical-inference-and-model-comparisons" class="nav-link" data-scroll-target="#statistical-inference-and-model-comparisons"><span class="header-section-number">3.16</span> Statistical Inference and Model Comparisons</a></li>
+  <li><a href="#model-comparisons-testing-inferences-about-beta_0" id="toc-model-comparisons-testing-inferences-about-beta_0" class="nav-link" data-scroll-target="#model-comparisons-testing-inferences-about-beta_0"><span class="header-section-number">3.17</span> Model Comparisons: Testing Inferences about <span class="math inline">\(\beta_0\)</span></a></li>
+  <li><a href="#model-comparison-plots" id="toc-model-comparison-plots" class="nav-link" data-scroll-target="#model-comparison-plots"><span class="header-section-number">3.18</span> Model Comparison Plots</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/03_single_mean.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -575,7 +578,7 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 </div>
 </div>
 <hr>
-<p>We also may want to look at the parameter coefficients (in this case we are only looking at the intercept).</p>
+<p>We also may want to look at the parameter coefficients (in this case we are only looking at the intercept). We can use the <code>tidy()</code> function from the <code>broom</code> package to do this.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>m <span class="sc">|&gt;</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -624,6 +627,48 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 <div>
 <figure class="figure">
 <p><img src="03_single_mean_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="statistical-inference-and-model-comparisons" class="level2" data-number="3.16">
+<h2 data-number="3.16" class="anchored" data-anchor-id="statistical-inference-and-model-comparisons"><span class="header-section-number">3.16</span> Statistical Inference and Model Comparisons</h2>
+<p>Statistical inference about parameters is fundamentally about model comparisons.</p>
+<p>You are implicitly (t-test of parameter estimate) or explicitly (F-test of model comparison) comparing two different models of your data.</p>
+<p>We follow Judd et al and call these two models the <em>compact model</em> and the <em>augmented model</em>.</p>
+<p>The compact model will represent reality as the null hypothesis predicts. The augmented model will represent reality as the alternative hypothesis predicts.</p>
+<p>The compact model is simpler (fewer parameters) than the augmented model. It is also nested in the augmented model (i.e.&nbsp;a subset of parameters).</p>
+<hr>
+</section>
+<section id="model-comparisons-testing-inferences-about-beta_0" class="level2" data-number="3.17">
+<h2 data-number="3.17" class="anchored" data-anchor-id="model-comparisons-testing-inferences-about-beta_0"><span class="header-section-number">3.17</span> Model Comparisons: Testing Inferences about <span class="math inline">\(\beta_0\)</span></h2>
+<p><span class="math inline">\(\hat{FPS_i}=\beta_0\)</span></p>
+<p><span class="math inline">\(H_0: \beta_0 = 0\)</span></p>
+<p><span class="math inline">\(H_a: \beta_0 \neq 0\)</span></p>
+<p>Compact model: <span class="math inline">\(\hat{FPS_i}=0\)</span></p>
+<p>Augmented model: <span class="math inline">\(\hat{FPS_i}=\beta_0 (\approx b_0)\)</span></p>
+<p>We estimate 0 parameters (<span class="math inline">\(P=0\)</span>) in this compact model.<br>
+We estimate 1 parameter (<span class="math inline">\(P=1\)</span>) in this augmented model.</p>
+<p>Choosing between these two models is equivalent to testing if <span class="math inline">\(\beta_0 = 0\)</span> as you did with the t-test.</p>
+<hr>
+</section>
+<section id="model-comparison-plots" class="level2" data-number="3.18">
+<h2 data-number="3.18" class="anchored" data-anchor-id="model-comparison-plots"><span class="header-section-number">3.18</span> Model Comparison Plots</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> fps)) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.05</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.line.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> broom<span class="sc">::</span><span class="fu">tidy</span>(m)<span class="sc">$</span>estimate, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_single_mean_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
