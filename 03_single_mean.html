@@ -388,6 +388,9 @@ This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure wo
 <p><strong><em>Population model</em></strong></p>
 <p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span> where <span class="math inline">\(\beta_0=\mu\)</span></p>
 <p><span class="math inline">\(Y_i=\beta_0+\varepsilon_i\)</span></p>
+<p><br>
+<br>
+</p>
 <p><strong><em>Estimate population parameters from sample</em></strong></p>
 <p><span class="math inline">\(Y_i=b_0\)</span> where <span class="math inline">\(b_0=\overline{X}\)</span></p>
 <p><span class="math inline">\(Y_i=b_0+e_i\)</span></p>
@@ -405,8 +408,12 @@ This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure wo
 <p>There are three properties that make a parameter estimate attractive.</p>
 <ol type="1">
 <li><strong><em>Unbiased:</em></strong> Mean of the sampling distribution for the parameter estimate is equal to the value for that parameter in the population.<br>
+<br>
+<br>
 </li>
 <li><strong><em>Efficient:</em></strong> The sample estimates are close to the population parameter. In other words, the narrower the sampling distribution for any specific sample size <span class="math inline">\(N\)</span>, the more efficient the estimator. Efficient means small <span class="math inline">\(SE\)</span> for parameter estimate.<br>
+<br>
+<br>
 </li>
 <li><strong><em>Consistent:</em></strong> As the sample size increases, the sampling distribution becomes narrower (more efficient). Consistent means as <span class="math inline">\(N\)</span> increases, <span class="math inline">\(SE\)</span> for parameter estimate decreases</li>
 </ol>
@@ -458,6 +465,7 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 1    96  32.2  37.5 -98.1  163.</code></pre>
 </div>
 </div>
+<hr>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> fps)) <span class="sc">+</span></span>
@@ -594,6 +602,35 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 </section>
 <section id="sampling-distribution-testing-inferences-about-beta_0" class="level2" data-number="3.15">
 <h2 data-number="3.15" class="anchored" data-anchor-id="sampling-distribution-testing-inferences-about-beta_0"><span class="header-section-number">3.15</span> Sampling Distribution: Testing Inferences About <span class="math inline">\(\beta_0\)</span></h2>
+<p><span class="math inline">\(H_0: \beta_0 = 0; H_a: \beta_0 \neq 0\)</span></p>
+<p>If <span class="math inline">\(H_0\)</span> is true, the sampling distribution for <span class="math inline">\(\beta_0\)</span> will have a mean of 0. We can estimate standard deviation of the sampling distribution with <span class="math inline">\(SE\)</span> for <span class="math inline">\(b_0\)</span>.</p>
+<p><span class="math inline">\(t(df=N-P)=\frac{b_0-0}{SE_{b_0}}=\frac{32.2-0}{3.8}=8.40\)</span></p>
+<p><span class="math inline">\(b_0\)</span> is approximately 8 standard deviations above the expected mean of the distribution if <span class="math inline">\(H_0\)</span> is true.</p>
+<hr>
+<p>We can use <code>pt()</code> to calculate the <span class="math inline">\(p\)</span> value.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="fl">8.40</span>,<span class="dv">95</span>,<span class="at">lower.tail=</span><span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.293253e-13</code></pre>
+</div>
+</div>
+<p>The probability of obtaining a sample <span class="math inline">\(b_0\)</span> = 32.2 (or more extreme) if <span class="math inline">\(H_0\)</span> is true is very low (&lt; .05). Therefore we reject <span class="math inline">\(H_0\)</span> and conclude that <span class="math inline">\(\beta_0 \neq 0\)</span> and <span class="math inline">\(b_0\)</span> is our best (unbiased) estimate of it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">b0 =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">40</span>,<span class="dv">40</span>,.<span class="dv">01</span>),</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">probability =</span> <span class="fu">dt</span>(b0<span class="sc">/</span>broom<span class="sc">::</span><span class="fu">tidy</span>(m)<span class="sc">$</span>std.error, m<span class="sc">$</span>df.residual)) <span class="sc">|&gt;</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> b0, <span class="at">y =</span> probability)) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> broom<span class="sc">::</span><span class="fu">tidy</span>(m)<span class="sc">$</span>estimate, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Sampling Distribution for b0"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_single_mean_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
 
 
 </section>
