@@ -275,6 +275,22 @@ window.Quarto = {
   <li><a href="#model-comparisons-testing-inferences-about-beta_0" id="toc-model-comparisons-testing-inferences-about-beta_0" class="nav-link" data-scroll-target="#model-comparisons-testing-inferences-about-beta_0"><span class="header-section-number">3.17</span> Model Comparisons: Testing Inferences about <span class="math inline">\(\beta_0\)</span></a></li>
   <li><a href="#model-comparison-plots" id="toc-model-comparison-plots" class="nav-link" data-scroll-target="#model-comparison-plots"><span class="header-section-number">3.18</span> Model Comparison Plots</a></li>
   <li><a href="#model-comparisons-testing-inferences-about-beta_0-continued" id="toc-model-comparisons-testing-inferences-about-beta_0-continued" class="nav-link" data-scroll-target="#model-comparisons-testing-inferences-about-beta_0-continued"><span class="header-section-number">3.19</span> Model Comparisons: Testing Inferences about <span class="math inline">\(\beta_0\)</span> (Continued)</a></li>
+  <li><a href="#sampling-distribution-vs.-model-comparison" id="toc-sampling-distribution-vs.-model-comparison" class="nav-link" data-scroll-target="#sampling-distribution-vs.-model-comparison"><span class="header-section-number">3.20</span> Sampling Distribution vs.&nbsp;Model Comparison</a></li>
+  <li><a href="#effect-sizes" id="toc-effect-sizes" class="nav-link" data-scroll-target="#effect-sizes"><span class="header-section-number">3.21</span> Effect Sizes</a></li>
+  <li><a href="#confidence-interval-for-b_0" id="toc-confidence-interval-for-b_0" class="nav-link" data-scroll-target="#confidence-interval-for-b_0"><span class="header-section-number">3.22</span> Confidence Interval for <span class="math inline">\(b_0\)</span></a>
+  <ul class="collapse">
+  <li><a href="#question-given-what-you-now-know-about-confidence-intervals-and-sampling-distributions-what-should-the-formula-be" id="toc-question-given-what-you-now-know-about-confidence-intervals-and-sampling-distributions-what-should-the-formula-be" class="nav-link" data-scroll-target="#question-given-what-you-now-know-about-confidence-intervals-and-sampling-distributions-what-should-the-formula-be"><span class="header-section-number">3.22.1</span> <span style="color: red;">Question: Given what you now know about confidence intervals and sampling distributions, what should the formula be?</span></a></li>
+  <li><a href="#question-how-can-we-tell-if-a-parameter-is-significant-from-the-confidence-interval" id="toc-question-how-can-we-tell-if-a-parameter-is-significant-from-the-confidence-interval" class="nav-link" data-scroll-target="#question-how-can-we-tell-if-a-parameter-is-significant-from-the-confidence-interval"><span class="header-section-number">3.22.2</span> <span style="color: red;">Question: How can we tell if a parameter is <em>significant</em> from the confidence interval?</span></a></li>
+  </ul></li>
+  <li><a href="#the-one-parameter-mean-only-model-special-case" id="toc-the-one-parameter-mean-only-model-special-case" class="nav-link" data-scroll-target="#the-one-parameter-mean-only-model-special-case"><span class="header-section-number">3.23</span> The one parameter (mean-only) model: Special Case</a>
+  <ul class="collapse">
+  <li><a href="#question-what-special-case-specific-analytic-test-is-statistically-equivalent-to-the-test-of-the-null-hypothesis-beta_0-0-in-the-one-parameter-model" id="toc-question-what-special-case-specific-analytic-test-is-statistically-equivalent-to-the-test-of-the-null-hypothesis-beta_0-0-in-the-one-parameter-model" class="nav-link" data-scroll-target="#question-what-special-case-specific-analytic-test-is-statistically-equivalent-to-the-test-of-the-null-hypothesis-beta_0-0-in-the-one-parameter-model"><span class="header-section-number">3.23.1</span> <span style="color: red;">Question: What special case (specific analytic test) is statistically equivalent to the test of the null hypothesis: <span class="math inline">\(\beta_0\)</span> = 0 in the one parameter model?</span></a></li>
+  </ul></li>
+  <li><a href="#testing-beta_0-non-zero-values" id="toc-testing-beta_0-non-zero-values" class="nav-link" data-scroll-target="#testing-beta_0-non-zero-values"><span class="header-section-number">3.24</span> Testing <span class="math inline">\(\beta_0\)</span> = non-zero values</a>
+  <ul class="collapse">
+  <li><a href="#question-how-could-you-test-an-h_0-regarding-b_0-some-value-other-than-0-e.g.-10-hint-there-are-at-least-three-methods." id="toc-question-how-could-you-test-an-h_0-regarding-b_0-some-value-other-than-0-e.g.-10-hint-there-are-at-least-three-methods." class="nav-link" data-scroll-target="#question-how-could-you-test-an-h_0-regarding-b_0-some-value-other-than-0-e.g.-10-hint-there-are-at-least-three-methods."><span class="header-section-number">3.24.1</span> <span style="color: red;">Question: How could you test an <span class="math inline">\(H_0\)</span> regarding <span class="math inline">\(B_0\)</span> = some value other than 0 (e.g., 10)? HINT: There are at least <strong>three</strong> methods.</span></a></li>
+  </ul></li>
+  <li><a href="#intermission" id="toc-intermission" class="nav-link" data-scroll-target="#intermission"><span class="header-section-number">3.25</span> Intermission…</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/03_single_mean.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -702,13 +718,13 @@ The compact model is simpler (fewer parameters) than the augmented model. It is 
 </section>
 <section id="model-comparisons-testing-inferences-about-beta_0" class="level2" data-number="3.17">
 <h2 data-number="3.17" class="anchored" data-anchor-id="model-comparisons-testing-inferences-about-beta_0"><span class="header-section-number">3.17</span> Model Comparisons: Testing Inferences about <span class="math inline">\(\beta_0\)</span></h2>
-<p><span class="math inline">\(\hat{FPS_i}=\beta_0\)</span></p>
+<p><span class="math inline">\(\hat{\text{FPS}_i}=\beta_0\)</span></p>
 <p><span class="math inline">\(H_0: \beta_0 = 0\)</span></p>
 <p><span class="math inline">\(H_a: \beta_0 \neq 0\)</span><br>
 <br>
 </p>
-<p>Compact model: <span class="math inline">\(\hat{FPS_i}=0\)</span><br>
-Augmented model: <span class="math inline">\(\hat{FPS_i}=\beta_0 (\approx b_0)\)</span><br>
+<p>Compact model: <span class="math inline">\(\hat{\text{FPS}_i}=0\)</span><br>
+Augmented model: <span class="math inline">\(\hat{\text{FPS}_i}=\beta_0 (\approx b_0)\)</span><br>
 <br>
 </p>
 <p>We estimate 0 parameters (<span class="math inline">\(P=0\)</span>) in this compact model.<br>
@@ -740,18 +756,18 @@ Choosing between these two models is equivalent to testing if <span class="math 
 </section>
 <section id="model-comparisons-testing-inferences-about-beta_0-continued" class="level2" data-number="3.19">
 <h2 data-number="3.19" class="anchored" data-anchor-id="model-comparisons-testing-inferences-about-beta_0-continued"><span class="header-section-number">3.19</span> Model Comparisons: Testing Inferences about <span class="math inline">\(\beta_0\)</span> (Continued)</h2>
-<p>Compact model: <span class="math inline">\(\hat{FPS_i}=0\)</span><br>
-Augmented model: <span class="math inline">\(\hat{FPS_i}=\beta_0 (\approx b_0)\)</span></p>
+<p>Compact model: <span class="math inline">\(\hat{\text{FPS}_i}=0\)</span><br>
+Augmented model: <span class="math inline">\(\hat{\text{FPS}_i}=\beta_0 (\approx b_0)\)</span></p>
 <p>We can compare (and choose between) these two models by comparing their total error (SSE) in our sample.</p>
-<p><span class="math inline">\(SSE=\sum(Y_i-\hat{Y}_i)^2\)</span></p>
-<p><span class="math inline">\(SSE_c = \sum(Y_i-0)^2\)</span></p>
+<p><span class="math inline">\(\text{SSE}=\sum(Y_i-\hat{Y}_i)^2\)</span></p>
+<p><span class="math inline">\(\text{SSE}_c = \sum(Y_i-0)^2\)</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((data<span class="sc">$</span>fps <span class="sc">-</span> <span class="dv">0</span>)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 233368.3</code></pre>
 </div>
 </div>
-<p><span class="math inline">\(SSE_a = \sum(Y_i- 32.2 )^2\)</span></p>
+<p><span class="math inline">\(\text{SSE}_a = \sum(Y_i- 32.2 )^2\)</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((data<span class="sc">$</span>fps <span class="sc">-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(m)<span class="sc">$</span>estimate)<span class="sc">^</span><span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -766,17 +782,17 @@ Augmented model: <span class="math inline">\(\hat{FPS_i}=\beta_0 (\approx b_0)\)
 </div>
 </div>
 <hr>
-<p>Compact model: <span class="math inline">\(\hat{FPS_i}=0\)</span><br>
+<p>Compact model: <span class="math inline">\(\hat{\text{FPS}_i}=0\)</span><br>
 SSE = 233368.3<br>
 P = 0<br>
 <br>
 </p>
-<p>Augmented model: <span class="math inline">\(\hat{FPS_i}=\beta_0 (\approx b_0)\)</span><br>
+<p>Augmented model: <span class="math inline">\(\hat{\text{FPS}_i}=\beta_0 (\approx b_0)\)</span><br>
 SSE = 133888.3<br>
 P = 1<br>
 <br>
 </p>
-<p><span class="math inline">\(F(P_a-P_c, N-P_a) = \frac{(SSE_c-SSE_a)/(P_a-P_c)}{SSE_a/(N-P_a)}\)</span></p>
+<p><span class="math inline">\(F(P_a-P_c, N-P_a) = \frac{(\text{SSE}_c-\text{SSE}_a)/(P_a-P_c)}{\text{SSE}_a/(N-P_a)}\)</span></p>
 <p><span class="math inline">\(F(1-0, 96 -1)= \frac{(233368.3 - 133888.3)/(1-0)}{133888.3 / (96 - 1)}\)</span></p>
 <p><span class="math inline">\(F(1, 95 )= 70.59, p &lt; .0001\)</span></p>
 <div class="cell">
@@ -786,6 +802,166 @@ P = 1<br>
 </div>
 </div>
 <hr>
+</section>
+<section id="sampling-distribution-vs.-model-comparison" class="level2" data-number="3.20">
+<h2 data-number="3.20" class="anchored" data-anchor-id="sampling-distribution-vs.-model-comparison"><span class="header-section-number">3.20</span> Sampling Distribution vs.&nbsp;Model Comparison</h2>
+<p>The two approaches to testing <span class="math inline">\(H_0\)</span> about parameters (<span class="math inline">\(\beta_0, \beta_j\)</span>) are statistically equivalent.</p>
+<p>They are complementary approaches with respect to conceptual understanding of GLMs.<br>
+<br>
+</p>
+<p><strong>Sampling Distribution</strong></p>
+<ul>
+<li>Focus on population parameters and their estimates.<br>
+</li>
+<li>Tight connection to sampling and probability distributions.<br>
+</li>
+<li>Understanding of <span class="math inline">\(SE\)</span> (sampling error/power; confidence intervals, graphic displays).</li>
+</ul>
+<p><strong>Model Comparison</strong></p>
+<ul>
+<li>Focus on models themselves.<br>
+</li>
+<li>Highlights model fit (SSE) and model parsimony (P).<br>
+</li>
+<li>Clearer link to PRE (<span class="math inline">\(\eta_p^2\)</span>).</li>
+<li>Test comparisons that differ by &gt;1 parameter (discouraged).</li>
+</ul>
+<hr>
+</section>
+<section id="effect-sizes" class="level2" data-number="3.21">
+<h2 data-number="3.21" class="anchored" data-anchor-id="effect-sizes"><span class="header-section-number">3.21</span> Effect Sizes</h2>
+<p>Your parameter estimates are descriptive. They describe effects in the original units of the (IVs) and DV. Report them in your paper.<br>
+<br>
+</p>
+<p>There are many other effect size estimates available. You will learn two that we prefer.<br>
+<br>
+</p>
+<p>Partial eta squared (<span class="math inline">\(\eta_p^2\)</span>): Judd et al call this PRE (proportional reduction in error).</p>
+<p>Eta squared (<span class="math inline">\(\eta^2\)</span>): This is also commonly referred to as <span class="math inline">\(\Delta R^2\)</span> in regression.</p>
+<hr>
+<p>Compact model: <span class="math inline">\(\hat{\text{FPS}_i}=0\)</span><br>
+SSE = 233368.3<br>
+P = 0<br>
+<br>
+</p>
+<p>Augmented model: <span class="math inline">\(\hat{\text{FPS}_i}=\beta_0 (\approx b_0)\)</span><br>
+SSE = 133888.3<br>
+P = 1<br>
+<br>
+</p>
+<p>How much was the error reduced in the augmented model relative to the compact model?<br>
+<br>
+</p>
+<p><span class="math inline">\(\frac{\text{SSE}_c-\text{SSE}_a}{\text{SSE}_c} = \frac{233368.3 - 133888.3}{233368.3} = 0.426\)</span><br>
+<br>
+</p>
+<p>Our more complex model that includes <span class="math inline">\(\beta_0\)</span> reduces prediction error (SSE) by approximately 43%. Not bad!</p>
+<hr>
+</section>
+<section id="confidence-interval-for-b_0" class="level2" data-number="3.22">
+<h2 data-number="3.22" class="anchored" data-anchor-id="confidence-interval-for-b_0"><span class="header-section-number">3.22</span> Confidence Interval for <span class="math inline">\(b_0\)</span></h2>
+<p>A confidence interval (CI) is an interval for a parameter estimate in which you can be fairly confident that you will capture the true population parameter (in this case, <span class="math inline">\(\beta_0\)</span>).Most commonly reported is the 95% CI. Across repeated samples, 95% of the calculated CIs will include the population parameter.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-16-1" class="code-annotation-target"><a href="#annotated-cell-16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="1" data-code-annotation="1">Use the <code>confint()</code> function to calculate confidence intervals. The default is to provide 95% CIs, but you can change this using the <code>level</code> parameter if you wish.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               2.5 %   97.5 %
+(Intercept) 24.58426 39.79742</code></pre>
+</div>
+</div>
+<p><br>
+<br>
+</p>
+<section id="question-given-what-you-now-know-about-confidence-intervals-and-sampling-distributions-what-should-the-formula-be" class="level3" data-number="3.22.1">
+<h3 data-number="3.22.1" class="anchored" data-anchor-id="question-given-what-you-now-know-about-confidence-intervals-and-sampling-distributions-what-should-the-formula-be"><span class="header-section-number">3.22.1</span> <span style="color: red;">Question: Given what you now know about confidence intervals and sampling distributions, what should the formula be?</span></h3>
+<hr>
+<p><strong><span class="math inline">\(\text{CI}(b_0)= b_0 \pm t(\alpha;N-P) * SE_{b_0}\)</span></strong><br>
+<br>
+</p>
+<p><strong>For the 95% confidence interval this is approximately 2 SEs around our unbiased estimate of <span class="math inline">\(\beta_0\)</span>.</strong></p>
+<hr>
+</section>
+<section id="question-how-can-we-tell-if-a-parameter-is-significant-from-the-confidence-interval" class="level3" data-number="3.22.2">
+<h3 data-number="3.22.2" class="anchored" data-anchor-id="question-how-can-we-tell-if-a-parameter-is-significant-from-the-confidence-interval"><span class="header-section-number">3.22.2</span> <span style="color: red;">Question: How can we tell if a parameter is <em>significant</em> from the confidence interval?</span></h3>
+<hr>
+<p><strong>If a parameter estimate <span class="math inline">\(\neq\)</span> 0 at <span class="math inline">\(\alpha\)</span> = .05, then the 95% confidence interval for its parameter estimate should not include 0.</strong><br>
+<br>
+</p>
+<p><strong>This is also true for testing whether the parameter estimate is equal to any other non-zero value for the population parameter.</strong></p>
+<hr>
+</section>
+</section>
+<section id="the-one-parameter-mean-only-model-special-case" class="level2" data-number="3.23">
+<h2 data-number="3.23" class="anchored" data-anchor-id="the-one-parameter-mean-only-model-special-case"><span class="header-section-number">3.23</span> The one parameter (mean-only) model: Special Case</h2>
+<section id="question-what-special-case-specific-analytic-test-is-statistically-equivalent-to-the-test-of-the-null-hypothesis-beta_0-0-in-the-one-parameter-model" class="level3" data-number="3.23.1">
+<h3 data-number="3.23.1" class="anchored" data-anchor-id="question-what-special-case-specific-analytic-test-is-statistically-equivalent-to-the-test-of-the-null-hypothesis-beta_0-0-in-the-one-parameter-model"><span class="header-section-number">3.23.1</span> <span style="color: red;">Question: What special case (specific analytic test) is statistically equivalent to the test of the null hypothesis: <span class="math inline">\(\beta_0\)</span> = 0 in the one parameter model?</span></h3>
+<hr>
+<p><strong>The one sample t-test testing if a population mean = 0.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(data<span class="sc">$</span>fps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  data$fps
+t = 8.4015, df = 95, p-value = 0.0000000000004261
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 24.58426 39.79742
+sample estimates:
+mean of x 
+ 32.19084 </code></pre>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="testing-beta_0-non-zero-values" class="level2" data-number="3.24">
+<h2 data-number="3.24" class="anchored" data-anchor-id="testing-beta_0-non-zero-values"><span class="header-section-number">3.24</span> Testing <span class="math inline">\(\beta_0\)</span> = non-zero values</h2>
+<section id="question-how-could-you-test-an-h_0-regarding-b_0-some-value-other-than-0-e.g.-10-hint-there-are-at-least-three-methods." class="level3" data-number="3.24.1">
+<h3 data-number="3.24.1" class="anchored" data-anchor-id="question-how-could-you-test-an-h_0-regarding-b_0-some-value-other-than-0-e.g.-10-hint-there-are-at-least-three-methods."><span class="header-section-number">3.24.1</span> <span style="color: red;">Question: How could you test an <span class="math inline">\(H_0\)</span> regarding <span class="math inline">\(B_0\)</span> = some value other than 0 (e.g., 10)? HINT: There are at least <strong>three</strong> methods.</span></h3>
+<hr>
+<p><strong>Option 1: Compare SSE for the augmented model (<span class="math inline">\(\hat{Y}_i= \beta_0\)</span>) to SSE from a different compact model for this new <span class="math inline">\(H_0\)</span> (<span class="math inline">\(\hat{Y}_i= 10\)</span>).</strong><br>
+<br>
+</p>
+<p><strong>Option 2: Recalculate t-statistic using this new <span class="math inline">\(H_0\)</span>.</strong></p>
+<p><span class="math inline">\(t= \frac{b_0 - 10}{SE_{b_0}}\)</span><br>
+<br>
+</p>
+<p><strong>Option 3: Does the confidence interval for the parameter estimate contain this other value? No p-value provided.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               2.5 %   97.5 %
+(Intercept) 24.58426 39.79742</code></pre>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="intermission" class="level2" data-number="3.25">
+<h2 data-number="3.25" class="anchored" data-anchor-id="intermission"><span class="header-section-number">3.25</span> Intermission…</h2>
+<p>One parameter (<span class="math inline">\(\beta_0\)</span>) <em>mean-only</em> model</p>
+<ul>
+<li><strong>Description:</strong> <span class="math inline">\(b_0\)</span> describes mean of <span class="math inline">\(Y\)</span>.</li>
+<li><strong>Prediction:</strong> <span class="math inline">\(b_0\)</span> is predicted value that minimizes sample SSE.</li>
+<li><strong>Inference:</strong> Use <span class="math inline">\(b_0\)</span> to test id <span class="math inline">\(\beta_0 = 0\)</span> (default) or any other value. One sample t-test.</li>
+</ul>
+<p><br>
+</p>
+<p>Two parameter (<span class="math inline">\(\beta_0, \beta_1\)</span>) model</p>
+<ul>
+<li><strong>Description:</strong> <span class="math inline">\(b_1\)</span> describes how <span class="math inline">\(Y\)</span> changes as a function of <span class="math inline">\(X_1\)</span>. <span class="math inline">\(b_0\)</span> describes expected value of <span class="math inline">\(Y\)</span> ar specific value (0) for <span class="math inline">\(X_1\)</span>.</li>
+<li><strong>Prediction:</strong> <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> yield predicted values that vary by <span class="math inline">\(X_1\)</span> and minimize SSE in sample.</li>
+<li><strong>Inference:</strong> Test if <span class="math inline">\(\beta_1 = 0\)</span>. Pearson’s <span class="math inline">\(r\)</span>; independent sample t-test. Test if <span class="math inline">\(\beta_0=0\)</span>. Analogous to one-sample t-test controlling for <span class="math inline">\(X_1\)</span>, if <span class="math inline">\(X_1\)</span> is mean-centered. Very flexible!</li>
+</ul>
 
 
 </section>

@@ -444,7 +444,7 @@
     "href": "03_single_mean.html#model-comparisons-testing-inferences-about-beta_0",
     "title": "3  Inferences About a Single Mean (1 Parameter Models)",
     "section": "3.17 Model Comparisons: Testing Inferences about \\(\\beta_0\\)",
-    "text": "3.17 Model Comparisons: Testing Inferences about \\(\\beta_0\\)\n\\(\\hat{FPS_i}=\\beta_0\\)\n\\(H_0: \\beta_0 = 0\\)\n\\(H_a: \\beta_0 \\neq 0\\)\n\n\nCompact model: \\(\\hat{FPS_i}=0\\)\nAugmented model: \\(\\hat{FPS_i}=\\beta_0 (\\approx b_0)\\)\n\n\nWe estimate 0 parameters (\\(P=0\\)) in this compact model.\nWe estimate 1 parameter (\\(P=1\\)) in this augmented model.\n\nChoosing between these two models is equivalent to testing if \\(\\beta_0 = 0\\) as you did with the t-test.",
+    "text": "3.17 Model Comparisons: Testing Inferences about \\(\\beta_0\\)\n\\(\\hat{\\text{FPS}_i}=\\beta_0\\)\n\\(H_0: \\beta_0 = 0\\)\n\\(H_a: \\beta_0 \\neq 0\\)\n\n\nCompact model: \\(\\hat{\\text{FPS}_i}=0\\)\nAugmented model: \\(\\hat{\\text{FPS}_i}=\\beta_0 (\\approx b_0)\\)\n\n\nWe estimate 0 parameters (\\(P=0\\)) in this compact model.\nWe estimate 1 parameter (\\(P=1\\)) in this augmented model.\n\nChoosing between these two models is equivalent to testing if \\(\\beta_0 = 0\\) as you did with the t-test.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
     ]
@@ -464,7 +464,67 @@
     "href": "03_single_mean.html#model-comparisons-testing-inferences-about-beta_0-continued",
     "title": "3  Inferences About a Single Mean (1 Parameter Models)",
     "section": "3.19 Model Comparisons: Testing Inferences about \\(\\beta_0\\) (Continued)",
-    "text": "3.19 Model Comparisons: Testing Inferences about \\(\\beta_0\\) (Continued)\nCompact model: \\(\\hat{FPS_i}=0\\)\nAugmented model: \\(\\hat{FPS_i}=\\beta_0 (\\approx b_0)\\)\nWe can compare (and choose between) these two models by comparing their total error (SSE) in our sample.\n\\(SSE=\\sum(Y_i-\\hat{Y}_i)^2\\)\n\\(SSE_c = \\sum(Y_i-0)^2\\)\n\nsum((data$fps - 0)^2)\n\n[1] 233368.3\n\n\n\\(SSE_a = \\sum(Y_i- 32.2 )^2\\)\n\nsum((data$fps - broom::tidy(m)$estimate)^2) \n\n[1] 133888.3\n\n\nor\n\nsum(residuals(m)^2)\n\n[1] 133888.3\n\n\n\nCompact model: \\(\\hat{FPS_i}=0\\)\nSSE = 233368.3\nP = 0\n\n\nAugmented model: \\(\\hat{FPS_i}=\\beta_0 (\\approx b_0)\\)\nSSE = 133888.3\nP = 1\n\n\n\\(F(P_a-P_c, N-P_a) = \\frac{(SSE_c-SSE_a)/(P_a-P_c)}{SSE_a/(N-P_a)}\\)\n\\(F(1-0, 96 -1)= \\frac{(233368.3 - 133888.3)/(1-0)}{133888.3 / (96 - 1)}\\)\n\\(F(1, 95 )= 70.59, p &lt; .0001\\)\n\npf(70.59, 1, 95, lower.tail = FALSE)\n\n[1] 0.0000000000004255967",
+    "text": "3.19 Model Comparisons: Testing Inferences about \\(\\beta_0\\) (Continued)\nCompact model: \\(\\hat{\\text{FPS}_i}=0\\)\nAugmented model: \\(\\hat{\\text{FPS}_i}=\\beta_0 (\\approx b_0)\\)\nWe can compare (and choose between) these two models by comparing their total error (SSE) in our sample.\n\\(\\text{SSE}=\\sum(Y_i-\\hat{Y}_i)^2\\)\n\\(\\text{SSE}_c = \\sum(Y_i-0)^2\\)\n\nsum((data$fps - 0)^2)\n\n[1] 233368.3\n\n\n\\(\\text{SSE}_a = \\sum(Y_i- 32.2 )^2\\)\n\nsum((data$fps - broom::tidy(m)$estimate)^2) \n\n[1] 133888.3\n\n\nor\n\nsum(residuals(m)^2)\n\n[1] 133888.3\n\n\n\nCompact model: \\(\\hat{\\text{FPS}_i}=0\\)\nSSE = 233368.3\nP = 0\n\n\nAugmented model: \\(\\hat{\\text{FPS}_i}=\\beta_0 (\\approx b_0)\\)\nSSE = 133888.3\nP = 1\n\n\n\\(F(P_a-P_c, N-P_a) = \\frac{(\\text{SSE}_c-\\text{SSE}_a)/(P_a-P_c)}{\\text{SSE}_a/(N-P_a)}\\)\n\\(F(1-0, 96 -1)= \\frac{(233368.3 - 133888.3)/(1-0)}{133888.3 / (96 - 1)}\\)\n\\(F(1, 95 )= 70.59, p &lt; .0001\\)\n\npf(70.59, 1, 95, lower.tail = FALSE)\n\n[1] 0.0000000000004255967",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
+  },
+  {
+    "objectID": "03_single_mean.html#sampling-distribution-vs.-model-comparison",
+    "href": "03_single_mean.html#sampling-distribution-vs.-model-comparison",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "3.20 Sampling Distribution vs. Model Comparison",
+    "text": "3.20 Sampling Distribution vs. Model Comparison\nThe two approaches to testing \\(H_0\\) about parameters (\\(\\beta_0, \\beta_j\\)) are statistically equivalent.\nThey are complementary approaches with respect to conceptual understanding of GLMs.\n\n\nSampling Distribution\n\nFocus on population parameters and their estimates.\n\nTight connection to sampling and probability distributions.\n\nUnderstanding of \\(SE\\) (sampling error/power; confidence intervals, graphic displays).\n\nModel Comparison\n\nFocus on models themselves.\n\nHighlights model fit (SSE) and model parsimony (P).\n\nClearer link to PRE (\\(\\eta_p^2\\)).\nTest comparisons that differ by &gt;1 parameter (discouraged).",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
+  },
+  {
+    "objectID": "03_single_mean.html#effect-sizes",
+    "href": "03_single_mean.html#effect-sizes",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "3.21 Effect Sizes",
+    "text": "3.21 Effect Sizes\nYour parameter estimates are descriptive. They describe effects in the original units of the (IVs) and DV. Report them in your paper.\n\n\nThere are many other effect size estimates available. You will learn two that we prefer.\n\n\nPartial eta squared (\\(\\eta_p^2\\)): Judd et al call this PRE (proportional reduction in error).\nEta squared (\\(\\eta^2\\)): This is also commonly referred to as \\(\\Delta R^2\\) in regression.\n\nCompact model: \\(\\hat{\\text{FPS}_i}=0\\)\nSSE = 233368.3\nP = 0\n\n\nAugmented model: \\(\\hat{\\text{FPS}_i}=\\beta_0 (\\approx b_0)\\)\nSSE = 133888.3\nP = 1\n\n\nHow much was the error reduced in the augmented model relative to the compact model?\n\n\n\\(\\frac{\\text{SSE}_c-\\text{SSE}_a}{\\text{SSE}_c} = \\frac{233368.3 - 133888.3}{233368.3} = 0.426\\)\n\n\nOur more complex model that includes \\(\\beta_0\\) reduces prediction error (SSE) by approximately 43%. Not bad!",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
+  },
+  {
+    "objectID": "03_single_mean.html#confidence-interval-for-b_0",
+    "href": "03_single_mean.html#confidence-interval-for-b_0",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "3.22 Confidence Interval for \\(b_0\\)",
+    "text": "3.22 Confidence Interval for \\(b_0\\)\nA confidence interval (CI) is an interval for a parameter estimate in which you can be fairly confident that you will capture the true population parameter (in this case, \\(\\beta_0\\)).Most commonly reported is the 95% CI. Across repeated samples, 95% of the calculated CIs will include the population parameter.\n\n1confint(m)\n\n\n1\n\nUse the confint() function to calculate confidence intervals. The default is to provide 95% CIs, but you can change this using the level parameter if you wish.\n\n\n\n\n               2.5 %   97.5 %\n(Intercept) 24.58426 39.79742\n\n\n\n\n\n\n3.22.1 Question: Given what you now know about confidence intervals and sampling distributions, what should the formula be?\n\n\\(\\text{CI}(b_0)= b_0 \\pm t(\\alpha;N-P) * SE_{b_0}\\)\n\n\nFor the 95% confidence interval this is approximately 2 SEs around our unbiased estimate of \\(\\beta_0\\).\n\n\n\n3.22.2 Question: How can we tell if a parameter is significant from the confidence interval?\n\nIf a parameter estimate \\(\\neq\\) 0 at \\(\\alpha\\) = .05, then the 95% confidence interval for its parameter estimate should not include 0.\n\n\nThis is also true for testing whether the parameter estimate is equal to any other non-zero value for the population parameter.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
+  },
+  {
+    "objectID": "03_single_mean.html#the-one-parameter-mean-only-model-special-case",
+    "href": "03_single_mean.html#the-one-parameter-mean-only-model-special-case",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "3.23 The one parameter (mean-only) model: Special Case",
+    "text": "3.23 The one parameter (mean-only) model: Special Case\n\n3.23.1 Question: What special case (specific analytic test) is statistically equivalent to the test of the null hypothesis: \\(\\beta_0\\) = 0 in the one parameter model?\n\nThe one sample t-test testing if a population mean = 0.\n\nt.test(data$fps)\n\n\n    One Sample t-test\n\ndata:  data$fps\nt = 8.4015, df = 95, p-value = 0.0000000000004261\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n 24.58426 39.79742\nsample estimates:\nmean of x \n 32.19084",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
+  },
+  {
+    "objectID": "03_single_mean.html#testing-beta_0-non-zero-values",
+    "href": "03_single_mean.html#testing-beta_0-non-zero-values",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "3.24 Testing \\(\\beta_0\\) = non-zero values",
+    "text": "3.24 Testing \\(\\beta_0\\) = non-zero values\n\n3.24.1 Question: How could you test an \\(H_0\\) regarding \\(B_0\\) = some value other than 0 (e.g., 10)? HINT: There are at least three methods.\n\nOption 1: Compare SSE for the augmented model (\\(\\hat{Y}_i= \\beta_0\\)) to SSE from a different compact model for this new \\(H_0\\) (\\(\\hat{Y}_i= 10\\)).\n\n\nOption 2: Recalculate t-statistic using this new \\(H_0\\).\n\\(t= \\frac{b_0 - 10}{SE_{b_0}}\\)\n\n\nOption 3: Does the confidence interval for the parameter estimate contain this other value? No p-value provided.\n\nconfint(m)\n\n               2.5 %   97.5 %\n(Intercept) 24.58426 39.79742",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
+  },
+  {
+    "objectID": "03_single_mean.html#intermission",
+    "href": "03_single_mean.html#intermission",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "3.25 Intermission…",
+    "text": "3.25 Intermission…\nOne parameter (\\(\\beta_0\\)) mean-only model\n\nDescription: \\(b_0\\) describes mean of \\(Y\\).\nPrediction: \\(b_0\\) is predicted value that minimizes sample SSE.\nInference: Use \\(b_0\\) to test id \\(\\beta_0 = 0\\) (default) or any other value. One sample t-test.\n\n\n\nTwo parameter (\\(\\beta_0, \\beta_1\\)) model\n\nDescription: \\(b_1\\) describes how \\(Y\\) changes as a function of \\(X_1\\). \\(b_0\\) describes expected value of \\(Y\\) ar specific value (0) for \\(X_1\\).\nPrediction: \\(b_0\\) and \\(b_1\\) yield predicted values that vary by \\(X_1\\) and minimize SSE in sample.\nInference: Test if \\(\\beta_1 = 0\\). Pearson’s \\(r\\); independent sample t-test. Test if \\(\\beta_0=0\\). Analogous to one-sample t-test controlling for \\(X_1\\), if \\(X_1\\) is mean-centered. Very flexible!",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
     ]
