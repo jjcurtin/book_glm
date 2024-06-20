@@ -303,9 +303,15 @@ window.Quarto = {
 <section id="units-3-4-organization" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="units-3-4-organization"><span class="header-section-number">3.1</span> Units 3-4 Organization</h2>
 <ul>
-<li>First, consider details of simplest model (one parameter estimate; mean-only model; no <span class="math inline">\(X\)</span>s).</li>
-<li>Next, examine simple regression (two parameter estimates; one <span class="math inline">\(X\)</span> for one quantitative predictor variable).</li>
-<li>These provide a critical foundation for all linear models.</li>
+<li>First, consider details of simplest model (one parameter estimate; mean-only model; no <span class="math inline">\(X\)</span>s).<br>
+<br>
+</li>
+<li>Next, examine simple regression (two parameter estimates; one <span class="math inline">\(X\)</span> for one quantitative predictor variable).<br>
+<br>
+</li>
+<li>These provide a critical foundation for all linear models.<br>
+<br>
+</li>
 <li>Subsequent units will generalize to one dichotomous variable (<em>Unit 5</em>), multiple predictor variables (<em>Units 6-7</em>), and beyond…</li>
 </ul>
 <hr>
@@ -343,15 +349,22 @@ This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure wo
 <section id="fear-potentiated-startle-one-parameter-model" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="fear-potentiated-startle-one-parameter-model"><span class="header-section-number">3.4</span> Fear Potentiated Startle: One parameter model</h2>
 <p>A very simple model for the population of FPS scores would predict the same value for everyone in the population.</p>
-<p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span></p>
+<p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span><br>
+<br>
+</p>
 <p>We would like this value to be the <em>best</em> prediction.<br>
 <br>
 </p>
 <section id="question-in-the-context-of-data-model-error-how-can-we-quantify-best" class="level3" data-number="3.4.1">
 <h3 data-number="3.4.1" class="anchored" data-anchor-id="question-in-the-context-of-data-model-error-how-can-we-quantify-best"><span class="header-section-number">3.4.1</span> <span style="color: red;">Question: In the context of DATA = MODEL + ERROR, how can we quantify <em>best</em>?</span></h3>
 <hr>
-<p><strong>We want to predict some characteristic about the population of FPS scores that minimizes the ERROR from our model.</strong></p>
-<p><strong>ERROR = DATA – MODEL</strong></p>
+<p><strong>We want to predict some characteristic about the population of FPS scores that minimizes the ERROR from our model.</strong><br>
+<br>
+</p>
+<p><strong>ERROR = DATA – MODEL</strong><br>
+<br>
+<br>
+</p>
 <p><strong><span class="math inline">\(\varepsilon_i=Y_i-\hat{Y}_i\)</span>; There is an error (<span class="math inline">\(\varepsilon_i\)</span>) for each population score.</strong><br>
 <br>
 </p>
@@ -364,16 +377,21 @@ This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure wo
 <section id="total-error" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="total-error"><span class="header-section-number">3.5</span> Total Error</h2>
 <p><strong><em>Sum of errors</em></strong> across all scores in the population isn’t ideal because positive and negative errors will tend to cancel each other out.</p>
-<p><span class="math inline">\(\sum(Y_i-\hat{Y}_i)\)</span></p>
-<p><strong><em>Sum of absolute values of errors</em></strong> could work. If we selected <span class="math inline">\(\beta_0\)</span> to minimize the sum of the absolute value of errors, <span class="math inline">\(\beta_0\)</span> would equal the median of the population.</p>
-<p><span class="math inline">\(\sum(|Y_i-\hat{Y}_i|)\)</span></p>
+<p><span class="math inline">\(\sum(Y_i-\hat{Y}_i)\)</span><br>
+<br>
+<strong><em>Sum of absolute values of errors</em></strong> could work. If we selected <span class="math inline">\(\beta_0\)</span> to minimize the sum of the absolute value of errors, <span class="math inline">\(\beta_0\)</span> would equal the median of the population.</p>
+<p><span class="math inline">\(\sum(|Y_i-\hat{Y}_i|)\)</span><br>
+<br>
+</p>
 <p><strong><em>Sum of squared errors (SSE)</em></strong> could work. If we selected <span class="math inline">\(\beta_0\)</span> to minimize the sum of squared errors, <span class="math inline">\(\beta_0\)</span> would equal the mean of the population.</p>
 <p><span class="math inline">\(\sum(Y_i-\hat{Y}_i)^2\)</span></p>
 <hr>
 </section>
 <section id="one-parameter-model-for-fps" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="one-parameter-model-for-fps"><span class="header-section-number">3.6</span> One Parameter Model for FPS</h2>
-<p>For the moment, lets assume we prefer to minimize SSE (more on that in a moment). You should predict the population mean FPS for everyone.</p>
+<p>For the moment, lets assume we prefer to minimize SSE (more on that in a moment). You should predict the population mean FPS for everyone.<br>
+<br>
+</p>
 <p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span> where <span class="math inline">\(\beta_0=\mu\)</span><br>
 <br>
 </p>
@@ -400,7 +418,9 @@ This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure wo
 </section>
 <section id="least-squares-criterion" class="level2" data-number="3.8">
 <h2 data-number="3.8" class="anchored" data-anchor-id="least-squares-criterion"><span class="header-section-number">3.8</span> Least Squares Criterion</h2>
-<p>In ordinary least squares (OLS) regression and other least squares linear models, the model parameter estimates (e.g., <span class="math inline">\(b_0\)</span>) are calculated such that they minimize the sum of squared errors (SSE) in the sample in which you estimate the model.</p>
+<p>In ordinary least squares (OLS) regression and other least squares linear models, the model parameter estimates (e.g., <span class="math inline">\(b_0\)</span>) are calculated such that they minimize the sum of squared errors (SSE) in the sample in which you estimate the model.<br>
+<br>
+</p>
 <p><span class="math inline">\(\text{SSE}=\sum(Y_i-\hat{Y}_i)^2\)</span></p>
 <p><span class="math inline">\(\text{SSE}=\sum e_i^2\)</span></p>
 <hr>
@@ -421,11 +441,16 @@ This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure wo
 </section>
 <section id="least-squares-criterion-continued" class="level2" data-number="3.10">
 <h2 data-number="3.10" class="anchored" data-anchor-id="least-squares-criterion-continued"><span class="header-section-number">3.10</span> Least Squares Criterion (Continued)</h2>
-<p>If the <span class="math inline">\(\varepsilon_i\)</span> are normally distributed, both the median and the mean are <strong><em>unbiased</em></strong> and <strong><em>consistent</em></strong> estimators.</p>
+<p>If the <span class="math inline">\(\varepsilon_i\)</span> are normally distributed, both the median and the mean are <strong><em>unbiased</em></strong> and <strong><em>consistent</em></strong> estimators.<br>
+<br>
+</p>
 <p>The variance of the sampling distribution for the mean is:</p>
 <p><span class="math inline">\(\frac{\sigma^2}{N}\)</span></p>
 <p>The variance of the sampling distribution for the mean is:</p>
-<p><span class="math inline">\(\frac{\pi\sigma^2}{2N}\)</span></p>
+<p><span class="math inline">\(\frac{\pi\sigma^2}{2N}\)</span><br>
+<br>
+<br>
+</p>
 <p>Therefore, the mean is the <strong>more efficient</strong> parameter.</p>
 <p>For this reason, we tend to prefer to estimate our models by minimizing the sum of squared errors.</p>
 <hr>
@@ -483,11 +508,19 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 </section>
 <section id="fps-experiment-the-inference-details" class="level2" data-number="3.13">
 <h2 data-number="3.13" class="anchored" data-anchor-id="fps-experiment-the-inference-details"><span class="header-section-number">3.13</span> FPS Experiment: The Inference Details</h2>
-<p><strong><em>Goal:</em></strong> Determine if our shock threat procedure is effective at potentiating startle (increasing startle during threat relative to safe).</p>
+<p><strong><em>Goal:</em></strong> Determine if our shock threat procedure is effective at potentiating startle (increasing startle during threat relative to safe).<br>
+<br>
+</p>
 <p>Create a simple model of FPS scores in the population.</p>
-<p><span class="math inline">\(\text{FPS}=\beta_0\)</span></p>
-<p>Collect sample of <span class="math inline">\(N=96\)</span> to estimate <span class="math inline">\(\beta_0\)</span>.</p>
-<p>Calculate sample parameter estimate (<span class="math inline">\(b_0\)</span>) that minimizes SSE in sample.</p>
+<p><span class="math inline">\(\text{FPS}=\beta_0\)</span><br>
+<br>
+</p>
+<p>Collect sample of <span class="math inline">\(N=96\)</span> to estimate <span class="math inline">\(\beta_0\)</span>.<br>
+<br>
+</p>
+<p>Calculate sample parameter estimate (<span class="math inline">\(b_0\)</span>) that minimizes SSE in sample.<br>
+<br>
+</p>
 <p>Use <span class="math inline">\(b_0\)</span> to test hypotheses.</p>
 <p><span class="math inline">\(H_0: \beta_0 = 0\)</span><br>
 <span class="math inline">\(H_a: \beta_0 \neq 0\)</span></p>
@@ -496,11 +529,20 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 <section id="estimating-a-one-parameter-model-in-r" class="level2" data-number="3.14">
 <h2 data-number="3.14" class="anchored" data-anchor-id="estimating-a-one-parameter-model-in-r"><span class="header-section-number">3.14</span> Estimating a One Parameter Model in R</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">lm</span>(fps <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">lm</span>(fps <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> data)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="1" data-code-annotation="1">Here we are fitting a linear model with FPS regressed on the intercept. In other words, we are fitting a model that predicts FPS using only the mean.</span>
+</dd>
+</dl>
 </div>
+</div>
+<hr>
 <p>We can pull out the errors (<span class="math inline">\(e_i=Y_i-\hat{Y}i\)</span>) for each observation in the sample using <code>residuals()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">residuals</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">residuals</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           1            2            3            4            5            6 
  -12.6999127   16.2161040  -54.7193405  -25.4670572   57.4678817    8.3829373 
@@ -539,17 +581,19 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 <hr>
 <p>We can also easily calculate the SSE with the following code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">residuals</span>(m)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">residuals</span>(m)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 133888.3</code></pre>
 </div>
 </div>
-<p>This tells us about how well the model fits the data. Specifically it is the sum of the squared differences between the predicted values and the actual participant scores</p>
+<p><br>
+<br>
+This tells us about how well the model fits the data. Specifically it is the sum of the squared differences between the predicted values and the actual participant scores</p>
 <hr>
 <p>We can get the predicted value for each individual in the sample using this model with the function <code>predict()</code>.</p>
 <p><span class="math inline">\(\hat{Y}=32.19\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1        2        3        4        5        6        7        8 
 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 
@@ -580,8 +624,8 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 <hr>
 <p>We also may want to look at the parameter coefficients (in this case we are only looking at the intercept). We can use the <code>tidy()</code> function from the <code>broom</code> package to do this.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>m <span class="sc">|&gt;</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>m <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 5
   term        estimate std.error statistic  p.value
@@ -602,27 +646,35 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 </section>
 <section id="sampling-distribution-testing-inferences-about-beta_0" class="level2" data-number="3.15">
 <h2 data-number="3.15" class="anchored" data-anchor-id="sampling-distribution-testing-inferences-about-beta_0"><span class="header-section-number">3.15</span> Sampling Distribution: Testing Inferences About <span class="math inline">\(\beta_0\)</span></h2>
-<p><span class="math inline">\(H_0: \beta_0 = 0; H_a: \beta_0 \neq 0\)</span></p>
-<p>If <span class="math inline">\(H_0\)</span> is true, the sampling distribution for <span class="math inline">\(\beta_0\)</span> will have a mean of 0. We can estimate standard deviation of the sampling distribution with <span class="math inline">\(SE\)</span> for <span class="math inline">\(b_0\)</span>.</p>
-<p><span class="math inline">\(t(df=N-P)=\frac{b_0-0}{SE_{b_0}}=\frac{32.2-0}{3.8}=8.40\)</span></p>
+<p><span class="math inline">\(H_0: \beta_0 = 0; H_a: \beta_0 \neq 0\)</span><br>
+<br>
+</p>
+<p>If <span class="math inline">\(H_0\)</span> is true, the sampling distribution for <span class="math inline">\(\beta_0\)</span> will have a mean of 0. We can estimate standard deviation of the sampling distribution with <span class="math inline">\(SE\)</span> for <span class="math inline">\(b_0\)</span>.<br>
+<br>
+</p>
+<p><span class="math inline">\(t(df=N-P)=\frac{b_0-0}{SE_{b_0}}=\frac{32.2-0}{3.8}=8.40\)</span><br>
+<br>
+</p>
 <p><span class="math inline">\(b_0\)</span> is approximately 8 standard deviations above the expected mean of the distribution if <span class="math inline">\(H_0\)</span> is true.</p>
 <hr>
 <p>We can use <code>pt()</code> to calculate the <span class="math inline">\(p\)</span> value.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="fl">8.40</span>,<span class="dv">95</span>,<span class="at">lower.tail=</span><span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="fl">8.40</span>,<span class="dv">95</span>,<span class="at">lower.tail=</span><span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4.293253e-13</code></pre>
 </div>
 </div>
-<p>The probability of obtaining a sample <span class="math inline">\(b_0\)</span> = 32.2 (or more extreme) if <span class="math inline">\(H_0\)</span> is true is very low (&lt; .05). Therefore we reject <span class="math inline">\(H_0\)</span> and conclude that <span class="math inline">\(\beta_0 \neq 0\)</span> and <span class="math inline">\(b_0\)</span> is our best (unbiased) estimate of it.</p>
+<p><br>
+<br>
+The probability of obtaining a sample <span class="math inline">\(b_0\)</span> = 32.2 (or more extreme) if <span class="math inline">\(H_0\)</span> is true is very low (&lt; .05). Therefore we reject <span class="math inline">\(H_0\)</span> and conclude that <span class="math inline">\(\beta_0 \neq 0\)</span> and <span class="math inline">\(b_0\)</span> is our best (unbiased) estimate of it.</p>
 <hr>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">b0 =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">40</span>,<span class="dv">40</span>,.<span class="dv">01</span>),</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">probability =</span> <span class="fu">dt</span>(b0<span class="sc">/</span>broom<span class="sc">::</span><span class="fu">tidy</span>(m)<span class="sc">$</span>std.error, m<span class="sc">$</span>df.residual)) <span class="sc">|&gt;</span> </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> b0, <span class="at">y =</span> probability)) <span class="sc">+</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> broom<span class="sc">::</span><span class="fu">tidy</span>(m)<span class="sc">$</span>estimate, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Sampling Distribution for b0"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">b0 =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">40</span>,<span class="dv">40</span>,.<span class="dv">01</span>),</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">probability =</span> <span class="fu">dt</span>(b0<span class="sc">/</span>broom<span class="sc">::</span><span class="fu">tidy</span>(m)<span class="sc">$</span>std.error, m<span class="sc">$</span>df.residual)) <span class="sc">|&gt;</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> b0, <span class="at">y =</span> probability)) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> broom<span class="sc">::</span><span class="fu">tidy</span>(m)<span class="sc">$</span>estimate, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Sampling Distribution for b0"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -635,36 +687,46 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 </section>
 <section id="statistical-inference-and-model-comparisons" class="level2" data-number="3.16">
 <h2 data-number="3.16" class="anchored" data-anchor-id="statistical-inference-and-model-comparisons"><span class="header-section-number">3.16</span> Statistical Inference and Model Comparisons</h2>
-<p>Statistical inference about parameters is fundamentally about model comparisons.</p>
-<p>You are implicitly (t-test of parameter estimate) or explicitly (F-test of model comparison) comparing two different models of your data.</p>
-<p>We follow Judd et al and call these two models the <em>compact model</em> and the <em>augmented model</em>.</p>
-<p>The compact model will represent reality as the null hypothesis predicts. The augmented model will represent reality as the alternative hypothesis predicts.</p>
-<p>The compact model is simpler (fewer parameters) than the augmented model. It is also nested in the augmented model (i.e.&nbsp;a subset of parameters).</p>
+<p>Statistical inference about parameters is fundamentally about model comparisons.<br>
+</p>
+<p><br>
+You are implicitly (t-test of parameter estimate) or explicitly (F-test of model comparison) comparing two different models of your data.<br>
+<br>
+We follow Judd et al and call these two models the <em>compact model</em> and the <em>augmented model</em>.<br>
+<br>
+The compact model will represent reality as the null hypothesis predicts. The augmented model will represent reality as the alternative hypothesis predicts.<br>
+<br>
+The compact model is simpler (fewer parameters) than the augmented model. It is also nested in the augmented model (i.e.&nbsp;a subset of parameters).</p>
 <hr>
 </section>
 <section id="model-comparisons-testing-inferences-about-beta_0" class="level2" data-number="3.17">
 <h2 data-number="3.17" class="anchored" data-anchor-id="model-comparisons-testing-inferences-about-beta_0"><span class="header-section-number">3.17</span> Model Comparisons: Testing Inferences about <span class="math inline">\(\beta_0\)</span></h2>
 <p><span class="math inline">\(\hat{FPS_i}=\beta_0\)</span></p>
 <p><span class="math inline">\(H_0: \beta_0 = 0\)</span></p>
-<p><span class="math inline">\(H_a: \beta_0 \neq 0\)</span></p>
-<p>Compact model: <span class="math inline">\(\hat{FPS_i}=0\)</span></p>
-<p>Augmented model: <span class="math inline">\(\hat{FPS_i}=\beta_0 (\approx b_0)\)</span></p>
+<p><span class="math inline">\(H_a: \beta_0 \neq 0\)</span><br>
+<br>
+</p>
+<p>Compact model: <span class="math inline">\(\hat{FPS_i}=0\)</span><br>
+Augmented model: <span class="math inline">\(\hat{FPS_i}=\beta_0 (\approx b_0)\)</span><br>
+<br>
+</p>
 <p>We estimate 0 parameters (<span class="math inline">\(P=0\)</span>) in this compact model.<br>
-We estimate 1 parameter (<span class="math inline">\(P=1\)</span>) in this augmented model.</p>
-<p>Choosing between these two models is equivalent to testing if <span class="math inline">\(\beta_0 = 0\)</span> as you did with the t-test.</p>
+We estimate 1 parameter (<span class="math inline">\(P=1\)</span>) in this augmented model.<br>
+<br>
+Choosing between these two models is equivalent to testing if <span class="math inline">\(\beta_0 = 0\)</span> as you did with the t-test.</p>
 <hr>
 </section>
 <section id="model-comparison-plots" class="level2" data-number="3.18">
 <h2 data-number="3.18" class="anchored" data-anchor-id="model-comparison-plots"><span class="header-section-number">3.18</span> Model Comparison Plots</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> fps)) <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.05</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.line.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> broom<span class="sc">::</span><span class="fu">tidy</span>(m)<span class="sc">$</span>estimate, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> fps)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.line.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> broom<span class="sc">::</span><span class="fu">tidy</span>(m)<span class="sc">$</span>estimate, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
