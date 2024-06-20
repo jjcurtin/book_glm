@@ -389,7 +389,6 @@ This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure wo
 <p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span> where <span class="math inline">\(\beta_0=\mu\)</span></p>
 <p><span class="math inline">\(Y_i=\beta_0+\varepsilon_i\)</span></p>
 <p><br>
-<br>
 </p>
 <p><strong><em>Estimate population parameters from sample</em></strong></p>
 <p><span class="math inline">\(Y_i=b_0\)</span> where <span class="math inline">\(b_0=\overline{X}\)</span></p>
@@ -409,10 +408,8 @@ This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure wo
 <ol type="1">
 <li><strong><em>Unbiased:</em></strong> Mean of the sampling distribution for the parameter estimate is equal to the value for that parameter in the population.<br>
 <br>
-<br>
 </li>
 <li><strong><em>Efficient:</em></strong> The sample estimates are close to the population parameter. In other words, the narrower the sampling distribution for any specific sample size <span class="math inline">\(N\)</span>, the more efficient the estimator. Efficient means small <span class="math inline">\(SE\)</span> for parameter estimate.<br>
-<br>
 <br>
 </li>
 <li><strong><em>Consistent:</em></strong> As the sample size increases, the sampling distribution becomes narrower (more efficient). Consistent means as <span class="math inline">\(N\)</span> increases, <span class="math inline">\(SE\)</span> for parameter estimate decreases</li>
@@ -615,6 +612,7 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 </div>
 </div>
 <p>The probability of obtaining a sample <span class="math inline">\(b_0\)</span> = 32.2 (or more extreme) if <span class="math inline">\(H_0\)</span> is true is very low (&lt; .05). Therefore we reject <span class="math inline">\(H_0\)</span> and conclude that <span class="math inline">\(\beta_0 \neq 0\)</span> and <span class="math inline">\(b_0\)</span> is our best (unbiased) estimate of it.</p>
+<hr>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">b0 =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">40</span>,<span class="dv">40</span>,.<span class="dv">01</span>),</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">probability =</span> <span class="fu">dt</span>(b0<span class="sc">/</span>broom<span class="sc">::</span><span class="fu">tidy</span>(m)<span class="sc">$</span>std.error, m<span class="sc">$</span>df.residual)) <span class="sc">|&gt;</span> </span>
