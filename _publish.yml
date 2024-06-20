@@ -2,3 +2,7 @@
   quarto-pub:
     - id: 524d6fcd-0102-4ef4-aca6-e445ba9adc69
       url: 'https://kendra-wyant.quarto.pub/02_sampling_distributions'
+- source: 03_single_mean.qmd
+  quarto-pub:
+    - id: 436f3f00-00eb-4fbd-8d17-15a01c67d252
+      url: 'https://kendra-wyant.quarto.pub/03_single_mean'
