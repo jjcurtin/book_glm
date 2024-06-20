@@ -274,6 +274,7 @@ window.Quarto = {
   <li><a href="#statistical-inference-and-model-comparisons" id="toc-statistical-inference-and-model-comparisons" class="nav-link" data-scroll-target="#statistical-inference-and-model-comparisons"><span class="header-section-number">3.16</span> Statistical Inference and Model Comparisons</a></li>
   <li><a href="#model-comparisons-testing-inferences-about-beta_0" id="toc-model-comparisons-testing-inferences-about-beta_0" class="nav-link" data-scroll-target="#model-comparisons-testing-inferences-about-beta_0"><span class="header-section-number">3.17</span> Model Comparisons: Testing Inferences about <span class="math inline">\(\beta_0\)</span></a></li>
   <li><a href="#model-comparison-plots" id="toc-model-comparison-plots" class="nav-link" data-scroll-target="#model-comparison-plots"><span class="header-section-number">3.18</span> Model Comparison Plots</a></li>
+  <li><a href="#model-comparisons-testing-inferences-about-beta_0-continued" id="toc-model-comparisons-testing-inferences-about-beta_0-continued" class="nav-link" data-scroll-target="#model-comparisons-testing-inferences-about-beta_0-continued"><span class="header-section-number">3.19</span> Model Comparisons: Testing Inferences about <span class="math inline">\(\beta_0\)</span> (Continued)</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/03_single_mean.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -733,6 +734,35 @@ Choosing between these two models is equivalent to testing if <span class="math 
 <p><img src="03_single_mean_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
+</div>
+</div>
+<hr>
+</section>
+<section id="model-comparisons-testing-inferences-about-beta_0-continued" class="level2" data-number="3.19">
+<h2 data-number="3.19" class="anchored" data-anchor-id="model-comparisons-testing-inferences-about-beta_0-continued"><span class="header-section-number">3.19</span> Model Comparisons: Testing Inferences about <span class="math inline">\(\beta_0\)</span> (Continued)</h2>
+<p>Compact model: <span class="math inline">\(\hat{FPS_i}=0\)</span><br>
+Augmented model: <span class="math inline">\(\hat{FPS_i}=\beta_0 (\approx b_0)\)</span></p>
+<p>We can compare (and choose between) these two models by comparing their total error (SSE) in our sample.</p>
+<p><span class="math inline">\(SSE=\sum(Y_i-\hat{Y}_i)^2\)</span></p>
+<p><span class="math inline">\(SSE_c = \sum(Y_i-0)^2\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((data<span class="sc">$</span>fps <span class="sc">-</span> <span class="dv">0</span>)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 233368.3</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(SSE_a = \sum(Y_i- 32.2 )^2\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((data<span class="sc">$</span>fps <span class="sc">-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(m)<span class="sc">$</span>estimate)<span class="sc">^</span><span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 133888.3</code></pre>
+</div>
+</div>
+<p>or</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">residuals</span>(m)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 133888.3</code></pre>
 </div>
 </div>
 <hr>

@@ -458,5 +458,15 @@
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
     ]
+  },
+  {
+    "objectID": "03_single_mean.html#model-comparisons-testing-inferences-about-beta_0-continued",
+    "href": "03_single_mean.html#model-comparisons-testing-inferences-about-beta_0-continued",
+    "title": "3  Inferences About a Single Mean (1 Parameter Models)",
+    "section": "3.19 Model Comparisons: Testing Inferences about \\(\\beta_0\\) (Continued)",
+    "text": "3.19 Model Comparisons: Testing Inferences about \\(\\beta_0\\) (Continued)\nCompact model: \\(\\hat{FPS_i}=0\\)\nAugmented model: \\(\\hat{FPS_i}=\\beta_0 (\\approx b_0)\\)\nWe can compare (and choose between) these two models by comparing their total error (SSE) in our sample.\n\\(SSE=\\sum(Y_i-\\hat{Y}_i)^2\\)\n\\(SSE_c = \\sum(Y_i-0)^2\\)\n\nsum((data$fps - 0)^2)\n\n[1] 233368.3\n\n\n\\(SSE_a = \\sum(Y_i- 32.2 )^2\\)\n\nsum((data$fps - broom::tidy(m)$estimate)^2) \n\n[1] 133888.3\n\n\nor\n\nsum(residuals(m)^2)\n\n[1] 133888.3",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Inferences About a Single Mean (1 Parameter Models)</span>"
+    ]
   }
 ]
