@@ -500,7 +500,7 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="03_single_mean_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="03_single_mean_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -662,7 +662,7 @@ This tells us about how well the model fits the data. Specifically it is the sum
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="fl">8.40</span>,<span class="dv">95</span>,<span class="at">lower.tail=</span><span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.293253e-13</code></pre>
+<pre><code>[1] 0.0000000000004293253</code></pre>
 </div>
 </div>
 <p><br>
@@ -679,7 +679,7 @@ The probability of obtaining a sample <span class="math inline">\(b_0\)</span> =
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="03_single_mean_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="03_single_mean_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -731,7 +731,7 @@ Choosing between these two models is equivalent to testing if <span class="math 
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="03_single_mean_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="03_single_mean_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -767,18 +767,25 @@ Augmented model: <span class="math inline">\(\hat{FPS_i}=\beta_0 (\approx b_0)\)
 </div>
 <hr>
 <p>Compact model: <span class="math inline">\(\hat{FPS_i}=0\)</span><br>
-SSE = 2.333683^{5}<br>
+SSE = 233368.3<br>
 P = 0<br>
 <br>
 </p>
 <p>Augmented model: <span class="math inline">\(\hat{FPS_i}=\beta_0 (\approx b_0)\)</span><br>
-SSE = 1.338883^{5}<br>
+SSE = 133888.3<br>
 P = 1<br>
 <br>
 </p>
 <p><span class="math inline">\(F(P_a-P_c, N-P_a) = \frac{(SSE_c-SSE_a)/(P_a-P_c)}{SSE_a/(N-P_a)}\)</span></p>
-<p><span class="math inline">\(F(1-0, 96-1)= \frac{(1.338883\times 10^{5} - 2.333683\times 10^{5})/(1-0)}{2.333683\times 10^{5} / (96 - 1)}\)</span></p>
-<p><span class="math inline">\(F(1,95)= 70.59\)</span></p>
+<p><span class="math inline">\(F(1-0, 96 -1)= \frac{(233368.3 - 133888.3)/(1-0)}{133888.3 / (96 - 1)}\)</span></p>
+<p><span class="math inline">\(F(1, 95 )= 70.59, p &lt; .0001\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pf</span>(<span class="fl">70.59</span>, <span class="dv">1</span>, <span class="dv">95</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0000000000004255967</code></pre>
+</div>
+</div>
+<hr>
 
 
 </section>
