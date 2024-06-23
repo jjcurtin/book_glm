@@ -272,6 +272,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#question-does-bac-affect-fps-explain-this-conclusion-in-terms-of-the-parameter-estimate-b_1-and-its-standard-error." id="toc-question-does-bac-affect-fps-explain-this-conclusion-in-terms-of-the-parameter-estimate-b_1-and-its-standard-error." class="nav-link" data-scroll-target="#question-does-bac-affect-fps-explain-this-conclusion-in-terms-of-the-parameter-estimate-b_1-and-its-standard-error."><span class="header-section-number">4.7.1</span> <span style="color: red;">Question: Does BAC affect FPS? Explain this conclusion in terms of the parameter estimate, <span class="math inline">\(b_1\)</span> and its standard error.</span></a></li>
   </ul></li>
+  <li><a href="#testing-inferences-about-beta_1-1" id="toc-testing-inferences-about-beta_1-1" class="nav-link" data-scroll-target="#testing-inferences-about-beta_1-1"><span class="header-section-number">4.8</span> Testing Inferences about <span class="math inline">\(\beta_1\)</span></a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/04_single_quantitative.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -632,9 +633,50 @@ If <span class="math inline">\(\beta_1 = 0\)</span>, this means that FPS does no
 </div>
 <p><strong>A <span class="math inline">\(b_1\)</span> of this size is not unlikely under the null, therefore you fail to reject the null and conclude that BAC has no effect on FPS.</strong></p>
 <hr>
-
-
 </section>
+</section>
+<section id="testing-inferences-about-beta_1-1" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="testing-inferences-about-beta_1-1"><span class="header-section-number">4.8</span> Testing Inferences about <span class="math inline">\(\beta_1\)</span></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic       p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+1 (Intercept)     42.5      6.55      6.48 0.00000000411
+2 bac           -184.      95.9      -1.92 0.0579       </code></pre>
+</div>
+</div>
+<p><strong>One tailed p-value</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="sc">-</span><span class="fl">1.92</span>, <span class="dv">94</span>, <span class="at">lower.tail =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02894492</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(H_0: \beta_1 = 0\)</span><br>
+<span class="math inline">\(H_1: \beta_1 &lt; 0\)</span></p>
+<p><strong>Two tailed p-value</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="sc">-</span><span class="fl">1.92</span>, <span class="dv">94</span>, <span class="at">lower.tail =</span> <span class="cn">TRUE</span>)<span class="sc">*</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05788984</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(H_0: \beta_1 = 0\)</span><br>
+<span class="math inline">\(H_1: \beta_1 \neq 0\)</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_single_quantitative_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->

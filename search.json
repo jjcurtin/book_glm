@@ -608,5 +608,15 @@
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Inferences About a Single Quantitative Predictor</span>"
     ]
+  },
+  {
+    "objectID": "04_single_quantitative.html#testing-inferences-about-beta_1-1",
+    "href": "04_single_quantitative.html#testing-inferences-about-beta_1-1",
+    "title": "4  Inferences About a Single Quantitative Predictor",
+    "section": "4.8 Testing Inferences about \\(\\beta_1\\)",
+    "text": "4.8 Testing Inferences about \\(\\beta_1\\)\n\nm_2 |&gt; \n  broom::tidy()\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)     42.5      6.55      6.48 0.00000000411\n2 bac           -184.      95.9      -1.92 0.0579       \n\n\nOne tailed p-value:\n\npt(-1.92, 94, lower.tail = TRUE)\n\n[1] 0.02894492\n\n\n\\(H_0: \\beta_1 = 0\\)\n\\(H_1: \\beta_1 &lt; 0\\)\nTwo tailed p-value:\n\npt(-1.92, 94, lower.tail = TRUE)*2\n\n[1] 0.05788984\n\n\n\\(H_0: \\beta_1 = 0\\)\n\\(H_1: \\beta_1 \\neq 0\\)",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Inferences About a Single Quantitative Predictor</span>"
+    ]
   }
 ]
