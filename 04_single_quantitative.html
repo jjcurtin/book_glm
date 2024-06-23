@@ -301,6 +301,9 @@ window.Quarto = {
 <h2 data-number="4.1" class="anchored" data-anchor-id="two-parameter-one-predictor-models"><span class="header-section-number">4.1</span> Two Parameter (One Predictor) Models</h2>
 <p>We started with a very simple model of FPS: <span class="math inline">\(\hat{\text{FPS}}= \beta_0\)</span></p>
 <p>What if some participants were drunk and we knew their blood alcohol concentrations (BAC)?</p>
+<p><br>
+<br>
+</p>
 <section id="question-would-it-help-what-would-the-model-look-like-what-questions-does-this-model-allow-us-to-test" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="question-would-it-help-what-would-the-model-look-like-what-questions-does-this-model-allow-us-to-test"><span class="header-section-number">4.1.1</span> <span style="color: red;">Question: Would it help? What would the model look like? What question(s) does this model allow us to test?</span></h3>
 <hr>
@@ -310,7 +313,6 @@ window.Quarto = {
 <p><span class="math inline">\(\varepsilon_i = Y_i - \hat{Y}_i\)</span></p>
 <p><br>
 <span class="math inline">\(\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_1\)</span></p>
-<hr>
 <hr>
 <div class="cell">
 <div class="cell-output-display">
@@ -415,12 +417,17 @@ window.Quarto = {
 <h2 data-number="4.6" class="anchored" data-anchor-id="testing-inferences-about-beta_1"><span class="header-section-number">4.6</span> Testing Inferences about <span class="math inline">\(\beta_1\)</span></h2>
 <p>Does alcohol affect people’s anxiety?</p>
 <p><span class="math inline">\(\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_i\)</span></p>
+<p><br>
+<br>
+</p>
 <section id="question-what-are-your-null-and-alternative-hypotheses-about-a-model-parameter-to-evaluate-this-question" class="level3" data-number="4.6.1">
 <h3 data-number="4.6.1" class="anchored" data-anchor-id="question-what-are-your-null-and-alternative-hypotheses-about-a-model-parameter-to-evaluate-this-question"><span class="header-section-number">4.6.1</span> <span style="color: red;">Question: What are your null and alternative hypotheses about a model parameter to evaluate this question?</span></h3>
 <hr>
 <p><strong><span class="math inline">\(H_0: \beta_1=0\)</span></strong><br>
-<strong><span class="math inline">\(H_a: \beta_1 \neq 0\)</span></strong></p>
-<p>If <span class="math inline">\(\beta_1 = 0\)</span>, this means that FPS does not change with changes in BAC. In other words, there is no effect of BAC on FPS. If <span class="math inline">\(\beta_1 &lt; 0\)</span>, this means that FPS decreases with increasing BAC (people are less anxious when drunk). If <span class="math inline">\(\beta_1 &gt; 0\)</span>, this means FPS increases with increasing BAC (people are more anxious when drunk).</p>
+<strong><span class="math inline">\(H_a: \beta_1 \neq 0\)</span></strong><br>
+<br>
+<br>
+If <span class="math inline">\(\beta_1 = 0\)</span>, this means that FPS does not change with changes in BAC. In other words, there is no effect of BAC on FPS. If <span class="math inline">\(\beta_1 &lt; 0\)</span>, this means that FPS decreases with increasing BAC (people are less anxious when drunk). If <span class="math inline">\(\beta_1 &gt; 0\)</span>, this means FPS increases with increasing BAC (people are more anxious when drunk).</p>
 <hr>
 </section>
 </section>
@@ -435,10 +442,12 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>path_data <span class="ot">&lt;-</span> <span class="st">"data_lecture"</span> </span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_data, <span class="st">"4_single_quantitative_bac_fps.csv"</span>),</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <caption>Data summary</caption>
@@ -592,11 +601,12 @@ window.Quarto = {
 </table>
 </div>
 </div>
+<hr>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="ot">=</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac, <span class="at">data =</span> data)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>m_2 <span class="sc">|&gt;</span> </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="ot">=</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac, <span class="at">data =</span> data)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>m_2 <span class="sc">|&gt;</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   term        estimate std.error statistic       p.value
@@ -605,8 +615,22 @@ window.Quarto = {
 2 bac           -184.      95.9      -1.92 0.0579       </code></pre>
 </div>
 </div>
+<p><br>
+<br>
+</p>
 <section id="question-does-bac-affect-fps-explain-this-conclusion-in-terms-of-the-parameter-estimate-b_1-and-its-standard-error." class="level3" data-number="4.7.1">
 <h3 data-number="4.7.1" class="anchored" data-anchor-id="question-does-bac-affect-fps-explain-this-conclusion-in-terms-of-the-parameter-estimate-b_1-and-its-standard-error."><span class="header-section-number">4.7.1</span> <span style="color: red;">Question: Does BAC affect FPS? Explain this conclusion in terms of the parameter estimate, <span class="math inline">\(b_1\)</span> and its standard error.</span></h3>
+<hr>
+<p><strong>Under the <span class="math inline">\(H_0: \beta_1 = 0\)</span>, the sampling distribution for <span class="math inline">\(\beta_1\)</span> will have a mean of 0 with an estimated standard deviation 95.89.</strong></p>
+<p><strong><span class="math inline">\(t (96 - 1) = \frac{-184.09 - 0}{95.89 } = -1.92\)</span></strong></p>
+<p><strong>Our value of the parameter estimate, <span class="math inline">\(b_1\)</span>, is 1.92 standard deviations below the expected mean of the sampling distribution for <span class="math inline">\(H_0\)</span>.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="sc">-</span><span class="fl">1.92</span>, <span class="dv">94</span>, <span class="at">lower.tail =</span> <span class="cn">TRUE</span>)<span class="sc">*</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05788984</code></pre>
+</div>
+</div>
+<p><strong>A <span class="math inline">\(b_1\)</span> of this size is not unlikely under the null, therefore you fail to reject the null and conclude that BAC has no effect on FPS.</strong></p>
 <hr>
 
 
