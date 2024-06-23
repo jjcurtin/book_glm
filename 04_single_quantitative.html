@@ -273,6 +273,7 @@ window.Quarto = {
   <li><a href="#question-does-bac-affect-fps-explain-this-conclusion-in-terms-of-the-parameter-estimate-b_1-and-its-standard-error." id="toc-question-does-bac-affect-fps-explain-this-conclusion-in-terms-of-the-parameter-estimate-b_1-and-its-standard-error." class="nav-link" data-scroll-target="#question-does-bac-affect-fps-explain-this-conclusion-in-terms-of-the-parameter-estimate-b_1-and-its-standard-error."><span class="header-section-number">4.7.1</span> <span style="color: red;">Question: Does BAC affect FPS? Explain this conclusion in terms of the parameter estimate, <span class="math inline">\(b_1\)</span> and its standard error.</span></a></li>
   </ul></li>
   <li><a href="#testing-inferences-about-beta_1-1" id="toc-testing-inferences-about-beta_1-1" class="nav-link" data-scroll-target="#testing-inferences-about-beta_1-1"><span class="header-section-number">4.8</span> Testing Inferences about <span class="math inline">\(\beta_1\)</span></a></li>
+  <li><a href="#model-comparison-testing-inferences-about-beta_1" id="toc-model-comparison-testing-inferences-about-beta_1" class="nav-link" data-scroll-target="#model-comparison-testing-inferences-about-beta_1"><span class="header-section-number">4.9</span> Model Comparison: Testing Inferences about <span class="math inline">\(\beta_1\)</span></a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/04_single_quantitative.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -604,7 +605,7 @@ If <span class="math inline">\(\beta_1 = 0\)</span>, this means that FPS does no
 </div>
 <hr>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="ot">=</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac, <span class="at">data =</span> data)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac, <span class="at">data =</span> data)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>m_2 <span class="sc">|&gt;</span> </span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -673,6 +674,45 @@ If <span class="math inline">\(\beta_1 = 0\)</span>, this means that FPS does no
 <p><img src="04_single_quantitative_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
+</div>
+</div>
+<hr>
+</section>
+<section id="model-comparison-testing-inferences-about-beta_1" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="model-comparison-testing-inferences-about-beta_1"><span class="header-section-number">4.9</span> Model Comparison: Testing Inferences about <span class="math inline">\(\beta_1\)</span></h2>
+<p><span class="math inline">\(H_0: \beta_1 = 0\)</span><br>
+<span class="math inline">\(H_1: \beta_1 \neq 0\)</span></p>
+<p><br>
+<br>
+### <span style="color: red;">Question: What two models are you comparing when you test hypotheses about <span class="math inline">\(\beta_1\)</span>? Describe the logic.</span></p>
+<hr>
+<p><strong>Compact model: <span class="math inline">\(\hat{\text{FPS}}_i = \beta_0+0*\text{BAC}_i\)</span></strong><br>
+<strong><span class="math inline">\(P_c=1\)</span></strong><br>
+**$_c=1.338883^{5} $**<br>
+<br>
+<strong>Augmented model: <span class="math inline">\(\hat{\text{FPS}}_i = \beta_0+\beta_1*\text{BAC}_i\)</span></strong><br>
+<strong><span class="math inline">\(P_a=2\)</span></strong><br>
+<strong><span class="math inline">\(\text{SSE}_a=1.288371\times 10^{5}\)</span></strong><br>
+<br>
+<span class="math inline">\(F(P_a-P_c, N-P_a) = \frac{\text{SSE}_c-\text{SSE}_a/(P_a-P_c)}{\text{SSE}_a/(N-P_a)}\)</span></p>
+<p>F(1,94) = 3.685, p = 0.058</p>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>m_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> data)   </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>m_2 <span class="ot">&lt;-</span>  <span class="fu">lm</span>(fps <span class="sc">~</span> bac, <span class="at">data =</span> data) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(m_1, m_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Model 1: fps ~ 1
+Model 2: fps ~ bac
+  Res.Df    RSS Df Sum of Sq      F  Pr(&gt;F)  
+1     95 133888                              
+2     94 128837  1    5051.2 3.6854 0.05792 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 
