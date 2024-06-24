@@ -277,6 +277,13 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#question-what-two-models-are-you-comparing-when-you-test-hypotheses-about-beta_1-describe-the-logic." id="toc-question-what-two-models-are-you-comparing-when-you-test-hypotheses-about-beta_1-describe-the-logic." class="nav-link" data-scroll-target="#question-what-two-models-are-you-comparing-when-you-test-hypotheses-about-beta_1-describe-the-logic."><span class="header-section-number">4.9.1</span> <span style="color: red;">Question: What two models are you comparing when you test hypotheses about <span class="math inline">\(\beta_1\)</span>? Describe the logic.</span></a></li>
   </ul></li>
+  <li><a href="#sum-of-squared-errors" id="toc-sum-of-squared-errors" class="nav-link" data-scroll-target="#sum-of-squared-errors"><span class="header-section-number">4.10</span> Sum of Squared Errors</a>
+  <ul class="collapse">
+  <li><a href="#question-if-there-is-a-perfect-relationship-between-x_1-and-y-in-your-sample-what-will-the-sse-be-in-the-two-parameter-model-augmented-and-why" id="toc-question-if-there-is-a-perfect-relationship-between-x_1-and-y-in-your-sample-what-will-the-sse-be-in-the-two-parameter-model-augmented-and-why" class="nav-link" data-scroll-target="#question-if-there-is-a-perfect-relationship-between-x_1-and-y-in-your-sample-what-will-the-sse-be-in-the-two-parameter-model-augmented-and-why"><span class="header-section-number">4.10.1</span> <span style="color: red;">Question: If there is a perfect relationship between <span class="math inline">\(X_1\)</span> and <span class="math inline">\(Y\)</span> in your sample, what will the SSE be in the two parameter model (augmented) and why?</span></a></li>
+  <li><a href="#question-if-there-is-no-relationship-at-all-between-x_1-and-y-in-your-sample-b_1-0-what-will-the-sse-be-in-the-two-parameter-model-augmented-and-why" id="toc-question-if-there-is-no-relationship-at-all-between-x_1-and-y-in-your-sample-b_1-0-what-will-the-sse-be-in-the-two-parameter-model-augmented-and-why" class="nav-link" data-scroll-target="#question-if-there-is-no-relationship-at-all-between-x_1-and-y-in-your-sample-b_1-0-what-will-the-sse-be-in-the-two-parameter-model-augmented-and-why"><span class="header-section-number">4.10.2</span> <span style="color: red;">Question: If there is no relationship at all between <span class="math inline">\(X_1\)</span> and <span class="math inline">\(Y\)</span> in your sample (<span class="math inline">\(b_1\)</span> = 0), what will the SSE be in the two parameter model (augmented) and why?</span></a></li>
+  </ul></li>
+  <li><a href="#testing-inferences-about-beta_0" id="toc-testing-inferences-about-beta_0" class="nav-link" data-scroll-target="#testing-inferences-about-beta_0"><span class="header-section-number">4.11</span> Testing Inferences about <span class="math inline">\(\beta_0\)</span></a></li>
+  <li><a href="#mean-centering-predictor-variables" id="toc-mean-centering-predictor-variables" class="nav-link" data-scroll-target="#mean-centering-predictor-variables"><span class="header-section-number">4.12</span> Mean Centering Predictor Variables</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/04_single_quantitative.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -466,7 +473,7 @@ If <span class="math inline">\(\beta_1 = 0\)</span>, this means that FPS does no
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Number of columns</td>
-<td style="text-align: left;">4</td>
+<td style="text-align: left;">3</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">_______________________</td>
@@ -482,7 +489,7 @@ If <span class="math inline">\(\beta_1 = 0\)</span>, this means that FPS does no
 </tr>
 <tr class="odd">
 <td style="text-align: left;">numeric</td>
-<td style="text-align: left;">3</td>
+<td style="text-align: left;">2</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">________________________</td>
@@ -587,19 +594,6 @@ If <span class="math inline">\(\beta_1 = 0\)</span>, this means that FPS does no
 <td style="text-align: right;">50.46</td>
 <td style="text-align: right;">162.74</td>
 <td style="text-align: left;">▁▃▇▂▁</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">bg_2</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">0.75</td>
-<td style="text-align: right;">0.44</td>
-<td style="text-align: right;">0.0</td>
-<td style="text-align: right;">0.75</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: left;">▂▁▁▁▇</td>
 </tr>
 </tbody>
 </table>
@@ -721,9 +715,104 @@ Model 2: fps ~ bac
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-
-
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculte delta r squared and partial eta square</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
 </section>
+</section>
+<section id="sum-of-squared-errors" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="sum-of-squared-errors"><span class="header-section-number">4.10</span> Sum of Squared Errors</h2>
+<section id="question-if-there-is-a-perfect-relationship-between-x_1-and-y-in-your-sample-what-will-the-sse-be-in-the-two-parameter-model-augmented-and-why" class="level3" data-number="4.10.1">
+<h3 data-number="4.10.1" class="anchored" data-anchor-id="question-if-there-is-a-perfect-relationship-between-x_1-and-y-in-your-sample-what-will-the-sse-be-in-the-two-parameter-model-augmented-and-why"><span class="header-section-number">4.10.1</span> <span style="color: red;">Question: If there is a perfect relationship between <span class="math inline">\(X_1\)</span> and <span class="math inline">\(Y\)</span> in your sample, what will the SSE be in the two parameter model (augmented) and why?</span></h3>
+<hr>
+<p><strong><span class="math inline">\(\text{SSE}_a=0\)</span>. All data points will fall perfectly on the regression line. All errors will be 0.</strong></p>
+<hr>
+</section>
+<section id="question-if-there-is-no-relationship-at-all-between-x_1-and-y-in-your-sample-b_1-0-what-will-the-sse-be-in-the-two-parameter-model-augmented-and-why" class="level3" data-number="4.10.2">
+<h3 data-number="4.10.2" class="anchored" data-anchor-id="question-if-there-is-no-relationship-at-all-between-x_1-and-y-in-your-sample-b_1-0-what-will-the-sse-be-in-the-two-parameter-model-augmented-and-why"><span class="header-section-number">4.10.2</span> <span style="color: red;">Question: If there is no relationship at all between <span class="math inline">\(X_1\)</span> and <span class="math inline">\(Y\)</span> in your sample (<span class="math inline">\(b_1\)</span> = 0), what will the SSE be in the two parameter model (augmented) and why?</span></h3>
+<hr>
+<p><strong><span class="math inline">\(\text{SSE}_a=\text{SSE}\)</span> of the mean-only model. <span class="math inline">\(X_1\)</span> provides no additional information about the DV. Your best prediction will still be the mean of the DV.</strong></p>
+<hr>
+</section>
+</section>
+<section id="testing-inferences-about-beta_0" class="level2" data-number="4.11">
+<h2 data-number="4.11" class="anchored" data-anchor-id="testing-inferences-about-beta_0"><span class="header-section-number">4.11</span> Testing Inferences about <span class="math inline">\(\beta_0\)</span></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic       p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+1 (Intercept)     42.5      6.55      6.48 0.00000000411
+2 bac           -184.      95.9      -1.92 0.0579       </code></pre>
+</div>
+</div>
+<p><br>
+<br>
+### <span style="color: red;">Question: What is the interpretation of <span class="math inline">\(b_0\)</span> in this two parameter model?</span></p>
+<hr>
+<p><strong>It is the predicted FPS for a person with BAC = 0 (sober).</strong></p>
+<p><strong>The test of this parameter estimate could inform us if the shock procedure worked among our sober participants. This is probably a more appropriate manipulation check than testing if it worked in everyone including drunk people given that alcohol could have reduced FPS.</strong></p>
+<p><br>
+### <span style="color: red;">Question: What two models are being compared?</span></p>
+<hr>
+<p><strong>Compact model: <span class="math inline">\(\hat{\text{FPS}}_i= 0 + \beta_1* \text{BAC}_i\)</span></strong></p>
+<p><strong>Augmented model: <span class="math inline">\(\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i\)</span></strong></p>
+<hr>
+</section>
+<section id="mean-centering-predictor-variables" class="level2" data-number="4.12">
+<h2 data-number="4.12" class="anchored" data-anchor-id="mean-centering-predictor-variables"><span class="header-section-number">4.12</span> Mean Centering Predictor Variables</h2>
+<p>In this example, I have been using raw BAC. In many instances, we will <em>mean center</em> our quantitative predictor variables.</p>
+<p>Mean centering simply involves subtracting the mean of the predictor variable from all scores for that predictor variable.</p>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-12-2" class="code-annotation-target"><a href="#annotated-cell-12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bac_c =</span> bac <span class="sc">-</span> <span class="fu">mean</span>(bac))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="2" data-code-annotation="1">We use <code>mutate()</code> to update and create new variables (e.g., centered quantitative predictors, changing character variables to factors).</span>
+</dd>
+</dl>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="annotated-cell-13-2"><a href="#annotated-cell-13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"bac"</span>)) <span class="sc">|&gt;</span> </span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-13-3" class="code-annotation-target"><a href="#annotated-cell-13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"var"</span>) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-13-4"><a href="#annotated-cell-13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(var) <span class="sc">|&gt;</span> </span>
+<span id="annotated-cell-13-5"><a href="#annotated-cell-13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(value), </span>
+<span id="annotated-cell-13-6"><a href="#annotated-cell-13-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(value), </span>
+<span id="annotated-cell-13-7"><a href="#annotated-cell-13-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(value), </span>
+<span id="annotated-cell-13-8"><a href="#annotated-cell-13-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(value)) <span class="sc">|&gt;</span> </span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-13-9" class="code-annotation-target"><a href="#annotated-cell-13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(mean<span class="sc">:</span>max, <span class="sc">~</span><span class="fu">round</span>(.x, <span class="dv">2</span>)))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="3" data-code-annotation="1"><code>pivot_longer()</code> and <code>pivot_wider()</code> are two tidy functions for transforming your data frame (i.e., wide to long data frame and long to wide data frame).<br>
+</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="9" data-code-annotation="2">Here we use <code>mutate()</code> again, but are now combing it with <code>across()</code> so that we can apply our transformation (rounding to 2 decimal places) to several variables in one statement.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  var    mean    sd   min   max
+  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 bac    0.06  0.04  0     0.14
+2 bac_c  0     0.04 -0.06  0.08</code></pre>
+</div>
+</div>
+<hr>
+
+
 </section>
 
 </main> <!-- /main -->
