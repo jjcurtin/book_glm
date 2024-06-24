@@ -304,6 +304,11 @@ window.Quarto = {
   <li><a href="#question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_1" id="toc-question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_1" class="nav-link" data-scroll-target="#question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_1"><span class="header-section-number">4.15.1</span> <span style="color: red;">Question: How can you calculate the effect size estimate <span class="math inline">\(\eta_p^2\)</span> (PRE) for <span class="math inline">\(\beta_1\)</span>? </span></a></li>
   <li><a href="#question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_0" id="toc-question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_0" class="nav-link" data-scroll-target="#question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_0"><span class="header-section-number">4.15.2</span> <span style="color: red;">Question: How can you calculate the effect size estimate <span class="math inline">\(\eta_p^2\)</span> (PRE) for <span class="math inline">\(\beta_0\)</span>? </span></a></li>
   </ul></li>
+  <li><a href="#coefficient-of-determination-r2" id="toc-coefficient-of-determination-r2" class="nav-link" data-scroll-target="#coefficient-of-determination-r2"><span class="header-section-number">4.16</span> Coefficient of Determination (<span class="math inline">\(R^2\)</span>)</a></li>
+  <li><a href="#r2-and-the-mean-only-model" id="toc-r2-and-the-mean-only-model" class="nav-link" data-scroll-target="#r2-and-the-mean-only-model"><span class="header-section-number">4.17</span> <span class="math inline">\(R^2\)</span> and the Mean-Only Model</a>
+  <ul class="collapse">
+  <li><a href="#question-why-did-the-mean-only-model-not-have-an-r2" id="toc-question-why-did-the-mean-only-model-not-have-an-r2" class="nav-link" data-scroll-target="#question-why-did-the-mean-only-model-not-have-an-r2"><span class="header-section-number">4.17.1</span> <span style="color: red;">Question: Why did the mean-only model not have an <span class="math inline">\(R^2\)</span>? </span></a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/04_single_quantitative.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -735,14 +740,6 @@ Model 2: fps ~ bac
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># missing from anova summary</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># r-squared -  </span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># var(predict(m_2))/ var(data$fps)</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># partial eta squared - </span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (sum(residuals(m_1)^2) - sum(residuals(m_2)^2))/ sum(residuals(m_1)^2)</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># These ideas are introduced later in the unit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <hr>
 </section>
 </section>
@@ -764,8 +761,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="testing-inferences-about-beta_0" class="level2" data-number="4.11">
 <h2 data-number="4.11" class="anchored" data-anchor-id="testing-inferences-about-beta_0"><span class="header-section-number">4.11</span> Testing Inferences about <span class="math inline">\(\beta_0\)</span></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="sc">|&gt;</span> </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   term        estimate std.error statistic       p.value
@@ -799,38 +796,38 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Mean centering simply involves subtracting the mean of the predictor variable from all scores for that predictor variable.</p>
 <hr>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-12-2" class="code-annotation-target"><a href="#annotated-cell-12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bac_c =</span> bac <span class="sc">-</span> <span class="fu">mean</span>(bac))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-11-2" class="code-annotation-target"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bac_c =</span> bac <span class="sc">-</span> <span class="fu">mean</span>(bac))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-12" data-code-lines="2" data-code-annotation="1">We use <code>mutate()</code> to update and create new variables (e.g., centered quantitative predictors, changing character variables to factors).</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="2" data-code-annotation="1">We use <code>mutate()</code> to update and create new variables (e.g., centered quantitative predictors, changing character variables to factors).</span>
 </dd>
 </dl>
 </div>
 </div>
 <hr>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
-<span id="annotated-cell-13-2"><a href="#annotated-cell-13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"bac"</span>)) <span class="sc">|&gt;</span> </span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-13-3" class="code-annotation-target"><a href="#annotated-cell-13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"var"</span>) <span class="sc">|&gt;</span></span>
-<span id="annotated-cell-13-4"><a href="#annotated-cell-13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(var) <span class="sc">|&gt;</span> </span>
-<span id="annotated-cell-13-5"><a href="#annotated-cell-13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(value), </span>
-<span id="annotated-cell-13-6"><a href="#annotated-cell-13-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(value), </span>
-<span id="annotated-cell-13-7"><a href="#annotated-cell-13-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(value), </span>
-<span id="annotated-cell-13-8"><a href="#annotated-cell-13-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(value)) <span class="sc">|&gt;</span> </span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-13-9" class="code-annotation-target"><a href="#annotated-cell-13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(mean<span class="sc">:</span>max, <span class="sc">~</span><span class="fu">round</span>(.x, <span class="dv">2</span>)))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="annotated-cell-12-2"><a href="#annotated-cell-12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"bac"</span>)) <span class="sc">|&gt;</span> </span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-12-3" class="code-annotation-target"><a href="#annotated-cell-12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"var"</span>) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-12-4"><a href="#annotated-cell-12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(var) <span class="sc">|&gt;</span> </span>
+<span id="annotated-cell-12-5"><a href="#annotated-cell-12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(value), </span>
+<span id="annotated-cell-12-6"><a href="#annotated-cell-12-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(value), </span>
+<span id="annotated-cell-12-7"><a href="#annotated-cell-12-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(value), </span>
+<span id="annotated-cell-12-8"><a href="#annotated-cell-12-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(value)) <span class="sc">|&gt;</span> </span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-12-9" class="code-annotation-target"><a href="#annotated-cell-12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(mean<span class="sc">:</span>max, <span class="sc">~</span><span class="fu">round</span>(.x, <span class="dv">2</span>)))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-13" data-code-lines="3" data-code-annotation="1"><code>pivot_longer()</code> and <code>pivot_wider()</code> are two tidy functions for transforming your data frame (i.e., wide to long data frame and long to wide data frame).<br>
+<span data-code-cell="annotated-cell-12" data-code-lines="3" data-code-annotation="1"><code>pivot_longer()</code> and <code>pivot_wider()</code> are two tidy functions for transforming your data frame (i.e., wide to long data frame and long to wide data frame).<br>
 </span>
 </dd>
-<dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-13" data-code-lines="9" data-code-annotation="2">Here we use <code>mutate()</code> again, but are now combing it with <code>across()</code> so that we can apply our transformation (rounding to 2 decimal places) to several variables in one statement.</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="9" data-code-annotation="2">Here we use <code>mutate()</code> again, but are now combing it with <code>across()</code> so that we can apply our transformation (rounding to 2 decimal places) to several variables in one statement.</span>
 </dd>
 </dl>
 </div>
@@ -846,8 +843,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="question-how-would-the-parameter-estimate-values-and-interpretations-change-if-i-mean-centered-bac" class="level3" data-number="4.12.1">
 <h3 data-number="4.12.1" class="anchored" data-anchor-id="question-how-would-the-parameter-estimate-values-and-interpretations-change-if-i-mean-centered-bac"><span class="header-section-number">4.12.1</span> <span style="color: red;">Question: How would the parameter estimate values and interpretations change if I mean centered BAC?</span></h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="sc">|&gt;</span> </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   term        estimate std.error statistic       p.value
@@ -858,10 +855,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <hr>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>m_2_c <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac_c, <span class="at">data =</span> data)  </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>m_2_c <span class="sc">|&gt;</span> </span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>m_2_c <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac_c, <span class="at">data =</span> data)  </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>m_2_c <span class="sc">|&gt;</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   term        estimate std.error statistic  p.value
@@ -883,7 +880,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="04_single_quantitative_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="04_single_quantitative_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -895,7 +892,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h2 data-number="4.14" class="anchored" data-anchor-id="confidence-interval-for-b_j-or-b_0"><span class="header-section-number">4.14</span> Confidence Interval for <span class="math inline">\(b_j\)</span> or <span class="math inline">\(b_0\)</span></h2>
 <p>You can provide confidence intervals for each parameter estimate in your model.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 2.5 %    97.5 %
 (Intercept)   29.45597 55.457721
@@ -919,13 +916,13 @@ bac         -374.49261  6.308724</code></pre>
 <h3 data-number="4.15.1" class="anchored" data-anchor-id="question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_1"><span class="header-section-number">4.15.1</span> <span style="color: red;">Question: How can you calculate the effect size estimate <span class="math inline">\(\eta_p^2\)</span> (PRE) for <span class="math inline">\(\beta_1\)</span>? </span></h3>
 <hr>
 <p><strong>Compare the SSE across the two relevant models.</strong></p>
-<p><strong>Compact model: <span class="math inline">\(\hat{\text{FPS}}_i= \beta_0 + 0* \text{BAC}_i\)</span></strong><br>
-<span class="math inline">\(\text{SSE}_c =  133888.3\)</span></p>
-<p><strong>Augmented model: <span class="math inline">\(\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i\)</span></strong><br>
-<span class="math inline">\(\text{SSE}_a =  round(sum(residuals(m_2)^2), 1)\)</span></p>
+<p><strong>Compact model: <span class="math inline">\(\hat{\text{FPS}}_i= \beta_0 + 0* \text{BAC}_i\)</span></strong></p>
+<p><span class="math inline">\(\text{SSE}_c =  133888.3\)</span></p>
+<p><strong>Augmented model: <span class="math inline">\(\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i\)</span></strong></p>
+<p><span class="math inline">\(\text{SSE}_a =  128837.1\)</span></p>
 <p><span class="math inline">\(\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{133888.3- 128837.1}{133888.3}= 0.038\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(<span class="fu">residuals</span>(m_1)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_2)<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">residuals</span>(m_1)<span class="sc">^</span><span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(<span class="fu">residuals</span>(m_1)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_2)<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">residuals</span>(m_1)<span class="sc">^</span><span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.03772707</code></pre>
 </div>
@@ -938,12 +935,12 @@ bac         -374.49261  6.308724</code></pre>
 <hr>
 <p><strong>Compare the SSE across the two relevant models.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-18"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-18-1" class="code-annotation-target"><a href="#annotated-cell-18-1" aria-hidden="true" tabindex="-1"></a>m_1_0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac <span class="sc">-</span> <span class="dv">1</span>, <span class="at">data =</span> data)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-17"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-17-1" class="code-annotation-target"><a href="#annotated-cell-17-1" aria-hidden="true" tabindex="-1"></a>m_1_0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac <span class="sc">-</span> <span class="dv">1</span>, <span class="at">data =</span> data)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-18" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-17" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-18" data-code-lines="1" data-code-annotation="1">We can use -1 to remove the intercept (i.e., set it equal to 0) from our new compact model.</span>
+<span data-code-cell="annotated-cell-17" data-code-lines="1" data-code-annotation="1">We can use -1 to remove the intercept (i.e., set it equal to 0) from our new compact model.</span>
 </dd>
 </dl>
 </div>
@@ -951,16 +948,46 @@ bac         -374.49261  6.308724</code></pre>
 <p><strong>Compact model: <span class="math inline">\(\hat{\text{FPS}}_i= 0 + \beta_1* \text{BAC}_i\)</span></strong></p>
 <p><span class="math inline">\(\text{SSE}_c =  186462.4\)</span></p>
 <p><strong>Augmented model: <span class="math inline">\(\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i\)</span></strong></p>
-<p><span class="math inline">\(\text{SSE}_a =  round(sum(residuals(m_2)^2), 1)\)</span></p>
+<p><span class="math inline">\(\text{SSE}_a =  128837.1\)</span></p>
 <p><span class="math inline">\(\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{186462.4- 128837.1}{186462.4}= 0.309\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(<span class="fu">residuals</span>(m_1_0)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_2)<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">residuals</span>(m_1_0)<span class="sc">^</span><span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(<span class="fu">residuals</span>(m_1_0)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_2)<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">residuals</span>(m_1_0)<span class="sc">^</span><span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3090451</code></pre>
 </div>
 </div>
 <p>Our augmented model that allows FPS to be non-zero for people with BAC=0 (sober people) reduces prediction error (SSE) by 30.9% from the model that fixes FPS at 0 when BAC=0!</p>
 <hr>
+</section>
+</section>
+<section id="coefficient-of-determination-r2" class="level2" data-number="4.16">
+<h2 data-number="4.16" class="anchored" data-anchor-id="coefficient-of-determination-r2"><span class="header-section-number">4.16</span> Coefficient of Determination (<span class="math inline">\(R^2\)</span>)</h2>
+<p><strong>Coefficient of Determination (<span class="math inline">\(R^2\)</span>):</strong><br>
+Proportion of explained variance (i.e., proportion of variance in <span class="math inline">\(Y\)</span> accounted for by all <span class="math inline">\(Xs\)</span> in model).</p>
+<p>DATA = MODEL + ERROR</p>
+<p>For individuals:</p>
+<p><span class="math inline">\(Y_i=Y_i+e_i\)</span></p>
+<p>With respect to variance:</p>
+<p><span class="math inline">\(S_{Y_i}^2=S_{\hat{Y}_i}^2+S_{e_i}^2\)</span></p>
+<p><span class="math inline">\(R^2=\frac{S_{\hat{Y}_i}^2}{S_{Y_i}^2}\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(<span class="fu">predict</span>(m_2))<span class="sc">/</span> <span class="fu">var</span>(data<span class="sc">$</span>fps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03772707</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="r2-and-the-mean-only-model" class="level2" data-number="4.17">
+<h2 data-number="4.17" class="anchored" data-anchor-id="r2-and-the-mean-only-model"><span class="header-section-number">4.17</span> <span class="math inline">\(R^2\)</span> and the Mean-Only Model</h2>
+<section id="question-why-did-the-mean-only-model-not-have-an-r2" class="level3" data-number="4.17.1">
+<h3 data-number="4.17.1" class="anchored" data-anchor-id="question-why-did-the-mean-only-model-not-have-an-r2"><span class="header-section-number">4.17.1</span> <span style="color: red;">Question: Why did the mean-only model not have an <span class="math inline">\(R^2\)</span>? </span></h3>
+<hr>
+<p><strong>It did but it was just 0. It explained no variance in <span class="math inline">\(Y_i\)</span> because it predicted the same value (mean) for every person. The variance of the predicted values is 0 in the mean-only model.</strong></p>
+<p><span class="math inline">\(R^2=\frac{S_{\hat{Y}_i}^2}{S_{Y_i}^2}\)</span></p>
+<p><strong>In fact, the SSE for the mean-only model is the numerator of the formula for the variance for <span class="math inline">\(Y_i\)</span>.</strong></p>
+<p><span class="math inline">\(\text{SSE}=\frac{\sum(Y_i-\hat{Y_i})^2}{}\)</span></p>
+<p><span class="math inline">\(S^2 = \frac{\sum(Y_i-\overline{Y})^2}{N-1}\)</span></p>
 
 
 </section>
