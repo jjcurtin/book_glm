@@ -282,7 +282,11 @@ window.Quarto = {
   <li><a href="#question-if-there-is-a-perfect-relationship-between-x_1-and-y-in-your-sample-what-will-the-sse-be-in-the-two-parameter-model-augmented-and-why" id="toc-question-if-there-is-a-perfect-relationship-between-x_1-and-y-in-your-sample-what-will-the-sse-be-in-the-two-parameter-model-augmented-and-why" class="nav-link" data-scroll-target="#question-if-there-is-a-perfect-relationship-between-x_1-and-y-in-your-sample-what-will-the-sse-be-in-the-two-parameter-model-augmented-and-why"><span class="header-section-number">4.10.1</span> <span style="color: red;">Question: If there is a perfect relationship between <span class="math inline">\(X_1\)</span> and <span class="math inline">\(Y\)</span> in your sample, what will the SSE be in the two parameter model (augmented) and why?</span></a></li>
   <li><a href="#question-if-there-is-no-relationship-at-all-between-x_1-and-y-in-your-sample-b_1-0-what-will-the-sse-be-in-the-two-parameter-model-augmented-and-why" id="toc-question-if-there-is-no-relationship-at-all-between-x_1-and-y-in-your-sample-b_1-0-what-will-the-sse-be-in-the-two-parameter-model-augmented-and-why" class="nav-link" data-scroll-target="#question-if-there-is-no-relationship-at-all-between-x_1-and-y-in-your-sample-b_1-0-what-will-the-sse-be-in-the-two-parameter-model-augmented-and-why"><span class="header-section-number">4.10.2</span> <span style="color: red;">Question: If there is no relationship at all between <span class="math inline">\(X_1\)</span> and <span class="math inline">\(Y\)</span> in your sample (<span class="math inline">\(b_1\)</span> = 0), what will the SSE be in the two parameter model (augmented) and why?</span></a></li>
   </ul></li>
-  <li><a href="#testing-inferences-about-beta_0" id="toc-testing-inferences-about-beta_0" class="nav-link" data-scroll-target="#testing-inferences-about-beta_0"><span class="header-section-number">4.11</span> Testing Inferences about <span class="math inline">\(\beta_0\)</span></a></li>
+  <li><a href="#testing-inferences-about-beta_0" id="toc-testing-inferences-about-beta_0" class="nav-link" data-scroll-target="#testing-inferences-about-beta_0"><span class="header-section-number">4.11</span> Testing Inferences about <span class="math inline">\(\beta_0\)</span></a>
+  <ul class="collapse">
+  <li><a href="#question-what-is-the-interpretation-of-b_0-in-this-two-parameter-model" id="toc-question-what-is-the-interpretation-of-b_0-in-this-two-parameter-model" class="nav-link" data-scroll-target="#question-what-is-the-interpretation-of-b_0-in-this-two-parameter-model"><span class="header-section-number">4.11.1</span> <span style="color: red;">Question: What is the interpretation of <span class="math inline">\(b_0\)</span> in this two parameter model?</span></a></li>
+  <li><a href="#question-what-two-models-are-being-compared" id="toc-question-what-two-models-are-being-compared" class="nav-link" data-scroll-target="#question-what-two-models-are-being-compared"><span class="header-section-number">4.11.2</span> <span style="color: red;">Question: What two models are being compared?</span></a></li>
+  </ul></li>
   <li><a href="#mean-centering-predictor-variables" id="toc-mean-centering-predictor-variables" class="nav-link" data-scroll-target="#mean-centering-predictor-variables"><span class="header-section-number">4.12</span> Mean Centering Predictor Variables</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/04_single_quantitative.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -751,16 +755,22 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p><br>
 <br>
-### <span style="color: red;">Question: What is the interpretation of <span class="math inline">\(b_0\)</span> in this two parameter model?</span></p>
+</p>
+<section id="question-what-is-the-interpretation-of-b_0-in-this-two-parameter-model" class="level3" data-number="4.11.1">
+<h3 data-number="4.11.1" class="anchored" data-anchor-id="question-what-is-the-interpretation-of-b_0-in-this-two-parameter-model"><span class="header-section-number">4.11.1</span> <span style="color: red;">Question: What is the interpretation of <span class="math inline">\(b_0\)</span> in this two parameter model?</span></h3>
 <hr>
 <p><strong>It is the predicted FPS for a person with BAC = 0 (sober).</strong></p>
 <p><strong>The test of this parameter estimate could inform us if the shock procedure worked among our sober participants. This is probably a more appropriate manipulation check than testing if it worked in everyone including drunk people given that alcohol could have reduced FPS.</strong></p>
 <p><br>
-### <span style="color: red;">Question: What two models are being compared?</span></p>
+</p>
+</section>
+<section id="question-what-two-models-are-being-compared" class="level3" data-number="4.11.2">
+<h3 data-number="4.11.2" class="anchored" data-anchor-id="question-what-two-models-are-being-compared"><span class="header-section-number">4.11.2</span> <span style="color: red;">Question: What two models are being compared?</span></h3>
 <hr>
 <p><strong>Compact model: <span class="math inline">\(\hat{\text{FPS}}_i= 0 + \beta_1* \text{BAC}_i\)</span></strong></p>
 <p><strong>Augmented model: <span class="math inline">\(\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i\)</span></strong></p>
 <hr>
+</section>
 </section>
 <section id="mean-centering-predictor-variables" class="level2" data-number="4.12">
 <h2 data-number="4.12" class="anchored" data-anchor-id="mean-centering-predictor-variables"><span class="header-section-number">4.12</span> Mean Centering Predictor Variables</h2>
@@ -779,6 +789,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </dl>
 </div>
 </div>
+<hr>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
 <span id="annotated-cell-13-2"><a href="#annotated-cell-13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"bac"</span>)) <span class="sc">|&gt;</span> </span>
