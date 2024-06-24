@@ -988,6 +988,16 @@ Proportion of explained variance (i.e., proportion of variance in <span class="m
 <p><strong>In fact, the SSE for the mean-only model is the numerator of the formula for the variance for <span class="math inline">\(Y_i\)</span>.</strong></p>
 <p><span class="math inline">\(\text{SSE}=\frac{\sum(Y_i-\hat{Y_i})^2}{}\)</span></p>
 <p><span class="math inline">\(S^2 = \frac{\sum(Y_i-\overline{Y})^2}{N-1}\)</span></p>
+<hr>
+<p>This leads to an alternative formula for <span class="math inline">\(R^2\)</span> for an augmented model.</p>
+<p><span class="math inline">\(R^2=\frac{\text{SSE}_\text{mean-only}-\text{SSE}_a}{\text{SSE}_\text{mean-only}}\)</span></p>
+<p>Mean-only model: <span class="math inline">\(\hat{\text{FPS}}_i=\beta_0\)</span></p>
+<p><span class="math inline">\(\text{SSE}_{\text{mean-only}} = 133888.3\)</span></p>
+<p>Augmented model: <span class="math inline">\(\hat{\text{FPS}}_i=\beta_0 + \beta_1*\text{BAC}_i\)</span></p>
+<p><span class="math inline">\(\text{SSE}_a} = 128837.1\)</span></p>
+<p><span class="math inline">\(R^2= \frac{133888.3 - 128837.1}{133888.3} = `r round((sum(residuals(m_1)^2)-sum(residuals(m_2)^2))/sum(residuals(m_1)^2),5)\)</span></p>
+<p>In this augmented model, <span class="math inline">\(R^2\)</span> is fully accounted for by BAC. In more complex models, <span class="math inline">\(R^2\)</span> will be the aggregate of multiple predictors. <span class="math inline">\(R^2\)</span> is only defined for models that include <span class="math inline">\(b_0\)</span>.</p>
+<hr>
 
 
 </section>
