@@ -704,7 +704,37 @@
     "href": "04_single_quantitative.html#r2-and-the-mean-only-model",
     "title": "4  Inferences About a Single Quantitative Predictor",
     "section": "4.17 \\(R^2\\) and the Mean-Only Model",
-    "text": "4.17 \\(R^2\\) and the Mean-Only Model\n\n4.17.1 Question: Why did the mean-only model not have an \\(R^2\\)? \n\nIt did but it was just 0. It explained no variance in \\(Y_i\\) because it predicted the same value (mean) for every person. The variance of the predicted values is 0 in the mean-only model.\n\\(R^2=\\frac{S_{\\hat{Y}_i}^2}{S_{Y_i}^2}\\)\nIn fact, the SSE for the mean-only model is the numerator of the formula for the variance for \\(Y_i\\).\n\\(\\text{SSE}=\\frac{\\sum(Y_i-\\hat{Y_i})^2}{}\\)\n\\(S^2 = \\frac{\\sum(Y_i-\\overline{Y})^2}{N-1}\\)\n\nThis leads to an alternative formula for \\(R^2\\) for an augmented model.\n\\(R^2=\\frac{\\text{SSE}_\\text{mean-only}-\\text{SSE}_a}{\\text{SSE}_\\text{mean-only}}\\)\nMean-only model: \\(\\hat{\\text{FPS}}_i=\\beta_0\\)\n\\(\\text{SSE}_{\\text{mean-only}} = 133888.3\\)\nAugmented model: \\(\\hat{\\text{FPS}}_i=\\beta_0 + \\beta_1*\\text{BAC}_i\\)\n\\(\\text{SSE}_a} = 128837.1\\)\n\\(R^2= \\frac{133888.3 - 128837.1}{133888.3} = `r round((sum(residuals(m_1)^2)-sum(residuals(m_2)^2))/sum(residuals(m_1)^2),5)\\)\nIn this augmented model, \\(R^2\\) is fully accounted for by BAC. In more complex models, \\(R^2\\) will be the aggregate of multiple predictors. \\(R^2\\) is only defined for models that include \\(b_0\\).",
+    "text": "4.17 \\(R^2\\) and the Mean-Only Model\n\n4.17.1 Question: Why did the mean-only model not have an \\(R^2\\)? \n\nIt did but it was just 0. It explained no variance in \\(Y_i\\) because it predicted the same value (mean) for every person. The variance of the predicted values is 0 in the mean-only model.\n\\(R^2=\\frac{S_{\\hat{Y}_i}^2}{S_{Y_i}^2}\\)\nIn fact, the SSE for the mean-only model is the numerator of the formula for the variance for \\(Y_i\\).\n\\(\\text{SSE}=\\frac{\\sum(Y_i-\\hat{Y_i})^2}{}\\)\n\\(S^2 = \\frac{\\sum(Y_i-\\overline{Y})^2}{N-1}\\)\n\nThis leads to an alternative formula for \\(R^2\\) for an augmented model.\n\\(R^2=\\frac{\\text{SSE}_\\text{mean-only}-\\text{SSE}_a}{\\text{SSE}_\\text{mean-only}}\\)\nMean-only model: \\(\\hat{\\text{FPS}}_i=\\beta_0\\)\n\\(\\text{SSE}_{\\text{mean-only}} = 133888.3\\)\nAugmented model: \\(\\hat{\\text{FPS}}_i=\\beta_0 + \\beta_1*\\text{BAC}_i\\)\n\\(\\text{SSE}_a = 128837.1\\)\n\\(R^2= \\frac{133888.3 - 128837.1}{133888.3} = 0.03773\\)\nIn this augmented model, \\(R^2\\) is fully accounted for by BAC. In more complex models, \\(R^2\\) will be the aggregate of multiple predictors. \\(R^2\\) is only defined for models that include \\(b_0\\).",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Inferences About a Single Quantitative Predictor</span>"
+    ]
+  },
+  {
+    "objectID": "04_single_quantitative.html#test-of-beta_1-in-two-parameter-model-special-case",
+    "href": "04_single_quantitative.html#test-of-beta_1-in-two-parameter-model-special-case",
+    "title": "4  Inferences About a Single Quantitative Predictor",
+    "section": "4.18 Test of \\(\\beta_1\\) in Two Parameter Model: Special Case",
+    "text": "4.18 Test of \\(\\beta_1\\) in Two Parameter Model: Special Case\n\n4.18.1 Question: When both the predictor variable and the dependent variable are quantitative, the test of \\(\\beta_1\\) = 0 is statistically equivalent to the what other common statistical test? \n\nThe test of the Pearson’s correlation coefficient, r.\n\npsych::corr.test(data$bac, data$fps)\n\nCall:psych::corr.test(x = data$bac, y = data$fps)\nCorrelation matrix \n[1] -0.19\nSample Size \n[1] 96\nThese are the unadjusted probability values.\n  The probability values  adjusted for multiple tests are in the p.adj object. \n[1] 0.06\n\n To see confidence intervals of the correlations, print with the short=FALSE option\n\n\nFurthermore, \\(r^2=R^2\\) for this model only.\n\\(-0.194^2 = 0.038\\)",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Inferences About a Single Quantitative Predictor</span>"
+    ]
+  },
+  {
+    "objectID": "04_single_quantitative.html#visualizing-the-model",
+    "href": "04_single_quantitative.html#visualizing-the-model",
+    "title": "4  Inferences About a Single Quantitative Predictor",
+    "section": "4.19 Visualizing the Model",
+    "text": "4.19 Visualizing the Model\nThe effect() function in the effects package can be used to quickly fit model values and calculate 95% confidence intervals for plotting the model.\n\n(e &lt;- effects::effect('bac', m_2) |&gt;  \n  as_tibble())\n\n# A tibble: 5 × 5\n    bac   fit    se lower upper\n  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 0      42.5  6.55 29.5   55.5\n2 0.035  36.0  4.27 27.5   44.5\n3 0.07   29.6  4.02 21.6   37.5\n4 0.1    24.0  5.68 12.8   35.3\n5 0.14   16.7  8.92 -1.02  34.4\n\n\n\nggplot(e, aes(x = bac, y = fit)) +\n  geom_line() +\n  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2) +\n  labs(title = \"Effect of BAC\",\n       x = \"BAC\",\n       y = \"FPS\")",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Inferences About a Single Quantitative Predictor</span>"
+    ]
+  },
+  {
+    "objectID": "04_single_quantitative.html#displaying-model-results",
+    "href": "04_single_quantitative.html#displaying-model-results",
+    "title": "4  Inferences About a Single Quantitative Predictor",
+    "section": "4.20 Displaying Model Results",
+    "text": "4.20 Displaying Model Results\nError bars/bands\nYou are predicting the mean \\(Y\\) for any \\(X\\). There is a sampling distribution around this mean. The true population mean \\(Y\\) for any \\(X\\) is uncertain. You can display this uncertainty by displaying information about the sampling distribution at any/every \\(X\\). This is equivalent to error bars in ANOVA.",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Inferences About a Single Quantitative Predictor</span>"
     ]

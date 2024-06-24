@@ -309,6 +309,12 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#question-why-did-the-mean-only-model-not-have-an-r2" id="toc-question-why-did-the-mean-only-model-not-have-an-r2" class="nav-link" data-scroll-target="#question-why-did-the-mean-only-model-not-have-an-r2"><span class="header-section-number">4.17.1</span> <span style="color: red;">Question: Why did the mean-only model not have an <span class="math inline">\(R^2\)</span>? </span></a></li>
   </ul></li>
+  <li><a href="#test-of-beta_1-in-two-parameter-model-special-case" id="toc-test-of-beta_1-in-two-parameter-model-special-case" class="nav-link" data-scroll-target="#test-of-beta_1-in-two-parameter-model-special-case"><span class="header-section-number">4.18</span> Test of <span class="math inline">\(\beta_1\)</span> in Two Parameter Model: Special Case</a>
+  <ul class="collapse">
+  <li><a href="#question-when-both-the-predictor-variable-and-the-dependent-variable-are-quantitative-the-test-of-beta_1-0-is-statistically-equivalent-to-the-what-other-common-statistical-test" id="toc-question-when-both-the-predictor-variable-and-the-dependent-variable-are-quantitative-the-test-of-beta_1-0-is-statistically-equivalent-to-the-what-other-common-statistical-test" class="nav-link" data-scroll-target="#question-when-both-the-predictor-variable-and-the-dependent-variable-are-quantitative-the-test-of-beta_1-0-is-statistically-equivalent-to-the-what-other-common-statistical-test"><span class="header-section-number">4.18.1</span> <span style="color: red;">Question: When both the predictor variable and the dependent variable are quantitative, the test of <span class="math inline">\(\beta_1\)</span> = 0 is statistically equivalent to the what other common statistical test? </span></a></li>
+  </ul></li>
+  <li><a href="#visualizing-the-model" id="toc-visualizing-the-model" class="nav-link" data-scroll-target="#visualizing-the-model"><span class="header-section-number">4.19</span> Visualizing the Model</a></li>
+  <li><a href="#displaying-model-results" id="toc-displaying-model-results" class="nav-link" data-scroll-target="#displaying-model-results"><span class="header-section-number">4.20</span> Displaying Model Results</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/04_single_quantitative.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -994,13 +1000,79 @@ Proportion of explained variance (i.e., proportion of variance in <span class="m
 <p>Mean-only model: <span class="math inline">\(\hat{\text{FPS}}_i=\beta_0\)</span></p>
 <p><span class="math inline">\(\text{SSE}_{\text{mean-only}} = 133888.3\)</span></p>
 <p>Augmented model: <span class="math inline">\(\hat{\text{FPS}}_i=\beta_0 + \beta_1*\text{BAC}_i\)</span></p>
-<p><span class="math inline">\(\text{SSE}_a} = 128837.1\)</span></p>
-<p><span class="math inline">\(R^2= \frac{133888.3 - 128837.1}{133888.3} = `r round((sum(residuals(m_1)^2)-sum(residuals(m_2)^2))/sum(residuals(m_1)^2),5)\)</span></p>
+<p><span class="math inline">\(\text{SSE}_a = 128837.1\)</span></p>
+<p><span class="math inline">\(R^2= \frac{133888.3 - 128837.1}{133888.3} = 0.03773\)</span></p>
 <p>In this augmented model, <span class="math inline">\(R^2\)</span> is fully accounted for by BAC. In more complex models, <span class="math inline">\(R^2\)</span> will be the aggregate of multiple predictors. <span class="math inline">\(R^2\)</span> is only defined for models that include <span class="math inline">\(b_0\)</span>.</p>
+<hr>
+</section>
+</section>
+<section id="test-of-beta_1-in-two-parameter-model-special-case" class="level2" data-number="4.18">
+<h2 data-number="4.18" class="anchored" data-anchor-id="test-of-beta_1-in-two-parameter-model-special-case"><span class="header-section-number">4.18</span> Test of <span class="math inline">\(\beta_1\)</span> in Two Parameter Model: Special Case</h2>
+<section id="question-when-both-the-predictor-variable-and-the-dependent-variable-are-quantitative-the-test-of-beta_1-0-is-statistically-equivalent-to-the-what-other-common-statistical-test" class="level3" data-number="4.18.1">
+<h3 data-number="4.18.1" class="anchored" data-anchor-id="question-when-both-the-predictor-variable-and-the-dependent-variable-are-quantitative-the-test-of-beta_1-0-is-statistically-equivalent-to-the-what-other-common-statistical-test"><span class="header-section-number">4.18.1</span> <span style="color: red;">Question: When both the predictor variable and the dependent variable are quantitative, the test of <span class="math inline">\(\beta_1\)</span> = 0 is statistically equivalent to the what other common statistical test? </span></h3>
+<hr>
+<p><strong>The test of the Pearson’s correlation coefficient, r.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">corr.test</span>(data<span class="sc">$</span>bac, data<span class="sc">$</span>fps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:psych::corr.test(x = data$bac, y = data$fps)
+Correlation matrix 
+[1] -0.19
+Sample Size 
+[1] 96
+These are the unadjusted probability values.
+  The probability values  adjusted for multiple tests are in the p.adj object. 
+[1] 0.06
+
+ To see confidence intervals of the correlations, print with the short=FALSE option</code></pre>
+</div>
+</div>
+<p><strong>Furthermore, <span class="math inline">\(r^2=R^2\)</span> for this model only.</strong></p>
+<p><span class="math inline">\(-0.194^2 = 0.038\)</span></p>
+<hr>
+</section>
+</section>
+<section id="visualizing-the-model" class="level2" data-number="4.19">
+<h2 data-number="4.19" class="anchored" data-anchor-id="visualizing-the-model"><span class="header-section-number">4.19</span> Visualizing the Model</h2>
+<p>The <code>effect()</code> function in the <code>effects</code> package can be used to quickly fit model values and calculate 95% confidence intervals for plotting the model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>(e <span class="ot">&lt;-</span> effects<span class="sc">::</span><span class="fu">effect</span>(<span class="st">'bac'</span>, m_2) <span class="sc">|&gt;</span>  </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+    bac   fit    se lower upper
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 0      42.5  6.55 29.5   55.5
+2 0.035  36.0  4.27 27.5   44.5
+3 0.07   29.6  4.02 21.6   37.5
+4 0.1    24.0  5.68 12.8   35.3
+5 0.14   16.7  8.92 -1.02  34.4</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(e, <span class="fu">aes</span>(<span class="at">x =</span> bac, <span class="at">y =</span> fit)) <span class="sc">+</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Effect of BAC"</span>,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"BAC"</span>,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"FPS"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_single_quantitative_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="displaying-model-results" class="level2" data-number="4.20">
+<h2 data-number="4.20" class="anchored" data-anchor-id="displaying-model-results"><span class="header-section-number">4.20</span> Displaying Model Results</h2>
+<p><strong>Error bars/bands</strong></p>
+<p>You are predicting the mean <span class="math inline">\(Y\)</span> for any <span class="math inline">\(X\)</span>. There is a sampling distribution around this mean. The true population mean <span class="math inline">\(Y\)</span> for any <span class="math inline">\(X\)</span> is uncertain. You can display this uncertainty by displaying information about the sampling distribution at any/every <span class="math inline">\(X\)</span>. This is equivalent to error bars in ANOVA.</p>
 <hr>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
