@@ -299,6 +299,11 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#question-how-can-we-tell-if-a-parameter-is-significant-from-the-confidence-interval" id="toc-question-how-can-we-tell-if-a-parameter-is-significant-from-the-confidence-interval" class="nav-link" data-scroll-target="#question-how-can-we-tell-if-a-parameter-is-significant-from-the-confidence-interval"><span class="header-section-number">4.14.1</span> <span style="color: red;">Question: How can we tell if a parameter is <em>significant</em> from the confidence interval?</span></a></li>
   </ul></li>
+  <li><a href="#partial-eta-squared-eta_p2-or-pre-for-beta_1" id="toc-partial-eta-squared-eta_p2-or-pre-for-beta_1" class="nav-link" data-scroll-target="#partial-eta-squared-eta_p2-or-pre-for-beta_1"><span class="header-section-number">4.15</span> Partial Eta Squared (<span class="math inline">\(\eta_p^2\)</span>) or PRE for <span class="math inline">\(\beta_1\)</span></a>
+  <ul class="collapse">
+  <li><a href="#question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_1" id="toc-question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_1" class="nav-link" data-scroll-target="#question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_1"><span class="header-section-number">4.15.1</span> <span style="color: red;">Question: How can you calculate the effect size estimate <span class="math inline">\(\eta_p^2\)</span> (PRE) for <span class="math inline">\(\beta_1\)</span>? </span></a></li>
+  <li><a href="#question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_0" id="toc-question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_0" class="nav-link" data-scroll-target="#question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_0"><span class="header-section-number">4.15.2</span> <span style="color: red;">Question: How can you calculate the effect size estimate <span class="math inline">\(\eta_p^2\)</span> (PRE) for <span class="math inline">\(\beta_0\)</span>? </span></a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/04_single_quantitative.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -732,8 +737,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># missing from anova summary</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># r-squared -  var(predict(m_2))/ var(data$fps)</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># partial eta squared</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># r-squared -  </span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># var(predict(m_2))/ var(data$fps)</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># partial eta squared - </span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (sum(residuals(m_1)^2) - sum(residuals(m_2)^2))/ sum(residuals(m_1)^2)</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># These ideas are introduced later in the unit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 </section>
@@ -902,6 +910,56 @@ bac         -374.49261  6.308724</code></pre>
 <h3 data-number="4.14.1" class="anchored" data-anchor-id="question-how-can-we-tell-if-a-parameter-is-significant-from-the-confidence-interval"><span class="header-section-number">4.14.1</span> <span style="color: red;">Question: How can we tell if a parameter is <em>significant</em> from the confidence interval?</span></h3>
 <hr>
 <p><strong>If a parameter <span class="math inline">\(\neq 0\)</span>, at <span class="math inline">\(\alpha\)</span> = .05, then the 95% confidence interval should not include 0. True for any other non-zero value for <span class="math inline">\(b\)</span> as well.</strong></p>
+<hr>
+</section>
+</section>
+<section id="partial-eta-squared-eta_p2-or-pre-for-beta_1" class="level2" data-number="4.15">
+<h2 data-number="4.15" class="anchored" data-anchor-id="partial-eta-squared-eta_p2-or-pre-for-beta_1"><span class="header-section-number">4.15</span> Partial Eta Squared (<span class="math inline">\(\eta_p^2\)</span>) or PRE for <span class="math inline">\(\beta_1\)</span></h2>
+<section id="question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_1" class="level3" data-number="4.15.1">
+<h3 data-number="4.15.1" class="anchored" data-anchor-id="question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_1"><span class="header-section-number">4.15.1</span> <span style="color: red;">Question: How can you calculate the effect size estimate <span class="math inline">\(\eta_p^2\)</span> (PRE) for <span class="math inline">\(\beta_1\)</span>? </span></h3>
+<hr>
+<p><strong>Compare the SSE across the two relevant models.</strong></p>
+<p><strong>Compact model: <span class="math inline">\(\hat{\text{FPS}}_i= \beta_0 + 0* \text{BAC}_i\)</span></strong><br>
+<span class="math inline">\(\text{SSE}_c =  133888.3\)</span></p>
+<p><strong>Augmented model: <span class="math inline">\(\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i\)</span></strong><br>
+<span class="math inline">\(\text{SSE}_a =  round(sum(residuals(m_2)^2), 1)\)</span></p>
+<p><span class="math inline">\(\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{133888.3- 128837.1}{133888.3}= 0.038\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(<span class="fu">residuals</span>(m_1)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_2)<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">residuals</span>(m_1)<span class="sc">^</span><span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03772707</code></pre>
+</div>
+</div>
+<p>Our augmented model that includes a non-zero effect for BAC reduces prediction error (SSE) by only 3.8% over the compact model that fixes this parameter at 0.</p>
+<hr>
+</section>
+<section id="question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_0" class="level3" data-number="4.15.2">
+<h3 data-number="4.15.2" class="anchored" data-anchor-id="question-how-can-you-calculate-the-effect-size-estimate-eta_p2-pre-for-beta_0"><span class="header-section-number">4.15.2</span> <span style="color: red;">Question: How can you calculate the effect size estimate <span class="math inline">\(\eta_p^2\)</span> (PRE) for <span class="math inline">\(\beta_0\)</span>? </span></h3>
+<hr>
+<p><strong>Compare the SSE across the two relevant models.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-18"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-18-1" class="code-annotation-target"><a href="#annotated-cell-18-1" aria-hidden="true" tabindex="-1"></a>m_1_0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac <span class="sc">-</span> <span class="dv">1</span>, <span class="at">data =</span> data)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-18" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-18" data-code-lines="1" data-code-annotation="1">We can use -1 to remove the intercept (i.e., set it equal to 0) from our new compact model.</span>
+</dd>
+</dl>
+</div>
+</div>
+<p><strong>Compact model: <span class="math inline">\(\hat{\text{FPS}}_i= 0 + \beta_1* \text{BAC}_i\)</span></strong></p>
+<p><span class="math inline">\(\text{SSE}_c =  186462.4\)</span></p>
+<p><strong>Augmented model: <span class="math inline">\(\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i\)</span></strong></p>
+<p><span class="math inline">\(\text{SSE}_a =  round(sum(residuals(m_2)^2), 1)\)</span></p>
+<p><span class="math inline">\(\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{186462.4- 128837.1}{186462.4}= 0.309\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(<span class="fu">residuals</span>(m_1_0)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_2)<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">residuals</span>(m_1_0)<span class="sc">^</span><span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3090451</code></pre>
+</div>
+</div>
+<p>Our augmented model that allows FPS to be non-zero for people with BAC=0 (sober people) reduces prediction error (SSE) by 30.9% from the model that fixes FPS at 0 when BAC=0!</p>
 <hr>
 
 
