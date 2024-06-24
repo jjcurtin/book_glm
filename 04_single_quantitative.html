@@ -287,7 +287,18 @@ window.Quarto = {
   <li><a href="#question-what-is-the-interpretation-of-b_0-in-this-two-parameter-model" id="toc-question-what-is-the-interpretation-of-b_0-in-this-two-parameter-model" class="nav-link" data-scroll-target="#question-what-is-the-interpretation-of-b_0-in-this-two-parameter-model"><span class="header-section-number">4.11.1</span> <span style="color: red;">Question: What is the interpretation of <span class="math inline">\(b_0\)</span> in this two parameter model?</span></a></li>
   <li><a href="#question-what-two-models-are-being-compared" id="toc-question-what-two-models-are-being-compared" class="nav-link" data-scroll-target="#question-what-two-models-are-being-compared"><span class="header-section-number">4.11.2</span> <span style="color: red;">Question: What two models are being compared?</span></a></li>
   </ul></li>
-  <li><a href="#mean-centering-predictor-variables" id="toc-mean-centering-predictor-variables" class="nav-link" data-scroll-target="#mean-centering-predictor-variables"><span class="header-section-number">4.12</span> Mean Centering Predictor Variables</a></li>
+  <li><a href="#mean-centering-predictor-variables" id="toc-mean-centering-predictor-variables" class="nav-link" data-scroll-target="#mean-centering-predictor-variables"><span class="header-section-number">4.12</span> Mean Centering Predictor Variables</a>
+  <ul class="collapse">
+  <li><a href="#question-how-would-the-parameter-estimate-values-and-interpretations-change-if-i-mean-centered-bac" id="toc-question-how-would-the-parameter-estimate-values-and-interpretations-change-if-i-mean-centered-bac" class="nav-link" data-scroll-target="#question-how-would-the-parameter-estimate-values-and-interpretations-change-if-i-mean-centered-bac"><span class="header-section-number">4.12.1</span> <span style="color: red;">Question: How would the parameter estimate values and interpretations change if I mean centered BAC?</span></a></li>
+  </ul></li>
+  <li><a href="#raw-vs.-centered-bac" id="toc-raw-vs.-centered-bac" class="nav-link" data-scroll-target="#raw-vs.-centered-bac"><span class="header-section-number">4.13</span> Raw vs.&nbsp;Centered BAC</a>
+  <ul class="collapse">
+  <li><a href="#question-how-would-the-graph-look-different-where-is-b_0-and-b_1-on-the-new-figure-would-you-center-bac-in-this-example" id="toc-question-how-would-the-graph-look-different-where-is-b_0-and-b_1-on-the-new-figure-would-you-center-bac-in-this-example" class="nav-link" data-scroll-target="#question-how-would-the-graph-look-different-where-is-b_0-and-b_1-on-the-new-figure-would-you-center-bac-in-this-example"><span class="header-section-number">4.13.1</span> <span style="color: red;">Question: How would the graph look different? Where is <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> on the new figure? Would you center BAC in this example?</span></a></li>
+  </ul></li>
+  <li><a href="#confidence-interval-for-b_j-or-b_0" id="toc-confidence-interval-for-b_j-or-b_0" class="nav-link" data-scroll-target="#confidence-interval-for-b_j-or-b_0"><span class="header-section-number">4.14</span> Confidence Interval for <span class="math inline">\(b_j\)</span> or <span class="math inline">\(b_0\)</span></a>
+  <ul class="collapse">
+  <li><a href="#question-how-can-we-tell-if-a-parameter-is-significant-from-the-confidence-interval" id="toc-question-how-can-we-tell-if-a-parameter-is-significant-from-the-confidence-interval" class="nav-link" data-scroll-target="#question-how-can-we-tell-if-a-parameter-is-significant-from-the-confidence-interval"><span class="header-section-number">4.14.1</span> <span style="color: red;">Question: How can we tell if a parameter is <em>significant</em> from the confidence interval?</span></a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/04_single_quantitative.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -720,7 +731,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculte delta r squared and partial eta square</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># missing from anova summary</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># r-squared -  var(predict(m_2))/ var(data$fps)</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># partial eta squared</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 </section>
@@ -822,8 +835,77 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <hr>
+<section id="question-how-would-the-parameter-estimate-values-and-interpretations-change-if-i-mean-centered-bac" class="level3" data-number="4.12.1">
+<h3 data-number="4.12.1" class="anchored" data-anchor-id="question-how-would-the-parameter-estimate-values-and-interpretations-change-if-i-mean-centered-bac"><span class="header-section-number">4.12.1</span> <span style="color: red;">Question: How would the parameter estimate values and interpretations change if I mean centered BAC?</span></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="sc">|&gt;</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic       p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+1 (Intercept)     42.5      6.55      6.48 0.00000000411
+2 bac           -184.      95.9      -1.92 0.0579       </code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>m_2_c <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac_c, <span class="at">data =</span> data)  </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>m_2_c <span class="sc">|&gt;</span> </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)     32.2      3.78      8.52 2.57e-13
+2 bac_c         -184.      95.9      -1.92 5.79e- 2</code></pre>
+</div>
+</div>
+<p><strong>The value and interpretation of <span class="math inline">\(b_0\)</span> will change because it is the predicted FPS score at 0 on <span class="math inline">\(X\)</span>. <span class="math inline">\(b_0\)</span> is now the predicted value for someone with the mean BAC in the sample.</strong></p>
+<p><strong>No change to interpretation of <span class="math inline">\(b_1\)</span>. Why? Think about it…</strong></p>
+</section>
+</section>
+<section id="raw-vs.-centered-bac" class="level2" data-number="4.13">
+<h2 data-number="4.13" class="anchored" data-anchor-id="raw-vs.-centered-bac"><span class="header-section-number">4.13</span> Raw vs.&nbsp;Centered BAC</h2>
+<section id="question-how-would-the-graph-look-different-where-is-b_0-and-b_1-on-the-new-figure-would-you-center-bac-in-this-example" class="level3" data-number="4.13.1">
+<h3 data-number="4.13.1" class="anchored" data-anchor-id="question-how-would-the-graph-look-different-where-is-b_0-and-b_1-on-the-new-figure-would-you-center-bac-in-this-example"><span class="header-section-number">4.13.1</span> <span style="color: red;">Question: How would the graph look different? Where is <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> on the new figure? Would you center BAC in this example?</span></h3>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_single_quantitative_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="confidence-interval-for-b_j-or-b_0" class="level2" data-number="4.14">
+<h2 data-number="4.14" class="anchored" data-anchor-id="confidence-interval-for-b_j-or-b_0"><span class="header-section-number">4.14</span> Confidence Interval for <span class="math inline">\(b_j\)</span> or <span class="math inline">\(b_0\)</span></h2>
+<p>You can provide confidence intervals for each parameter estimate in your model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 2.5 %    97.5 %
+(Intercept)   29.45597 55.457721
+bac         -374.49261  6.308724</code></pre>
+</div>
+</div>
+<p>The underlying logic from your understanding of sampling distributions remains the same.</p>
+<p><span class="math inline">\(CI_b = b\pm t(\alpha; N-P)*SE_b\)</span> where <span class="math inline">\(P\)</span> = total # of parameters.</p>
+<p><br>
+</p>
+<section id="question-how-can-we-tell-if-a-parameter-is-significant-from-the-confidence-interval" class="level3" data-number="4.14.1">
+<h3 data-number="4.14.1" class="anchored" data-anchor-id="question-how-can-we-tell-if-a-parameter-is-significant-from-the-confidence-interval"><span class="header-section-number">4.14.1</span> <span style="color: red;">Question: How can we tell if a parameter is <em>significant</em> from the confidence interval?</span></h3>
+<hr>
+<p><strong>If a parameter <span class="math inline">\(\neq 0\)</span>, at <span class="math inline">\(\alpha\)</span> = .05, then the 95% confidence interval should not include 0. True for any other non-zero value for <span class="math inline">\(b\)</span> as well.</strong></p>
+<hr>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
