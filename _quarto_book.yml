@@ -28,6 +28,7 @@ book:
     - 01_overview.qmd
     - 02_sampling_distributions.qmd
     - 03_single_mean.qmd
+    - 04_single_quantitative.qmd
     - part: Appendices
       chapters:
         - app_terminology.qmd

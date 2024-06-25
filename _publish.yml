@@ -6,3 +6,7 @@
   quarto-pub:
     - id: 436f3f00-00eb-4fbd-8d17-15a01c67d252
       url: 'https://kendra-wyant.quarto.pub/03_single_mean'
+- source: 04_single_quantitative.qmd
+  quarto-pub:
+    - id: 776c00af-79fa-4713-9ce0-58ca6900cf34
+      url: 'https://kendra-wyant.quarto.pub/04_single_quantitative'

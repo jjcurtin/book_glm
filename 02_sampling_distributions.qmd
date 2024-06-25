@@ -128,7 +128,7 @@ A sampling distribution, like a population, is an abstract concept that represen
 library(tidyverse)
 path_data <- "data_lecture"  # <1> 
 
-data <- read_csv(here::here(path_data, "2_sampling_distributions_like_clean.csv"), # <2>
+data <- read_csv(here::here(path_data, "2_sampling_distributions_like.csv"), # <2>
                  show_col_types = FALSE) 
 ```
 1. This path points to where your data is and should be a relative path from your R project. 
