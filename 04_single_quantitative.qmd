@@ -733,21 +733,28 @@ $SE_{b_0}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overline{X})^2
 ## Publication Quality Figure
 
 ```{r}
-
-dNew = data.frame(bac= seq(0,.14,.0001))
-pY = predict(m_2,dNew)
-lines(dNew$bac,pY[,1], col='red', lwd=2)
-lines(dNew$BAC,pY[,2], col='gray', lwd=.5)
-lines(dNew$BAC,pY[,3], col='gray', lwd=.5)
-
-```
-
-```{r}
-ggplot(e, aes(x = bac, y = fit)) +
-  geom_line() +
-  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2) +
+preds <- predict(m_2, data, se.fit = TRUE) |> #<1>
+  as_tibble() |> 
+  mutate(upper = fit + se.fit,  #<2>
+         lower= fit - se.fit)
+plot_pub <- preds |>  
+  ggplot() +
+  geom_point(aes(x = data$bac, y = data$fps), alpha = .6, size = 2) +
+  geom_line(aes(x = data$bac, y =fit),
+              color = "black", linewidth = 1) +
+  geom_ribbon(aes(x = data$bac, ymin = lower, ymax = upper), alpha = 0.2) +
   labs(x = "Blood alcohol concentration",
        y = "Fear-potentiated startle") 
+```
+
+1. We can use our model to generate predictions. We use the `se.fit = TRUE` argument to return the standard error for each prediction.  
+
+2. We use `mutate()` to calculate $\pm$ 1 standard error values for each prediction.   
+
+-----
+
+```{r}
+plot_pub
 ```
 
 -----
