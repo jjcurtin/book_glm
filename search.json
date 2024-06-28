@@ -584,7 +584,7 @@
     "href": "04_single_quantitative.html#testing-inferences-about-beta_1",
     "title": "4  Inferences About a Single Quantitative Predictor",
     "section": "4.6 Testing Inferences about \\(\\beta_1\\)",
-    "text": "4.6 Testing Inferences about \\(\\beta_1\\)\nDoes alcohol affect people’s anxiety?\n\\(\\hat{\\text{FPS}}_i=\\beta_0+\\beta_1*\\text{BAC}_i\\)\n\n\n\nQuestion: What are your null and alternative hypotheses about a model parameter to evaluate this question?\n\n\\(H_0: \\beta_1=0\\)\n\\(H_a: \\beta_1 \\neq 0\\)\n\n\nIf \\(\\beta_1 = 0\\), this means that FPS does not change with changes in BAC. In other words, there is no effect of BAC on FPS. If \\(\\beta_1 &lt; 0\\), this means that FPS decreases with increasing BAC (people are less anxious when drunk). If \\(\\beta_1 &gt; 0\\), this means FPS increases with increasing BAC (people are more anxious when drunk).",
+    "text": "4.6 Testing Inferences about \\(\\beta_1\\)\nDoes alcohol affect people’s anxiety?\n\\(\\hat{\\text{FPS}}_i=\\beta_0+\\beta_1*\\text{BAC}_i\\)\nQuestion: What are your null and alternative hypotheses about a model parameter to evaluate this question?\n\n\\(H_0: \\beta_1=0\\)\n\\(H_a: \\beta_1 \\neq 0\\)\nIf \\(\\beta_1 = 0\\), this means that FPS does not change with changes in BAC. In other words, there is no effect of BAC on FPS. If \\(\\beta_1 &lt; 0\\), this means that FPS decreases with increasing BAC (people are less anxious when drunk).\nIf \\(\\beta_1 &gt; 0\\), this means FPS increases with increasing BAC (people are more anxious when drunk).",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Inferences About a Single Quantitative Predictor</span>"
     ]
