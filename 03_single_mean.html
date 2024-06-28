@@ -481,6 +481,8 @@ This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure wo
 <section id="fear-potentiated-startle-during-threat-of-shock" class="level2" data-number="3.11">
 <h2 data-number="3.11" class="anchored" data-anchor-id="fear-potentiated-startle-during-threat-of-shock"><span class="header-section-number">3.11</span> Fear-potentiated Startle During Threat of Shock</h2>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>()) </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>path_data <span class="ot">&lt;-</span> <span class="st">"data_lecture"</span>  </span>
@@ -488,6 +490,7 @@ This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure wo
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_data, <span class="st">"3_single_mean_fps.csv"</span>), </span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 96
 Columns: 2
@@ -500,12 +503,15 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 <section id="descriptives-and-univariate-plots" class="level2" data-number="3.12">
 <h2 data-number="3.12" class="anchored" data-anchor-id="descriptives-and-univariate-plots"><span class="header-section-number">3.12</span> Descriptives and Univariate Plots</h2>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(fps),</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(fps),</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(fps),</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(fps))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 5
       n  mean    sd   min   max
@@ -515,10 +521,13 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 </div>
 <hr>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> fps)) <span class="sc">+</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"light grey"</span>, <span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span> </span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="sc">-</span><span class="dv">50</span>, <span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -552,7 +561,10 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 <section id="estimating-a-one-parameter-model-in-r" class="level2" data-number="3.14">
 <h2 data-number="3.14" class="anchored" data-anchor-id="estimating-a-one-parameter-model-in-r"><span class="header-section-number">3.14</span> Estimating a One Parameter Model in R</h2>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">lm</span>(fps <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> data)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
@@ -565,7 +577,10 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 <hr>
 <p>We can pull out the errors (<span class="math inline">\(e_i=Y_i-\hat{Y}i\)</span>) for each observation in the sample using <code>residuals()</code></p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">residuals</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>           1            2            3            4            5            6 
  -12.6999127   16.2161040  -54.7193405  -25.4670572   57.4678817    8.3829373 
@@ -604,7 +619,10 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 <hr>
 <p>We can also easily calculate the SSE with the following code:</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">residuals</span>(m)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 133888.3</code></pre>
 </div>
@@ -616,7 +634,10 @@ This tells us about how well the model fits the data. Specifically it is the sum
 <p>We can get the predicted value for each individual in the sample using this model with the function <code>predict()</code>.</p>
 <p><span class="math inline">\(\hat{Y}=32.19\)</span></p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1        2        3        4        5        6        7        8 
 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 
@@ -647,8 +668,11 @@ This tells us about how well the model fits the data. Specifically it is the sum
 <hr>
 <p>We also may want to look at the parameter coefficients (in this case we are only looking at the intercept). We can use the <code>tidy()</code> function from the <code>broom</code> package to do this.</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>m <span class="sc">|&gt;</span> </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 5
   term        estimate std.error statistic  p.value
@@ -682,7 +706,10 @@ This tells us about how well the model fits the data. Specifically it is the sum
 <hr>
 <p>We can use <code>pt()</code> to calculate the <span class="math inline">\(p\)</span> value.</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="fl">8.40</span>,<span class="dv">95</span>,<span class="at">lower.tail=</span><span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0000000000004293253</code></pre>
 </div>
@@ -692,12 +719,15 @@ This tells us about how well the model fits the data. Specifically it is the sum
 The probability of obtaining a sample <span class="math inline">\(b_0\)</span> = 32.2 (or more extreme) if <span class="math inline">\(H_0\)</span> is true is very low (&lt; .05). Therefore we reject <span class="math inline">\(H_0\)</span> and conclude that <span class="math inline">\(\beta_0 \neq 0\)</span> and <span class="math inline">\(b_0\)</span> is our best (unbiased) estimate of it.</p>
 <hr>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">b0 =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">40</span>,<span class="dv">40</span>,.<span class="dv">01</span>),</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">probability =</span> <span class="fu">dt</span>(b0<span class="sc">/</span>broom<span class="sc">::</span><span class="fu">tidy</span>(m)<span class="sc">$</span>std.error, m<span class="sc">$</span>df.residual)) <span class="sc">|&gt;</span> </span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> b0, <span class="at">y =</span> probability)) <span class="sc">+</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> broom<span class="sc">::</span><span class="fu">tidy</span>(m)<span class="sc">$</span>estimate, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Sampling Distribution for b0"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -742,6 +772,8 @@ Choosing between these two models is equivalent to testing if <span class="math 
 <section id="model-comparison-plots" class="level2" data-number="3.18">
 <h2 data-number="3.18" class="anchored" data-anchor-id="model-comparison-plots"><span class="header-section-number">3.18</span> Model Comparison Plots</h2>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> fps)) <span class="sc">+</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
@@ -750,6 +782,7 @@ Choosing between these two models is equivalent to testing if <span class="math 
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> broom<span class="sc">::</span><span class="fu">tidy</span>(m)<span class="sc">$</span>estimate, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -768,21 +801,30 @@ Augmented model: <span class="math inline">\(\hat{\text{FPS}_i}=\beta_0 (\approx
 <p><span class="math inline">\(\text{SSE}=\sum(Y_i-\hat{Y}_i)^2\)</span></p>
 <p><span class="math inline">\(\text{SSE}_c = \sum(Y_i-0)^2\)</span></p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((data<span class="sc">$</span>fps <span class="sc">-</span> <span class="dv">0</span>)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 233368.3</code></pre>
 </div>
 </div>
 <p><span class="math inline">\(\text{SSE}_a = \sum(Y_i- 32.2 )^2\)</span></p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((data<span class="sc">$</span>fps <span class="sc">-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(m)<span class="sc">$</span>estimate)<span class="sc">^</span><span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 133888.3</code></pre>
 </div>
 </div>
 <p>or</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">residuals</span>(m)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 133888.3</code></pre>
 </div>
@@ -802,7 +844,10 @@ P = 1<br>
 <p><span class="math inline">\(F(1-0, 96 -1)= \frac{(233368.3 - 133888.3)/(1-0)}{133888.3 / (96 - 1)}\)</span></p>
 <p><span class="math inline">\(F(1, 95 )= 70.59, p &lt; .0001\)</span></p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pf</span>(<span class="fl">70.59</span>, <span class="dv">1</span>, <span class="dv">95</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0000000000004255967</code></pre>
 </div>
@@ -868,7 +913,10 @@ P = 1<br>
 <h2 data-number="3.22" class="anchored" data-anchor-id="confidence-interval-for-b_0"><span class="header-section-number">3.22</span> Confidence Interval for <span class="math inline">\(b_0\)</span></h2>
 <p>A confidence interval (CI) is an interval for a parameter estimate in which you can be fairly confident that you will capture the true population parameter (in this case, <span class="math inline">\(\beta_0\)</span>).Most commonly reported is the 95% CI. Across repeated samples, 95% of the calculated CIs will include the population parameter.</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-16-1" class="code-annotation-target"><a href="#annotated-cell-16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
@@ -911,7 +959,10 @@ P = 1<br>
 <hr>
 <p><strong>The one sample t-test testing if a population mean = 0.</strong></p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(data<span class="sc">$</span>fps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
@@ -943,7 +994,10 @@ mean of x
 </p>
 <p><strong>Option 3: Does the confidence interval for the parameter estimate contain this other value? No p-value provided.</strong></p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>               2.5 %   97.5 %
 (Intercept) 24.58426 39.79742</code></pre>

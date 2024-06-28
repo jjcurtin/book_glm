@@ -426,11 +426,14 @@ A sampling distribution, like a population, is an abstract concept that represen
 <section id="ocean-liking-scale-scores-in-full-population" class="level2" data-number="2.8">
 <h2 data-number="2.8" class="anchored" data-anchor-id="ocean-liking-scale-scores-in-full-population"><span class="header-section-number">2.8</span> Ocean Liking Scale Scores in Full Population</h2>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a>path_data <span class="ot">&lt;-</span> <span class="st">"data_lecture"</span></span>
 <span id="annotated-cell-1-3"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-4" class="code-annotation-target"><a href="#annotated-cell-1-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_data, <span class="st">"2_sampling_distributions_like.csv"</span>),</span>
 <span id="annotated-cell-1-5"><a href="#annotated-cell-1-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) </span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
@@ -449,8 +452,11 @@ A sampling distribution, like a population, is an abstract concept that represen
 <code>view()</code> allows you to open up the data frame in rstudio.</p>
 <p><code>glimpse()</code> is a useful function that you can pipe tibbles into when first reading them in. It shows you useful information, like number of rows and column, variable (column) names, a sample of what the data look like, and the class of each variable (e.g., double, character, factor).</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 10,000
 Columns: 2
@@ -461,8 +467,11 @@ $ like_score &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 
 <hr>
 <p><code>skim()</code> and other functions in the <code>skimr</code> package are helpful for quick summaries of your data (e.g., missingness, distribution, type of data)</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <caption>Data summary</caption>
@@ -565,10 +574,13 @@ $ like_score &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 
 <hr>
 <p>If we want less information about the distribution we can use <code>summarise</code> and specify the descriptive statistics we want.</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(like_score),</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(like_score))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
       n      mean    sd
@@ -579,6 +591,8 @@ $ like_score &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 
 <hr>
 <p>You can also pull out a few rows to look at your data. This can be done using <code>slice_head()</code> to pull out <span class="math inline">\(n\)</span> top rows of the data set, <code>slice_tail()</code> to pull out <span class="math inline">\(n\)</span> bottom rows of the data set, or <code>slice_sample()</code> to pull out a random <span class="math inline">\(n\)</span> of rows from the data set.</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
 <span id="annotated-cell-5-2"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>) </span>
 <span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -588,6 +602,7 @@ $ like_score &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-5-7" class="code-annotation-target"><a href="#annotated-cell-5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
 <span id="annotated-cell-5-8"><a href="#annotated-cell-5-8" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
 <span id="annotated-cell-5-9"><a href="#annotated-cell-5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">5</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
@@ -625,11 +640,14 @@ $ like_score &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 
 </div>
 <hr>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a>plot_raw <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
 <span id="annotated-cell-6-2"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> like_score)) <span class="sc">+</span></span>
 <span id="annotated-cell-6-3"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"light grey"</span>, <span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span> </span>
 <span id="annotated-cell-6-4"><a href="#annotated-cell-6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">100</span>)) <span class="sc">+</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-6-5" class="code-annotation-target"><a href="#annotated-cell-6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
@@ -640,10 +658,16 @@ $ like_score &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 
 </div>
 </div>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plot_raw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -679,6 +703,8 @@ $ like_score &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 
 <h2 data-number="2.10" class="anchored" data-anchor-id="obtain-a-sample"><span class="header-section-number">2.10</span> Obtain a Sample</h2>
 <p>You are a poor graduate student. All you can afford is <span class="math inline">\(N = 10\)</span>.</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2005</span>) </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data_sample_1 <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
@@ -687,6 +713,7 @@ $ like_score &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(like_score),</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(like_score))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
       n  mean    sd
@@ -701,6 +728,8 @@ $ like_score &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 
 <hr>
 <p>Your friend is a poor graduate student too. All she can afford is <span class="math inline">\(N = 10\)</span> too.</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data_sample_2 <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -708,6 +737,7 @@ $ like_score &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(like_score),</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(like_score))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
       n  mean    sd
@@ -737,12 +767,15 @@ For the mean, you can think of the sampling distribution conceptually as follows
 <section id="samples-of-n10" class="level3" data-number="2.11.1">
 <h3 data-number="2.11.1" class="anchored" data-anchor-id="samples-of-n10"><span class="header-section-number">2.11.1</span> 1000 Samples of <span class="math inline">\(N\)</span>=10</h3>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-11-1" class="code-annotation-target"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a>get_sample_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(data, n_sub) {</span>
 <span id="annotated-cell-11-2"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span> </span>
 <span id="annotated-cell-11-3"><a href="#annotated-cell-11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> n_sub) <span class="sc">|&gt;</span> </span>
 <span id="annotated-cell-11-4"><a href="#annotated-cell-11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">sd =</span> sd), <span class="at">.names =</span> <span class="st">"{fn}"</span>)) <span class="sc">|&gt;</span> </span>
 <span id="annotated-cell-11-5"><a href="#annotated-cell-11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n =</span> n_sub) </span>
 <span id="annotated-cell-11-6"><a href="#annotated-cell-11-6" aria-hidden="true" tabindex="-1"></a>}</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
@@ -753,12 +786,15 @@ For the mean, you can think of the sampling distribution conceptually as follows
 </div>
 </div>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-12-1"><a href="#annotated-cell-12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
 <span id="annotated-cell-12-2"><a href="#annotated-cell-12-2" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span> <span class="sc">|&gt;</span> </span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-12-3" class="code-annotation-target"><a href="#annotated-cell-12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(i) <span class="fu">get_sample_mean</span>(<span class="at">data =</span> data[, <span class="st">"like_score"</span>], <span class="at">n_sub =</span> <span class="dv">10</span>)) <span class="sc">|&gt;</span></span>
 <span id="annotated-cell-12-4"><a href="#annotated-cell-12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>()</span>
 <span id="annotated-cell-12-5"><a href="#annotated-cell-12-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-12-6"><a href="#annotated-cell-12-6" aria-hidden="true" tabindex="-1"></a>samples</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
@@ -789,22 +825,28 @@ For the mean, you can think of the sampling distribution conceptually as follows
 <section id="sampling-distribution-of-the-mean-1" class="level3" data-number="2.11.2">
 <h3 data-number="2.11.2" class="anchored" data-anchor-id="sampling-distribution-of-the-mean-1"><span class="header-section-number">2.11.2</span> Sampling Distribution of the Mean</h3>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>samples <span class="sc">|&gt;</span> </span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_m =</span> <span class="fu">mean</span>(mean), </span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
       n mean_m    sd
   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;
 1  1000 -0.238  7.69</code></pre>
 </div>
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plot_samples <span class="ot">&lt;-</span> samples <span class="sc">|&gt;</span> </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean)) <span class="sc">+</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"light grey"</span>, <span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span> </span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">"sample means"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">100</span>))</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>plot_samples</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -821,7 +863,10 @@ For the mean, you can think of the sampling distribution conceptually as follows
 <h2 data-number="2.12" class="anchored" data-anchor-id="raw-score-distribution-vs.-sampling-distribution"><span class="header-section-number">2.12</span> Raw Score Distribution vs.&nbsp;Sampling Distribution</h2>
 <p>The distinction between the raw score distribution and your sample distribution is very important to keep clear in your mind!</p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="annotated-cell-15"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-15" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-15-1" class="code-annotation-target"><a href="#annotated-cell-15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-15" data-target-annotation="1">1</dt>
@@ -832,7 +877,10 @@ For the mean, you can think of the sampling distribution conceptually as follows
 </div>
 </div>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plot_raw <span class="sc">+</span> plot_samples</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1073,7 +1121,10 @@ Think about it……</p>
 <h2 data-number="2.22" class="anchored" data-anchor-id="our-first-inferential-test-the-z-test"><span class="header-section-number">2.22</span> Our First Inferential Test: The z-test</h2>
 <p><span class="math inline">\(z = \frac{2.4 - 0}{7.5} = 0.32; p \le .749\)</span></p>
 <div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">0.32</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">2</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7489683</code></pre>
 </div>
