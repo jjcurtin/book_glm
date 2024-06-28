@@ -534,17 +534,7 @@
     "href": "04_single_quantitative.html",
     "title": "4  Inferences About a Single Quantitative Predictor",
     "section": "",
-    "text": "4.1 Two Parameter (One Predictor) Models\nWe started with a very simple model of FPS: \\(\\hat{\\text{FPS}}= \\beta_0\\)\nWhat if some participants were drunk and we knew their blood alcohol concentrations (BAC)?",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Inferences About a Single Quantitative Predictor</span>"
-    ]
-  },
-  {
-    "objectID": "04_single_quantitative.html#two-parameter-one-predictor-models",
-    "href": "04_single_quantitative.html#two-parameter-one-predictor-models",
-    "title": "4  Inferences About a Single Quantitative Predictor",
-    "section": "",
-    "text": "4.1.1 Question: Would it help? What would the model look like? What question(s) does this model allow us to test?\n\nDATA = MODEL + ERROR\n\\(Y_i= \\beta_0+\\beta_1*X_1+\\varepsilon_i\\)\n\\(\\hat{Y}_i=\\beta_0+\\beta_1*X_1\\)\n\\(\\varepsilon_i = Y_i - \\hat{Y}_i\\)\n\n\\(\\hat{\\text{FPS}}_i=\\beta_0+\\beta_1*\\text{BAC}_1\\)",
+    "text": "4.1 Two Parameter (One Predictor) Models\nWe started with a very simple model of FPS: \\(\\hat{\\text{FPS}}= \\beta_0\\)\nWhat if some participants were drunk and we knew their blood alcohol concentrations (BAC)?\nQuestion: Would it help? What would the model look like? What question(s) does this model allow us to test?\nDATA = MODEL + ERROR\n\\(Y_i= \\beta_0+\\beta_1*X_1+\\varepsilon_i\\)\n\\(\\hat{Y}_i=\\beta_0+\\beta_1*X_1\\)\n\\(\\varepsilon_i = Y_i - \\hat{Y}_i\\)\n\\(\\hat{\\text{FPS}}_i=\\beta_0+\\beta_1*\\text{BAC}_1\\)",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Inferences About a Single Quantitative Predictor</span>"
     ]
@@ -574,7 +564,7 @@
     "href": "04_single_quantitative.html#interpretation-of-b_0-in-two-parameter-model",
     "title": "4  Inferences About a Single Quantitative Predictor",
     "section": "4.4 Interpretation of \\(b_0\\) in Two Parameter Model",
-    "text": "4.4 Interpretation of \\(b_0\\) in Two Parameter Model\n\\(\\hat{Y}_i=b_0+b_1*X_1\\)\n\\(b_0\\) is predicted value for \\(Y\\) when \\(X_1\\) = 0. Graphically, this is the \\(Y\\) intercept for the regression line (value of \\(Y\\) where regression line crosses Y-axis at \\(X_1\\) = 0).\n\n4.4.1 Question: Approximately what is \\(b_0\\) in this example?\n\n\n\n\n\n\n\n\n\n\n42.5\nIMPORTANT: Notice that \\(b_0\\) is very different in the two parameter model (42.5) than in the previous one parameter model (32.2).\n\n\n\n\n\n\n\n\n\n\n\n4.4.2 Question: Why?\n\nIn the one parameter model \\(b_0\\) was our sample estimate of the mean FPS score in everyone. \\(b_0\\) in the two parameter model is our sample estimate of the mean FPS score for people with BAC = 0, not everyone.",
+    "text": "4.4 Interpretation of \\(b_0\\) in Two Parameter Model\n\\(\\hat{Y}_i=b_0+b_1*X_1\\)\n\\(b_0\\) is predicted value for \\(Y\\) when \\(X_1\\) = 0. Graphically, this is the \\(Y\\) intercept for the regression line (value of \\(Y\\) where regression line crosses Y-axis at \\(X_1\\) = 0).\n\n4.4.1 Question: Approximately what is \\(b_0\\) in this example?\n\n\n\n\n\n\n\n\n\n\n42.5\nIMPORTANT: Notice that \\(b_0\\) is very different in the two parameter model (42.5) than in the previous one parameter model (32.2).\n\n\n\n\n\n\n\n\n\nQuestion: Why?\n\nIn the one parameter model \\(b_0\\) was our sample estimate of the mean FPS score in everyone. \\(b_0\\) in the two parameter model is our sample estimate of the mean FPS score for people with BAC = 0, not everyone.",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Inferences About a Single Quantitative Predictor</span>"
     ]
@@ -594,7 +584,7 @@
     "href": "04_single_quantitative.html#testing-inferences-about-beta_1",
     "title": "4  Inferences About a Single Quantitative Predictor",
     "section": "4.6 Testing Inferences about \\(\\beta_1\\)",
-    "text": "4.6 Testing Inferences about \\(\\beta_1\\)\nDoes alcohol affect people’s anxiety?\n\\(\\hat{\\text{FPS}}_i=\\beta_0+\\beta_1*\\text{BAC}_i\\)\n\n\n\n\n4.6.1 Question: What are your null and alternative hypotheses about a model parameter to evaluate this question?\n\n\\(H_0: \\beta_1=0\\)\n\\(H_a: \\beta_1 \\neq 0\\)\n\n\nIf \\(\\beta_1 = 0\\), this means that FPS does not change with changes in BAC. In other words, there is no effect of BAC on FPS. If \\(\\beta_1 &lt; 0\\), this means that FPS decreases with increasing BAC (people are less anxious when drunk). If \\(\\beta_1 &gt; 0\\), this means FPS increases with increasing BAC (people are more anxious when drunk).",
+    "text": "4.6 Testing Inferences about \\(\\beta_1\\)\nDoes alcohol affect people’s anxiety?\n\\(\\hat{\\text{FPS}}_i=\\beta_0+\\beta_1*\\text{BAC}_i\\)\n\n\n\nQuestion: What are your null and alternative hypotheses about a model parameter to evaluate this question?\n\n\\(H_0: \\beta_1=0\\)\n\\(H_a: \\beta_1 \\neq 0\\)\n\n\nIf \\(\\beta_1 = 0\\), this means that FPS does not change with changes in BAC. In other words, there is no effect of BAC on FPS. If \\(\\beta_1 &lt; 0\\), this means that FPS decreases with increasing BAC (people are less anxious when drunk). If \\(\\beta_1 &gt; 0\\), this means FPS increases with increasing BAC (people are more anxious when drunk).",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Inferences About a Single Quantitative Predictor</span>"
     ]

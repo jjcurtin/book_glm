@@ -252,22 +252,15 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#two-parameter-one-predictor-models" id="toc-two-parameter-one-predictor-models" class="nav-link active" data-scroll-target="#two-parameter-one-predictor-models"><span class="header-section-number">4.1</span> Two Parameter (One Predictor) Models</a>
-  <ul class="collapse">
-  <li><a href="#question-would-it-help-what-would-the-model-look-like-what-questions-does-this-model-allow-us-to-test" id="toc-question-would-it-help-what-would-the-model-look-like-what-questions-does-this-model-allow-us-to-test" class="nav-link" data-scroll-target="#question-would-it-help-what-would-the-model-look-like-what-questions-does-this-model-allow-us-to-test"><span class="header-section-number">4.1.1</span> <span style="color: red;">Question: Would it help? What would the model look like? What question(s) does this model allow us to test?</span></a></li>
-  </ul></li>
+  <li><a href="#two-parameter-one-predictor-models" id="toc-two-parameter-one-predictor-models" class="nav-link active" data-scroll-target="#two-parameter-one-predictor-models"><span class="header-section-number">4.1</span> Two Parameter (One Predictor) Models</a></li>
   <li><a href="#the-two-parameter-model" id="toc-the-two-parameter-model" class="nav-link" data-scroll-target="#the-two-parameter-model"><span class="header-section-number">4.2</span> The Two Parameter Model</a></li>
   <li><a href="#least-squares-criterion" id="toc-least-squares-criterion" class="nav-link" data-scroll-target="#least-squares-criterion"><span class="header-section-number">4.3</span> Least Squares Criterion</a></li>
   <li><a href="#interpretation-of-b_0-in-two-parameter-model" id="toc-interpretation-of-b_0-in-two-parameter-model" class="nav-link" data-scroll-target="#interpretation-of-b_0-in-two-parameter-model"><span class="header-section-number">4.4</span> Interpretation of <span class="math inline">\(b_0\)</span> in Two Parameter Model</a>
   <ul class="collapse">
   <li><a href="#question-approximately-what-is-b_0-in-this-example" id="toc-question-approximately-what-is-b_0-in-this-example" class="nav-link" data-scroll-target="#question-approximately-what-is-b_0-in-this-example"><span class="header-section-number">4.4.1</span> <span style="color: red;">Question: Approximately what is <span class="math inline">\(b_0\)</span> in this example?</span></a></li>
-  <li><a href="#question-why" id="toc-question-why" class="nav-link" data-scroll-target="#question-why"><span class="header-section-number">4.4.2</span> <span style="color: red;">Question: Why?</span></a></li>
   </ul></li>
   <li><a href="#interpretation-of-b_1-in-two-parameter-model" id="toc-interpretation-of-b_1-in-two-parameter-model" class="nav-link" data-scroll-target="#interpretation-of-b_1-in-two-parameter-model"><span class="header-section-number">4.5</span> Interpretation of <span class="math inline">\(b_1\)</span> in Two Parameter Model</a></li>
-  <li><a href="#testing-inferences-about-beta_1" id="toc-testing-inferences-about-beta_1" class="nav-link" data-scroll-target="#testing-inferences-about-beta_1"><span class="header-section-number">4.6</span> Testing Inferences about <span class="math inline">\(\beta_1\)</span></a>
-  <ul class="collapse">
-  <li><a href="#question-what-are-your-null-and-alternative-hypotheses-about-a-model-parameter-to-evaluate-this-question" id="toc-question-what-are-your-null-and-alternative-hypotheses-about-a-model-parameter-to-evaluate-this-question" class="nav-link" data-scroll-target="#question-what-are-your-null-and-alternative-hypotheses-about-a-model-parameter-to-evaluate-this-question"><span class="header-section-number">4.6.1</span> <span style="color: red;">Question: What are your null and alternative hypotheses about a model parameter to evaluate this question?</span></a></li>
-  </ul></li>
+  <li><a href="#testing-inferences-about-beta_1" id="toc-testing-inferences-about-beta_1" class="nav-link" data-scroll-target="#testing-inferences-about-beta_1"><span class="header-section-number">4.6</span> Testing Inferences about <span class="math inline">\(\beta_1\)</span></a></li>
   <li><a href="#estimating-a-two-parameter-model-in-r" id="toc-estimating-a-two-parameter-model-in-r" class="nav-link" data-scroll-target="#estimating-a-two-parameter-model-in-r"><span class="header-section-number">4.7</span> Estimating a Two Parameter Model in R</a>
   <ul class="collapse">
   <li><a href="#question-does-bac-affect-fps-explain-this-conclusion-in-terms-of-the-parameter-estimate-b_1-and-its-standard-error." id="toc-question-does-bac-affect-fps-explain-this-conclusion-in-terms-of-the-parameter-estimate-b_1-and-its-standard-error." class="nav-link" data-scroll-target="#question-does-bac-affect-fps-explain-this-conclusion-in-terms-of-the-parameter-estimate-b_1-and-its-standard-error."><span class="header-section-number">4.7.1</span> <span style="color: red;">Question: Does BAC affect FPS? Explain this conclusion in terms of the parameter estimate, <span class="math inline">\(b_1\)</span> and its standard error.</span></a></li>
@@ -352,15 +345,14 @@ window.Quarto = {
 <p>What if some participants were drunk and we knew their blood alcohol concentrations (BAC)?</p>
 <p><br>
 </p>
-<section id="question-would-it-help-what-would-the-model-look-like-what-questions-does-this-model-allow-us-to-test" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="question-would-it-help-what-would-the-model-look-like-what-questions-does-this-model-allow-us-to-test"><span class="header-section-number">4.1.1</span> <span style="color: red;">Question: Would it help? What would the model look like? What question(s) does this model allow us to test?</span></h3>
+<p><span style="color: red;">Question: Would it help? What would the model look like? What question(s) does this model allow us to test?</span></p>
 <hr>
-<p><strong>DATA = MODEL + ERROR</strong></p>
-<p><span class="math inline">\(Y_i= \beta_0+\beta_1*X_1+\varepsilon_i\)</span></p>
-<p><span class="math inline">\(\hat{Y}_i=\beta_0+\beta_1*X_1\)</span></p>
-<p><span class="math inline">\(\varepsilon_i = Y_i - \hat{Y}_i\)</span></p>
+<p><span style="color: blue;"><strong>DATA = MODEL + ERROR</strong></span></p>
+<p><span style="color: blue;"><span class="math inline">\(Y_i= \beta_0+\beta_1*X_1+\varepsilon_i\)</span></span></p>
+<p><span style="color: blue;"><span class="math inline">\(\hat{Y}_i=\beta_0+\beta_1*X_1\)</span></span></p>
+<p><span style="color: blue;"><span class="math inline">\(\varepsilon_i = Y_i - \hat{Y}_i\)</span></span></p>
 <p><br>
-<span class="math inline">\(\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_1\)</span></p>
+<span style="color: blue;"><span class="math inline">\(\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_1\)</span></span></p>
 <hr>
 <div class="cell">
 <div class="cell-output-display">
@@ -372,7 +364,6 @@ window.Quarto = {
 </div>
 </div>
 <hr>
-</section>
 </section>
 <section id="the-two-parameter-model" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="the-two-parameter-model"><span class="header-section-number">4.2</span> The Two Parameter Model</h2>
@@ -435,11 +426,9 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</section>
-<section id="question-why" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="question-why"><span class="header-section-number">4.4.2</span> <span style="color: red;">Question: Why?</span></h3>
+<p><span style="color: red;">Question: Why?</span></p>
 <hr>
-<p><strong>In the one parameter model <span class="math inline">\(b_0\)</span> was our sample estimate of the mean FPS score in everyone. <span class="math inline">\(b_0\)</span> in the two parameter model is our sample estimate of the mean FPS score for people with BAC = 0, not everyone.</strong></p>
+<p><span style="color: blue;"><strong>In the one parameter model <span class="math inline">\(b_0\)</span> was our sample estimate of the mean FPS score in everyone. <span class="math inline">\(b_0\)</span> in the two parameter model is our sample estimate of the mean FPS score for people with BAC = 0, not everyone.</strong></span></p>
 <hr>
 </section>
 </section>
@@ -468,16 +457,14 @@ window.Quarto = {
 <p><br>
 <br>
 </p>
-<section id="question-what-are-your-null-and-alternative-hypotheses-about-a-model-parameter-to-evaluate-this-question" class="level3" data-number="4.6.1">
-<h3 data-number="4.6.1" class="anchored" data-anchor-id="question-what-are-your-null-and-alternative-hypotheses-about-a-model-parameter-to-evaluate-this-question"><span class="header-section-number">4.6.1</span> <span style="color: red;">Question: What are your null and alternative hypotheses about a model parameter to evaluate this question?</span></h3>
+<p><span style="color: red;">Question: What are your null and alternative hypotheses about a model parameter to evaluate this question?</span></p>
 <hr>
-<p><strong><span class="math inline">\(H_0: \beta_1=0\)</span></strong><br>
-<strong><span class="math inline">\(H_a: \beta_1 \neq 0\)</span></strong><br>
+<p><span style="color: blue;"><strong><span class="math inline">\(H_0: \beta_1=0\)</span></strong></span><br>
+<span style="color: blue;"><strong><span class="math inline">\(H_a: \beta_1 \neq 0\)</span></strong></span><br>
 <br>
 <br>
 If <span class="math inline">\(\beta_1 = 0\)</span>, this means that FPS does not change with changes in BAC. In other words, there is no effect of BAC on FPS. If <span class="math inline">\(\beta_1 &lt; 0\)</span>, this means that FPS decreases with increasing BAC (people are less anxious when drunk). If <span class="math inline">\(\beta_1 &gt; 0\)</span>, this means FPS increases with increasing BAC (people are more anxious when drunk).</p>
 <hr>
-</section>
 </section>
 <section id="estimating-a-two-parameter-model-in-r" class="level2" data-number="4.7">
 <h2 data-number="4.7" class="anchored" data-anchor-id="estimating-a-two-parameter-model-in-r"><span class="header-section-number">4.7</span> Estimating a Two Parameter Model in R</h2>
