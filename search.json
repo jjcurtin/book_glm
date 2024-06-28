@@ -654,7 +654,7 @@
     "href": "04_single_quantitative.html#raw-vs.-centered-bac",
     "title": "4  Inferences About a Single Quantitative Predictor",
     "section": "4.13 Raw vs. Centered BAC",
-    "text": "4.13 Raw vs. Centered BAC\nQuestion: How would the graph look different? Where is \\(b_0\\) and \\(b_1\\) on the new figure? Would you center BAC in this example?\n\n\n\nCode\nplot_x &lt;- data |&gt; \n  ggplot(aes(x = bac, y = fps)) +\n  geom_point(alpha = .6, size = 2) +\n  geom_abline(aes(intercept = coef(m_2)[1],\n                  slope = coef(m_2)[2]),\n              color = \"red\", linewidth = 1) +\n  xlim(0, .15)\n\n\nplot_x_c &lt;- data |&gt; \n  ggplot(aes(x = bac_c, y = fps)) +\n  geom_point(alpha = .6, size = 2) +\n  geom_abline(aes(intercept = coef(m_2)[1],\n                  slope = coef(m_2)[2]),\n              color = \"red\", linewidth = 1)\n\n\n\n\nCode\nplot_x + plot_x_c",
+    "text": "4.13 Raw vs. Centered BAC\nQuestion: How would the graph look different? Where is \\(b_0\\) and \\(b_1\\) on the new figure? Would you center BAC in this example?\n\n\n\nCode\nplot_x &lt;- data |&gt; \n  ggplot(aes(x = bac, y = fps)) +\n  geom_point(alpha = .6, size = 2) +\n  geom_abline(aes(intercept = coef(m_2)[1],\n                  slope = coef(m_2)[2]),\n              color = \"red\", linewidth = 1) +\n  xlim(0, .15)\n\n\nplot_x_c &lt;- data |&gt; \n  ggplot(aes(x = bac_c, y = fps)) +\n  geom_point(alpha = .6, size = 2) +\n  geom_abline(aes(intercept = coef(m_2)[1],\n                  slope = coef(m_2)[2]),\n              color = \"red\", linewidth = 1)\n\n\n\n\n\nCode\nplot_x + plot_x_c",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Inferences About a Single Quantitative Predictor</span>"
     ]
