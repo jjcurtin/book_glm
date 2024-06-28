@@ -255,16 +255,10 @@ window.Quarto = {
   <li><a href="#two-parameter-one-predictor-models" id="toc-two-parameter-one-predictor-models" class="nav-link active" data-scroll-target="#two-parameter-one-predictor-models"><span class="header-section-number">4.1</span> Two Parameter (One Predictor) Models</a></li>
   <li><a href="#the-two-parameter-model" id="toc-the-two-parameter-model" class="nav-link" data-scroll-target="#the-two-parameter-model"><span class="header-section-number">4.2</span> The Two Parameter Model</a></li>
   <li><a href="#least-squares-criterion" id="toc-least-squares-criterion" class="nav-link" data-scroll-target="#least-squares-criterion"><span class="header-section-number">4.3</span> Least Squares Criterion</a></li>
-  <li><a href="#interpretation-of-b_0-in-two-parameter-model" id="toc-interpretation-of-b_0-in-two-parameter-model" class="nav-link" data-scroll-target="#interpretation-of-b_0-in-two-parameter-model"><span class="header-section-number">4.4</span> Interpretation of <span class="math inline">\(b_0\)</span> in Two Parameter Model</a>
-  <ul class="collapse">
-  <li><a href="#question-approximately-what-is-b_0-in-this-example" id="toc-question-approximately-what-is-b_0-in-this-example" class="nav-link" data-scroll-target="#question-approximately-what-is-b_0-in-this-example"><span class="header-section-number">4.4.1</span> <span style="color: red;">Question: Approximately what is <span class="math inline">\(b_0\)</span> in this example?</span></a></li>
-  </ul></li>
+  <li><a href="#interpretation-of-b_0-in-two-parameter-model" id="toc-interpretation-of-b_0-in-two-parameter-model" class="nav-link" data-scroll-target="#interpretation-of-b_0-in-two-parameter-model"><span class="header-section-number">4.4</span> Interpretation of <span class="math inline">\(b_0\)</span> in Two Parameter Model</a></li>
   <li><a href="#interpretation-of-b_1-in-two-parameter-model" id="toc-interpretation-of-b_1-in-two-parameter-model" class="nav-link" data-scroll-target="#interpretation-of-b_1-in-two-parameter-model"><span class="header-section-number">4.5</span> Interpretation of <span class="math inline">\(b_1\)</span> in Two Parameter Model</a></li>
   <li><a href="#testing-inferences-about-beta_1" id="toc-testing-inferences-about-beta_1" class="nav-link" data-scroll-target="#testing-inferences-about-beta_1"><span class="header-section-number">4.6</span> Testing Inferences about <span class="math inline">\(\beta_1\)</span></a></li>
-  <li><a href="#estimating-a-two-parameter-model-in-r" id="toc-estimating-a-two-parameter-model-in-r" class="nav-link" data-scroll-target="#estimating-a-two-parameter-model-in-r"><span class="header-section-number">4.7</span> Estimating a Two Parameter Model in R</a>
-  <ul class="collapse">
-  <li><a href="#question-does-bac-affect-fps-explain-this-conclusion-in-terms-of-the-parameter-estimate-b_1-and-its-standard-error." id="toc-question-does-bac-affect-fps-explain-this-conclusion-in-terms-of-the-parameter-estimate-b_1-and-its-standard-error." class="nav-link" data-scroll-target="#question-does-bac-affect-fps-explain-this-conclusion-in-terms-of-the-parameter-estimate-b_1-and-its-standard-error."><span class="header-section-number">4.7.1</span> <span style="color: red;">Question: Does BAC affect FPS? Explain this conclusion in terms of the parameter estimate, <span class="math inline">\(b_1\)</span> and its standard error.</span></a></li>
-  </ul></li>
+  <li><a href="#estimating-a-two-parameter-model-in-r" id="toc-estimating-a-two-parameter-model-in-r" class="nav-link" data-scroll-target="#estimating-a-two-parameter-model-in-r"><span class="header-section-number">4.7</span> Estimating a Two Parameter Model in R</a></li>
   <li><a href="#testing-inferences-about-beta_1-1" id="toc-testing-inferences-about-beta_1-1" class="nav-link" data-scroll-target="#testing-inferences-about-beta_1-1"><span class="header-section-number">4.8</span> Testing Inferences about <span class="math inline">\(\beta_1\)</span></a></li>
   <li><a href="#model-comparison-testing-inferences-about-beta_1" id="toc-model-comparison-testing-inferences-about-beta_1" class="nav-link" data-scroll-target="#model-comparison-testing-inferences-about-beta_1"><span class="header-section-number">4.9</span> Model Comparison: Testing Inferences about <span class="math inline">\(\beta_1\)</span></a>
   <ul class="collapse">
@@ -403,8 +397,7 @@ window.Quarto = {
 <h2 data-number="4.4" class="anchored" data-anchor-id="interpretation-of-b_0-in-two-parameter-model"><span class="header-section-number">4.4</span> Interpretation of <span class="math inline">\(b_0\)</span> in Two Parameter Model</h2>
 <p><span class="math inline">\(\hat{Y}_i=b_0+b_1*X_1\)</span></p>
 <p><span class="math inline">\(b_0\)</span> is predicted value for <span class="math inline">\(Y\)</span> when <span class="math inline">\(X_1\)</span> = 0. Graphically, this is the <span class="math inline">\(Y\)</span> intercept for the regression line (value of <span class="math inline">\(Y\)</span> where regression line crosses Y-axis at <span class="math inline">\(X_1\)</span> = 0).</p>
-<section id="question-approximately-what-is-b_0-in-this-example" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="question-approximately-what-is-b_0-in-this-example"><span class="header-section-number">4.4.1</span> <span style="color: red;">Question: Approximately what is <span class="math inline">\(b_0\)</span> in this example?</span></h3>
+<p><span style="color: red;">Question: Approximately what is <span class="math inline">\(b_0\)</span> in this example?</span></p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -415,7 +408,7 @@ window.Quarto = {
 </div>
 </div>
 <hr>
-<p><strong>42.5</strong></p>
+<p><span style="color: blue;">42.5</span></p>
 <p><em>IMPORTANT: Notice that <span class="math inline">\(b_0\)</span> is very different in the two parameter model (42.5) than in the previous one parameter model (32.2).</em></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -428,9 +421,8 @@ window.Quarto = {
 </div>
 <p><span style="color: red;">Question: Why?</span></p>
 <hr>
-<p><span style="color: blue;"><strong>In the one parameter model <span class="math inline">\(b_0\)</span> was our sample estimate of the mean FPS score in everyone. <span class="math inline">\(b_0\)</span> in the two parameter model is our sample estimate of the mean FPS score for people with BAC = 0, not everyone.</strong></span></p>
+<p><span style="color: blue;">In the one parameter model <span class="math inline">\(b_0\)</span> was our sample estimate of the mean FPS score in everyone. <span class="math inline">\(b_0\)</span> in the two parameter model is our sample estimate of the mean FPS score for people with BAC = 0, not everyone.</span></p>
 <hr>
-</section>
 </section>
 <section id="interpretation-of-b_1-in-two-parameter-model" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="interpretation-of-b_1-in-two-parameter-model"><span class="header-section-number">4.5</span> Interpretation of <span class="math inline">\(b_1\)</span> in Two Parameter Model</h2>
@@ -459,8 +451,8 @@ window.Quarto = {
 </p>
 <p><span style="color: red;">Question: What are your null and alternative hypotheses about a model parameter to evaluate this question?</span></p>
 <hr>
-<p><span style="color: blue;"><strong><span class="math inline">\(H_0: \beta_1=0\)</span></strong></span><br>
-<span style="color: blue;"><strong><span class="math inline">\(H_a: \beta_1 \neq 0\)</span></strong></span><br>
+<p><span style="color: blue;"><span class="math inline">\(H_0: \beta_1=0\)</span></span><br>
+<span style="color: blue;"><span class="math inline">\(H_a: \beta_1 \neq 0\)</span></span><br>
 <br>
 <br>
 If <span class="math inline">\(\beta_1 = 0\)</span>, this means that FPS does not change with changes in BAC. In other words, there is no effect of BAC on FPS. If <span class="math inline">\(\beta_1 &lt; 0\)</span>, this means that FPS decreases with increasing BAC (people are less anxious when drunk). If <span class="math inline">\(\beta_1 &gt; 0\)</span>, this means FPS increases with increasing BAC (people are more anxious when drunk).</p>
@@ -640,12 +632,11 @@ If <span class="math inline">\(\beta_1 = 0\)</span>, this means that FPS does no
 <p><br>
 <br>
 </p>
-<section id="question-does-bac-affect-fps-explain-this-conclusion-in-terms-of-the-parameter-estimate-b_1-and-its-standard-error." class="level3" data-number="4.7.1">
-<h3 data-number="4.7.1" class="anchored" data-anchor-id="question-does-bac-affect-fps-explain-this-conclusion-in-terms-of-the-parameter-estimate-b_1-and-its-standard-error."><span class="header-section-number">4.7.1</span> <span style="color: red;">Question: Does BAC affect FPS? Explain this conclusion in terms of the parameter estimate, <span class="math inline">\(b_1\)</span> and its standard error.</span></h3>
+<p><span style="color: red;">Question: Does BAC affect FPS? Explain this conclusion in terms of the parameter estimate, <span class="math inline">\(b_1\)</span> and its standard error.</span></p>
 <hr>
-<p><strong>Under the <span class="math inline">\(H_0: \beta_1 = 0\)</span>, the sampling distribution for <span class="math inline">\(\beta_1\)</span> will have a mean of 0 with an estimated standard deviation 95.89.</strong></p>
-<p><strong><span class="math inline">\(t (96 - 1) = \frac{-184.09 - 0}{95.89 } = -1.92\)</span></strong></p>
-<p><strong>Our value of the parameter estimate, <span class="math inline">\(b_1\)</span>, is 1.92 standard deviations below the expected mean of the sampling distribution for <span class="math inline">\(H_0\)</span>.</strong></p>
+<p><span style="color: blue;">Under the <span class="math inline">\(H_0: \beta_1 = 0\)</span>, the sampling distribution for <span class="math inline">\(\beta_1\)</span> will have a mean of 0 with an estimated standard deviation 95.89.</span></p>
+<p><span style="color: blue;"><span class="math inline">\(t (96 - 1) = \frac{-184.09 - 0}{95.89 } = -1.92\)</span></span></p>
+<p><span style="color: blue;">Our value of the parameter estimate, <span class="math inline">\(b_1\)</span>, is 1.92 standard deviations below the expected mean of the sampling distribution for <span class="math inline">\(H_0\)</span>.</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="sc">-</span><span class="fl">1.92</span>, <span class="dv">94</span>, <span class="at">lower.tail =</span> <span class="cn">TRUE</span>)<span class="sc">*</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -654,7 +645,6 @@ If <span class="math inline">\(\beta_1 = 0\)</span>, this means that FPS does no
 </div>
 <p><strong>A <span class="math inline">\(b_1\)</span> of this size is not unlikely under the null, therefore you fail to reject the null and conclude that BAC has no effect on FPS.</strong></p>
 <hr>
-</section>
 </section>
 <section id="testing-inferences-about-beta_1-1" class="level2" data-number="4.8">
 <h2 data-number="4.8" class="anchored" data-anchor-id="testing-inferences-about-beta_1-1"><span class="header-section-number">4.8</span> Testing Inferences about <span class="math inline">\(\beta_1\)</span></h2>
