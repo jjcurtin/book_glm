@@ -598,13 +598,10 @@ window.Quarto = {
 2 bac           -184.      95.9      -1.92 0.0579       </code></pre>
 </div>
 </div>
-<p><br>
-<br>
-</p>
 <p><span style="color: red;">Question: Does BAC affect FPS? Explain this conclusion in terms of the parameter estimate, <span class="math inline">\(b_1\)</span> and its standard error.</span></p>
 <hr>
 <p><span style="color: blue;">Under the <span class="math inline">\(H_0: \beta_1 = 0\)</span>, the sampling distribution for <span class="math inline">\(\beta_1\)</span> will have a mean of 0 with an estimated standard deviation 95.89.</span></p>
-<p><span style="color: blue;"><span class="math inline">\(t (96 - 1) = \frac{-184.09 - 0}{95.89 } = -1.92\)</span></span></p>
+<p><span class="math inline">\(t (96 - 1) = \frac{-184.09 - 0}{95.89 } = -1.92\)</span></p>
 <p><span style="color: blue;">Our value of the parameter estimate, <span class="math inline">\(b_1\)</span>, is 1.92 standard deviations below the expected mean of the sampling distribution for <span class="math inline">\(H_0\)</span>.</span></p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -615,7 +612,7 @@ window.Quarto = {
 <pre><code>[1] 0.05788984</code></pre>
 </div>
 </div>
-<p><strong>A <span class="math inline">\(b_1\)</span> of this size is not unlikely under the null, therefore you fail to reject the null and conclude that BAC has no effect on FPS.</strong></p>
+<p>A <span class="math inline">\(b_1\)</span> of this size is not unlikely under the null, therefore you fail to reject the null and conclude that BAC has no effect on FPS.</p>
 <hr>
 </section>
 <section id="testing-inferences-about-beta_1-1" class="level2" data-number="4.8">
@@ -686,16 +683,11 @@ window.Quarto = {
 <h2 data-number="4.9" class="anchored" data-anchor-id="model-comparison-testing-inferences-about-beta_1"><span class="header-section-number">4.9</span> Model Comparison: Testing Inferences about <span class="math inline">\(\beta_1\)</span></h2>
 <p><span class="math inline">\(H_0: \beta_1 = 0\)</span><br>
 <span class="math inline">\(H_1: \beta_1 \neq 0\)</span></p>
-<p><br>
-<br>
-</p>
 <p><span style="color: red;">Question: What two models are you comparing when you test hypotheses about <span class="math inline">\(\beta_1\)</span>? Describe the logic.</span></p>
 <hr>
 <p><span style="color: blue;">Compact model: <span class="math inline">\(\hat{\text{FPS}}_i = \beta_0+0*\text{BAC}_i\)</span></span><br>
 <span style="color: blue;"><span class="math inline">\(P_c=1\)</span></span><br>
 <span style="color: blue;"><span class="math inline">\(\text{SSE}_c=133888.3\)</span></span></p>
-<p><br>
-</p>
 <p><span style="color: blue;">Augmented model: <span class="math inline">\(\hat{\text{FPS}}_i = \beta_0+\beta_1*\text{BAC}_i\)</span></span><br>
 <span style="color: blue;"><span class="math inline">\(P_a=2\)</span></span><br>
 <span style="color: blue;"><span class="math inline">\(\text{SSE}_a=128837.1\)</span></span><br>
@@ -756,15 +748,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 2 bac           -184.      95.9      -1.92 0.0579       </code></pre>
 </div>
 </div>
-<p><br>
-<br>
-</p>
 <p><span style="color: red;">Question: What is the interpretation of <span class="math inline">\(b_0\)</span> in this two parameter model?</span></p>
 <hr>
 <p><span style="color: blue;">It is the predicted FPS for a person with BAC = 0 (sober).</span></p>
 <p><span style="color: blue;">The test of this parameter estimate could inform us if the shock procedure worked among our sober participants. This is probably a more appropriate manipulation check than testing if it worked in everyone including drunk people given that alcohol could have reduced FPS.</span></p>
-<p><br>
-</p>
+<hr>
 <p><span style="color: red;">Question: What two models are being compared?</span></p>
 <hr>
 <p><span style="color: blue;">Compact model: <span class="math inline">\(\hat{\text{FPS}}_i= 0 + \beta_1* \text{BAC}_i\)</span></span></p>
@@ -868,7 +856,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p><span style="color: red;">Question: How would the graph look different? Where is <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> on the new figure? Would you center BAC in this example?</span></p>
 <hr>
 <div class="cell">
-<details class="code-fold">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>plot_x <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bac, <span class="at">y =</span> fps)) <span class="sc">+</span></span>
@@ -887,7 +875,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-code_fold="true">
+<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>plot_x <span class="sc">+</span> plot_x_c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -918,8 +906,6 @@ bac         -374.49261  6.308724</code></pre>
 </div>
 <p>The underlying logic from your understanding of sampling distributions remains the same.</p>
 <p><span class="math inline">\(CI_b = b\pm t(\alpha; N-P)*SE_b\)</span> where <span class="math inline">\(P\)</span> = total # of parameters.</p>
-<p><br>
-</p>
 <p><span style="color: red;">Question: How can we tell if a parameter is <em>significant</em> from the confidence interval?</span></p>
 <hr>
 <p><span style="color: blue;">If a parameter <span class="math inline">\(\neq 0\)</span>, at <span class="math inline">\(\alpha\)</span> = .05, then the 95% confidence interval should not include 0. True for any other non-zero value for <span class="math inline">\(b\)</span> as well.</span></p>
@@ -930,11 +916,11 @@ bac         -374.49261  6.308724</code></pre>
 <p><span style="color: red;">Question: How can you calculate the effect size estimate <span class="math inline">\(\eta_p^2\)</span> (PRE) for <span class="math inline">\(\beta_1\)</span>? </span></p>
 <hr>
 <p><span style="color: blue;">Compare the SSE across the two relevant models.</span></p>
-<p><span style="color: blue;">Compact model: <span class="math inline">\(\hat{\text{FPS}}_i= \beta_0 + 0* \text{BAC}_i\)</span></span></p>
-<p><span style="color: blue;"><span class="math inline">\(\text{SSE}_c =  133888.3\)</span></span></p>
-<p><span style="color: blue;">Augmented model: <span class="math inline">\(\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i\)</span></span></p>
-<p><span style="color: blue;"><span class="math inline">\(\text{SSE}_a =  128837.1\)</span></span></p>
-<p><span style="color: blue;"><span class="math inline">\(\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{133888.3- 128837.1}{133888.3}= 0.038\)</span></span></p>
+<p><strong>Compact model:</strong> <span class="math inline">\(\hat{\text{FPS}}_i= \beta_0 + 0* \text{BAC}_i\)</span></p>
+<p><span class="math inline">\(\text{SSE}_c =  133888.3\)</span></p>
+<p><strong>Augmented model:</strong> <span class="math inline">\(\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i\)</span></p>
+<p><span class="math inline">\(\text{SSE}_a =  128837.1\)</span></p>
+<p><span class="math inline">\(\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{133888.3- 128837.1}{133888.3}= 0.038\)</span></p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
