@@ -24,13 +24,13 @@ What if some participants were drunk and we knew their blood alcohol concentrati
 
 -----
 
-<span style="color: blue;">**DATA = MODEL + ERROR**</span>    
+**DATA = MODEL + ERROR**   
 
-<span style="color: blue;">$Y_i= \beta_0+\beta_1*X_1+\varepsilon_i$</span>    
+$Y_i= \beta_0+\beta_1*X_1+\varepsilon_i$    
 
-<span style="color: blue;">$\hat{Y}_i=\beta_0+\beta_1*X_1$</span>    
+$\hat{Y}_i=\beta_0+\beta_1*X_1$    
 
-<span style="color: blue;">$\varepsilon_i = Y_i - \hat{Y}_i$</span>    
+$\varepsilon_i = Y_i - \hat{Y}_i$   
 
 \
 <span style="color: blue;">$\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_1$</span>
@@ -330,13 +330,13 @@ $H_1: \beta_1 \neq 0$
 -----
 
 <span style="color: blue;">Compact model: $\hat{\text{FPS}}_i = \beta_0+0*\text{BAC}_i$</span>    
-<span style="color: blue;">$P_c=1$</span>     
-<span style="color: blue;">$\text{SSE}_c=`r round(sum(residuals(m_1)^2), 1)`$</span>     
+$P_c=1$     
+$\text{SSE}_c=`r round(sum(residuals(m_1)^2), 1)`$     
 
 
 <span style="color: blue;">Augmented model: $\hat{\text{FPS}}_i = \beta_0+\beta_1*\text{BAC}_i$</span>    
-<span style="color: blue;">$P_a=2$</span>   
-<span style="color: blue;">$\text{SSE}_a=`r round(sum(residuals(m_2)^2), 1)`$</span>  
+$P_a=2$   
+$\text{SSE}_a=`r round(sum(residuals(m_2)^2), 1)`$  
 \
 $F(P_a-P_c, N-P_a) = \frac{\text{SSE}_c-\text{SSE}_a/(P_a-P_c)}{\text{SSE}_a/(N-P_a)}$
 
@@ -590,8 +590,25 @@ $S_{Y_i}^2=S_{\hat{Y}_i}^2+S_{e_i}^2$
 
 $R^2=\frac{S_{\hat{Y}_i}^2}{S_{Y_i}^2}$   
 
+-----
+
+We can calculate $R^2$ manually by computing the ratio of the variance of the predicted values to the variance of the actual values.   
 ```{r}
 var(predict(m_2))/ var(data$fps)
+```
+
+-----
+
+We can also use the `glance()` function in the `broom` package to return various model fit indices.   
+
+```{r}
+broom::glance(m_2) |>
+  glimpse()
+```
+
+Since we are only interested in $R^2$ we can use the following code to pull out this single value.
+```{r}
+broom::glance(m_2)$r.squared
 ```
 
 -----
@@ -602,9 +619,15 @@ var(predict(m_2))/ var(data$fps)
 
 -----
 
-<span style="color: blue;">It did but it was just 0. It explained no variance in $Y_i$ because it predicted the same value (mean) for every person. The variance of the predicted values is 0 in the mean-only model.</span>    
+<span style="color: blue;">It did but it was just 0. It explained no variance in $Y_i$ because it predicted the same value (mean) for every person. The variance of the predicted values is 0 in the mean-only model.</span>  
 
-$R^2=\frac{S_{\hat{Y}_i}^2}{S_{Y_i}^2}$    
+$R^2=\frac{S_{\hat{Y}_i}^2}{S_{Y_i}^2}$  
+
+```{r}
+m_1 <- lm(fps ~ 1, data = data)  
+
+broom::glance(m_1)$r.squared
+```
 
 In fact, the SSE for the mean-only model is the numerator of the formula for the variance for $Y_i$.     
 
@@ -652,21 +675,29 @@ $`r round(psych::corr.test(data$bac, data$fps)$r,3)`^2 = `r round((sum(residuals
 
 ## Visualizing the Model
 
-The `effect()` function in the `effects` package can be used to quickly fit model values and calculate 95% confidence intervals for plotting the model.
 
 ```{r}
-(e <- effects::effect('bac', m_2) |>  
-  as_tibble())
+x <- tibble(bac = seq(from = min(data$bac), to = max(data$bac), by = .001))
+
+preds <- predict(m_2, x, interval = "confidence", level = .95) |> #<1>
+  as_tibble() 
 ```
 
+1. We can use our model to generate predictions. We use the `interval = "confidence"` and `level = .95` arguments to return the upper and lower values of the 95% confidence interval.  
+
+```{r}
+preds
+```
+ 
 -----
 
 ```{r}
-ggplot(e, aes(x = bac, y = fit)) +
-  geom_line() +
-  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2) +
-  labs(title = "Effect of BAC",
-       x = "BAC",
+ggplot() +
+  geom_point(aes(x = data$bac, y = data$fps), alpha = .6, size = 2) +
+  geom_line(aes(x = x$bac, y = preds$fit),
+              color = "black", linewidth = 1) +
+  geom_ribbon(aes(x = x$bac, ymin = preds$lwr, ymax = preds$upr), alpha = 0.2) +
+  labs(x = "BAC",
        y = "FPS") 
 ```
 
@@ -692,11 +723,12 @@ $CI_\hat{Y_i}=\hat{Y_i}\pm t(\alpha; N-k-1)SE_\hat{Y_i}$
 ```{r}
 #| code-fold: true
 
-ggplot(e, aes(x = bac, y = fit)) +
-  geom_line() +
-  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2) +
-  labs(title = "Effect of BAC",
-       x = "BAC",
+ggplot() +
+  geom_point(aes(x = data$bac, y = data$fps), alpha = .6, size = 2) +
+  geom_line(aes(x = x$bac, y = preds$fit),
+              color = "black", linewidth = 1) +
+  geom_ribbon(aes(x = x$bac, ymin = preds$lwr, ymax = preds$upr), alpha = 0.2) +
+  labs(x = "BAC",
        y = "FPS") 
 ```
 
@@ -732,26 +764,31 @@ $SE_{b_0}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overline{X})^2
 ## Publication Quality Figure
 
 ```{r}
-preds <- predict(m_2, data, se.fit = TRUE) |> #<1>
+preds_pub <- predict(m_2, x, se.fit = TRUE) |> #<1>
   as_tibble() |> 
   mutate(upper = fit + se.fit,  #<2>
          lower= fit - se.fit)
 ```
 
+1. We use the `se.fit = TRUE` argument to return the standard error for each prediction.  
+
+2. We use `mutate()` to calculate $\pm$ 1 standard error values for each prediction. 
+
 ```{r}
-plot_pub <- preds |>  
-  ggplot() +
+preds_pub
+```
+
+
+```{r}
+plot_pub <- ggplot() +
   geom_point(aes(x = data$bac, y = data$fps), alpha = .6, size = 2) +
-  geom_line(aes(x = data$bac, y =fit),
+  geom_line(aes(x = x$bac, y = preds_pub$fit),
               color = "black", linewidth = 1) +
-  geom_ribbon(aes(x = data$bac, ymin = lower, ymax = upper), alpha = 0.2) +
+  geom_ribbon(aes(x = x$bac, ymin = preds_pub$lower, ymax = preds_pub$upper), alpha = 0.2) +
   labs(x = "Blood alcohol concentration",
        y = "Fear-potentiated startle") 
 ```
 
-1. We can use our model to generate predictions. We use the `se.fit = TRUE` argument to return the standard error for each prediction.  
-
-2. We use `mutate()` to calculate $\pm$ 1 standard error values for each prediction.   
 
 -----
 

@@ -83,39 +83,35 @@ We would like this value to be the *best* prediction.
 \
 
 
-### <span style="color: red;">Question: In the context of DATA = MODEL + ERROR, how can we quantify *best*?</span>
+<span style="color: red;">Question: In the context of DATA = MODEL + ERROR, how can we quantify *best*?</span>
 
 -----
 
-**We want to predict some characteristic about the population of FPS scores that minimizes the ERROR from our model.**   
+<span style="color: blue;">We want to predict some characteristic about the population of FPS scores that minimizes the ERROR from our model.</span>   
 \
-
-**ERROR = DATA – MODEL**   
+<span style="color: blue;">ERROR = DATA – MODEL</span>   
 \
-\
-
-**$\varepsilon_i=Y_i-\hat{Y}_i$; There is an error ($\varepsilon_i$) for each population score.**
+<span style="color: blue;">$\varepsilon_i=Y_i-\hat{Y}_i$; There is an error ($\varepsilon_i$) for each population score.</span>
 \
 \
-
-### <span style="color: red;">Question: How can we quantify total model error?</span>
+<span style="color: red;">Question: How can we quantify total model error?</span>
 
 -----
 
 ## Total Error
 
-***Sum of errors*** across all scores in the population isn’t ideal because positive and negative errors will tend to cancel each other out.
+<span style="color: blue;">**Sum of errors**</span> across all scores in the population isn’t ideal because positive and negative errors will tend to cancel each other out.
 
 $\sum(Y_i-\hat{Y}_i)$
 \
 \
-***Sum of absolute values of errors*** could work. If we selected $\beta_0$ to minimize the sum of the absolute value of errors, $\beta_0$ would equal the median of the population.
+<span style="color: blue;">**Sum of absolute values of errors**</span> could work. If we selected $\beta_0$ to minimize the sum of the absolute value of errors, $\beta_0$ would equal the median of the population.
 
 $\sum(|Y_i-\hat{Y}_i|)$
 \
 \
 
-***Sum of squared errors (SSE)*** could work. If we selected $\beta_0$ to minimize the sum of squared errors, $\beta_0$ would equal the mean of the population.
+<span style="color: blue;">**Sum of squared errors (SSE)**</span> could work. If we selected $\beta_0$ to minimize the sum of squared errors, $\beta_0$ would equal the mean of the population.
 
 $\sum(Y_i-\hat{Y}_i)^2$
 
@@ -131,14 +127,14 @@ $\hat{Y}_i=\beta_0$ where $\beta_0=\mu$
 \
 \
 
-### <span style="color: red;">Question: What is the problem with this model and how can we fix this problem?</span>
+<span style="color: red;">Question: What is the problem with this model and how can we fix this problem?</span>
 
 -----
 
-**We don't know the population mean for FPS scores ($\mu$).**
+<span style="color: blue;">We don't know the population mean for FPS scores ($\mu$).</span>
 \
 \
-**We can collect a sample from the population and use the sample mean ($\overline{X}$) as an estimate of the population mean ($\mu$). $\overline{X}$ is an unbiased estimate for $\mu$.**
+<span style="color: blue;">We can collect a sample from the population and use the sample mean ($\overline{X}$) as an estimate of the population mean ($\mu$). $\overline{X}$ is an unbiased estimate for $\mu$.</span>
 
 -----
 
@@ -327,7 +323,7 @@ The probability (p-value) of obtaining a sample $b_0=32.2$ if $H_0$ is true ($\b
 \
 \
 
-### <span style="color: red;">Question: Describe the logic of how this was determined given your understanding of sampling distributions?</span>
+<span style="color: red;">Question: Describe the logic of how this was determined given your understanding of sampling distributions?</span>
 
 -----
 
@@ -337,13 +333,13 @@ The probability (p-value) of obtaining a sample $b_0=32.2$ if $H_0$ is true ($\b
 $H_0: \beta_0 = 0; H_a: \beta_0 \neq 0$   
 \
 
-If $H_0$ is true, the sampling distribution for $\beta_0$ will have a mean of 0. We can estimate standard deviation of the sampling distribution with $SE$ for $b_0$.    
+<span style="color: blue;">If $H_0$ is true, the sampling distribution for $\beta_0$ will have a mean of 0. We can estimate standard deviation of the sampling distribution with $SE$ for $b_0$.</span>    
 \
 
 $t(df=N-P)=\frac{b_0-0}{SE_{b_0}}=\frac{32.2-0}{3.8}=8.40$   
 \
 
-$b_0$ is approximately `r round(broom::tidy(m)$estimate/broom::tidy(m)$std.error)` standard deviations above the expected mean of the distribution if $H_0$ is true.  
+<span style="color: blue;">$b_0$ is approximately `r round(broom::tidy(m)$estimate/broom::tidy(m)$std.error)` standard deviations above the expected mean of the distribution if $H_0$ is true.</span>  
 
 -----
 
@@ -542,35 +538,35 @@ confint(m) #<1>
 \
 \
 
-### <span style="color: red;">Question: Given what you now know about confidence intervals and sampling distributions, what should the formula be?</span>
+<span style="color: red;">Question: Given what you now know about confidence intervals and sampling distributions, what should the formula be?</span>
 
 -----
 
-**$\text{CI}(b_0)= b_0 \pm t(\alpha;N-P) * SE_{b_0}$**   
+<span style="color: blue;">$\text{CI}(b_0)= b_0 \pm t(\alpha;N-P) * SE_{b_0}$</span>   
 \
 
-**For the 95% confidence interval this is approximately 2 SEs around our unbiased estimate of $\beta_0$.**
+<span style="color: blue;">For the 95% confidence interval this is approximately 2 SEs around our unbiased estimate of $\beta_0$.</span>
  
 -----
 
-### <span style="color: red;">Question: How can we tell if a parameter is *significant* from the confidence interval?</span>
+<span style="color: red;">Question: How can we tell if a parameter is *significant* from the confidence interval?</span>
 
 -----
 
-**If a parameter estimate $\neq$ 0 at $\alpha$ = .05, then the 95% confidence interval for its parameter estimate should not include 0.**   
+<span style="color: blue;">If a parameter estimate $\neq$ 0 at $\alpha$ = .05, then the 95% confidence interval for its parameter estimate should not include 0.</span>   
 \
 
-**This is also true for testing whether the parameter estimate is equal to any other non-zero value for the population parameter.**
+<span style="color: blue;">This is also true for testing whether the parameter estimate is equal to any other non-zero value for the population parameter.</span>
  
 -----
 
 ## The one parameter (mean-only) model: Special Case  
 
-### <span style="color: red;">Question: What special case (specific analytic test) is statistically equivalent to the test of the null hypothesis: $\beta_0$ = 0 in the one parameter model?</span>
+<span style="color: red;">Question: What special case (specific analytic test) is statistically equivalent to the test of the null hypothesis: $\beta_0$ = 0 in the one parameter model?</span>
 
 -----
 
-**The one sample t-test testing if a population mean = 0.**     
+<span style="color: blue;">The one sample t-test testing if a population mean = 0.</span>     
 
 ```{r}
 t.test(data$fps)
@@ -580,19 +576,19 @@ t.test(data$fps)
 
 ## Testing $\beta_0$ = non-zero values  
 
-### <span style="color: red;">Question: How could you test an $H_0$ regarding $B_0$ = some value other than 0 (e.g., 10)? HINT: There are at least **three** methods.</span>
+<span style="color: red;">Question: How could you test an $H_0$ regarding $B_0$ = some value other than 0 (e.g., 10)? HINT: There are at least **three** methods.</span>
 
 -----
 
-**Option 1: Compare SSE for the augmented model ($\hat{Y}_i= \beta_0$) to SSE from a different compact model for this new $H_0$ ($\hat{Y}_i= 10$).**      
+<span style="color: blue;">**Option 1:**</span> Compare SSE for the augmented model ($\hat{Y}_i= \beta_0$) to SSE from a different compact model for this new $H_0$ ($\hat{Y}_i= 10$).   
 \
 
-**Option 2: Recalculate t-statistic using this new $H_0$.**  
+<span style="color: blue;">**Option 2:**</span> Recalculate t-statistic using this new $H_0$.  
 
 $t= \frac{b_0 - 10}{SE_{b_0}}$   
 \
 
-**Option 3: Does the confidence interval for the parameter estimate contain this other value? No p-value provided.**   
+<span style="color: blue;">**Option 3:**</span> Does the confidence interval for the parameter estimate contain this other value? No p-value provided.   
 
 ```{r}
 confint(m)
