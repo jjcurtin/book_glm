@@ -10,3 +10,7 @@
   quarto-pub:
     - id: 776c00af-79fa-4713-9ce0-58ca6900cf34
       url: 'https://kendra-wyant.quarto.pub/04_single_quantitative'
+- source: 05_single_dichotomous.qmd
+  quarto-pub:
+    - id: 51548c9d-856c-452e-85d6-0ae548e73a33
+      url: 'https://kendra-wyant.quarto.pub/05_single_dichotomous'
