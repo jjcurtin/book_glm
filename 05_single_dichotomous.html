@@ -308,21 +308,15 @@ window.Quarto = {
 <h2 data-number="5.1" class="anchored" data-anchor-id="categorical-variables-in-glm"><span class="header-section-number">5.1</span> Categorical Variables in GLM</h2>
 <ol type="1">
 <li><p>One dichotomous predictor coded with one regressor (<em>this unit</em>).</p></li>
-<li><p>Learn models with multiple regressors in later units:</p>
-<ul>
-<li>One-way between subject ANOVA (One predictor, multiple regressors)<br>
-</li>
-</ul></li>
+<li><p>Learn models with multiple regressors in later units:</p></li>
 </ol>
 <ul>
-<li>Multiple predictors and regressors<br>
-<em>Additive:</em><br>
-- ANCOVA<br>
-- General Additive Models<br>
-<em>Interactive:</em><br>
-- Factorial ANOVA<br>
-- Attitude Treatment Interactions<br>
-- General Interactive Models</li>
+<li>One-way between subject ANOVA (One predictor, multiple regressors)</li>
+<li>Multiple predictors and regressors
+<ul>
+<li><em>Additive:</em> ANCOVA, General Additive Models</li>
+<li><em>Interactive:</em> Factorial ANOVA, Attitude Treatment Interactions, General Interactive Models</li>
+</ul></li>
 </ul>
 <ol start="3" type="1">
 <li>Repeated measures &amp; mixed model designs</li>
@@ -332,16 +326,9 @@ window.Quarto = {
 <section id="dichotomous-predictor" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="dichotomous-predictor"><span class="header-section-number">5.2</span> Dichotomous Predictor</h2>
 <p><span style="color: red;">Question: Consider a regression model with one dichotomous predictor and the typical continuous DV. What other statistical test is this regression equivalent to?</span></p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 8%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td><span style="color: blue;">An independent samples (between subjects) t-test comparing the two groups that are represented by the two levels of the predictor on the mean of the DV.</span></td>
-</tr>
-</tbody>
-</table>
+<hr>
+<p><span style="color: blue;">An independent samples (between subjects) t-test comparing the two groups that are represented by the two levels of the predictor on the mean of the DV.</span></p>
+<hr>
 </section>
 <section id="coding-dichotomous-predictors" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="coding-dichotomous-predictors"><span class="header-section-number">5.3</span> Coding Dichotomous Predictors</h2>
@@ -408,6 +395,7 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 2 fps      96 32.2  37.5   -98.1  163.</code></pre>
 </div>
 </div>
+<hr>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
