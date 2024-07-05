@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.45">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; Inferences about a Single Dichotomous Predictor – Introduction to the General Linear Model</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./app_terminology.html" rel="next">
+<link href="./04_single_quantitative.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="book.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_single_dichotomous.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Inferences about a Single Dichotomous Predictor</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to the General Linear Model</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/jjcurtin/book_glm" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_sampling_distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sampling Distributions, Parameters, and Parameter Estimates</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_single_mean.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Inferences About a Single Mean (1 Parameter Models)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_single_quantitative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Inferences About a Single Quantitative Predictor</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_single_dichotomous.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Inferences about a Single Dichotomous Predictor</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app_terminology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Key Terminology and Concepts</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#categorical-variables-in-glm" id="toc-categorical-variables-in-glm" class="nav-link active" data-scroll-target="#categorical-variables-in-glm"><span class="header-section-number">5.1</span> Categorical Variables in GLM</a></li>
+  <li><a href="#dichotomous-predictor" id="toc-dichotomous-predictor" class="nav-link" data-scroll-target="#dichotomous-predictor"><span class="header-section-number">5.2</span> Dichotomous Predictor</a></li>
+  <li><a href="#coding-dichotomous-predictors" id="toc-coding-dichotomous-predictors" class="nav-link" data-scroll-target="#coding-dichotomous-predictors"><span class="header-section-number">5.3</span> Coding Dichotomous Predictors</a></li>
+  <li><a href="#dummy-coding" id="toc-dummy-coding" class="nav-link" data-scroll-target="#dummy-coding"><span class="header-section-number">5.4</span> Dummy Coding</a></li>
+  <li><a href="#our-running-example" id="toc-our-running-example" class="nav-link" data-scroll-target="#our-running-example"><span class="header-section-number">5.5</span> Our Running Example</a></li>
+  <li><a href="#dichotomous-beverage-group" id="toc-dichotomous-beverage-group" class="nav-link" data-scroll-target="#dichotomous-beverage-group"><span class="header-section-number">5.6</span> Dichotomous Beverage Group</a></li>
+  <li><a href="#sse-leads-to-ses-and-power" id="toc-sse-leads-to-ses-and-power" class="nav-link" data-scroll-target="#sse-leads-to-ses-and-power"><span class="header-section-number">5.7</span> &gt;SSE leads to &gt;SEs and &lt;Power</a></li>
+  <li><a href="#se_b_1fracs_ys_xsqrtfrac1-r2n-p" id="toc-se_b_1fracs_ys_xsqrtfrac1-r2n-p" class="nav-link" data-scroll-target="#se_b_1fracs_ys_xsqrtfrac1-r2n-p"><span class="header-section-number">5.8</span> <span class="math inline">\(SE_{b_1}=\frac{s_y}{s_x}*\sqrt{\frac{1-R^2}{N-P}}\)</span></a></li>
+  <li><a href="#dichotomous-beverage-group-cont." id="toc-dichotomous-beverage-group-cont." class="nav-link" data-scroll-target="#dichotomous-beverage-group-cont."><span class="header-section-number">5.9</span> Dichotomous Beverage Group (cont.)</a></li>
+  <li><a href="#model-comparisons-beta_1" id="toc-model-comparisons-beta_1" class="nav-link" data-scroll-target="#model-comparisons-beta_1"><span class="header-section-number">5.10</span> Model Comparisons (<span class="math inline">\(\beta_1\)</span>)</a></li>
+  <li><a href="#testing-beta_0" id="toc-testing-beta_0" class="nav-link" data-scroll-target="#testing-beta_0"><span class="header-section-number">5.11</span> Testing <span class="math inline">\(\beta_0\)</span></a></li>
+  <li><a href="#model-comparisons-beta_0" id="toc-model-comparisons-beta_0" class="nav-link" data-scroll-target="#model-comparisons-beta_0"><span class="header-section-number">5.12</span> Model Comparisons (<span class="math inline">\(\beta_0\)</span>)</a></li>
+  <li><a href="#effect-sizes-in-r" id="toc-effect-sizes-in-r" class="nav-link" data-scroll-target="#effect-sizes-in-r"><span class="header-section-number">5.13</span> Effect Sizes in R</a></li>
+  <li><a href="#unit-weighted-centered-coefficients" id="toc-unit-weighted-centered-coefficients" class="nav-link" data-scroll-target="#unit-weighted-centered-coefficients"><span class="header-section-number">5.14</span> Unit Weighted, Centered Coefficients</a></li>
+  <li><a href="#visual-displays-of-dummy-vs.-centered" id="toc-visual-displays-of-dummy-vs.-centered" class="nav-link" data-scroll-target="#visual-displays-of-dummy-vs.-centered"><span class="header-section-number">5.15</span> Visual Displays of Dummy vs.&nbsp;Centered</a></li>
+  <li><a href="#b_0-with-zero-centered-coefficients" id="toc-b_0-with-zero-centered-coefficients" class="nav-link" data-scroll-target="#b_0-with-zero-centered-coefficients"><span class="header-section-number">5.16</span> <span class="math inline">\(b_0\)</span> with Zero-Centered Coefficients</a></li>
+  <li><a href="#b_0-as-weighted-mean" id="toc-b_0-as-weighted-mean" class="nav-link" data-scroll-target="#b_0-as-weighted-mean"><span class="header-section-number">5.17</span> <span class="math inline">\(b_0\)</span> as Weighted Mean</a></li>
+  <li><a href="#b_0-as-weighted-mean-1" id="toc-b_0-as-weighted-mean-1" class="nav-link" data-scroll-target="#b_0-as-weighted-mean-1"><span class="header-section-number">5.18</span> <span class="math inline">\(b_0\)</span> as Weighted Mean</a></li>
+  <li><a href="#comparing-b_0-across-models" id="toc-comparing-b_0-across-models" class="nav-link" data-scroll-target="#comparing-b_0-across-models"><span class="header-section-number">5.19</span> Comparing <span class="math inline">\(b_0\)</span> Across Models</a></li>
+  <li><a href="#other-not-useful-coefficients" id="toc-other-not-useful-coefficients" class="nav-link" data-scroll-target="#other-not-useful-coefficients"><span class="header-section-number">5.20</span> Other (not useful) Coefficients</a></li>
+  <li><a href="#publication-quality-figure" id="toc-publication-quality-figure" class="nav-link" data-scroll-target="#publication-quality-figure"><span class="header-section-number">5.21</span> Publication Quality Figure</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/05_single_dichotomous.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Inferences about a Single Dichotomous Predictor</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="categorical-variables-in-glm" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="categorical-variables-in-glm"><span class="header-section-number">5.1</span> Categorical Variables in GLM</h2>
+<ol type="1">
+<li><p>One dichotomous predictor coded with one regressor (<em>this unit</em>).</p></li>
+<li><p>Learn models with multiple regressors in later units:</p>
+<ul>
+<li>One-way between subject ANOVA (One predictor, multiple regressors)<br>
+</li>
+</ul></li>
+</ol>
+<ul>
+<li>Multiple predictors and regressors<br>
+<em>Additive:</em><br>
+- ANCOVA<br>
+- General Additive Models<br>
+<em>Interactive:</em><br>
+- Factorial ANOVA<br>
+- Attitude Treatment Interactions<br>
+- General Interactive Models</li>
+</ul>
+<ol start="3" type="1">
+<li>Repeated measures &amp; mixed model designs</li>
+</ol>
+<hr>
+</section>
+<section id="dichotomous-predictor" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="dichotomous-predictor"><span class="header-section-number">5.2</span> Dichotomous Predictor</h2>
+<p><span style="color: red;">Question: Consider a regression model with one dichotomous predictor and the typical continuous DV. What other statistical test is this regression equivalent to?</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><span style="color: blue;">An independent samples (between subjects) t-test comparing the two groups that are represented by the two levels of the predictor on the mean of the DV.</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="coding-dichotomous-predictors" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="coding-dichotomous-predictors"><span class="header-section-number">5.3</span> Coding Dichotomous Predictors</h2>
+<p><span style="color: red;">Question: How do we handle analysis of dichotomous predictors in regression?</span></p>
+<hr>
+<p><span style="color: blue;">Very simple! We will assign two “arbitrary” values to a regressor <span class="math inline">\(X\)</span> to represent the two levels (groups) in the dichotomous predictor variable.</span></p>
+<p>There are 2 coding schemes that we will need to learn:</p>
+<ol type="1">
+<li>Dummy coding (reference/control group)</li>
+<li>Contrast coding (for now, unit weighted, centered coefficients).</li>
+</ol>
+<p>We also need to learn distinction between weighted vs.&nbsp;unweighted means (optional).</p>
+<hr>
+</section>
+<section id="dummy-coding" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="dummy-coding"><span class="header-section-number">5.4</span> Dummy Coding</h2>
+<p><strong>Dummy coding with a dichotomous variable:</strong>.<br>
+Dummy coding involves assigning 1’s and 0’s to the regressor in a specific pattern. For the two level simple case, assign a 0 to the control/reference group and a 1 to the target or experimental group. (Doesn’t <em>really</em> matter which is which; <span style="color: red;">but what would change? What about -1 vs.&nbsp;1</span>)</p>
+<hr>
+</section>
+<section id="our-running-example" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="our-running-example"><span class="header-section-number">5.5</span> Our Running Example</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>()) </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>path_data <span class="ot">&lt;-</span> <span class="st">"data_lecture"</span> </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_data, <span class="st">"5_single_dichotomous_bg_fps.csv"</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 96
+Columns: 4
+$ subid &lt;chr&gt; "0011", "0012", "0013", "0014", "0015", "0016", "0021", "0022", …
+$ bg_2  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ sex   &lt;chr&gt; "female", "female", "female", "female", "female", "female", "fem…
+$ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 40.5…</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">where</span>(is.numeric), <span class="at">names_to =</span> <span class="st">"var"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(var) <span class="sc">|&gt;</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(value),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(value),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(value),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(value))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  var       n  mean     sd   min   max
+  &lt;chr&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 bg_2     96  0.75  0.435   0      1 
+2 fps      96 32.2  37.5   -98.1  163.</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bg_2) <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+# Groups:   bg_2 [2]
+   bg_2     n
+  &lt;dbl&gt; &lt;int&gt;
+1     0    24
+2     1    72</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="dichotomous-beverage-group" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="dichotomous-beverage-group"><span class="header-section-number">5.6</span> Dichotomous Beverage Group</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>m_d <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bg_2, <span class="at">data =</span> data)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>m_d <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic    p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)    37.1       7.68     4.83  0.00000524
+2 bg_2           -6.57      8.87    -0.741 0.461     </code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>m_q <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac, <span class="at">data =</span> data_q)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>m_q <span class="sc">|&gt;</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic       p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+1 (Intercept)     42.5      6.55      6.48 0.00000000411
+2 bac           -184.      95.9      -1.92 0.0579       </code></pre>
+</div>
+</div>
+<p><span style="color: red;">Question: What is different about the NHST of the <em>alcohol</em> effect with bg_2 vs BAC and why?</span></p>
+<hr>
+</section>
+<section id="sse-leads-to-ses-and-power" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="sse-leads-to-ses-and-power"><span class="header-section-number">5.7</span> &gt;SSE leads to &gt;SEs and &lt;Power</h2>
+<p><span style="color: blue;">p-value is worse (bigger) for bg_2 than BAC. Taking a quantitative variable and dichotomizing (or trichotomizing, etc.) throws away potentially valuable information in your predictor variable. The dichotomous variable will generally be a worse predictor. This will produce a model with more error (&gt; SSE) and less power (&gt; p-values) to test hypotheses.</span></p>
+<p><span style="color: blue;">Don’t dichotomize unless there is a <strong>REALLY</strong> good reason. GLM can accommodate quantitative variables anywhere you would have previously used a categorical variable.</span></p>
+<p><span class="math inline">\(SE_{b_0}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overline{X})^2}{(N-1)*S_x^2}}\)</span></p>
+</section>
+<section id="se_b_1fracs_ys_xsqrtfrac1-r2n-p" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="se_b_1fracs_ys_xsqrtfrac1-r2n-p"><span class="header-section-number">5.8</span> <span class="math inline">\(SE_{b_1}=\frac{s_y}{s_x}*\sqrt{\frac{1-R^2}{N-P}}\)</span></h2>
+</section>
+<section id="dichotomous-beverage-group-cont." class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="dichotomous-beverage-group-cont."><span class="header-section-number">5.9</span> Dichotomous Beverage Group (cont.)</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>m_d <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic    p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)    37.1       7.68     4.83  0.00000524
+2 bg_2           -6.57      8.87    -0.741 0.461     </code></pre>
+</div>
+</div>
+<p><span style="color: red;">Question: What is the interpretation of <span class="math inline">\(b_1\)</span> (bg_2) in this model?</span></p>
+<hr>
+<p><span style="color: blue;">Still change in <span class="math inline">\(Y\)</span> for one unit change in <span class="math inline">\(X\)</span>.</span></p>
+<p><span style="color: blue;">However, a one unit change in <span class="math inline">\(X\)</span> moves from the no-alcohol group (coded 0) to alcohol group (coded 1). Therefore <span class="math inline">\(b_1\)</span> is now the predicted change in <span class="math inline">\(Y\)</span> between no-alcohol and alcohol groups. This is simply the difference in the mean of the two groups!</span></p>
+<hr>
+<p><span style="color: red;">Question: Where is <span class="math inline">\(b_1\)</span> (bg_2 effect) on this graph?</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plot_d <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bg_2, <span class="at">y =</span> fps)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="fu">aes</span>(<span class="at">intercept =</span> <span class="fu">coef</span>(m_d)[<span class="dv">1</span>],</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">slope =</span> <span class="fu">coef</span>(m_d)[<span class="dv">2</span>]),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">linewidth =</span> <span class="dv">1</span>) </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>plot_d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_single_dichotomous_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<p><span style="color: blue;">It is the slope of the line (as before). The line goes through the mean of FPS scores for each of the two groups.</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">means =</span> <span class="fu">c</span>(<span class="fu">round</span>(<span class="fu">mean</span>(<span class="fu">subset</span>(data, bg_2 <span class="sc">==</span> <span class="dv">0</span>)<span class="sc">$</span>fps), <span class="dv">2</span>), </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">round</span>(<span class="fu">mean</span>(<span class="fu">subset</span>(data, bg_2 <span class="sc">==</span> <span class="dv">1</span>)<span class="sc">$</span>fps), <span class="dv">2</span>)),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"bg_1"</span>, <span class="st">"bg_2"</span>))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>plot_d <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span>.<span class="dv">2</span>, <span class="at">y =</span> labels<span class="sc">$</span>means[<span class="dv">1</span>], <span class="at">label =</span> labels<span class="sc">$</span>means[<span class="dv">1</span>], </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">1.1</span>, <span class="at">y =</span> labels<span class="sc">$</span>means[<span class="dv">2</span>], <span class="at">label =</span> labels<span class="sc">$</span>means[<span class="dv">2</span>], </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="sc">-</span><span class="dv">140</span>, <span class="at">label =</span> <span class="st">"No Alcohol"</span>, </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="sc">-</span><span class="dv">140</span>, <span class="at">label =</span> <span class="st">"Alcohol"</span>, </span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>                  (<span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">175</span>)),</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>                  <span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">75</span>, .<span class="dv">5</span>, .<span class="dv">75</span>), <span class="st">"inches"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_single_dichotomous_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>m_d <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic    p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)    37.1       7.68     4.83  0.00000524
+2 bg_2           -6.57      8.87    -0.741 0.461     </code></pre>
+</div>
+</div>
+<p><span style="color: red;">Question: What is the interpretation of <span class="math inline">\(b_0\)</span> in this model?</span></p>
+<hr>
+<p><span style="color: blue;">Still predicted value for <span class="math inline">\(Y\)</span> when <span class="math inline">\(X\)</span> = 0.</span></p>
+<p><span style="color: blue;">In this context, that is the predicted FPS score for the no-alcohol group (coded 0).</span></p>
+<hr>
+<p><span style="color: red;">Question: Where is <span class="math inline">\(b_0\)</span> on this graph?</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plot_d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_single_dichotomous_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<p><span style="color: blue;">It is the <span class="math inline">\(Y\)</span> intercept as before. The value of FPS when <span class="math inline">\(X\)</span> = 0.</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plot_d <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span>.<span class="dv">2</span>, <span class="at">y =</span> labels<span class="sc">$</span>means[<span class="dv">1</span>], <span class="at">label =</span> labels<span class="sc">$</span>means[<span class="dv">1</span>], </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="sc">-</span><span class="dv">140</span>, <span class="at">label =</span> <span class="st">"No Alcohol"</span>, </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                  (<span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">175</span>)),</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, .<span class="dv">5</span>, .<span class="dv">75</span>), <span class="st">"inches"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_single_dichotomous_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<p><span style="color: red;">Question: Does alcohol affect FPS?</span></p>
+<hr>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>m_d <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic    p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)    37.1       7.68     4.83  0.00000524
+2 bg_2           -6.57      8.87    -0.741 0.461     </code></pre>
+</div>
+</div>
+<p><span class="math inline">\(H_0: \beta_1 = 0\)</span><br>
+<span class="math inline">\(H_a: \beta_1 \neq 0\)</span></p>
+<p><span style="color: blue;">No.&nbsp;The probability of getting a <span class="math inline">\(b_1\)</span> of -6.568 or more extreme is 0.461 if the null hypothesis is true. This is not sufficient evidence to reject the null.</span></p>
+<hr>
+</section>
+<section id="model-comparisons-beta_1" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="model-comparisons-beta_1"><span class="header-section-number">5.10</span> Model Comparisons (<span class="math inline">\(\beta_1\)</span>)</h2>
+<p><span style="color: red;">Question: What two models are you comparing to test your hypotheses about alcohol’s effect on FPS?</span></p>
+<hr>
+<p><span class="math inline">\(H_0: \beta_1 = 0\)</span><br>
+<span class="math inline">\(H_a: \beta_1 \neq 0\)</span></p>
+<p><span style="color: blue;">Compact model: <span class="math inline">\(\hat{\text{FPS}}=\beta_0+0*\text{bg_2}_i\)</span></span><br>
+<span class="math inline">\(P_c = 1\)</span><br>
+$_c = 133888.2817847 $</p>
+<p><span style="color: blue;">Augmented model: <span class="math inline">\(\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i\)</span></span><br>
+<span class="math inline">\(P_a=2\)</span><br>
+<span class="math inline">\(\text{SEE}_a = 133111.7568431\)</span></p>
+<hr>
+<p><span style="color: red;">Question: How do you use this information to calculate <span class="math inline">\(\eta_p^2\)</span> (PRE) for the bg_2 effect?</span></p>
+<hr>
+<p>Compact model: <span class="math inline">\(\hat{\text{FPS}}=\beta_0+0*\text{bg_2}_i\)</span><br>
+<span class="math inline">\(P_c = 1\)</span><br>
+$_c = 133888.2817847 $</p>
+<p>Augmented model: <span class="math inline">\(\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i\)</span><br>
+<span class="math inline">\(P_a=2\)</span><br>
+<span class="math inline">\(\text{SEE}_a = 133111.7568431\)</span></p>
+<p><span style="color: blue;">PRE or <span class="math inline">\(\eta_p^2\)</span> is the proportion reduction in error due to the effect (the parameter). Use the same models that you would use to test the hypotheses about that parameter.</span></p>
+<p><span style="color: blue;"><span class="math inline">\(\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}= \frac{133888.2817847 - 133111.7568431}{sum((data\)</span>fps - mean(data<span class="math inline">\(fps))^2)} = 0.0058\)</span></span></p>
+<hr>
+</section>
+<section id="testing-beta_0" class="level2" data-number="5.11">
+<h2 data-number="5.11" class="anchored" data-anchor-id="testing-beta_0"><span class="header-section-number">5.11</span> Testing <span class="math inline">\(\beta_0\)</span></h2>
+<p><span style="color: red;">Question: Does our task produce non-zero fear potentiated startle in sober people?</span></p>
+<hr>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>m_d <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic    p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)    37.1       7.68     4.83  0.00000524
+2 bg_2           -6.57      8.87    -0.741 0.461     </code></pre>
+</div>
+</div>
+<p><span class="math inline">\(H_0: \beta_0 = 0\)</span><br>
+<span class="math inline">\(H_a: \beta_0 \neq 0\)</span></p>
+<p><span style="color: blue;">Yes. The probability of getting a <span class="math inline">\(b_0\)</span> of 37.117 or more extreme is 0.0000052 if the null hypothesis is true. Very unlikely so reject null. Conclude <span class="math inline">\(B_0 &gt; 0\)</span>.</span></p>
+<hr>
+</section>
+<section id="model-comparisons-beta_0" class="level2" data-number="5.12">
+<h2 data-number="5.12" class="anchored" data-anchor-id="model-comparisons-beta_0"><span class="header-section-number">5.12</span> Model Comparisons (<span class="math inline">\(\beta_0\)</span>)</h2>
+<p><span style="color: red;">Question: What two models are you comparing to test your hypotheses about mean FPS for sober people?</span></p>
+<hr>
+<p><span class="math inline">\(H_0: \beta_0 = 0\)</span><br>
+<span class="math inline">\(H_a: \beta_0 \neq 0\)</span></p>
+<p><span style="color: blue;">Compact model: <span class="math inline">\(\hat{\text{FPS}}=0+\beta_1*\text{bg_2}_i\)</span></span><br>
+<span class="math inline">\(P_c = 1\)</span><br>
+$_c = 166175.7610793 $</p>
+<p><span style="color: blue;">Augmented model: <span class="math inline">\(\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i\)</span></span><br>
+<span class="math inline">\(P_a=2\)</span><br>
+<span class="math inline">\(\text{SEE}_a = 133111.7568431\)</span></p>
+<hr>
+<p><span style="color: red;">Question: How do you use this information to calculate <span class="math inline">\(\eta_p^2\)</span> (PRE) for <span class="math inline">\(\beta_0\)</span>?</span></p>
+<hr>
+<p>Compact model: <span class="math inline">\(\hat{\text{FPS}}=0+\beta_1*\text{bg_2}_i\)</span><br>
+<span class="math inline">\(P_c = 1\)</span><br>
+$_c = 166175.7610793 $</p>
+<p>Augmented model: <span class="math inline">\(\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i\)</span><br>
+<span class="math inline">\(P_a=2\)</span><br>
+<span class="math inline">\(\text{SEE}_a = 133111.7568431\)</span></p>
+<p><span style="color: blue;">PRE or <span class="math inline">\(\eta_p^2\)</span> is the proportion reduction in error due to the effect (the parameter). Use the same models that you would use to test the hypotheses about that parameter.</span></p>
+<p><span style="color: blue;"><span class="math inline">\(\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}= \frac{166175.7610793 - 133111.7568431}{sum((data\)</span>fps - predict(lm(fps~bg_2 -1, data = data)))^2) } = 0.199$</span></p>
+<hr>
+<p><span style="color: red;">Question: How do you use this information to calculate <span class="math inline">\(R^2\)</span> for the augmented model?</span></p>
+<hr>
+<p>Mean Only model: <span class="math inline">\(\hat{\text{FPS}_i}=\beta_0\)</span><br>
+<span class="math inline">\(P_c = 1\)</span><br>
+$_c = 133888.2817847 $</p>
+<p>Augmented model: <span class="math inline">\(\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i\)</span><br>
+<span class="math inline">\(P_a=2\)</span><br>
+<span class="math inline">\(\text{SEE}_a = 133111.7568431\)</span></p>
+<p><span style="color: blue;"><span class="math inline">\(R^2\)</span> is the proportion of explained variance over total variance in <span class="math inline">\(Y\)</span>. The total variance is equivalent to the SSE of the Mean Only model (</span><span style="color: red;">WHY?</span><span style="color: blue;">).</span></p>
+<p>$= = 0.0058 $</p>
+<p><span style="color: blue;">At this point it equals PRE b/c <span class="math inline">\(\text{SSE}_c\)</span> is the mean only model!</span></p>
+<hr>
+</section>
+<section id="effect-sizes-in-r" class="level2" data-number="5.13">
+<h2 data-number="5.13" class="anchored" data-anchor-id="effect-sizes-in-r"><span class="header-section-number">5.13</span> Effect Sizes in R</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>m_mean <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> data) </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>m_d <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bg_2, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><span class="math inline">\(\eta_p^2\)</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(<span class="fu">residuals</span>(m_mean)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_d)<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">residuals</span>(m_mean)<span class="sc">^</span><span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.005799798</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(R^2\)</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">glance</span>(m_d)<span class="sc">$</span>r.squared </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.005799798</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="unit-weighted-centered-coefficients" class="level2" data-number="5.14">
+<h2 data-number="5.14" class="anchored" data-anchor-id="unit-weighted-centered-coefficients"><span class="header-section-number">5.14</span> Unit Weighted, Centered Coefficients</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bg_2c =</span> <span class="fu">if_else</span>(bg_2 <span class="sc">==</span> <span class="dv">0</span>, <span class="sc">-</span>.<span class="dv">5</span>, .<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>m_c <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bg_2c, <span class="at">data =</span> data)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>m_c <span class="sc">|&gt;</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    33.8       4.43     7.63  1.90e-11
+2 bg_2c          -6.57      8.87    -0.741 4.61e- 1</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="visual-displays-of-dummy-vs.-centered" class="level2" data-number="5.15">
+<h2 data-number="5.15" class="anchored" data-anchor-id="visual-displays-of-dummy-vs.-centered"><span class="header-section-number">5.15</span> Visual Displays of Dummy vs.&nbsp;Centered</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>plot_d <span class="ot">&lt;-</span> plot_d <span class="sc">+</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Dummy"</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>plot_c <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bg_2c, <span class="at">y =</span> fps)) <span class="sc">+</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="fu">aes</span>(<span class="at">intercept =</span> <span class="fu">coef</span>(m_c)[<span class="dv">1</span>],</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">slope =</span> <span class="fu">coef</span>(m_c)[<span class="dv">2</span>]),</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Zero-centered"</span>)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>plot_d <span class="sc">+</span> plot_c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_single_dichotomous_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span style="color: red;">Question: <span class="math inline">\(b_0, b_1\)</span> in each?</span></p>
+<hr>
+</section>
+<section id="b_0-with-zero-centered-coefficients" class="level2" data-number="5.16">
+<h2 data-number="5.16" class="anchored" data-anchor-id="b_0-with-zero-centered-coefficients"><span class="header-section-number">5.16</span> <span class="math inline">\(b_0\)</span> with Zero-Centered Coefficients</h2>
+<p><span style="color: red;">Question: Is <span class="math inline">\(b_0\)</span> (33.83) the mean of FPS in the sample?</span></p>
+<hr>
+<p><span style="color: blue;">It is the unweighted mean.</span></p>
+<p><span style="color: blue;">Weighted and unweighted means emerge as concepts with grouped data. An unweighted mean is the mean of the group means, ignoring the <span class="math inline">\(N\)</span> in each group.</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(fps),</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(fps))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+   mean    sd
+  &lt;dbl&gt; &lt;dbl&gt;
+1  32.2  37.5</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bg_2) <span class="sc">|&gt;</span> </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(fps),</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(fps))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+   bg_2  mean    sd
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     0  37.1  46.1
+2     1  30.5  34.4</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="b_0-as-weighted-mean" class="level2" data-number="5.17">
+<h2 data-number="5.17" class="anchored" data-anchor-id="b_0-as-weighted-mean"><span class="header-section-number">5.17</span> <span class="math inline">\(b_0\)</span> as Weighted Mean</h2>
+<p>A weighted mean is the mean of the groups <em>weighted</em> or proportional to their sample sizes. It is also equal to the grand mean of the DV ignoring group.</p>
+<p><span style="color: red;">Question: How can you get <span class="math inline">\(b_0\)</span> to reflect the weighted mean?</span>.</p>
+<hr>
+<p><span style="color: blue;">Mean center <span class="math inline">\(X\)</span>. This is the same as we did with a quantitative variable to make <span class="math inline">\(b_0\)</span> equal the grand mean.</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bg_2mc =</span> bg_2 <span class="sc">-</span> <span class="fu">mean</span>(bg_2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(bg_2mc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75
+[13] -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75
+[25]  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25
+[37]  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25
+[49]  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25
+[61]  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25
+[73]  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25
+[85]  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(data<span class="sc">$</span>bg_2mc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="b_0-as-weighted-mean-1" class="level2" data-number="5.18">
+<h2 data-number="5.18" class="anchored" data-anchor-id="b_0-as-weighted-mean-1"><span class="header-section-number">5.18</span> <span class="math inline">\(b_0\)</span> as Weighted Mean</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>m_mc <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bg_2mc, <span class="at">data =</span> data)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>m_mc <span class="sc">|&gt;</span> </span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    32.2       3.84     8.38  5.02e-13
+2 bg_2mc         -6.57      8.87    -0.741 4.61e- 1</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="comparing-b_0-across-models" class="level2" data-number="5.19">
+<h2 data-number="5.19" class="anchored" data-anchor-id="comparing-b_0-across-models"><span class="header-section-number">5.19</span> Comparing <span class="math inline">\(b_0\)</span> Across Models</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>plot_d <span class="ot">&lt;-</span> plot_d <span class="sc">+</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Dummy"</span>) <span class="sc">+</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">y =</span> <span class="fu">round</span>(<span class="fu">coef</span>(m_d)[<span class="dv">1</span>],<span class="dv">2</span>) <span class="sc">+</span> <span class="dv">10</span>, <span class="at">label =</span> <span class="fu">round</span>(<span class="fu">coef</span>(m_d)[<span class="dv">1</span>],<span class="dv">2</span>), </span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"blue"</span>) </span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>plot_c <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bg_2c, <span class="at">y =</span> fps)) <span class="sc">+</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="fu">aes</span>(<span class="at">intercept =</span> <span class="fu">coef</span>(m_c)[<span class="dv">1</span>],</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">slope =</span> <span class="fu">coef</span>(m_c)[<span class="dv">2</span>]),</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Zero-centered"</span>)  <span class="sc">+</span></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="fu">round</span>(<span class="fu">coef</span>(m_c)[<span class="dv">1</span>],<span class="dv">2</span>) <span class="sc">+</span> <span class="dv">10</span>, <span class="at">label =</span> <span class="fu">round</span>(<span class="fu">coef</span>(m_c)[<span class="dv">1</span>],<span class="dv">2</span>), </span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"blue"</span>) </span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>plot_mc <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bg_2mc, <span class="at">y =</span> fps)) <span class="sc">+</span></span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="fu">aes</span>(<span class="at">intercept =</span> <span class="fu">coef</span>(m_mc)[<span class="dv">1</span>],</span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a>                  <span class="at">slope =</span> <span class="fu">coef</span>(m_mc)[<span class="dv">2</span>]),</span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>                  <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Mean-centered"</span>) <span class="sc">+</span></span>
+<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> .<span class="dv">9</span>, <span class="at">y =</span> <span class="fu">round</span>(<span class="fu">coef</span>(m_mc)[<span class="dv">1</span>],<span class="dv">2</span>) <span class="sc">+</span> <span class="dv">10</span>, <span class="at">label =</span> <span class="fu">round</span>(<span class="fu">coef</span>(m_mc)[<span class="dv">1</span>],<span class="dv">2</span>), </span>
+<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"blue"</span>) </span>
+<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-26"><a href="#cb43-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb43-27"><a href="#cb43-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb43-28"><a href="#cb43-28" aria-hidden="true" tabindex="-1"></a>plot_d <span class="sc">+</span> plot_c <span class="sc">+</span> plot_mc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_single_dichotomous_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="other-not-useful-coefficients" class="level2" data-number="5.20">
+<h2 data-number="5.20" class="anchored" data-anchor-id="other-not-useful-coefficients"><span class="header-section-number">5.20</span> Other (not useful) Coefficients</h2>
+<p><span style="color: red;">What would be the interpretation of <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> if I used coefficients of -1 and 1 for bg_2?</span></p>
+<hr>
+<p><span style="color: blue;"><span class="math inline">\(b_0\)</span> will be the unweighted mean of FPS because 0 is halfway between the two groups.</span></p>
+<p><span style="color: blue;"><span class="math inline">\(b_1\)</span> will be half what it was in all previous models b/c a one unit change on <span class="math inline">\(X\)</span> will only go halfway between no-alcohol and alcohol groups.</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bg_2o =</span> <span class="fu">if_else</span>(bg_2<span class="sc">==</span><span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>m_o <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bg_2o, <span class="at">data =</span> data)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>m_o <span class="sc">|&gt;</span> </span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    33.8       4.43     7.63  1.90e-11
+2 bg_2o          -3.28      4.43    -0.741 4.61e- 1</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bg_2o, <span class="at">y =</span> fps)) <span class="sc">+</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="fu">aes</span>(<span class="at">intercept =</span> <span class="fu">coef</span>(m_o)[<span class="dv">1</span>],</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">slope =</span> <span class="fu">coef</span>(m_o)[<span class="dv">2</span>]),</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">linewidth =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05_single_dichotomous_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="publication-quality-figure" class="level2" data-number="5.21">
+<h2 data-number="5.21" class="anchored" data-anchor-id="publication-quality-figure"><span class="header-section-number">5.21</span> Publication Quality Figure</h2>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/github\.io\/jjcurtin\/book_glm");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./04_single_quantitative.html" class="pagination-link" aria-label="Inferences About a Single Quantitative Predictor">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Inferences About a Single Quantitative Predictor</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./app_terminology.html" class="pagination-link" aria-label="Key Terminology and Concepts">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Key Terminology and Concepts</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/05_single_dichotomous.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
