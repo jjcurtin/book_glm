@@ -685,6 +685,8 @@ preds <- predict(m_2, x, interval = "confidence", level = .95) |> #<1>
 
 1. We can use our model to generate predictions. We use the `interval = "confidence"` and `level = .95` arguments to return the upper and lower values of the 95% confidence interval.  
 
+-----
+
 ```{r}
 preds
 ```
@@ -773,6 +775,8 @@ preds_pub <- predict(m_2, x, se.fit = TRUE) |> #<1>
 1. We use the `se.fit = TRUE` argument to return the standard error for each prediction.  
 
 2. We use `mutate()` to calculate $\pm$ 1 standard error values for each prediction. 
+
+-----
 
 ```{r}
 preds_pub

@@ -18,17 +18,12 @@ options(scipen = 999) # turns off scientfic notation
 
 1. One dichotomous predictor coded with one regressor (*this unit*).   
 
-2. Learn models with multiple regressors in later units:      
+2. Learn models with multiple regressors in later units:
 
-	- One-way between subject ANOVA (One predictor, multiple regressors)   
-  - Multiple predictors and regressors   
-	  *Additive:*  
-		    - ANCOVA  
-		    - General Additive Models   
-    *Interactive:*    
-	      - Factorial ANOVA   
-	      - Attitude Treatment Interactions  
-       	- General Interactive Models    
+  - One-way between subject ANOVA (One predictor, multiple regressors) 
+  - Multiple predictors and regressors
+	  - *Additive:*  ANCOVA, General Additive Models
+	  - *Interactive:* Factorial ANOVA, Attitude Treatment Interactions, General Interactive Models    
 
 3. Repeated measures & mixed model designs
   
@@ -39,6 +34,7 @@ options(scipen = 999) # turns off scientfic notation
 <span style="color: red;">Question: Consider a regression model with one dichotomous predictor and the typical continuous DV.  What other statistical test is this regression equivalent to?</span>
 
 -----
+
 <span style="color: blue;">An independent samples (between subjects) t-test comparing the two groups that are represented by the two levels of the predictor on the mean of the DV.</span>
 
 
@@ -99,6 +95,8 @@ data |>
             max = max(value))
 ```
 
+-----
+
 ```{r}
 data |> 
   group_by(bg_2) |> 
@@ -148,6 +146,8 @@ m_q |>
 $SE_{b_0}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overline{X})^2}{(N-1)*S_x^2}}$  
 
 $SE_{b_1}=\frac{s_y}{s_x}*\sqrt{\frac{1-R^2}{N-P}}$
+
+
 -----
 
 ## Dichotomous Beverage Group (cont.)
@@ -194,10 +194,10 @@ labels <- tibble(means = c(round(mean(subset(data, bg_2 == 0)$fps), 2),
                            round(mean(subset(data, bg_2 == 1)$fps), 2)),
                  vars = c("bg_1", "bg_2"))
 plot_d +
-  annotate("text", x = -.2, y = labels$means[1], label = labels$means[1], 
-           size = 5, color = "blue") +
+  annotate("text", x = -.15, y = labels$means[1], label = labels$means[1], 
+           size = 6, color = "blue") +
   annotate("text", x = 1.1, y = labels$means[2], label = labels$means[2], 
-           size = 5, color = "blue") +
+           size = 6, color = "blue") +
   annotate("text", x = 0, y = -140, label = "No Alcohol", 
            size = 5, color = "blue") +
    annotate("text", x = 1, y = -140, label = "Alcohol", 
@@ -243,8 +243,8 @@ plot_d
 #| code-fold: true
 
 plot_d +
-  annotate("text", x = -.2, y = labels$means[1], label = labels$means[1], 
-           size = 5, color = "blue") +
+  annotate("text", x = -.15, y = labels$means[1], label = labels$means[1], 
+           size = 6, color = "blue") +
   annotate("text", x = 0, y = -140, label = "No Alcohol", 
            size = 5, color = "blue") +
   coord_cartesian(xlim = c(0, 1),
@@ -285,12 +285,12 @@ $H_a: \beta_1 \neq 0$
 
 <span style="color: blue;">Compact model:  $\hat{\text{FPS}}=\beta_0+0*\text{bg_2}_i$</span>  
 $P_c = 1$  
-$\text{SSE}_c = `r sum((data$fps - mean(data$fps))^2) ` $  
+$\text{SSE}_c = `r round(sum((data$fps - mean(data$fps))^2),2)`$  
 
 
 <span style="color: blue;">Augmented model:  $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i$</span>   
 $P_a=2$  
-$\text{SEE}_a = `r sum((data$fps - predict(m_d))^2)`$
+$\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
 
 -----
 
@@ -300,16 +300,16 @@ $\text{SEE}_a = `r sum((data$fps - predict(m_d))^2)`$
 
 Compact model:  $\hat{\text{FPS}}=\beta_0+0*\text{bg_2}_i$  
 $P_c = 1$  
-$\text{SSE}_c = `r sum((data$fps - mean(data$fps))^2) ` $  
+$\text{SSE}_c = `r round(sum((data$fps - mean(data$fps))^2),2)`$   
 
 
 Augmented model:  $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i$   
 $P_a=2$  
-$\text{SEE}_a = `r sum((data$fps - predict(m_d))^2)`$  
+$\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
 
 <span style="color: blue;">PRE or $\eta_p^2$ is the proportion reduction in error due to the effect (the parameter). Use the same models that you would use to test the hypotheses about that parameter.</span>  
 
-<span style="color: blue;">$\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}= \frac{`r sum((data$fps - mean(data$fps))^2)` - `r sum((data$fps - predict(m_d))^2)`}{sum((data$fps - mean(data$fps))^2)} = `r round((sum((data$fps - mean(data$fps))^2)-sum((data$fps - predict(m_d))^2))/sum((data$fps - mean(data$fps))^2), 4)`$</span>
+<span style="color: blue;">$\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{`r round(sum((data$fps - mean(data$fps))^2),2)` - `r round(sum((data$fps - predict(m_d))^2),2)`}{`r round(sum((data$fps - mean(data$fps))^2),2)`} = `r round((sum((data$fps - mean(data$fps))^2)-sum((data$fps - predict(m_d))^2))/sum((data$fps - mean(data$fps))^2), 4)`$</span>
 
 -----
 
@@ -344,12 +344,12 @@ $H_a: \beta_0 \neq 0$
 
 <span style="color: blue;">Compact model:  $\hat{\text{FPS}}=0+\beta_1*\text{bg_2}_i$</span>  
 $P_c = 1$  
-$\text{SSE}_c = `r sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2) ` $  
+$\text{SSE}_c = `r round(sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2),2)`$  
 
 
 <span style="color: blue;">Augmented model:  $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i$</span>   
 $P_a=2$  
-$\text{SEE}_a = `r sum((data$fps - predict(m_d))^2)`$
+$\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
 
 -----
 
@@ -359,16 +359,16 @@ $\text{SEE}_a = `r sum((data$fps - predict(m_d))^2)`$
 
 Compact model:  $\hat{\text{FPS}}=0+\beta_1*\text{bg_2}_i$  
 $P_c = 1$  
-$\text{SSE}_c = `r sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2) ` $  
+$\text{SSE}_c = `r round(sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2),2)`$  
 
 
 Augmented model:  $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i$   
 $P_a=2$  
-$\text{SEE}_a = `r sum((data$fps - predict(m_d))^2)`$  
+$\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$  
 
 <span style="color: blue;">PRE or $\eta_p^2$ is the proportion reduction in error due to the effect (the parameter). Use the same models that you would use to test the hypotheses about that parameter.</span>  
 
-<span style="color: blue;">$\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}= \frac{`r sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2) ` - `r sum((data$fps - predict(m_d))^2)`}{sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2) } = `r round((sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2) -sum((data$fps - predict(m_d))^2))/sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2), 4)`$</span>
+<span style="color: blue;">$\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}= \frac{`r round(sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2),2)` - `r round(sum((data$fps - predict(m_d))^2),2)`}{`r round(sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2),2)` } = `r round((sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2) -sum((data$fps - predict(m_d))^2))/sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2), 4)`$</span>
 
 -----
 
@@ -378,16 +378,16 @@ $\text{SEE}_a = `r sum((data$fps - predict(m_d))^2)`$
 
 Mean Only model:  $\hat{\text{FPS}_i}=\beta_0$  
 $P_c = 1$  
-$\text{SSE}_c = `r sum((data$fps - mean(data$fps))^2) ` $  
+$\text{SSE}_c = `r round(sum((data$fps - mean(data$fps))^2),2)`$  
 
 
 Augmented model:  $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i$   
 $P_a=2$  
-$\text{SEE}_a = `r sum((data$fps - predict(m_d))^2)`$  
+$\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$  
 
 <span style="color: blue;">$R^2$ is the proportion of explained variance over total variance in $Y$. The total variance is equivalent to the SSE of the Mean Only model (</span><span style="color: red;">WHY?</span><span style="color: blue;">).</span>   
 
-$\frac{\text{SSE}_\text{mean only}-\text{SSE}_a}{\text{SSE}_\text{mean only}}= \frac{`r sum((data$fps - mean(data$fps))^2) ` - `r sum((data$fps - predict(m_d))^2)`}{`r sum((data$fps - mean(data$fps))^2) ` } = `r round((sum((data$fps - mean(data$fps))^2) - sum((data$fps - predict(m_d))^2))/sum((data$fps - mean(data$fps))^2),4)` $ 
+$\frac{\text{SSE}_\text{mean}-\text{SSE}_a}{\text{SSE}_\text{mean}}=\frac{`r round(sum((data$fps - mean(data$fps))^2),2)` - `r round(sum((data$fps - predict(m_d))^2),2)`}{`r round(sum((data$fps - mean(data$fps))^2),2)`}$ = `r round((sum((data$fps - mean(data$fps))^2) - sum((data$fps - predict(m_d))^2))/sum((data$fps - mean(data$fps))^2),4)`$ 
 
 <span style="color: blue;">At this point it equals PRE b/c $\text{SSE}_c$ is the mean only model!</span>  
 
@@ -498,6 +498,8 @@ data |>
   pull(bg_2mc)
 ```
 
+-----
+
 ```{r}
 mean(data$bg_2mc)
 ```
@@ -524,7 +526,8 @@ m_mc |>
 plot_d <- plot_d +
   labs(title = "Dummy") +
   annotate("text", x = -.1, y = round(coef(m_d)[1],2) + 10, label = round(coef(m_d)[1],2), 
-           size = 5, color = "blue") 
+           size = 5, color = "blue") +
+  coord_cartesian(clip = "off") 
 
 plot_c <- data |> 
   ggplot(aes(x = bg_2c, y = fps)) +
@@ -534,7 +537,8 @@ plot_c <- data |>
                   linewidth = 1) +
   labs(title = "Zero-centered")  +
   annotate("text", x = 0, y = round(coef(m_c)[1],2) + 10, label = round(coef(m_c)[1],2), 
-           size = 5, color = "blue") 
+           size = 5, color = "blue") +
+  coord_cartesian(clip = "off") 
 
 plot_mc <- data |> 
   ggplot(aes(x = bg_2mc, y = fps)) +
@@ -544,7 +548,8 @@ plot_mc <- data |>
                   linewidth = 1) +
   labs(title = "Mean-centered") +
   annotate("text", x = .9, y = round(coef(m_mc)[1],2) + 10, label = round(coef(m_mc)[1],2), 
-           size = 5, color = "blue") 
+           size = 5, color = "blue") +
+  coord_cartesian(clip = "off") 
 
   
   

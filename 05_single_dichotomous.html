@@ -8,7 +8,7 @@
 <link href="05_single_dichotomous_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="05_single_dichotomous_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="05_single_dichotomous_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.554">
+  <meta name="generator" content="quarto-1.5.45">
 
   <title>single_dichotomous</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -41,7 +41,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -69,7 +69,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -83,7 +83,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -403,23 +403,15 @@
 <h2>Categorical Variables in GLM</h2>
 <ol type="1">
 <li><p>One dichotomous predictor coded with one regressor (<em>this unit</em>).</p></li>
-<li><p>Learn models with multiple regressors in later units:<br>
-/</p>
-<ul>
-<li>One-way between subject ANOVA (One predictor, multiple regressors)<br>
-</li>
-</ul></li>
+<li><p>Learn models with multiple regressors in later units:</p></li>
 </ol>
 <ul>
-<li>Multiple predictors and regressors<br>
-<em>Additive:</em><br>
-- ANCOVA<br>
-- General Additive Models<br>
-<em>Interactive:</em><br>
-- Factorial ANOVA<br>
-- Attitude Treatment Interactions<br>
-- General Interactive Models<br>
-/</li>
+<li>One-way between subject ANOVA (One predictor, multiple regressors)</li>
+<li>Multiple predictors and regressors
+<ul>
+<li><em>Additive:</em> ANCOVA, General Additive Models</li>
+<li><em>Interactive:</em> Factorial ANOVA, Attitude Treatment Interactions, General Interactive Models</li>
+</ul></li>
 </ul>
 <ol start="3" type="1">
 <li>Repeated measures &amp; mixed model designs</li>
@@ -428,16 +420,10 @@
 <section id="dichotomous-predictor" class="slide level2">
 <h2>Dichotomous Predictor</h2>
 <p><span style="color: red;">Question: Consider a regression model with one dichotomous predictor and the typical continuous DV. What other statistical test is this regression equivalent to?</span></p>
-<table style="width:8%;">
-<colgroup>
-<col style="width: 8%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td><span style="color: blue;">An independent samples (between subjects) t-test comparing the two groups that are represented by the two levels of the predictor on the mean of the DV.</span></td>
-</tr>
-</tbody>
-</table>
+</section>
+<section class="slide level2">
+
+<p><span style="color: blue;">An independent samples (between subjects) t-test comparing the two groups that are represented by the two levels of the predictor on the mean of the DV.</span></p>
 </section>
 <section id="coding-dichotomous-predictors" class="slide level2">
 <h2>Coding Dichotomous Predictors</h2>
@@ -468,17 +454,565 @@ Dummy coding involves assigning 1’s and 0’s to the regressor in a specific p
 <span id="cb1-5"><a href=""></a></span>
 <span id="cb1-6"><a href=""></a>path_data <span class="ot">&lt;-</span> <span class="st">"data_lecture"</span> </span>
 <span id="cb1-7"><a href=""></a></span>
-<span id="cb1-8"><a href=""></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_data, <span class="st">"4_single_quantitative_bac_fps.csv"</span>),</span>
+<span id="cb1-8"><a href=""></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_data, <span class="st">"5_single_dichotomous_bg_fps.csv"</span>),</span>
 <span id="cb1-9"><a href=""></a>                 <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb1-10"><a href=""></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 96
-Columns: 3
-$ subid &lt;chr&gt; "0125", "0013", "0113", "0116", "0111", "0014", "0124", "0022", …
-$ bac   &lt;dbl&gt; 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, …
-$ fps   &lt;dbl&gt; -98.0977778, -22.5285000, 0.4632944, 1.1943667, 2.7280444, 6.723…</code></pre>
+Columns: 4
+$ subid &lt;chr&gt; "0011", "0012", "0013", "0014", "0015", "0016", "0021", "0022", …
+$ bg_2  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ sex   &lt;chr&gt; "female", "female", "female", "female", "female", "female", "fem…
+$ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 40.5…</code></pre>
 </div>
 </div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href=""></a>  <span class="fu">pivot_longer</span>(<span class="fu">where</span>(is.numeric), <span class="at">names_to =</span> <span class="st">"var"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb3-3"><a href=""></a>  <span class="fu">group_by</span>(var) <span class="sc">|&gt;</span> </span>
+<span id="cb3-4"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb3-5"><a href=""></a>            <span class="at">mean =</span> <span class="fu">mean</span>(value),</span>
+<span id="cb3-6"><a href=""></a>            <span class="at">sd =</span> <span class="fu">sd</span>(value),</span>
+<span id="cb3-7"><a href=""></a>            <span class="at">min =</span> <span class="fu">min</span>(value),</span>
+<span id="cb3-8"><a href=""></a>            <span class="at">max =</span> <span class="fu">max</span>(value))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  var       n  mean     sd   min   max
+  &lt;chr&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 bg_2     96  0.75  0.435   0      1 
+2 fps      96 32.2  37.5   -98.1  163.</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href=""></a>  <span class="fu">group_by</span>(bg_2) <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a href=""></a>  <span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+# Groups:   bg_2 [2]
+   bg_2     n
+  &lt;dbl&gt; &lt;int&gt;
+1     0    24
+2     1    72</code></pre>
+</div>
+</div>
+</section>
+<section id="dichotomous-beverage-group" class="slide level2">
+<h2>Dichotomous Beverage Group</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>m_d <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bg_2, <span class="at">data =</span> data)</span>
+<span id="cb7-2"><a href=""></a></span>
+<span id="cb7-3"><a href=""></a>m_d <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a href=""></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic    p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)    37.1       7.68     4.83  0.00000524
+2 bg_2           -6.57      8.87    -0.741 0.461     </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a>m_q <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac, <span class="at">data =</span> data_q)</span>
+<span id="cb9-2"><a href=""></a></span>
+<span id="cb9-3"><a href=""></a>m_q <span class="sc">|&gt;</span> </span>
+<span id="cb9-4"><a href=""></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic       p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+1 (Intercept)     42.5      6.55      6.48 0.00000000411
+2 bac           -184.      95.9      -1.92 0.0579       </code></pre>
+</div>
+</div>
+<p><span style="color: red;">Question: What is different about the NHST of the <em>alcohol</em> effect with bg_2 vs BAC and why?</span></p>
+</section>
+<section id="sse-leads-to-ses-and-power" class="slide level2">
+<h2>&gt;SSE leads to &gt;SEs and &lt;Power</h2>
+<p><span style="color: blue;">p-value is worse (bigger) for bg_2 than BAC. Taking a quantitative variable and dichotomizing (or trichotomizing, etc.) throws away potentially valuable information in your predictor variable. The dichotomous variable will generally be a worse predictor. This will produce a model with more error (&gt; SSE) and less power (&gt; p-values) to test hypotheses.</span></p>
+<p><span style="color: blue;">Don’t dichotomize unless there is a <strong>REALLY</strong> good reason. GLM can accommodate quantitative variables anywhere you would have previously used a categorical variable.</span></p>
+<p><span class="math inline">\(SE_{b_0}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overline{X})^2}{(N-1)*S_x^2}}\)</span></p>
+<p><span class="math inline">\(SE_{b_1}=\frac{s_y}{s_x}*\sqrt{\frac{1-R^2}{N-P}}\)</span></p>
+</section>
+<section id="dichotomous-beverage-group-cont." class="slide level2">
+<h2>Dichotomous Beverage Group (cont.)</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a>m_d <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href=""></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic    p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)    37.1       7.68     4.83  0.00000524
+2 bg_2           -6.57      8.87    -0.741 0.461     </code></pre>
+</div>
+</div>
+<p><span style="color: red;">Question: What is the interpretation of <span class="math inline">\(b_1\)</span> (bg_2) in this model?</span></p>
+</section>
+<section class="slide level2">
+
+<p><span style="color: blue;">Still change in <span class="math inline">\(Y\)</span> for one unit change in <span class="math inline">\(X\)</span>.</span></p>
+<p><span style="color: blue;">However, a one unit change in <span class="math inline">\(X\)</span> moves from the no-alcohol group (coded 0) to alcohol group (coded 1). Therefore <span class="math inline">\(b_1\)</span> is now the predicted change in <span class="math inline">\(Y\)</span> between no-alcohol and alcohol groups. This is simply the difference in the mean of the two groups!</span></p>
+</section>
+<section class="slide level2">
+
+<p><span style="color: red;">Question: Where is <span class="math inline">\(b_1\)</span> (bg_2 effect) on this graph?</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a>plot_d <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bg_2, <span class="at">y =</span> fps)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href=""></a>  <span class="fu">geom_abline</span>(<span class="fu">aes</span>(<span class="at">intercept =</span> <span class="fu">coef</span>(m_d)[<span class="dv">1</span>],</span>
+<span id="cb13-5"><a href=""></a>                  <span class="at">slope =</span> <span class="fu">coef</span>(m_d)[<span class="dv">2</span>]),</span>
+<span id="cb13-6"><a href=""></a>                  <span class="at">linewidth =</span> <span class="dv">1</span>) </span>
+<span id="cb13-7"><a href=""></a></span>
+<span id="cb13-8"><a href=""></a>plot_d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="05_single_dichotomous_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<p><span style="color: blue;">It is the slope of the line (as before). The line goes through the mean of FPS scores for each of the two groups.</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a>labels <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">means =</span> <span class="fu">c</span>(<span class="fu">round</span>(<span class="fu">mean</span>(<span class="fu">subset</span>(data, bg_2 <span class="sc">==</span> <span class="dv">0</span>)<span class="sc">$</span>fps), <span class="dv">2</span>), </span>
+<span id="cb14-2"><a href=""></a>                           <span class="fu">round</span>(<span class="fu">mean</span>(<span class="fu">subset</span>(data, bg_2 <span class="sc">==</span> <span class="dv">1</span>)<span class="sc">$</span>fps), <span class="dv">2</span>)),</span>
+<span id="cb14-3"><a href=""></a>                 <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"bg_1"</span>, <span class="st">"bg_2"</span>))</span>
+<span id="cb14-4"><a href=""></a>plot_d <span class="sc">+</span></span>
+<span id="cb14-5"><a href=""></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span>.<span class="dv">15</span>, <span class="at">y =</span> labels<span class="sc">$</span>means[<span class="dv">1</span>], <span class="at">label =</span> labels<span class="sc">$</span>means[<span class="dv">1</span>], </span>
+<span id="cb14-6"><a href=""></a>           <span class="at">size =</span> <span class="dv">6</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href=""></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">1.1</span>, <span class="at">y =</span> labels<span class="sc">$</span>means[<span class="dv">2</span>], <span class="at">label =</span> labels<span class="sc">$</span>means[<span class="dv">2</span>], </span>
+<span id="cb14-8"><a href=""></a>           <span class="at">size =</span> <span class="dv">6</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb14-9"><a href=""></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="sc">-</span><span class="dv">140</span>, <span class="at">label =</span> <span class="st">"No Alcohol"</span>, </span>
+<span id="cb14-10"><a href=""></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb14-11"><a href=""></a>   <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="sc">-</span><span class="dv">140</span>, <span class="at">label =</span> <span class="st">"Alcohol"</span>, </span>
+<span id="cb14-12"><a href=""></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb14-13"><a href=""></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb14-14"><a href=""></a>                  (<span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">175</span>)),</span>
+<span id="cb14-15"><a href=""></a>                  <span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
+<span id="cb14-16"><a href=""></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">75</span>, .<span class="dv">5</span>, .<span class="dv">75</span>), <span class="st">"inches"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="05_single_dichotomous_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a>m_d <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href=""></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic    p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)    37.1       7.68     4.83  0.00000524
+2 bg_2           -6.57      8.87    -0.741 0.461     </code></pre>
+</div>
+</div>
+<p><span style="color: red;">Question: What is the interpretation of <span class="math inline">\(b_0\)</span> in this model?</span></p>
+</section>
+<section class="slide level2">
+
+<p><span style="color: blue;">Still predicted value for <span class="math inline">\(Y\)</span> when <span class="math inline">\(X\)</span> = 0.</span></p>
+<p><span style="color: blue;">In this context, that is the predicted FPS score for the no-alcohol group (coded 0).</span></p>
+</section>
+<section class="slide level2">
+
+<p><span style="color: red;">Question: Where is <span class="math inline">\(b_0\)</span> on this graph?</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>plot_d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="05_single_dichotomous_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<p><span style="color: blue;">It is the <span class="math inline">\(Y\)</span> intercept as before. The value of FPS when <span class="math inline">\(X\)</span> = 0.</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a>plot_d <span class="sc">+</span></span>
+<span id="cb18-2"><a href=""></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span>.<span class="dv">15</span>, <span class="at">y =</span> labels<span class="sc">$</span>means[<span class="dv">1</span>], <span class="at">label =</span> labels<span class="sc">$</span>means[<span class="dv">1</span>], </span>
+<span id="cb18-3"><a href=""></a>           <span class="at">size =</span> <span class="dv">6</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href=""></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="sc">-</span><span class="dv">140</span>, <span class="at">label =</span> <span class="st">"No Alcohol"</span>, </span>
+<span id="cb18-5"><a href=""></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href=""></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb18-7"><a href=""></a>                  (<span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="dv">175</span>)),</span>
+<span id="cb18-8"><a href=""></a>                  <span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
+<span id="cb18-9"><a href=""></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, .<span class="dv">5</span>, .<span class="dv">75</span>), <span class="st">"inches"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="05_single_dichotomous_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<p><span style="color: red;">Question: Does alcohol affect FPS?</span></p>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a>m_d <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a href=""></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic    p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)    37.1       7.68     4.83  0.00000524
+2 bg_2           -6.57      8.87    -0.741 0.461     </code></pre>
+</div>
+</div>
+<p><span class="math inline">\(H_0: \beta_1 = 0\)</span><br>
+<span class="math inline">\(H_a: \beta_1 \neq 0\)</span></p>
+<p><span style="color: blue;">No.&nbsp;The probability of getting a <span class="math inline">\(b_1\)</span> of -6.568 or more extreme is 0.461 if the null hypothesis is true. This is not sufficient evidence to reject the null.</span></p>
+</section>
+<section id="model-comparisons-beta_1" class="slide level2">
+<h2>Model Comparisons (<span class="math inline">\(\beta_1\)</span>)</h2>
+<p><span style="color: red;">Question: What two models are you comparing to test your hypotheses about alcohol’s effect on FPS?</span></p>
+</section>
+<section class="slide level2">
+
+<p><span class="math inline">\(H_0: \beta_1 = 0\)</span><br>
+<span class="math inline">\(H_a: \beta_1 \neq 0\)</span></p>
+<p><span style="color: blue;">Compact model: <span class="math inline">\(\hat{\text{FPS}}=\beta_0+0*\text{bg_2}_i\)</span></span><br>
+<span class="math inline">\(P_c = 1\)</span><br>
+<span class="math inline">\(\text{SSE}_c = 133888.28\)</span></p>
+<p><span style="color: blue;">Augmented model: <span class="math inline">\(\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i\)</span></span><br>
+<span class="math inline">\(P_a=2\)</span><br>
+<span class="math inline">\(\text{SSE}_a = 133111.76\)</span></p>
+</section>
+<section class="slide level2">
+
+<p><span style="color: red;">Question: How do you use this information to calculate <span class="math inline">\(\eta_p^2\)</span> (PRE) for the bg_2 effect?</span></p>
+</section>
+<section class="slide level2">
+
+<p>Compact model: <span class="math inline">\(\hat{\text{FPS}}=\beta_0+0*\text{bg_2}_i\)</span><br>
+<span class="math inline">\(P_c = 1\)</span><br>
+<span class="math inline">\(\text{SSE}_c = 133888.28\)</span></p>
+<p>Augmented model: <span class="math inline">\(\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i\)</span><br>
+<span class="math inline">\(P_a=2\)</span><br>
+<span class="math inline">\(\text{SSE}_a = 133111.76\)</span></p>
+<p><span style="color: blue;">PRE or <span class="math inline">\(\eta_p^2\)</span> is the proportion reduction in error due to the effect (the parameter). Use the same models that you would use to test the hypotheses about that parameter.</span></p>
+<p><span style="color: blue;"><span class="math inline">\(\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{133888.28 - 133111.76}{133888.28} = 0.0058\)</span></span></p>
+</section>
+<section id="testing-beta_0" class="slide level2">
+<h2>Testing <span class="math inline">\(\beta_0\)</span></h2>
+<p><span style="color: red;">Question: Does our task produce non-zero fear potentiated startle in sober people?</span></p>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a>m_d <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href=""></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic    p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)    37.1       7.68     4.83  0.00000524
+2 bg_2           -6.57      8.87    -0.741 0.461     </code></pre>
+</div>
+</div>
+<p><span class="math inline">\(H_0: \beta_0 = 0\)</span><br>
+<span class="math inline">\(H_a: \beta_0 \neq 0\)</span></p>
+<p><span style="color: blue;">Yes. The probability of getting a <span class="math inline">\(b_0\)</span> of 37.117 or more extreme is 0.0000052 if the null hypothesis is true. Very unlikely so reject null. Conclude <span class="math inline">\(B_0 &gt; 0\)</span>.</span></p>
+</section>
+<section id="model-comparisons-beta_0" class="slide level2">
+<h2>Model Comparisons (<span class="math inline">\(\beta_0\)</span>)</h2>
+<p><span style="color: red;">Question: What two models are you comparing to test your hypotheses about mean FPS for sober people?</span></p>
+</section>
+<section class="slide level2">
+
+<p><span class="math inline">\(H_0: \beta_0 = 0\)</span><br>
+<span class="math inline">\(H_a: \beta_0 \neq 0\)</span></p>
+<p><span style="color: blue;">Compact model: <span class="math inline">\(\hat{\text{FPS}}=0+\beta_1*\text{bg_2}_i\)</span></span><br>
+<span class="math inline">\(P_c = 1\)</span><br>
+<span class="math inline">\(\text{SSE}_c = 166175.76\)</span></p>
+<p><span style="color: blue;">Augmented model: <span class="math inline">\(\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i\)</span></span><br>
+<span class="math inline">\(P_a=2\)</span><br>
+<span class="math inline">\(\text{SSE}_a = 133111.76\)</span></p>
+</section>
+<section class="slide level2">
+
+<p><span style="color: red;">Question: How do you use this information to calculate <span class="math inline">\(\eta_p^2\)</span> (PRE) for <span class="math inline">\(\beta_0\)</span>?</span></p>
+</section>
+<section class="slide level2">
+
+<p>Compact model: <span class="math inline">\(\hat{\text{FPS}}=0+\beta_1*\text{bg_2}_i\)</span><br>
+<span class="math inline">\(P_c = 1\)</span><br>
+<span class="math inline">\(\text{SSE}_c = 166175.76\)</span></p>
+<p>Augmented model: <span class="math inline">\(\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i\)</span><br>
+<span class="math inline">\(P_a=2\)</span><br>
+<span class="math inline">\(\text{SSE}_a = 133111.76\)</span></p>
+<p><span style="color: blue;">PRE or <span class="math inline">\(\eta_p^2\)</span> is the proportion reduction in error due to the effect (the parameter). Use the same models that you would use to test the hypotheses about that parameter.</span></p>
+<p><span style="color: blue;"><span class="math inline">\(\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}= \frac{166175.76 - 133111.76}{166175.76 } = 0.199\)</span></span></p>
+</section>
+<section class="slide level2">
+
+<p><span style="color: red;">Question: How do you use this information to calculate <span class="math inline">\(R^2\)</span> for the augmented model?</span></p>
+</section>
+<section class="slide level2">
+
+<p>Mean Only model: <span class="math inline">\(\hat{\text{FPS}_i}=\beta_0\)</span><br>
+<span class="math inline">\(P_c = 1\)</span><br>
+<span class="math inline">\(\text{SSE}_c = 133888.28\)</span></p>
+<p>Augmented model: <span class="math inline">\(\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i\)</span><br>
+<span class="math inline">\(P_a=2\)</span><br>
+<span class="math inline">\(\text{SSE}_a = 133111.76\)</span></p>
+<p><span style="color: blue;"><span class="math inline">\(R^2\)</span> is the proportion of explained variance over total variance in <span class="math inline">\(Y\)</span>. The total variance is equivalent to the SSE of the Mean Only model (</span><span style="color: red;">WHY?</span><span style="color: blue;">).</span></p>
+<p><span class="math inline">\(\frac{\text{SSE}_\text{mean}-\text{SSE}_a}{\text{SSE}_\text{mean}}=\frac{133888.28 - 133111.76}{133888.28}\)</span> = 0.0058$</p>
+<p><span style="color: blue;">At this point it equals PRE b/c <span class="math inline">\(\text{SSE}_c\)</span> is the mean only model!</span></p>
+</section>
+<section id="effect-sizes-in-r" class="slide level2">
+<h2>Effect Sizes in R</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>m_mean <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> data) </span>
+<span id="cb23-2"><a href=""></a>m_d <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bg_2, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><span class="math inline">\(\eta_p^2\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a>(<span class="fu">sum</span>(<span class="fu">residuals</span>(m_mean)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_d)<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">residuals</span>(m_mean)<span class="sc">^</span><span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.005799798</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(R^2\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a>broom<span class="sc">::</span><span class="fu">glance</span>(m_d)<span class="sc">$</span>r.squared </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.005799798</code></pre>
+</div>
+</div>
+</section>
+<section id="unit-weighted-centered-coefficients" class="slide level2">
+<h2>Unit Weighted, Centered Coefficients</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb28-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">bg_2c =</span> <span class="fu">if_else</span>(bg_2 <span class="sc">==</span> <span class="dv">0</span>, <span class="sc">-</span>.<span class="dv">5</span>, .<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a>m_c <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bg_2c, <span class="at">data =</span> data)</span>
+<span id="cb29-2"><a href=""></a></span>
+<span id="cb29-3"><a href=""></a>m_c <span class="sc">|&gt;</span> </span>
+<span id="cb29-4"><a href=""></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    33.8       4.43     7.63  1.90e-11
+2 bg_2c          -6.57      8.87    -0.741 4.61e- 1</code></pre>
+</div>
+</div>
+</section>
+<section id="visual-displays-of-dummy-vs.-centered" class="slide level2">
+<h2>Visual Displays of Dummy vs.&nbsp;Centered</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a>plot_d <span class="ot">&lt;-</span> plot_d <span class="sc">+</span></span>
+<span id="cb31-2"><a href=""></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Dummy"</span>)</span>
+<span id="cb31-3"><a href=""></a></span>
+<span id="cb31-4"><a href=""></a>plot_c <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb31-5"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bg_2c, <span class="at">y =</span> fps)) <span class="sc">+</span></span>
+<span id="cb31-6"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb31-7"><a href=""></a>  <span class="fu">geom_abline</span>(<span class="fu">aes</span>(<span class="at">intercept =</span> <span class="fu">coef</span>(m_c)[<span class="dv">1</span>],</span>
+<span id="cb31-8"><a href=""></a>                  <span class="at">slope =</span> <span class="fu">coef</span>(m_c)[<span class="dv">2</span>]),</span>
+<span id="cb31-9"><a href=""></a>                  <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb31-10"><a href=""></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Zero-centered"</span>)</span>
+<span id="cb31-11"><a href=""></a>  </span>
+<span id="cb31-12"><a href=""></a>  </span>
+<span id="cb31-13"><a href=""></a>plot_d <span class="sc">+</span> plot_c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="05_single_dichotomous_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"><p><span style="color: red;">Question: <span class="math inline">\(b_0, b_1\)</span> in each?</span></p>
+</section>
+<section id="b_0-with-zero-centered-coefficients" class="slide level2">
+<h2><span class="math inline">\(b_0\)</span> with Zero-Centered Coefficients</h2>
+<p><span style="color: red;">Question: Is <span class="math inline">\(b_0\)</span> (33.83) the mean of FPS in the sample?</span></p>
+</section>
+<section class="slide level2">
+
+<p><span style="color: blue;">It is the unweighted mean.</span></p>
+<p><span style="color: blue;">Weighted and unweighted means emerge as concepts with grouped data. An unweighted mean is the mean of the group means, ignoring the <span class="math inline">\(N\)</span> in each group.</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb32-2"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(fps),</span>
+<span id="cb32-3"><a href=""></a>            <span class="at">sd =</span> <span class="fu">sd</span>(fps))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+   mean    sd
+  &lt;dbl&gt; &lt;dbl&gt;
+1  32.2  37.5</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb34-2"><a href=""></a>  <span class="fu">group_by</span>(bg_2) <span class="sc">|&gt;</span> </span>
+<span id="cb34-3"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(fps),</span>
+<span id="cb34-4"><a href=""></a>            <span class="at">sd =</span> <span class="fu">sd</span>(fps))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+   bg_2  mean    sd
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     0  37.1  46.1
+2     1  30.5  34.4</code></pre>
+</div>
+</div>
+</section>
+<section id="b_0-as-weighted-mean" class="slide level2">
+<h2><span class="math inline">\(b_0\)</span> as Weighted Mean</h2>
+<p>A weighted mean is the mean of the groups <em>weighted</em> or proportional to their sample sizes. It is also equal to the grand mean of the DV ignoring group.</p>
+<p><span style="color: red;">Question: How can you get <span class="math inline">\(b_0\)</span> to reflect the weighted mean?</span>.</p>
+</section>
+<section class="slide level2">
+
+<p><span style="color: blue;">Mean center <span class="math inline">\(X\)</span>. This is the same as we did with a quantitative variable to make <span class="math inline">\(b_0\)</span> equal the grand mean.</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb36-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">bg_2mc =</span> bg_2 <span class="sc">-</span> <span class="fu">mean</span>(bg_2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb37-2"><a href=""></a>  <span class="fu">pull</span>(bg_2mc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75
+[13] -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75 -0.75
+[25]  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25
+[37]  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25
+[49]  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25
+[61]  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25
+[73]  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25
+[85]  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25  0.25</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="fu">mean</span>(data<span class="sc">$</span>bg_2mc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+</section>
+<section id="b_0-as-weighted-mean-1" class="slide level2">
+<h2><span class="math inline">\(b_0\)</span> as Weighted Mean</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a>m_mc <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bg_2mc, <span class="at">data =</span> data)</span>
+<span id="cb41-2"><a href=""></a></span>
+<span id="cb41-3"><a href=""></a>m_mc <span class="sc">|&gt;</span> </span>
+<span id="cb41-4"><a href=""></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    32.2       3.84     8.38  5.02e-13
+2 bg_2mc         -6.57      8.87    -0.741 4.61e- 1</code></pre>
+</div>
+</div>
+</section>
+<section id="comparing-b_0-across-models" class="slide level2">
+<h2>Comparing <span class="math inline">\(b_0\)</span> Across Models</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a>plot_d <span class="ot">&lt;-</span> plot_d <span class="sc">+</span></span>
+<span id="cb43-2"><a href=""></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Dummy"</span>) <span class="sc">+</span></span>
+<span id="cb43-3"><a href=""></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span>.<span class="dv">1</span>, <span class="at">y =</span> <span class="fu">round</span>(<span class="fu">coef</span>(m_d)[<span class="dv">1</span>],<span class="dv">2</span>) <span class="sc">+</span> <span class="dv">10</span>, <span class="at">label =</span> <span class="fu">round</span>(<span class="fu">coef</span>(m_d)[<span class="dv">1</span>],<span class="dv">2</span>), </span>
+<span id="cb43-4"><a href=""></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb43-5"><a href=""></a>  <span class="fu">coord_cartesian</span>(<span class="at">clip =</span> <span class="st">"off"</span>) </span>
+<span id="cb43-6"><a href=""></a></span>
+<span id="cb43-7"><a href=""></a>plot_c <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb43-8"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bg_2c, <span class="at">y =</span> fps)) <span class="sc">+</span></span>
+<span id="cb43-9"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb43-10"><a href=""></a>  <span class="fu">geom_abline</span>(<span class="fu">aes</span>(<span class="at">intercept =</span> <span class="fu">coef</span>(m_c)[<span class="dv">1</span>],</span>
+<span id="cb43-11"><a href=""></a>                  <span class="at">slope =</span> <span class="fu">coef</span>(m_c)[<span class="dv">2</span>]),</span>
+<span id="cb43-12"><a href=""></a>                  <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb43-13"><a href=""></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Zero-centered"</span>)  <span class="sc">+</span></span>
+<span id="cb43-14"><a href=""></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="fu">round</span>(<span class="fu">coef</span>(m_c)[<span class="dv">1</span>],<span class="dv">2</span>) <span class="sc">+</span> <span class="dv">10</span>, <span class="at">label =</span> <span class="fu">round</span>(<span class="fu">coef</span>(m_c)[<span class="dv">1</span>],<span class="dv">2</span>), </span>
+<span id="cb43-15"><a href=""></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb43-16"><a href=""></a>  <span class="fu">coord_cartesian</span>(<span class="at">clip =</span> <span class="st">"off"</span>) </span>
+<span id="cb43-17"><a href=""></a></span>
+<span id="cb43-18"><a href=""></a>plot_mc <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb43-19"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bg_2mc, <span class="at">y =</span> fps)) <span class="sc">+</span></span>
+<span id="cb43-20"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb43-21"><a href=""></a>  <span class="fu">geom_abline</span>(<span class="fu">aes</span>(<span class="at">intercept =</span> <span class="fu">coef</span>(m_mc)[<span class="dv">1</span>],</span>
+<span id="cb43-22"><a href=""></a>                  <span class="at">slope =</span> <span class="fu">coef</span>(m_mc)[<span class="dv">2</span>]),</span>
+<span id="cb43-23"><a href=""></a>                  <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb43-24"><a href=""></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Mean-centered"</span>) <span class="sc">+</span></span>
+<span id="cb43-25"><a href=""></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> .<span class="dv">9</span>, <span class="at">y =</span> <span class="fu">round</span>(<span class="fu">coef</span>(m_mc)[<span class="dv">1</span>],<span class="dv">2</span>) <span class="sc">+</span> <span class="dv">10</span>, <span class="at">label =</span> <span class="fu">round</span>(<span class="fu">coef</span>(m_mc)[<span class="dv">1</span>],<span class="dv">2</span>), </span>
+<span id="cb43-26"><a href=""></a>           <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb43-27"><a href=""></a>  <span class="fu">coord_cartesian</span>(<span class="at">clip =</span> <span class="st">"off"</span>) </span>
+<span id="cb43-28"><a href=""></a></span>
+<span id="cb43-29"><a href=""></a>  </span>
+<span id="cb43-30"><a href=""></a>  </span>
+<span id="cb43-31"><a href=""></a>plot_d <span class="sc">+</span> plot_c <span class="sc">+</span> plot_mc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="05_single_dichotomous_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch"></section>
+<section id="other-not-useful-coefficients" class="slide level2">
+<h2>Other (not useful) Coefficients</h2>
+<p><span style="color: red;">What would be the interpretation of <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> if I used coefficients of -1 and 1 for bg_2?</span></p>
+</section>
+<section class="slide level2">
+
+<p><span style="color: blue;"><span class="math inline">\(b_0\)</span> will be the unweighted mean of FPS because 0 is halfway between the two groups.</span></p>
+<p><span style="color: blue;"><span class="math inline">\(b_1\)</span> will be half what it was in all previous models b/c a one unit change on <span class="math inline">\(X\)</span> will only go halfway between no-alcohol and alcohol groups.</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb44-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">bg_2o =</span> <span class="fu">if_else</span>(bg_2<span class="sc">==</span><span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>m_o <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bg_2o, <span class="at">data =</span> data)</span>
+<span id="cb45-2"><a href=""></a></span>
+<span id="cb45-3"><a href=""></a>m_o <span class="sc">|&gt;</span> </span>
+<span id="cb45-4"><a href=""></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    33.8       4.43     7.63  1.90e-11
+2 bg_2o          -3.28      4.43    -0.741 4.61e- 1</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb47-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> bg_2o, <span class="at">y =</span> fps)) <span class="sc">+</span></span>
+<span id="cb47-3"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb47-4"><a href=""></a>  <span class="fu">geom_abline</span>(<span class="fu">aes</span>(<span class="at">intercept =</span> <span class="fu">coef</span>(m_o)[<span class="dv">1</span>],</span>
+<span id="cb47-5"><a href=""></a>                  <span class="at">slope =</span> <span class="fu">coef</span>(m_o)[<span class="dv">2</span>]),</span>
+<span id="cb47-6"><a href=""></a>                  <span class="at">linewidth =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="05_single_dichotomous_files/figure-revealjs/unnamed-chunk-31-1.png" width="960" class="r-stretch"></section>
+<section id="publication-quality-figure" class="slide level2">
+<h2>Publication Quality Figure</h2>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -698,42 +1232,80 @@ $ fps   &lt;dbl&gt; -98.0977778, -22.5285000, 0.4632944, 1.1943667, 2.7280444, 6
       });
     </script>
     
+
     <script>
+
       // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
       // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
       // slide changes (different for each slide format).
+
       (function () {
+
         // dispatch for htmlwidgets
+
         function fireSlideEnter() {
+
           const event = window.document.createEvent("Event");
+
           event.initEvent("slideenter", true, true);
+
           window.document.dispatchEvent(event);
+
         }
+
+    
 
         function fireSlideChanged(previousSlide, currentSlide) {
+
           fireSlideEnter();
 
+    
+
           // dispatch for shiny
+
           if (window.jQuery) {
+
             if (previousSlide) {
+
               window.jQuery(previousSlide).trigger("hidden");
+
             }
+
             if (currentSlide) {
+
               window.jQuery(currentSlide).trigger("shown");
+
             }
+
           }
+
         }
+
+    
 
         // hookup for slidy
+
         if (window.w3c_slidy) {
+
           window.w3c_slidy.add_observer(function (slide_num) {
+
             // slide_num starts at position 1
+
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
           });
+
         }
 
+    
+
       })();
+
     </script>
+
+    
 
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -767,18 +1339,7 @@ $ fps   &lt;dbl&gt; -98.0977778, -22.5285000, 0.4632944, 1.1943667, 2.7280444, 6
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -810,7 +1371,29 @@ $ fps   &lt;dbl&gt; -98.0977778, -22.5285000, 0.4632944, 1.1943667, 2.7280444, 6
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -818,7 +1401,7 @@ $ fps   &lt;dbl&gt; -98.0977778, -22.5285000, 0.4632944, 1.1943667, 2.7280444, 6
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {
