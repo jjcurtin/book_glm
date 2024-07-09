@@ -342,12 +342,14 @@ $H_a: \beta_0 \neq 0$
 $H_0: \beta_0 = 0$  
 $H_a: \beta_0 \neq 0$   
 
-<span style="color: blue;">Compact model:  $\hat{\text{FPS}}=0+\beta_1*\text{bg_2}_i$</span>  
+<span style="color: blue;">Compact model: $\hat{\text{FPS}}=0+\beta_1*\text{bg_2}_i$</span>  
+
 $P_c = 1$  
 $\text{SSE}_c = `r round(sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2),2)`$  
 
 
-<span style="color: blue;">Augmented model:  $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i$</span>   
+<span style="color: blue;">Augmented model: $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i$</span>   
+
 $P_a=2$  
 $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
 
@@ -357,12 +359,14 @@ $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
 
 -----
 
-Compact model:  $\hat{\text{FPS}}=0+\beta_1*\text{bg_2}_i$  
+Compact model: $\hat{\text{FPS}}=0+\beta_1*\text{bg_2}_i$  
+
 $P_c = 1$  
 $\text{SSE}_c = `r round(sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2),2)`$  
 
 
-Augmented model:  $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i$   
+Augmented model: $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i$   
+
 $P_a=2$  
 $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$  
 
@@ -376,12 +380,14 @@ $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
 
 -----
 
-Mean Only model:  $\hat{\text{FPS}_i}=\beta_0$  
+Mean Only model: $\hat{\text{FPS}_i}=\beta_0$  
+
 $P_c = 1$  
 $\text{SSE}_c = `r round(sum((data$fps - mean(data$fps))^2),2)`$  
 
 
-Augmented model:  $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i$   
+Augmented model: $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i$   
+
 $P_a=2$  
 $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$  
 
@@ -596,5 +602,39 @@ data |>
 -----
 
 ## Publication Quality Figure
+
+```{r}
+x <- tibble(bg_2 = c(0,1))
+
+preds_pub <- x |> 
+  bind_cols(predict(m_d, x, se.fit = TRUE) |> 
+  as_tibble())
+```
+
+```{r}
+plot_pub <- ggplot() +
+  geom_col(aes(x = as.factor(preds_pub$bg_2), y = preds_pub$fit, 
+               fill = as.factor(preds_pub$bg_2)),
+           alpha = .4, color = "black") +
+  geom_jitter(aes(x = as.factor(data$bg_2), y = data$fps), width = .02, height = NULL) +
+  geom_errorbar(aes(ymin = preds_pub$fit-preds_pub$se.fit, 
+                    ymax = preds_pub$fit+preds_pub$se.fit, 
+                    x = as.factor(preds_pub$bg_2)), width = .4) +
+  scale_fill_manual(values = c("black", "light grey")) +
+  scale_x_discrete(breaks = c(0, 1),
+                   labels = c("No alcohol", "Alcohol")) +
+  theme(legend.position = "none") +
+  labs(x = "Group",
+       y = "Fear-potentiated startle") 
+```
+
+-----
+
+```{r}
+#| fig-cap: "Bars display point estimates for fear potentiated startle by group from the general linear model. Confidence intervals display +/- 1 standard error for these point estimates."
+
+plot_pub
+```
+
 
 
