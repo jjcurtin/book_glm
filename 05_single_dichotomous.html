@@ -690,7 +690,7 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 <span class="math inline">\(P_a=2\)</span><br>
 <span class="math inline">\(\text{SSE}_a = 133111.76\)</span></p>
 <p><span style="color: blue;"><span class="math inline">\(R^2\)</span> is the proportion of explained variance over total variance in <span class="math inline">\(Y\)</span>. The total variance is equivalent to the SSE of the Mean Only model (</span><span style="color: red;">WHY?</span><span style="color: blue;">).</span></p>
-<p><span class="math inline">\(\frac{\text{SSE}_\text{mean}-\text{SSE}_a}{\text{SSE}_\text{mean}}=\)</span> <span class="math inline">\(\frac{133888.28 - 133111.76}{133888.28}\)</span> = 0.0058$</p>
+<p><span class="math inline">\(\frac{\text{SSE}_\text{mean}-\text{SSE}_a}{\text{SSE}_\text{mean}}=\frac{133888.28 - 133111.76}{133888.28}\)</span> = 0.0058$</p>
 <p><span style="color: blue;">At this point it equals PRE b/c <span class="math inline">\(\text{SSE}_c\)</span> is the mean only model!</span></p>
 <hr>
 </section>
@@ -981,6 +981,50 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 </section>
 <section id="publication-quality-figure" class="level2" data-number="5.20">
 <h2 data-number="5.20" class="anchored" data-anchor-id="publication-quality-figure"><span class="header-section-number">5.20</span> Publication Quality Figure</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">bg_2 =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>preds_pub <span class="ot">&lt;-</span> x <span class="sc">|&gt;</span> </span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(<span class="fu">predict</span>(m_d, x, <span class="at">se.fit =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>plot_pub <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(preds_pub<span class="sc">$</span>bg_2), <span class="at">y =</span> preds_pub<span class="sc">$</span>fit, </span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="fu">as.factor</span>(preds_pub<span class="sc">$</span>bg_2)),</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">alpha =</span> .<span class="dv">4</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(data<span class="sc">$</span>bg_2), <span class="at">y =</span> data<span class="sc">$</span>fps), <span class="at">width =</span> .<span class="dv">02</span>, <span class="at">height =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> preds_pub<span class="sc">$</span>fit<span class="sc">-</span>preds_pub<span class="sc">$</span>se.fit, </span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymax =</span> preds_pub<span class="sc">$</span>fit<span class="sc">+</span>preds_pub<span class="sc">$</span>se.fit, </span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">x =</span> <span class="fu">as.factor</span>(preds_pub<span class="sc">$</span>bg_2)), <span class="at">width =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"light grey"</span>)) <span class="sc">+</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"No alcohol"</span>, <span class="st">"Alcohol"</span>)) <span class="sc">+</span></span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Group"</span>,</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Fear-potentiated startle"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>plot_pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="05_single_dichotomous_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Bars display point estimates for fear potentiated startle by group from the general linear model. Confidence intervals display +/- 1 standard error for these point estimates.</figcaption>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
