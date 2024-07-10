@@ -271,6 +271,8 @@ window.Quarto = {
   <li><a href="#testing-inferences-about-beta_1" id="toc-testing-inferences-about-beta_1" class="nav-link" data-scroll-target="#testing-inferences-about-beta_1"><span class="header-section-number">6.5</span> Testing Inferences about <span class="math inline">\(\beta_1\)</span></a></li>
   <li><a href="#standard-errors-of-glm-coefficients" id="toc-standard-errors-of-glm-coefficients" class="nav-link" data-scroll-target="#standard-errors-of-glm-coefficients"><span class="header-section-number">6.6</span> Standard Errors of GLM Coefficients</a></li>
   <li><a href="#se-for-b_j-and-r2" id="toc-se-for-b_j-and-r2" class="nav-link" data-scroll-target="#se-for-b_j-and-r2"><span class="header-section-number">6.7</span> SE for <span class="math inline">\(b_j\)</span> and <span class="math inline">\(R^2\)</span></a></li>
+  <li><a href="#model-comparison-testing-inferences-about-beta_1" id="toc-model-comparison-testing-inferences-about-beta_1" class="nav-link" data-scroll-target="#model-comparison-testing-inferences-about-beta_1"><span class="header-section-number">6.8</span> Model Comparison: Testing Inferences about <span class="math inline">\(\beta_1\)</span></a></li>
+  <li><a href="#two-parameter-1-predictor-model-continued" id="toc-two-parameter-1-predictor-model-continued" class="nav-link" data-scroll-target="#two-parameter-1-predictor-model-continued"><span class="header-section-number">6.9</span> Two Parameter (1 Predictor) Model (Continued)</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/06_two_predictors.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -374,7 +376,7 @@ window.Quarto = {
 </div>
 <p><span class="math inline">\(H_0: \beta_1 = 0\)</span><br>
 <span class="math inline">\(H_a: \beta_1 \neq 0\)</span></p>
-<p><span style="color: red;">What could we change about the sampling distribution that would make this <span class="math inline">\(b_1\)</span> be less probable given <span class="math inline">\(H_0\)</span> so that we reject the Null?</span></p>
+<p><span style="color: red;">Question: What could we change about the sampling distribution that would make this <span class="math inline">\(b_1\)</span> be less probable given <span class="math inline">\(H_0\)</span> so that we reject the Null?</span></p>
 <hr>
 <div class="cell">
 <details class="code-fold">
@@ -410,6 +412,55 @@ window.Quarto = {
 </section>
 <section id="se-for-b_j-and-r2" class="level2" data-number="6.7">
 <h2 data-number="6.7" class="anchored" data-anchor-id="se-for-b_j-and-r2"><span class="header-section-number">6.7</span> SE for <span class="math inline">\(b_j\)</span> and <span class="math inline">\(R^2\)</span></h2>
+<p><span class="math inline">\(SE_{b_j}= \frac{s_y}{s_j}*\frac{\sqrt{(1-R_y^2)}}{(N-P)}*\frac{1}{\sqrt{(1-R_j^2)}}\)</span></p>
+<p>If we increase <span class="math inline">\(R_y^2\)</span>, we would decrease the SE for our regression coefficient.</p>
+<hr>
+</section>
+<section id="model-comparison-testing-inferences-about-beta_1" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="model-comparison-testing-inferences-about-beta_1"><span class="header-section-number">6.8</span> Model Comparison: Testing Inferences about <span class="math inline">\(\beta_1\)</span></h2>
+<p><span class="math inline">\(H_0: \beta_1 = 0; H_a: \beta_1 \neq 0\)</span></p>
+<p><span style="color: red;">Question: What two models are you comparing when you test hypotheses about <span class="math inline">\(\beta_1\)</span> for BAC? Describe the logic.</span></p>
+<hr>
+<p><span style="color: blue;">Compact model: <span class="math inline">\(\hat{\text{FPS}}_i = \beta_0+0*\text{BAC}_i\)</span></span><br>
+<span class="math inline">\(P_c=1\)</span><br>
+<span class="math inline">\(\text{SSE}_c=133888.3\)</span></p>
+<p><span style="color: blue;">Augmented model: <span class="math inline">\(\hat{\text{FPS}}_i = \beta_0+\beta_1*\text{BAC}_i\)</span></span><br>
+<span class="math inline">\(P_a=2\)</span><br>
+<span class="math inline">\(\text{SSE}_a=128837.1\)</span><br>
+<br>
+<span class="math inline">\(F(P_a-P_c, N-P_a) = \frac{\text{SSE}_c-\text{SSE}_a/(P_a-P_c)}{\text{SSE}_a/(N-P_a)}\)</span></p>
+<p>F(1,94) = 3.685, p = 0.058</p>
+<hr>
+<p><span class="math inline">\(F(P_a-P_c, N-P_a) = \frac{\text{SSE}_c-\text{SSE}_a/(P_a-P_c)}{\text{SSE}_a/(N-P_a)}\)</span></p>
+<p><span style="color: red;">Question: What could you change from this model comparison perspective to increase <span class="math inline">\(F\)</span> and probability to reject the <span class="math inline">\(H_0\)</span> about <span class="math inline">\(\beta_1\)</span>?</span></p>
+<hr>
+<p><span style="color: blue;">Make <span class="math inline">\(\text{SSE}_a\)</span> smaller by explaining more variance in <span class="math inline">\(Y_i\)</span>.</span></p>
+<p><span style="color: blue;">Of course, <span class="math inline">\(R^2 = \frac{\text{SSE}_\text{mean-only} - \text{SSE}_a}{\text{SSE}_\text{mean-only} }\)</span></span></p>
+<p><span style="color: blue;">If you decrease <span class="math inline">\(\text{SSE}_a\)</span> or increase model <span class="math inline">\(R^2\)</span>, you will have more power to reject <span class="math inline">\(H_0\)</span> regarding parameter estimates.</span></p>
+<hr>
+</section>
+<section id="two-parameter-1-predictor-model-continued" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="two-parameter-1-predictor-model-continued"><span class="header-section-number">6.9</span> Two Parameter (1 Predictor) Model (Continued)</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic       p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+1 (Intercept)     42.5      6.55      6.48 0.00000000411
+2 bac           -184.      95.9      -1.92 0.0579       </code></pre>
+</div>
+</div>
+<p><span style="color: red;">Question: What can we do analytically to decrease SSE (increase model <span class="math inline">\(R^2\)</span>)?</span></p>
+<hr>
+<p><span style="color: blue;">Include another predictor (<em>covariate</em>) in the model that accounts for additional variance in <span class="math inline">\(Y\)</span> (reduces SSE).</span></p>
+<p><span style="color: blue;">Ideally, this covariate should be orthogonal (uncorrelated) with the other predictor (BAC).</span></p>
+<p><span style="color: blue;">In this experiment, I could have measured another predictor of stress response, Trait Anxiety (TA). TA might be expected to be a robust predictor of FPS. It also should be uncorrelated with BAC because I manipulated BAC.</span></p>
+<hr>
 
 
 </section>

@@ -1014,7 +1014,7 @@
     "href": "06_two_predictors.html#testing-inferences-about-beta_1",
     "title": "6  Inferences about two predictors (multiple regression without interaction)",
     "section": "6.5 Testing Inferences about \\(\\beta_1\\)",
-    "text": "6.5 Testing Inferences about \\(\\beta_1\\)\n\n\nCode\nm_2 |&gt; \n  broom::tidy()\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)     42.5      6.55      6.48 0.00000000411\n2 bac           -184.      95.9      -1.92 0.0579       \n\n\n\\(H_0: \\beta_1 = 0\\)\n\\(H_a: \\beta_1 \\neq 0\\)\nWhat could we change about the sampling distribution that would make this \\(b_1\\) be less probable given \\(H_0\\) so that we reject the Null?\n\n\n\nCode\ntibble(b1 = seq(-400,400,.01),\n       probability = dt(b1/subset(broom::tidy(m_2), term == \"bac\")$std.error, m_2$df.residual)) |&gt; \n  ggplot(aes(x = b1, y = probability)) +\n  geom_line() +\n  geom_vline(xintercept = subset(broom::tidy(m_2), term == \"bac\")$estimate, \n             color = \"red\") +\n  labs(title = \"Sampling Distribution for b1\")\n\n\n\n\n\n\n\n\n\nIf the standard deviation of the sampling distribution (its standard error) was smaller so that the distribution was narrower, \\(b_1\\) would be less probable given \\(H_0\\).",
+    "text": "6.5 Testing Inferences about \\(\\beta_1\\)\n\n\nCode\nm_2 |&gt; \n  broom::tidy()\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)     42.5      6.55      6.48 0.00000000411\n2 bac           -184.      95.9      -1.92 0.0579       \n\n\n\\(H_0: \\beta_1 = 0\\)\n\\(H_a: \\beta_1 \\neq 0\\)\nQuestion: What could we change about the sampling distribution that would make this \\(b_1\\) be less probable given \\(H_0\\) so that we reject the Null?\n\n\n\nCode\ntibble(b1 = seq(-400,400,.01),\n       probability = dt(b1/subset(broom::tidy(m_2), term == \"bac\")$std.error, m_2$df.residual)) |&gt; \n  ggplot(aes(x = b1, y = probability)) +\n  geom_line() +\n  geom_vline(xintercept = subset(broom::tidy(m_2), term == \"bac\")$estimate, \n             color = \"red\") +\n  labs(title = \"Sampling Distribution for b1\")\n\n\n\n\n\n\n\n\n\nIf the standard deviation of the sampling distribution (its standard error) was smaller so that the distribution was narrower, \\(b_1\\) would be less probable given \\(H_0\\).",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
     ]
@@ -1034,7 +1034,27 @@
     "href": "06_two_predictors.html#se-for-b_j-and-r2",
     "title": "6  Inferences about two predictors (multiple regression without interaction)",
     "section": "6.7 SE for \\(b_j\\) and \\(R^2\\)",
-    "text": "6.7 SE for \\(b_j\\) and \\(R^2\\)",
+    "text": "6.7 SE for \\(b_j\\) and \\(R^2\\)\n\\(SE_{b_j}= \\frac{s_y}{s_j}*\\frac{\\sqrt{(1-R_y^2)}}{(N-P)}*\\frac{1}{\\sqrt{(1-R_j^2)}}\\)\nIf we increase \\(R_y^2\\), we would decrease the SE for our regression coefficient.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
+    ]
+  },
+  {
+    "objectID": "06_two_predictors.html#model-comparison-testing-inferences-about-beta_1",
+    "href": "06_two_predictors.html#model-comparison-testing-inferences-about-beta_1",
+    "title": "6  Inferences about two predictors (multiple regression without interaction)",
+    "section": "6.8 Model Comparison: Testing Inferences about \\(\\beta_1\\)",
+    "text": "6.8 Model Comparison: Testing Inferences about \\(\\beta_1\\)\n\\(H_0: \\beta_1 = 0; H_a: \\beta_1 \\neq 0\\)\nQuestion: What two models are you comparing when you test hypotheses about \\(\\beta_1\\) for BAC? Describe the logic.\n\nCompact model: \\(\\hat{\\text{FPS}}_i = \\beta_0+0*\\text{BAC}_i\\)\n\\(P_c=1\\)\n\\(\\text{SSE}_c=133888.3\\)\nAugmented model: \\(\\hat{\\text{FPS}}_i = \\beta_0+\\beta_1*\\text{BAC}_i\\)\n\\(P_a=2\\)\n\\(\\text{SSE}_a=128837.1\\)\n\n\\(F(P_a-P_c, N-P_a) = \\frac{\\text{SSE}_c-\\text{SSE}_a/(P_a-P_c)}{\\text{SSE}_a/(N-P_a)}\\)\nF(1,94) = 3.685, p = 0.058\n\n\\(F(P_a-P_c, N-P_a) = \\frac{\\text{SSE}_c-\\text{SSE}_a/(P_a-P_c)}{\\text{SSE}_a/(N-P_a)}\\)\nQuestion: What could you change from this model comparison perspective to increase \\(F\\) and probability to reject the \\(H_0\\) about \\(\\beta_1\\)?\n\nMake \\(\\text{SSE}_a\\) smaller by explaining more variance in \\(Y_i\\).\nOf course, \\(R^2 = \\frac{\\text{SSE}_\\text{mean-only} - \\text{SSE}_a}{\\text{SSE}_\\text{mean-only} }\\)\nIf you decrease \\(\\text{SSE}_a\\) or increase model \\(R^2\\), you will have more power to reject \\(H_0\\) regarding parameter estimates.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
+    ]
+  },
+  {
+    "objectID": "06_two_predictors.html#two-parameter-1-predictor-model-continued",
+    "href": "06_two_predictors.html#two-parameter-1-predictor-model-continued",
+    "title": "6  Inferences about two predictors (multiple regression without interaction)",
+    "section": "6.9 Two Parameter (1 Predictor) Model (Continued)",
+    "text": "6.9 Two Parameter (1 Predictor) Model (Continued)\n\n\nCode\nm_2 |&gt; \n  broom::tidy()\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)     42.5      6.55      6.48 0.00000000411\n2 bac           -184.      95.9      -1.92 0.0579       \n\n\nQuestion: What can we do analytically to decrease SSE (increase model \\(R^2\\))?\n\nInclude another predictor (covariate) in the model that accounts for additional variance in \\(Y\\) (reduces SSE).\nIdeally, this covariate should be orthogonal (uncorrelated) with the other predictor (BAC).\nIn this experiment, I could have measured another predictor of stress response, Trait Anxiety (TA). TA might be expected to be a robust predictor of FPS. It also should be uncorrelated with BAC because I manipulated BAC.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
     ]
