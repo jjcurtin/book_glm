@@ -270,6 +270,7 @@ window.Quarto = {
   <li><a href="#two-parameter-1-predictor-model" id="toc-two-parameter-1-predictor-model" class="nav-link" data-scroll-target="#two-parameter-1-predictor-model"><span class="header-section-number">6.4</span> Two Parameter (1 Predictor) Model</a></li>
   <li><a href="#testing-inferences-about-beta_1" id="toc-testing-inferences-about-beta_1" class="nav-link" data-scroll-target="#testing-inferences-about-beta_1"><span class="header-section-number">6.5</span> Testing Inferences about <span class="math inline">\(\beta_1\)</span></a></li>
   <li><a href="#standard-errors-of-glm-coefficients" id="toc-standard-errors-of-glm-coefficients" class="nav-link" data-scroll-target="#standard-errors-of-glm-coefficients"><span class="header-section-number">6.6</span> Standard Errors of GLM Coefficients</a></li>
+  <li><a href="#se-for-b_j-and-r2" id="toc-se-for-b_j-and-r2" class="nav-link" data-scroll-target="#se-for-b_j-and-r2"><span class="header-section-number">6.7</span> SE for <span class="math inline">\(b_j\)</span> and <span class="math inline">\(R^2\)</span></a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/06_two_predictors.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -334,26 +335,12 @@ window.Quarto = {
 <section id="two-parameter-1-predictor-model" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="two-parameter-1-predictor-model"><span class="header-section-number">6.4</span> Two Parameter (1 Predictor) Model</h2>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-</div>
-<div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac, <span class="at">data =</span> data)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>m_2 <span class="sc">|&gt;</span> </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac, <span class="at">data =</span> data)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>m_2 <span class="sc">|&gt;</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
@@ -374,8 +361,8 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
@@ -388,13 +375,26 @@ window.Quarto = {
 <p><span class="math inline">\(H_0: \beta_1 = 0\)</span><br>
 <span class="math inline">\(H_a: \beta_1 \neq 0\)</span></p>
 <p><span style="color: red;">What could we change about the sampling distribution that would make this <span class="math inline">\(b_1\)</span> be less probable given <span class="math inline">\(H_0\)</span> so that we reject the Null?</span></p>
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add sampling distribution figure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 <hr>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">b1 =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">400</span>,<span class="dv">400</span>,.<span class="dv">01</span>),</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">probability =</span> <span class="fu">dt</span>(b1<span class="sc">/</span><span class="fu">subset</span>(broom<span class="sc">::</span><span class="fu">tidy</span>(m_2), term <span class="sc">==</span> <span class="st">"bac"</span>)<span class="sc">$</span>std.error, m_2<span class="sc">$</span>df.residual)) <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> b1, <span class="at">y =</span> probability)) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">subset</span>(broom<span class="sc">::</span><span class="fu">tidy</span>(m_2), term <span class="sc">==</span> <span class="st">"bac"</span>)<span class="sc">$</span>estimate, </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Sampling Distribution for b1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06_two_predictors_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <p><span style="color: blue;">If the standard deviation of the sampling distribution (its standard error) was smaller so that the distribution was narrower, <span class="math inline">\(b_1\)</span> would be less probable given <span class="math inline">\(H_0\)</span>.</span></p>
 <hr>
 </section>
@@ -407,6 +407,9 @@ window.Quarto = {
 <p>For the one predictor model it is (need matrix notation for <span class="math inline">\(k&gt;1\)</span>):</p>
 <p><span class="math inline">\(\sqrt {\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{X^2}{(N-1)s_x^2}}\)</span></p>
 <hr>
+</section>
+<section id="se-for-b_j-and-r2" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="se-for-b_j-and-r2"><span class="header-section-number">6.7</span> SE for <span class="math inline">\(b_j\)</span> and <span class="math inline">\(R^2\)</span></h2>
 
 
 </section>
