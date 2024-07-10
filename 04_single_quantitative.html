@@ -451,7 +451,7 @@ window.Quarto = {
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  skimr<span class="sc">::</span><span class="fu">skim_without_charts</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -535,17 +535,16 @@ window.Quarto = {
 <p><strong>Variable type: numeric</strong></p>
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 16%">
-<col style="width: 11%">
-<col style="width: 16%">
+<col style="width: 17%">
+<col style="width: 12%">
+<col style="width: 17%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
 <col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 5%">
-<col style="width: 6%">
-<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
 <col style="width: 8%">
-<col style="width: 6%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -559,7 +558,6 @@ window.Quarto = {
 <th style="text-align: right;">p50</th>
 <th style="text-align: right;">p75</th>
 <th style="text-align: right;">p100</th>
-<th style="text-align: left;">hist</th>
 </tr>
 </thead>
 <tbody>
@@ -574,7 +572,6 @@ window.Quarto = {
 <td style="text-align: right;">0.06</td>
 <td style="text-align: right;">0.08</td>
 <td style="text-align: right;">0.14</td>
-<td style="text-align: left;">▇▆▇▆▂</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">fps</td>
@@ -587,7 +584,6 @@ window.Quarto = {
 <td style="text-align: right;">19.46</td>
 <td style="text-align: right;">50.46</td>
 <td style="text-align: right;">162.74</td>
-<td style="text-align: left;">▁▃▇▂▁</td>
 </tr>
 </tbody>
 </table>
