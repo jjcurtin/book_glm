@@ -1068,5 +1068,25 @@
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
     ]
+  },
+  {
+    "objectID": "06_two_predictors.html#the-two-predictor-and-general-linear-models",
+    "href": "06_two_predictors.html#the-two-predictor-and-general-linear-models",
+    "title": "6  Inferences about two predictors (multiple regression without interaction)",
+    "section": "6.11 The Two Predictor and General Linear Models",
+    "text": "6.11 The Two Predictor and General Linear Models\nDATA = MODEL + ERROR\nTwo Predictor Model for Sample Data\n\\(Y_i=b_0+b_1X_1+b_2X_2+e_i\\)\n\\(\\hat{Y_i}=b_0+b_1X_1+b_2X_2\\)\n\\(k\\) Predictor Model for Sample Data\n\\(Y_i=b_0+b_1X_1+...+b_kX_k+e_i\\)\n\\(\\hat{Y_i}=b_0+b_1X_1+...+b_kX_k\\)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
+    ]
+  },
+  {
+    "objectID": "06_two_predictors.html#testing-bac-in-a-three-parameter-model-2-predictors",
+    "href": "06_two_predictors.html#testing-bac-in-a-three-parameter-model-2-predictors",
+    "title": "6  Inferences about two predictors (multiple regression without interaction)",
+    "section": "6.12 Testing BAC in a Three Parameter Model (2 Predictors)",
+    "text": "6.12 Testing BAC in a Three Parameter Model (2 Predictors)\n\n\nCode\nm_3 &lt;- lm(fps ~ bac + ta, data = data)\n\nm_3 |&gt; \n  broom::tidy()\n\n\n# A tibble: 3 × 5\n  term        estimate std.error statistic    p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;\n1 (Intercept)   19.4      7.66        2.54 0.0128    \n2 bac         -177.      86.6        -2.04 0.0437    \n3 ta             0.153    0.0324      4.73 0.00000807\n\n\n\\(\\hat{\\text{FPS}} = 19.4 + -177 * \\text{BAC} + 0.2 * \\text{TA}\\)\nQuestion: What parameter estimate is used to test our research question about the effect of BAC? What are our \\(H_0\\) and \\(H_a\\) for the associated population parameter?",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
+    ]
   }
 ]

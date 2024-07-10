@@ -274,6 +274,8 @@ window.Quarto = {
   <li><a href="#model-comparison-testing-inferences-about-beta_1" id="toc-model-comparison-testing-inferences-about-beta_1" class="nav-link" data-scroll-target="#model-comparison-testing-inferences-about-beta_1"><span class="header-section-number">6.8</span> Model Comparison: Testing Inferences about <span class="math inline">\(\beta_1\)</span></a></li>
   <li><a href="#two-parameter-1-predictor-model-continued" id="toc-two-parameter-1-predictor-model-continued" class="nav-link" data-scroll-target="#two-parameter-1-predictor-model-continued"><span class="header-section-number">6.9</span> Two Parameter (1 Predictor) Model (Continued)</a></li>
   <li><a href="#open-view-preliminary-checks" id="toc-open-view-preliminary-checks" class="nav-link" data-scroll-target="#open-view-preliminary-checks"><span class="header-section-number">6.10</span> Open, View, &amp; Preliminary Checks</a></li>
+  <li><a href="#the-two-predictor-and-general-linear-models" id="toc-the-two-predictor-and-general-linear-models" class="nav-link" data-scroll-target="#the-two-predictor-and-general-linear-models"><span class="header-section-number">6.11</span> The Two Predictor and General Linear Models</a></li>
+  <li><a href="#testing-bac-in-a-three-parameter-model-2-predictors" id="toc-testing-bac-in-a-three-parameter-model-2-predictors" class="nav-link" data-scroll-target="#testing-bac-in-a-three-parameter-model-2-predictors"><span class="header-section-number">6.12</span> Testing BAC in a Three Parameter Model (2 Predictors)</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/06_two_predictors.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -757,6 +759,40 @@ fps 0.06 0.00 0.00
 </div>
 </div>
 </div>
+<hr>
+</section>
+<section id="the-two-predictor-and-general-linear-models" class="level2" data-number="6.11">
+<h2 data-number="6.11" class="anchored" data-anchor-id="the-two-predictor-and-general-linear-models"><span class="header-section-number">6.11</span> The Two Predictor and General Linear Models</h2>
+<p>DATA = MODEL + ERROR</p>
+<p><strong>Two Predictor Model for Sample Data</strong></p>
+<p><span class="math inline">\(Y_i=b_0+b_1X_1+b_2X_2+e_i\)</span></p>
+<p><span class="math inline">\(\hat{Y_i}=b_0+b_1X_1+b_2X_2\)</span></p>
+<p><strong><span class="math inline">\(k\)</span> Predictor Model for Sample Data</strong></p>
+<p><span class="math inline">\(Y_i=b_0+b_1X_1+...+b_kX_k+e_i\)</span></p>
+<p><span class="math inline">\(\hat{Y_i}=b_0+b_1X_1+...+b_kX_k\)</span></p>
+<hr>
+</section>
+<section id="testing-bac-in-a-three-parameter-model-2-predictors" class="level2" data-number="6.12">
+<h2 data-number="6.12" class="anchored" data-anchor-id="testing-bac-in-a-three-parameter-model-2-predictors"><span class="header-section-number">6.12</span> Testing BAC in a Three Parameter Model (2 Predictors)</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>m_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac <span class="sc">+</span> ta, <span class="at">data =</span> data)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>m_3 <span class="sc">|&gt;</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic    p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)   19.4      7.66        2.54 0.0128    
+2 bac         -177.      86.6        -2.04 0.0437    
+3 ta             0.153    0.0324      4.73 0.00000807</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\hat{\text{FPS}} = 19.4 + -177 * \text{BAC} + 0.2 * \text{TA}\)</span></p>
+<p><span style="color: red;">Question: What parameter estimate is used to test our research question about the effect of BAC? What are our <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_a\)</span> for the associated population parameter?</span></p>
 <hr>
 
 
