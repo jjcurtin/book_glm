@@ -318,95 +318,66 @@ window.Quarto = {
 <section id="units-3-4-organization" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="units-3-4-organization"><span class="header-section-number">3.1</span> Units 3-4 Organization</h2>
 <ul>
-<li>First, consider details of simplest model (one parameter estimate; mean-only model; no <span class="math inline">\(X\)</span>s).<br>
-<br>
-</li>
-<li>Next, examine simple regression (two parameter estimates; one <span class="math inline">\(X\)</span> for one quantitative predictor variable).<br>
-<br>
-</li>
-<li>These provide a critical foundation for all linear models.<br>
-<br>
-</li>
-<li>Subsequent units will generalize to one dichotomous variable (<em>Unit 5</em>), multiple predictor variables (<em>Units 6-7</em>), and beyond…</li>
+<li><p>First, consider details of simplest model (one parameter estimate; mean-only model; no <span class="math inline">\(X\)</span>s).</p></li>
+<li><p>Next, examine simple regression (two parameter estimates; one <span class="math inline">\(X\)</span> for one quantitative predictor variable).</p></li>
+<li><p>These provide a critical foundation for all linear models.</p></li>
+<li><p>Subsequent units will generalize to one dichotomous variable (<em>Unit 5</em>), multiple predictor variables (<em>Units 6-7</em>), and beyond…</p></li>
 </ul>
 <hr>
 </section>
 <section id="linear-models-as-models" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="linear-models-as-models"><span class="header-section-number">3.2</span> Linear Models as Models</h2>
-<p>Linear models (including regression) are <em>models</em>.<br>
-<br>
-<strong>DATA = MODEL + ERROR</strong><br>
-<br>
-Three general uses for models:</p>
+<p>Linear models (including regression) are <em>models</em>.</p>
+<p><strong>DATA = MODEL + ERROR</strong></p>
+<p>Three general uses for models:</p>
 <ol type="1">
 <li><strong><em>Describe</em></strong> and summarize DATA (<span class="math inline">\(Y\)</span>s) in a simpler form using MODEL.</li>
 <li><strong><em>Predict</em></strong> DATA (<span class="math inline">\(Y\)</span>s) from MODEL.</li>
-<li><strong><em>Understand</em></strong> (test inferences about) complex relationships between individual regressors (<span class="math inline">\(X\)</span>s) in MODEL and the DATA (<span class="math inline">\(Y\)</span>s). How precise are estimates of relationship?<br>
-<br>
-</li>
+<li><strong><em>Understand</em></strong> (test inferences about) complex relationships between individual regressors (<span class="math inline">\(X\)</span>s) in MODEL and the DATA (<span class="math inline">\(Y\)</span>s). How precise are estimates of relationship?</li>
 </ol>
 <p>MODELS are simplifications of reality. As such, there is ERROR. They also make assumptions that must be evaluated.</p>
 <hr>
 </section>
 <section id="fear-potential-startle" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="fear-potential-startle"><span class="header-section-number">3.3</span> Fear Potential Startle</h2>
-<p>We are interested in producing anxiety in the laboratory.<br>
-<br>
-To do this, we develop a procedure where we expose people to periods of unpredictable electric shock administration alternating with periods of safety.<br>
-<br>
-We measure their startle response in the shock and safe periods.<br>
-<br>
-We use the difference between their startle during shock – safe to determine if they are anxious.<br>
-<br>
-This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure works if FPS &gt; 0. We need a model of FPS scores to determine if FPS &gt; 0.</p>
+<p>We are interested in producing anxiety in the laboratory.</p>
+<p>To do this, we develop a procedure where we expose people to periods of unpredictable electric shock administration alternating with periods of safety.</p>
+<p>We measure their startle response in the shock and safe periods.</p>
+<p>We use the difference between their startle during shock – safe to determine if they are anxious. This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure works if FPS &gt; 0. We need a model of FPS scores to determine if FPS &gt; 0.</p>
 <hr>
 </section>
 <section id="fear-potentiated-startle-one-parameter-model" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="fear-potentiated-startle-one-parameter-model"><span class="header-section-number">3.4</span> Fear Potentiated Startle: One parameter model</h2>
 <p>A very simple model for the population of FPS scores would predict the same value for everyone in the population.</p>
-<p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span><br>
-<br>
-</p>
-<p>We would like this value to be the <em>best</em> prediction.<br>
-<br>
-</p>
+<p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span></p>
+<p>We would like this value to be the <em>best</em> prediction.</p>
 <p><span style="color: red;">Question: In the context of DATA = MODEL + ERROR, how can we quantify <em>best</em>?</span></p>
 <hr>
-<p><span style="color: blue;">We want to predict some characteristic about the population of FPS scores that minimizes the ERROR from our model.</span><br>
-<br>
-<span style="color: blue;">ERROR = DATA – MODEL</span><br>
-<br>
-<span style="color: blue;"><span class="math inline">\(\varepsilon_i=Y_i-\hat{Y}_i\)</span>; There is an error (<span class="math inline">\(\varepsilon_i\)</span>) for each population score.</span><br>
-<br>
-<span style="color: red;">Question: How can we quantify total model error?</span></p>
+<p><span style="color: blue;">We want to predict some characteristic about the population of FPS scores that minimizes the ERROR from our model.</span></p>
+<p><span style="color: blue;">ERROR = DATA – MODEL</span></p>
+<p><span style="color: blue;"><span class="math inline">\(\varepsilon_i=Y_i-\hat{Y}_i\)</span>; There is an error (<span class="math inline">\(\varepsilon_i\)</span>) for each population score.</span></p>
+<hr>
+<p><span style="color: red;">Question: How can we quantify total model error?</span></p>
 <hr>
 </section>
 <section id="total-error" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="total-error"><span class="header-section-number">3.5</span> Total Error</h2>
 <p><span style="color: blue;"><strong>Sum of errors</strong></span> across all scores in the population isn’t ideal because positive and negative errors will tend to cancel each other out.</p>
-<p><span class="math inline">\(\sum(Y_i-\hat{Y}_i)\)</span><br>
-<br>
-<span style="color: blue;"><strong>Sum of absolute values of errors</strong></span> could work. If we selected <span class="math inline">\(\beta_0\)</span> to minimize the sum of the absolute value of errors, <span class="math inline">\(\beta_0\)</span> would equal the median of the population.</p>
-<p><span class="math inline">\(\sum(|Y_i-\hat{Y}_i|)\)</span><br>
-<br>
-</p>
+<p><span class="math inline">\(\sum(Y_i-\hat{Y}_i)\)</span></p>
+<p><span style="color: blue;"><strong>Sum of absolute values of errors</strong></span> could work. If we selected <span class="math inline">\(\beta_0\)</span> to minimize the sum of the absolute value of errors, <span class="math inline">\(\beta_0\)</span> would equal the median of the population.</p>
+<p><span class="math inline">\(\sum(|Y_i-\hat{Y}_i|)\)</span></p>
 <p><span style="color: blue;"><strong>Sum of squared errors (SSE)</strong></span> could work. If we selected <span class="math inline">\(\beta_0\)</span> to minimize the sum of squared errors, <span class="math inline">\(\beta_0\)</span> would equal the mean of the population.</p>
 <p><span class="math inline">\(\sum(Y_i-\hat{Y}_i)^2\)</span></p>
 <hr>
 </section>
 <section id="one-parameter-model-for-fps" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="one-parameter-model-for-fps"><span class="header-section-number">3.6</span> One Parameter Model for FPS</h2>
-<p>For the moment, lets assume we prefer to minimize SSE (more on that in a moment). You should predict the population mean FPS for everyone.<br>
-<br>
-</p>
-<p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span> where <span class="math inline">\(\beta_0=\mu\)</span><br>
-<br>
-</p>
+<p>For the moment, lets assume we prefer to minimize SSE (more on that in a moment). You should predict the population mean FPS for everyone.</p>
+<p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span> where <span class="math inline">\(\beta_0=\mu\)</span></p>
 <p><span style="color: red;">Question: What is the problem with this model and how can we fix this problem?</span></p>
 <hr>
-<p><span style="color: blue;">We don’t know the population mean for FPS scores (<span class="math inline">\(\mu\)</span>).</span><br>
-<br>
-<span style="color: blue;">We can collect a sample from the population and use the sample mean (<span class="math inline">\(\overline{X}\)</span>) as an estimate of the population mean (<span class="math inline">\(\mu\)</span>). <span class="math inline">\(\overline{X}\)</span> is an unbiased estimate for <span class="math inline">\(\mu\)</span>.</span></p>
+<p><span style="color: blue;">We don’t know the population mean for FPS scores (<span class="math inline">\(\mu\)</span>).</span></p>
+<p><span style="color: blue;">We can collect a sample from the population and use the sample mean (<span class="math inline">\(\overline{X}\)</span>) as an estimate of the population mean (<span class="math inline">\(\mu\)</span>). <span class="math inline">\(\overline{X}\)</span> is an unbiased estimate for <span class="math inline">\(\mu\)</span>.</span></p>
 <hr>
 </section>
 <section id="model-parameter-estimation" class="level2" data-number="3.7">
@@ -414,8 +385,6 @@ This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure wo
 <p><strong><em>Population model</em></strong></p>
 <p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span> where <span class="math inline">\(\beta_0=\mu\)</span></p>
 <p><span class="math inline">\(Y_i=\beta_0+\varepsilon_i\)</span></p>
-<p><br>
-</p>
 <p><strong><em>Estimate population parameters from sample</em></strong></p>
 <p><span class="math inline">\(Y_i=b_0\)</span> where <span class="math inline">\(b_0=\overline{X}\)</span></p>
 <p><span class="math inline">\(Y_i=b_0+e_i\)</span></p>
@@ -423,9 +392,7 @@ This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure wo
 </section>
 <section id="least-squares-criterion" class="level2" data-number="3.8">
 <h2 data-number="3.8" class="anchored" data-anchor-id="least-squares-criterion"><span class="header-section-number">3.8</span> Least Squares Criterion</h2>
-<p>In ordinary least squares (OLS) regression and other least squares linear models, the model parameter estimates (e.g., <span class="math inline">\(b_0\)</span>) are calculated such that they minimize the sum of squared errors (SSE) in the sample in which you estimate the model.<br>
-<br>
-</p>
+<p>In ordinary least squares (OLS) regression and other least squares linear models, the model parameter estimates (e.g., <span class="math inline">\(b_0\)</span>) are calculated such that they minimize the sum of squared errors (SSE) in the sample in which you estimate the model.</p>
 <p><span class="math inline">\(\text{SSE}=\sum(Y_i-\hat{Y}_i)^2\)</span></p>
 <p><span class="math inline">\(\text{SSE}=\sum e_i^2\)</span></p>
 <hr>
@@ -434,28 +401,19 @@ This is called <strong>Fear potentiated startle (FPS)</strong>. Our procedure wo
 <h2 data-number="3.9" class="anchored" data-anchor-id="properties-of-parameter-estimates"><span class="header-section-number">3.9</span> Properties of Parameter Estimates</h2>
 <p>There are three properties that make a parameter estimate attractive.</p>
 <ol type="1">
-<li><strong><em>Unbiased:</em></strong> Mean of the sampling distribution for the parameter estimate is equal to the value for that parameter in the population.<br>
-<br>
-</li>
-<li><strong><em>Efficient:</em></strong> The sample estimates are close to the population parameter. In other words, the narrower the sampling distribution for any specific sample size <span class="math inline">\(N\)</span>, the more efficient the estimator. Efficient means small <span class="math inline">\(SE\)</span> for parameter estimate.<br>
-<br>
-</li>
-<li><strong><em>Consistent:</em></strong> As the sample size increases, the sampling distribution becomes narrower (more efficient). Consistent means as <span class="math inline">\(N\)</span> increases, <span class="math inline">\(SE\)</span> for parameter estimate decreases</li>
+<li><p><strong><em>Unbiased:</em></strong> Mean of the sampling distribution for the parameter estimate is equal to the value for that parameter in the population.</p></li>
+<li><p><strong><em>Efficient:</em></strong> The sample estimates are close to the population parameter. In other words, the narrower the sampling distribution for any specific sample size <span class="math inline">\(N\)</span>, the more efficient the estimator. Efficient means small <span class="math inline">\(SE\)</span> for parameter estimate.</p></li>
+<li><p><strong><em>Consistent:</em></strong> As the sample size increases, the sampling distribution becomes narrower (more efficient). Consistent means as <span class="math inline">\(N\)</span> increases, <span class="math inline">\(SE\)</span> for parameter estimate decreases</p></li>
 </ol>
 <hr>
 </section>
 <section id="least-squares-criterion-continued" class="level2" data-number="3.10">
 <h2 data-number="3.10" class="anchored" data-anchor-id="least-squares-criterion-continued"><span class="header-section-number">3.10</span> Least Squares Criterion (Continued)</h2>
-<p>If the <span class="math inline">\(\varepsilon_i\)</span> are normally distributed, both the median and the mean are <strong><em>unbiased</em></strong> and <strong><em>consistent</em></strong> estimators.<br>
-<br>
-</p>
+<p>If the <span class="math inline">\(\varepsilon_i\)</span> are normally distributed, both the median and the mean are <strong><em>unbiased</em></strong> and <strong><em>consistent</em></strong> estimators.</p>
 <p>The variance of the sampling distribution for the mean is:</p>
 <p><span class="math inline">\(\frac{\sigma^2}{N}\)</span></p>
 <p>The variance of the sampling distribution for the mean is:</p>
-<p><span class="math inline">\(\frac{\pi\sigma^2}{2N}\)</span><br>
-<br>
-<br>
-</p>
+<p><span class="math inline">\(\frac{\pi\sigma^2}{2N}\)</span></p>
 <p>Therefore, the mean is the <strong>more efficient</strong> parameter.</p>
 <p>For this reason, we tend to prefer to estimate our models by minimizing the sum of squared errors.</p>
 <hr>
@@ -522,19 +480,11 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 </section>
 <section id="fps-experiment-the-inference-details" class="level2" data-number="3.13">
 <h2 data-number="3.13" class="anchored" data-anchor-id="fps-experiment-the-inference-details"><span class="header-section-number">3.13</span> FPS Experiment: The Inference Details</h2>
-<p><strong><em>Goal:</em></strong> Determine if our shock threat procedure is effective at potentiating startle (increasing startle during threat relative to safe).<br>
-<br>
-</p>
+<p><strong><em>Goal:</em></strong> Determine if our shock threat procedure is effective at potentiating startle (increasing startle during threat relative to safe).</p>
 <p>Create a simple model of FPS scores in the population.</p>
-<p><span class="math inline">\(\text{FPS}=\beta_0\)</span><br>
-<br>
-</p>
-<p>Collect sample of <span class="math inline">\(N=96\)</span> to estimate <span class="math inline">\(\beta_0\)</span>.<br>
-<br>
-</p>
-<p>Calculate sample parameter estimate (<span class="math inline">\(b_0\)</span>) that minimizes SSE in sample.<br>
-<br>
-</p>
+<p><span class="math inline">\(\text{FPS}=\beta_0\)</span></p>
+<p>Collect sample of <span class="math inline">\(N=96\)</span> to estimate <span class="math inline">\(\beta_0\)</span>.</p>
+<p>Calculate sample parameter estimate (<span class="math inline">\(b_0\)</span>) that minimizes SSE in sample.</p>
 <p>Use <span class="math inline">\(b_0\)</span> to test hypotheses.</p>
 <p><span class="math inline">\(H_0: \beta_0 = 0\)</span><br>
 <span class="math inline">\(H_a: \beta_0 \neq 0\)</span></p>
@@ -609,9 +559,7 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 <pre><code>[1] 133888.3</code></pre>
 </div>
 </div>
-<p><br>
-<br>
-This tells us about how well the model fits the data. Specifically it is the sum of the squared differences between the predicted values and the actual participant scores</p>
+<p>This tells us about how well the model fits the data. Specifically it is the sum of the squared differences between the predicted values and the actual participant scores</p>
 <hr>
 <p>We can get the predicted value for each individual in the sample using this model with the function <code>predict()</code>.</p>
 <p><span class="math inline">\(\hat{Y}=32.19\)</span></p>
@@ -665,23 +613,15 @@ This tells us about how well the model fits the data. Specifically it is the sum
 <p>The estimate is <span class="math inline">\(b_0\)</span>, the unbiased sample estimate of <span class="math inline">\(\beta_0\)</span>, and its standard error. It is also called the intercept in regression (more on this later).</p>
 <p><span class="math inline">\(\hat{Y}_i=b_0=32.2\)</span></p>
 <p>The statistic is the t-statistic to test the <span class="math inline">\(H_0\)</span> that <span class="math inline">\(\beta_0=0\)</span>.</p>
-<p>The probability (p-value) of obtaining a sample <span class="math inline">\(b_0=32.2\)</span> if <span class="math inline">\(H_0\)</span> is true (<span class="math inline">\(\beta_0=0\)</span>) is &lt; .0001.<br>
-<br>
-</p>
+<p>The probability (p-value) of obtaining a sample <span class="math inline">\(b_0=32.2\)</span> if <span class="math inline">\(H_0\)</span> is true (<span class="math inline">\(\beta_0=0\)</span>) is &lt; .0001.</p>
 <p><span style="color: red;">Question: Describe the logic of how this was determined given your understanding of sampling distributions?</span></p>
 <hr>
 </section>
 <section id="sampling-distribution-testing-inferences-about-beta_0" class="level2" data-number="3.15">
 <h2 data-number="3.15" class="anchored" data-anchor-id="sampling-distribution-testing-inferences-about-beta_0"><span class="header-section-number">3.15</span> Sampling Distribution: Testing Inferences About <span class="math inline">\(\beta_0\)</span></h2>
-<p><span class="math inline">\(H_0: \beta_0 = 0; H_a: \beta_0 \neq 0\)</span><br>
-<br>
-</p>
-<p><span style="color: blue;">If <span class="math inline">\(H_0\)</span> is true, the sampling distribution for <span class="math inline">\(\beta_0\)</span> will have a mean of 0. We can estimate standard deviation of the sampling distribution with <span class="math inline">\(SE\)</span> for <span class="math inline">\(b_0\)</span>.</span><br>
-<br>
-</p>
-<p><span class="math inline">\(t(df=N-P)=\frac{b_0-0}{SE_{b_0}}=\frac{32.2-0}{3.8}=8.40\)</span><br>
-<br>
-</p>
+<p><span class="math inline">\(H_0: \beta_0 = 0; H_a: \beta_0 \neq 0\)</span></p>
+<p><span style="color: blue;">If <span class="math inline">\(H_0\)</span> is true, the sampling distribution for <span class="math inline">\(\beta_0\)</span> will have a mean of 0. We can estimate standard deviation of the sampling distribution with <span class="math inline">\(SE\)</span> for <span class="math inline">\(b_0\)</span>.</span></p>
+<p><span class="math inline">\(t(df=N-P)=\frac{b_0-0}{SE_{b_0}}=\frac{32.2-0}{3.8}=8.40\)</span></p>
 <p><span style="color: blue;"><span class="math inline">\(b_0\)</span> is approximately 8 standard deviations above the expected mean of the distribution if <span class="math inline">\(H_0\)</span> is true.</span></p>
 <hr>
 <p>We can use <code>pt()</code> to calculate the <span class="math inline">\(p\)</span> value.</p>
@@ -694,9 +634,7 @@ This tells us about how well the model fits the data. Specifically it is the sum
 <pre><code>[1] 0.0000000000004293253</code></pre>
 </div>
 </div>
-<p><br>
-<br>
-The probability of obtaining a sample <span class="math inline">\(b_0\)</span> = 32.2 (or more extreme) if <span class="math inline">\(H_0\)</span> is true is very low (&lt; .05). Therefore we reject <span class="math inline">\(H_0\)</span> and conclude that <span class="math inline">\(\beta_0 \neq 0\)</span> and <span class="math inline">\(b_0\)</span> is our best (unbiased) estimate of it.</p>
+<p>The probability of obtaining a sample <span class="math inline">\(b_0\)</span> = 32.2 (or more extreme) if <span class="math inline">\(H_0\)</span> is true is very low (&lt; .05). Therefore we reject <span class="math inline">\(H_0\)</span> and conclude that <span class="math inline">\(\beta_0 \neq 0\)</span> and <span class="math inline">\(b_0\)</span> is our best (unbiased) estimate of it.</p>
 <hr>
 <div class="cell">
 <details open="" class="code-fold">
@@ -720,33 +658,23 @@ The probability of obtaining a sample <span class="math inline">\(b_0\)</span> =
 </section>
 <section id="statistical-inference-and-model-comparisons" class="level2" data-number="3.16">
 <h2 data-number="3.16" class="anchored" data-anchor-id="statistical-inference-and-model-comparisons"><span class="header-section-number">3.16</span> Statistical Inference and Model Comparisons</h2>
-<p>Statistical inference about parameters is fundamentally about model comparisons.<br>
-</p>
-<p><br>
-You are implicitly (t-test of parameter estimate) or explicitly (F-test of model comparison) comparing two different models of your data.<br>
-<br>
-We follow Judd et al and call these two models the <em>compact model</em> and the <em>augmented model</em>.<br>
-<br>
-The compact model will represent reality as the null hypothesis predicts. The augmented model will represent reality as the alternative hypothesis predicts.<br>
-<br>
-The compact model is simpler (fewer parameters) than the augmented model. It is also nested in the augmented model (i.e.&nbsp;a subset of parameters).</p>
+<p>Statistical inference about parameters is fundamentally about model comparisons.</p>
+<p>You are implicitly (t-test of parameter estimate) or explicitly (F-test of model comparison) comparing two different models of your data.</p>
+<p>We follow Judd et al and call these two models the <em>compact model</em> and the <em>augmented model</em>.</p>
+<p>The compact model will represent reality as the null hypothesis predicts. The augmented model will represent reality as the alternative hypothesis predicts.</p>
+<p>The compact model is simpler (fewer parameters) than the augmented model. It is also nested in the augmented model (i.e.&nbsp;a subset of parameters).</p>
 <hr>
 </section>
 <section id="model-comparisons-testing-inferences-about-beta_0" class="level2" data-number="3.17">
 <h2 data-number="3.17" class="anchored" data-anchor-id="model-comparisons-testing-inferences-about-beta_0"><span class="header-section-number">3.17</span> Model Comparisons: Testing Inferences about <span class="math inline">\(\beta_0\)</span></h2>
 <p><span class="math inline">\(\hat{\text{FPS}_i}=\beta_0\)</span></p>
 <p><span class="math inline">\(H_0: \beta_0 = 0\)</span></p>
-<p><span class="math inline">\(H_a: \beta_0 \neq 0\)</span><br>
-<br>
-</p>
+<p><span class="math inline">\(H_a: \beta_0 \neq 0\)</span></p>
 <p>Compact model: <span class="math inline">\(\hat{\text{FPS}_i}=0\)</span><br>
-Augmented model: <span class="math inline">\(\hat{\text{FPS}_i}=\beta_0 (\approx b_0)\)</span><br>
-<br>
-</p>
+Augmented model: <span class="math inline">\(\hat{\text{FPS}_i}=\beta_0 (\approx b_0)\)</span></p>
 <p>We estimate 0 parameters (<span class="math inline">\(P=0\)</span>) in this compact model.<br>
-We estimate 1 parameter (<span class="math inline">\(P=1\)</span>) in this augmented model.<br>
-<br>
-Choosing between these two models is equivalent to testing if <span class="math inline">\(\beta_0 = 0\)</span> as you did with the t-test.</p>
+We estimate 1 parameter (<span class="math inline">\(P=1\)</span>) in this augmented model.</p>
+<p>Choosing between these two models is equivalent to testing if <span class="math inline">\(\beta_0 = 0\)</span> as you did with the t-test.</p>
 <hr>
 </section>
 <section id="model-comparison-plots" class="level2" data-number="3.18">
@@ -812,14 +740,10 @@ Augmented model: <span class="math inline">\(\hat{\text{FPS}_i}=\beta_0 (\approx
 <hr>
 <p>Compact model: <span class="math inline">\(\hat{\text{FPS}_i}=0\)</span><br>
 SSE = 233368.3<br>
-P = 0<br>
-<br>
-</p>
+P = 0</p>
 <p>Augmented model: <span class="math inline">\(\hat{\text{FPS}_i}=\beta_0 (\approx b_0)\)</span><br>
 SSE = 133888.3<br>
-P = 1<br>
-<br>
-</p>
+P = 1</p>
 <p><span class="math inline">\(F(P_a-P_c, N-P_a) = \frac{(\text{SSE}_c-\text{SSE}_a)/(P_a-P_c)}{\text{SSE}_a/(N-P_a)}\)</span></p>
 <p><span class="math inline">\(F(1-0, 96 -1)= \frac{(233368.3 - 133888.3)/(1-0)}{133888.3 / (96 - 1)}\)</span></p>
 <p><span class="math inline">\(F(1, 95 )= 70.59, p &lt; .0001\)</span></p>
@@ -837,9 +761,7 @@ P = 1<br>
 <section id="sampling-distribution-vs.-model-comparison" class="level2" data-number="3.20">
 <h2 data-number="3.20" class="anchored" data-anchor-id="sampling-distribution-vs.-model-comparison"><span class="header-section-number">3.20</span> Sampling Distribution vs.&nbsp;Model Comparison</h2>
 <p>The two approaches to testing <span class="math inline">\(H_0\)</span> about parameters (<span class="math inline">\(\beta_0, \beta_j\)</span>) are statistically equivalent.</p>
-<p>They are complementary approaches with respect to conceptual understanding of GLMs.<br>
-<br>
-</p>
+<p>They are complementary approaches with respect to conceptual understanding of GLMs.</p>
 <p><strong>Sampling Distribution</strong></p>
 <ul>
 <li>Focus on population parameters and their estimates.<br>
@@ -861,31 +783,19 @@ P = 1<br>
 </section>
 <section id="effect-sizes" class="level2" data-number="3.21">
 <h2 data-number="3.21" class="anchored" data-anchor-id="effect-sizes"><span class="header-section-number">3.21</span> Effect Sizes</h2>
-<p>Your parameter estimates are descriptive. They describe effects in the original units of the (IVs) and DV. Report them in your paper.<br>
-<br>
-</p>
-<p>There are many other effect size estimates available. You will learn two that we prefer.<br>
-<br>
-</p>
+<p>Your parameter estimates are descriptive. They describe effects in the original units of the (IVs) and DV. Report them in your paper.</p>
+<p>There are many other effect size estimates available. You will learn two that we prefer.</p>
 <p>Partial eta squared (<span class="math inline">\(\eta_p^2\)</span>): Judd et al call this PRE (proportional reduction in error).</p>
 <p>Eta squared (<span class="math inline">\(\eta^2\)</span>): This is also commonly referred to as <span class="math inline">\(\Delta R^2\)</span> in regression.</p>
 <hr>
 <p>Compact model: <span class="math inline">\(\hat{\text{FPS}_i}=0\)</span><br>
 SSE = 233368.3<br>
-P = 0<br>
-<br>
-</p>
+P = 0</p>
 <p>Augmented model: <span class="math inline">\(\hat{\text{FPS}_i}=\beta_0 (\approx b_0)\)</span><br>
 SSE = 133888.3<br>
-P = 1<br>
-<br>
-</p>
-<p>How much was the error reduced in the augmented model relative to the compact model?<br>
-<br>
-</p>
-<p><span class="math inline">\(\frac{\text{SSE}_c-\text{SSE}_a}{\text{SSE}_c} = \frac{233368.3 - 133888.3}{233368.3} = 0.426\)</span><br>
-<br>
-</p>
+P = 1</p>
+<p>How much was the error reduced in the augmented model relative to the compact model?</p>
+<p><span class="math inline">\(\frac{\text{SSE}_c-\text{SSE}_a}{\text{SSE}_c} = \frac{233368.3 - 133888.3}{233368.3} = 0.426\)</span></p>
 <p>Our more complex model that includes <span class="math inline">\(\beta_0\)</span> reduces prediction error (SSE) by approximately 43%. Not bad!</p>
 <hr>
 </section>
@@ -910,21 +820,14 @@ P = 1<br>
 (Intercept) 24.58426 39.79742</code></pre>
 </div>
 </div>
-<p><br>
-<br>
-</p>
 <p><span style="color: red;">Question: Given what you now know about confidence intervals and sampling distributions, what should the formula be?</span></p>
 <hr>
-<p><span style="color: blue;"><span class="math inline">\(\text{CI}(b_0)= b_0 \pm t(\alpha;N-P) * SE_{b_0}\)</span></span><br>
-<br>
-</p>
+<p><span style="color: blue;"><span class="math inline">\(\text{CI}(b_0)= b_0 \pm t(\alpha;N-P) * SE_{b_0}\)</span></span></p>
 <p><span style="color: blue;">For the 95% confidence interval this is approximately 2 SEs around our unbiased estimate of <span class="math inline">\(\beta_0\)</span>.</span></p>
 <hr>
 <p><span style="color: red;">Question: How can we tell if a parameter is <em>significant</em> from the confidence interval?</span></p>
 <hr>
-<p><span style="color: blue;">If a parameter estimate <span class="math inline">\(\neq\)</span> 0 at <span class="math inline">\(\alpha\)</span> = .05, then the 95% confidence interval for its parameter estimate should not include 0.</span><br>
-<br>
-</p>
+<p><span style="color: blue;">If a parameter estimate <span class="math inline">\(\neq\)</span> 0 at <span class="math inline">\(\alpha\)</span> = .05, then the 95% confidence interval for its parameter estimate should not include 0.</span></p>
 <p><span style="color: blue;">This is also true for testing whether the parameter estimate is equal to any other non-zero value for the population parameter.</span></p>
 <hr>
 </section>
@@ -958,13 +861,9 @@ mean of x
 <h2 data-number="3.24" class="anchored" data-anchor-id="testing-beta_0-non-zero-values"><span class="header-section-number">3.24</span> Testing <span class="math inline">\(\beta_0\)</span> = non-zero values</h2>
 <p><span style="color: red;">Question: How could you test an <span class="math inline">\(H_0\)</span> regarding <span class="math inline">\(B_0\)</span> = some value other than 0 (e.g., 10)? HINT: There are at least <strong>three</strong> methods.</span></p>
 <hr>
-<p><span style="color: blue;"><strong>Option 1:</strong></span> Compare SSE for the augmented model (<span class="math inline">\(\hat{Y}_i= \beta_0\)</span>) to SSE from a different compact model for this new <span class="math inline">\(H_0\)</span> (<span class="math inline">\(\hat{Y}_i= 10\)</span>).<br>
-<br>
-</p>
+<p><span style="color: blue;"><strong>Option 1:</strong></span> Compare SSE for the augmented model (<span class="math inline">\(\hat{Y}_i= \beta_0\)</span>) to SSE from a different compact model for this new <span class="math inline">\(H_0\)</span> (<span class="math inline">\(\hat{Y}_i= 10\)</span>).</p>
 <p><span style="color: blue;"><strong>Option 2:</strong></span> Recalculate t-statistic using this new <span class="math inline">\(H_0\)</span>.</p>
-<p><span class="math inline">\(t= \frac{b_0 - 10}{SE_{b_0}}\)</span><br>
-<br>
-</p>
+<p><span class="math inline">\(t= \frac{b_0 - 10}{SE_{b_0}}\)</span></p>
 <p><span style="color: blue;"><strong>Option 3:</strong></span> Does the confidence interval for the parameter estimate contain this other value? No p-value provided.</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -986,8 +885,6 @@ mean of x
 <li><strong>Prediction:</strong> <span class="math inline">\(b_0\)</span> is predicted value that minimizes sample SSE.</li>
 <li><strong>Inference:</strong> Use <span class="math inline">\(b_0\)</span> to test id <span class="math inline">\(\beta_0 = 0\)</span> (default) or any other value. One sample t-test.</li>
 </ul>
-<p><br>
-</p>
 <p>Two parameter (<span class="math inline">\(\beta_0, \beta_1\)</span>) model</p>
 <ul>
 <li><strong>Description:</strong> <span class="math inline">\(b_1\)</span> describes how <span class="math inline">\(Y\)</span> changes as a function of <span class="math inline">\(X_1\)</span>. <span class="math inline">\(b_0\)</span> describes expected value of <span class="math inline">\(Y\)</span> ar specific value (0) for <span class="math inline">\(X_1\)</span>.</li>
