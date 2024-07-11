@@ -276,6 +276,10 @@ window.Quarto = {
   <li><a href="#open-view-preliminary-checks" id="toc-open-view-preliminary-checks" class="nav-link" data-scroll-target="#open-view-preliminary-checks"><span class="header-section-number">6.10</span> Open, View, &amp; Preliminary Checks</a></li>
   <li><a href="#the-two-predictor-and-general-linear-models" id="toc-the-two-predictor-and-general-linear-models" class="nav-link" data-scroll-target="#the-two-predictor-and-general-linear-models"><span class="header-section-number">6.11</span> The Two Predictor and General Linear Models</a></li>
   <li><a href="#testing-bac-in-a-three-parameter-model-2-predictors" id="toc-testing-bac-in-a-three-parameter-model-2-predictors" class="nav-link" data-scroll-target="#testing-bac-in-a-three-parameter-model-2-predictors"><span class="header-section-number">6.12</span> Testing BAC in a Three Parameter Model (2 Predictors)</a></li>
+  <li><a href="#standard-error-of-partial-regression-coefficient-b_j" id="toc-standard-error-of-partial-regression-coefficient-b_j" class="nav-link" data-scroll-target="#standard-error-of-partial-regression-coefficient-b_j"><span class="header-section-number">6.13</span> Standard Error of Partial Regression Coefficient (<span class="math inline">\(b_j\)</span>)</a></li>
+  <li><a href="#sampling-distributions-and-power" id="toc-sampling-distributions-and-power" class="nav-link" data-scroll-target="#sampling-distributions-and-power"><span class="header-section-number">6.14</span> Sampling Distributions and Power</a></li>
+  <li><a href="#sampling-distributions-and-precision" id="toc-sampling-distributions-and-precision" class="nav-link" data-scroll-target="#sampling-distributions-and-precision"><span class="header-section-number">6.15</span> Sampling Distributions and Precision</a></li>
+  <li><a href="#standard-error-of-partial-regression-coefficient-b_j-continued" id="toc-standard-error-of-partial-regression-coefficient-b_j-continued" class="nav-link" data-scroll-target="#standard-error-of-partial-regression-coefficient-b_j-continued"><span class="header-section-number">6.16</span> Standard Error of Partial Regression Coefficient (<span class="math inline">\(b_j\)</span>; Continued)</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/06_two_predictors.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -852,7 +856,9 @@ fps 0.06 0.00 0.00
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="fu">lm</span>(fps <span class="sc">~</span> bac, <span class="at">data =</span> data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac, <span class="at">data =</span> data)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
@@ -862,6 +868,7 @@ fps 0.06 0.00 0.00
 2 bac           -184.      95.9      -1.92 0.0579       </code></pre>
 </div>
 </div>
+<p><span class="math inline">\(\text{SSE} =\)</span> 128837.1</p>
 <p><strong>Three parameter model test of BAC</strong></p>
 <div class="cell">
 <details class="code-fold">
@@ -877,8 +884,157 @@ fps 0.06 0.00 0.00
 3 ta             0.153    0.0324      4.73 0.00000807</code></pre>
 </div>
 </div>
+<p><span class="math inline">\(\text{SSE} =\)</span> 103877.2</p>
 <p><span style="color: red;">Question: What changed about test of <span class="math inline">\(\beta_1\)</span> (BAC effect) and why?</span></p>
 <hr>
+<p><span style="color: blue;">SE for BAC and SSE decreased.</span></p>
+<p><span style="color: blue;">As a result, <span class="math inline">\(R^2\)</span> increases.</span></p>
+<p><strong>Two parameter model test of BAC</strong></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">glance</span>(m_2) <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(r.squared)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  r.squared
+      &lt;dbl&gt;
+1    0.0377</code></pre>
+</div>
+</div>
+<p><strong>Three parameter model test of BAC</strong></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">glance</span>(m_3) <span class="sc">|&gt;</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(r.squared)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  r.squared
+      &lt;dbl&gt;
+1     0.224</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="standard-error-of-partial-regression-coefficient-b_j" class="level2" data-number="6.13">
+<h2 data-number="6.13" class="anchored" data-anchor-id="standard-error-of-partial-regression-coefficient-b_j"><span class="header-section-number">6.13</span> Standard Error of Partial Regression Coefficient (<span class="math inline">\(b_j\)</span>)</h2>
+<p><span class="math inline">\(t(N-P) = \frac{b_j - 0}{SE_{b_j}}\)</span></p>
+<p><span class="math inline">\(SE_{b_j} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R_Y^2)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{(1-R_j^2)}}\)</span></p>
+<p><span style="color: red;">Question: What happens to <span class="math inline">\(SE_{b_j}\)</span> as model <span class="math inline">\(R^2\)</span> (<span class="math inline">\(R^2_Y\)</span>) increases (holding other factors constant)?</span></p>
+<hr>
+<p><span style="color: blue;"><span class="math inline">\(SE_{b_j}\)</span> decreases as model <span class="math inline">\(R^2\)</span> increases. In other words, the sampling distribution get narrower.</span></p>
+<hr>
+<p><span style="color: red;">Question: What happens to significance test of <span class="math inline">\(b_j\)</span> as <span class="math inline">\(SE_{b_j}\)</span> decreases (holding other factors constant)?</span></p>
+<hr>
+<p><span style="color: blue;"><span class="math inline">\(t\)</span> increases and associated p-value deceases (More Power!).</span></p>
+<hr>
+</section>
+<section id="sampling-distributions-and-power" class="level2" data-number="6.14">
+<h2 data-number="6.14" class="anchored" data-anchor-id="sampling-distributions-and-power"><span class="header-section-number">6.14</span> Sampling Distributions and Power</h2>
+<p><span class="math inline">\(t(N-P) = \frac{b_j - 0}{SE_{b_j}}\)</span></p>
+<p><strong>Two parameter model test of BAC</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic       p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+1 (Intercept)     42.5      6.55      6.48 0.00000000411
+2 bac           -184.      95.9      -1.92 0.0579       </code></pre>
+</div>
+</div>
+<p><span class="math inline">\(t(96-2) = \frac{-184 - 0}{95.9}\)</span></p>
+<p><span class="math inline">\(t(94) = -1.92\)</span></p>
+<p><span class="math inline">\(p = .0579\)</span></p>
+<hr>
+<p><span class="math inline">\(t(N-P) = \frac{b_j - 0}{SE_{b_j}}\)</span></p>
+<p><strong>Three parameter model test of BAC</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic    p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)   19.4      7.66        2.54 0.0128    
+2 bac         -177.      86.6        -2.04 0.0437    
+3 ta             0.153    0.0324      4.73 0.00000807</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(t(96-3) = \frac{-177 - 0}{86.6}\)</span></p>
+<p><span class="math inline">\(t(93) = -2.04\)</span></p>
+<p><span class="math inline">\(p = .0437\)</span></p>
+<hr>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>distr_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">b1 =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">400</span>,<span class="dv">400</span>,.<span class="dv">01</span>),</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">probability =</span> <span class="fu">dt</span>(b1<span class="sc">/</span><span class="fu">subset</span>(broom<span class="sc">::</span><span class="fu">tidy</span>(m_3), term <span class="sc">==</span> <span class="st">"bac"</span>)<span class="sc">$</span>std.error, m_3<span class="sc">$</span>df.residual),</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">group =</span> <span class="st">"3 parameter model"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(<span class="fu">tibble</span>(<span class="at">b1 =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">400</span>,<span class="dv">400</span>,.<span class="dv">01</span>),</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">probability =</span> <span class="fu">dt</span>(b1<span class="sc">/</span><span class="fu">subset</span>(broom<span class="sc">::</span><span class="fu">tidy</span>(m_2), term <span class="sc">==</span> <span class="st">"bac"</span>)<span class="sc">$</span>std.error, m_2<span class="sc">$</span>df.residual),</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">group =</span> <span class="st">"2 parameter model"</span>))</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>distr_data <span class="sc">|&gt;</span> </span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> b1, <span class="at">y =</span> probability, <span class="at">color =</span> group)) <span class="sc">+</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>)) <span class="sc">+</span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">subset</span>(broom<span class="sc">::</span><span class="fu">tidy</span>(m_2), term <span class="sc">==</span> <span class="st">"bac"</span>)<span class="sc">$</span>estimate, </span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">subset</span>(broom<span class="sc">::</span><span class="fu">tidy</span>(m_3), term <span class="sc">==</span> <span class="st">"bac"</span>)<span class="sc">$</span>estimate, </span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"blue"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06_two_predictors_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="sampling-distributions-and-precision" class="level2" data-number="6.15">
+<h2 data-number="6.15" class="anchored" data-anchor-id="sampling-distributions-and-precision"><span class="header-section-number">6.15</span> Sampling Distributions and Precision</h2>
+<p><span class="math inline">\(CI_b=b \pm t(\alpha; N-P)*SE_b\)</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 2.5 %    97.5 %
+(Intercept)   29.45597 55.457721
+bac         -374.49261  6.308724</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\Delta\)</span> 380.8013363</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    2.5 %     97.5 %
+(Intercept)    4.22130089 34.6411333
+bac         -348.98099457 -5.1177113
+ta             0.08891558  0.2177329</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\Delta\)</span> 343.8632833</p>
+</section>
+<section id="standard-error-of-partial-regression-coefficient-b_j-continued" class="level2" data-number="6.16">
+<h2 data-number="6.16" class="anchored" data-anchor-id="standard-error-of-partial-regression-coefficient-b_j-continued"><span class="header-section-number">6.16</span> Standard Error of Partial Regression Coefficient (<span class="math inline">\(b_j\)</span>; Continued)</h2>
+<p><span class="math inline">\(t(N-P) = \frac{b_j - 0}{SE_{b_j}}\)</span></p>
+<p><span class="math inline">\(SE_{b_j} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R_Y^2)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{(1-R_j^2)}}\)</span></p>
 
 
 </section>
