@@ -1328,7 +1328,7 @@ exam                0.4 0.54 1.00</code></pre>
 <h2 data-number="6.20" class="anchored" data-anchor-id="causal-models"><span class="header-section-number">6.20</span> Causal Models?</h2>
 <p><strong>Total effect of study_hours</strong></p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>DiagrammeR<span class="sc">::</span><span class="fu">grViz</span>(<span class="st">"</span></span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="st">digraph{</span></span>
@@ -1336,13 +1336,13 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="st">  node [shape = box]</span></span>
 <span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="st">    A [label = 'study_hours']</span></span>
 <span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="st">    Y [label = 'exam']</span></span>
-<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a><span class="st">    A-&gt;Y</span></span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a><span class="st">    A-&gt;Y [label = round(coef(m_exam_1)[2],2)]</span></span>
 <span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
 <span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-a26cef68735eebad2e08" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-a26cef68735eebad2e08">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-e716da92ff9419a52299" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-e716da92ff9419a52299">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = round(coef(m_exam_1)[2],2)]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Direct and indirect/spurious effects on study_hours</strong></p>
