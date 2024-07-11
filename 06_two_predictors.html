@@ -355,7 +355,7 @@ window.Quarto = {
 2 bac           -184.      95.9      -1.92 0.0579       </code></pre>
 </div>
 </div>
-<p><span style="color: red;">Question: Describe the interpretation of <span class="math inline">\(b_1\)</span> (coefficient for BAC) and its significance test.</span></p>
+<p><span style="color: red;">Describe the interpretation of <span class="math inline">\(b_1\)</span> (coefficient for BAC) and its significance test.</span></p>
 <hr>
 <p><span style="color: blue;"><span class="math inline">\(b_1\)</span> <em>describes</em> the relationship between BAC and FPS in the units of each measure. FPS will decrease by 184 µV for every 1% increase in BAC (It will decrease by 1.84µV for every .01 increase in BAC).</span></p>
 <p><span style="color: blue;">The significance test for <span class="math inline">\(\beta_1\)</span> tests the null hypothesis that the population relationship between BAC and FPS is 0 (i.e., <span class="math inline">\(\beta_1\)</span> = 0, no relationship). We fail to reject this <span class="math inline">\(H_0\)</span>. Conclude that alcohol does not affect FPS.</span></p>
@@ -812,7 +812,7 @@ fps 0.06 0.00 0.00
 3 ta             0.153    0.0324      4.73 0.00000807</code></pre>
 </div>
 </div>
-<p><span style="color: red;">Question: Describe conclusion and logic of the test of <span class="math inline">\(H_0:\beta_1=0\)</span> from sampling distribution perspective.</span></p>
+<p><span style="color: red;">Describe conclusion and logic of the test of <span class="math inline">\(H_0:\beta_1=0\)</span> from sampling distribution perspective.</span></p>
 <hr>
 <p><span style="color: blue;">If <span class="math inline">\(H_0\)</span> is true, we expect a sampling distribution for <span class="math inline">\(b_1\)</span> to have a mean of 0 and an SE of 86.6 (red curve below).</span></p>
 <div class="cell">
@@ -836,7 +836,7 @@ fps 0.06 0.00 0.00
 <p><span style="color: blue;">A sample <span class="math inline">\(b_1\)</span> = -177.0 is unlikely (about 2 standard deviations below mean; p = .0437). Therefore, we reject our <span class="math inline">\(H_0\)</span> and conclude that <span class="math inline">\(\beta_1 \neq 0\)</span>.</span></p>
 <p><span style="color: blue;">Conclusion is that BAC affects FPS.</span></p>
 <hr>
-<p><span style="color: red;">Question: Describe conclusion and logic of the test of <span class="math inline">\(H_0:\beta_1=0\)</span> from model comparison perspective.</span></p>
+<p><span style="color: red;">Describe conclusion and logic of the test of <span class="math inline">\(H_0:\beta_1=0\)</span> from model comparison perspective.</span></p>
 <hr>
 <p><span class="math inline">\(H_0: \beta_1 = 0; H_a: \beta_1 \neq 0\)</span></p>
 <p><span style="color: blue;"><strong>Compact Model:</strong> <span class="math inline">\(\hat{\text{FPS}}=\beta_0 + 0*\text{BAC}+\beta_2*\text{TA}\)</span></span></p>
@@ -847,6 +847,37 @@ fps 0.06 0.00 0.00
 <p><span class="math inline">\(P_c = 3\)</span></p>
 <p><span class="math inline">\(F(P_a - P_c, N - P_a) = \frac{(\text{SSE}_c = \text{SSE}_a)/(P_a-P_c)}{\text{SSE}_a/(N-P_a)}\)</span><br>
 <span class="math inline">\(F (1, 93) = 4.18, p = 0.0442\)</span></p>
+<hr>
+<p><strong>Two parameter model test of BAC</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="fu">lm</span>(fps <span class="sc">~</span> bac, <span class="at">data =</span> data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic       p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+1 (Intercept)     42.5      6.55      6.48 0.00000000411
+2 bac           -184.      95.9      -1.92 0.0579       </code></pre>
+</div>
+</div>
+<p><strong>Three parameter model test of BAC</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic    p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)   19.4      7.66        2.54 0.0128    
+2 bac         -177.      86.6        -2.04 0.0437    
+3 ta             0.153    0.0324      4.73 0.00000807</code></pre>
+</div>
+</div>
+<p><span style="color: red;">Question: What changed about test of <span class="math inline">\(\beta_1\)</span> (BAC effect) and why?</span></p>
 <hr>
 
 
