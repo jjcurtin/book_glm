@@ -402,8 +402,8 @@ window.Quarto = {
 <p>There are three properties that make a parameter estimate attractive.</p>
 <ol type="1">
 <li><p><strong><em>Unbiased:</em></strong> Mean of the sampling distribution for the parameter estimate is equal to the value for that parameter in the population.</p></li>
-<li><p><strong><em>Efficient:</em></strong> The sample estimates are close to the population parameter. In other words, the narrower the sampling distribution for any specific sample size <span class="math inline">\(N\)</span>, the more efficient the estimator. Efficient means small <span class="math inline">\(SE\)</span> for parameter estimate.</p></li>
-<li><p><strong><em>Consistent:</em></strong> As the sample size increases, the sampling distribution becomes narrower (more efficient). Consistent means as <span class="math inline">\(N\)</span> increases, <span class="math inline">\(SE\)</span> for parameter estimate decreases</p></li>
+<li><p><strong><em>Efficient:</em></strong> The sample estimates are close to the population parameter. In other words, the narrower the sampling distribution for any specific sample size <span class="math inline">\(N\)</span>, the more efficient the estimator. Efficient means small SE for parameter estimate.</p></li>
+<li><p><strong><em>Consistent:</em></strong> As the sample size increases, the sampling distribution becomes narrower (more efficient). Consistent means as <span class="math inline">\(N\)</span> increases, SE for parameter estimate decreases</p></li>
 </ol>
 <hr>
 </section>
@@ -620,8 +620,8 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 <section id="sampling-distribution-testing-inferences-about-beta_0" class="level2" data-number="3.15">
 <h2 data-number="3.15" class="anchored" data-anchor-id="sampling-distribution-testing-inferences-about-beta_0"><span class="header-section-number">3.15</span> Sampling Distribution: Testing Inferences About <span class="math inline">\(\beta_0\)</span></h2>
 <p><span class="math inline">\(H_0: \beta_0 = 0; H_a: \beta_0 \neq 0\)</span></p>
-<p><span style="color: blue;">If <span class="math inline">\(H_0\)</span> is true, the sampling distribution for <span class="math inline">\(\beta_0\)</span> will have a mean of 0. We can estimate standard deviation of the sampling distribution with <span class="math inline">\(SE\)</span> for <span class="math inline">\(b_0\)</span>.</span></p>
-<p><span class="math inline">\(t(df=N-P)=\frac{b_0-0}{SE_{b_0}}=\frac{32.2-0}{3.8}=8.40\)</span></p>
+<p><span style="color: blue;">If <span class="math inline">\(H_0\)</span> is true, the sampling distribution for <span class="math inline">\(\beta_0\)</span> will have a mean of 0. We can estimate standard deviation of the sampling distribution with SE for <span class="math inline">\(b_0\)</span>.</span></p>
+<p><span class="math inline">\(t(df=N-P)=\frac{b_0-0}{\text{SE}_{b_0}}=\frac{32.2-0}{3.8}=8.40\)</span></p>
 <p><span style="color: blue;"><span class="math inline">\(b_0\)</span> is approximately 8 standard deviations above the expected mean of the distribution if <span class="math inline">\(H_0\)</span> is true.</span></p>
 <hr>
 <p>We can use <code>pt()</code> to calculate the <span class="math inline">\(p\)</span> value.</p>
@@ -768,7 +768,7 @@ P = 1</p>
 </li>
 <li>Tight connection to sampling and probability distributions.<br>
 </li>
-<li>Understanding of <span class="math inline">\(SE\)</span> (sampling error/power; confidence intervals, graphic displays).</li>
+<li>Understanding of SE (sampling error/power; confidence intervals, graphic displays).</li>
 </ul>
 <p><strong>Model Comparison</strong></p>
 <ul>
@@ -822,7 +822,7 @@ P = 1</p>
 </div>
 <p><span style="color: red;">Question: Given what you now know about confidence intervals and sampling distributions, what should the formula be?</span></p>
 <hr>
-<p><span style="color: blue;"><span class="math inline">\(\text{CI}(b_0)= b_0 \pm t(\alpha;N-P) * SE_{b_0}\)</span></span></p>
+<p><span style="color: blue;"><span class="math inline">\(\text{CI}(b_0)= b_0 \pm t(\alpha;N-P) * \text{SE}_{b_0}\)</span></span></p>
 <p><span style="color: blue;">For the 95% confidence interval this is approximately 2 SEs around our unbiased estimate of <span class="math inline">\(\beta_0\)</span>.</span></p>
 <hr>
 <p><span style="color: red;">Question: How can we tell if a parameter is <em>significant</em> from the confidence interval?</span></p>
@@ -863,7 +863,7 @@ mean of x
 <hr>
 <p><span style="color: blue;"><strong>Option 1:</strong></span> Compare SSE for the augmented model (<span class="math inline">\(\hat{Y}_i= \beta_0\)</span>) to SSE from a different compact model for this new <span class="math inline">\(H_0\)</span> (<span class="math inline">\(\hat{Y}_i= 10\)</span>).</p>
 <p><span style="color: blue;"><strong>Option 2:</strong></span> Recalculate t-statistic using this new <span class="math inline">\(H_0\)</span>.</p>
-<p><span class="math inline">\(t= \frac{b_0 - 10}{SE_{b_0}}\)</span></p>
+<p><span class="math inline">\(t= \frac{b_0 - 10}{\text{SE}_{b_0}}\)</span></p>
 <p><span style="color: blue;"><strong>Option 3:</strong></span> Does the confidence interval for the parameter estimate contain this other value? No p-value provided.</p>
 <div class="cell">
 <details open="" class="code-fold">

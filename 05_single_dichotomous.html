@@ -460,8 +460,8 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 <h2 data-number="5.7" class="anchored" data-anchor-id="sse-leads-to-ses-and-power"><span class="header-section-number">5.7</span> &gt;SSE leads to &gt;SEs and &lt;Power</h2>
 <p><span style="color: blue;">p-value is worse (bigger) for bg_2 than BAC. Taking a quantitative variable and dichotomizing (or trichotomizing, etc.) throws away potentially valuable information in your predictor variable. The dichotomous variable will generally be a worse predictor. This will produce a model with more error (&gt; SSE) and less power (&gt; p-values) to test hypotheses.</span></p>
 <p><span style="color: blue;">Don’t dichotomize unless there is a <strong>REALLY</strong> good reason. GLM can accommodate quantitative variables anywhere you would have previously used a categorical variable.</span></p>
-<p><span class="math inline">\(SE_{b_0}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overline{X})^2}{(N-1)*S_x^2}}\)</span></p>
-<p><span class="math inline">\(SE_{b_1}=\frac{s_y}{s_x}*\sqrt{\frac{1-R^2}{N-P}}\)</span></p>
+<p><span class="math inline">\(\text{SE}_{b_0}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overline{X})^2}{(N-1)*S_x^2}}\)</span></p>
+<p><span class="math inline">\(\text{SE}_{b_1}=\frac{s_y}{s_x}*\sqrt{\frac{1-R^2}{N-P}}\)</span></p>
 <hr>
 </section>
 <section id="dichotomous-beverage-group-cont." class="level2" data-number="5.8">

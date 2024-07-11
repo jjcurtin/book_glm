@@ -413,7 +413,7 @@ window.Quarto = {
 <section id="standard-errors-of-glm-coefficients" class="level2" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="standard-errors-of-glm-coefficients"><span class="header-section-number">6.6</span> Standard Errors of GLM Coefficients</h2>
 <p>The formula for the standard error for a coefficient <span class="math inline">\(b_j\)</span> in <strong>multiple</strong> (more than one predictor) regression is:</p>
-<p><span class="math inline">\(SE_{bj} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R^2_y)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{(1-R^2_j)}}\)</span></p>
+<p><span class="math inline">\(\text{SE}_{bj} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R^2_y)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{(1-R^2_j)}}\)</span></p>
 <p><span class="math inline">\(R^2_j\)</span> = variance in <span class="math inline">\(X_j\)</span> accounted for by all other predictors in the model (i.e., how redundant is <span class="math inline">\(X_{a_j}\)</span> in model?). Literally, predict <span class="math inline">\(X_j\)</span> as DV with all other predictors as IVs.</p>
 <p><strong>Note: Formula for the standard error for <span class="math inline">\(b_0\)</span> is different.</strong></p>
 <p>For the one predictor model it is (need matrix notation for <span class="math inline">\(k&gt;1\)</span>):</p>
@@ -422,7 +422,7 @@ window.Quarto = {
 </section>
 <section id="se-for-b_j-and-r2" class="level2" data-number="6.7">
 <h2 data-number="6.7" class="anchored" data-anchor-id="se-for-b_j-and-r2"><span class="header-section-number">6.7</span> SE for <span class="math inline">\(b_j\)</span> and <span class="math inline">\(R^2\)</span></h2>
-<p><span class="math inline">\(SE_{b_j}= \frac{s_y}{s_j}*\frac{\sqrt{(1-R_y^2)}}{(N-P)}*\frac{1}{\sqrt{(1-R_j^2)}}\)</span></p>
+<p><span class="math inline">\(\text{SE}_{b_j}= \frac{s_y}{s_j}*\frac{\sqrt{(1-R_y^2)}}{(N-P)}*\frac{1}{\sqrt{(1-R_j^2)}}\)</span></p>
 <p>If we increase <span class="math inline">\(R_y^2\)</span>, we would decrease the SE for our regression coefficient.</p>
 <hr>
 </section>
@@ -924,20 +924,20 @@ fps 0.06 0.00 0.00
 </section>
 <section id="standard-error-of-partial-regression-coefficient-b_j" class="level2" data-number="6.13">
 <h2 data-number="6.13" class="anchored" data-anchor-id="standard-error-of-partial-regression-coefficient-b_j"><span class="header-section-number">6.13</span> Standard Error of Partial Regression Coefficient (<span class="math inline">\(b_j\)</span>)</h2>
-<p><span class="math inline">\(t(N-P) = \frac{b_j - 0}{SE_{b_j}}\)</span></p>
-<p><span class="math inline">\(SE_{b_j} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R_y^2)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{(1-R_j^2)}}\)</span></p>
-<p><span style="color: red;">Question: What happens to <span class="math inline">\(SE_{b_j}\)</span> as model <span class="math inline">\(R^2\)</span> (<span class="math inline">\(R^2_y\)</span>) increases (holding other factors constant)?</span></p>
+<p><span class="math inline">\(t(N-P) = \frac{b_j - 0}{\text{SE}_{b_j}}\)</span></p>
+<p><span class="math inline">\(\text{SE}_{b_j} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R_y^2)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{(1-R_j^2)}}\)</span></p>
+<p><span style="color: red;">Question: What happens to <span class="math inline">\(\text{SE}_{b_j}\)</span> as model <span class="math inline">\(R^2\)</span> (<span class="math inline">\(R^2_y\)</span>) increases (holding other factors constant)?</span></p>
 <hr>
-<p><span style="color: blue;"><span class="math inline">\(SE_{b_j}\)</span> decreases as model <span class="math inline">\(R^2\)</span> increases. In other words, the sampling distribution get narrower.</span></p>
+<p><span style="color: blue;"><span class="math inline">\(\text{SE}_{b_j}\)</span> decreases as model <span class="math inline">\(R^2\)</span> increases. In other words, the sampling distribution get narrower.</span></p>
 <hr>
-<p><span style="color: red;">Question: What happens to significance test of <span class="math inline">\(b_j\)</span> as <span class="math inline">\(SE_{b_j}\)</span> decreases (holding other factors constant)?</span></p>
+<p><span style="color: red;">Question: What happens to significance test of <span class="math inline">\(b_j\)</span> as <span class="math inline">\(\text{SE}_{b_j}\)</span> decreases (holding other factors constant)?</span></p>
 <hr>
 <p><span style="color: blue;"><span class="math inline">\(t\)</span> increases and associated p-value deceases (More Power!).</span></p>
 <hr>
 </section>
 <section id="sampling-distributions-and-power" class="level2" data-number="6.14">
 <h2 data-number="6.14" class="anchored" data-anchor-id="sampling-distributions-and-power"><span class="header-section-number">6.14</span> Sampling Distributions and Power</h2>
-<p><span class="math inline">\(t(N-P) = \frac{b_j - 0}{SE_{b_j}}\)</span></p>
+<p><span class="math inline">\(t(N-P) = \frac{b_j - 0}{\text{SE}_{b_j}}\)</span></p>
 <p><strong>Two parameter model test of BAC</strong></p>
 <div class="cell">
 <details class="code-fold">
@@ -956,7 +956,7 @@ fps 0.06 0.00 0.00
 <p><span class="math inline">\(t(94) = -1.92\)</span></p>
 <p><span class="math inline">\(p = .0579\)</span></p>
 <hr>
-<p><span class="math inline">\(t(N-P) = \frac{b_j - 0}{SE_{b_j}}\)</span></p>
+<p><span class="math inline">\(t(N-P) = \frac{b_j - 0}{\text{SE}_{b_j}}\)</span></p>
 <p><strong>Three parameter model test of BAC</strong></p>
 <div class="cell">
 <details class="code-fold">
@@ -1007,7 +1007,7 @@ fps 0.06 0.00 0.00
 </section>
 <section id="sampling-distributions-and-precision" class="level2" data-number="6.15">
 <h2 data-number="6.15" class="anchored" data-anchor-id="sampling-distributions-and-precision"><span class="header-section-number">6.15</span> Sampling Distributions and Precision</h2>
-<p><span class="math inline">\(CI_b=b \pm t(\alpha; N-P)*SE_b\)</span></p>
+<p><span class="math inline">\(\text{CI}_b=b \pm t(\alpha; N-P)*\text{SE}_b\)</span></p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -1037,8 +1037,8 @@ ta             0.08891558  0.2177329</code></pre>
 </section>
 <section id="standard-error-of-partial-regression-coefficient-b_j-continued" class="level2" data-number="6.16">
 <h2 data-number="6.16" class="anchored" data-anchor-id="standard-error-of-partial-regression-coefficient-b_j-continued"><span class="header-section-number">6.16</span> Standard Error of Partial Regression Coefficient (<span class="math inline">\(b_j\)</span>; Continued)</h2>
-<p><span class="math inline">\(t(N-P) = \frac{b_j - 0}{SE_{b_j}}\)</span></p>
-<p><span class="math inline">\(SE_{b_j} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R_Y^2)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{(1-R_j^2)}}\)</span></p>
+<p><span class="math inline">\(t(N-P) = \frac{b_j - 0}{\text{SE}_{b_j}}\)</span></p>
+<p><span class="math inline">\(\text{SE}_{b_j} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R_Y^2)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{(1-R_j^2)}}\)</span></p>
 <p><span class="math inline">\(R^2_j\)</span> = variance in <span class="math inline">\(X_j\)</span> accounted for by all other predictors in model (i.e., how redundant is <span class="math inline">\(X_j\)</span> in model?).</p>
 <p><span style="color: red;">Question: What other factors affect SE for regression coefficients and how?</span></p>
 <hr>
@@ -1087,13 +1087,13 @@ ta             0.08891558  0.2177329</code></pre>
 </section>
 <section id="r2_j-and-multicollinearity" class="level2" data-number="6.18">
 <h2 data-number="6.18" class="anchored" data-anchor-id="r2_j-and-multicollinearity"><span class="header-section-number">6.18</span> <span class="math inline">\(R^2_j\)</span> and Multicollinearity</h2>
-<p><span class="math inline">\(t(N-P) = \frac{b-0}{SE_b}\)</span></p>
-<p><span class="math inline">\(CI_b= b \pm t(\alpha; N-P)*SE_b\)</span></p>
+<p><span class="math inline">\(t(N-P) = \frac{b-0}{\text{SE}_b}\)</span></p>
+<p><span class="math inline">\(\text{CI}_b= b \pm t(\alpha; N-P)*\text{SE}_b\)</span></p>
 <p>This decrease in <strong>power and precision</strong> for model parameter estimates (regression coefficients) associated with redundancy among the predictors is called the <em>problem of Multicollinearity</em>.</p>
 <hr>
 <p>It is <strong>not</strong> sufficient to examine only bivariate correlations among predictors. To determine if a problem exists, calculate Variance Inflation Factors (VIF) for each predictor.</p>
 <p><span class="math inline">\(\text{VIF}_j = \frac{1}{(1-R^2_j)}\)</span></p>
-<p>VIF tells you how much <span class="math inline">\(SE_{b_j}\)</span> is increased because of redundancy. VIFs <span class="math inline">\(\ge\)</span> 5 are considered problematic (SE increased by factor of 2.2).</p>
+<p>VIF tells you how much <span class="math inline">\(\text{SE}_{b_j}\)</span> is increased because of redundancy. VIFs <span class="math inline">\(\ge\)</span> 5 are considered problematic (SE increased by factor of 2.2).</p>
 <hr>
 <p>We can use <code>car::vif()</code> to calculate VIFs in R.</p>
 <div class="cell">
