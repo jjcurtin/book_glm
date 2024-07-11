@@ -283,6 +283,7 @@ window.Quarto = {
   <li><a href="#power-and-sse-in-two-and-three-parameter-models" id="toc-power-and-sse-in-two-and-three-parameter-models" class="nav-link" data-scroll-target="#power-and-sse-in-two-and-three-parameter-models"><span class="header-section-number">6.17</span> Power and SSE in Two and Three Parameter Models</a></li>
   <li><a href="#r2_j-and-multicollinearity" id="toc-r2_j-and-multicollinearity" class="nav-link" data-scroll-target="#r2_j-and-multicollinearity"><span class="header-section-number">6.18</span> <span class="math inline">\(R^2_j\)</span> and Multicollinearity</a></li>
   <li><a href="#interpretation-of-multiple-regression-coefficients" id="toc-interpretation-of-multiple-regression-coefficients" class="nav-link" data-scroll-target="#interpretation-of-multiple-regression-coefficients"><span class="header-section-number">6.19</span> Interpretation of Multiple Regression Coefficients</a></li>
+  <li><a href="#causal-models" id="toc-causal-models" class="nav-link" data-scroll-target="#causal-models"><span class="header-section-number">6.20</span> Causal Models?</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/06_two_predictors.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1118,6 +1119,205 @@ ta             0.08891558  0.2177329</code></pre>
 </section>
 <section id="interpretation-of-multiple-regression-coefficients" class="level2" data-number="6.19">
 <h2 data-number="6.19" class="anchored" data-anchor-id="interpretation-of-multiple-regression-coefficients"><span class="header-section-number">6.19</span> Interpretation of Multiple Regression Coefficients</h2>
+<p><span style="color: red;">Question: What did the value of <span class="math inline">\(b_1\)</span> tell us in a regression model with one predictor?</span></p>
+<hr>
+<p><span style="color: blue;">The change in <span class="math inline">\(Y\)</span> associated with a one unit increase in <span class="math inline">\(X_1\)</span>.</span></p>
+<p><span style="color: blue;">For every 1 unit increase in <span class="math inline">\(X_1\)</span>, there will be a <span class="math inline">\(b_1\)</span> unit increase in <span class="math inline">\(Y\)</span>.</span></p>
+<hr>
+<p><span style="color: red;">Question: What about <span class="math inline">\(b_j\)</span> with multiple (e.g., 2) predictors?</span></p>
+<hr>
+<p><span style="color: blue;">The change in <span class="math inline">\(Y\)</span> associated with a one unit increase in <span class="math inline">\(X_j\)</span> <em>controlling for all other predictors in the model</em>. “Controlling for” means holding constant.</span></p>
+<p><span style="color: blue;">For every 1 unit increase in <span class="math inline">\(X_j\)</span>, there will be a <span class="math inline">\(b_j\)</span> unit increase in <span class="math inline">\(Y\)</span> holding all other predictors in the model constant.</span></p>
+<hr>
+<p><span style="color: red;">Question: Do hours of studying per week affect exam performance in 610?</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_data, <span class="st">"6_two_predictors_exam.csv"</span>), </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">study_hours_c =</span> study_hours <span class="sc">-</span> <span class="fu">mean</span>(study_hours)) <span class="sc">|&gt;</span> </span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 200
+Columns: 5
+$ subid         &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 1…
+$ study_hours   &lt;dbl&gt; 9.197649, 10.897476, 10.508091, 12.297003, 8.789881, 11.…
+$ iq            &lt;dbl&gt; 106.39393, 103.02859, 98.11384, 110.42777, 93.35694, 114…
+$ exam          &lt;dbl&gt; 79.66300, 59.58193, 70.21451, 59.25460, 55.80582, 72.951…
+$ study_hours_c &lt;dbl&gt; -0.80235118, 0.89747646, 0.50809122, 2.29700259, -1.2101…</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>m_exam_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(exam <span class="sc">~</span> study_hours_c, <span class="at">data =</span> data)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_exam_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term          estimate std.error statistic   p.value
+  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)      62.1      0.757     82.1  6.60e-155
+2 study_hours_c     2.34     0.379      6.18 3.65e-  9</code></pre>
+</div>
+</div>
+<hr>
+<p><span style="color: blue;">Yes, for every one hour of studying per week, students’ exam scores increase by 2.3 points.</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_exam_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term          estimate std.error statistic   p.value
+  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)      62.1      0.757     82.1  6.60e-155
+2 study_hours_c     2.34     0.379      6.18 3.65e-  9</code></pre>
+</div>
+</div>
+<p><span style="color: red;">Interpretation of <span class="math inline">\(b_0\)</span>?</span></p>
+<hr>
+<p>Maybe study hours are related to exam scores only because intelligent students study more (learned early good study habits) and intelligent students do better on exams.</p>
+<p><span style="color: red;">Question: How could you assess the unique effect of study_hours, controlling for IQ?</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(study_hours, iq, exam) <span class="sc">|&gt;</span> </span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>            study_hours   iq exam
+study_hours         1.0 0.50 0.40
+iq                  0.5 1.00 0.54
+exam                0.4 0.54 1.00</code></pre>
+</div>
+</div>
+<hr>
+<p><span style="color: blue;">Model exam scores as a function of both study_hours and IQ. <span class="math inline">\(b_1\)</span> (effect of study hours) in this model is the unique effect of study_hours, controlling for IQ.</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>m_exam_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(exam <span class="sc">~</span> study_hours_c <span class="sc">+</span> iq, <span class="at">data =</span> data)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_exam_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term          estimate std.error statistic  p.value
+  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)     27.3      5.35        5.11 7.46e- 7
+2 study_hours_c    1.04     0.398       2.61 9.77e- 3
+3 iq               0.348    0.0530      6.56 4.62e-10</code></pre>
+</div>
+</div>
+<p><span style="color: red;">Question: Do hours of studying per week affect performance in 610 after controlling for student IQ?</span></p>
+<hr>
+<p><span style="color: blue;">Yes, for every one hour of studying per week, students’ exam scores increase by 1 point, controlling for IQ.</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_exam_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term          estimate std.error statistic  p.value
+  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)     27.3      5.35        5.11 7.46e- 7
+2 study_hours_c    1.04     0.398       2.61 9.77e- 3
+3 iq               0.348    0.0530      6.56 4.62e-10</code></pre>
+</div>
+</div>
+<p><span style="color: red;">Interpretation of <span class="math inline">\(b_0\)</span>?</span></p>
+<hr>
+<p><span style="color: red;">Question: Why did the effect of study_hours get smaller after controlling for IQ?</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_exam_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term          estimate std.error statistic   p.value
+  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)      62.1      0.757     82.1  6.60e-155
+2 study_hours_c     2.34     0.379      6.18 3.65e-  9</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_exam_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term          estimate std.error statistic  p.value
+  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)     27.3      5.35        5.11 7.46e- 7
+2 study_hours_c    1.04     0.398       2.61 9.77e- 3
+3 iq               0.348    0.0530      6.56 4.62e-10</code></pre>
+</div>
+</div>
+<hr>
+<ol type="1">
+<li><p><span style="color: blue;">When study_hours increases, IQ increases.</span></p></li>
+<li><p><span style="color: blue;">When IQ increases, exam scores increase.</span></p></li>
+<li><p><span style="color: blue;">The partial effect of study_hours on exam scores is smaller if IQ is not allowed to increase.</span></p></li>
+</ol>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_exam_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term          estimate std.error statistic   p.value
+  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)      62.1      0.757     82.1  6.60e-155
+2 study_hours_c     2.34     0.379      6.18 3.65e-  9</code></pre>
+</div>
+</div>
+<p><span style="color: blue;"><span class="math inline">\(b_1= 2.34\)</span></span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_exam_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term          estimate std.error statistic  p.value
+  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)     27.3      5.35        5.11 7.46e- 7
+2 study_hours_c    1.04     0.398       2.61 9.77e- 3
+3 iq               0.348    0.0530      6.56 4.62e-10</code></pre>
+</div>
+</div>
+<p><span style="color: blue;"><span class="math inline">\(b_1= 1.04\)</span></span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="fu">lm</span>(iq <span class="sc">~</span> study_hours_c, <span class="at">data =</span> data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term          estimate std.error statistic   p.value
+  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)     100.       0.921    109.   2.10e-178
+2 study_hours_c     3.75     0.462      8.12 4.77e- 14</code></pre>
+</div>
+</div>
+<p><span style="color: blue;"><span class="math inline">\(b_1= 3.75\)</span></span></p>
+<hr>
+</section>
+<section id="causal-models" class="level2" data-number="6.20">
+<h2 data-number="6.20" class="anchored" data-anchor-id="causal-models"><span class="header-section-number">6.20</span> Causal Models?</h2>
 
 
 </section>
