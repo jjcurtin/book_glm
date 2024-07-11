@@ -281,6 +281,8 @@ window.Quarto = {
   <li><a href="#sampling-distributions-and-precision" id="toc-sampling-distributions-and-precision" class="nav-link" data-scroll-target="#sampling-distributions-and-precision"><span class="header-section-number">6.15</span> Sampling Distributions and Precision</a></li>
   <li><a href="#standard-error-of-partial-regression-coefficient-b_j-continued" id="toc-standard-error-of-partial-regression-coefficient-b_j-continued" class="nav-link" data-scroll-target="#standard-error-of-partial-regression-coefficient-b_j-continued"><span class="header-section-number">6.16</span> Standard Error of Partial Regression Coefficient (<span class="math inline">\(b_j\)</span>; Continued)</a></li>
   <li><a href="#power-and-sse-in-two-and-three-parameter-models" id="toc-power-and-sse-in-two-and-three-parameter-models" class="nav-link" data-scroll-target="#power-and-sse-in-two-and-three-parameter-models"><span class="header-section-number">6.17</span> Power and SSE in Two and Three Parameter Models</a></li>
+  <li><a href="#r2_j-and-multicollinearity" id="toc-r2_j-and-multicollinearity" class="nav-link" data-scroll-target="#r2_j-and-multicollinearity"><span class="header-section-number">6.18</span> <span class="math inline">\(R^2_j\)</span> and Multicollinearity</a></li>
+  <li><a href="#interpretation-of-multiple-regression-coefficients" id="toc-interpretation-of-multiple-regression-coefficients" class="nav-link" data-scroll-target="#interpretation-of-multiple-regression-coefficients"><span class="header-section-number">6.19</span> Interpretation of Multiple Regression Coefficients</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/06_two_predictors.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1076,6 +1078,46 @@ ta             0.08891558  0.2177329</code></pre>
 <p><span class="math inline">\(F(1, 93) = \frac{(4670.7)/(1)}{1117}\)</span></p>
 <p><span class="math inline">\(F (1, 93) = 4.18, p = 0.0442\)</span></p>
 <p><span style="color: blue;">Decreased <span class="math inline">\(\text{SSE}_a\)</span> in three parameter model. Flip side of increased model <span class="math inline">\(R^2\)</span>.</span></p>
+<hr>
+<p><span class="math inline">\(F(P_a - P_c, N - P_a) = \frac{(\text{SSE}_c = \text{SSE}_a)/(P_a-P_c)}{\text{SSE}_a/(N-P_a)}\)</span></p>
+<p><span style="color: blue;">Impact of <span class="math inline">\(N\)</span> on <span class="math inline">\(P_a\)</span> also clear.</span></p>
+<p><span style="color: blue;">Impact of <span class="math inline">\(s_y\)</span> and <span class="math inline">\(s_{x_j}\)</span> and multicollinearity less clear in formula.</span></p>
+<p><span style="color: blue;">Connection to precision of parameter estimation less clear in formula.</span></p>
+<hr>
+</section>
+<section id="r2_j-and-multicollinearity" class="level2" data-number="6.18">
+<h2 data-number="6.18" class="anchored" data-anchor-id="r2_j-and-multicollinearity"><span class="header-section-number">6.18</span> <span class="math inline">\(R^2_j\)</span> and Multicollinearity</h2>
+<p><span class="math inline">\(t(N-P) = \frac{b-0}{SE_b}\)</span></p>
+<p><span class="math inline">\(CI_b= b \pm t(\alpha; N-P)*SE_b\)</span></p>
+<p>This decrease in <strong>power and precision</strong> for model parameter estimates (regression coefficients) associated with redundancy among the predictors is called the <em>problem of Multicollinearity</em>.</p>
+<hr>
+<p>It is <strong>not</strong> sufficient to examine only bivariate correlations among predictors. To determine if a problem exists, calculate Variance Inflation Factors (VIF) for each predictor.</p>
+<p><span class="math inline">\(\text{VIF}_j = \frac{1}{(1-R^2_j)}\)</span></p>
+<p>VIF tells you how much <span class="math inline">\(SE_{b_j}\)</span> is increased because of redundancy. VIFs <span class="math inline">\(\ge\)</span> 5 are considered problematic (SE increased by factor of 2.2).</p>
+<hr>
+<p>We can use <code>car::vif()</code> to calculate VIFs in R.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(m_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     bac       ta 
+1.000296 1.000296 </code></pre>
+</div>
+</div>
+<p>SPSS users may be more familiar with Tolerance (<span class="math inline">\(X_i= 1- R^2_j\)</span>). As tolerance decreases toward 0, Multicollinearity increases.</p>
+<hr>
+<p>Solutions for Multicollinearity include:</p>
+<ol type="1">
+<li><p>Drop redundant variable.</p></li>
+<li><p>Factor analysis (e.g., PCA) to produce factors that reflect major sources of variance among the redundant predictors.</p></li>
+<li><p>This is only a problem for the variables in the model with high VIFs. If you don’t care about testing them, this is not a problem. Generally, you only care about VIFs for your focal variable(s).</p></li>
+</ol>
+<hr>
+</section>
+<section id="interpretation-of-multiple-regression-coefficients" class="level2" data-number="6.19">
+<h2 data-number="6.19" class="anchored" data-anchor-id="interpretation-of-multiple-regression-coefficients"><span class="header-section-number">6.19</span> Interpretation of Multiple Regression Coefficients</h2>
 
 
 </section>
