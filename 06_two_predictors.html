@@ -1341,8 +1341,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-8f03d7ed761ccb69b7ce" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-8f03d7ed761ccb69b7ce">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\"]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-0b7a3666a9f08438e967" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-0b7a3666a9f08438e967">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\"]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Direct and indirect/spurious effects on study_hours</strong></p>
@@ -1356,14 +1356,15 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="st">    A [label = 'study_hours']</span></span>
 <span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a><span class="st">    B [label = 'iq']</span></span>
 <span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a><span class="st">    Y [label = 'exam']</span></span>
-<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a><span class="st">    A-&gt;Y [label = round(coef(m_exam_2)[2],2)]</span></span>
-<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a><span class="st">    B-&gt;Y [label = round(coef(m_exam_2)[3],2)]</span></span>
-<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a><span class="st">    A-&gt;Y [label = '1.04']</span></span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a><span class="st">    B-&gt;Y [label = '.35']</span></span>
+<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a><span class="st">    A&lt;-&gt;B [label = '3.75']</span></span>
+<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-b877c5c20932f60b6923" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-b877c5c20932f60b6923">{"x":{"diagram":"\ndigraph{\n  graph[]\n  node [shape = box]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = round(coef(m_exam_2)[2],2)]\n    B->Y [label = round(coef(m_exam_2)[3],2)]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-243df1f6aef8e56511a7" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-243df1f6aef8e56511a7">{"x":{"diagram":"\ndigraph{\n  graph[]\n  node [shape = box]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\"]\n    B->Y [label = \".35\"]\n    A<->B [label = \"3.75\"]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Direct + Indirect/Spurious = Total</strong></p>
