@@ -280,6 +280,7 @@ window.Quarto = {
   <li><a href="#sampling-distributions-and-power" id="toc-sampling-distributions-and-power" class="nav-link" data-scroll-target="#sampling-distributions-and-power"><span class="header-section-number">6.14</span> Sampling Distributions and Power</a></li>
   <li><a href="#sampling-distributions-and-precision" id="toc-sampling-distributions-and-precision" class="nav-link" data-scroll-target="#sampling-distributions-and-precision"><span class="header-section-number">6.15</span> Sampling Distributions and Precision</a></li>
   <li><a href="#standard-error-of-partial-regression-coefficient-b_j-continued" id="toc-standard-error-of-partial-regression-coefficient-b_j-continued" class="nav-link" data-scroll-target="#standard-error-of-partial-regression-coefficient-b_j-continued"><span class="header-section-number">6.16</span> Standard Error of Partial Regression Coefficient (<span class="math inline">\(b_j\)</span>; Continued)</a></li>
+  <li><a href="#power-and-sse-in-two-and-three-parameter-models" id="toc-power-and-sse-in-two-and-three-parameter-models" class="nav-link" data-scroll-target="#power-and-sse-in-two-and-three-parameter-models"><span class="header-section-number">6.17</span> Power and SSE in Two and Three Parameter Models</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/06_two_predictors.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -922,8 +923,8 @@ fps 0.06 0.00 0.00
 <section id="standard-error-of-partial-regression-coefficient-b_j" class="level2" data-number="6.13">
 <h2 data-number="6.13" class="anchored" data-anchor-id="standard-error-of-partial-regression-coefficient-b_j"><span class="header-section-number">6.13</span> Standard Error of Partial Regression Coefficient (<span class="math inline">\(b_j\)</span>)</h2>
 <p><span class="math inline">\(t(N-P) = \frac{b_j - 0}{SE_{b_j}}\)</span></p>
-<p><span class="math inline">\(SE_{b_j} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R_Y^2)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{(1-R_j^2)}}\)</span></p>
-<p><span style="color: red;">Question: What happens to <span class="math inline">\(SE_{b_j}\)</span> as model <span class="math inline">\(R^2\)</span> (<span class="math inline">\(R^2_Y\)</span>) increases (holding other factors constant)?</span></p>
+<p><span class="math inline">\(SE_{b_j} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R_y^2)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{(1-R_j^2)}}\)</span></p>
+<p><span style="color: red;">Question: What happens to <span class="math inline">\(SE_{b_j}\)</span> as model <span class="math inline">\(R^2\)</span> (<span class="math inline">\(R^2_y\)</span>) increases (holding other factors constant)?</span></p>
 <hr>
 <p><span style="color: blue;"><span class="math inline">\(SE_{b_j}\)</span> decreases as model <span class="math inline">\(R^2\)</span> increases. In other words, the sampling distribution get narrower.</span></p>
 <hr>
@@ -1016,7 +1017,7 @@ fps 0.06 0.00 0.00
 bac         -374.49261  6.308724</code></pre>
 </div>
 </div>
-<p><span class="math inline">\(\Delta\)</span> 380.8013363</p>
+<p><span class="math inline">\(\Delta\)</span> 380.801</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -1029,12 +1030,52 @@ bac         -348.98099457 -5.1177113
 ta             0.08891558  0.2177329</code></pre>
 </div>
 </div>
-<p><span class="math inline">\(\Delta\)</span> 343.8632833</p>
+<p><span class="math inline">\(\Delta\)</span> 343.863</p>
+<hr>
 </section>
 <section id="standard-error-of-partial-regression-coefficient-b_j-continued" class="level2" data-number="6.16">
 <h2 data-number="6.16" class="anchored" data-anchor-id="standard-error-of-partial-regression-coefficient-b_j-continued"><span class="header-section-number">6.16</span> Standard Error of Partial Regression Coefficient (<span class="math inline">\(b_j\)</span>; Continued)</h2>
 <p><span class="math inline">\(t(N-P) = \frac{b_j - 0}{SE_{b_j}}\)</span></p>
 <p><span class="math inline">\(SE_{b_j} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R_Y^2)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{(1-R_j^2)}}\)</span></p>
+<p><span class="math inline">\(R^2_j\)</span> = variance in <span class="math inline">\(X_j\)</span> accounted for by all other predictors in model (i.e., how redundant is <span class="math inline">\(X_j\)</span> in model?).</p>
+<p><span style="color: red;">Question: What other factors affect SE for regression coefficients and how?</span></p>
+<hr>
+<p><span style="color: blue;">Increasing <span class="math inline">\(N\)</span> decreases SE (increases power).</span></p>
+<p><span style="color: blue;">Increasing <span class="math inline">\(P\)</span> increases SE (decreases power).</span></p>
+<p><span style="color: blue;">Increasing <span class="math inline">\(s_y\)</span> increases SE (decreases power).</span></p>
+<p><span style="color: blue;">Increasing <span class="math inline">\(s_j\)</span> decreases SE (increases power).</span></p>
+<p><span style="color: blue;">Increasing <span class="math inline">\(R_j^2\)</span> increases SE (decreases power).</span></p>
+<hr>
+</section>
+<section id="power-and-sse-in-two-and-three-parameter-models" class="level2" data-number="6.17">
+<h2 data-number="6.17" class="anchored" data-anchor-id="power-and-sse-in-two-and-three-parameter-models"><span class="header-section-number">6.17</span> Power and SSE in Two and Three Parameter Models</h2>
+<p><strong>Two parameter model test of BAC</strong></p>
+<p>Compact Model: <span class="math inline">\(\hat{\text{FPS}}= 32.2 + 0*\text{BAC}\)</span><br>
+<span class="math inline">\(\text{SSE}_c = 133888.3\)</span><br>
+<span class="math inline">\(P_c\)</span> = 1</p>
+<p>Augmented Model: <span class="math inline">\(\hat{\text{FPS}}= 42.5 + -184.1 *\text{BAC}\)</span><br>
+<span class="math inline">\(\text{SSE}_a = 128837.1\)</span><br>
+<span class="math inline">\(P_a\)</span> = 2</p>
+<p><strong>Three parameter model test of BAC</strong></p>
+<p>Compact Model: <span class="math inline">\(\hat{\text{FPS}}= 9.4 + 0*\text{BAC} + 0.2 * \text{TA}\)</span><br>
+<span class="math inline">\(\text{SSE}_c = 108547.9\)</span><br>
+<span class="math inline">\(P_c\)</span> = 2</p>
+<p>Augmented Model: <span class="math inline">\(\hat{\text{FPS}}= 19.4 + -177 *\text{BAC} + 0.2 *\text{TA}\)</span><br>
+<span class="math inline">\(\text{SSE}_a = 103877.2\)</span><br>
+<span class="math inline">\(P_a\)</span> = 3</p>
+<p><span class="math inline">\(F(P_a - P_c, N - P_a) = \frac{(\text{SSE}_c = \text{SSE}_a)/(P_a-P_c)}{\text{SSE}_a/(N-P_a)}\)</span></p>
+<hr>
+<p><span style="color: red;">Question: How can you see the increase in power from the model comparison perspective?</span></p>
+<hr>
+<p><strong>Two parameter model test of BAC</strong></p>
+<p><span class="math inline">\(F(2-1, 96-2) = \frac{(133888.3 - 128837.1)/(2-1)}{128837.1 / (96-2)}\)</span></p>
+<p><span class="math inline">\(F(1, 94) = \frac{(5051.2)/(1)}{1370.6}\)</span></p>
+<p><span class="math inline">\(F (1, 94) = 3.69, p = 0.0442\)</span></p>
+<p><strong>Three parameter model test of BAC</strong></p>
+<p><span class="math inline">\(F(3-2, 96-3) = \frac{(108547.9 - 103877.2)/(3-2)}{103877.2 / (99-3)}\)</span></p>
+<p><span class="math inline">\(F(1, 93) = \frac{(4670.7)/(1)}{1117}\)</span></p>
+<p><span class="math inline">\(F (1, 93) = 4.18, p = 0.0442\)</span></p>
+<p><span style="color: blue;">Decreased <span class="math inline">\(\text{SSE}_a\)</span> in three parameter model. Flip side of increased model <span class="math inline">\(R^2\)</span>.</span></p>
 
 
 </section>

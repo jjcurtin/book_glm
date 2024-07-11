@@ -1094,7 +1094,7 @@
     "href": "06_two_predictors.html#standard-error-of-partial-regression-coefficient-b_j",
     "title": "6  Inferences about two predictors (multiple regression without interaction)",
     "section": "6.13 Standard Error of Partial Regression Coefficient (\\(b_j\\))",
-    "text": "6.13 Standard Error of Partial Regression Coefficient (\\(b_j\\))\n\\(t(N-P) = \\frac{b_j - 0}{SE_{b_j}}\\)\n\\(SE_{b_j} = \\frac{s_y}{s_j}*\\frac{\\sqrt{(1-R_Y^2)}}{\\sqrt{(N-P)}}*\\frac{1}{\\sqrt{(1-R_j^2)}}\\)\nQuestion: What happens to \\(SE_{b_j}\\) as model \\(R^2\\) (\\(R^2_Y\\)) increases (holding other factors constant)?\n\n\\(SE_{b_j}\\) decreases as model \\(R^2\\) increases. In other words, the sampling distribution get narrower.\n\nQuestion: What happens to significance test of \\(b_j\\) as \\(SE_{b_j}\\) decreases (holding other factors constant)?\n\n\\(t\\) increases and associated p-value deceases (More Power!).",
+    "text": "6.13 Standard Error of Partial Regression Coefficient (\\(b_j\\))\n\\(t(N-P) = \\frac{b_j - 0}{SE_{b_j}}\\)\n\\(SE_{b_j} = \\frac{s_y}{s_j}*\\frac{\\sqrt{(1-R_y^2)}}{\\sqrt{(N-P)}}*\\frac{1}{\\sqrt{(1-R_j^2)}}\\)\nQuestion: What happens to \\(SE_{b_j}\\) as model \\(R^2\\) (\\(R^2_y\\)) increases (holding other factors constant)?\n\n\\(SE_{b_j}\\) decreases as model \\(R^2\\) increases. In other words, the sampling distribution get narrower.\n\nQuestion: What happens to significance test of \\(b_j\\) as \\(SE_{b_j}\\) decreases (holding other factors constant)?\n\n\\(t\\) increases and associated p-value deceases (More Power!).",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
     ]
@@ -1114,7 +1114,7 @@
     "href": "06_two_predictors.html#sampling-distributions-and-precision",
     "title": "6  Inferences about two predictors (multiple regression without interaction)",
     "section": "6.15 Sampling Distributions and Precision",
-    "text": "6.15 Sampling Distributions and Precision\n\\(CI_b=b \\pm t(\\alpha; N-P)*SE_b\\)\n\n\nCode\nconfint(m_2)\n\n\n                 2.5 %    97.5 %\n(Intercept)   29.45597 55.457721\nbac         -374.49261  6.308724\n\n\n\\(\\Delta\\) 380.8013363\n\n\nCode\nconfint(m_3)\n\n\n                    2.5 %     97.5 %\n(Intercept)    4.22130089 34.6411333\nbac         -348.98099457 -5.1177113\nta             0.08891558  0.2177329\n\n\n\\(\\Delta\\) 343.8632833",
+    "text": "6.15 Sampling Distributions and Precision\n\\(CI_b=b \\pm t(\\alpha; N-P)*SE_b\\)\n\n\nCode\nconfint(m_2)\n\n\n                 2.5 %    97.5 %\n(Intercept)   29.45597 55.457721\nbac         -374.49261  6.308724\n\n\n\\(\\Delta\\) 380.801\n\n\nCode\nconfint(m_3)\n\n\n                    2.5 %     97.5 %\n(Intercept)    4.22130089 34.6411333\nbac         -348.98099457 -5.1177113\nta             0.08891558  0.2177329\n\n\n\\(\\Delta\\) 343.863",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
     ]
@@ -1124,7 +1124,17 @@
     "href": "06_two_predictors.html#standard-error-of-partial-regression-coefficient-b_j-continued",
     "title": "6  Inferences about two predictors (multiple regression without interaction)",
     "section": "6.16 Standard Error of Partial Regression Coefficient (\\(b_j\\); Continued)",
-    "text": "6.16 Standard Error of Partial Regression Coefficient (\\(b_j\\); Continued)\n\\(t(N-P) = \\frac{b_j - 0}{SE_{b_j}}\\)\n\\(SE_{b_j} = \\frac{s_y}{s_j}*\\frac{\\sqrt{(1-R_Y^2)}}{\\sqrt{(N-P)}}*\\frac{1}{\\sqrt{(1-R_j^2)}}\\)",
+    "text": "6.16 Standard Error of Partial Regression Coefficient (\\(b_j\\); Continued)\n\\(t(N-P) = \\frac{b_j - 0}{SE_{b_j}}\\)\n\\(SE_{b_j} = \\frac{s_y}{s_j}*\\frac{\\sqrt{(1-R_Y^2)}}{\\sqrt{(N-P)}}*\\frac{1}{\\sqrt{(1-R_j^2)}}\\)\n\\(R^2_j\\) = variance in \\(X_j\\) accounted for by all other predictors in model (i.e., how redundant is \\(X_j\\) in model?).\nQuestion: What other factors affect SE for regression coefficients and how?\n\nIncreasing \\(N\\) decreases SE (increases power).\nIncreasing \\(P\\) increases SE (decreases power).\nIncreasing \\(s_y\\) increases SE (decreases power).\nIncreasing \\(s_j\\) decreases SE (increases power).\nIncreasing \\(R_j^2\\) increases SE (decreases power).",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
+    ]
+  },
+  {
+    "objectID": "06_two_predictors.html#power-and-sse-in-two-and-three-parameter-models",
+    "href": "06_two_predictors.html#power-and-sse-in-two-and-three-parameter-models",
+    "title": "6  Inferences about two predictors (multiple regression without interaction)",
+    "section": "6.17 Power and SSE in Two and Three Parameter Models",
+    "text": "6.17 Power and SSE in Two and Three Parameter Models\nTwo parameter model test of BAC\nCompact Model: \\(\\hat{\\text{FPS}}= 32.2 + 0*\\text{BAC}\\)\n\\(\\text{SSE}_c = 133888.3\\)\n\\(P_c\\) = 1\nAugmented Model: \\(\\hat{\\text{FPS}}= 42.5 + -184.1 *\\text{BAC}\\)\n\\(\\text{SSE}_a = 128837.1\\)\n\\(P_a\\) = 2\nThree parameter model test of BAC\nCompact Model: \\(\\hat{\\text{FPS}}= 9.4 + 0*\\text{BAC} + 0.2 * \\text{TA}\\)\n\\(\\text{SSE}_c = 108547.9\\)\n\\(P_c\\) = 2\nAugmented Model: \\(\\hat{\\text{FPS}}= 19.4 + -177 *\\text{BAC} + 0.2 *\\text{TA}\\)\n\\(\\text{SSE}_a = 103877.2\\)\n\\(P_a\\) = 3\n\\(F(P_a - P_c, N - P_a) = \\frac{(\\text{SSE}_c = \\text{SSE}_a)/(P_a-P_c)}{\\text{SSE}_a/(N-P_a)}\\)\n\nQuestion: How can you see the increase in power from the model comparison perspective?\n\nTwo parameter model test of BAC\n\\(F(2-1, 96-2) = \\frac{(133888.3 - 128837.1)/(2-1)}{128837.1 / (96-2)}\\)\n\\(F(1, 94) = \\frac{(5051.2)/(1)}{1370.6}\\)\n\\(F (1, 94) = 3.69, p = 0.0442\\)\nThree parameter model test of BAC\n\\(F(3-2, 96-3) = \\frac{(108547.9 - 103877.2)/(3-2)}{103877.2 / (99-3)}\\)\n\\(F(1, 93) = \\frac{(4670.7)/(1)}{1117}\\)\n\\(F (1, 93) = 4.18, p = 0.0442\\)\nDecreased \\(\\text{SSE}_a\\) in three parameter model. Flip side of increased model \\(R^2\\).",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
     ]
