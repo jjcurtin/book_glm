@@ -1341,8 +1341,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-99e2fb7a280faed9902f" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-99e2fb7a280faed9902f">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\"]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-8b7c7e8db7dca5e4127a" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-8b7c7e8db7dca5e4127a">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\"]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Direct and indirect/spurious effects on study_hours</strong></p>
@@ -1351,7 +1351,7 @@ exam                0.4 0.54 1.00</code></pre>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>DiagrammeR<span class="sc">::</span><span class="fu">grViz</span>(<span class="st">"</span></span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="st">digraph{</span></span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="st">  graph[rankdir=LR]</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="st">  graph[]</span></span>
 <span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="st">  node [shape = box]</span></span>
 <span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="st">    A [label = 'study_hours']</span></span>
 <span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a><span class="st">    B [label = 'iq']</span></span>
@@ -1359,12 +1359,13 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a><span class="st">    A-&gt;Y [label = '1.04']</span></span>
 <span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a><span class="st">    B-&gt;Y [label = '.35']</span></span>
 <span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a><span class="st">    A-&gt;B [dir = both, label = '3.75']</span></span>
-<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a><span class="st">{ rank = same; A; B }</span></span>
+<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-5a1885a28f165b4ef32d" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-5a1885a28f165b4ef32d">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\"]\n    B->Y [label = \".35\"]\n    A->B [dir = both, label = \"3.75\"]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-075d2ba18ed1a4805415" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-075d2ba18ed1a4805415">{"x":{"diagram":"\ndigraph{\n  graph[]\n  node [shape = box]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\"]\n    B->Y [label = \".35\"]\n    A->B [dir = both, label = \"3.75\"]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Direct + Indirect/Spurious = Total</strong></p>
