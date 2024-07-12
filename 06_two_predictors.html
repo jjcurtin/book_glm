@@ -295,6 +295,7 @@ window.Quarto = {
   <li><a href="#interpretation-of-multiple-regression-coefficients" id="toc-interpretation-of-multiple-regression-coefficients" class="nav-link" data-scroll-target="#interpretation-of-multiple-regression-coefficients"><span class="header-section-number">6.19</span> Interpretation of Multiple Regression Coefficients</a></li>
   <li><a href="#causal-models" id="toc-causal-models" class="nav-link" data-scroll-target="#causal-models"><span class="header-section-number">6.20</span> Causal Models?</a></li>
   <li><a href="#interpretation-of-multiple-regression-coefficients-continued" id="toc-interpretation-of-multiple-regression-coefficients-continued" class="nav-link" data-scroll-target="#interpretation-of-multiple-regression-coefficients-continued"><span class="header-section-number">6.21</span> Interpretation of Multiple Regression Coefficients (Continued)</a></li>
+  <li><a href="#model-effect-size-coefficient-of-determination-r2" id="toc-model-effect-size-coefficient-of-determination-r2" class="nav-link" data-scroll-target="#model-effect-size-coefficient-of-determination-r2"><span class="header-section-number">6.22</span> Model Effect Size: Coefficient of Determination (<span class="math inline">\(R^2\)</span>)</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/06_two_predictors.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1342,8 +1343,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-5816224f639b4b5f848c" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-5816224f639b4b5f848c">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-1ed660fe6e4b52ab7738" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-1ed660fe6e4b52ab7738">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <hr>
@@ -1366,8 +1367,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-30a3387c24950a5d1bd6" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-30a3387c24950a5d1bd6">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-b2c26f424001483d189b" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-b2c26f424001483d189b">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Direct + Indirect/Spurious = Total</strong></p>
@@ -1429,9 +1430,9 @@ fps -0.19  0.44  1.00</code></pre>
 <hr>
 <p><span style="color: red;">Question: In what situation would <span class="math inline">\(b_j\)</span> for a focal predictor not change when you added an additional predictor (covariate)? </span></p>
 <hr>
-<p><span style="color: blue;">If the new predictor was completely uncorrelated (orthogonal) with the focal predictor in those sample data, there would be no change in the parameter estimate when you added this new predictor.</span></p>
-<p><span style="color: blue;">This is why uncorrelated predictors/covariates are considered easier to interpret when trying to increase power. If they are related to the DV, they will increase power (&lt; SE) to test your focal variable but they will not change your estimate of the magnitude of the focal variables parameter estimate.</span></p>
-<p><span style="color: blue;">Completely orthogonal variables are typically only observed in experimental designs. However, small/trivial, nonsystematic sample <span class="math inline">\(r\)</span> will occur when population <span class="math inline">\(r=0\)</span>.</span></p>
+<p><span style="color: blue;">- If the new predictor was completely uncorrelated (orthogonal) with the focal predictor in those sample data, there would be no change in the parameter estimate when you added this new predictor.</span></p>
+<p><span style="color: blue;">- This is why uncorrelated predictors/covariates are considered easier to interpret when trying to increase power. If they are related to the DV, they will increase power (&lt; SE) to test your focal variable but they will not change your estimate of the magnitude of the focal variables parameter estimate.</span></p>
+<p><span style="color: blue;">- Completely orthogonal variables are typically only observed in experimental designs. However, small/trivial, nonsystematic sample <span class="math inline">\(r\)</span> will occur when population <span class="math inline">\(r=0\)</span>.</span></p>
 <hr>
 <p><strong><span class="math inline">\(\text{SSR}=\text{SSE}_c - \text{SSE}_a\)</span></strong></p>
 <p><strong>Two parameter model test of BAC</strong></p>
@@ -1445,6 +1446,9 @@ fps -0.19  0.44  1.00</code></pre>
 <p><span class="math inline">\(F (1, 93) = 4.18, p = 0.0442\)</span></p>
 <p><strong><span class="math inline">\(\text{SSR} = 4670.7\)</span></strong></p>
 <hr>
+</section>
+<section id="model-effect-size-coefficient-of-determination-r2" class="level2" data-number="6.22">
+<h2 data-number="6.22" class="anchored" data-anchor-id="model-effect-size-coefficient-of-determination-r2"><span class="header-section-number">6.22</span> Model Effect Size: Coefficient of Determination (<span class="math inline">\(R^2\)</span>)</h2>
 
 
 </section>
