@@ -1342,8 +1342,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-cca8cb7724d138d77259" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-cca8cb7724d138d77259">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-5816224f639b4b5f848c" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-5816224f639b4b5f848c">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <hr>
@@ -1366,8 +1366,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-d471db7ee953993c51f2" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-d471db7ee953993c51f2">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-30a3387c24950a5d1bd6" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-30a3387c24950a5d1bd6">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Direct + Indirect/Spurious = Total</strong></p>
@@ -1406,7 +1406,7 @@ exam                0.4 0.54 1.00</code></pre>
 3 ta             0.153    0.0324      4.73 0.00000807</code></pre>
 </div>
 </div>
-<p><span style="color: red;">Question: Why did <span class="math inline">\(b\)</span> for BAC get smaller (less negative) when TA was controlled for? Hint: consider the bivariate relationships between all variables.</span></p>
+<p><span style="color: red;">Question: Why did <span class="math inline">\(b\)</span> for BAC get smaller (less negative) when TA was controlled? Hint: consider the bivariate relationships between all variables.</span></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1422,6 +1422,29 @@ ta  -0.02  1.00  0.44
 fps -0.19  0.44  1.00</code></pre>
 </div>
 </div>
+<hr>
+<p><span style="color: blue;">1. When BAC increases, TA decreases.</span></p>
+<p><span style="color: blue;">2. When TA decreases FPS decreases. This negative <em>indirect/spurious effect</em> contributes to the total effect of BAC (negative <span class="math inline">\(b\)</span> for BAC in 1 predictor model).</span></p>
+<p><span style="color: blue;">3. The partial effect of BAC on FPS, if TA was not allowed to decrease (i.e., is controlled or held constant), is less negative than when it is allowed to naturally decrease as BAC increases.</span></p>
+<hr>
+<p><span style="color: red;">Question: In what situation would <span class="math inline">\(b_j\)</span> for a focal predictor not change when you added an additional predictor (covariate)? </span></p>
+<hr>
+<p><span style="color: blue;">If the new predictor was completely uncorrelated (orthogonal) with the focal predictor in those sample data, there would be no change in the parameter estimate when you added this new predictor.</span></p>
+<p><span style="color: blue;">This is why uncorrelated predictors/covariates are considered easier to interpret when trying to increase power. If they are related to the DV, they will increase power (&lt; SE) to test your focal variable but they will not change your estimate of the magnitude of the focal variables parameter estimate.</span></p>
+<p><span style="color: blue;">Completely orthogonal variables are typically only observed in experimental designs. However, small/trivial, nonsystematic sample <span class="math inline">\(r\)</span> will occur when population <span class="math inline">\(r=0\)</span>.</span></p>
+<hr>
+<p><strong><span class="math inline">\(\text{SSR}=\text{SSE}_c - \text{SSE}_a\)</span></strong></p>
+<p><strong>Two parameter model test of BAC</strong></p>
+<p><span class="math inline">\(F(2-1, 96-2) = \frac{(133888.3 - 128837.1)/(2-1)}{128837.1 / (96-2)}\)</span></p>
+<p><span class="math inline">\(F(1, 94) = \frac{(5051.2)/(1)}{1370.6}\)</span></p>
+<p><span class="math inline">\(F (1, 94) = 3.69, p = 0.0579\)</span></p>
+<p><strong><span class="math inline">\(\text{SSR} = 5051.2\)</span></strong></p>
+<p><strong>Three parameter model test of BAC</strong></p>
+<p><span class="math inline">\(F(3-2, 96-3) = \frac{(108547.9 - 103877.2)/(3-2)}{103877.2 / (99-3)}\)</span></p>
+<p><span class="math inline">\(F(1, 93) = \frac{(4670.7)/(1)}{1117}\)</span></p>
+<p><span class="math inline">\(F (1, 93) = 4.18, p = 0.0442\)</span></p>
+<p><strong><span class="math inline">\(\text{SSR} = 4670.7\)</span></strong></p>
+<hr>
 
 
 </section>
