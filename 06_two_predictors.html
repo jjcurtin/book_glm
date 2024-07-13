@@ -300,6 +300,7 @@ window.Quarto = {
   <li><a href="#variance-based-effect-sizes-eta_p2-or-pre" id="toc-variance-based-effect-sizes-eta_p2-or-pre" class="nav-link" data-scroll-target="#variance-based-effect-sizes-eta_p2-or-pre"><span class="header-section-number">6.24</span> Variance Based Effect Sizes: <span class="math inline">\(\eta_p^2\)</span> or PRE</a></li>
   <li><a href="#variance-based-effect-sizes-delta-r2" id="toc-variance-based-effect-sizes-delta-r2" class="nav-link" data-scroll-target="#variance-based-effect-sizes-delta-r2"><span class="header-section-number">6.25</span> Variance Based Effect Sizes: <span class="math inline">\(\Delta R^2\)</span></a></li>
   <li><a href="#comparing-variance-based-effect-sizes" id="toc-comparing-variance-based-effect-sizes" class="nav-link" data-scroll-target="#comparing-variance-based-effect-sizes"><span class="header-section-number">6.26</span> Comparing Variance Based Effect Sizes</a></li>
+  <li><a href="#visualizing-the-model" id="toc-visualizing-the-model" class="nav-link" data-scroll-target="#visualizing-the-model"><span class="header-section-number">6.27</span> Visualizing the Model</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/06_two_predictors.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1347,8 +1348,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-1e2ce5f5a651d690565e" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-1e2ce5f5a651d690565e">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-f044580235096a57599f" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-f044580235096a57599f">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <hr>
@@ -1371,8 +1372,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-04eed815c9cd7f7af57e" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-04eed815c9cd7f7af57e">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-bd2911eb8485bef9b59b" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-bd2911eb8485bef9b59b">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Direct + Indirect/Spurious = Total</strong></p>
@@ -1554,7 +1555,7 @@ Proportion of variance in <span class="math inline">\(Y\)</span> explained by th
 </section>
 <section id="comparing-variance-based-effect-sizes" class="level2" data-number="6.26">
 <h2 data-number="6.26" class="anchored" data-anchor-id="comparing-variance-based-effect-sizes"><span class="header-section-number">6.26</span> Comparing Variance Based Effect Sizes</h2>
-<p>$R^2 = $</p>
+<p><span class="math inline">\(R^2 = \frac{\text{SSE}_{\text{mean-only}} - \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}\)</span></p>
 <p><span class="math inline">\(\Delta R^2 = \frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}\)</span></p>
 <p><span class="math inline">\(\eta_p^2 = \frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}\)</span></p>
 <hr>
@@ -1585,6 +1586,9 @@ Proportion of variance in <span class="math inline">\(Y\)</span> explained by th
 <li>Stable in experimental designs when additional IVs are added.</li>
 </ul>
 <hr>
+</section>
+<section id="visualizing-the-model" class="level2" data-number="6.27">
+<h2 data-number="6.27" class="anchored" data-anchor-id="visualizing-the-model"><span class="header-section-number">6.27</span> Visualizing the Model</h2>
 
 
 </section>

@@ -1224,7 +1224,17 @@
     "href": "06_two_predictors.html#comparing-variance-based-effect-sizes",
     "title": "6  Inferences about two predictors (multiple regression without interaction)",
     "section": "6.26 Comparing Variance Based Effect Sizes",
-    "text": "6.26 Comparing Variance Based Effect Sizes\n$R^2 = $\n\\(\\Delta R^2 = \\frac{\\text{SSE}_c - \\text{SSE}_a}{\\text{SSE}_{\\text{mean-only}}}\\)\n\\(\\eta_p^2 = \\frac{\\text{SSE}_c - \\text{SSE}_a}{\\text{SSE}_c}\\)\n\n\\(R^2\\)\n\nDescribes proportion of explained variance in \\(Y\\) explained by full model relative to total variance in \\(Y\\).\n\nCan not be used for a specific predictor.\n\nNot used frequently in Psychology but useful in other fields.\n\n\\(\\Delta R^2\\)\n\nDescribes proportion of unique variance in \\(Y\\) explained by \\(X_j\\) relative to total variance in \\(Y\\).\n\nIf \\(X\\)s are orthogonal \\(\\Delta R^2\\) will sum to \\(R^2\\).\n\nAnchored to total \\(Y\\) variance.\n\nSame denominator for all \\(X\\)s.\n\n\\(\\eta_p^2\\)\n\nDescribes proportion of reduction of unexplained variance (SSE) by adding \\(X_j\\).\n\n\\(\\ge \\Delta R^2\\) (stupid!).\nSPSS reports it (stupid!).\nStable in experimental designs when additional IVs are added.",
+    "text": "6.26 Comparing Variance Based Effect Sizes\n\\(R^2 = \\frac{\\text{SSE}_{\\text{mean-only}} - \\text{SSE}_a}{\\text{SSE}_{\\text{mean-only}}}\\)\n\\(\\Delta R^2 = \\frac{\\text{SSE}_c - \\text{SSE}_a}{\\text{SSE}_{\\text{mean-only}}}\\)\n\\(\\eta_p^2 = \\frac{\\text{SSE}_c - \\text{SSE}_a}{\\text{SSE}_c}\\)\n\n\\(R^2\\)\n\nDescribes proportion of explained variance in \\(Y\\) explained by full model relative to total variance in \\(Y\\).\n\nCan not be used for a specific predictor.\n\nNot used frequently in Psychology but useful in other fields.\n\n\\(\\Delta R^2\\)\n\nDescribes proportion of unique variance in \\(Y\\) explained by \\(X_j\\) relative to total variance in \\(Y\\).\n\nIf \\(X\\)s are orthogonal \\(\\Delta R^2\\) will sum to \\(R^2\\).\n\nAnchored to total \\(Y\\) variance.\n\nSame denominator for all \\(X\\)s.\n\n\\(\\eta_p^2\\)\n\nDescribes proportion of reduction of unexplained variance (SSE) by adding \\(X_j\\).\n\n\\(\\ge \\Delta R^2\\) (stupid!).\nSPSS reports it (stupid!).\nStable in experimental designs when additional IVs are added.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
+    ]
+  },
+  {
+    "objectID": "06_two_predictors.html#visualizing-the-model",
+    "href": "06_two_predictors.html#visualizing-the-model",
+    "title": "6  Inferences about two predictors (multiple regression without interaction)",
+    "section": "6.27 Visualizing the Model",
+    "text": "6.27 Visualizing the Model",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
     ]
