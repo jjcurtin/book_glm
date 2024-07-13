@@ -296,6 +296,9 @@ window.Quarto = {
   <li><a href="#causal-models" id="toc-causal-models" class="nav-link" data-scroll-target="#causal-models"><span class="header-section-number">6.20</span> Causal Models?</a></li>
   <li><a href="#interpretation-of-multiple-regression-coefficients-continued" id="toc-interpretation-of-multiple-regression-coefficients-continued" class="nav-link" data-scroll-target="#interpretation-of-multiple-regression-coefficients-continued"><span class="header-section-number">6.21</span> Interpretation of Multiple Regression Coefficients (Continued)</a></li>
   <li><a href="#model-effect-size-coefficient-of-determination-r2" id="toc-model-effect-size-coefficient-of-determination-r2" class="nav-link" data-scroll-target="#model-effect-size-coefficient-of-determination-r2"><span class="header-section-number">6.22</span> Model Effect Size: Coefficient of Determination (<span class="math inline">\(R^2\)</span>)</a></li>
+  <li><a href="#predictor-effect-size-options" id="toc-predictor-effect-size-options" class="nav-link" data-scroll-target="#predictor-effect-size-options"><span class="header-section-number">6.23</span> Predictor Effect Size Options</a></li>
+  <li><a href="#variance-based-effect-sizes-eta_p2-or-pre" id="toc-variance-based-effect-sizes-eta_p2-or-pre" class="nav-link" data-scroll-target="#variance-based-effect-sizes-eta_p2-or-pre"><span class="header-section-number">6.24</span> Variance Based Effect Sizes: <span class="math inline">\(\eta_p^2\)</span> or PRE</a></li>
+  <li><a href="#variance-based-effect-sizes-delta-r2" id="toc-variance-based-effect-sizes-delta-r2" class="nav-link" data-scroll-target="#variance-based-effect-sizes-delta-r2"><span class="header-section-number">6.25</span> Variance Based Effect Sizes: <span class="math inline">\(\Delta R^2\)</span></a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/06_two_predictors.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1343,8 +1346,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-1ed660fe6e4b52ab7738" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-1ed660fe6e4b52ab7738">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-4fa23939fffce1337893" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-4fa23939fffce1337893">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <hr>
@@ -1367,8 +1370,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-b2c26f424001483d189b" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-b2c26f424001483d189b">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-82e765bceeb2a114eed3" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-82e765bceeb2a114eed3">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Direct + Indirect/Spurious = Total</strong></p>
@@ -1449,6 +1452,95 @@ fps -0.19  0.44  1.00</code></pre>
 </section>
 <section id="model-effect-size-coefficient-of-determination-r2" class="level2" data-number="6.22">
 <h2 data-number="6.22" class="anchored" data-anchor-id="model-effect-size-coefficient-of-determination-r2"><span class="header-section-number">6.22</span> Model Effect Size: Coefficient of Determination (<span class="math inline">\(R^2\)</span>)</h2>
+<p><strong>Coefficient of Determination (<span class="math inline">\(R^2\)</span>):</strong><br>
+Proportion of variance in <span class="math inline">\(Y\)</span> explained by the set of all model predictors (i.e., proportion of variance in <span class="math inline">\(Y\)</span> predicted by all <span class="math inline">\(X\)</span>s in model).</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">glance</span>(m_3) <span class="sc">|&gt;</span> </span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(r.squared)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  r.squared
+      &lt;dbl&gt;
+1     0.224</code></pre>
+</div>
+</div>
+<hr>
+<p><span class="math inline">\(R^2\)</span> for any augmented model is:</p>
+<p><span class="math inline">\(R^2 = \frac{\text{SSE}_\text{mean-only} - \text{SSE}_a}{\text{SSE}_\text{mean-only} }\)</span></p>
+<p><strong>Mean-Only Model: <span class="math inline">\(\hat{\text{FPS}}_i=\beta_0\)</span></strong></p>
+<p><span class="math inline">\(\text{SSE}_{\text{mean-only}} = 133888.3\)</span></p>
+<p><strong>Augmented Model: <span class="math inline">\(\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_i+ \beta_2*\text{TA}_i\)</span></strong></p>
+<p><span class="math inline">\(\text{SSE}_a = 103877.2\)</span></p>
+<p><span class="math inline">\(R^2 = \frac{133888.3 - 103877.2}{133888.3} = 0.2242\)</span></p>
+<p>In this augmented model, <span class="math inline">\(R^2\)</span> describes the combined effect of BAC and TA. In more complex models, R2 will always be predictive strength of the set of all predictors.</p>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>m_3 <span class="sc">|&gt;</span> </span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic    p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)   19.4      7.66        2.54 0.0128    
+2 bac         -177.      86.6        -2.04 0.0437    
+3 ta             0.153    0.0324      4.73 0.00000807</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>m_3 <span class="sc">|&gt;</span> </span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">glance</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(r.squared)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  r.squared
+      &lt;dbl&gt;
+1     0.224</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="predictor-effect-size-options" class="level2" data-number="6.23">
+<h2 data-number="6.23" class="anchored" data-anchor-id="predictor-effect-size-options"><span class="header-section-number">6.23</span> Predictor Effect Size Options</h2>
+<ul>
+<li><p>As in the one predictor model, the parameter estimates in the two predictor model (and the <span class="math inline">\(k\)</span> predictor model) are attractive effect size estimates.</p></li>
+<li><p>In addition, there are variance based effect size estimates that are also attractive.</p></li>
+<li><p>You have already learned about Partial eta-squared (<span class="math inline">\(\eta_p^2\)</span>), which Judd et al refer to as PRE.</p></li>
+<li><p>You will now also learn about Delta <span class="math inline">\(R^2\)</span> (<span class="math inline">\(\Delta R^2\)</span>).</p></li>
+</ul>
+<hr>
+</section>
+<section id="variance-based-effect-sizes-eta_p2-or-pre" class="level2" data-number="6.24">
+<h2 data-number="6.24" class="anchored" data-anchor-id="variance-based-effect-sizes-eta_p2-or-pre"><span class="header-section-number">6.24</span> Variance Based Effect Sizes: <span class="math inline">\(\eta_p^2\)</span> or PRE</h2>
+<p><span class="math inline">\(\eta_p^2\)</span> or PRE describes how much SSE was reduced (proportionally) in the augmented model where we estimated a specific parameter vs.&nbsp;the associated compact model where we fixed that parameter to 0.</p>
+<p><strong>Compact Model: <span class="math inline">\(\hat{\text{FPS}}_i=\beta_0+0*\text{BAC}_i+ \beta_2*\text{TA}_i\)</span></strong></p>
+<p><span class="math inline">\(\text{SSE}_c = 108547.9\)</span></p>
+<p><strong>Augmented Model: <span class="math inline">\(\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_i+ \beta_2*\text{TA}_i\)</span></strong></p>
+<p><span class="math inline">\(\text{SSE}_a = 103877.2\)</span></p>
+<p><span style="color: red;">Question: How much was the error reduced by estimating <span class="math inline">\(\beta_1\)</span> for BAC?</span></p>
+<hr>
+<p><span style="color: blue;"><span class="math inline">\(\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c} = \frac{108547.9 - 103877.2}{108547.9} = 0.043\)</span></span></p>
+<hr>
+</section>
+<section id="variance-based-effect-sizes-delta-r2" class="level2" data-number="6.25">
+<h2 data-number="6.25" class="anchored" data-anchor-id="variance-based-effect-sizes-delta-r2"><span class="header-section-number">6.25</span> Variance Based Effect Sizes: <span class="math inline">\(\Delta R^2\)</span></h2>
+<p><span class="math inline">\(\Delta R^2\)</span> is the increase in model <span class="math inline">\(R^2\)</span> for the augmented model where we estimated a specific parameter vs.&nbsp;the associated compact model where we fixed that parameter to 0.</p>
+<p><strong><span class="math inline">\(\hat{\text{FPS}}_i=\beta_0+0*\text{BAC}_i+ \beta_2*\text{TA}_i\)</span></strong></p>
+<p><span class="math inline">\(\text{SSE}_c = 108547.9\)</span></p>
+<p><span class="math inline">\(R^2 = 0.1893\)</span></p>
+<p><strong><span class="math inline">\(\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_i+ \beta_2*\text{TA}_i\)</span></strong></p>
+<p><span class="math inline">\(\text{SSE}_a = 103877.2\)</span></p>
+<p><span class="math inline">\(R^2 = 0.2242\)</span></p>
+<p><span class="math inline">\(\Delta R^2= 0.2242 -  0.1893 = `r round(broom::glance(m_3)\)</span>r.squared, 4) - round(broom::glance(lm(fps~ta, data = data))<span class="math inline">\(r.squared, 4)\)</span></p>
+<hr>
 
 
 </section>

@@ -1184,7 +1184,37 @@
     "href": "06_two_predictors.html#model-effect-size-coefficient-of-determination-r2",
     "title": "6  Inferences about two predictors (multiple regression without interaction)",
     "section": "6.22 Model Effect Size: Coefficient of Determination (\\(R^2\\))",
-    "text": "6.22 Model Effect Size: Coefficient of Determination (\\(R^2\\))",
+    "text": "6.22 Model Effect Size: Coefficient of Determination (\\(R^2\\))\nCoefficient of Determination (\\(R^2\\)):\nProportion of variance in \\(Y\\) explained by the set of all model predictors (i.e., proportion of variance in \\(Y\\) predicted by all \\(X\\)s in model).\n\n\nCode\nbroom::glance(m_3) |&gt; \n  select(r.squared)\n\n\n# A tibble: 1 × 1\n  r.squared\n      &lt;dbl&gt;\n1     0.224\n\n\n\n\\(R^2\\) for any augmented model is:\n\\(R^2 = \\frac{\\text{SSE}_\\text{mean-only} - \\text{SSE}_a}{\\text{SSE}_\\text{mean-only} }\\)\nMean-Only Model: \\(\\hat{\\text{FPS}}_i=\\beta_0\\)\n\\(\\text{SSE}_{\\text{mean-only}} = 133888.3\\)\nAugmented Model: \\(\\hat{\\text{FPS}}_i=\\beta_0+\\beta_1*\\text{BAC}_i+ \\beta_2*\\text{TA}_i\\)\n\\(\\text{SSE}_a = 103877.2\\)\n\\(R^2 = \\frac{133888.3 - 103877.2}{133888.3} = 0.2242\\)\nIn this augmented model, \\(R^2\\) describes the combined effect of BAC and TA. In more complex models, R2 will always be predictive strength of the set of all predictors.\n\n\n\nCode\nm_3 |&gt; \n  broom::tidy()\n\n\n# A tibble: 3 × 5\n  term        estimate std.error statistic    p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;\n1 (Intercept)   19.4      7.66        2.54 0.0128    \n2 bac         -177.      86.6        -2.04 0.0437    \n3 ta             0.153    0.0324      4.73 0.00000807\n\n\n\n\nCode\nm_3 |&gt; \n  broom::glance() |&gt; \n  select(r.squared)\n\n\n# A tibble: 1 × 1\n  r.squared\n      &lt;dbl&gt;\n1     0.224",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
+    ]
+  },
+  {
+    "objectID": "06_two_predictors.html#predictor-effect-size-options",
+    "href": "06_two_predictors.html#predictor-effect-size-options",
+    "title": "6  Inferences about two predictors (multiple regression without interaction)",
+    "section": "6.23 Predictor Effect Size Options",
+    "text": "6.23 Predictor Effect Size Options\n\nAs in the one predictor model, the parameter estimates in the two predictor model (and the \\(k\\) predictor model) are attractive effect size estimates.\nIn addition, there are variance based effect size estimates that are also attractive.\nYou have already learned about Partial eta-squared (\\(\\eta_p^2\\)), which Judd et al refer to as PRE.\nYou will now also learn about Delta \\(R^2\\) (\\(\\Delta R^2\\)).",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
+    ]
+  },
+  {
+    "objectID": "06_two_predictors.html#variance-based-effect-sizes-eta_p2-or-pre",
+    "href": "06_two_predictors.html#variance-based-effect-sizes-eta_p2-or-pre",
+    "title": "6  Inferences about two predictors (multiple regression without interaction)",
+    "section": "6.24 Variance Based Effect Sizes: \\(\\eta_p^2\\) or PRE",
+    "text": "6.24 Variance Based Effect Sizes: \\(\\eta_p^2\\) or PRE\n\\(\\eta_p^2\\) or PRE describes how much SSE was reduced (proportionally) in the augmented model where we estimated a specific parameter vs. the associated compact model where we fixed that parameter to 0.\nCompact Model: \\(\\hat{\\text{FPS}}_i=\\beta_0+0*\\text{BAC}_i+ \\beta_2*\\text{TA}_i\\)\n\\(\\text{SSE}_c = 108547.9\\)\nAugmented Model: \\(\\hat{\\text{FPS}}_i=\\beta_0+\\beta_1*\\text{BAC}_i+ \\beta_2*\\text{TA}_i\\)\n\\(\\text{SSE}_a = 103877.2\\)\nQuestion: How much was the error reduced by estimating \\(\\beta_1\\) for BAC?\n\n\\(\\frac{\\text{SSE}_c - \\text{SSE}_a}{\\text{SSE}_c} = \\frac{108547.9 - 103877.2}{108547.9} = 0.043\\)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
+    ]
+  },
+  {
+    "objectID": "06_two_predictors.html#variance-based-effect-sizes-delta-r2",
+    "href": "06_two_predictors.html#variance-based-effect-sizes-delta-r2",
+    "title": "6  Inferences about two predictors (multiple regression without interaction)",
+    "section": "6.25 Variance Based Effect Sizes: \\(\\Delta R^2\\)",
+    "text": "6.25 Variance Based Effect Sizes: \\(\\Delta R^2\\)\n\\(\\Delta R^2\\) is the increase in model \\(R^2\\) for the augmented model where we estimated a specific parameter vs. the associated compact model where we fixed that parameter to 0.\n\\(\\hat{\\text{FPS}}_i=\\beta_0+0*\\text{BAC}_i+ \\beta_2*\\text{TA}_i\\)\n\\(\\text{SSE}_c = 108547.9\\)\n\\(R^2 = 0.1893\\)\n\\(\\hat{\\text{FPS}}_i=\\beta_0+\\beta_1*\\text{BAC}_i+ \\beta_2*\\text{TA}_i\\)\n\\(\\text{SSE}_a = 103877.2\\)\n\\(R^2 = 0.2242\\)\n\\(\\Delta R^2= 0.2242 -  0.1893 = `r round(broom::glance(m_3)\\)r.squared, 4) - round(broom::glance(lm(fps~ta, data = data))\\(r.squared, 4)\\)",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
     ]
