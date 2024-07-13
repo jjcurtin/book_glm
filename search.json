@@ -1214,7 +1214,17 @@
     "href": "06_two_predictors.html#variance-based-effect-sizes-delta-r2",
     "title": "6  Inferences about two predictors (multiple regression without interaction)",
     "section": "6.25 Variance Based Effect Sizes: \\(\\Delta R^2\\)",
-    "text": "6.25 Variance Based Effect Sizes: \\(\\Delta R^2\\)\n\\(\\Delta R^2\\) is the increase in model \\(R^2\\) for the augmented model where we estimated a specific parameter vs. the associated compact model where we fixed that parameter to 0.\n\\(\\hat{\\text{FPS}}_i=\\beta_0+0*\\text{BAC}_i+ \\beta_2*\\text{TA}_i\\)\n\\(\\text{SSE}_c = 108547.9\\)\n\\(R^2 = 0.1893\\)\n\\(\\hat{\\text{FPS}}_i=\\beta_0+\\beta_1*\\text{BAC}_i+ \\beta_2*\\text{TA}_i\\)\n\\(\\text{SSE}_a = 103877.2\\)\n\\(R^2 = 0.2242\\)\n\\(\\Delta R^2= 0.2242 -  0.1893 = `r round(broom::glance(m_3)\\)r.squared, 4) - round(broom::glance(lm(fps~ta, data = data))\\(r.squared, 4)\\)",
+    "text": "6.25 Variance Based Effect Sizes: \\(\\Delta R^2\\)\n\\(\\Delta R^2\\) is the increase in model \\(R^2\\) for the augmented model where we estimated a specific parameter vs. the associated compact model where we fixed that parameter to 0.\n\\(\\hat{\\text{FPS}}_i=\\beta_0+0*\\text{BAC}_i+ \\beta_2*\\text{TA}_i\\)\n\\(\\text{SSE}_c = 108547.9\\)\n\\(R^2 = 0.1893\\)\n\\(\\hat{\\text{FPS}}_i=\\beta_0+\\beta_1*\\text{BAC}_i+ \\beta_2*\\text{TA}_i\\)\n\\(\\text{SSE}_a = 103877.2\\)\n\\(R^2 = 0.2242\\)\n\\(\\Delta R^2= 0.2242 -  0.1893 = 0.0349\\)\n\n\\(\\Delta R^2\\) can also be defined with respect to SSE.\nCompact Model: \\(\\hat{\\text{FPS}}_i=\\beta_0+0*\\text{BAC}_i+ \\beta_2*\\text{TA}_i\\)\n\\(\\text{SSE}_c = 108547.9\\)\nAugmented Model: \\(\\hat{\\text{FPS}}_i=\\beta_0+\\beta_1*\\text{BAC}_i+ \\beta_2*\\text{TA}_i\\)\n\\(\\text{SSE}_a = 103877.2\\)\nQuestion: How much was the error reduced by estimating \\(\\beta_1\\) for BAC?\n\n\\(\\frac{\\text{SSE}_c - \\text{SSE}_a}{\\text{SSE}_{\\text{mean-only}}}=\\frac{108547.9 - 103877.2}{133888.3} = 0.0349\\)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
+    ]
+  },
+  {
+    "objectID": "06_two_predictors.html#comparing-variance-based-effect-sizes",
+    "href": "06_two_predictors.html#comparing-variance-based-effect-sizes",
+    "title": "6  Inferences about two predictors (multiple regression without interaction)",
+    "section": "6.26 Comparing Variance Based Effect Sizes",
+    "text": "6.26 Comparing Variance Based Effect Sizes\n$R^2 = $\n\\(\\Delta R^2 = \\frac{\\text{SSE}_c - \\text{SSE}_a}{\\text{SSE}_{\\text{mean-only}}}\\)\n\\(\\eta_p^2 = \\frac{\\text{SSE}_c - \\text{SSE}_a}{\\text{SSE}_c}\\)\n\n\\(R^2\\)\n\nDescribes proportion of explained variance in \\(Y\\) explained by full model relative to total variance in \\(Y\\).\n\nCan not be used for a specific predictor.\n\nNot used frequently in Psychology but useful in other fields.\n\n\\(\\Delta R^2\\)\n\nDescribes proportion of unique variance in \\(Y\\) explained by \\(X_j\\) relative to total variance in \\(Y\\).\n\nIf \\(X\\)s are orthogonal \\(\\Delta R^2\\) will sum to \\(R^2\\).\n\nAnchored to total \\(Y\\) variance.\n\nSame denominator for all \\(X\\)s.\n\n\\(\\eta_p^2\\)\n\nDescribes proportion of reduction of unexplained variance (SSE) by adding \\(X_j\\).\n\n\\(\\ge \\Delta R^2\\) (stupid!).\nSPSS reports it (stupid!).\nStable in experimental designs when additional IVs are added.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
     ]

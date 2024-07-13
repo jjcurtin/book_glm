@@ -299,6 +299,7 @@ window.Quarto = {
   <li><a href="#predictor-effect-size-options" id="toc-predictor-effect-size-options" class="nav-link" data-scroll-target="#predictor-effect-size-options"><span class="header-section-number">6.23</span> Predictor Effect Size Options</a></li>
   <li><a href="#variance-based-effect-sizes-eta_p2-or-pre" id="toc-variance-based-effect-sizes-eta_p2-or-pre" class="nav-link" data-scroll-target="#variance-based-effect-sizes-eta_p2-or-pre"><span class="header-section-number">6.24</span> Variance Based Effect Sizes: <span class="math inline">\(\eta_p^2\)</span> or PRE</a></li>
   <li><a href="#variance-based-effect-sizes-delta-r2" id="toc-variance-based-effect-sizes-delta-r2" class="nav-link" data-scroll-target="#variance-based-effect-sizes-delta-r2"><span class="header-section-number">6.25</span> Variance Based Effect Sizes: <span class="math inline">\(\Delta R^2\)</span></a></li>
+  <li><a href="#comparing-variance-based-effect-sizes" id="toc-comparing-variance-based-effect-sizes" class="nav-link" data-scroll-target="#comparing-variance-based-effect-sizes"><span class="header-section-number">6.26</span> Comparing Variance Based Effect Sizes</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/06_two_predictors.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1346,8 +1347,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-4fa23939fffce1337893" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-4fa23939fffce1337893">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-1e2ce5f5a651d690565e" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-1e2ce5f5a651d690565e">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <hr>
@@ -1370,8 +1371,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-82e765bceeb2a114eed3" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-82e765bceeb2a114eed3">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-04eed815c9cd7f7af57e" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-04eed815c9cd7f7af57e">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Direct + Indirect/Spurious = Total</strong></p>
@@ -1539,7 +1540,50 @@ Proportion of variance in <span class="math inline">\(Y\)</span> explained by th
 <p><strong><span class="math inline">\(\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_i+ \beta_2*\text{TA}_i\)</span></strong></p>
 <p><span class="math inline">\(\text{SSE}_a = 103877.2\)</span></p>
 <p><span class="math inline">\(R^2 = 0.2242\)</span></p>
-<p><span class="math inline">\(\Delta R^2= 0.2242 -  0.1893 = `r round(broom::glance(m_3)\)</span>r.squared, 4) - round(broom::glance(lm(fps~ta, data = data))<span class="math inline">\(r.squared, 4)\)</span></p>
+<p><span class="math inline">\(\Delta R^2= 0.2242 -  0.1893 = 0.0349\)</span></p>
+<hr>
+<p><span class="math inline">\(\Delta R^2\)</span> can also be defined with respect to SSE.</p>
+<p><strong>Compact Model: <span class="math inline">\(\hat{\text{FPS}}_i=\beta_0+0*\text{BAC}_i+ \beta_2*\text{TA}_i\)</span></strong></p>
+<p><span class="math inline">\(\text{SSE}_c = 108547.9\)</span></p>
+<p><strong>Augmented Model: <span class="math inline">\(\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_i+ \beta_2*\text{TA}_i\)</span></strong></p>
+<p><span class="math inline">\(\text{SSE}_a = 103877.2\)</span></p>
+<p><span style="color: red;">Question: How much was the error reduced by estimating <span class="math inline">\(\beta_1\)</span> for BAC?</span></p>
+<hr>
+<p><span style="color: blue;"><span class="math inline">\(\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}=\frac{108547.9 - 103877.2}{133888.3} = 0.0349\)</span></span></p>
+<hr>
+</section>
+<section id="comparing-variance-based-effect-sizes" class="level2" data-number="6.26">
+<h2 data-number="6.26" class="anchored" data-anchor-id="comparing-variance-based-effect-sizes"><span class="header-section-number">6.26</span> Comparing Variance Based Effect Sizes</h2>
+<p>$R^2 = $</p>
+<p><span class="math inline">\(\Delta R^2 = \frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}\)</span></p>
+<p><span class="math inline">\(\eta_p^2 = \frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}\)</span></p>
+<hr>
+<p><span class="math inline">\(R^2\)</span></p>
+<ul>
+<li>Describes proportion of explained variance in <span class="math inline">\(Y\)</span> explained by full model relative to total variance in <span class="math inline">\(Y\)</span>.<br>
+</li>
+<li>Can <strong>not</strong> be used for a specific predictor.<br>
+</li>
+<li>Not used frequently in Psychology but useful in other fields.</li>
+</ul>
+<p><span class="math inline">\(\Delta R^2\)</span></p>
+<ul>
+<li>Describes proportion of unique variance in <span class="math inline">\(Y\)</span> explained by <span class="math inline">\(X_j\)</span> relative to total variance in <span class="math inline">\(Y\)</span>.<br>
+</li>
+<li>If <span class="math inline">\(X\)</span>s are orthogonal <span class="math inline">\(\Delta R^2\)</span> will sum to <span class="math inline">\(R^2\)</span>.<br>
+</li>
+<li>Anchored to total <span class="math inline">\(Y\)</span> variance.<br>
+</li>
+<li>Same denominator for all <span class="math inline">\(X\)</span>s.</li>
+</ul>
+<p><span class="math inline">\(\eta_p^2\)</span></p>
+<ul>
+<li>Describes proportion of reduction of unexplained variance (SSE) by adding <span class="math inline">\(X_j\)</span>.<br>
+</li>
+<li><span class="math inline">\(\ge \Delta R^2\)</span> (stupid!).</li>
+<li>SPSS reports it (stupid!).</li>
+<li>Stable in experimental designs when additional IVs are added.</li>
+</ul>
 <hr>
 
 
