@@ -301,6 +301,7 @@ window.Quarto = {
   <li><a href="#variance-based-effect-sizes-delta-r2" id="toc-variance-based-effect-sizes-delta-r2" class="nav-link" data-scroll-target="#variance-based-effect-sizes-delta-r2"><span class="header-section-number">6.25</span> Variance Based Effect Sizes: <span class="math inline">\(\Delta R^2\)</span></a></li>
   <li><a href="#comparing-variance-based-effect-sizes" id="toc-comparing-variance-based-effect-sizes" class="nav-link" data-scroll-target="#comparing-variance-based-effect-sizes"><span class="header-section-number">6.26</span> Comparing Variance Based Effect Sizes</a></li>
   <li><a href="#visualizing-the-model" id="toc-visualizing-the-model" class="nav-link" data-scroll-target="#visualizing-the-model"><span class="header-section-number">6.27</span> Visualizing the Model</a></li>
+  <li><a href="#describing-model-results" id="toc-describing-model-results" class="nav-link" data-scroll-target="#describing-model-results"><span class="header-section-number">6.28</span> Describing Model Results</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/06_two_predictors.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1348,8 +1349,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-29f7980511ff749ff3b2" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-29f7980511ff749ff3b2">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-5cc26e4d15a279529b26" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-5cc26e4d15a279529b26">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <hr>
@@ -1372,8 +1373,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-fc9249c5e858c9160060" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-fc9249c5e858c9160060">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-230c7dab5f10177fee97" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-230c7dab5f10177fee97">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Direct + Indirect/Spurious = Total</strong></p>
@@ -1605,9 +1606,8 @@ Proportion of variance in <span class="math inline">\(Y\)</span> explained by th
 <span id="cb78-10"><a href="#cb78-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ncol =</span> <span class="dv">100</span>)</span>
 <span id="cb78-11"><a href="#cb78-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb78-12"><a href="#cb78-12" aria-hidden="true" tabindex="-1"></a><span class="fu">scatter3D</span>(data<span class="sc">$</span>bac, data<span class="sc">$</span>ta, data<span class="sc">$</span>fps, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">ticktype =</span> <span class="st">"detailed"</span>,</span>
-<span id="cb78-13"><a href="#cb78-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlab =</span> <span class="st">"BAC"</span>, <span class="at">ylab =</span> <span class="st">"TA"</span>, </span>
-<span id="cb78-14"><a href="#cb78-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">zlab =</span> <span class="st">"FPS"</span>,</span>
-<span id="cb78-15"><a href="#cb78-15" aria-hidden="true" tabindex="-1"></a>          <span class="at">surf =</span> <span class="fu">list</span>(<span class="at">x =</span> preds_bac, <span class="at">y =</span> preds_ta, <span class="at">z =</span> preds_y, <span class="at">alpha =</span> .<span class="dv">9</span>, <span class="at">border =</span> <span class="st">"light grey"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb78-13"><a href="#cb78-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlab =</span> <span class="st">"BAC"</span>, <span class="at">ylab =</span> <span class="st">"TA"</span>, <span class="at">zlab =</span> <span class="st">"FPS"</span>,</span>
+<span id="cb78-14"><a href="#cb78-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">surf =</span> <span class="fu">list</span>(<span class="at">x =</span> preds_bac, <span class="at">y =</span> preds_ta, <span class="at">z =</span> preds_y, <span class="at">alpha =</span> .<span class="dv">9</span>, <span class="at">border =</span> <span class="st">"light grey"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -1615,6 +1615,236 @@ Proportion of variance in <span class="math inline">\(Y\)</span> explained by th
 <p><img src="06_two_predictors_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
+</div>
+</div>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Additional model visualizations</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+<p><span style="color: red;">Question: What would change if TA was mean centered?</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>m_3 <span class="sc">|&gt;</span> </span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic    p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)   19.4      7.66        2.54 0.0128    
+2 bac         -177.      86.6        -2.04 0.0437    
+3 ta             0.153    0.0324      4.73 0.00000807</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>m_3 <span class="sc">|&gt;</span> </span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">glance</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(r.squared)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  r.squared
+      &lt;dbl&gt;
+1     0.224</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ta_c =</span> ta <span class="sc">-</span> <span class="fu">mean</span>(ta))</span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>m_3_c <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac <span class="sc">+</span> ta_c, <span class="at">data =</span> data) </span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>m_3_c <span class="sc">|&gt;</span> </span>
+<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)   42.1      5.91        7.12 2.28e-10
+2 bac         -177.      86.6        -2.04 4.37e- 2
+3 ta_c           0.153    0.0324      4.73 8.07e- 6</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>m_3_c <span class="sc">|&gt;</span> </span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">glance</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(r.squared)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  r.squared
+      &lt;dbl&gt;
+1     0.224</code></pre>
+</div>
+</div>
+<hr>
+<p><span style="color: red;">Question: What do you report and why?</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>m_3_c <span class="sc">|&gt;</span> </span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)   42.1      5.91        7.12 2.28e-10
+2 bac         -177.      86.6        -2.04 4.37e- 2
+3 ta_c           0.153    0.0324      4.73 8.07e- 6</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\eta_p^2\)</span> effect size for BAC</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>sse_c_bac <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(fps <span class="sc">~</span> ta_c, <span class="at">data =</span> data))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>sse_a <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_3_c)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>(p_eta_bac <span class="ot">&lt;-</span> (sse_c_bac <span class="sc">-</span> sse_a)<span class="sc">/</span>sse_c_bac)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.04302933</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\eta_p^2\)</span> effect size for TA</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>sse_c_ta <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(fps <span class="sc">~</span> bac, <span class="at">data =</span> data))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>(p_eta_ta <span class="ot">&lt;-</span> (sse_c_ta <span class="sc">-</span> sse_a)<span class="sc">/</span>sse_c_ta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.193732</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\eta_p^2\)</span> effect size for intercept</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>sse_c_int <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(fps <span class="sc">~</span> bac <span class="sc">+</span> ta <span class="sc">-</span> <span class="dv">1</span>, <span class="at">data =</span> data))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>(p_eta_int <span class="ot">&lt;-</span> (sse_c_int <span class="sc">-</span> sse_a)<span class="sc">/</span>sse_c_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.06472535</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m_3_c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    2.5 %     97.5 %
+(Intercept)   30.32490549 53.8033111
+bac         -348.98099457 -5.1177113
+ta_c           0.08891558  0.2177329</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="describing-model-results" class="level2" data-number="6.28">
+<h2 data-number="6.28" class="anchored" data-anchor-id="describing-model-results"><span class="header-section-number">6.28</span> Describing Model Results</h2>
+<p>We regressed fear-potentiated startle (FPS) on Blood alcohol concentration (BAC). We included trait anxiety (mean-centered) as a covariate in this model to increase power to test substantive questions about BAC. We tested partial effects, controlling for all other predictors in the model, from the full model that included both predictors. We provide raw regression coefficients, 95% confidence intervals for these coefficients, and partial eta squared (<span class="math inline">\(\eta_p^2\)</span>) to quantify effect sizes for each predictor in Table 1.</p>
+<p>FPS was 42.1 <span class="math inline">\(\mu V\)</span> for participants with 0.00% BAC and average trait anxiety, <span class="math inline">\(t(93) = 7.12, p&lt; .001\)</span>, indicating that our threat manipulation successfully increased FPS above zero when sober. As expected, the effect of the trait anxiety covariate was significant and reduced error variance by approximately 19%, <span class="math inline">\(t(93)= 4.73, p&lt; .001\)</span>. FPS increased by 0.2 <span class="math inline">\(\mu V\)</span> for every 1 unit increase in trait anxiety.</p>
+<p>As predicted, the effect of BAC was significant and reduced error variance by approximately 4%, <span class="math inline">\(t(93)= -2.04, p= .044\)</span>. FPS decreased 1.8 <span class="math inline">\(\mu V\)</span> for every .01% increase in BAC (see Figure 1).</p>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>coef <span class="ot">&lt;-</span> m_3_c <span class="sc">|&gt;</span> </span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(term, estimate, statistic, p.value) </span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">confint</span>(m_3_c) <span class="sc">|&gt;</span> </span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(ci, <span class="st">`</span><span class="at">2.5 %</span><span class="st">`</span>, <span class="st">`</span><span class="at">97.5 %</span><span class="st">`</span>, <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ci =</span> <span class="fu">str_c</span>(<span class="st">"("</span>, ci, <span class="st">")"</span>))</span>
+<span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-11"><a href="#cb98-11" aria-hidden="true" tabindex="-1"></a>p_eta <span class="ot">&lt;-</span> <span class="fu">tibble</span> (<span class="at">peta =</span> <span class="fu">c</span>(p_eta_int, p_eta_bac, p_eta_ta)) </span>
+<span id="cb98-12"><a href="#cb98-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-13"><a href="#cb98-13" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> coef <span class="sc">|&gt;</span> </span>
+<span id="cb98-14"><a href="#cb98-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(ci, p_eta) <span class="sc">|&gt;</span> </span>
+<span id="cb98-15"><a href="#cb98-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at"> </span><span class="st">`</span> <span class="ot">=</span> <span class="fu">factor</span>(term, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span>, <span class="st">"bac"</span>, <span class="st">"ta_c"</span>),</span>
+<span id="cb98-16"><a href="#cb98-16" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Intercept"</span>, <span class="st">"Blood Alcohol Concentration"</span>, <span class="st">"Trait Anxiety"</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb98-17"><a href="#cb98-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at"> </span><span class="st">`</span>, </span>
+<span id="cb98-18"><a href="#cb98-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">b =</span> estimate,</span>
+<span id="cb98-19"><a href="#cb98-19" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">95% CI (b)</span><span class="st">`</span> <span class="ot">=</span> ci,</span>
+<span id="cb98-20"><a href="#cb98-20" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Partial eta squared</span><span class="st">`</span> <span class="ot">=</span> peta,</span>
+<span id="cb98-21"><a href="#cb98-21" aria-hidden="true" tabindex="-1"></a>         <span class="at">t =</span> statistic,</span>
+<span id="cb98-22"><a href="#cb98-22" aria-hidden="true" tabindex="-1"></a>         <span class="at">p =</span> p.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>table <span class="sc">|&gt;</span> </span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 9%">
+<col style="width: 20%">
+<col style="width: 23%">
+<col style="width: 7%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">b</th>
+<th style="text-align: left;">95% CI (b)</th>
+<th style="text-align: right;">Partial eta squared</th>
+<th style="text-align: right;">t</th>
+<th style="text-align: right;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: right;">42.06</td>
+<td style="text-align: left;">(30.32, 53.8)</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">7.12</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Blood Alcohol Concentration</td>
+<td style="text-align: right;">-177.05</td>
+<td style="text-align: left;">(-348.98, -5.12)</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">-2.04</td>
+<td style="text-align: right;">0.04</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Trait Anxiety</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: left;">(0.09, 0.22)</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">4.73</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
