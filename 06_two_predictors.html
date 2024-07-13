@@ -112,20 +112,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script src="site_libs/grViz-binding-1.0.11/grViz.js"></script>
 
-<script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
-
-<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
-
-<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
-
-<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
-
-<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
-
-<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
-
-<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
-
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -1362,8 +1348,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-0572324d2f6f6964e8db" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-0572324d2f6f6964e8db">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-e85ad8406a3094fdad87" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-e85ad8406a3094fdad87">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <hr>
@@ -1386,8 +1372,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-9be312289624c0029dad" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-9be312289624c0029dad">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-f3e915c40c4d2edebd6c" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-f3e915c40c4d2edebd6c">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Direct + Indirect/Spurious = Total</strong></p>
@@ -1607,49 +1593,33 @@ Proportion of variance in <span class="math inline">\(Y\)</span> explained by th
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plot3D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'plotly' was built under R version 4.4.1</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'plotly'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:ggplot2':
-
-    last_plot</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:stats':
-
-    filter</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:graphics':
-
-    layout</code></pre>
+<pre><code>Warning: package 'plot3D' was built under R version 4.4.1</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>preds_x <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">bac =</span> <span class="fu">seq</span>(<span class="fu">min</span>(data<span class="sc">$</span>bac), <span class="fu">max</span>(data<span class="sc">$</span>bac), <span class="at">length.out =</span> <span class="dv">100</span>),</span>
-<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">ta =</span> <span class="fu">seq</span>(<span class="fu">min</span>(data<span class="sc">$</span>ta), <span class="fu">max</span>(data<span class="sc">$</span>ta), <span class="at">length.out =</span> <span class="dv">100</span>))</span>
-<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> preds_x <span class="sc">|&gt;</span> </span>
-<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(<span class="fu">tibble</span>(<span class="at">fps =</span> <span class="fu">predict</span>(m_3, <span class="at">newdata =</span> preds_x)))</span>
-<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a>plot_3d <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> bac, <span class="at">y =</span> ta, <span class="at">z =</span> fps)) <span class="sc">+</span></span>
-<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb84-9"><a href="#cb84-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">data =</span> preds, <span class="fu">aes</span>(<span class="at">fill =</span> fps), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb84-10"><a href="#cb84-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Blood Alcohol Concentration (%)'</span>, <span class="at">y =</span> <span class="st">'Trait Anxiety'</span>, <span class="at">z =</span> <span class="st">'FPS'</span>) </span>
-<span id="cb84-11"><a href="#cb84-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-12"><a href="#cb84-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-13"><a href="#cb84-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(<span class="at">x=</span>data<span class="sc">$</span>bac, <span class="at">y=</span>data<span class="sc">$</span>ta, <span class="at">z=</span>data<span class="sc">$</span>fps, <span class="at">type=</span><span class="st">"scatter3d"</span>, <span class="at">mode=</span><span class="st">"markers"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>preds_bac <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(data<span class="sc">$</span>bac), <span class="fu">max</span>(data<span class="sc">$</span>bac), <span class="at">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>preds_ta <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(data<span class="sc">$</span>ta), <span class="fu">max</span>(data<span class="sc">$</span>ta), <span class="at">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>preds_x <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">bac =</span> preds_bac, <span class="at">ta =</span> preds_ta)</span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>preds_y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">predict</span>(m_3, <span class="at">newdata =</span> preds_x),</span>
+<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">nrow =</span> <span class="dv">100</span>,</span>
+<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ncol =</span> <span class="dv">100</span>)</span>
+<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-10"><a href="#cb80-10" aria-hidden="true" tabindex="-1"></a><span class="fu">scatter3D</span>(data<span class="sc">$</span>bac, data<span class="sc">$</span>ta, data<span class="sc">$</span>fps, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">ticktype =</span> <span class="st">"detailed"</span>,</span>
+<span id="cb80-11"><a href="#cb80-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlab =</span> <span class="st">"Blood Alcohol Concentration"</span>, <span class="at">ylab =</span> <span class="st">"Trait Anxiety"</span>, </span>
+<span id="cb80-12"><a href="#cb80-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">zlab =</span> <span class="st">"Fear Potentiated Startle"</span>,</span>
+<span id="cb80-13"><a href="#cb80-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">surf =</span> <span class="fu">list</span>(<span class="at">x =</span> preds_bac, <span class="at">y =</span> preds_ta, <span class="at">z =</span> preds_y, <span class="at">alpha =</span> .<span class="dv">9</span>, <span class="at">border =</span> <span class="st">"grey"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-8b77135591838b0a222c" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-8b77135591838b0a222c">{"x":{"visdat":{"25ec60466589":["function () ","plotlyVisDat"]},"cur_data":"25ec60466589","attrs":{"25ec60466589":{"x":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0235,0.035000000000000003,0.036999999999999998,0.036999999999999998,0.037499999999999999,0.0395,0.0395,0.040500000000000001,0.043999999999999997,0.043999999999999997,0.045499999999999999,0.045499999999999999,0.045499999999999999,0.047500000000000001,0.049500000000000002,0.050000000000000003,0.050500000000000003,0.052499999999999998,0.053499999999999999,0.053999999999999999,0.053999999999999999,0.057000000000000002,0.058000000000000003,0.058000000000000003,0.059999999999999998,0.060499999999999998,0.062,0.0625,0.066000000000000003,0.066000000000000003,0.067000000000000004,0.068000000000000005,0.069500000000000006,0.070999999999999994,0.072999999999999995,0.073499999999999996,0.073999999999999996,0.074499999999999997,0.074999999999999997,0.075999999999999998,0.075999999999999998,0.076499999999999999,0.077499999999999999,0.078,0.080500000000000002,0.082000000000000003,0.082500000000000004,0.084000000000000005,0.084500000000000006,0.085500000000000007,0.085999999999999993,0.090499999999999997,0.092499999999999999,0.094,0.094,0.098000000000000004,0.098500000000000004,0.10000000000000001,0.10000000000000001,0.10249999999999999,0.105,0.1055,0.107,0.108,0.1085,0.11700000000000001,0.11849999999999999,0.11899999999999999,0.1205,0.1215,0.124,0.13900000000000001],"y":[110,120,35,119,26,103,52,34,208,34,254,84,249,163,133,33,296,158,150,417,97,126,255,200,74,174,211,286,362,25,43,136,16,128,142,125,410,171,277,160,16,90,329,96,26,103,71,52,143,153,37,264,191,94,37,90,352,41,345,327,33,201,445,10,94,356,254,115,102,163,39,124,68,90,150,82,119,118,327,82,239,44,105,73,282,120,226,92,247,114,15,100,97,29,76,287],"z":[-98.097777780000001,-22.528500000000001,0.46329444400000003,1.1943666669999999,2.728044444,6.7237833330000001,6.8198333330000001,15.336716669999999,19.49092778,29.473266670000001,33.757777779999998,40.57377778,41.557055560000002,43.908444439999997,48.406944439999997,51.316911109999999,51.855222220000002,67.287222220000004,68.758055560000003,85.382222220000003,89.658722220000001,90.878222219999998,104.9167333,110.9451667,43.901666669999997,66.900388890000002,6.947388889,46.456666669999997,136.82483329999999,14.18134444,23.757072220000001,62.058972220000001,8.0309438889999996,93.596666670000005,12.98315556,18.06888889,68.743499999999997,2.5316111110000001,53.176722220000002,92.007277779999995,-3.3200555559999998,3.021283333,99.94456667,13.765777780000001,15.440205560000001,79.524688889999993,10.69111111,11.85905,59.785955559999998,45.181777779999997,19.420355560000001,-26.06888889,-3.3496611110000001,50.168333330000003,3.6173333329999999,57.268055560000001,37.404666669999997,4.7123855560000001,162.7366111,33.885166669999997,11.546900000000001,4.1818611109999999,30.453111109999998,0.172447778,8.7647777779999991,41.588277779999999,36.69955556,69.597483330000003,49.248722219999998,36.111888890000003,22.37582222,59.623388890000001,17.67687222,19.187177779999999,32.503222219999998,6.8075083330000004,19.598722219999999,0.0062777780000000004,1.182222222,13.61916667,38.33966667,14.085438890000001,15.02083333,0.379378889,110.0547778,-1.863172222,36.998222220000002,5.7521444439999998,14.603611109999999,5.2342833329999996,5.2549611110000001,0.71522777800000004,16.258022220000001,6.4185666670000003,10.733283330000001,14.727783329999999],"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":[]},"yaxis":{"title":[]},"zaxis":{"title":[]}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0235,0.035000000000000003,0.036999999999999998,0.036999999999999998,0.037499999999999999,0.0395,0.0395,0.040500000000000001,0.043999999999999997,0.043999999999999997,0.045499999999999999,0.045499999999999999,0.045499999999999999,0.047500000000000001,0.049500000000000002,0.050000000000000003,0.050500000000000003,0.052499999999999998,0.053499999999999999,0.053999999999999999,0.053999999999999999,0.057000000000000002,0.058000000000000003,0.058000000000000003,0.059999999999999998,0.060499999999999998,0.062,0.0625,0.066000000000000003,0.066000000000000003,0.067000000000000004,0.068000000000000005,0.069500000000000006,0.070999999999999994,0.072999999999999995,0.073499999999999996,0.073999999999999996,0.074499999999999997,0.074999999999999997,0.075999999999999998,0.075999999999999998,0.076499999999999999,0.077499999999999999,0.078,0.080500000000000002,0.082000000000000003,0.082500000000000004,0.084000000000000005,0.084500000000000006,0.085500000000000007,0.085999999999999993,0.090499999999999997,0.092499999999999999,0.094,0.094,0.098000000000000004,0.098500000000000004,0.10000000000000001,0.10000000000000001,0.10249999999999999,0.105,0.1055,0.107,0.108,0.1085,0.11700000000000001,0.11849999999999999,0.11899999999999999,0.1205,0.1215,0.124,0.13900000000000001],"y":[110,120,35,119,26,103,52,34,208,34,254,84,249,163,133,33,296,158,150,417,97,126,255,200,74,174,211,286,362,25,43,136,16,128,142,125,410,171,277,160,16,90,329,96,26,103,71,52,143,153,37,264,191,94,37,90,352,41,345,327,33,201,445,10,94,356,254,115,102,163,39,124,68,90,150,82,119,118,327,82,239,44,105,73,282,120,226,92,247,114,15,100,97,29,76,287],"z":[-98.097777780000001,-22.528500000000001,0.46329444400000003,1.1943666669999999,2.728044444,6.7237833330000001,6.8198333330000001,15.336716669999999,19.49092778,29.473266670000001,33.757777779999998,40.57377778,41.557055560000002,43.908444439999997,48.406944439999997,51.316911109999999,51.855222220000002,67.287222220000004,68.758055560000003,85.382222220000003,89.658722220000001,90.878222219999998,104.9167333,110.9451667,43.901666669999997,66.900388890000002,6.947388889,46.456666669999997,136.82483329999999,14.18134444,23.757072220000001,62.058972220000001,8.0309438889999996,93.596666670000005,12.98315556,18.06888889,68.743499999999997,2.5316111110000001,53.176722220000002,92.007277779999995,-3.3200555559999998,3.021283333,99.94456667,13.765777780000001,15.440205560000001,79.524688889999993,10.69111111,11.85905,59.785955559999998,45.181777779999997,19.420355560000001,-26.06888889,-3.3496611110000001,50.168333330000003,3.6173333329999999,57.268055560000001,37.404666669999997,4.7123855560000001,162.7366111,33.885166669999997,11.546900000000001,4.1818611109999999,30.453111109999998,0.172447778,8.7647777779999991,41.588277779999999,36.69955556,69.597483330000003,49.248722219999998,36.111888890000003,22.37582222,59.623388890000001,17.67687222,19.187177779999999,32.503222219999998,6.8075083330000004,19.598722219999999,0.0062777780000000004,1.182222222,13.61916667,38.33966667,14.085438890000001,15.02083333,0.379378889,110.0547778,-1.863172222,36.998222220000002,5.7521444439999998,14.603611109999999,5.2342833329999996,5.2549611110000001,0.71522777800000004,16.258022220000001,6.4185666670000003,10.733283330000001,14.727783329999999],"mode":"markers","type":"scatter3d","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div>
+<figure class="figure">
+<p><img src="06_two_predictors_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
 </div>
 </div>
 
