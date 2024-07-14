@@ -1425,8 +1425,10 @@ m_depress_1 |>
 
 
 ```{r}
-# code for delta r squared (same as r.squared since one predictor)
+broom::glance(m_depress_1)$r.squared - broom::glance(lm(depress_post ~ 1, data = data_int))$r.squared
 ```
+
+*Note: In this case $\Delta R^2$ is the same as model $R^2$ because there is only one predictor (i.e., $R^2$ in our compact/mean-only model is 0).*
 
 
 -----
