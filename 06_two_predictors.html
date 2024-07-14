@@ -1349,8 +1349,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-5cc26e4d15a279529b26" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-5cc26e4d15a279529b26">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-693ef976eca8cea1e6e9" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-693ef976eca8cea1e6e9">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <hr>
@@ -1373,8 +1373,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-230c7dab5f10177fee97" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-230c7dab5f10177fee97">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-bab7b338cac7c00065f1" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-bab7b338cac7c00065f1">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Direct + Indirect/Spurious = Total</strong></p>
@@ -1769,84 +1769,90 @@ ta_c           0.08891558  0.2177329</code></pre>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>coef <span class="ot">&lt;-</span> m_3_c <span class="sc">|&gt;</span> </span>
 <span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(term, estimate, statistic, p.value) </span>
-<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">confint</span>(m_3_c) <span class="sc">|&gt;</span> </span>
-<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(ci, <span class="st">`</span><span class="at">2.5 %</span><span class="st">`</span>, <span class="st">`</span><span class="at">97.5 %</span><span class="st">`</span>, <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ci =</span> <span class="fu">str_c</span>(<span class="st">"("</span>, ci, <span class="st">")"</span>))</span>
-<span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb98-11"><a href="#cb98-11" aria-hidden="true" tabindex="-1"></a>p_eta <span class="ot">&lt;-</span> <span class="fu">tibble</span> (<span class="at">peta =</span> <span class="fu">c</span>(p_eta_int, p_eta_bac, p_eta_ta)) </span>
-<span id="cb98-12"><a href="#cb98-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb98-13"><a href="#cb98-13" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> coef <span class="sc">|&gt;</span> </span>
-<span id="cb98-14"><a href="#cb98-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(ci, p_eta) <span class="sc">|&gt;</span> </span>
-<span id="cb98-15"><a href="#cb98-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at"> </span><span class="st">`</span> <span class="ot">=</span> <span class="fu">factor</span>(term, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span>, <span class="st">"bac"</span>, <span class="st">"ta_c"</span>),</span>
-<span id="cb98-16"><a href="#cb98-16" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Intercept"</span>, <span class="st">"Blood Alcohol Concentration"</span>, <span class="st">"Trait Anxiety"</span>))) <span class="sc">|&gt;</span> </span>
-<span id="cb98-17"><a href="#cb98-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at"> </span><span class="st">`</span>, </span>
-<span id="cb98-18"><a href="#cb98-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">b =</span> estimate,</span>
-<span id="cb98-19"><a href="#cb98-19" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">95% CI (b)</span><span class="st">`</span> <span class="ot">=</span> ci,</span>
-<span id="cb98-20"><a href="#cb98-20" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Partial eta squared</span><span class="st">`</span> <span class="ot">=</span> peta,</span>
-<span id="cb98-21"><a href="#cb98-21" aria-hidden="true" tabindex="-1"></a>         <span class="at">t =</span> statistic,</span>
-<span id="cb98-22"><a href="#cb98-22" aria-hidden="true" tabindex="-1"></a>         <span class="at">p =</span> p.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(term, estimate, statistic, p.value) <span class="sc">|&gt;</span> </span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p.value =</span> <span class="fu">if_else</span>(p.value <span class="sc">&lt;</span> .<span class="dv">001</span>, <span class="st">"&lt;.001"</span>, <span class="fu">as.character</span>(<span class="fu">round</span>(p.value, <span class="dv">2</span>))))</span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">confint</span>(m_3_c) <span class="sc">|&gt;</span> </span>
+<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(ci, <span class="st">`</span><span class="at">2.5 %</span><span class="st">`</span>, <span class="st">`</span><span class="at">97.5 %</span><span class="st">`</span>, <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ci =</span> <span class="fu">str_c</span>(<span class="st">"("</span>, ci, <span class="st">")"</span>))</span>
+<span id="cb98-11"><a href="#cb98-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-12"><a href="#cb98-12" aria-hidden="true" tabindex="-1"></a>p_eta <span class="ot">&lt;-</span> <span class="fu">tibble</span> (<span class="at">peta =</span> <span class="fu">c</span>(p_eta_int, p_eta_bac, p_eta_ta)) </span>
+<span id="cb98-13"><a href="#cb98-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-14"><a href="#cb98-14" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> coef <span class="sc">|&gt;</span> </span>
+<span id="cb98-15"><a href="#cb98-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(ci, p_eta) <span class="sc">|&gt;</span> </span>
+<span id="cb98-16"><a href="#cb98-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at"> </span><span class="st">`</span> <span class="ot">=</span> <span class="fu">factor</span>(term, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"(Intercept)"</span>, <span class="st">"bac"</span>, <span class="st">"ta_c"</span>),</span>
+<span id="cb98-17"><a href="#cb98-17" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Intercept"</span>, <span class="st">"Blood Alcohol Concentration"</span>, <span class="st">"Trait Anxiety"</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb98-18"><a href="#cb98-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at"> </span><span class="st">`</span>, </span>
+<span id="cb98-19"><a href="#cb98-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">b =</span> estimate,</span>
+<span id="cb98-20"><a href="#cb98-20" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">95% CI (b)</span><span class="st">`</span> <span class="ot">=</span> ci,</span>
+<span id="cb98-21"><a href="#cb98-21" aria-hidden="true" tabindex="-1"></a>         <span class="st">`</span><span class="at">Partial eta squared</span><span class="st">`</span> <span class="ot">=</span> peta,</span>
+<span id="cb98-22"><a href="#cb98-22" aria-hidden="true" tabindex="-1"></a>         <span class="at">t =</span> statistic,</span>
+<span id="cb98-23"><a href="#cb98-23" aria-hidden="true" tabindex="-1"></a>         <span class="at">p =</span> p.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <hr>
+<p><strong>Table 1</strong></p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>table <span class="sc">|&gt;</span> </span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>, <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 9%">
+<col style="width: 31%">
+<col style="width: 10%">
 <col style="width: 20%">
 <col style="width: 23%">
 <col style="width: 7%">
-<col style="width: 5%">
+<col style="width: 7%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
-<th style="text-align: right;">b</th>
-<th style="text-align: left;">95% CI (b)</th>
-<th style="text-align: right;">Partial eta squared</th>
-<th style="text-align: right;">t</th>
-<th style="text-align: right;">p</th>
+<th style="text-align: center;">b</th>
+<th style="text-align: center;">95% CI (b)</th>
+<th style="text-align: center;">Partial eta squared</th>
+<th style="text-align: center;">t</th>
+<th style="text-align: center;">p</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Intercept</td>
-<td style="text-align: right;">42.06</td>
-<td style="text-align: left;">(30.32, 53.8)</td>
-<td style="text-align: right;">0.06</td>
-<td style="text-align: right;">7.12</td>
-<td style="text-align: right;">0.00</td>
+<td style="text-align: center;">42.06</td>
+<td style="text-align: center;">(30.32, 53.8)</td>
+<td style="text-align: center;">0.06</td>
+<td style="text-align: center;">7.12</td>
+<td style="text-align: center;">&lt;.001</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Blood Alcohol Concentration</td>
-<td style="text-align: right;">-177.05</td>
-<td style="text-align: left;">(-348.98, -5.12)</td>
-<td style="text-align: right;">0.04</td>
-<td style="text-align: right;">-2.04</td>
-<td style="text-align: right;">0.04</td>
+<td style="text-align: center;">-177.05</td>
+<td style="text-align: center;">(-348.98, -5.12)</td>
+<td style="text-align: center;">0.04</td>
+<td style="text-align: center;">-2.04</td>
+<td style="text-align: center;">0.04</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Trait Anxiety</td>
-<td style="text-align: right;">0.15</td>
-<td style="text-align: left;">(0.09, 0.22)</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">4.73</td>
-<td style="text-align: right;">0.00</td>
+<td style="text-align: center;">0.15</td>
+<td style="text-align: center;">(0.09, 0.22)</td>
+<td style="text-align: center;">0.19</td>
+<td style="text-align: center;">4.73</td>
+<td style="text-align: center;">&lt;.001</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
+<p>Notes:<br>
+$R^2 = 0.224, F(2,93) = 13.44, p &lt; .001***<br>
+Trait anxiety was mean-centered</p>
+<hr>
 
 
 </section>
