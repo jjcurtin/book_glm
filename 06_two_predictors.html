@@ -302,6 +302,9 @@ window.Quarto = {
   <li><a href="#comparing-variance-based-effect-sizes" id="toc-comparing-variance-based-effect-sizes" class="nav-link" data-scroll-target="#comparing-variance-based-effect-sizes"><span class="header-section-number">6.26</span> Comparing Variance Based Effect Sizes</a></li>
   <li><a href="#visualizing-the-model" id="toc-visualizing-the-model" class="nav-link" data-scroll-target="#visualizing-the-model"><span class="header-section-number">6.27</span> Visualizing the Model</a></li>
   <li><a href="#describing-model-results" id="toc-describing-model-results" class="nav-link" data-scroll-target="#describing-model-results"><span class="header-section-number">6.28</span> Describing Model Results</a></li>
+  <li><a href="#multiple-predictors-dichotomous-predictor" id="toc-multiple-predictors-dichotomous-predictor" class="nav-link" data-scroll-target="#multiple-predictors-dichotomous-predictor"><span class="header-section-number">6.29</span> Multiple Predictors: Dichotomous Predictor</a></li>
+  <li><a href="#adding-a-third-predictor" id="toc-adding-a-third-predictor" class="nav-link" data-scroll-target="#adding-a-third-predictor"><span class="header-section-number">6.30</span> Adding a Third Predictor</a></li>
+  <li><a href="#summary-new-and-familiar-concepts" id="toc-summary-new-and-familiar-concepts" class="nav-link" data-scroll-target="#summary-new-and-familiar-concepts"><span class="header-section-number">6.31</span> Summary: New and Familiar Concepts</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/06_two_predictors.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1349,8 +1352,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-488c8b9eae54149c49ec" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-488c8b9eae54149c49ec">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-c0b552a446b657815206" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-c0b552a446b657815206">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"2.34\", fontsize = 5]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <hr>
@@ -1373,8 +1376,8 @@ exam                0.4 0.54 1.00</code></pre>
 <span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-b38eb1aaee31746df9ef" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-b38eb1aaee31746df9ef">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-c4249b628a4a190d14a9" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-c4249b628a4a190d14a9">{"x":{"diagram":"\ndigraph{\n  graph[rankdir=LR]\n  node [shape = box, fontsize = 5, width = .5, height = .2]\n    A [label = \"study_hours\"]\n    B [label = \"iq\"]\n    Y [label = \"exam\"]\n    A->Y [label = \"1.04\", fontsize = 5]\n    B->Y [label = \".35\", fontsize = 5]\n    A->B [dir = both, label = \"3.75\", fontsize = 5]\n{ rank = same; A; B }\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p><strong>Direct + Indirect/Spurious = Total</strong></p>
@@ -1909,7 +1912,7 @@ Trait anxiety was mean-centered</p>
 <span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="fu">mean</span>(data<span class="sc">$</span>fps), <span class="fu">sd</span>(data<span class="sc">$</span>fps)),</span>
 <span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a>       <span class="st">`</span><span class="at">Trait Anxiety</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="fu">cor</span>(data<span class="sc">$</span>bac, data<span class="sc">$</span>ta_c), <span class="fu">mean</span>(data<span class="sc">$</span>ta_c), <span class="fu">sd</span>(data<span class="sc">$</span>ta_c)),</span>
 <span id="cb103-5"><a href="#cb103-5" aria-hidden="true" tabindex="-1"></a>       <span class="st">`</span><span class="at">Blood Alcohol Concentration</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="fu">mean</span>(data<span class="sc">$</span>bac), <span class="fu">sd</span>(data<span class="sc">$</span>bac))) <span class="sc">|&gt;</span> </span>
-<span id="cb103-6"><a href="#cb103-6" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>, <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb103-6"><a href="#cb103-6" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>, <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>, <span class="st">"c"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -1917,14 +1920,14 @@ Trait anxiety was mean-centered</p>
 <col style="width: 28%">
 <col style="width: 26%">
 <col style="width: 15%">
-<col style="width: 28%">
+<col style="width: 29%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
 <th style="text-align: center;">Fear Potentiated Startle</th>
 <th style="text-align: center;">Trait Anxiety</th>
-<th style="text-align: left;">Blood Alcohol Concentration</th>
+<th style="text-align: center;">Blood Alcohol Concentration</th>
 </tr>
 </thead>
 <tbody>
@@ -1932,30 +1935,101 @@ Trait anxiety was mean-centered</p>
 <td style="text-align: left;">Trait Anxiety</td>
 <td style="text-align: center;">0.44</td>
 <td style="text-align: center;"></td>
-<td style="text-align: left;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Blood Alcohol Concentration</td>
 <td style="text-align: center;">-0.19</td>
 <td style="text-align: center;">-0.02</td>
-<td style="text-align: left;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Mean</td>
 <td style="text-align: center;">32.19</td>
 <td style="text-align: center;">0.00</td>
-<td style="text-align: left;">0.06</td>
+<td style="text-align: center;">0.06</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">SD</td>
 <td style="text-align: center;">37.54</td>
 <td style="text-align: center;">105.73</td>
-<td style="text-align: left;">0.04</td>
+<td style="text-align: center;">0.04</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
+<hr>
+</section>
+<section id="multiple-predictors-dichotomous-predictor" class="level2" data-number="6.29">
+<h2 data-number="6.29" class="anchored" data-anchor-id="multiple-predictors-dichotomous-predictor"><span class="header-section-number">6.29</span> Multiple Predictors: Dichotomous Predictor</h2>
+<p><strong>Example:</strong> Evaluate the effects of a new intervention for depression.</p>
+<p><span class="math inline">\(N=200\)</span> participants, randomly assigned to receive new invervention vs.&nbsp;standard of care control.</p>
+<p>Measure depression with CES-D pre- (baseline) and post-intervention.</p>
+<p><span style="color: red;">Question: How do you evaluate the effect of the new intervention in a one predictor model?</span></p>
+<hr>
+<p><span style="color: blue;">1. Code one regressor for intervention group using dummy or zero-centered coefficients. How different?</span></p>
+<p><span style="color: blue;">2. Regress depression scores from post-intervention on intervention group.</span></p>
+<p><span style="color: blue;">3. Test if <span class="math inline">\(b_1\)</span> for Intervention group is non-zero.</span></p>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>data_int <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_data, <span class="st">"6_two_predictors_intervention.csv"</span>),</span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>m_depress_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(depress_post <span class="sc">~</span> intervention_group, <span class="at">data =</span> data_int)</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a>m_depress_1 <span class="sc">|&gt;</span> </span>
+<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term               estimate std.error statistic  p.value
+  &lt;chr&gt;                 &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)           35.7       1.07     33.3  4.96e-83
+2 intervention_group    -3.64      1.52     -2.40 1.75e- 2</code></pre>
+</div>
+</div>
+<p><span style="color: red;">Question: What do you conclude? What do you report?</span></p>
+<hr>
+<p><span style="color: blue;">The new intervention reduced CES-D depressions scores by approximately 3.6 units relative to the standard of care control group, <span class="math inline">\(b = -3.6, t(198) = -2.40, p= .0175.\)</span></span></p>
+<hr>
+<p><span style="color: red;">Question: What else do you report?</span></p>
+<hr>
+<p><span style="color: blue;">PRE or <span class="math inline">\(\Delta R^2\)</span>. Means/SD of two groups or better - figure with means, standard error and raw (or residual) data points.</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># code for delta r squared (same as r.squared since one predictor)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+<p><span style="color: red;">Question: What is a <em>better</em> analysis to address this question about the effect of the intervention and why is it better?</span></p>
+<hr>
+<p><span style="color: blue;">Control for baseline depressions scores to increase power.</span></p>
+<p><span style="color: blue;">Baseline depression should be uncorrelated (in the population) with intervention group because participants were randomly assigned to group. Therefore, including baseline depression should not systematically change <span class="math inline">\(b_1\)</span>.</span></p>
+<p><span style="color: blue;">However, baseline scores are likely strong predictors of post-intervention scores. This will increase model <span class="math inline">\(R^2\)</span>, reduce SSE, and therefore reduce the SE for intervention group. More power!</span></p>
+<hr>
+</section>
+<section id="adding-a-third-predictor" class="level2" data-number="6.30">
+<h2 data-number="6.30" class="anchored" data-anchor-id="adding-a-third-predictor"><span class="header-section-number">6.30</span> Adding a Third Predictor</h2>
+</section>
+<section id="summary-new-and-familiar-concepts" class="level2" data-number="6.31">
+<h2 data-number="6.31" class="anchored" data-anchor-id="summary-new-and-familiar-concepts"><span class="header-section-number">6.31</span> Summary: New and Familiar Concepts</h2>
+<ul>
+<li><p>Interpretation of <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span>, and <span class="math inline">\(b_2\)</span>, in 2+ predictor model with continuous and dichotomous focal predictor.</p></li>
+<li><p>Impact of centering <span class="math inline">\(X_1\)</span> or <span class="math inline">\(X_2\)</span> on <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span>, and <span class="math inline">\(b_2\)</span>.</p></li>
+<li><p>What affects standard errors of <span class="math inline">\(b_j\)</span>.</p></li>
+<li><p>What is Multicollinearity, how to detect, what are implications if high, and what are solutions.</p></li>
+<li><p>Model effect size (<span class="math inline">\(R^2\)</span>).</p></li>
+<li><p>Effect sizes for <span class="math inline">\(X\)</span>s (<span class="math inline">\(b_j\)</span>s, <span class="math inline">\(\Delta R^2\)</span>, <span class="math inline">\(\eta_p^2\)</span>).</p></li>
+<li><p>Text, table, and figure descriptions of results.</p></li>
+</ul>
 
 
 </section>
