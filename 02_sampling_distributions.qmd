@@ -11,14 +11,11 @@ editor_options:
 ## Inferential Statistics
 
 Inferential statistics are used to estimate *parameters* in the population from parameter estimates in a sample drawn from that population. 
-\
-\
+
 In inferential statistics, we use these parameter estimates to test hypotheses (predictions; null and alternative hypotheses) about the size of the population parameter. 
-\
-\
+
 These predictions about the size of population parameters typically map directly onto research questions about (causal) relationships between variables (IVs and DV).
-\
-\
+
 Answers from inferential statistics are **probabilistic**. In other words, all answers have the potential to be wrong and you will provide an index of that probability along with your results. 
 
 -----
@@ -26,11 +23,9 @@ Answers from inferential statistics are **probabilistic**. In other words, all a
 ## Populations
 
 A population is any clearly defined set of objects or events (people, occurrences, animals, etc.). Populations usually represent all events in a particular class (e.g., all college students, all alcoholics, all depressed people, all people). It is often an abstract concept because in many/most instances you will never have access to the entire population.
-\
-\
+
 For example, many of our studies may have the population of all people as its target.
-\
-\
+
 Nonetheless, researchers usually want to describe or draw conclusions about populations (e.g., We don't care if some new drug is an effective treatment for 100 people in your sample. Will it work, on average, for everyone we might treat?). 
 
 -----
@@ -38,17 +33,13 @@ Nonetheless, researchers usually want to describe or draw conclusions about popu
 ## (Population) Parameters
 
 A parameter is a value used to describe a certain characteristic of a population. It is usually unknown and therefore has to be estimated.
-\
-\
+
 For example, the population mean is a parameter that is often used to indicate the average/typical value of a variable in the population.
-\
-\
+
 Within a population, a parameter is a fixed value which does not vary within the population at the time of measurement (e.g., the mean height of people in the US at the present moment).
-\
-\
+
 You typically can't calculate these parameters directly because you don't have access to the entire population.
-\
-\
+
 We use Greek letters to represent population parameters ($\mu$, $\sigma$, $\sigma^2$, $\beta_0$, $\beta_j$).
 
 -----
@@ -56,17 +47,13 @@ We use Greek letters to represent population parameters ($\mu$, $\sigma$, $\sigm
 ## Samples & Parameter Estimates
 
 A sample is a finite group of units (e.g., participants) selected from the population of interest.
-\
-\
+
 A sample is generally selected for a study because the population is too large to study in its entirety. We typically have only one sample in a study.
-\
-\
+
 We use the sample to estimate and test parameters in the population. 
-\
-\
+
 These estimates are called parameter estimates.
-\
-\
+
 We use Roman letters to represent sample parameter estimates ($\overline{X}$, $s$, $s^2$, $b_0$, $b_j$).
 
 -----
@@ -74,11 +61,9 @@ We use Roman letters to represent sample parameter estimates ($\overline{X}$, $s
 ## Sampling Error
 
 Since a sample does not include all members of the population, parameter estimates generally differ from parameters on the entire population (e.g., use mean height of a sample of 1000 people to estimate mean height of US population).
-\
-\
+
 The difference between the (sample) parameter estimate and the (population) parameter is sampling error.
-\
-\
+
 You will not be able to calculate the sampling error of your parameter estimate directly because you don't know the value of the population parameter. However, you can estimate it by probabilistic modeling of the *hypothetical sampling distibution* for that parameter.
 
 -----
@@ -86,17 +71,13 @@ You will not be able to calculate the sampling error of your parameter estimate 
 ## Hypothetical Sampling Distribution
 
 A sampling distribution is a probability distribution for a parameter estimate drawn from all possible samples of size $N$ taken from a population.
-\
-\
+
 A sampling distribution can be formed for any population parameter.
-\
-\
+
 Each time you draw a sample of size $N$ from a population you can calculate an estimate of that population parameter from that sample.
-\
-\
+
 Because of sampling error, these parameter estimates will not exactly equal the population parameter. They will not equal each other either. They will form a distribution.
-\
-\
+
 A sampling distribution, like a population, is an abstract concept that represents the outcome of repeated (infinite) sampling. You will typically only have one sample.
 
 -----
@@ -104,11 +85,9 @@ A sampling distribution, like a population, is an abstract concept that represen
 ## What if we didn't need samples?
 
 ***Research question:*** How do inhabitants of a remote pacific island feel about the ocean? Population size = 10,000.
-\
-\
+
 ***Dependent measure:*** Ocean liking scale scores that range from -100 (strongly dislike) to 100 (strongly like). 0 represents neutral.
-\
-\
+
 ***Hypotheses:*** $H_0: \mu = 0; H_a: \mu \neq 0$ 
 
 <span style="color: red;">Question: How would you answer this question if you had unlimited resources (e.g., time, money, and patience)?</span>
@@ -293,8 +272,7 @@ data_sample_2 |>
 ## Sampling Distribution of the Mean
 
 You can construct a sampling distribution for any parameter estimate (e.g., mean, $s$, min, max, $r$, $b_0$, $b_1$).
-\
-\
+
 For the mean, you can think of the sampling distribution conceptually as follows:  
 
 1. Imagine drawing many samples (lets say 1000 samples but in theory, the sampling distribution is infinite) of $N$=10 participants (10 participants in each sample) from your population.
@@ -378,7 +356,7 @@ plot_raw + plot_samples
 
 ## Sampling Distribution of the Mean
 
-<span style="color: red;">Question: What will the mean of the sample means be?  In other words, what is the mean of the sampling distribution?</span>
+<span style="color: red;">Question: What will the mean of the sample means be? In other words, what is the mean of the sampling distribution?</span>
 
 -----
 
@@ -393,8 +371,7 @@ plot_samples
 -----
 
 ***The mean is an unbiased estimator:*** The mean of the sample means will equal the mean of the population. Therefore, individual sample means will neither systematically under or overestimate the population mean.
-\
-\
+
 ***Raw Ocean Liking Scores:***
 ```{r}
 #| code-fold: true
@@ -404,7 +381,7 @@ data |>
             mean_m = round(mean(like_score), 2), 
             sd = sd(like_score))
 ```
-\
+
 ***Sample (N=10) Means:***
 ```{r}
 #| code-fold: true
@@ -448,15 +425,15 @@ plot_samples
 ## Standard Error(SE)
 
 The standard deviation of the sampling distribution (i.e., standard deviation of the infinite sample means) is equal to:   
-\
+
 $\frac{\sigma}{\sqrt{N_{sample}}}$
-\
+
 Where $\sigma$ is the standard deviation of the population raw scores.  
-\
+
 This variability in the sampling distribution is due to sampling error.  
-\
+
 Therefore, because we use parameter estimates calculated in our sample to estimate population parameters, we would like to minimize sampling error.
-\
+
 The standard deviation of the sampling distribution for a parameter estimate has a technical name.  It is called the standard error of the parameter estimate.  Here, we are talking about the standard error of the mean.
 
 -----
@@ -523,8 +500,7 @@ The standard deviation of the sampling distribution for a parameter estimate has
 ## Shape of the Sampling Distribution
 
 ***Central Limit Theorem:*** The shape of the sampling distribution approaches normal as $N$ increases. 
-\
-\
+
 The shape is roughly normal even for moderate sample sizes assuming that the original distribution isn’t really weird (i.e., non-normal). 
 
 -----
@@ -876,11 +852,9 @@ samp_skew_100_plot <- samp_skew_100 |>
 ## An Important Normal Distribution: Z-scores
 
 The $z$ distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.
-\
-\
+
 You can therefore think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.
-\
-\
+
 The probability distribution is known for the $z$ distribution.
 
 ```{r}
@@ -939,8 +913,9 @@ probability_1sd + probability_2sd + probability_3sd
 ## Probability of Parameter Estimate Given $H_0$
 
 How could you use the $z$ distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of $N=10$ from a population of Ocean Liking scores with a population mean (parameter) of 0?
-\
-\
+
+
+
 Think about it……
 
 -----
@@ -1037,11 +1012,9 @@ $z = \frac{2.4 - 0}{7.5} = 0.32$
 -----
 
 <span style="color: blue;">This was our estimate of the standard deviation of the sampling distribution.</span>  
-\
-\
+
 <span style="color: blue;">$\frac{\sigma}{\sqrt{N_{sample}}}$</span>  
-\
-\
+
 <span style="color: blue;">We do not know $\sigma$.</span>   
 
 -----
@@ -1059,8 +1032,7 @@ $z = \frac{2.4 - 0}{7.5} = 0.32$
 -----
 
 <span style="color: blue;">We account for this underestimation of $\sigma$ and therefore of the standard deviation (standard error) of the sampling distribution by using the $t$ distribution rather than the $z$ distribution to calculate the probability of our parameter estimate if $H_0$ is true.</span>    
-\
-\
+
 <span style="color: blue;">The $t$ distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.</span>
 
 -----
@@ -1068,9 +1040,9 @@ $z = \frac{2.4 - 0}{7.5} = 0.32$
 ## Our Second Inferential Test: One Sample t-test
 
 $t(df)$ = $\frac{\text{Parameter estimate – Parameter:} H_0}{\text{Standard error of parameter estimate}}$   
-\          
-Where $SE$ is estimated using $s$ from sample data.
-\
+         
+Where SE is estimated using $s$ from sample data.
+
 $df = N – P = 10 - 1 = 9$
 
 

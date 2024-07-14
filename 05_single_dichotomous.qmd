@@ -31,7 +31,7 @@ options(scipen = 999) # turns off scientfic notation
 
 ## Dichotomous Predictor
   
-<span style="color: red;">Question: Consider a regression model with one dichotomous predictor and the typical continuous DV.  What other statistical test is this regression equivalent to?</span>
+<span style="color: red;">Question: Consider a regression model with one dichotomous predictor and the typical continuous DV. What other statistical test is this regression equivalent to?</span>
 
 -----
 
@@ -143,9 +143,9 @@ m_q |>
 <span style="color: blue;">Don’t dichotomize unless there is a **REALLY** good reason. GLM can accommodate quantitative variables anywhere you would have previously used a categorical variable.</span>  
 
 
-$SE_{b_0}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overline{X})^2}{(N-1)*S_x^2}}$  
+$\text{SE}_{b_0}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overline{X})^2}{(N-1)*S_x^2}}$  
 
-$SE_{b_1}=\frac{s_y}{s_x}*\sqrt{\frac{1-R^2}{N-P}}$
+$\text{SE}_{b_1}=\frac{s_y}{s_x}*\sqrt{\frac{1-R^2}{N-P}}$
 
 
 -----
@@ -283,12 +283,12 @@ $H_a: \beta_1 \neq 0$
 $H_0: \beta_1 = 0$  
 $H_a: \beta_1 \neq 0$   
 
-<span style="color: blue;">Compact model:  $\hat{\text{FPS}}=\beta_0+0*\text{bg_2}_i$</span>  
+<span style="color: blue;">Compact model:  $\hat{\text{FPS}}_i = \beta_0+0*\text{bg}\_2_i$</span>  
 $P_c = 1$  
 $\text{SSE}_c = `r round(sum((data$fps - mean(data$fps))^2),2)`$  
 
 
-<span style="color: blue;">Augmented model:  $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i$</span>   
+<span style="color: blue;">Augmented model:  $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg}\_2_i$</span>   
 $P_a=2$  
 $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
 
@@ -298,12 +298,12 @@ $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
 
 -----
 
-Compact model:  $\hat{\text{FPS}}=\beta_0+0*\text{bg_2}_i$  
+Compact model:  $\hat{\text{FPS}}_i=\beta_0+0*\text{bg}\_2_i$  
 $P_c = 1$  
 $\text{SSE}_c = `r round(sum((data$fps - mean(data$fps))^2),2)`$   
 
 
-Augmented model:  $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i$   
+Augmented model:  $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg}\_2_i$   
 $P_a=2$  
 $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
 
@@ -342,13 +342,13 @@ $H_a: \beta_0 \neq 0$
 $H_0: \beta_0 = 0$  
 $H_a: \beta_0 \neq 0$   
 
-<span style="color: blue;">Compact model: $\hat{\text{FPS}}=0+\beta_1*\text{bg_2}_i$</span>  
+<span style="color: blue;">Compact model: $\hat{\text{FPS}}_i=0+\beta_1*\text{bg}\_2_i$</span>  
 
 $P_c = 1$  
 $\text{SSE}_c = `r round(sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2),2)`$  
 
 
-<span style="color: blue;">Augmented model: $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i$</span>   
+<span style="color: blue;">Augmented model: $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg}\_2_i$</span>   
 
 $P_a=2$  
 $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
@@ -359,13 +359,13 @@ $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
 
 -----
 
-Compact model: $\hat{\text{FPS}}=0+\beta_1*\text{bg_2}_i$  
+Compact model: $\hat{\text{FPS}}_i=0+\beta_1*\text{bg}\_2_i$  
 
 $P_c = 1$  
 $\text{SSE}_c = `r round(sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2),2)`$  
 
 
-Augmented model: $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i$   
+Augmented model: $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg}\_2_i$   
 
 $P_a=2$  
 $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$  
@@ -386,7 +386,7 @@ $P_c = 1$
 $\text{SSE}_c = `r round(sum((data$fps - mean(data$fps))^2),2)`$  
 
 
-Augmented model: $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg_2}_i$   
+Augmented model: $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg}\_2_i$   
 
 $P_a=2$  
 $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$  

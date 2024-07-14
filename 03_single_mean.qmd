@@ -18,14 +18,11 @@ options(scipen = 999) # turns off scientfic notation
 
 
 - First, consider details of simplest model (one parameter estimate; mean-only model; no $X$s).
-\
-\
+
 - Next, examine simple regression (two parameter estimates; one $X$ for one quantitative predictor variable).
-\
-\
+
 - These provide a critical foundation for all linear models.
-\
-\
+
 - Subsequent units will generalize to one dichotomous variable (*Unit 5*), multiple predictor variables (*Units 6-7*), and beyond...
 
 
@@ -35,18 +32,15 @@ options(scipen = 999) # turns off scientfic notation
 ## Linear Models as Models
 
 Linear models (including regression) are *models*.
-\
-\
+
 **DATA = MODEL + ERROR**
-\
-\
+
 Three general uses for models:  
 
 1. ***Describe*** and summarize DATA ($Y$s) in a simpler form using MODEL.
 2. ***Predict*** DATA ($Y$s) from MODEL.
 3. ***Understand*** (test inferences about) complex relationships between individual regressors ($X$s) in MODEL and the DATA ($Y$s). How precise are estimates of relationship?
-\
-\
+
 
 MODELS are simplifications of reality. As such, there is ERROR. They also make assumptions that must be evaluated.
 
@@ -55,17 +49,12 @@ MODELS are simplifications of reality. As such, there is ERROR. They also make a
 ## Fear Potential Startle
 
 We are interested in producing anxiety in the laboratory.
-\
-\
+
 To do this, we develop a procedure where we expose people to periods of unpredictable electric shock administration alternating with periods of safety.
-\
-\
+
 We measure their startle response in the shock and safe periods.
-\
-\
+
 We use the difference between their startle during shock – safe to determine if they are anxious. 
-\
-\
 This is called **Fear potentiated startle (FPS)**. Our procedure works if FPS > 0.  We need a model of FPS scores to determine if FPS > 0.
 
 ------
@@ -75,12 +64,9 @@ This is called **Fear potentiated startle (FPS)**. Our procedure works if FPS > 
 A very simple model for the population of FPS scores would predict the same value for everyone in the population.
 
 $\hat{Y}_i=\beta_0$
-\
-\
+
 
 We would like this value to be the *best* prediction.
-\
-\
 
 
 <span style="color: red;">Question: In the context of DATA = MODEL + ERROR, how can we quantify *best*?</span>
@@ -88,12 +74,13 @@ We would like this value to be the *best* prediction.
 -----
 
 <span style="color: blue;">We want to predict some characteristic about the population of FPS scores that minimizes the ERROR from our model.</span>   
-\
+
 <span style="color: blue;">ERROR = DATA – MODEL</span>   
-\
+
 <span style="color: blue;">$\varepsilon_i=Y_i-\hat{Y}_i$; There is an error ($\varepsilon_i$) for each population score.</span>
-\
-\
+
+-----
+
 <span style="color: red;">Question: How can we quantify total model error?</span>
 
 -----
@@ -103,13 +90,11 @@ We would like this value to be the *best* prediction.
 <span style="color: blue;">**Sum of errors**</span> across all scores in the population isn’t ideal because positive and negative errors will tend to cancel each other out.
 
 $\sum(Y_i-\hat{Y}_i)$
-\
-\
+
 <span style="color: blue;">**Sum of absolute values of errors**</span> could work. If we selected $\beta_0$ to minimize the sum of the absolute value of errors, $\beta_0$ would equal the median of the population.
 
 $\sum(|Y_i-\hat{Y}_i|)$
-\
-\
+
 
 <span style="color: blue;">**Sum of squared errors (SSE)**</span> could work. If we selected $\beta_0$ to minimize the sum of squared errors, $\beta_0$ would equal the mean of the population.
 
@@ -121,19 +106,17 @@ $\sum(Y_i-\hat{Y}_i)^2$
 ## One Parameter Model for FPS
 
 For the moment, lets assume we prefer to minimize SSE (more on that in a moment). You should predict the population mean FPS for everyone.  
-\
+
 
 $\hat{Y}_i=\beta_0$ where $\beta_0=\mu$
-\
-\
+
 
 <span style="color: red;">Question: What is the problem with this model and how can we fix this problem?</span>
 
 -----
 
 <span style="color: blue;">We don't know the population mean for FPS scores ($\mu$).</span>
-\
-\
+
 <span style="color: blue;">We can collect a sample from the population and use the sample mean ($\overline{X}$) as an estimate of the population mean ($\mu$). $\overline{X}$ is an unbiased estimate for $\mu$.</span>
 
 -----
@@ -147,7 +130,7 @@ $\hat{Y}_i=\beta_0$ where $\beta_0=\mu$
 
 $Y_i=\beta_0+\varepsilon_i$   
 
-\
+
 
 ***Estimate population parameters from sample***
 
@@ -160,7 +143,7 @@ $Y_i=b_0+e_i$
 ## Least Squares Criterion
 
 In ordinary least squares (OLS) regression and other least squares linear models, the model parameter estimates (e.g., $b_0$) are calculated such that they minimize the sum of squared errors (SSE) in the sample in which you estimate the model.  
-\
+
 
 $\text{SSE}=\sum(Y_i-\hat{Y}_i)^2$   
 
@@ -173,17 +156,17 @@ $\text{SSE}=\sum e_i^2$
 There are three properties that make a parameter estimate attractive.  
 
 1. ***Unbiased:*** Mean of the sampling distribution for the parameter estimate is equal to the value for that parameter in the population.   
-\
-2. ***Efficient:*** The sample estimates are close to the population parameter.  In other words, the narrower the sampling distribution for any specific sample size $N$, the more efficient the estimator. Efficient means small $SE$ for parameter estimate.    
-\
-3. ***Consistent:*** As the sample size increases, the sampling distribution becomes narrower (more efficient). Consistent means as $N$ increases, $SE$ for parameter estimate decreases
+
+2. ***Efficient:*** The sample estimates are close to the population parameter.  In other words, the narrower the sampling distribution for any specific sample size $N$, the more efficient the estimator. Efficient means small SE for parameter estimate.    
+
+3. ***Consistent:*** As the sample size increases, the sampling distribution becomes narrower (more efficient). Consistent means as $N$ increases, SE for parameter estimate decreases
 
 -----
 
 ## Least Squares Criterion (Continued)
 
 If the $\varepsilon_i$ are normally distributed, both the median and the mean are ***unbiased*** and ***consistent*** estimators.   
-\
+
 
 The variance of the sampling distribution for the mean is:   
 
@@ -192,8 +175,7 @@ $\frac{\sigma^2}{N}$
 The variance of the sampling distribution for the mean is:   
 
 $\frac{\pi\sigma^2}{2N}$   
-\
-\
+
 
 Therefore, the mean is the **more efficient** parameter.   
 
@@ -245,18 +227,18 @@ data |>
 
 
 ***Goal:*** Determine if our shock threat procedure is effective at potentiating startle (increasing startle during threat relative to safe).  
-\
+
 
 Create a simple model of FPS scores in the population.   
 
 $\text{FPS}=\beta_0$   
-\
+
 
 Collect sample of $N=96$ to estimate $\beta_0$.   
-\
+
 
 Calculate sample parameter estimate ($b_0$) that minimizes SSE in sample.   
-\
+
 
 Use $b_0$ to test hypotheses.    
 
@@ -290,8 +272,7 @@ We can also easily calculate the SSE with the following code:
 sum(residuals(m)^2)
 ```
 
-\
-\
+
 This tells us about how well the model fits the data.  Specifically it is the sum of the squared differences between the predicted values and the actual participant scores
 
 -----
@@ -320,10 +301,9 @@ $\hat{Y}_i=b_0=32.2$
 The statistic is the t-statistic to test the $H_0$ that $\beta_0=0$.   
 
 The probability (p-value) of obtaining a sample $b_0=32.2$ if $H_0$ is true ($\beta_0=0$) is < .0001.
-\
-\
 
-<span style="color: red;">Question: Describe the logic of how this was determined given your understanding of sampling distributions?</span>
+
+<span style="color: red;">Describe the logic of how this was determined given your understanding of sampling distributions.</span>
 
 -----
 
@@ -331,13 +311,13 @@ The probability (p-value) of obtaining a sample $b_0=32.2$ if $H_0$ is true ($\b
 
 
 $H_0: \beta_0 = 0; H_a: \beta_0 \neq 0$   
-\
 
-<span style="color: blue;">If $H_0$ is true, the sampling distribution for $\beta_0$ will have a mean of 0. We can estimate standard deviation of the sampling distribution with $SE$ for $b_0$.</span>    
-\
 
-$t(df=N-P)=\frac{b_0-0}{SE_{b_0}}=\frac{32.2-0}{3.8}=8.40$   
-\
+<span style="color: blue;">If $H_0$ is true, the sampling distribution for $\beta_0$ will have a mean of 0. We can estimate standard deviation of the sampling distribution with SE for $b_0$.</span>    
+
+
+$t(df=N-P)=\frac{b_0-0}{\text{SE}_{b_0}}=\frac{32.2-0}{3.8}=8.40$   
+
 
 <span style="color: blue;">$b_0$ is approximately `r round(broom::tidy(m)$estimate/broom::tidy(m)$std.error)` standard deviations above the expected mean of the distribution if $H_0$ is true.</span>  
 
@@ -347,8 +327,8 @@ We can use `pt()` to calculate the $p$ value.
 ```{r}
 pt(8.40,95,lower.tail=FALSE) * 2
 ```
-\
-\
+
+
 The probability of obtaining a sample $b_0$ = `r round(broom::tidy(m)$estimate, 1)` (or more extreme) if $H_0$ is true is very low (< .05). Therefore we reject $H_0$ and conclude that $\beta_0 \neq 0$ and $b_0$ is our best (unbiased) estimate of it.
 
 -----
@@ -366,15 +346,14 @@ tibble(b0 = seq(-40,40,.01),
 
 ## Statistical Inference and Model Comparisons
 
-Statistical inference about parameters is fundamentally about model comparisons.\
+Statistical inference about parameters is fundamentally about model comparisons.
   
-\
 You are implicitly (t-test of parameter estimate) or explicitly (F-test of model comparison) comparing two different models of your data.   
-\
+
 We follow Judd et al and call these two models the *compact model* and the *augmented model*.    
-\
+
 The compact model will represent reality as the null hypothesis predicts. The augmented model will represent reality as the alternative hypothesis predicts.  
-\
+
 The compact model is simpler (fewer parameters) than the augmented model. It is also nested in the augmented model (i.e. a subset of parameters).   
 
 -----
@@ -386,15 +365,15 @@ $\hat{\text{FPS}_i}=\beta_0$
 $H_0: \beta_0 = 0$     
 
 $H_a: \beta_0 \neq 0$     
-\
+
 
 Compact model: $\hat{\text{FPS}_i}=0$    
 Augmented model: $\hat{\text{FPS}_i}=\beta_0 (\approx b_0)$    
-\
+
 
 We estimate 0 parameters ($P=0$) in this compact model.   
 We estimate 1 parameter ($P=1$) in this augmented model.   
-\
+
 Choosing between these two models is equivalent to testing if $\beta_0 = 0$ as you did with the t-test.   
 
 -----
@@ -448,12 +427,12 @@ sum(residuals(m)^2)
 Compact model: $\hat{\text{FPS}_i}=0$      
 SSE = `r round(sum((data$fps - 0)^2), 1)`   
 P = 0  
-\
+
 
 Augmented model: $\hat{\text{FPS}_i}=\beta_0 (\approx b_0)$     
 SSE = `r round(sum(residuals(m)^2), 1)`    
 P = 1   
-\
+
 
 $F(P_a-P_c, N-P_a) = \frac{(\text{SSE}_c-\text{SSE}_a)/(P_a-P_c)}{\text{SSE}_a/(N-P_a)}$    
 
@@ -473,13 +452,13 @@ The two approaches to testing $H_0$ about parameters ($\beta_0, \beta_j$) are st
 
 
 They are complementary approaches with respect to conceptual understanding of GLMs.   
-\
+
 
 **Sampling Distribution**   
 
 - Focus on population parameters and their estimates.   
 - Tight connection to sampling and probability distributions.   
-- Understanding of $SE$ (sampling error/power; confidence intervals, graphic displays).  
+- Understanding of SE (sampling error/power; confidence intervals, graphic displays).  
 
 
 **Model Comparison**   
@@ -494,10 +473,10 @@ They are complementary approaches with respect to conceptual understanding of GL
 ## Effect Sizes
 
 Your parameter estimates are descriptive. They describe effects in the original units of the (IVs) and DV. Report them in your paper.   
-\
+
 
 There are many other effect size estimates available. You will learn two that we prefer.   
-\
+
 
 Partial eta squared ($\eta_p^2$):  Judd et al call this PRE (proportional reduction in error).   
 
@@ -508,18 +487,18 @@ Eta squared ($\eta^2$): This is also commonly referred to as $\Delta R^2$ in reg
 Compact model: $\hat{\text{FPS}_i}=0$      
 SSE = `r round(sum((data$fps - 0)^2), 1)`   
 P = 0  
-\
+
 
 Augmented model: $\hat{\text{FPS}_i}=\beta_0 (\approx b_0)$     
 SSE = `r round(sum(residuals(m)^2), 1)`    
 P = 1   
-\
+
 
 How much was the error reduced in the augmented model relative to the compact model?   
-\
+
 
 $\frac{\text{SSE}_c-\text{SSE}_a}{\text{SSE}_c} = \frac{`r round(sum((data$fps - 0)^2), 1)` - `r round(sum(residuals(m)^2), 1)`}{`r round(sum((data$fps - 0)^2), 1)`} = `r round((sum((data$fps - 0)^2)-sum(residuals(m)^2))/sum((data$fps - 0)^2),3)`$   
-\
+
 
 Our more complex model that includes $\beta_0$ reduces prediction error (SSE) by approximately `r round((sum((data$fps - 0)^2)-sum(residuals(m)^2))/sum((data$fps - 0)^2)*100)`%. Not bad!
 
@@ -535,15 +514,13 @@ confint(m) #<1>
 
 1. Use the `confint()` function to calculate confidence intervals. The default is to provide 95% CIs, but you can change this using the `level` parameter if you wish.   
 
-\
-\
 
 <span style="color: red;">Question: Given what you now know about confidence intervals and sampling distributions, what should the formula be?</span>
 
 -----
 
-<span style="color: blue;">$\text{CI}(b_0)= b_0 \pm t(\alpha;N-P) * SE_{b_0}$</span>   
-\
+<span style="color: blue;">$\text{CI}(b_0)= b_0 \pm t(\alpha;N-P) * \text{SE}_{b_0}$</span>   
+
 
 <span style="color: blue;">For the 95% confidence interval this is approximately 2 SEs around our unbiased estimate of $\beta_0$.</span>
  
@@ -554,7 +531,6 @@ confint(m) #<1>
 -----
 
 <span style="color: blue;">If a parameter estimate $\neq$ 0 at $\alpha$ = .05, then the 95% confidence interval for its parameter estimate should not include 0.</span>   
-\
 
 <span style="color: blue;">This is also true for testing whether the parameter estimate is equal to any other non-zero value for the population parameter.</span>
  
@@ -581,12 +557,12 @@ t.test(data$fps)
 -----
 
 <span style="color: blue;">**Option 1:**</span> Compare SSE for the augmented model ($\hat{Y}_i= \beta_0$) to SSE from a different compact model for this new $H_0$ ($\hat{Y}_i= 10$).   
-\
+
 
 <span style="color: blue;">**Option 2:**</span> Recalculate t-statistic using this new $H_0$.  
 
-$t= \frac{b_0 - 10}{SE_{b_0}}$   
-\
+$t= \frac{b_0 - 10}{\text{SE}_{b_0}}$   
+
 
 <span style="color: blue;">**Option 3:**</span> Does the confidence interval for the parameter estimate contain this other value? No p-value provided.   
 
@@ -604,7 +580,6 @@ One parameter ($\beta_0$) *mean-only* model
 - **Prediction:** $b_0$ is predicted value that minimizes sample SSE.
 - **Inference:** Use $b_0$ to test id $\beta_0 = 0$ (default) or any other value. One sample t-test.   
 
-\
 
 Two parameter ($\beta_0, \beta_1$) model    
 
