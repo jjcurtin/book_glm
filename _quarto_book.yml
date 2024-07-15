@@ -32,6 +32,7 @@ book:
     - 04_single_quantitative.qmd
     - 05_single_dichotomous.qmd
     - 06_two_predictors.qmd
+    - 07_case_analysis.qmd
     - part: Appendices
       chapters:
         - app_terminology.qmd
