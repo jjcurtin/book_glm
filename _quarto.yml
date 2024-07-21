@@ -1,0 +1,38 @@
+project:
+  type: book
+
+execute:
+  echo: true
+  warning: true
+  message: true
+  freeze: auto
+
+toc: true
+toc-depth: 3
+bibliography: refs.bib
+css: book.css
+callout-icon: false
+code-fold: show
+
+book:
+  title: "Introduction to the General Linear Model"
+  author: John J. Curtin, PhD
+  site-url: https://github.io/jjcurtin/book_glm
+  repo-url: https://github.com/jjcurtin/book_glm
+  repo-branch: main
+  repo-actions: [edit]
+  sharing: [facebook, linkedin]
+  page-navigation: true
+  reader-mode: true
+  chapters:
+    - index.qmd
+    - 01_overview.qmd
+    - 02_sampling_distributions.qmd
+    - 03_single_mean.qmd
+    - 04_single_quantitative.qmd
+    - 05_single_dichotomous.qmd
+    - 06_two_predictors.qmd
+    - 07_case_analysis.qmd
+    - part: Appendices
+      chapters:
+        - app_terminology.qmd

@@ -14,3 +14,192 @@ options(scipen = 999) # turns off scientfic notation
 options(knitr.kable.NA = '')
 ```
 
+## Anscombe's Quartet
+
+
+
+-----
+
+## Case Analysis
+
+- Goal is to identify any unusual or excessively influential data. These data points may either bias results and/or reduce power to detect effects (inflate standard errors and/or decrease $R^2$).   
+
+- Three aspects of individual observations we attend to:
+  1. Leverage
+  2. Regression Outlier
+  3. Influence
+
+- Case Analysis also provides an important first step as you get to *know* your data.  
+
+-----
+
+## Case Analysis: Unusual and Influential Data
+
+```{r}
+#| message: false
+
+library(tidyverse)
+
+data <- read_csv(here::here("data_lecture/6_two_predictors_fps.csv"), 
+                 show_col_types = FALSE) |> 
+  glimpse()
+```
+
+-----
+
+```{r}
+m_1 <- lm(fps ~ bac + ta, data = data)
+
+broom::tidy(m_1)
+```
+
+-----
+
+## Univariate Statistics and Graphs
+
+```{r}
+data |> 
+  select(-subid) |> 
+  pivot_longer(everything(), names_to = "var") |>
+  group_by(var) |> 
+  summarize( n = n(),
+             mean = mean(value), 
+             sd = sd(value), 
+             min = min(value), 
+             max = max(value)) |> 
+  mutate(across(mean:max, ~round(.x, 2)))
+```
+
+
+-----
+
+```{r}
+# univariate plots
+```
+
+-----
+
+## Bivariate Correlations
+
+```{r}
+data |> 
+  select(-subid) |> 
+  cor() |> 
+  round(2)
+```
+
+-----
+
+## Bivariate Plots
+
+```{r}
+# bivariate plots
+```
+
+-----
+
+## Leverage (Cartoon Data)
+
+**Check for high Leverage points**   
+
+Leverage is a property of the predictors (DV is not considered for leverage analysis). An observation will have increased *leverage* on the results as its distance from the mean of all predictors increases. 
+
+
+```{r}
+# cartoon leverage plot
+```
+
+<span style="color: red;">Question: Which colored points have the most leverage in the 1 predictor example above?</span> 
+
+-----
+
+## Leverage
+
+Hat values ($h_i$) provide an index of leverage.   
+
+In the one predictor case:  
+$h_i = \frac{1}{N} + \frac{(X_i- \overline X)^2}{\sum(X_j- \overline X)^2}$ (for $j=1$ to $N$ in summation)  
+
+With multiple predictors, $h_i$ measures the distance from the centroid (point of means) of the $X$s. Hat values are bounded between $\frac{1}{N}$ and 1. 
+
+**Mean Hat value = $\frac{P}{N}$.**  
+
+Rules of thumb:  
+- $h_i > 3* \overline h$ for small samples ($N < 100$)
+- $h_i > 2* \overline h$ for large samples   
+
+
+**Do not blindly apply rules of thumb. Hat values should be separated from distribution of $h_i$. View a histogram of $h_i$.**
+
+Note: Mahalanobis (Maha) distance = $(N - 1)(h_i - \frac{1}{N})$.   
+SPSS reports centered leverage ($h - \frac{1}{N}$).
+
+-----
+
+## Leverage (Cartoon Data; Continued)
+
+
+High leverage values are not always bad. In fact, in some cases they are good. Must also consider if they are regression outliers.  
+
+<span style="color: red;">Question: Why?</span> 
+
+-----
+
+$R^2 = \frac{\text{SSE}_{\text{mean-only}}- \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}$  
+
+$\text{SE}_{bi} = \frac{s_y}{s_i} = \frac{\sqrt{(1-R^2_y)}}{\sqrt{(N - k - 1)}}*\frac{1}{\sqrt{(1-R^2_i)}}$
+
+
+<span style="color: blue;">- High leverage points that are fit well by the model increase the difference between $\text{SSE}_{\text{mean-only}}$ and $\text{SSE}_a$, which increases $R^2$.</span>
+
+<span style="color: blue;">- High leverage points that are fit well also increase variance for predictor. This reduces the SE for predictors and yields more power.</span>
+
+<span style="color: blue;">- Well fit, high leverage points do **not** alter $b$s.</span>
+
+```{r}
+# cartoon leverage plot
+```
+
+-----
+
+## Leverage (Real Data)
+
+
+
+
+
+
+
+## Enter the Real World
+
+<span style="color: red;">Question: So what do you do?</span> 
+
+
+-----
+
+## Overall Impact of Problem Scores: Real Data
+
+```{r}
+# add code example
+```
+
+
+-----
+
+## What to Do
+
+<span style="color: blue;">- Don’t worry about leverage alone.</span>
+
+<span style="color: blue;">- Worry about model outliers always.</span>
+
+<span style="color: blue;">- Worry about influence (overall model or predictors by field).</span>
+
+<span style="color: blue;">- Drop, retain, or bring model outliers to the fence.</span>
+
+<span style="color: blue;">- Drop or retain influential participants.</span>
+
+<span style="color: blue;">- Report both ways (in olden day…).</span>
+
+<span style="color: blue;">- Get with the program and pre-register instead (what you worry about, how you define it, and what you do)!</span>
+
+
