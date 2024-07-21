@@ -1318,5 +1318,115 @@
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
     ]
+  },
+  {
+    "objectID": "07_case_analysis.html#case-analysis-unusual-and-influential-data",
+    "href": "07_case_analysis.html#case-analysis-unusual-and-influential-data",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.3 Case Analysis: Unusual and Influential Data",
+    "text": "7.3 Case Analysis: Unusual and Influential Data\n\n\nCode\nlibrary(tidyverse)\n\ndata &lt;- read_csv(here::here(\"data_lecture/6_two_predictors_fps.csv\"), \n                 show_col_types = FALSE) |&gt; \n  glimpse()\n\n\nRows: 96\nColumns: 4\n$ subid &lt;chr&gt; \"0125\", \"0013\", \"0113\", \"0116\", \"0111\", \"0014\", \"0124\", \"0022\", …\n$ bac   &lt;dbl&gt; 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, …\n$ ta    &lt;dbl&gt; 110, 120, 35, 119, 26, 103, 52, 34, 208, 34, 254, 84, 249, 163, …\n$ fps   &lt;dbl&gt; -98.0977778, -22.5285000, 0.4632944, 1.1943667, 2.7280444, 6.723…\n\n\n\n\n\nCode\nm_1 &lt;- lm(fps ~ bac + ta, data = data)\n\nbroom::tidy(m_1)\n\n\n# A tibble: 3 × 5\n  term        estimate std.error statistic    p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;\n1 (Intercept)   19.4      7.66        2.54 0.0128    \n2 bac         -177.      86.6        -2.04 0.0437    \n3 ta             0.153    0.0324      4.73 0.00000807",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#univariate-statistics-and-graphs",
+    "href": "07_case_analysis.html#univariate-statistics-and-graphs",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.4 Univariate Statistics and Graphs",
+    "text": "7.4 Univariate Statistics and Graphs\n\n\nCode\ndata |&gt; \n  select(-subid) |&gt; \n  pivot_longer(everything(), names_to = \"var\") |&gt;\n  group_by(var) |&gt; \n  summarize( n = n(),\n             mean = mean(value), \n             sd = sd(value), \n             min = min(value), \n             max = max(value)) |&gt; \n  mutate(across(mean:max, ~round(.x, 2)))\n\n\n# A tibble: 3 × 6\n  var       n   mean     sd   min    max\n  &lt;chr&gt; &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;\n1 bac      96   0.06   0.04   0     0.14\n2 fps      96  32.2   37.5  -98.1 163.  \n3 ta       96 148.   106.    10   445   \n\n\n\n\n\nCode\n# univariate plots",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#bivariate-correlations",
+    "href": "07_case_analysis.html#bivariate-correlations",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.5 Bivariate Correlations",
+    "text": "7.5 Bivariate Correlations\n\n\nCode\ndata |&gt; \n  select(-subid) |&gt; \n  cor() |&gt; \n  round(2)\n\n\n      bac    ta   fps\nbac  1.00 -0.02 -0.19\nta  -0.02  1.00  0.44\nfps -0.19  0.44  1.00",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#bivariate-plots",
+    "href": "07_case_analysis.html#bivariate-plots",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.6 Bivariate Plots",
+    "text": "7.6 Bivariate Plots\n\n\nCode\n# bivariate plots",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#leverage-cartoon-data",
+    "href": "07_case_analysis.html#leverage-cartoon-data",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.7 Leverage (Cartoon Data)",
+    "text": "7.7 Leverage (Cartoon Data)\nCheck for high Leverage points\nLeverage is a property of the predictors (DV is not considered for leverage analysis). An observation will have increased leverage on the results as its distance from the mean of all predictors increases.\n\n\nCode\n# cartoon leverage plot\n\n\nQuestion: Which colored points have the most leverage in the 1 predictor example above?",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#leverage",
+    "href": "07_case_analysis.html#leverage",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.8 Leverage",
+    "text": "7.8 Leverage\nHat values (\\(h_i\\)) provide an index of leverage.\nIn the one predictor case:\n\\(h_i = \\frac{1}{N} + \\frac{(X_i- \\overline X)^2}{\\sum(X_j- \\overline X)^2}\\) (for \\(j=1\\) to \\(N\\) in summation)\nWith multiple predictors, \\(h_i\\) measures the distance from the centroid (point of means) of the \\(X\\)s. Hat values are bounded between \\(\\frac{1}{N}\\) and 1.\nMean Hat value = \\(\\frac{P}{N}\\).\nRules of thumb:\n- \\(h_i &gt; 3* \\overline h\\) for small samples (\\(N &lt; 100\\)) - \\(h_i &gt; 2* \\overline h\\) for large samples\nDo not blindly apply rules of thumb. Hat values should be separated from distribution of \\(h_i\\). View a histogram of \\(h_i\\).\nNote: Mahalanobis (Maha) distance = \\((N - 1)(h_i - \\frac{1}{N})\\).\nSPSS reports centered leverage (\\(h - \\frac{1}{N}\\)).",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#leverage-cartoon-data-continued",
+    "href": "07_case_analysis.html#leverage-cartoon-data-continued",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.9 Leverage (Cartoon Data; Continued)",
+    "text": "7.9 Leverage (Cartoon Data; Continued)\nHigh leverage values are not always bad. In fact, in some cases they are good. Must also consider if they are regression outliers.\nQuestion: Why?\n\n\\(R^2 = \\frac{\\text{SSE}_{\\text{mean-only}}- \\text{SSE}_a}{\\text{SSE}_{\\text{mean-only}}}\\)\n\\(\\text{SE}_{bi} = \\frac{s_y}{s_i} = \\frac{\\sqrt{(1-R^2_y)}}{\\sqrt{(N - k - 1)}}*\\frac{1}{\\sqrt{(1-R^2_i)}}\\)\n- High leverage points that are fit well by the model increase the difference between \\(\\text{SSE}_{\\text{mean-only}}\\) and \\(\\text{SSE}_a\\), which increases \\(R^2\\).\n- High leverage points that are fit well also increase variance for predictor. This reduces the SE for predictors and yields more power.\n- Well fit, high leverage points do not alter \\(b\\)s.\n\n\nCode\n# cartoon leverage plot",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#leverage-real-data",
+    "href": "07_case_analysis.html#leverage-real-data",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.10 Leverage (Real Data)",
+    "text": "7.10 Leverage (Real Data)",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#enter-the-real-world",
+    "href": "07_case_analysis.html#enter-the-real-world",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.11 Enter the Real World",
+    "text": "7.11 Enter the Real World\nQuestion: So what do you do?",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#overall-impact-of-problem-scores-real-data",
+    "href": "07_case_analysis.html#overall-impact-of-problem-scores-real-data",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.12 Overall Impact of Problem Scores: Real Data",
+    "text": "7.12 Overall Impact of Problem Scores: Real Data\n\n\nCode\n# add code example",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#what-to-do",
+    "href": "07_case_analysis.html#what-to-do",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.13 What to Do",
+    "text": "7.13 What to Do\n- Don’t worry about leverage alone.\n- Worry about model outliers always.\n- Worry about influence (overall model or predictors by field).\n- Drop, retain, or bring model outliers to the fence.\n- Drop or retain influential participants.\n- Report both ways (in olden day…).\n- Get with the program and pre-register instead (what you worry about, how you define it, and what you do)!",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
   }
 ]
