@@ -1298,5 +1298,25 @@
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
     ]
+  },
+  {
+    "objectID": "07_case_analysis.html",
+    "href": "07_case_analysis.html",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "",
+    "text": "7.1 Anscombe’s Quartet",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#case-analysis",
+    "href": "07_case_analysis.html#case-analysis",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.2 Case Analysis",
+    "text": "7.2 Case Analysis\n\nGoal is to identify any unusual or excessively influential data. These data points may either bias results and/or reduce power to detect effects (inflate standard errors and/or decrease \\(R^2\\)).\nThree aspects of individual observations we attend to:\n\nLeverage\nRegression Outlier\nInfluence\n\nCase Analysis also provides an important first step as you get to know your data.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
   }
 ]
