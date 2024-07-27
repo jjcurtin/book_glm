@@ -691,9 +691,11 @@ SPSS reports centered leverage (<span class="math inline">\(h - \frac{1}{N}\)</s
 <hr>
 <p><span class="math inline">\(R^2 = \frac{\text{SSE}_{\text{mean-only}}- \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}\)</span></p>
 <p><span class="math inline">\(\text{SE}_{bi} = \frac{s_y}{s_i} = \frac{\sqrt{(1-R^2_y)}}{\sqrt{(N - k - 1)}}*\frac{1}{\sqrt{(1-R^2_i)}}\)</span></p>
-<p><span style="color: blue;">High leverage points that are fit well by the model increase the difference between <span class="math inline">\(\text{SSE}_{\text{mean-only}}\)</span> and <span class="math inline">\(\text{SSE}_a\)</span>, which increases <span class="math inline">\(R^2\)</span>.</span></p>
-<p><span style="color: blue;">High leverage points that are fit well also increase variance for predictor. This reduces the SE for predictors and yields more power.</span></p>
-<p><span style="color: blue;">Well fit, high leverage points do <strong>not</strong> alter <span class="math inline">\(b\)</span>s.</span></p>
+<ul>
+<li><p><span style="color: blue;">High leverage points that are fit well by the model increase the difference between <span class="math inline">\(\text{SSE}_{\text{mean-only}}\)</span> and <span class="math inline">\(\text{SSE}_a\)</span>, which increases <span class="math inline">\(R^2\)</span>.</span></p></li>
+<li><p><span style="color: blue;">High leverage points that are fit well also increase variance for predictor. This reduces the SE for predictors and yields more power.</span></p></li>
+<li><p><span style="color: blue;">Well fit, high leverage points do <strong>not</strong> alter <span class="math inline">\(b\)</span>s.</span></p></li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -770,8 +772,10 @@ named numeric(0)</code></pre>
 <hr>
 <p><span class="math inline">\(R^2 = \frac{\text{SSE}_{\text{mean-only}}- \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}\)</span></p>
 <p><span class="math inline">\(\text{SE}_{bi} = \frac{s_y}{s_i} = \frac{\sqrt{(1-R^2_y)}}{\sqrt{(N - k - 1)}}*\frac{1}{\sqrt{(1-R^2_i)}}\)</span></p>
-<p><span style="color: blue;">Regression outliers increase <span class="math inline">\(\text{SSE}_a\)</span> which decreases <span class="math inline">\(R^2\)</span>. Decreased <span class="math inline">\(R^2\)</span> leads to increased SEs for <span class="math inline">\(b\)</span>s.</span></p>
-<p><span style="color: blue;">If outlier also has leverage can alter (increase or decrease) <span class="math inline">\(b\)</span>s.</span></p>
+<ul>
+<li><p><span style="color: blue;">Regression outliers increase <span class="math inline">\(\text{SSE}_a\)</span> which decreases <span class="math inline">\(R^2\)</span>. Decreased <span class="math inline">\(R^2\)</span> leads to increased SEs for <span class="math inline">\(b\)</span>s.</span></p></li>
+<li><p><span style="color: blue;">If outlier also has leverage can alter (increase or decrease) <span class="math inline">\(b\)</span>s.</span></p></li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -935,6 +939,7 @@ numeric(0)</code></pre>
 </div>
 </div>
 </div>
+<hr>
 </section>
 <section id="impact-on-ses" class="level2" data-number="7.24">
 <h2 data-number="7.24" class="anchored" data-anchor-id="impact-on-ses"><span class="header-section-number">7.24</span> Impact on SEs</h2>
@@ -943,6 +948,7 @@ numeric(0)</code></pre>
 <p>Observations that decrease the precision of estimation have COVRATIOS &lt; 1.0.</p>
 <p>Belsley et al., (1980) proposed a cut off of:</p>
 <p><span class="math inline">\(\text{COVRATIO}_i &lt; |3* \frac{P}{N} - 1|\)</span></p>
+<hr>
 </section>
 <section id="impact-on-ses-real-data" class="level2" data-number="7.25">
 <h2 data-number="7.25" class="anchored" data-anchor-id="impact-on-ses-real-data"><span class="header-section-number">7.25</span> Impact on SEs (Real data)</h2>
@@ -966,9 +972,19 @@ $Values
 named numeric(0)</code></pre>
 </div>
 </div>
+<hr>
 </section>
 <section id="four-examples-with-fake-data" class="level2" data-number="7.26">
 <h2 data-number="7.26" class="anchored" data-anchor-id="four-examples-with-fake-data"><span class="header-section-number">7.26</span> Four Examples with Fake Data</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <hr>
 </section>
 <section id="enter-the-real-world" class="level2" data-number="7.27">
@@ -979,7 +995,7 @@ named numeric(0)</code></pre>
 <section id="overall-impact-of-problem-scores-real-data" class="level2" data-number="7.28">
 <h2 data-number="7.28" class="anchored" data-anchor-id="overall-impact-of-problem-scores-real-data"><span class="header-section-number">7.28</span> Overall Impact of Problem Scores: Real Data</h2>
 <div class="cell">
-<details class="code-fold">
+<details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -993,7 +1009,8 @@ named numeric(0)</code></pre>
 4 sex_c        -16.0      6.67       -2.40 0.0184    </code></pre>
 </div>
 </div>
-<p>SSE = 97756.43</p>
+<p><strong>SSE = 97756.43</strong></p>
+<hr>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -1014,7 +1031,7 @@ named numeric(0)</code></pre>
 4 sex_c        -15.5      5.70       -2.72 0.00790  </code></pre>
 </div>
 </div>
-<p>SSE = 68262.98</p>
+<p><strong>SSE = 68262.98</strong></p>
 <hr>
 </section>
 <section id="what-to-do" class="level2" data-number="7.29">
