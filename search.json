@@ -1414,7 +1414,7 @@
     "href": "07_case_analysis.html#leverage-real-data",
     "title": "7  Dealing with Messy Data I: Case Analysis",
     "section": "7.12 Leverage (Real Data)",
-    "text": "7.12 Leverage (Real Data)",
+    "text": "7.12 Leverage (Real Data)\nThere is a function available for helping you identify observations with high leverage.\nSource the function with the following code\n\n\nCode\ndevtools::source_url(\"https://github.com/jjcurtin/lab_support/blob/main/case_analysis.R?raw=true\")\n\n\n\n\n\nCode\ncase_analysis(m_1, Type = \"hatvalues\")\n\n\n\n\n\n\n\n\n\n$Rownames\ncharacter(0)\n\n$Values\nnamed numeric(0)",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
     ]

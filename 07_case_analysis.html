@@ -683,6 +683,36 @@ SPSS reports centered leverage (<span class="math inline">\(h - \frac{1}{N}\)</s
 </section>
 <section id="leverage-real-data" class="level2" data-number="7.12">
 <h2 data-number="7.12" class="anchored" data-anchor-id="leverage-real-data"><span class="header-section-number">7.12</span> Leverage (Real Data)</h2>
+<p>There is a function available for helping you identify observations with high leverage.</p>
+<p>Source the function with the following code</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">source_url</span>(<span class="st">"https://github.com/jjcurtin/lab_support/blob/main/case_analysis.R?raw=true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">case_analysis</span>(m_1, <span class="at">Type =</span> <span class="st">"hatvalues"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Rownames
+character(0)
+
+$Values
+named numeric(0)</code></pre>
+</div>
+</div>
+<hr>
 </section>
 <section id="enter-the-real-world" class="level2" data-number="7.13">
 <h2 data-number="7.13" class="anchored" data-anchor-id="enter-the-real-world"><span class="header-section-number">7.13</span> Enter the Real World</h2>
@@ -694,7 +724,7 @@ SPSS reports centered leverage (<span class="math inline">\(h - \frac{1}{N}\)</s
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code example</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code example</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <hr>
