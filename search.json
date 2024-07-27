@@ -1588,5 +1588,35 @@
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
     ]
+  },
+  {
+    "objectID": "08_model_assumptions.html",
+    "href": "08_model_assumptions.html",
+    "title": "8  Dealing with Messy Data II: Model Assumptions",
+    "section": "",
+    "text": "8.1 Goals of Unit",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
+    ]
+  },
+  {
+    "objectID": "08_model_assumptions.html#goals-of-unit",
+    "href": "08_model_assumptions.html#goals-of-unit",
+    "title": "8  Dealing with Messy Data II: Model Assumptions",
+    "section": "",
+    "text": "Understand 5 assumptions of GLMs.\nUnderstand consequences of assumption violations.\n\nInefficient standard errors (low power, type II errors).\nInaccurate standard errors (incorrect statistical tests, type I errors).\nInaccurate parameter estimates.\n\nLearn how to detect violations (statistical tests and visual diagnosis).\nRecognize the range of options available when violations are detected. Implementation of these options will be covered over the semester.\nExamination of assumptions will further inform you about your data.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
+    ]
+  },
+  {
+    "objectID": "08_model_assumptions.html#assessment-of-assumptions-for-sig.-tests",
+    "href": "08_model_assumptions.html#assessment-of-assumptions-for-sig.-tests",
+    "title": "8  Dealing with Messy Data II: Model Assumptions",
+    "section": "8.2 Assessment of Assumptions for Sig. Tests",
+    "text": "8.2 Assessment of Assumptions for Sig. Tests",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
+    ]
   }
 ]
