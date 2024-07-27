@@ -1404,7 +1404,7 @@
     "href": "07_case_analysis.html#leverage-cartoon-data-continued",
     "title": "7  Dealing with Messy Data I: Case Analysis",
     "section": "7.11 Leverage (Cartoon Data; Continued)",
-    "text": "7.11 Leverage (Cartoon Data; Continued)\nHigh leverage values are not always bad. In fact, in some cases they are good. Must also consider if they are regression outliers.\nQuestion: Why?\n\n\\(R^2 = \\frac{\\text{SSE}_{\\text{mean-only}}- \\text{SSE}_a}{\\text{SSE}_{\\text{mean-only}}}\\)\n\\(\\text{SE}_{bi} = \\frac{s_y}{s_i} = \\frac{\\sqrt{(1-R^2_y)}}{\\sqrt{(N - k - 1)}}*\\frac{1}{\\sqrt{(1-R^2_i)}}\\)\n- High leverage points that are fit well by the model increase the difference between \\(\\text{SSE}_{\\text{mean-only}}\\) and \\(\\text{SSE}_a\\), which increases \\(R^2\\).\n- High leverage points that are fit well also increase variance for predictor. This reduces the SE for predictors and yields more power.\n- Well fit, high leverage points do not alter \\(b\\)s.\n\n\nCode\n# cartoon leverage plot",
+    "text": "7.11 Leverage (Cartoon Data; Continued)\nHigh leverage values are not always bad. In fact, in some cases they are good. Must also consider if they are regression outliers.\nQuestion: Why?\n\n\\(R^2 = \\frac{\\text{SSE}_{\\text{mean-only}}- \\text{SSE}_a}{\\text{SSE}_{\\text{mean-only}}}\\)\n\\(\\text{SE}_{bi} = \\frac{s_y}{s_i} = \\frac{\\sqrt{(1-R^2_y)}}{\\sqrt{(N - k - 1)}}*\\frac{1}{\\sqrt{(1-R^2_i)}}\\)\nHigh leverage points that are fit well by the model increase the difference between \\(\\text{SSE}_{\\text{mean-only}}\\) and \\(\\text{SSE}_a\\), which increases \\(R^2\\).\nHigh leverage points that are fit well also increase variance for predictor. This reduces the SE for predictors and yields more power.\nWell fit, high leverage points do not alter \\(b\\)s.",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
     ]
@@ -1420,11 +1420,151 @@
     ]
   },
   {
+    "objectID": "07_case_analysis.html#regression-outlier-cartoon-data",
+    "href": "07_case_analysis.html#regression-outlier-cartoon-data",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.13 Regression Outlier (Cartoon data)",
+    "text": "7.13 Regression Outlier (Cartoon data)\nCheck for regression outliers\nAn observation that is not adequately fit by the regression model (i.e., falls very far from the prediction line).\nIn essence, a regression outlier is a discrepant score with a large residual (\\(e_i\\)).\n\n\n\n\n\n\n\n\n\nQuestion: Which point(s) are regression outliers?",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#regression-outlier",
+    "href": "07_case_analysis.html#regression-outlier",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.14 Regression Outlier",
+    "text": "7.14 Regression Outlier\nThere are multiple quantitative indicators to identify regression outliers, including raw residuals (\\(e_i\\)), standardized residuals (\\(e'_i\\)), and studentized residuals (\\(t'_i\\)). The preferred index is the studentized residual.\n\\(t'_i = \\frac{e_i}{(\\text{SE}_{e(-i)}*\\sqrt{(1-h_i)})}\\)\n\\(t'_i\\) follows a t-distribution with n-P-1 degrees of freedom.\nNOTE: SPSS calls these Studentized Deleted Residuals. Cohen calls these Externally Studentized Residual",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#regression-outlier-cartoon-data-continued",
+    "href": "07_case_analysis.html#regression-outlier-cartoon-data-continued",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.15 Regression Outlier (Cartoon data; Continued)",
+    "text": "7.15 Regression Outlier (Cartoon data; Continued)\nRegression outliers are always bad but they can have two different types of bad effects.\nQuestion: Why?\n\n\\(R^2 = \\frac{\\text{SSE}_{\\text{mean-only}}- \\text{SSE}_a}{\\text{SSE}_{\\text{mean-only}}}\\)\n\\(\\text{SE}_{bi} = \\frac{s_y}{s_i} = \\frac{\\sqrt{(1-R^2_y)}}{\\sqrt{(N - k - 1)}}*\\frac{1}{\\sqrt{(1-R^2_i)}}\\)\nRegression outliers increase \\(\\text{SSE}_a\\) which decreases \\(R^2\\). Decreased \\(R^2\\) leads to increased SEs for \\(b\\)s.\nIf outlier also has leverage can alter (increase or decrease) \\(b\\)s.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#regression-outlier-real-data",
+    "href": "07_case_analysis.html#regression-outlier-real-data",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.16 Regression Outlier (Real data)",
+    "text": "7.16 Regression Outlier (Real data)\n\n\nCode\ncase_analysis(m_1, Type = \"residuals\")\n\n\n\n\n\n\n\n\n\n$Rownames\ncharacter(0)\n\n$Values\nnamed numeric(0)\n\n\n\n\n\nCode\ncar::outlierTest(m_1, cutoff = .05, labels = data$subid)\n\n\n      rstudent unadjusted p-value Bonferroni p\n0125 -4.307609        0.000041622    0.0039958\n2112  3.765010        0.000294880    0.0283080",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#influence-cartoon-data",
+    "href": "07_case_analysis.html#influence-cartoon-data",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.17 Influence (Cartoon data)",
+    "text": "7.17 Influence (Cartoon data)\nAn observation is influential if it substantially alters the fitted regression model (i.e., the coefficients and/or intercept). Two commonly used assessment methods:\n\nCooks distance\ndfBetas\n\n\n\n\n\n\n\n\n\n\nQuestion: Which point(s) have the most influence?",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#cooks-distance",
+    "href": "07_case_analysis.html#cooks-distance",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.18 Cook’s Distance",
+    "text": "7.18 Cook’s Distance\nCook’s distance (\\(\\text{D}_i\\)) provides a single summary statistic to index how much influence each score has on the overall model.\nCooks distance is based on both the outlierness (standardized residual) and leverage characteristics of the observation.\n\\(\\text{D}_i = \\frac{e'^2_i}{P} * \\frac{h_i}{1-h_i}\\)\n\\(\\text{D}_i &gt; \\frac{4}{N-P}\\) has been proposed as a very liberal cutoff (identifies a lot of influential points).\n\\(\\text{D}_i &gt; \\text{qf}(.5, P, N-P)\\) has also been employed as very conservative.\nIdentification of problematic scores should be considered in the context of the overall distribution of \\(\\text{D}_i\\).",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#cooks-distance-real-data",
+    "href": "07_case_analysis.html#cooks-distance-real-data",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.19 Cook’s Distance (Real data)",
+    "text": "7.19 Cook’s Distance (Real data)\n\n\nCode\ncase_analysis(m_1, Type = \"cooksd\")\n\n\n\n\n\n\n\n\n\n$Rownames\ncharacter(0)\n\n$Values\nnamed numeric(0)",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#influence-bubble-plot-real-data",
+    "href": "07_case_analysis.html#influence-bubble-plot-real-data",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.20 Influence Bubble Plot (Real data)",
+    "text": "7.20 Influence Bubble Plot (Real data)\n\n\nCode\ncase_analysis(m_1, Type = \"influenceplot\")\n\n\n\n\n\n\n\n\n\n$Rownames\ncharacter(0)\n\n$Values\nnumeric(0)\n\n\nQuestion: What are the expected effects of each of these points on the model?",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#dfbetas",
+    "href": "07_case_analysis.html#dfbetas",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.21 dfBetas",
+    "text": "7.21 dfBetas",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#dfbetas-real-data",
+    "href": "07_case_analysis.html#dfbetas-real-data",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.22 dfBetas (Real data)",
+    "text": "7.22 dfBetas (Real data)",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#added-variable-plot-real-data",
+    "href": "07_case_analysis.html#added-variable-plot-real-data",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.23 Added Variable Plot (Real data)",
+    "text": "7.23 Added Variable Plot (Real data)",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#impact-on-ses",
+    "href": "07_case_analysis.html#impact-on-ses",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.24 Impact on SEs",
+    "text": "7.24 Impact on SEs",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#impact-on-ses-real-data",
+    "href": "07_case_analysis.html#impact-on-ses-real-data",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.25 Impact on SEs (Real data)",
+    "text": "7.25 Impact on SEs (Real data)",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "07_case_analysis.html#four-examples-with-fake-data",
+    "href": "07_case_analysis.html#four-examples-with-fake-data",
+    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "section": "7.26 Four Examples with Fake Data",
+    "text": "7.26 Four Examples with Fake Data",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+    ]
+  },
+  {
     "objectID": "07_case_analysis.html#enter-the-real-world",
     "href": "07_case_analysis.html#enter-the-real-world",
     "title": "7  Dealing with Messy Data I: Case Analysis",
-    "section": "7.13 Enter the Real World",
-    "text": "7.13 Enter the Real World\nQuestion: So what do you do?",
+    "section": "7.27 Enter the Real World",
+    "text": "7.27 Enter the Real World\nQuestion: So what do you do?",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
     ]
@@ -1433,8 +1573,8 @@
     "objectID": "07_case_analysis.html#overall-impact-of-problem-scores-real-data",
     "href": "07_case_analysis.html#overall-impact-of-problem-scores-real-data",
     "title": "7  Dealing with Messy Data I: Case Analysis",
-    "section": "7.14 Overall Impact of Problem Scores: Real Data",
-    "text": "7.14 Overall Impact of Problem Scores: Real Data\n\n\nCode\n# add code example",
+    "section": "7.28 Overall Impact of Problem Scores: Real Data",
+    "text": "7.28 Overall Impact of Problem Scores: Real Data",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
     ]
@@ -1443,8 +1583,8 @@
     "objectID": "07_case_analysis.html#what-to-do",
     "href": "07_case_analysis.html#what-to-do",
     "title": "7  Dealing with Messy Data I: Case Analysis",
-    "section": "7.15 What to Do",
-    "text": "7.15 What to Do\n- Don’t worry about leverage alone.\n- Worry about model outliers always.\n- Worry about influence (overall model or predictors by field).\n- Drop, retain, or bring model outliers to the fence.\n- Drop or retain influential participants.\n- Report both ways (in olden day…).\n- Get with the program and pre-register instead (what you worry about, how you define it, and what you do)!",
+    "section": "7.29 What to Do",
+    "text": "7.29 What to Do\n- Don’t worry about leverage alone.\n- Worry about model outliers always.\n- Worry about influence (overall model or predictors by field).\n- Drop, retain, or bring model outliers to the fence.\n- Drop or retain influential participants.\n- Report both ways (in olden day…).\n- Get with the program and pre-register instead (what you worry about, how you define it, and what you do)!",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
     ]

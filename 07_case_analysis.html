@@ -282,9 +282,23 @@ window.Quarto = {
   <li><a href="#leverage" id="toc-leverage" class="nav-link" data-scroll-target="#leverage"><span class="header-section-number">7.10</span> Leverage</a></li>
   <li><a href="#leverage-cartoon-data-continued" id="toc-leverage-cartoon-data-continued" class="nav-link" data-scroll-target="#leverage-cartoon-data-continued"><span class="header-section-number">7.11</span> Leverage (Cartoon Data; Continued)</a></li>
   <li><a href="#leverage-real-data" id="toc-leverage-real-data" class="nav-link" data-scroll-target="#leverage-real-data"><span class="header-section-number">7.12</span> Leverage (Real Data)</a></li>
-  <li><a href="#enter-the-real-world" id="toc-enter-the-real-world" class="nav-link" data-scroll-target="#enter-the-real-world"><span class="header-section-number">7.13</span> Enter the Real World</a></li>
-  <li><a href="#overall-impact-of-problem-scores-real-data" id="toc-overall-impact-of-problem-scores-real-data" class="nav-link" data-scroll-target="#overall-impact-of-problem-scores-real-data"><span class="header-section-number">7.14</span> Overall Impact of Problem Scores: Real Data</a></li>
-  <li><a href="#what-to-do" id="toc-what-to-do" class="nav-link" data-scroll-target="#what-to-do"><span class="header-section-number">7.15</span> What to Do</a></li>
+  <li><a href="#regression-outlier-cartoon-data" id="toc-regression-outlier-cartoon-data" class="nav-link" data-scroll-target="#regression-outlier-cartoon-data"><span class="header-section-number">7.13</span> Regression Outlier (Cartoon data)</a></li>
+  <li><a href="#regression-outlier" id="toc-regression-outlier" class="nav-link" data-scroll-target="#regression-outlier"><span class="header-section-number">7.14</span> Regression Outlier</a></li>
+  <li><a href="#regression-outlier-cartoon-data-continued" id="toc-regression-outlier-cartoon-data-continued" class="nav-link" data-scroll-target="#regression-outlier-cartoon-data-continued"><span class="header-section-number">7.15</span> Regression Outlier (Cartoon data; Continued)</a></li>
+  <li><a href="#regression-outlier-real-data" id="toc-regression-outlier-real-data" class="nav-link" data-scroll-target="#regression-outlier-real-data"><span class="header-section-number">7.16</span> Regression Outlier (Real data)</a></li>
+  <li><a href="#influence-cartoon-data" id="toc-influence-cartoon-data" class="nav-link" data-scroll-target="#influence-cartoon-data"><span class="header-section-number">7.17</span> Influence (Cartoon data)</a></li>
+  <li><a href="#cooks-distance" id="toc-cooks-distance" class="nav-link" data-scroll-target="#cooks-distance"><span class="header-section-number">7.18</span> Cook’s Distance</a></li>
+  <li><a href="#cooks-distance-real-data" id="toc-cooks-distance-real-data" class="nav-link" data-scroll-target="#cooks-distance-real-data"><span class="header-section-number">7.19</span> Cook’s Distance (Real data)</a></li>
+  <li><a href="#influence-bubble-plot-real-data" id="toc-influence-bubble-plot-real-data" class="nav-link" data-scroll-target="#influence-bubble-plot-real-data"><span class="header-section-number">7.20</span> Influence Bubble Plot (Real data)</a></li>
+  <li><a href="#dfbetas" id="toc-dfbetas" class="nav-link" data-scroll-target="#dfbetas"><span class="header-section-number">7.21</span> dfBetas</a></li>
+  <li><a href="#dfbetas-real-data" id="toc-dfbetas-real-data" class="nav-link" data-scroll-target="#dfbetas-real-data"><span class="header-section-number">7.22</span> dfBetas (Real data)</a></li>
+  <li><a href="#added-variable-plot-real-data" id="toc-added-variable-plot-real-data" class="nav-link" data-scroll-target="#added-variable-plot-real-data"><span class="header-section-number">7.23</span> Added Variable Plot (Real data)</a></li>
+  <li><a href="#impact-on-ses" id="toc-impact-on-ses" class="nav-link" data-scroll-target="#impact-on-ses"><span class="header-section-number">7.24</span> Impact on SEs</a></li>
+  <li><a href="#impact-on-ses-real-data" id="toc-impact-on-ses-real-data" class="nav-link" data-scroll-target="#impact-on-ses-real-data"><span class="header-section-number">7.25</span> Impact on SEs (Real data)</a></li>
+  <li><a href="#four-examples-with-fake-data" id="toc-four-examples-with-fake-data" class="nav-link" data-scroll-target="#four-examples-with-fake-data"><span class="header-section-number">7.26</span> Four Examples with Fake Data</a></li>
+  <li><a href="#enter-the-real-world" id="toc-enter-the-real-world" class="nav-link" data-scroll-target="#enter-the-real-world"><span class="header-section-number">7.27</span> Enter the Real World</a></li>
+  <li><a href="#overall-impact-of-problem-scores-real-data" id="toc-overall-impact-of-problem-scores-real-data" class="nav-link" data-scroll-target="#overall-impact-of-problem-scores-real-data"><span class="header-section-number">7.28</span> Overall Impact of Problem Scores: Real Data</a></li>
+  <li><a href="#what-to-do" id="toc-what-to-do" class="nav-link" data-scroll-target="#what-to-do"><span class="header-section-number">7.29</span> What to Do</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/07_case_analysis.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -644,7 +658,7 @@ sex_c  0.06 -0.01 -0.23  1.00</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -676,14 +690,17 @@ SPSS reports centered leverage (<span class="math inline">\(h - \frac{1}{N}\)</s
 <hr>
 <p><span class="math inline">\(R^2 = \frac{\text{SSE}_{\text{mean-only}}- \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}\)</span></p>
 <p><span class="math inline">\(\text{SE}_{bi} = \frac{s_y}{s_i} = \frac{\sqrt{(1-R^2_y)}}{\sqrt{(N - k - 1)}}*\frac{1}{\sqrt{(1-R^2_i)}}\)</span></p>
-<p><span style="color: blue;">- High leverage points that are fit well by the model increase the difference between <span class="math inline">\(\text{SSE}_{\text{mean-only}}\)</span> and <span class="math inline">\(\text{SSE}_a\)</span>, which increases <span class="math inline">\(R^2\)</span>.</span></p>
-<p><span style="color: blue;">- High leverage points that are fit well also increase variance for predictor. This reduces the SE for predictors and yields more power.</span></p>
-<p><span style="color: blue;">- Well fit, high leverage points do <strong>not</strong> alter <span class="math inline">\(b\)</span>s.</span></p>
+<p><span style="color: blue;">High leverage points that are fit well by the model increase the difference between <span class="math inline">\(\text{SSE}_{\text{mean-only}}\)</span> and <span class="math inline">\(\text{SSE}_a\)</span>, which increases <span class="math inline">\(R^2\)</span>.</span></p>
+<p><span style="color: blue;">High leverage points that are fit well also increase variance for predictor. This reduces the SE for predictors and yields more power.</span></p>
+<p><span style="color: blue;">Well fit, high leverage points do <strong>not</strong> alter <span class="math inline">\(b\)</span>s.</span></p>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cartoon leverage plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <hr>
 </section>
@@ -694,19 +711,19 @@ SPSS reports centered leverage (<span class="math inline">\(h - \frac{1}{N}\)</s
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">source_url</span>(<span class="st">"https://github.com/jjcurtin/lab_support/blob/main/case_analysis.R?raw=true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">source_url</span>(<span class="st">"https://github.com/jjcurtin/lab_support/blob/main/case_analysis.R?raw=true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <hr>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">case_analysis</span>(m_1, <span class="at">Type =</span> <span class="st">"hatvalues"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">case_analysis</span>(m_1, <span class="at">Type =</span> <span class="st">"hatvalues"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -720,23 +737,191 @@ named numeric(0)</code></pre>
 </div>
 <hr>
 </section>
-<section id="enter-the-real-world" class="level2" data-number="7.13">
-<h2 data-number="7.13" class="anchored" data-anchor-id="enter-the-real-world"><span class="header-section-number">7.13</span> Enter the Real World</h2>
-<p><span style="color: red;">Question: So what do you do?</span></p>
+<section id="regression-outlier-cartoon-data" class="level2" data-number="7.13">
+<h2 data-number="7.13" class="anchored" data-anchor-id="regression-outlier-cartoon-data"><span class="header-section-number">7.13</span> Regression Outlier (Cartoon data)</h2>
+<p><strong>Check for regression outliers</strong></p>
+<p>An observation that is not adequately fit by the regression model (i.e., falls very far from the prediction line).</p>
+<p>In essence, a regression outlier is a discrepant score with a large residual (<span class="math inline">\(e_i\)</span>).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span style="color: red;">Question: Which point(s) are regression outliers?</span></p>
 <hr>
 </section>
-<section id="overall-impact-of-problem-scores-real-data" class="level2" data-number="7.14">
-<h2 data-number="7.14" class="anchored" data-anchor-id="overall-impact-of-problem-scores-real-data"><span class="header-section-number">7.14</span> Overall Impact of Problem Scores: Real Data</h2>
+<section id="regression-outlier" class="level2" data-number="7.14">
+<h2 data-number="7.14" class="anchored" data-anchor-id="regression-outlier"><span class="header-section-number">7.14</span> Regression Outlier</h2>
+<p>There are multiple quantitative indicators to identify regression outliers, including raw residuals (<span class="math inline">\(e_i\)</span>), standardized residuals (<span class="math inline">\(e'_i\)</span>), and studentized residuals (<span class="math inline">\(t'_i\)</span>). The preferred index is the <strong>studentized residual</strong>.</p>
+<p><span class="math inline">\(t'_i = \frac{e_i}{(\text{SE}_{e(-i)}*\sqrt{(1-h_i)})}\)</span></p>
+<p><span class="math inline">\(t'_i\)</span> follows a t-distribution with n-P-1 degrees of freedom.</p>
+<p>NOTE: SPSS calls these Studentized Deleted Residuals. Cohen calls these Externally Studentized Residual</p>
+<hr>
+</section>
+<section id="regression-outlier-cartoon-data-continued" class="level2" data-number="7.15">
+<h2 data-number="7.15" class="anchored" data-anchor-id="regression-outlier-cartoon-data-continued"><span class="header-section-number">7.15</span> Regression Outlier (Cartoon data; Continued)</h2>
+<p>Regression outliers are always bad but they can have two different types of bad effects.</p>
+<p><span style="color: red;">Question: Why?</span></p>
+<hr>
+<p><span class="math inline">\(R^2 = \frac{\text{SSE}_{\text{mean-only}}- \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}\)</span></p>
+<p><span class="math inline">\(\text{SE}_{bi} = \frac{s_y}{s_i} = \frac{\sqrt{(1-R^2_y)}}{\sqrt{(N - k - 1)}}*\frac{1}{\sqrt{(1-R^2_i)}}\)</span></p>
+<p><span style="color: blue;">Regression outliers increase <span class="math inline">\(\text{SSE}_a\)</span> which decreases <span class="math inline">\(R^2\)</span>. Decreased <span class="math inline">\(R^2\)</span> leads to increased SEs for <span class="math inline">\(b\)</span>s.</span></p>
+<p><span style="color: blue;">If outlier also has leverage can alter (increase or decrease) <span class="math inline">\(b\)</span>s.</span></p>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code example</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <hr>
 </section>
-<section id="what-to-do" class="level2" data-number="7.15">
-<h2 data-number="7.15" class="anchored" data-anchor-id="what-to-do"><span class="header-section-number">7.15</span> What to Do</h2>
+<section id="regression-outlier-real-data" class="level2" data-number="7.16">
+<h2 data-number="7.16" class="anchored" data-anchor-id="regression-outlier-real-data"><span class="header-section-number">7.16</span> Regression Outlier (Real data)</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">case_analysis</span>(m_1, <span class="at">Type =</span> <span class="st">"residuals"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Rownames
+character(0)
+
+$Values
+named numeric(0)</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">outlierTest</span>(m_1, <span class="at">cutoff =</span> .<span class="dv">05</span>, <span class="at">labels =</span> data<span class="sc">$</span>subid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      rstudent unadjusted p-value Bonferroni p
+0125 -4.307609        0.000041622    0.0039958
+2112  3.765010        0.000294880    0.0283080</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="influence-cartoon-data" class="level2" data-number="7.17">
+<h2 data-number="7.17" class="anchored" data-anchor-id="influence-cartoon-data"><span class="header-section-number">7.17</span> Influence (Cartoon data)</h2>
+<p>An observation is <em>influential</em> if it substantially alters the fitted regression model (i.e., the coefficients and/or intercept). Two commonly used assessment methods:</p>
+<ul>
+<li>Cooks distance</li>
+<li>dfBetas</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span style="color: red;">Question: Which point(s) have the most influence?</span></p>
+</section>
+<section id="cooks-distance" class="level2" data-number="7.18">
+<h2 data-number="7.18" class="anchored" data-anchor-id="cooks-distance"><span class="header-section-number">7.18</span> Cook’s Distance</h2>
+<p>Cook’s distance (<span class="math inline">\(\text{D}_i\)</span>) provides a single summary statistic to index how much influence each score has on the overall model.</p>
+<p>Cooks distance is based on both the <em>outlierness</em> (standardized residual) and leverage characteristics of the observation.</p>
+<p><span class="math inline">\(\text{D}_i = \frac{e'^2_i}{P} * \frac{h_i}{1-h_i}\)</span></p>
+<p><span class="math inline">\(\text{D}_i &gt; \frac{4}{N-P}\)</span> has been proposed as a very liberal cutoff (identifies a lot of influential points).</p>
+<p><span class="math inline">\(\text{D}_i &gt; \text{qf}(.5, P, N-P)\)</span> has also been employed as very conservative.</p>
+<p>Identification of problematic scores should be considered in the context of the overall distribution of <span class="math inline">\(\text{D}_i\)</span>.</p>
+</section>
+<section id="cooks-distance-real-data" class="level2" data-number="7.19">
+<h2 data-number="7.19" class="anchored" data-anchor-id="cooks-distance-real-data"><span class="header-section-number">7.19</span> Cook’s Distance (Real data)</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">case_analysis</span>(m_1, <span class="at">Type =</span> <span class="st">"cooksd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Rownames
+character(0)
+
+$Values
+named numeric(0)</code></pre>
+</div>
+</div>
+</section>
+<section id="influence-bubble-plot-real-data" class="level2" data-number="7.20">
+<h2 data-number="7.20" class="anchored" data-anchor-id="influence-bubble-plot-real-data"><span class="header-section-number">7.20</span> Influence Bubble Plot (Real data)</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">case_analysis</span>(m_1, <span class="at">Type =</span> <span class="st">"influenceplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Rownames
+character(0)
+
+$Values
+numeric(0)</code></pre>
+</div>
+</div>
+<p><span style="color: red;">Question: What are the expected effects of each of these points on the model?</span></p>
+</section>
+<section id="dfbetas" class="level2" data-number="7.21">
+<h2 data-number="7.21" class="anchored" data-anchor-id="dfbetas"><span class="header-section-number">7.21</span> dfBetas</h2>
+</section>
+<section id="dfbetas-real-data" class="level2" data-number="7.22">
+<h2 data-number="7.22" class="anchored" data-anchor-id="dfbetas-real-data"><span class="header-section-number">7.22</span> dfBetas (Real data)</h2>
+</section>
+<section id="added-variable-plot-real-data" class="level2" data-number="7.23">
+<h2 data-number="7.23" class="anchored" data-anchor-id="added-variable-plot-real-data"><span class="header-section-number">7.23</span> Added Variable Plot (Real data)</h2>
+</section>
+<section id="impact-on-ses" class="level2" data-number="7.24">
+<h2 data-number="7.24" class="anchored" data-anchor-id="impact-on-ses"><span class="header-section-number">7.24</span> Impact on SEs</h2>
+</section>
+<section id="impact-on-ses-real-data" class="level2" data-number="7.25">
+<h2 data-number="7.25" class="anchored" data-anchor-id="impact-on-ses-real-data"><span class="header-section-number">7.25</span> Impact on SEs (Real data)</h2>
+</section>
+<section id="four-examples-with-fake-data" class="level2" data-number="7.26">
+<h2 data-number="7.26" class="anchored" data-anchor-id="four-examples-with-fake-data"><span class="header-section-number">7.26</span> Four Examples with Fake Data</h2>
+<hr>
+</section>
+<section id="enter-the-real-world" class="level2" data-number="7.27">
+<h2 data-number="7.27" class="anchored" data-anchor-id="enter-the-real-world"><span class="header-section-number">7.27</span> Enter the Real World</h2>
+<p><span style="color: red;">Question: So what do you do?</span></p>
+<hr>
+</section>
+<section id="overall-impact-of-problem-scores-real-data" class="level2" data-number="7.28">
+<h2 data-number="7.28" class="anchored" data-anchor-id="overall-impact-of-problem-scores-real-data"><span class="header-section-number">7.28</span> Overall Impact of Problem Scores: Real Data</h2>
+<hr>
+</section>
+<section id="what-to-do" class="level2" data-number="7.29">
+<h2 data-number="7.29" class="anchored" data-anchor-id="what-to-do"><span class="header-section-number">7.29</span> What to Do</h2>
 <p><span style="color: blue;">- Don’t worry about leverage alone.</span></p>
 <p><span style="color: blue;">- Worry about model outliers always.</span></p>
 <p><span style="color: blue;">- Worry about influence (overall model or predictors by field).</span></p>
