@@ -641,26 +641,6 @@ sex_c  0.06 -0.01 -0.23  1.00</code></pre>
 <p><strong>Check for high Leverage points</strong></p>
 <p>Leverage is a property of the predictors (DV is not considered for leverage analysis). An observation will have increased <em>leverage</em> on the results as its distance from the mean of all predictors increases.</p>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in geom_point(aes(x = 10, y = 100), color = "yellow", size = 4): All aesthetics have length 1, but the data has 30 rows.
-ℹ Please consider using `annotate()` or provide this layer with data containing
-  a single row.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in geom_point(aes(x = 30, y = 100), color = "red", size = 4): All aesthetics have length 1, but the data has 30 rows.
-ℹ Please consider using `annotate()` or provide this layer with data containing
-  a single row.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in geom_point(aes(x = 45, y = 100), color = "blue", size = 4): All aesthetics have length 1, but the data has 30 rows.
-ℹ Please consider using `annotate()` or provide this layer with data containing
-  a single row.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in geom_point(aes(x = 45, y = 81.75), color = "green", size = 4): All aesthetics have length 1, but the data has 30 rows.
-ℹ Please consider using `annotate()` or provide this layer with data containing
-  a single row.</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -679,8 +659,11 @@ sex_c  0.06 -0.01 -0.23  1.00</code></pre>
 <span class="math inline">\(h_i = \frac{1}{N} + \frac{(X_i- \overline X)^2}{\sum(X_j- \overline X)^2}\)</span> (for <span class="math inline">\(j=1\)</span> to <span class="math inline">\(N\)</span> in summation)</p>
 <p>With multiple predictors, <span class="math inline">\(h_i\)</span> measures the distance from the centroid (point of means) of the <span class="math inline">\(X\)</span>s. Hat values are bounded between <span class="math inline">\(\frac{1}{N}\)</span> and 1.</p>
 <p><strong>Mean Hat value = <span class="math inline">\(\frac{P}{N}\)</span>.</strong></p>
-<p>Rules of thumb:<br>
-- <span class="math inline">\(h_i &gt; 3* \overline h\)</span> for small samples (<span class="math inline">\(N &lt; 100\)</span>) - <span class="math inline">\(h_i &gt; 2* \overline h\)</span> for large samples</p>
+<p>Rules of thumb:</p>
+<ul>
+<li><span class="math inline">\(h_i &gt; 3* \overline h\)</span> for small samples (<span class="math inline">\(N &lt; 100\)</span>)</li>
+<li><span class="math inline">\(h_i &gt; 2* \overline h\)</span> for large samples</li>
+</ul>
 <p><strong>Do not blindly apply rules of thumb. Hat values should be separated from distribution of <span class="math inline">\(h_i\)</span>. View a histogram of <span class="math inline">\(h_i\)</span>.</strong></p>
 <p>Note: Mahalanobis (Maha) distance = <span class="math inline">\((N - 1)(h_i - \frac{1}{N})\)</span>.<br>
 SPSS reports centered leverage (<span class="math inline">\(h - \frac{1}{N}\)</span>).</p>
@@ -699,7 +682,7 @@ SPSS reports centered leverage (<span class="math inline">\(h - \frac{1}{N}\)</s
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cartoon leverage plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cartoon leverage plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <hr>
@@ -711,14 +694,14 @@ SPSS reports centered leverage (<span class="math inline">\(h - \frac{1}{N}\)</s
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">source_url</span>(<span class="st">"https://github.com/jjcurtin/lab_support/blob/main/case_analysis.R?raw=true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">source_url</span>(<span class="st">"https://github.com/jjcurtin/lab_support/blob/main/case_analysis.R?raw=true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <hr>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">case_analysis</span>(m_1, <span class="at">Type =</span> <span class="st">"hatvalues"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">case_analysis</span>(m_1, <span class="at">Type =</span> <span class="st">"hatvalues"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -747,7 +730,7 @@ named numeric(0)</code></pre>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code example</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code example</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <hr>
