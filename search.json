@@ -1534,7 +1534,7 @@
     "href": "07_case_analysis.html#impact-on-ses",
     "title": "7  Dealing with Messy Data I: Case Analysis",
     "section": "7.24 Impact on SEs",
-    "text": "7.24 Impact on SEs",
+    "text": "7.24 Impact on SEs\nIn addition to altering regression coefficients (and reducing \\(R^2\\)), problematic scores can increase the SEs (i.e., precision of estimation) of the regression coefficients.\nCOVRATIO is an index that indicates how individual scores affect the overall precision of estimation (joint confidence region for set of coefficients) of the regression coefficients.\nObservations that decrease the precision of estimation have COVRATIOS &lt; 1.0.\nBelsley et al., (1980) proposed a cut off of:\n\\(\\text{COVRATIO}_i &lt; |3* \\frac{P}{N} - 1|\\)",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
     ]
@@ -1544,7 +1544,7 @@
     "href": "07_case_analysis.html#impact-on-ses-real-data",
     "title": "7  Dealing with Messy Data I: Case Analysis",
     "section": "7.25 Impact on SEs (Real data)",
-    "text": "7.25 Impact on SEs (Real data)",
+    "text": "7.25 Impact on SEs (Real data)\n\n\nCode\ncase_analysis(m_1, Type = \"covratio\")\n\n\n\n\n\n\n\n\n\n$Rownames\ncharacter(0)\n\n$Values\nnamed numeric(0)",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
     ]
@@ -1574,7 +1574,7 @@
     "href": "07_case_analysis.html#overall-impact-of-problem-scores-real-data",
     "title": "7  Dealing with Messy Data I: Case Analysis",
     "section": "7.28 Overall Impact of Problem Scores: Real Data",
-    "text": "7.28 Overall Impact of Problem Scores: Real Data",
+    "text": "7.28 Overall Impact of Problem Scores: Real Data\n\n\nCode\nbroom::tidy(m_1)\n\n\n# A tibble: 4 × 5\n  term        estimate std.error statistic    p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;\n1 (Intercept)   18.9      7.47        2.53 0.0132    \n2 bac         -165.      84.6        -1.95 0.0545    \n3 ta             0.152    0.0316      4.82 0.00000570\n4 sex_c        -16.0      6.67       -2.40 0.0184    \n\n\nSSE = 97756.4330176\n\n\nCode\ndata_rm_outliers &lt;- data |&gt; \n  filter(!subid %in% c(\"0125\", \"2112\"))\n\nm_2 &lt;- lm(fps ~ bac + ta + sex_c, data = data_rm_outliers) \n\nbroom::tidy(m_2)\n\n\n# A tibble: 4 × 5\n  term        estimate std.error statistic   p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)   26.6      6.44        4.13 0.0000825\n2 bac         -229.      72.4        -3.16 0.00214  \n3 ta             0.126    0.0273      4.61 0.0000135\n4 sex_c        -15.5      5.70       -2.72 0.00790  \n\n\nSSE = 68262.9797344",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
     ]

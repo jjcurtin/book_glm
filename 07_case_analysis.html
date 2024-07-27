@@ -938,9 +938,34 @@ numeric(0)</code></pre>
 </section>
 <section id="impact-on-ses" class="level2" data-number="7.24">
 <h2 data-number="7.24" class="anchored" data-anchor-id="impact-on-ses"><span class="header-section-number">7.24</span> Impact on SEs</h2>
+<p>In addition to altering regression coefficients (and reducing <span class="math inline">\(R^2\)</span>), problematic scores can increase the SEs (i.e., precision of estimation) of the regression coefficients.</p>
+<p>COVRATIO is an index that indicates how individual scores affect the overall precision of estimation (joint confidence region for set of coefficients) of the regression coefficients.</p>
+<p>Observations that decrease the precision of estimation have COVRATIOS &lt; 1.0.</p>
+<p>Belsley et al., (1980) proposed a cut off of:</p>
+<p><span class="math inline">\(\text{COVRATIO}_i &lt; |3* \frac{P}{N} - 1|\)</span></p>
 </section>
 <section id="impact-on-ses-real-data" class="level2" data-number="7.25">
 <h2 data-number="7.25" class="anchored" data-anchor-id="impact-on-ses-real-data"><span class="header-section-number">7.25</span> Impact on SEs (Real data)</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">case_analysis</span>(m_1, <span class="at">Type =</span> <span class="st">"covratio"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Rownames
+character(0)
+
+$Values
+named numeric(0)</code></pre>
+</div>
+</div>
 </section>
 <section id="four-examples-with-fake-data" class="level2" data-number="7.26">
 <h2 data-number="7.26" class="anchored" data-anchor-id="four-examples-with-fake-data"><span class="header-section-number">7.26</span> Four Examples with Fake Data</h2>
@@ -953,6 +978,43 @@ numeric(0)</code></pre>
 </section>
 <section id="overall-impact-of-problem-scores-real-data" class="level2" data-number="7.28">
 <h2 data-number="7.28" class="anchored" data-anchor-id="overall-impact-of-problem-scores-real-data"><span class="header-section-number">7.28</span> Overall Impact of Problem Scores: Real Data</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term        estimate std.error statistic    p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+1 (Intercept)   18.9      7.47        2.53 0.0132    
+2 bac         -165.      84.6        -1.95 0.0545    
+3 ta             0.152    0.0316      4.82 0.00000570
+4 sex_c        -16.0      6.67       -2.40 0.0184    </code></pre>
+</div>
+</div>
+<p>SSE = 97756.4330176</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>data_rm_outliers <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>subid <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"0125"</span>, <span class="st">"2112"</span>))</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>m_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac <span class="sc">+</span> ta <span class="sc">+</span> sex_c, <span class="at">data =</span> data_rm_outliers) </span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)   26.6      6.44        4.13 0.0000825
+2 bac         -229.      72.4        -3.16 0.00214  
+3 ta             0.126    0.0273      4.61 0.0000135
+4 sex_c        -15.5      5.70       -2.72 0.00790  </code></pre>
+</div>
+</div>
+<p>SSE = 68262.9797344</p>
 <hr>
 </section>
 <section id="what-to-do" class="level2" data-number="7.29">
