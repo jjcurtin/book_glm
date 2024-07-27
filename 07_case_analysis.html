@@ -894,9 +894,87 @@ numeric(0)</code></pre>
 </section>
 <section id="dfbetas" class="level2" data-number="7.21">
 <h2 data-number="7.21" class="anchored" data-anchor-id="dfbetas"><span class="header-section-number">7.21</span> dfBetas</h2>
+<p><span class="math inline">\(\text{dfBeta}_{ij}\)</span> is an index of how much each regression coefficient (<span class="math inline">\(j= 0 – k\)</span>) would change if the <span class="math inline">\(i^{\text{th}}\)</span> score was deleted.</p>
+<p><span class="math inline">\(\text{dfBeta}_{ij} = b_j - b_{j(-i)}\)</span></p>
+<p>dfBetas (preferred) is the standardized form of the index.</p>
+<p><span class="math inline">\(\text{dfBetas} = \frac{\text{dfBeta}}{\text{SE}_{b_{j(-i)}}}\)</span></p>
+<p><span class="math inline">\(|{\text{dfBetas}}|&gt;2\)</span> may be problematic.</p>
+<p><span class="math inline">\(|{\text{dfBetas}}|&gt; \frac{2}{\sqrt{N}}\)</span> in larger samples (Belsley et al., 1980).</p>
+<p>Consider distribution with histogram! Also can visualize with added variable plot.</p>
+<p>Problem is there can be many dfBetas (a set for each predictor and intercept). Most helpful when there is one <em>critical/focal effect.</em></p>
+<hr>
 </section>
 <section id="dfbetas-real-data" class="level2" data-number="7.22">
 <h2 data-number="7.22" class="anchored" data-anchor-id="dfbetas-real-data"><span class="header-section-number">7.22</span> dfBetas (Real data)</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: carData</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'car'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    recode</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:purrr':
+
+    some</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">case_analysis</span>(m_1, <span class="at">Type =</span> <span class="st">"dfbetas"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-26-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-26-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-26-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_case_analysis_files/figure-html/unnamed-chunk-26-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Rownames
+character(0)
+
+$Values
+NULL</code></pre>
+</div>
+</div>
 </section>
 <section id="added-variable-plot-real-data" class="level2" data-number="7.23">
 <h2 data-number="7.23" class="anchored" data-anchor-id="added-variable-plot-real-data"><span class="header-section-number">7.23</span> Added Variable Plot (Real data)</h2>
