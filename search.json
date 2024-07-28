@@ -1664,7 +1664,7 @@
     "href": "08_model_assumptions.html#normally-distributed-errors",
     "title": "8  Dealing with Messy Data II: Model Assumptions",
     "section": "8.7 Normally Distributed Errors",
-    "text": "8.7 Normally Distributed Errors",
+    "text": "8.7 Normally Distributed Errors\nThe errors for each \\(\\hat{Y}\\) are assumed to be normally distributed. Normally distributed errors are required for OLS regression coefficients to be MVUE but not BLUE.\nCentral limit theory indicates that even with non-normal errors, significance tests and confidence intervals are approximately correct with large \\(N\\).\nCoefficients are still best unbiased efficient estimators among linear solutions (i.e., BLUE) but more efficient non-linear solutions may exist (e.g., Generalized Linear Models such as Poisson regression for thick tailed distributions).\nMean may not be best measure of center of a highly skewed distribution.\nMultimodal error distributions suggest the omission of one or more categorical variables that divide the data into groups.\nTransformations may correct shape of residuals (Unit 9).",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]

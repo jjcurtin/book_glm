@@ -428,6 +428,12 @@ window.Quarto = {
 </section>
 <section id="normally-distributed-errors" class="level2" data-number="8.7">
 <h2 data-number="8.7" class="anchored" data-anchor-id="normally-distributed-errors"><span class="header-section-number">8.7</span> Normally Distributed Errors</h2>
+<p>The errors for each <span class="math inline">\(\hat{Y}\)</span> are assumed to be normally distributed. Normally distributed errors are required for OLS regression coefficients to be MVUE but not BLUE.</p>
+<p>Central limit theory indicates that even with non-normal errors, <strong>significance tests and confidence intervals are approximately correct with large <span class="math inline">\(N\)</span>.</strong></p>
+<p>Coefficients are still best unbiased efficient estimators among linear solutions (i.e., BLUE) but <strong>more efficient non-linear solutions</strong> may exist (e.g., Generalized Linear Models such as Poisson regression for thick tailed distributions).</p>
+<p><strong>Mean may not be best measure of center</strong> of a highly skewed distribution.</p>
+<p>Multimodal error distributions suggest the <strong>omission of one or more categorical variables</strong> that divide the data into groups.</p>
+<p>Transformations may correct shape of residuals (<em>Unit 9</em>).</p>
 <hr>
 </section>
 <section id="normality-quantile-comparison-density-plots" class="level2" data-number="8.8">
