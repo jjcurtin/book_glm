@@ -325,9 +325,10 @@ window.Quarto = {
   <li><a href="#assessment-of-residuals-general-issues" id="toc-assessment-of-residuals-general-issues" class="nav-link" data-scroll-target="#assessment-of-residuals-general-issues"><span class="header-section-number">8.5</span> Assessment of Residuals: General Issues</a></li>
   <li><a href="#residuals-by-haty-normal-m-0-s-constant" id="toc-residuals-by-haty-normal-m-0-s-constant" class="nav-link" data-scroll-target="#residuals-by-haty-normal-m-0-s-constant"><span class="header-section-number">8.6</span> Residuals by <span class="math inline">\(\hat{Y}\)</span>: Normal M = 0, S = Constant</a></li>
   <li><a href="#normally-distributed-errors" id="toc-normally-distributed-errors" class="nav-link" data-scroll-target="#normally-distributed-errors"><span class="header-section-number">8.7</span> Normally Distributed Errors</a></li>
-  <li><a href="#global-test-of-model-assumptions" id="toc-global-test-of-model-assumptions" class="nav-link" data-scroll-target="#global-test-of-model-assumptions"><span class="header-section-number">8.8</span> Global Test of Model Assumptions</a></li>
-  <li><a href="#transformations-the-family-of-powers-roots" id="toc-transformations-the-family-of-powers-roots" class="nav-link" data-scroll-target="#transformations-the-family-of-powers-roots"><span class="header-section-number">8.9</span> Transformations: The Family of Powers &amp; Roots</a></li>
-  <li><a href="#summary-of-violation-consequences-and-solutions" id="toc-summary-of-violation-consequences-and-solutions" class="nav-link" data-scroll-target="#summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.10</span> Summary of Violation Consequences and Solutions</a></li>
+  <li><a href="#normality-quantile-comparison-density-plots" id="toc-normality-quantile-comparison-density-plots" class="nav-link" data-scroll-target="#normality-quantile-comparison-density-plots"><span class="header-section-number">8.8</span> Normality: Quantile Comparison &amp; Density Plots</a></li>
+  <li><a href="#global-test-of-model-assumptions" id="toc-global-test-of-model-assumptions" class="nav-link" data-scroll-target="#global-test-of-model-assumptions"><span class="header-section-number">8.9</span> Global Test of Model Assumptions</a></li>
+  <li><a href="#transformations-the-family-of-powers-roots" id="toc-transformations-the-family-of-powers-roots" class="nav-link" data-scroll-target="#transformations-the-family-of-powers-roots"><span class="header-section-number">8.10</span> Transformations: The Family of Powers &amp; Roots</a></li>
+  <li><a href="#summary-of-violation-consequences-and-solutions" id="toc-summary-of-violation-consequences-and-solutions" class="nav-link" data-scroll-target="#summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.11</span> Summary of Violation Consequences and Solutions</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/08_model_assumptions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -426,14 +427,131 @@ window.Quarto = {
 <h2 data-number="8.7" class="anchored" data-anchor-id="normally-distributed-errors"><span class="header-section-number">8.7</span> Normally Distributed Errors</h2>
 <hr>
 </section>
-<section id="global-test-of-model-assumptions" class="level2" data-number="8.8">
-<h2 data-number="8.8" class="anchored" data-anchor-id="global-test-of-model-assumptions"><span class="header-section-number">8.8</span> Global Test of Model Assumptions</h2>
+<section id="normality-quantile-comparison-density-plots" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="normality-quantile-comparison-density-plots"><span class="header-section-number">8.8</span> Normality: Quantile Comparison &amp; Density Plots</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car) <span class="co"># needed for model_assumptions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: carData
+
+Attaching package: 'car'
+
+The following object is masked from 'package:dplyr':
+
+    recode
+
+The following object is masked from 'package:purrr':
+
+    some</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych) <span class="co"># needed for model_assumptions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'psych' was built under R version 4.4.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'psych'
+
+The following object is masked from 'package:car':
+
+    logit
+
+The following objects are masked from 'package:ggplot2':
+
+    %+%, alpha</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gvlma) <span class="co"># needed for model_assumptions</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>()) </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data_lecture/7_three_predictors_fps.csv"</span>), </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">sex_c =</span> <span class="fu">if_else</span>(sex <span class="sc">==</span> <span class="st">"female"</span>, <span class="sc">-</span>.<span class="dv">5</span>, .<span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We have a second function written by John called <code>model_assumptions()</code> that you can source to help test model assumptions.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">source_url</span>(<span class="st">"https://github.com/jjcurtin/lab_support/blob/main/model_assumptions.R?raw=true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Lets refit our last model from the previous section.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data_rm_outliers <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>subid <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"0125"</span>, <span class="st">"2112"</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>m_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps <span class="sc">~</span> bac <span class="sc">+</span> ta <span class="sc">+</span> sex_c, <span class="at">data =</span> data_rm_outliers) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model_assumptions</span>(m_2, <span class="at">Type =</span> <span class="st">"normal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Descriptive Statistics for Studentized Residuals
+
+Call:
+lm(formula = fps ~ bac + ta + sex_c, data = data_rm_outliers)
+
+Coefficients:
+(Intercept)          bac           ta        sex_c  
+    26.5528    -228.8721       0.1256     -15.4874  
+
+
+ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
+USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
+Level of Significance =  0.05 
+
+Call:
+ gvlma(x = Model) 
+
+                    Value  p-value                   Decision
+Global Stat        9.8263 0.043458 Assumptions NOT satisfied!
+Skewness           0.2921 0.588886    Assumptions acceptable.
+Kurtosis           1.0393 0.307987    Assumptions acceptable.
+Link Function      0.1898 0.663091    Assumptions acceptable.
+Heteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="global-test-of-model-assumptions" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="global-test-of-model-assumptions"><span class="header-section-number">8.9</span> Global Test of Model Assumptions</h2>
 <p>Pena, EA and Slate, EH (2006). Global validation of linear model assumptions, <em>Journal of the American Statistical Association</em>, 101, 341-354.</p>
 <p>Provided by <code>modelAssumptions()</code> using <code>gvlma</code> package</p>
 <hr>
 </section>
-<section id="transformations-the-family-of-powers-roots" class="level2" data-number="8.9">
-<h2 data-number="8.9" class="anchored" data-anchor-id="transformations-the-family-of-powers-roots"><span class="header-section-number">8.9</span> Transformations: The Family of Powers &amp; Roots</h2>
+<section id="transformations-the-family-of-powers-roots" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="transformations-the-family-of-powers-roots"><span class="header-section-number">8.10</span> Transformations: The Family of Powers &amp; Roots</h2>
 <ul>
 <li><p>Power transformations (<em>next unit</em>) are very useful for correcting problems with normality, constant, variance, and linearity of errors.</p></li>
 <li><p>Polynomial regression (<em>PSY 710</em>) is useful when you have quadratic, cubic, etc. effects of <span class="math inline">\(X\)</span>s on <span class="math inline">\(Y\)</span>.</p></li>
@@ -442,8 +560,8 @@ window.Quarto = {
 <hr>
 <hr>
 </section>
-<section id="summary-of-violation-consequences-and-solutions" class="level2" data-number="8.10">
-<h2 data-number="8.10" class="anchored" data-anchor-id="summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.10</span> Summary of Violation Consequences and Solutions</h2>
+<section id="summary-of-violation-consequences-and-solutions" class="level2" data-number="8.11">
+<h2 data-number="8.11" class="anchored" data-anchor-id="summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.11</span> Summary of Violation Consequences and Solutions</h2>
 <ol type="1">
 <li><p><strong>Exact X</strong></p>
 <ul>

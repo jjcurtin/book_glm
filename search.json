@@ -1414,7 +1414,7 @@
     "href": "07_case_analysis.html#leverage-real-data",
     "title": "7  Dealing with Messy Data I: Case Analysis",
     "section": "7.12 Leverage (Real Data)",
-    "text": "7.12 Leverage (Real Data)\nThere is a function available for helping you identify observations with high leverage.\nSource the function with the following code\n\n\nCode\ndevtools::source_url(\"https://github.com/jjcurtin/lab_support/blob/main/case_analysis.R?raw=true\")\n\n\n\n\n\nCode\ncase_analysis(m_1, Type = \"hatvalues\")\n\n\n\n\n\n\n\n\n\n$Rownames\ncharacter(0)\n\n$Values\nnamed numeric(0)",
+    "text": "7.12 Leverage (Real Data)\nThere is a function written by John called case_analysis(). It is available to help you identify observations with high leverage.\nSource the function with the following code\n\n\nCode\ndevtools::source_url(\"https://github.com/jjcurtin/lab_support/blob/main/case_analysis.R?raw=true\")\n\n\n\n\n\nCode\ncase_analysis(m_1, Type = \"hatvalues\")\n\n\n\n\n\n\n\n\n\n$Rownames\ncharacter(0)\n\n$Values\nnamed numeric(0)",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
     ]
@@ -1670,11 +1670,21 @@
     ]
   },
   {
+    "objectID": "08_model_assumptions.html#normality-quantile-comparison-density-plots",
+    "href": "08_model_assumptions.html#normality-quantile-comparison-density-plots",
+    "title": "8  Dealing with Messy Data II: Model Assumptions",
+    "section": "8.8 Normality: Quantile Comparison & Density Plots",
+    "text": "8.8 Normality: Quantile Comparison & Density Plots\n\n\nCode\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\nlibrary(patchwork)\nlibrary(car) # needed for model_assumptions\n\n\nLoading required package: carData\n\nAttaching package: 'car'\n\nThe following object is masked from 'package:dplyr':\n\n    recode\n\nThe following object is masked from 'package:purrr':\n\n    some\n\n\nCode\nlibrary(psych) # needed for model_assumptions\n\n\nWarning: package 'psych' was built under R version 4.4.1\n\n\n\nAttaching package: 'psych'\n\nThe following object is masked from 'package:car':\n\n    logit\n\nThe following objects are masked from 'package:ggplot2':\n\n    %+%, alpha\n\n\nCode\nlibrary(gvlma) # needed for model_assumptions\n\ntheme_set(theme_classic()) \n\ndata &lt;- read_csv(here::here(\"data_lecture/7_three_predictors_fps.csv\"), \n                 show_col_types = FALSE) |&gt; \n   mutate(sex_c = if_else(sex == \"female\", -.5, .5))\n\n\nWe have a second function written by John called model_assumptions() that you can source to help test model assumptions.\n\n\nCode\ndevtools::source_url(\"https://github.com/jjcurtin/lab_support/blob/main/model_assumptions.R?raw=true\")\n\n\nLets refit our last model from the previous section.\n\n\nCode\ndata_rm_outliers &lt;- data |&gt; \n  filter(!subid %in% c(\"0125\", \"2112\"))\n\nm_2 &lt;- lm(fps ~ bac + ta + sex_c, data = data_rm_outliers) \n\n\n\n\nCode\nmodel_assumptions(m_2, Type = \"normal\")\n\n\nDescriptive Statistics for Studentized Residuals\n\nCall:\nlm(formula = fps ~ bac + ta + sex_c, data = data_rm_outliers)\n\nCoefficients:\n(Intercept)          bac           ta        sex_c  \n    26.5528    -228.8721       0.1256     -15.4874  \n\n\nASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS\nUSING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:\nLevel of Significance =  0.05 \n\nCall:\n gvlma(x = Model) \n\n                    Value  p-value                   Decision\nGlobal Stat        9.8263 0.043458 Assumptions NOT satisfied!\nSkewness           0.2921 0.588886    Assumptions acceptable.\nKurtosis           1.0393 0.307987    Assumptions acceptable.\nLink Function      0.1898 0.663091    Assumptions acceptable.\nHeteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
+    ]
+  },
+  {
     "objectID": "08_model_assumptions.html#global-test-of-model-assumptions",
     "href": "08_model_assumptions.html#global-test-of-model-assumptions",
     "title": "8  Dealing with Messy Data II: Model Assumptions",
-    "section": "8.8 Global Test of Model Assumptions",
-    "text": "8.8 Global Test of Model Assumptions\nPena, EA and Slate, EH (2006). Global validation of linear model assumptions, Journal of the American Statistical Association, 101, 341-354.\nProvided by modelAssumptions() using gvlma package",
+    "section": "8.9 Global Test of Model Assumptions",
+    "text": "8.9 Global Test of Model Assumptions\nPena, EA and Slate, EH (2006). Global validation of linear model assumptions, Journal of the American Statistical Association, 101, 341-354.\nProvided by modelAssumptions() using gvlma package",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]
@@ -1683,8 +1693,8 @@
     "objectID": "08_model_assumptions.html#transformations-the-family-of-powers-roots",
     "href": "08_model_assumptions.html#transformations-the-family-of-powers-roots",
     "title": "8  Dealing with Messy Data II: Model Assumptions",
-    "section": "8.9 Transformations: The Family of Powers & Roots",
-    "text": "8.9 Transformations: The Family of Powers & Roots\n\nPower transformations (next unit) are very useful for correcting problems with normality, constant, variance, and linearity of errors.\nPolynomial regression (PSY 710) is useful when you have quadratic, cubic, etc. effects of \\(X\\)s on \\(Y\\).\nGeneralized linear models (e.g., Logistic regression; PSY 710) are also available.",
+    "section": "8.10 Transformations: The Family of Powers & Roots",
+    "text": "8.10 Transformations: The Family of Powers & Roots\n\nPower transformations (next unit) are very useful for correcting problems with normality, constant, variance, and linearity of errors.\nPolynomial regression (PSY 710) is useful when you have quadratic, cubic, etc. effects of \\(X\\)s on \\(Y\\).\nGeneralized linear models (e.g., Logistic regression; PSY 710) are also available.",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]
@@ -1693,8 +1703,8 @@
     "objectID": "08_model_assumptions.html#summary-of-violation-consequences-and-solutions",
     "href": "08_model_assumptions.html#summary-of-violation-consequences-and-solutions",
     "title": "8  Dealing with Messy Data II: Model Assumptions",
-    "section": "8.10 Summary of Violation Consequences and Solutions",
-    "text": "8.10 Summary of Violation Consequences and Solutions\n\nExact X\n\nInaccurate (biased) parameter estimates.\nUse reliable measures of \\(X\\)s, use SEM with latent variables.\n\nIndependence\n\nInaccurate standard errors.\nUse repeated measures, use multi-level models.\n\nNormally distributed errors\n\nInefficient standard errors.\nConsider omitted variables, use transformations, use generalized linear models.\n\nConstant variance for errors\n\nInaccurate and inefficient standard errors.\nUse SE corrections (but still inefficient), use transformations, use weighted least squares.\n\nLinearity (Error distributions all have mean of 0)\n\nInaccurate (biased) parameter estimates.\nUse transformations, use polynomial regression, use generalized linear models.",
+    "section": "8.11 Summary of Violation Consequences and Solutions",
+    "text": "8.11 Summary of Violation Consequences and Solutions\n\nExact X\n\nInaccurate (biased) parameter estimates.\nUse reliable measures of \\(X\\)s, use SEM with latent variables.\n\nIndependence\n\nInaccurate standard errors.\nUse repeated measures, use multi-level models.\n\nNormally distributed errors\n\nInefficient standard errors.\nConsider omitted variables, use transformations, use generalized linear models.\n\nConstant variance for errors\n\nInaccurate and inefficient standard errors.\nUse SE corrections (but still inefficient), use transformations, use weighted least squares.\n\nLinearity (Error distributions all have mean of 0)\n\nInaccurate (biased) parameter estimates.\nUse transformations, use polynomial regression, use generalized linear models.",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]
