@@ -1624,7 +1624,27 @@
     "href": "08_model_assumptions.html#exact-x",
     "title": "8  Dealing with Messy Data II: Model Assumptions",
     "section": "8.3 Exact X",
-    "text": "8.3 Exact X\nViolations of the Exact X assumption lead to biased (i.e., inaccurate) estimates of regression coefficients.\nViolations are caused by problems with reliability of measurement of your predictors.\nQuestion: In simple, bivariate regression, how will reducing reliability affect the regression model?",
+    "text": "8.3 Exact X\nViolations of the Exact X assumption lead to biased (i.e., inaccurate) estimates of regression coefficients.\nViolations are caused by problems with reliability of measurement of your predictors.\nQuestion: In simple, bivariate regression, how will reducing reliability affect the regression model?\n\n\n\nCode\n# 3 demo plots with fake data\n\n\nIt will reduce \\(b_1\\). We will underestimate the strength of relationship between \\(X\\) and \\(Y\\).\nIn multiple predictor models, the bias can be either positive or negative based on the nature of the correlations among the predictors. Use reliable variables!.\nQuestion: What are the implications of unreliable \\(X\\) for the use of covariates to control variables?\n\nCovariates only control from the construct they measure to the degree that they are reliable (and valid) measures of that construct.\nAnalysis that rely on unreliable covariates are not controlling the variance for the construct well.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
+    ]
+  },
+  {
+    "objectID": "08_model_assumptions.html#independence",
+    "href": "08_model_assumptions.html#independence",
+    "title": "8  Dealing with Messy Data II: Model Assumptions",
+    "section": "8.4 Independence",
+    "text": "8.4 Independence\nViolations of the independence of residuals assumption can compromise the validity of our statistical tests (inaccurate standard errors).\nViolations of residuals independence is a function of the research design caused by repeated measures on the same individual or related individuals/observations (participants in same family, school, etc).\nOften difficult to detect in data but clear from research design.\nCan be fixed by a variety of approaches including repeated measures analyses (later this semester) or multi-level, mixed effects, and/or hierarchical linear models (next semester).",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
+    ]
+  },
+  {
+    "objectID": "08_model_assumptions.html#assessment-of-residuals-general-issues",
+    "href": "08_model_assumptions.html#assessment-of-residuals-general-issues",
+    "title": "8  Dealing with Messy Data II: Model Assumptions",
+    "section": "8.5 Assessment of Residuals: General Issues",
+    "text": "8.5 Assessment of Residuals: General Issues\nRemaining three assumptions (Normality distributed residuals with a mean of 0 and constant variance) can be assessed via examination of the residuals.\nUse of Graphical Methods is emphasized.\nStatistical tests of assumptions exist but should be used cautiously.\nAssessment of assumptions about residuals is an inexact science: Conclusions are tentative.\nThe process of examining residuals will increase your understanding of your data. - May suggest transformations of your data. - May suggest alternative analytic strategies. - Will increase your confidence in your conclusions.",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]

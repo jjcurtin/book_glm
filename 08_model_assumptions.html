@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -287,6 +321,8 @@ window.Quarto = {
   <li><a href="#goals-of-unit" id="toc-goals-of-unit" class="nav-link active" data-scroll-target="#goals-of-unit"><span class="header-section-number">8.1</span> Goals of Unit</a></li>
   <li><a href="#assessment-of-assumptions-for-sig.-tests" id="toc-assessment-of-assumptions-for-sig.-tests" class="nav-link" data-scroll-target="#assessment-of-assumptions-for-sig.-tests"><span class="header-section-number">8.2</span> Assessment of Assumptions for Sig. Tests</a></li>
   <li><a href="#exact-x" id="toc-exact-x" class="nav-link" data-scroll-target="#exact-x"><span class="header-section-number">8.3</span> Exact X</a></li>
+  <li><a href="#independence" id="toc-independence" class="nav-link" data-scroll-target="#independence"><span class="header-section-number">8.4</span> Independence</a></li>
+  <li><a href="#assessment-of-residuals-general-issues" id="toc-assessment-of-residuals-general-issues" class="nav-link" data-scroll-target="#assessment-of-residuals-general-issues"><span class="header-section-number">8.5</span> Assessment of Residuals: General Issues</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/08_model_assumptions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -345,6 +381,36 @@ window.Quarto = {
 <p>Violations of the Exact X assumption lead to biased (i.e., inaccurate) estimates of regression coefficients.</p>
 <p>Violations are caused by problems with reliability of measurement of your predictors.</p>
 <p><span style="color: red;">Question: In simple, bivariate regression, how will reducing reliability affect the regression model?</span></p>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 demo plots with fake data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><span style="color: blue;">It will reduce <span class="math inline">\(b_1\)</span>. We will underestimate the strength of relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</span></p>
+<p><span style="color: blue;">In multiple predictor models, the bias can be either positive or negative based on the nature of the correlations among the predictors. <strong>Use reliable variables!</strong>.</span></p>
+<p><span style="color: red;">Question: What are the implications of unreliable <span class="math inline">\(X\)</span> for the use of covariates to <em>control</em> variables?</span></p>
+<hr>
+<p><span style="color: blue;">Covariates only <em>control</em> from the construct they measure to the degree that they are reliable (and valid) measures of that construct.</span></p>
+<p><span style="color: blue;">Analysis that rely on unreliable covariates are not controlling the variance for the construct well.</span></p>
+<hr>
+</section>
+<section id="independence" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="independence"><span class="header-section-number">8.4</span> Independence</h2>
+<p>Violations of the independence of residuals assumption can compromise the validity of our statistical tests (inaccurate standard errors).</p>
+<p>Violations of residuals independence is a function of the research design caused by repeated measures on the same individual or related individuals/observations (participants in same family, school, etc).</p>
+<p>Often difficult to detect in data but clear from research design.</p>
+<p>Can be fixed by a variety of approaches including repeated measures analyses (<strong>later this semester</strong>) or multi-level, mixed effects, and/or hierarchical linear models (<strong>next semester</strong>).</p>
+<hr>
+</section>
+<section id="assessment-of-residuals-general-issues" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="assessment-of-residuals-general-issues"><span class="header-section-number">8.5</span> Assessment of Residuals: General Issues</h2>
+<p>Remaining three assumptions (Normality distributed residuals with a mean of 0 and constant variance) can be assessed via examination of the residuals.</p>
+<p>Use of Graphical Methods is emphasized.</p>
+<p>Statistical tests of assumptions exist but should be used cautiously.</p>
+<p>Assessment of assumptions about residuals is an inexact science: Conclusions are tentative.</p>
+<p>The process of examining residuals will increase your understanding of your data. - May suggest transformations of your data. - May suggest alternative analytic strategies. - Will increase your confidence in your conclusions.</p>
 <hr>
 
 
