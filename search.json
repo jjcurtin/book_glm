@@ -1734,7 +1734,7 @@
     "href": "08_model_assumptions.html#linearity-component-residuals-plots",
     "title": "8  Dealing with Messy Data II: Model Assumptions",
     "section": "8.14 Linearity: Component + Residuals Plots",
-    "text": "8.14 Linearity: Component + Residuals Plots\nIf Linearity assumption is not met, coefficients are biased.\nPlot partial residual (\\(e_{i(j)} = e_i + b_jX_{ij}\\)) by each predictor.\nCan include factors but can not include interactions with factors. Code regressors manually.\n\n\nCode\nmodel_assumptions(m_2, Type='linear')\n\n\n\n\nCode\n# 3 plots",
+    "text": "8.14 Linearity: Component + Residuals Plots\nIf Linearity assumption is not met, coefficients are biased.\nPlot partial residual (\\(e_{i(j)} = e_i + b_jX_{ij}\\)) by each predictor.\nCan include factors but can not include interactions with factors. Code regressors manually.\n\n\nCode\nmodel_assumptions(m_2, Type='linear')",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]
