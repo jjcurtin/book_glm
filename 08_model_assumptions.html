@@ -328,9 +328,10 @@ window.Quarto = {
   <li><a href="#normality-quantile-comparison-density-plots" id="toc-normality-quantile-comparison-density-plots" class="nav-link" data-scroll-target="#normality-quantile-comparison-density-plots"><span class="header-section-number">8.8</span> Normality: Quantile Comparison &amp; Density Plots</a></li>
   <li><a href="#constant-variance" id="toc-constant-variance" class="nav-link" data-scroll-target="#constant-variance"><span class="header-section-number">8.9</span> Constant Variance</a></li>
   <li><a href="#constant-variance-residual-and-spread-level-plots" id="toc-constant-variance-residual-and-spread-level-plots" class="nav-link" data-scroll-target="#constant-variance-residual-and-spread-level-plots"><span class="header-section-number">8.10</span> Constant Variance: Residual and Spread-Level Plots</a></li>
-  <li><a href="#global-test-of-model-assumptions" id="toc-global-test-of-model-assumptions" class="nav-link" data-scroll-target="#global-test-of-model-assumptions"><span class="header-section-number">8.11</span> Global Test of Model Assumptions</a></li>
-  <li><a href="#transformations-the-family-of-powers-roots" id="toc-transformations-the-family-of-powers-roots" class="nav-link" data-scroll-target="#transformations-the-family-of-powers-roots"><span class="header-section-number">8.12</span> Transformations: The Family of Powers &amp; Roots</a></li>
-  <li><a href="#summary-of-violation-consequences-and-solutions" id="toc-summary-of-violation-consequences-and-solutions" class="nav-link" data-scroll-target="#summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.13</span> Summary of Violation Consequences and Solutions</a></li>
+  <li><a href="#constant-variance-statistical-test" id="toc-constant-variance-statistical-test" class="nav-link" data-scroll-target="#constant-variance-statistical-test"><span class="header-section-number">8.11</span> Constant Variance: Statistical Test</a></li>
+  <li><a href="#global-test-of-model-assumptions" id="toc-global-test-of-model-assumptions" class="nav-link" data-scroll-target="#global-test-of-model-assumptions"><span class="header-section-number">8.12</span> Global Test of Model Assumptions</a></li>
+  <li><a href="#transformations-the-family-of-powers-roots" id="toc-transformations-the-family-of-powers-roots" class="nav-link" data-scroll-target="#transformations-the-family-of-powers-roots"><span class="header-section-number">8.13</span> Transformations: The Family of Powers &amp; Roots</a></li>
+  <li><a href="#summary-of-violation-consequences-and-solutions" id="toc-summary-of-violation-consequences-and-solutions" class="nav-link" data-scroll-target="#summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.14</span> Summary of Violation Consequences and Solutions</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/08_model_assumptions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -508,7 +509,7 @@ Heteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!</code></pre>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model assumptions plots</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model assumptions plots (dont need gvlma output)</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># q-q plots</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># density plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -565,17 +566,39 @@ Kurtosis           1.0393 0.307987    Assumptions acceptable.
 Link Function      0.1898 0.663091    Assumptions acceptable.
 Heteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!</code></pre>
 </div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plots not showing up - dont need this output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <hr>
 </section>
-<section id="global-test-of-model-assumptions" class="level2" data-number="8.11">
-<h2 data-number="8.11" class="anchored" data-anchor-id="global-test-of-model-assumptions"><span class="header-section-number">8.11</span> Global Test of Model Assumptions</h2>
-<p>Pena, EA and Slate, EH (2006). Global validation of linear model assumptions, <em>Journal of the American Statistical Association</em>, 101, 341-354.</p>
-<p>Provided by <code>modelAssumptions()</code> using <code>gvlma</code> package</p>
+<section id="constant-variance-statistical-test" class="level2" data-number="8.11">
+<h2 data-number="8.11" class="anchored" data-anchor-id="constant-variance-statistical-test"><span class="header-section-number">8.11</span> Constant Variance: Statistical Test</h2>
+<p>Breusch &amp; Pagan (1979)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and Cook &amp; Weisberg (1983)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> independently developed test for constant variance.</p>
+<p><code>ncvTest()</code> in <code>car</code> package. Also provided by <code>model_assumptions()</code> as well.</p>
+<p>Do not use it blindly. All statistical tests are designed to be sensitive to specific types of violations. May miss other types of violations.May also provide false positive due to other aspects of the distribution.</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gvlma</span>(m_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">ncvTest</span>(m_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Non-constant Variance Score Test 
+Variance formula: ~ fitted.values 
+Chisquare = 21.89294, Df = 1, p = 0.0000028829</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="global-test-of-model-assumptions" class="level2" data-number="8.12">
+<h2 data-number="8.12" class="anchored" data-anchor-id="global-test-of-model-assumptions"><span class="header-section-number">8.12</span> Global Test of Model Assumptions</h2>
+<p>Pena, EA and Slate, EH (2006). Global validation of linear model assumptions, <em>Journal of the American Statistical Association</em>, 101, 341-354.</p>
+<p>Provided by <code>model_assumptions()</code> using <code>gvlma</code> package</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gvlma</span>(m_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -604,8 +627,8 @@ Heteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!</code></pre>
 </div>
 <hr>
 </section>
-<section id="transformations-the-family-of-powers-roots" class="level2" data-number="8.12">
-<h2 data-number="8.12" class="anchored" data-anchor-id="transformations-the-family-of-powers-roots"><span class="header-section-number">8.12</span> Transformations: The Family of Powers &amp; Roots</h2>
+<section id="transformations-the-family-of-powers-roots" class="level2" data-number="8.13">
+<h2 data-number="8.13" class="anchored" data-anchor-id="transformations-the-family-of-powers-roots"><span class="header-section-number">8.13</span> Transformations: The Family of Powers &amp; Roots</h2>
 <ul>
 <li><p>Power transformations (<em>next unit</em>) are very useful for correcting problems with normality, constant, variance, and linearity of errors.</p></li>
 <li><p>Polynomial regression (<em>PSY 710</em>) is useful when you have quadratic, cubic, etc. effects of <span class="math inline">\(X\)</span>s on <span class="math inline">\(Y\)</span>.</p></li>
@@ -614,8 +637,8 @@ Heteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!</code></pre>
 <hr>
 <hr>
 </section>
-<section id="summary-of-violation-consequences-and-solutions" class="level2" data-number="8.13">
-<h2 data-number="8.13" class="anchored" data-anchor-id="summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.13</span> Summary of Violation Consequences and Solutions</h2>
+<section id="summary-of-violation-consequences-and-solutions" class="level2" data-number="8.14">
+<h2 data-number="8.14" class="anchored" data-anchor-id="summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.14</span> Summary of Violation Consequences and Solutions</h2>
 <ol type="1">
 <li><p><strong>Exact X</strong></p>
 <ul>
@@ -645,6 +668,13 @@ Heteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!</code></pre>
 </ol>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Breusch,T. S. and Pagan,A. R. (1979) A simple test for heteroscedasticity and random coefficient variation. <em>Econometrica</em>, 47, 1287-1294.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Cook,R. D. and Weisberg,S. (1983) Diagnostics for heteroscedasticity in regression. <em>Biometrika</em>, 70, 1-10.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
