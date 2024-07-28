@@ -1614,7 +1614,7 @@
     "href": "08_model_assumptions.html#assessment-of-assumptions-for-sig.-tests",
     "title": "8  Dealing with Messy Data II: Model Assumptions",
     "section": "8.2 Assessment of Assumptions for Sig. Tests",
-    "text": "8.2 Assessment of Assumptions for Sig. Tests",
+    "text": "8.2 Assessment of Assumptions for Sig. Tests\nAll GLM procedures commonly make the 5 assumptions below. When these assumptions are met, OLS regression coefficients are MVUE (Minimum Variance Unbiased Estimators) and BLUE (Best Linear Unbiased Estimators). With the exception of \\(\\#1\\), these assumptions are expressed (and assessed) with respect to the residuals around the prediction line.\n\nExact X: The IVs are assumed to be known exactly (i.e., without measurement error).\nIndependence: Residuals are independently distributed (prob. of obtaining a specific observation does not depend on other observations).\nNormality: All residual distributions are normally distributed.\nConstant variance: All residual distributions have a constant variance, \\(\\text{SEE}^2\\).\nLinearity: All residual distributions (i.e., for each \\(Y'\\)) are assumed to have means equal to zero.",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]

@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="book.css">
 </head>
@@ -258,6 +287,15 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="assessment-of-assumptions-for-sig.-tests" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="assessment-of-assumptions-for-sig.-tests"><span class="header-section-number">8.2</span> Assessment of Assumptions for Sig. Tests</h2>
+<p>All GLM procedures commonly make the <strong>5 assumptions below</strong>. When these assumptions are met, OLS regression coefficients are MVUE (Minimum Variance Unbiased Estimators) and BLUE (Best Linear Unbiased Estimators). With the exception of <span class="math inline">\(\#1\)</span>, these assumptions are expressed (and assessed) with respect to the residuals around the prediction line.</p>
+<ol type="1">
+<li><strong>Exact X:</strong> The IVs are assumed to be known exactly (i.e., without measurement error).</li>
+<li><strong>Independence:</strong> Residuals are independently distributed (prob. of obtaining a specific observation does not depend on other observations).</li>
+<li><strong>Normality:</strong> All residual distributions are normally distributed.</li>
+<li><strong>Constant variance:</strong> All residual distributions have a constant variance, <span class="math inline">\(\text{SEE}^2\)</span>.</li>
+<li><strong>Linearity:</strong> All residual distributions (i.e., for each <span class="math inline">\(Y'\)</span>) are assumed to have means equal to zero.</li>
+</ol>
+<hr>
 
 
 </section>
