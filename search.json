@@ -1704,7 +1704,7 @@
     "href": "08_model_assumptions.html#constant-variance-residual-and-spread-level-plots",
     "title": "8  Dealing with Messy Data II: Model Assumptions",
     "section": "8.11 Constant Variance: Residual and Spread-Level Plots",
-    "text": "8.11 Constant Variance: Residual and Spread-Level Plots\n\n\nCode\nmodel_assumptions(m_2, Type = \"constant\")\n\n\n\n\n\n\n\n\n\n\n\n\nA spread level plot is a plot of the log(abs(studentized residuals) vs. log(fitted values). \\(1-b\\) (from the regression line below) is the suggested power transformation for \\(Y\\) to stabilize variance.\n\n\nCode\ncar::spreadLevelPlot(m_2)\n\n\nWarning in spreadLevelPlot.lm(m_2): \n2 negative fitted values removed\n\n\n\n\n\n\n\n\n\n\nSuggested power transformation:  0.2555876",
+    "text": "8.11 Constant Variance: Residual and Spread-Level Plots\n\n\nCode\nmodel_assumptions(m_2, Type = \"constant\")\n\n\n\n\n\n\n\n\n\n\n\n\nA spread level plot is a plot of the log(abs(studentized residuals) vs. log(fitted values). \\(1-b\\) (from the regression line below) is the suggested power transformation for \\(Y\\) to stabilize variance.\n\n\n\n\n\n\n\n\n\n\nSuggested power transformation:  0.2555876",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]
