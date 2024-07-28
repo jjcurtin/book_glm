@@ -326,14 +326,15 @@ window.Quarto = {
   <li><a href="#residuals-by-haty-normal-m-0-s-constant" id="toc-residuals-by-haty-normal-m-0-s-constant" class="nav-link" data-scroll-target="#residuals-by-haty-normal-m-0-s-constant"><span class="header-section-number">8.6</span> Residuals by <span class="math inline">\(\hat{Y}\)</span>: Normal M = 0, S = Constant</a></li>
   <li><a href="#normally-distributed-errors" id="toc-normally-distributed-errors" class="nav-link" data-scroll-target="#normally-distributed-errors"><span class="header-section-number">8.7</span> Normally Distributed Errors</a></li>
   <li><a href="#normality-quantile-comparison-density-plots" id="toc-normality-quantile-comparison-density-plots" class="nav-link" data-scroll-target="#normality-quantile-comparison-density-plots"><span class="header-section-number">8.8</span> Normality: Quantile Comparison &amp; Density Plots</a></li>
-  <li><a href="#constant-variance" id="toc-constant-variance" class="nav-link" data-scroll-target="#constant-variance"><span class="header-section-number">8.9</span> Constant Variance</a></li>
-  <li><a href="#constant-variance-residual-and-spread-level-plots" id="toc-constant-variance-residual-and-spread-level-plots" class="nav-link" data-scroll-target="#constant-variance-residual-and-spread-level-plots"><span class="header-section-number">8.10</span> Constant Variance: Residual and Spread-Level Plots</a></li>
-  <li><a href="#constant-variance-statistical-test" id="toc-constant-variance-statistical-test" class="nav-link" data-scroll-target="#constant-variance-statistical-test"><span class="header-section-number">8.11</span> Constant Variance: Statistical Test</a></li>
-  <li><a href="#constant-variance-correcting-ses" id="toc-constant-variance-correcting-ses" class="nav-link" data-scroll-target="#constant-variance-correcting-ses"><span class="header-section-number">8.12</span> Constant Variance: Correcting SEs</a></li>
-  <li><a href="#linearity-component-residuals-plots" id="toc-linearity-component-residuals-plots" class="nav-link" data-scroll-target="#linearity-component-residuals-plots"><span class="header-section-number">8.13</span> Linearity: Component + Residuals Plots</a></li>
-  <li><a href="#global-test-of-model-assumptions" id="toc-global-test-of-model-assumptions" class="nav-link" data-scroll-target="#global-test-of-model-assumptions"><span class="header-section-number">8.14</span> Global Test of Model Assumptions</a></li>
-  <li><a href="#transformations-the-family-of-powers-roots" id="toc-transformations-the-family-of-powers-roots" class="nav-link" data-scroll-target="#transformations-the-family-of-powers-roots"><span class="header-section-number">8.15</span> Transformations: The Family of Powers &amp; Roots</a></li>
-  <li><a href="#summary-of-violation-consequences-and-solutions" id="toc-summary-of-violation-consequences-and-solutions" class="nav-link" data-scroll-target="#summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.16</span> Summary of Violation Consequences and Solutions</a></li>
+  <li><a href="#normality-q-q-plot-examples" id="toc-normality-q-q-plot-examples" class="nav-link" data-scroll-target="#normality-q-q-plot-examples"><span class="header-section-number">8.9</span> Normality: q-q Plot Examples</a></li>
+  <li><a href="#constant-variance" id="toc-constant-variance" class="nav-link" data-scroll-target="#constant-variance"><span class="header-section-number">8.10</span> Constant Variance</a></li>
+  <li><a href="#constant-variance-residual-and-spread-level-plots" id="toc-constant-variance-residual-and-spread-level-plots" class="nav-link" data-scroll-target="#constant-variance-residual-and-spread-level-plots"><span class="header-section-number">8.11</span> Constant Variance: Residual and Spread-Level Plots</a></li>
+  <li><a href="#constant-variance-statistical-test" id="toc-constant-variance-statistical-test" class="nav-link" data-scroll-target="#constant-variance-statistical-test"><span class="header-section-number">8.12</span> Constant Variance: Statistical Test</a></li>
+  <li><a href="#constant-variance-correcting-ses" id="toc-constant-variance-correcting-ses" class="nav-link" data-scroll-target="#constant-variance-correcting-ses"><span class="header-section-number">8.13</span> Constant Variance: Correcting SEs</a></li>
+  <li><a href="#linearity-component-residuals-plots" id="toc-linearity-component-residuals-plots" class="nav-link" data-scroll-target="#linearity-component-residuals-plots"><span class="header-section-number">8.14</span> Linearity: Component + Residuals Plots</a></li>
+  <li><a href="#global-test-of-model-assumptions" id="toc-global-test-of-model-assumptions" class="nav-link" data-scroll-target="#global-test-of-model-assumptions"><span class="header-section-number">8.15</span> Global Test of Model Assumptions</a></li>
+  <li><a href="#transformations-the-family-of-powers-roots" id="toc-transformations-the-family-of-powers-roots" class="nav-link" data-scroll-target="#transformations-the-family-of-powers-roots"><span class="header-section-number">8.16</span> Transformations: The Family of Powers &amp; Roots</a></li>
+  <li><a href="#summary-of-violation-consequences-and-solutions" id="toc-summary-of-violation-consequences-and-solutions" class="nav-link" data-scroll-target="#summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.17</span> Summary of Violation Consequences and Solutions</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/08_model_assumptions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -530,6 +531,7 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">source_url</span>(<span class="st">"https://github.com/jjcurtin/lab_support/blob/main/model_assumptions.R?raw=true"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<hr>
 <p>Lets refit our last model from the previous section.</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -578,17 +580,19 @@ X1    1 94    0 1.02  -0.16   -0.02 0.83 -3.06 2.54   5.6 0.11      0.6 0.11</co
 </div>
 </div>
 <hr>
+</section>
+<section id="normality-q-q-plot-examples" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="normality-q-q-plot-examples"><span class="header-section-number">8.9</span> Normality: q-q Plot Examples</h2>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># q-q plots</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># density plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># q-q plots</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <hr>
 </section>
-<section id="constant-variance" class="level2" data-number="8.9">
-<h2 data-number="8.9" class="anchored" data-anchor-id="constant-variance"><span class="header-section-number">8.9</span> Constant Variance</h2>
+<section id="constant-variance" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="constant-variance"><span class="header-section-number">8.10</span> Constant Variance</h2>
 <p>The errors for each <span class="math inline">\(\hat{Y}\)</span> are assumed have a constant variance (homoscedasticity). This is necessary for the OLS estimated coefficients to be BLUE.</p>
 <p>If the errors are heteroscedastic, the <strong>coefficients remain unbiased</strong> but the <strong>efficiency (precision of estimation) is impaired</strong> and the <strong>coefficient SEs become inaccurate</strong>. The degree of the problem depends on severity of violation and sample size.</p>
 <p>Rough rule is that estimation is seriously degraded if the ratio of largest to smallest variance is 10 or greater (or more conservatively, 4 or greater)</p>
@@ -599,8 +603,8 @@ X1    1 94    0 1.02  -0.16   -0.02 0.83 -3.06 2.54   5.6 0.11      0.6 0.11</co
 </ol>
 <hr>
 </section>
-<section id="constant-variance-residual-and-spread-level-plots" class="level2" data-number="8.10">
-<h2 data-number="8.10" class="anchored" data-anchor-id="constant-variance-residual-and-spread-level-plots"><span class="header-section-number">8.10</span> Constant Variance: Residual and Spread-Level Plots</h2>
+<section id="constant-variance-residual-and-spread-level-plots" class="level2" data-number="8.11">
+<h2 data-number="8.11" class="anchored" data-anchor-id="constant-variance-residual-and-spread-level-plots"><span class="header-section-number">8.11</span> Constant Variance: Residual and Spread-Level Plots</h2>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -646,8 +650,8 @@ Heteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!</code></pre>
 <p>Suggested power transformation: 0.2699878</p>
 <hr>
 </section>
-<section id="constant-variance-statistical-test" class="level2" data-number="8.11">
-<h2 data-number="8.11" class="anchored" data-anchor-id="constant-variance-statistical-test"><span class="header-section-number">8.11</span> Constant Variance: Statistical Test</h2>
+<section id="constant-variance-statistical-test" class="level2" data-number="8.12">
+<h2 data-number="8.12" class="anchored" data-anchor-id="constant-variance-statistical-test"><span class="header-section-number">8.12</span> Constant Variance: Statistical Test</h2>
 <p>Breusch &amp; Pagan (1979)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and Cook &amp; Weisberg (1983)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> independently developed test for constant variance.</p>
 <p><code>ncvTest()</code> in <code>car</code> package. Also provided by <code>model_assumptions()</code> as well.</p>
 <p>Do not use it blindly. All statistical tests are designed to be sensitive to specific types of violations. May miss other types of violations.May also provide false positive due to other aspects of the distribution.</p>
@@ -664,8 +668,8 @@ Chisquare = 21.89294, Df = 1, p = 0.0000028829</code></pre>
 </div>
 <hr>
 </section>
-<section id="constant-variance-correcting-ses" class="level2" data-number="8.12">
-<h2 data-number="8.12" class="anchored" data-anchor-id="constant-variance-correcting-ses"><span class="header-section-number">8.12</span> Constant Variance: Correcting SEs</h2>
+<section id="constant-variance-correcting-ses" class="level2" data-number="8.13">
+<h2 data-number="8.13" class="anchored" data-anchor-id="constant-variance-correcting-ses"><span class="header-section-number">8.13</span> Constant Variance: Correcting SEs</h2>
 <p>Standard errors are inaccurate when variance of residuals is not constant. A procedure to provide White (1980)<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> corrected SEs is described in Fox (2008), chapter 12, pp 275-276.</p>
 <p>Uncorrected Tests of Coefficients</p>
 <div class="cell">
@@ -707,8 +711,8 @@ Chisquare = 21.89294, Df = 1, p = 0.0000028829</code></pre>
 </div>
 <hr>
 </section>
-<section id="linearity-component-residuals-plots" class="level2" data-number="8.13">
-<h2 data-number="8.13" class="anchored" data-anchor-id="linearity-component-residuals-plots"><span class="header-section-number">8.13</span> Linearity: Component + Residuals Plots</h2>
+<section id="linearity-component-residuals-plots" class="level2" data-number="8.14">
+<h2 data-number="8.14" class="anchored" data-anchor-id="linearity-component-residuals-plots"><span class="header-section-number">8.14</span> Linearity: Component + Residuals Plots</h2>
 <p>If Linearity assumption is not met, coefficients are biased.</p>
 <p>Plot partial residual (<span class="math inline">\(e_{i(j)} = e_i + b_jX_{ij}\)</span>) by each predictor.</p>
 <p>Can include factors but can not include interactions with factors. Code regressors manually.</p>
@@ -748,8 +752,8 @@ Heteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!</code></pre>
 </div>
 <hr>
 </section>
-<section id="global-test-of-model-assumptions" class="level2" data-number="8.14">
-<h2 data-number="8.14" class="anchored" data-anchor-id="global-test-of-model-assumptions"><span class="header-section-number">8.14</span> Global Test of Model Assumptions</h2>
+<section id="global-test-of-model-assumptions" class="level2" data-number="8.15">
+<h2 data-number="8.15" class="anchored" data-anchor-id="global-test-of-model-assumptions"><span class="header-section-number">8.15</span> Global Test of Model Assumptions</h2>
 <p>Pena and Slate (2006) validated a global test of linear model assumptions.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <p>Provided by <code>model_assumptions()</code> using <code>gvlma</code> package</p>
 <div class="cell">
@@ -784,8 +788,8 @@ Heteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!</code></pre>
 </div>
 <hr>
 </section>
-<section id="transformations-the-family-of-powers-roots" class="level2" data-number="8.15">
-<h2 data-number="8.15" class="anchored" data-anchor-id="transformations-the-family-of-powers-roots"><span class="header-section-number">8.15</span> Transformations: The Family of Powers &amp; Roots</h2>
+<section id="transformations-the-family-of-powers-roots" class="level2" data-number="8.16">
+<h2 data-number="8.16" class="anchored" data-anchor-id="transformations-the-family-of-powers-roots"><span class="header-section-number">8.16</span> Transformations: The Family of Powers &amp; Roots</h2>
 <ul>
 <li><p>Power transformations (<em>next unit</em>) are very useful for correcting problems with normality, constant, variance, and linearity of errors.</p></li>
 <li><p>Polynomial regression (<em>PSY 710</em>) is useful when you have quadratic, cubic, etc. effects of <span class="math inline">\(X\)</span>s on <span class="math inline">\(Y\)</span>.</p></li>
@@ -794,8 +798,8 @@ Heteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!</code></pre>
 <hr>
 <hr>
 </section>
-<section id="summary-of-violation-consequences-and-solutions" class="level2" data-number="8.16">
-<h2 data-number="8.16" class="anchored" data-anchor-id="summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.16</span> Summary of Violation Consequences and Solutions</h2>
+<section id="summary-of-violation-consequences-and-solutions" class="level2" data-number="8.17">
+<h2 data-number="8.17" class="anchored" data-anchor-id="summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.17</span> Summary of Violation Consequences and Solutions</h2>
 <ol type="1">
 <li><p><strong>Exact X</strong></p>
 <ul>
