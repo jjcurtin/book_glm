@@ -158,9 +158,55 @@ The process of examining residuals will increase your understanding of your data
 ## Residuals by $\hat{Y}$: Normal M = 0, S = Constant
 
 ```{r}
-# add plots
+#| code-fold: true 
+
+norm_tbl <- tibble(`Y'` = rep(1:25, 1000),
+                   `E'` = rnorm(25000, mean = 0, sd = 1))
+
+norm_tbl |> 
+  ggplot(aes(x = `Y'`,
+             y = `E'`)) +
+  geom_jitter(alpha = .4, width = .75, height = 0, size = .5) +
+  geom_hline(yintercept = 0, color = "blue", linewidth = 1) +
+  geom_vline(xintercept = 10, color = "red", linewidth = 1) +
+  geom_vline(xintercept = 15, color = "red", linewidth = 1) +
+  geom_vline(xintercept = 20, color = "red", linewidth = 1) +
+  scale_x_continuous(breaks = c(0, 5, 10, 15, 20, 25))
 ```
 
+-----
+
+```{r}
+#| code-fold: true
+
+hist_10 <- norm_tbl |> 
+  filter(`Y'` == 10) |> 
+  ggplot(aes(x = `E'`)) +
+  geom_histogram(aes(y = after_stat(density)), color = "black", 
+                 fill = "light grey", bins = 10) +
+  geom_density() +
+  labs(title = "Y' = 10")
+
+
+hist_15 <- norm_tbl |> 
+  filter(`Y'` == 15) |> 
+  ggplot(aes(x = `E'`)) +
+  geom_histogram(aes(y = after_stat(density)), color = "black", 
+                 fill = "light grey", bins = 10) +
+  geom_density() +
+  labs(title = "Y' = 15")
+
+
+hist_20 <- norm_tbl |> 
+  filter(`Y'` == 20) |> 
+  ggplot(aes(x = `E'`)) +
+  geom_histogram(aes(y = after_stat(density)), color = "black", 
+                 fill = "light grey", bins = 10) +
+  geom_density() +
+  labs(title = "Y' = 20")
+
+hist_10 + hist_15 + hist_20
+```
 
 
 -----
@@ -208,6 +254,8 @@ We have a second function written by John called `model_assumptions()` that you 
 devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/model_assumptions.R?raw=true")
 ```
 
+-----
+
 Lets refit our last model from the previous section.
 ```{r}
 data_rm_outliers <- data |> 
@@ -219,18 +267,47 @@ m_2 <- lm(fps ~ bac + ta + sex_c, data = data_rm_outliers)
 -----
 
 ```{r}
+#| eval: false
+
 model_assumptions(m_2, Type = "normal", one.page = TRUE)
 ```
 
 ```{r}
-#  2 plots not showing up (dont need gvlma output)
+#| echo: false
+
+car::qqPlot(m_2, id=FALSE, sim=TRUE, main='Quantile-Comparison Plot to Assess Normality', xlab='t Quantiles', ylab ='Studentized Residuals')
 ```
+
 
 -----
 
 ```{r}
+#| echo: false
+
+ggplot() +
+  geom_density(aes(x = value), data = enframe(rstudent(m_2), name = NULL)) +
+  labs(title = "Density Plot to Assess Normality of Residuals",
+       x = "Studentized Residual") +
+  geom_line(aes(x = x, y = y), data = tibble(x = seq(-4, 4, length.out = 100),
+                                      y = dnorm(seq(-4, 4, length.out = 100), 
+                                      mean=0, sd=sd(rstudent(m_2)))), 
+            linetype = "dashed", color = "blue")
+```
+
+
+**Descriptive Statistics for Studentized Residuals**
+```{r}
+#| code-fold: true
+
+psych::describe(rstudent(m_2))  
+```
+
+-----
+
+## Normality: q-q Plot Examples
+
+```{r}
 # q-q plots
-# density plot
 ```
 
 
@@ -255,17 +332,34 @@ Rough rule is that estimation is seriously degraded if the ratio of largest to s
 ## Constant Variance: Residual and Spread-Level Plots
 
 ```{r}
-#| warning: false
+#| eval: false
 
 model_assumptions(m_2, Type = "constant")
-
-
-# 2 plots should show up side by side - dont need gvlma output
 ```
 
-A spread level plot is a plot of the log(abs(studentized residuals) vs. log(fitted values). $1-b$ (from the regression line to the right) is the suggested power transformation for $Y$ to stabilize variance.  
+```{r}
+#| echo: false
+#| warning: false
 
-Suggested power transformation:  0.2699878 
+tibble(x = fitted.values(m_2),
+       y = rstudent(m_2)) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_point(alpha = .6) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "blue") +
+  labs(title = "Studentized Residuals vs. Fitted Values",
+       x = "Fitted Values",
+       y = "Studentized Residuals")
+```
+
+-----
+
+
+A spread level plot is a plot of the log(abs(studentized residuals) vs. log(fitted values). $1-b$ (from the regression line below) is the suggested power transformation for $Y$ to stabilize variance.  
+
+```{r}
+car::spreadLevelPlot(m_2)
+```
+
 
 -----
 
@@ -318,9 +412,13 @@ Plot partial residual ($e_{i(j)} = e_i + b_jX_{ij}$) by each predictor.
 Can include factors but can not include interactions with factors. Code regressors manually. 
 
 ```{r}
+#| eval: false
 model_assumptions(m_2, Type='linear')
+```
 
-# 3 plots not showing up
+
+```{r}
+# 3 plots
 ```
 
 
