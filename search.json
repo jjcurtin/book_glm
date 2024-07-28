@@ -1710,11 +1710,31 @@
     ]
   },
   {
+    "objectID": "08_model_assumptions.html#constant-variance-correcting-ses",
+    "href": "08_model_assumptions.html#constant-variance-correcting-ses",
+    "title": "8  Dealing with Messy Data II: Model Assumptions",
+    "section": "8.12 Constant Variance: Correcting SEs",
+    "text": "8.12 Constant Variance: Correcting SEs\nStandard errors are inaccurate when variance of residuals is not constant. A procedure to provide White (1980)3 corrected SEs is described in Fox (2008), chapter 12, pp 275-276).\nUncorrected Tests of Coefficients\n\n\nCode\nbroom::tidy(m_2)\n\n\n# A tibble: 4 × 5\n  term        estimate std.error statistic   p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)   26.6      6.44        4.13 0.0000825\n2 bac         -229.      72.4        -3.16 0.00214  \n3 ta             0.126    0.0273      4.61 0.0000135\n4 sex_c        -15.5      5.70       -2.72 0.00790  \n\n\nWhite (1980) Heteroscedasticity-corrected SEs and Tests\n\n\nCode\ncorrected_ses &lt;- sqrt(diag(hccm(m_2)))\n\nbroom::tidy(m_2) |&gt; \n  select(term, estimate) |&gt; \n  add_column(std.error = corrected_ses) |&gt; \n  mutate(statistic = estimate/std.error,\n         p.value = 2*(pt(abs(statistic), df=m_2$df.residual, lower.tail=FALSE)))\n\n\n# A tibble: 4 × 5\n  term        estimate std.error statistic   p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)   26.6      6.90        3.85 0.000220 \n2 bac         -229.      72.1        -3.18 0.00204  \n3 ta             0.126    0.0304      4.13 0.0000799\n4 sex_c        -15.5      5.70       -2.72 0.00791",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
+    ]
+  },
+  {
+    "objectID": "08_model_assumptions.html#linearity-component-residuals-plots",
+    "href": "08_model_assumptions.html#linearity-component-residuals-plots",
+    "title": "8  Dealing with Messy Data II: Model Assumptions",
+    "section": "8.13 Linearity: Component + Residuals Plots",
+    "text": "8.13 Linearity: Component + Residuals Plots",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
+    ]
+  },
+  {
     "objectID": "08_model_assumptions.html#global-test-of-model-assumptions",
     "href": "08_model_assumptions.html#global-test-of-model-assumptions",
     "title": "8  Dealing with Messy Data II: Model Assumptions",
-    "section": "8.12 Global Test of Model Assumptions",
-    "text": "8.12 Global Test of Model Assumptions\nPena, EA and Slate, EH (2006). Global validation of linear model assumptions, Journal of the American Statistical Association, 101, 341-354.\nProvided by model_assumptions() using gvlma package\n\n\nCode\ngvlma(m_2)\n\n\n\nCall:\nlm(formula = fps ~ bac + ta + sex_c, data = data_rm_outliers)\n\nCoefficients:\n(Intercept)          bac           ta        sex_c  \n    26.5528    -228.8721       0.1256     -15.4874  \n\n\nASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS\nUSING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:\nLevel of Significance =  0.05 \n\nCall:\n gvlma(x = m_2) \n\n                    Value  p-value                   Decision\nGlobal Stat        9.8263 0.043458 Assumptions NOT satisfied!\nSkewness           0.2921 0.588886    Assumptions acceptable.\nKurtosis           1.0393 0.307987    Assumptions acceptable.\nLink Function      0.1898 0.663091    Assumptions acceptable.\nHeteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!",
+    "section": "8.14 Global Test of Model Assumptions",
+    "text": "8.14 Global Test of Model Assumptions\nPena and Slate (2006) validated a global test of linear model assumptions.4\nProvided by model_assumptions() using gvlma package\n\n\nCode\ngvlma(m_2)\n\n\n\nCall:\nlm(formula = fps ~ bac + ta + sex_c, data = data_rm_outliers)\n\nCoefficients:\n(Intercept)          bac           ta        sex_c  \n    26.5528    -228.8721       0.1256     -15.4874  \n\n\nASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS\nUSING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:\nLevel of Significance =  0.05 \n\nCall:\n gvlma(x = m_2) \n\n                    Value  p-value                   Decision\nGlobal Stat        9.8263 0.043458 Assumptions NOT satisfied!\nSkewness           0.2921 0.588886    Assumptions acceptable.\nKurtosis           1.0393 0.307987    Assumptions acceptable.\nLink Function      0.1898 0.663091    Assumptions acceptable.\nHeteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]
@@ -1723,8 +1743,8 @@
     "objectID": "08_model_assumptions.html#transformations-the-family-of-powers-roots",
     "href": "08_model_assumptions.html#transformations-the-family-of-powers-roots",
     "title": "8  Dealing with Messy Data II: Model Assumptions",
-    "section": "8.13 Transformations: The Family of Powers & Roots",
-    "text": "8.13 Transformations: The Family of Powers & Roots\n\nPower transformations (next unit) are very useful for correcting problems with normality, constant, variance, and linearity of errors.\nPolynomial regression (PSY 710) is useful when you have quadratic, cubic, etc. effects of \\(X\\)s on \\(Y\\).\nGeneralized linear models (e.g., Logistic regression; PSY 710) are also available.",
+    "section": "8.15 Transformations: The Family of Powers & Roots",
+    "text": "8.15 Transformations: The Family of Powers & Roots\n\nPower transformations (next unit) are very useful for correcting problems with normality, constant, variance, and linearity of errors.\nPolynomial regression (PSY 710) is useful when you have quadratic, cubic, etc. effects of \\(X\\)s on \\(Y\\).\nGeneralized linear models (e.g., Logistic regression; PSY 710) are also available.",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]
@@ -1733,8 +1753,8 @@
     "objectID": "08_model_assumptions.html#summary-of-violation-consequences-and-solutions",
     "href": "08_model_assumptions.html#summary-of-violation-consequences-and-solutions",
     "title": "8  Dealing with Messy Data II: Model Assumptions",
-    "section": "8.14 Summary of Violation Consequences and Solutions",
-    "text": "8.14 Summary of Violation Consequences and Solutions\n\nExact X\n\nInaccurate (biased) parameter estimates.\nUse reliable measures of \\(X\\)s, use SEM with latent variables.\n\nIndependence\n\nInaccurate standard errors.\nUse repeated measures, use multi-level models.\n\nNormally distributed errors\n\nInefficient standard errors.\nConsider omitted variables, use transformations, use generalized linear models.\n\nConstant variance for errors\n\nInaccurate and inefficient standard errors.\nUse SE corrections (but still inefficient), use transformations, use weighted least squares.\n\nLinearity (Error distributions all have mean of 0)\n\nInaccurate (biased) parameter estimates.\nUse transformations, use polynomial regression, use generalized linear models.",
+    "section": "8.16 Summary of Violation Consequences and Solutions",
+    "text": "8.16 Summary of Violation Consequences and Solutions\n\nExact X\n\nInaccurate (biased) parameter estimates.\nUse reliable measures of \\(X\\)s, use SEM with latent variables.\n\nIndependence\n\nInaccurate standard errors.\nUse repeated measures, use multi-level models.\n\nNormally distributed errors\n\nInefficient standard errors.\nConsider omitted variables, use transformations, use generalized linear models.\n\nConstant variance for errors\n\nInaccurate and inefficient standard errors.\nUse SE corrections (but still inefficient), use transformations, use weighted least squares.\n\nLinearity (Error distributions all have mean of 0)\n\nInaccurate (biased) parameter estimates.\nUse transformations, use polynomial regression, use generalized linear models.",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]
@@ -1744,7 +1764,7 @@
     "href": "08_model_assumptions.html#footnotes",
     "title": "8  Dealing with Messy Data II: Model Assumptions",
     "section": "",
-    "text": "Breusch,T. S. and Pagan,A. R. (1979) A simple test for heteroscedasticity and random coefficient variation. Econometrica, 47, 1287-1294.↩︎\nCook,R. D. and Weisberg,S. (1983) Diagnostics for heteroscedasticity in regression. Biometrika, 70, 1-10.↩︎",
+    "text": "Breusch,T. S. and Pagan,A. R. (1979) A simple test for heteroscedasticity and random coefficient variation. Econometrica, 47, 1287-1294.↩︎\nCook,R. D. and Weisberg,S. (1983) Diagnostics for heteroscedasticity in regression. Biometrika, 70, 1-10.↩︎\nLong,J.S. and Ervin,L.H. (2000) Using heteroscedasity consistent standard errors in the linear regression model. The American Statistician 54, 217–224.;cWhite,H. (1980) A heterskedastic consistent covariance matrix estimator and a direct test of heteroskedasticity. Econometrica 48, 817–838.↩︎\nPena,E.A. and Slate,E.H. (2006). Global validation of linear model assumptions, Journal of the American Statistical Association, 101, 341-354.↩︎",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]
