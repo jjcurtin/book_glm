@@ -323,9 +323,11 @@ window.Quarto = {
   <li><a href="#exact-x" id="toc-exact-x" class="nav-link" data-scroll-target="#exact-x"><span class="header-section-number">8.3</span> Exact X</a></li>
   <li><a href="#independence" id="toc-independence" class="nav-link" data-scroll-target="#independence"><span class="header-section-number">8.4</span> Independence</a></li>
   <li><a href="#assessment-of-residuals-general-issues" id="toc-assessment-of-residuals-general-issues" class="nav-link" data-scroll-target="#assessment-of-residuals-general-issues"><span class="header-section-number">8.5</span> Assessment of Residuals: General Issues</a></li>
-  <li><a href="#global-test-of-model-assumptions" id="toc-global-test-of-model-assumptions" class="nav-link" data-scroll-target="#global-test-of-model-assumptions"><span class="header-section-number">8.6</span> Global Test of Model Assumptions</a></li>
-  <li><a href="#transformations-the-family-of-powers-roots" id="toc-transformations-the-family-of-powers-roots" class="nav-link" data-scroll-target="#transformations-the-family-of-powers-roots"><span class="header-section-number">8.7</span> Transformations: The Family of Powers &amp; Roots</a></li>
-  <li><a href="#summary-of-violation-consequences-and-solutions" id="toc-summary-of-violation-consequences-and-solutions" class="nav-link" data-scroll-target="#summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.8</span> Summary of Violation Consequences and Solutions</a></li>
+  <li><a href="#residuals-by-haty-normal-m-0-s-constant" id="toc-residuals-by-haty-normal-m-0-s-constant" class="nav-link" data-scroll-target="#residuals-by-haty-normal-m-0-s-constant"><span class="header-section-number">8.6</span> Residuals by <span class="math inline">\(\hat{Y}\)</span>: Normal M = 0, S = Constant</a></li>
+  <li><a href="#normally-distributed-errors" id="toc-normally-distributed-errors" class="nav-link" data-scroll-target="#normally-distributed-errors"><span class="header-section-number">8.7</span> Normally Distributed Errors</a></li>
+  <li><a href="#global-test-of-model-assumptions" id="toc-global-test-of-model-assumptions" class="nav-link" data-scroll-target="#global-test-of-model-assumptions"><span class="header-section-number">8.8</span> Global Test of Model Assumptions</a></li>
+  <li><a href="#transformations-the-family-of-powers-roots" id="toc-transformations-the-family-of-powers-roots" class="nav-link" data-scroll-target="#transformations-the-family-of-powers-roots"><span class="header-section-number">8.9</span> Transformations: The Family of Powers &amp; Roots</a></li>
+  <li><a href="#summary-of-violation-consequences-and-solutions" id="toc-summary-of-violation-consequences-and-solutions" class="nav-link" data-scroll-target="#summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.10</span> Summary of Violation Consequences and Solutions</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/08_model_assumptions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -415,16 +417,23 @@ window.Quarto = {
 <p>Assessment of assumptions about residuals is an inexact science: Conclusions are tentative.</p>
 <p>The process of examining residuals will increase your understanding of your data. - May suggest transformations of your data. - May suggest alternative analytic strategies. - Will increase your confidence in your conclusions.</p>
 <hr>
+</section>
+<section id="residuals-by-haty-normal-m-0-s-constant" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="residuals-by-haty-normal-m-0-s-constant"><span class="header-section-number">8.6</span> Residuals by <span class="math inline">\(\hat{Y}\)</span>: Normal M = 0, S = Constant</h2>
 <hr>
 </section>
-<section id="global-test-of-model-assumptions" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="global-test-of-model-assumptions"><span class="header-section-number">8.6</span> Global Test of Model Assumptions</h2>
+<section id="normally-distributed-errors" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="normally-distributed-errors"><span class="header-section-number">8.7</span> Normally Distributed Errors</h2>
+<hr>
+</section>
+<section id="global-test-of-model-assumptions" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="global-test-of-model-assumptions"><span class="header-section-number">8.8</span> Global Test of Model Assumptions</h2>
 <p>Pena, EA and Slate, EH (2006). Global validation of linear model assumptions, <em>Journal of the American Statistical Association</em>, 101, 341-354.</p>
 <p>Provided by <code>modelAssumptions()</code> using <code>gvlma</code> package</p>
 <hr>
 </section>
-<section id="transformations-the-family-of-powers-roots" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="transformations-the-family-of-powers-roots"><span class="header-section-number">8.7</span> Transformations: The Family of Powers &amp; Roots</h2>
+<section id="transformations-the-family-of-powers-roots" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="transformations-the-family-of-powers-roots"><span class="header-section-number">8.9</span> Transformations: The Family of Powers &amp; Roots</h2>
 <ul>
 <li><p>Power transformations (<em>next unit</em>) are very useful for correcting problems with normality, constant, variance, and linearity of errors.</p></li>
 <li><p>Polynomial regression (<em>PSY 710</em>) is useful when you have quadratic, cubic, etc. effects of <span class="math inline">\(X\)</span>s on <span class="math inline">\(Y\)</span>.</p></li>
@@ -433,15 +442,19 @@ window.Quarto = {
 <hr>
 <hr>
 </section>
-<section id="summary-of-violation-consequences-and-solutions" class="level2" data-number="8.8">
-<h2 data-number="8.8" class="anchored" data-anchor-id="summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.8</span> Summary of Violation Consequences and Solutions</h2>
+<section id="summary-of-violation-consequences-and-solutions" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.10</span> Summary of Violation Consequences and Solutions</h2>
 <ol type="1">
 <li><p><strong>Exact X</strong></p>
-<pre><code> - Inaccurate (biased) parameter estimates.
- - Use reliable measures of $X$s, use SEM with latent variables.</code></pre></li>
+<ul>
+<li>Inaccurate (biased) parameter estimates.</li>
+<li>Use reliable measures of <span class="math inline">\(X\)</span>s, use SEM with latent variables.</li>
+</ul></li>
 <li><p><strong>Independence</strong></p>
-<pre><code> - Inaccurate standard errors.
- - Use repeated measures, use multi-level models.</code></pre></li>
+<ul>
+<li>Inaccurate standard errors.</li>
+<li>Use repeated measures, use multi-level models.</li>
+</ul></li>
 <li><p><strong>Normally distributed errors</strong></p>
 <ul>
 <li>Inefficient standard errors.</li>
@@ -453,8 +466,10 @@ window.Quarto = {
 <li>Use SE corrections (but still inefficient), use transformations, use weighted least squares.</li>
 </ul></li>
 <li><p><strong>Linearity</strong> (Error distributions all have mean of 0)</p>
-<pre><code> - Inaccurate (biased) parameter estimates.
- - Use transformations, use polynomial regression, use generalized linear models.</code></pre></li>
+<ul>
+<li>Inaccurate (biased) parameter estimates.</li>
+<li>Use transformations, use polynomial regression, use generalized linear models.</li>
+</ul></li>
 </ol>
 
 
