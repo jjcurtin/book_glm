@@ -1650,11 +1650,21 @@
     ]
   },
   {
+    "objectID": "08_model_assumptions.html#global-test-of-model-assumptions",
+    "href": "08_model_assumptions.html#global-test-of-model-assumptions",
+    "title": "8  Dealing with Messy Data II: Model Assumptions",
+    "section": "8.6 Global Test of Model Assumptions",
+    "text": "8.6 Global Test of Model Assumptions\nPena, EA and Slate, EH (2006). Global validation of linear model assumptions, Journal of the American Statistical Association, 101, 341-354.\nProvided by modelAssumptions() using gvlma package",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
+    ]
+  },
+  {
     "objectID": "08_model_assumptions.html#transformations-the-family-of-powers-roots",
     "href": "08_model_assumptions.html#transformations-the-family-of-powers-roots",
     "title": "8  Dealing with Messy Data II: Model Assumptions",
-    "section": "8.6 Transformations: The Family of Powers & Roots",
-    "text": "8.6 Transformations: The Family of Powers & Roots\n\nPower transformations (next unit) are very useful for correcting problems with normality, constant, variance, and linearity of errors.\nPolynomial regression (PSY 710) is useful when you have quadratic, cubic, etc. effects of \\(X\\)s on \\(Y\\).\nGeneralized linear models (e.g., Logistic regression; PSY 710) are also available.",
+    "section": "8.7 Transformations: The Family of Powers & Roots",
+    "text": "8.7 Transformations: The Family of Powers & Roots\n\nPower transformations (next unit) are very useful for correcting problems with normality, constant, variance, and linearity of errors.\nPolynomial regression (PSY 710) is useful when you have quadratic, cubic, etc. effects of \\(X\\)s on \\(Y\\).\nGeneralized linear models (e.g., Logistic regression; PSY 710) are also available.",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]
@@ -1663,8 +1673,8 @@
     "objectID": "08_model_assumptions.html#summary-of-violation-consequences-and-solutions",
     "href": "08_model_assumptions.html#summary-of-violation-consequences-and-solutions",
     "title": "8  Dealing with Messy Data II: Model Assumptions",
-    "section": "8.7 Summary of Violation Consequences and Solutions",
-    "text": "8.7 Summary of Violation Consequences and Solutions\n\nExact X - Inaccurate (biased) parameter estimates. - Use reliable measures of \\(X\\)s, use SEM with latent variables.\nIndependence - Inaccurate standard errors. - Use repeated measures, use multi-level models.\nNormally distributed errors\n\nInefficient standard errors.\nConsider omitted variables, use transformations, use generalized linear models.\n\nConstant variance for errors\n\nInaccurate and inefficient standard errors.\nUse SE corrections (but still inefficient), use transformations, use weighted least squares.\n\nLinearity (Error distributions all have mean of 0) - Inaccurate (biased) parameter estimates. - Use transformations, use polynomial regression, use generalized linear models.",
+    "section": "8.8 Summary of Violation Consequences and Solutions",
+    "text": "8.8 Summary of Violation Consequences and Solutions\n\nExact X\n - Inaccurate (biased) parameter estimates.\n - Use reliable measures of $X$s, use SEM with latent variables.\nIndependence\n - Inaccurate standard errors.\n - Use repeated measures, use multi-level models.\nNormally distributed errors\n\nInefficient standard errors.\nConsider omitted variables, use transformations, use generalized linear models.\n\nConstant variance for errors\n\nInaccurate and inefficient standard errors.\nUse SE corrections (but still inefficient), use transformations, use weighted least squares.\n\nLinearity (Error distributions all have mean of 0)\n - Inaccurate (biased) parameter estimates.\n - Use transformations, use polynomial regression, use generalized linear models.",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]
