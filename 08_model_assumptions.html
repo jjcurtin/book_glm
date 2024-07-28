@@ -326,9 +326,11 @@ window.Quarto = {
   <li><a href="#residuals-by-haty-normal-m-0-s-constant" id="toc-residuals-by-haty-normal-m-0-s-constant" class="nav-link" data-scroll-target="#residuals-by-haty-normal-m-0-s-constant"><span class="header-section-number">8.6</span> Residuals by <span class="math inline">\(\hat{Y}\)</span>: Normal M = 0, S = Constant</a></li>
   <li><a href="#normally-distributed-errors" id="toc-normally-distributed-errors" class="nav-link" data-scroll-target="#normally-distributed-errors"><span class="header-section-number">8.7</span> Normally Distributed Errors</a></li>
   <li><a href="#normality-quantile-comparison-density-plots" id="toc-normality-quantile-comparison-density-plots" class="nav-link" data-scroll-target="#normality-quantile-comparison-density-plots"><span class="header-section-number">8.8</span> Normality: Quantile Comparison &amp; Density Plots</a></li>
-  <li><a href="#global-test-of-model-assumptions" id="toc-global-test-of-model-assumptions" class="nav-link" data-scroll-target="#global-test-of-model-assumptions"><span class="header-section-number">8.9</span> Global Test of Model Assumptions</a></li>
-  <li><a href="#transformations-the-family-of-powers-roots" id="toc-transformations-the-family-of-powers-roots" class="nav-link" data-scroll-target="#transformations-the-family-of-powers-roots"><span class="header-section-number">8.10</span> Transformations: The Family of Powers &amp; Roots</a></li>
-  <li><a href="#summary-of-violation-consequences-and-solutions" id="toc-summary-of-violation-consequences-and-solutions" class="nav-link" data-scroll-target="#summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.11</span> Summary of Violation Consequences and Solutions</a></li>
+  <li><a href="#constant-variance" id="toc-constant-variance" class="nav-link" data-scroll-target="#constant-variance"><span class="header-section-number">8.9</span> Constant Variance</a></li>
+  <li><a href="#constant-variance-residual-and-spread-level-plots" id="toc-constant-variance-residual-and-spread-level-plots" class="nav-link" data-scroll-target="#constant-variance-residual-and-spread-level-plots"><span class="header-section-number">8.10</span> Constant Variance: Residual and Spread-Level Plots</a></li>
+  <li><a href="#global-test-of-model-assumptions" id="toc-global-test-of-model-assumptions" class="nav-link" data-scroll-target="#global-test-of-model-assumptions"><span class="header-section-number">8.11</span> Global Test of Model Assumptions</a></li>
+  <li><a href="#transformations-the-family-of-powers-roots" id="toc-transformations-the-family-of-powers-roots" class="nav-link" data-scroll-target="#transformations-the-family-of-powers-roots"><span class="header-section-number">8.12</span> Transformations: The Family of Powers &amp; Roots</a></li>
+  <li><a href="#summary-of-violation-consequences-and-solutions" id="toc-summary-of-violation-consequences-and-solutions" class="nav-link" data-scroll-target="#summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.13</span> Summary of Violation Consequences and Solutions</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/08_model_assumptions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -503,16 +505,107 @@ Link Function      0.1898 0.663091    Assumptions acceptable.
 Heteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!</code></pre>
 </div>
 </div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model assumptions plots</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># q-q plots</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># density plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <hr>
 </section>
-<section id="global-test-of-model-assumptions" class="level2" data-number="8.9">
-<h2 data-number="8.9" class="anchored" data-anchor-id="global-test-of-model-assumptions"><span class="header-section-number">8.9</span> Global Test of Model Assumptions</h2>
+<section id="constant-variance" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="constant-variance"><span class="header-section-number">8.9</span> Constant Variance</h2>
+<p>The errors for each <span class="math inline">\(\hat{Y}\)</span> are assumed have a constant variance (homoscedasticity). This is necessary for the OLS estimated coefficients to be BLUE.</p>
+<p>If the errors are heteroscedastic, the <strong>coefficients remain unbiased</strong> but the <strong>efficiency (precision of estimation) is impaired</strong> and the <strong>coefficient SEs become inaccurate</strong>. The degree of the problem depends on severity of violation and sample size.</p>
+<p>Rough rule is that estimation is seriously degraded if the ratio of largest to smallest variance is 10 or greater (or more conservatively, 4 or greater)</p>
+<ol type="1">
+<li><p>Transformations may fix this issue (<em>next unit</em>).</p></li>
+<li><p>Weighted Least Squares provides an alternative to estimation when heteroscedasticity exists (maybe next semester?).</p></li>
+<li><p>Corrections also exist for SEs when errors are heteroscedastic (more on this in a moment).</p></li>
+</ol>
+<hr>
+</section>
+<section id="constant-variance-residual-and-spread-level-plots" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="constant-variance-residual-and-spread-level-plots"><span class="header-section-number">8.10</span> Constant Variance: Residual and Spread-Level Plots</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model_assumptions</span>(m_2, <span class="at">Type =</span> <span class="st">"constant"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Suggested power transformation:  0.2555876 
+
+
+Non-constant Variance Score Test 
+Variance formula: ~ fitted.values 
+Chisquare = 21.89294, Df = 1, p = 0.0000028829
+
+Call:
+lm(formula = fps ~ bac + ta + sex_c, data = data_rm_outliers)
+
+Coefficients:
+(Intercept)          bac           ta        sex_c  
+    26.5528    -228.8721       0.1256     -15.4874  
+
+
+ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
+USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
+Level of Significance =  0.05 
+
+Call:
+ gvlma(x = Model) 
+
+                    Value  p-value                   Decision
+Global Stat        9.8263 0.043458 Assumptions NOT satisfied!
+Skewness           0.2921 0.588886    Assumptions acceptable.
+Kurtosis           1.0393 0.307987    Assumptions acceptable.
+Link Function      0.1898 0.663091    Assumptions acceptable.
+Heteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="global-test-of-model-assumptions" class="level2" data-number="8.11">
+<h2 data-number="8.11" class="anchored" data-anchor-id="global-test-of-model-assumptions"><span class="header-section-number">8.11</span> Global Test of Model Assumptions</h2>
 <p>Pena, EA and Slate, EH (2006). Global validation of linear model assumptions, <em>Journal of the American Statistical Association</em>, 101, 341-354.</p>
 <p>Provided by <code>modelAssumptions()</code> using <code>gvlma</code> package</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gvlma</span>(m_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = fps ~ bac + ta + sex_c, data = data_rm_outliers)
+
+Coefficients:
+(Intercept)          bac           ta        sex_c  
+    26.5528    -228.8721       0.1256     -15.4874  
+
+
+ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
+USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
+Level of Significance =  0.05 
+
+Call:
+ gvlma(x = m_2) 
+
+                    Value  p-value                   Decision
+Global Stat        9.8263 0.043458 Assumptions NOT satisfied!
+Skewness           0.2921 0.588886    Assumptions acceptable.
+Kurtosis           1.0393 0.307987    Assumptions acceptable.
+Link Function      0.1898 0.663091    Assumptions acceptable.
+Heteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!</code></pre>
+</div>
+</div>
 <hr>
 </section>
-<section id="transformations-the-family-of-powers-roots" class="level2" data-number="8.10">
-<h2 data-number="8.10" class="anchored" data-anchor-id="transformations-the-family-of-powers-roots"><span class="header-section-number">8.10</span> Transformations: The Family of Powers &amp; Roots</h2>
+<section id="transformations-the-family-of-powers-roots" class="level2" data-number="8.12">
+<h2 data-number="8.12" class="anchored" data-anchor-id="transformations-the-family-of-powers-roots"><span class="header-section-number">8.12</span> Transformations: The Family of Powers &amp; Roots</h2>
 <ul>
 <li><p>Power transformations (<em>next unit</em>) are very useful for correcting problems with normality, constant, variance, and linearity of errors.</p></li>
 <li><p>Polynomial regression (<em>PSY 710</em>) is useful when you have quadratic, cubic, etc. effects of <span class="math inline">\(X\)</span>s on <span class="math inline">\(Y\)</span>.</p></li>
@@ -521,8 +614,8 @@ Heteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!</code></pre>
 <hr>
 <hr>
 </section>
-<section id="summary-of-violation-consequences-and-solutions" class="level2" data-number="8.11">
-<h2 data-number="8.11" class="anchored" data-anchor-id="summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.11</span> Summary of Violation Consequences and Solutions</h2>
+<section id="summary-of-violation-consequences-and-solutions" class="level2" data-number="8.13">
+<h2 data-number="8.13" class="anchored" data-anchor-id="summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.13</span> Summary of Violation Consequences and Solutions</h2>
 <ol type="1">
 <li><p><strong>Exact X</strong></p>
 <ul>
