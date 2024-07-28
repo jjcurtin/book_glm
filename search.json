@@ -1618,5 +1618,15 @@
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]
+  },
+  {
+    "objectID": "08_model_assumptions.html#exact-x",
+    "href": "08_model_assumptions.html#exact-x",
+    "title": "8  Dealing with Messy Data II: Model Assumptions",
+    "section": "8.3 Exact X",
+    "text": "8.3 Exact X\nViolations of the Exact X assumption lead to biased (i.e., inaccurate) estimates of regression coefficients.\nViolations are caused by problems with reliability of measurement of your predictors.\nQuestion: In simple, bivariate regression, how will reducing reliability affect the regression model?",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
+    ]
   }
 ]

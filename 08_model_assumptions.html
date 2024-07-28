@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./app_terminology.html" rel="next">
+<link href="./09_transformations.html" rel="next">
 <link href="./07_case_analysis.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -215,6 +215,48 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dealing with Messy Data II: Model Assumptions</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09_transformations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dealing with Messy Data III: Transformations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_interactions_two_continuous.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inferences about Two Continuous Predictors and their Interaction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11_interactions_continuous_and_dichotomous.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Inferences about a Continuous and Dichotomous Predictor and their Interaction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_interactions_two_dichotomous.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Inferences about a Two Dichotomous Predictors and their Interaction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13_categorical_variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Categorical Variables &gt; 2 Levels</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14_repeated_measures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Repeated Measures GLM</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15_power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Power Analysis and Statistical Validity</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -227,7 +269,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./app_terminology.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Key Terminology and Concepts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Key Terminology and Concepts</span></span></a>
   </div>
 </li>
       </ul>
@@ -244,6 +286,7 @@ window.Quarto = {
   <ul>
   <li><a href="#goals-of-unit" id="toc-goals-of-unit" class="nav-link active" data-scroll-target="#goals-of-unit"><span class="header-section-number">8.1</span> Goals of Unit</a></li>
   <li><a href="#assessment-of-assumptions-for-sig.-tests" id="toc-assessment-of-assumptions-for-sig.-tests" class="nav-link" data-scroll-target="#assessment-of-assumptions-for-sig.-tests"><span class="header-section-number">8.2</span> Assessment of Assumptions for Sig. Tests</a></li>
+  <li><a href="#exact-x" id="toc-exact-x" class="nav-link" data-scroll-target="#exact-x"><span class="header-section-number">8.3</span> Exact X</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/08_model_assumptions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -295,6 +338,13 @@ window.Quarto = {
 <li><strong>Constant variance:</strong> All residual distributions have a constant variance, <span class="math inline">\(\text{SEE}^2\)</span>.</li>
 <li><strong>Linearity:</strong> All residual distributions (i.e., for each <span class="math inline">\(Y'\)</span>) are assumed to have means equal to zero.</li>
 </ol>
+<hr>
+</section>
+<section id="exact-x" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="exact-x"><span class="header-section-number">8.3</span> Exact X</h2>
+<p>Violations of the Exact X assumption lead to biased (i.e., inaccurate) estimates of regression coefficients.</p>
+<p>Violations are caused by problems with reliability of measurement of your predictors.</p>
+<p><span style="color: red;">Question: In simple, bivariate regression, how will reducing reliability affect the regression model?</span></p>
 <hr>
 
 
@@ -728,8 +778,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./app_terminology.html" class="pagination-link" aria-label="Key Terminology and Concepts">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Key Terminology and Concepts</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./09_transformations.html" class="pagination-link" aria-label="Dealing with Messy Data III: Transformations">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dealing with Messy Data III: Transformations</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
