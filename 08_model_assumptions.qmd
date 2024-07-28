@@ -307,8 +307,33 @@ psych::describe(rstudent(m_2))
 ## Normality: q-q Plot Examples
 
 ```{r}
-# q-q plots
+#| echo: false
+
+set.seed(102030)
+n1 <- tibble(x = rnorm(100*1, mean=0, sd=1))
+
+qqPlot(n1$x, id = FALSE, main='Quantile-Comparison Plot for Random Normal (N = 100)', xlab='t Quantiles', ylab ='n1') 
+
+n2 <- tibble(x = rnorm(100*1, mean=0, sd=1))
+
+qqPlot(n2$x, id = FALSE, main='Quantile-Comparison Plot for Random Normal (N = 100)', xlab='t Quantiles', ylab ='n2') 
+
+n3 <- tibble(x = rnorm(100*1, mean=0, sd=1))
+qqPlot(n3$x, id = FALSE, main='Quantile-Comparison Plot for Random Normal (N = 100)', xlab='t Quantiles', ylab ='n3') 
 ```
+
+-----
+
+```{r}
+#| echo: false
+
+c1 <- tibble(x = rchisq(100, 3))
+qqPlot(c1$x, id = FALSE, main='Quantile-Comparison Plot + Skew (Chi-sq w/DF = 3; N = 100)', xlab='t Quantiles', ylab ='c1') 
+
+t1 <- tibble(x = rt(100, 3))
+qqPlot(t1$x, id = FALSE, main='Quantile-Comparison Plot for Heavy Tailed (t w/DF = 3; N = 100)', xlab='t Quantiles', ylab ='t1') 
+```
+
 
 
 -----
@@ -339,13 +364,12 @@ model_assumptions(m_2, Type = "constant")
 
 ```{r}
 #| echo: false
-#| warning: false
 
 tibble(x = fitted.values(m_2),
        y = rstudent(m_2)) |> 
   ggplot(aes(x = x, y = y)) +
   geom_point(alpha = .6) +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "blue") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "blue", linewidth = 1) +
   labs(title = "Studentized Residuals vs. Fitted Values",
        x = "Fitted Values",
        y = "Studentized Residuals")
@@ -357,6 +381,9 @@ tibble(x = fitted.values(m_2),
 A spread level plot is a plot of the log(abs(studentized residuals) vs. log(fitted values). $1-b$ (from the regression line below) is the suggested power transformation for $Y$ to stabilize variance.  
 
 ```{r}
+#| echo: false
+#| warning: false
+#| 
 car::spreadLevelPlot(m_2)
 ```
 
@@ -418,7 +445,9 @@ model_assumptions(m_2, Type='linear')
 
 
 ```{r}
-# 3 plots
+#| echo: false
+
+car::crPlots(m_2, ask = FALSE)
 ```
 
 
