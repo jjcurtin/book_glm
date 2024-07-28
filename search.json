@@ -1648,5 +1648,15 @@
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]
+  },
+  {
+    "objectID": "08_model_assumptions.html#summary-of-violation-consequences-and-solutions",
+    "href": "08_model_assumptions.html#summary-of-violation-consequences-and-solutions",
+    "title": "8  Dealing with Messy Data II: Model Assumptions",
+    "section": "8.6 Summary of Violation Consequences and Solutions",
+    "text": "8.6 Summary of Violation Consequences and Solutions\n\nExact X - Inaccurate (biased) parameter estimates. - Use reliable measures of \\(X\\)s, use SEM with latent variables.\nIndependence - Inaccurate standard errors. - Use repeated measures, use multi-level models.\nNormally distributed errors\n\nInefficient standard errors.\nConsider omitted variables, use transformations, use generalized linear models.\n\nConstant variance for errors\n\nInaccurate and inefficient standard errors.\nUse SE corrections (but still inefficient), use transformations, use weighted least squares.\n\nLinearity (Error distributions all have mean of 0) - Inaccurate (biased) parameter estimates. - Use transformations, use polynomial regression, use generalized linear models.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
+    ]
   }
 ]

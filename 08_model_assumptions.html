@@ -323,6 +323,7 @@ window.Quarto = {
   <li><a href="#exact-x" id="toc-exact-x" class="nav-link" data-scroll-target="#exact-x"><span class="header-section-number">8.3</span> Exact X</a></li>
   <li><a href="#independence" id="toc-independence" class="nav-link" data-scroll-target="#independence"><span class="header-section-number">8.4</span> Independence</a></li>
   <li><a href="#assessment-of-residuals-general-issues" id="toc-assessment-of-residuals-general-issues" class="nav-link" data-scroll-target="#assessment-of-residuals-general-issues"><span class="header-section-number">8.5</span> Assessment of Residuals: General Issues</a></li>
+  <li><a href="#summary-of-violation-consequences-and-solutions" id="toc-summary-of-violation-consequences-and-solutions" class="nav-link" data-scroll-target="#summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.6</span> Summary of Violation Consequences and Solutions</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/08_model_assumptions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -412,6 +413,25 @@ window.Quarto = {
 <p>Assessment of assumptions about residuals is an inexact science: Conclusions are tentative.</p>
 <p>The process of examining residuals will increase your understanding of your data. - May suggest transformations of your data. - May suggest alternative analytic strategies. - Will increase your confidence in your conclusions.</p>
 <hr>
+<hr>
+</section>
+<section id="summary-of-violation-consequences-and-solutions" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="summary-of-violation-consequences-and-solutions"><span class="header-section-number">8.6</span> Summary of Violation Consequences and Solutions</h2>
+<ol type="1">
+<li><p><strong>Exact X</strong> - Inaccurate (biased) parameter estimates. - Use reliable measures of <span class="math inline">\(X\)</span>s, use SEM with latent variables.</p></li>
+<li><p><strong>Independence</strong> - Inaccurate standard errors. - Use repeated measures, use multi-level models.</p></li>
+<li><p><strong>Normally distributed errors</strong></p>
+<ul>
+<li>Inefficient standard errors.</li>
+<li>Consider omitted variables, use transformations, use generalized linear models.</li>
+</ul></li>
+<li><p><strong>Constant variance for errors</strong></p>
+<ul>
+<li>Inaccurate and inefficient standard errors.</li>
+<li>Use SE corrections (but still inefficient), use transformations, use weighted least squares.</li>
+</ul></li>
+<li><p><strong>Linearity</strong> (Error distributions all have mean of 0) - Inaccurate (biased) parameter estimates. - Use transformations, use polynomial regression, use generalized linear models.</p></li>
+</ol>
 
 
 </section>
