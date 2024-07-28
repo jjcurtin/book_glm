@@ -1,0 +1,17 @@
+--- 
+output: html_document 
+editor_options:  
+  chunk_output_type: console
+--- 
+ 
+
+# Dealing with Messy Data III: Transformations
+
+```{r}
+#| echo: false
+
+options(scipen = 999) # turns off scientfic notation
+options(knitr.kable.NA = '')
+```
+
+

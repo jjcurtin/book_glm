@@ -1,0 +1,15 @@
+{
+  "hash": "a836502fd5df67831d1c10777a4a78cb",
+  "result": {
+    "engine": "knitr",
+    "markdown": "--- \noutput: html_document \neditor_options:  \n  chunk_output_type: console\n--- \n\n\n\n \n\n# Dealing with Messy Data III: Transformations\n\n\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

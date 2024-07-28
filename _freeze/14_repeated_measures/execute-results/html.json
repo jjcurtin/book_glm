@@ -1,0 +1,15 @@
+{
+  "hash": "357e7ed44ba403e370dfc7e75bc20073",
+  "result": {
+    "engine": "knitr",
+    "markdown": "--- \noutput: html_document \neditor_options:  \n  chunk_output_type: console\n--- \n\n\n\n \n\n# Repeated Measures GLM\n\n\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

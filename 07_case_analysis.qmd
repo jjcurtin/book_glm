@@ -455,7 +455,7 @@ plot_cartoon
 
 ## Leverage (Real Data)
 
-There is a function available for helping you identify observations with high leverage.  
+There is a function written by John called `case_analysis()`. It is available to help you identify observations with high leverage.    
 
 Source the function with the following code
 ```{r}

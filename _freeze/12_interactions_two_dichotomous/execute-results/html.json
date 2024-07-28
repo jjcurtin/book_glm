@@ -1,0 +1,15 @@
+{
+  "hash": "9d2a6da0d3ef6ba784731fa6f01d7eae",
+  "result": {
+    "engine": "knitr",
+    "markdown": "--- \noutput: html_document \neditor_options:  \n  chunk_output_type: console\n--- \n\n\n\n \n\n# Inferences about a Two Dichotomous Predictors and their Interaction\n\n\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

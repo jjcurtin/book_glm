@@ -1,0 +1,15 @@
+{
+  "hash": "81fa0e23953c60a0b91199f87b256cd1",
+  "result": {
+    "engine": "knitr",
+    "markdown": "--- \noutput: html_document \neditor_options:  \n  chunk_output_type: console\n--- \n\n\n\n \n\n# Inferences about Two Continuous Predictors and their Interaction\n\n\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

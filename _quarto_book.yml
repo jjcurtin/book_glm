@@ -33,6 +33,14 @@ book:
     - 05_single_dichotomous.qmd
     - 06_two_predictors.qmd
     - 07_case_analysis.qmd
+    - 08_model_assumptions.qmd
+    - 09_transformations.qmd
+    - 10_interactions_two_continuous.qmd
+    - 11_interactions_continuous_and_dichotomous.qmd
+    - 12_interactions_two_dichotomous.qmd
+    - 13_categorical_variables.qmd
+    - 14_repeated_measures.qmd
+    - 15_power.qmd
     - part: Appendices
       chapters:
         - app_terminology.qmd

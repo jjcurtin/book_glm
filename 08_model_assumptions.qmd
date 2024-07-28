@@ -1,0 +1,385 @@
+--- 
+output: html_document 
+editor_options:  
+  chunk_output_type: console
+--- 
+ 
+
+# Dealing with Messy Data II: Model Assumptions
+
+```{r}
+#| echo: false
+
+options(scipen = 999) # turns off scientfic notation
+options(knitr.kable.NA = '')
+```
+
+
+## Goals of Unit
+
+- Understand 5 assumptions of GLMs.
+
+- Understand consequences of assumption violations.
+  - Inefficient standard errors (low power, type II errors).
+  - Inaccurate standard errors (incorrect statistical tests, type I errors).
+  - Inaccurate parameter estimates.
+  
+- Learn how to detect violations (statistical tests and visual diagnosis).
+
+- Recognize the range of options available when violations are detected. Implementation of these options will be covered over the semester.
+
+- Examination of assumptions will further inform you about your data.
+
+-----
+
+## Assessment of Assumptions for Sig. Tests
+
+All GLM procedures commonly make the **5 assumptions below**. When these assumptions are met, OLS regression coefficients are MVUE (Minimum Variance Unbiased Estimators) and BLUE (Best Linear Unbiased Estimators). With the exception of $\#1$, these assumptions are expressed (and assessed) with respect to the residuals around the prediction line.
+
+1. **Exact X:** The IVs are assumed to be known exactly (i.e., without measurement error).
+2. **Independence:**  Residuals are independently distributed (prob. of obtaining a specific observation does not depend on other observations).
+3. **Normality:**  All residual distributions are normally distributed.
+4. **Constant variance:**  All residual distributions have a constant variance, $\text{SEE}^2$.
+5. **Linearity:**  All residual distributions (i.e., for each $Y'$) are assumed to have means equal to zero.
+
+-----
+
+## Exact X
+
+Violations of the Exact X assumption lead to biased (i.e., inaccurate) estimates of regression coefficients.  
+
+Violations are caused by problems with reliability of measurement of your predictors.
+
+<span style="color: red;">Question: In simple, bivariate regression, how will reducing reliability affect the regression model?</span> 
+
+-----
+```{r}
+#| echo: false
+#| message: false
+
+library(tidyverse)
+library(patchwork)
+
+theme_set(theme_classic()) 
+```
+
+```{r}
+#| echo: false
+
+plot_exact <- tibble(x = seq(0,100),
+                     y = seq(0, 100)) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_abline(aes(intercept = coef(lm(y~x))[1],
+                  slope = coef(lm(y~x))[2]),
+              color = "blue", linewidth = .5) +
+  geom_point() +
+  ylim(-50, 150) +
+  xlim(-50, 150) +
+  labs(title = "No Noise Pop Effect")
+
+
+plot_y_noise <- tibble(x = seq(0,100),
+                     y = seq(0, 100)) |> 
+  mutate(y = y + rnorm(n(), mean = 0, sd = 30)) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_abline(aes(intercept = coef(lm(y~x))[1],
+                  slope = coef(lm(y~x))[2]),
+              color = "blue", linewidth = .5) +
+  geom_point() +
+  ylim(-50, 150) +
+  xlim(-50, 150) +
+  labs(title = "Random Noise in Y")
+
+plot_x_noise <- tibble(x = seq(0,100),
+                     y = seq(0, 100)) |> 
+  mutate(x = x + rnorm(n(), mean = 0, sd = 30)) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_abline(aes(intercept = coef(lm(y~x))[1],
+                  slope = coef(lm(y~x))[2]),
+              color = "blue", linewidth = .5) +
+  geom_point() +
+  ylim(-50, 150) +
+  xlim(-50, 150) +
+  labs(title = "Random Noise in X")
+```
+
+```{r}
+#| echo: false
+#| warning: false
+
+plot_exact + plot_y_noise + plot_x_noise
+```
+
+
+
+<span style="color: blue;">It will reduce $b_1$. We will underestimate the strength of relationship between $X$ and $Y$.</span>   
+
+<span style="color: blue;">In multiple predictor models, the bias can be either positive or negative based on the nature of the correlations among the predictors. **Use reliable variables!**.</span>
+
+<span style="color: red;">Question: What are the implications of unreliable $X$ for the use of covariates to *control* variables?</span> 
+
+-----
+
+<span style="color: blue;">Covariates only *control* from the construct they measure to the degree that they are reliable (and valid) measures of that construct.</span>
+
+<span style="color: blue;">Analysis that rely on unreliable covariates are not controlling the variance for the construct well.</span>
+
+-----
+
+## Independence
+
+Violations of the independence of residuals assumption can compromise the validity of our statistical tests (inaccurate standard errors).   
+
+Violations of residuals independence is a function of the research design caused by repeated measures on the same individual or related individuals/observations (participants in same family, school, etc).  
+
+Often difficult to detect in data but clear from research design.
+
+Can be fixed by a variety of approaches including repeated measures analyses (**later this semester**) or multi-level, mixed effects, and/or hierarchical linear models (**next semester**).
+
+-----
+
+## Assessment of Residuals: General Issues
+
+Remaining three assumptions (Normality distributed residuals with a mean of 0 and constant variance) can be assessed via examination of the residuals. 
+
+Use of Graphical Methods is emphasized.
+
+Statistical tests of assumptions exist but should be used cautiously.
+
+Assessment of assumptions about residuals is an inexact science: Conclusions are tentative.
+
+The process of examining residuals will increase your understanding of your data.
+	- May suggest transformations of your data.
+	- May suggest alternative analytic strategies.
+	- Will increase your confidence in your conclusions.
+
+-----
+
+## Residuals by $\hat{Y}$: Normal M = 0, S = Constant
+
+```{r}
+# add plots
+```
+
+
+
+-----
+
+## Normally Distributed Errors
+
+The errors for each $\hat{Y}$ are assumed to be normally distributed. Normally distributed errors are required for OLS regression coefficients to be MVUE but not BLUE.   
+
+Central limit theory indicates that even with non-normal errors, **significance tests and confidence intervals are approximately correct with large $N$.**
+
+Coefficients are still best unbiased efficient estimators among linear solutions (i.e., BLUE) but **more efficient non-linear solutions** may exist (e.g., Generalized Linear Models such as Poisson regression for thick tailed distributions). 
+
+**Mean may not be best measure of center** of a highly skewed distribution.
+
+Multimodal error distributions suggest the **omission of one or more categorical variables** that divide the data into groups.
+
+Transformations may correct shape of residuals (*Unit 9*).
+
+
+-----
+
+## Normality: Quantile Comparison & Density Plots
+
+```{r}
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(patchwork)
+library(car) # needed for model_assumptions
+library(psych) # needed for model_assumptions
+library(gvlma) # needed for model_assumptions
+
+theme_set(theme_classic()) 
+
+data <- read_csv(here::here("data_lecture/7_three_predictors_fps.csv"), 
+                 show_col_types = FALSE) |> 
+   mutate(sex_c = if_else(sex == "female", -.5, .5))
+```
+
+We have a second function written by John called `model_assumptions()` that you can source to help test model assumptions.
+```{r}
+#| message: false
+
+devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/model_assumptions.R?raw=true")
+```
+
+Lets refit our last model from the previous section.
+```{r}
+data_rm_outliers <- data |> 
+  filter(!subid %in% c("0125", "2112"))
+
+m_2 <- lm(fps ~ bac + ta + sex_c, data = data_rm_outliers) 
+```
+
+-----
+
+```{r}
+model_assumptions(m_2, Type = "normal", one.page = TRUE)
+```
+
+```{r}
+#  2 plots not showing up (dont need gvlma output)
+```
+
+-----
+
+```{r}
+# q-q plots
+# density plot
+```
+
+
+-----
+
+## Constant Variance
+
+The errors for each $\hat{Y}$ are assumed have a constant variance (homoscedasticity). This is necessary for the OLS estimated coefficients to be BLUE.
+
+If the errors are heteroscedastic, the **coefficients remain unbiased** but the **efficiency (precision of estimation) is impaired** and the **coefficient SEs become inaccurate**. The degree of the problem depends on severity of violation and sample size.
+
+Rough rule is that estimation is seriously degraded if the ratio of largest to smallest variance is 10 or greater (or more conservatively, 4 or greater)
+
+1.  Transformations may fix this issue (*next unit*).
+
+2.  Weighted Least Squares provides an alternative to estimation when heteroscedasticity exists (maybe next semester?).
+
+3.  Corrections also exist for SEs when errors are heteroscedastic (more on this in a moment).
+
+-----
+
+## Constant Variance: Residual and Spread-Level Plots
+
+```{r}
+#| warning: false
+
+model_assumptions(m_2, Type = "constant")
+
+
+# 2 plots should show up side by side - dont need gvlma output
+```
+
+A spread level plot is a plot of the log(abs(studentized residuals) vs. log(fitted values). $1-b$ (from the regression line to the right) is the suggested power transformation for $Y$ to stabilize variance.  
+
+Suggested power transformation:  0.2699878 
+
+-----
+
+## Constant Variance: Statistical Test
+
+Breusch & Pagan (1979)^[Breusch,T. S. and Pagan,A. R. (1979) A simple test for heteroscedasticity and random coefficient variation. *Econometrica*, 47,  1287-1294.] and Cook & Weisberg (1983)^[Cook,R. D. and Weisberg,S. (1983) Diagnostics for heteroscedasticity in regression. *Biometrika*, 70, 1-10.] independently developed test for constant variance.
+
+`ncvTest()` in `car` package. Also provided by `model_assumptions()` as well.  
+
+Do not use it blindly. All statistical tests are designed to be sensitive to specific types of violations. May miss other types of violations.May also provide false positive due to other aspects of the distribution.
+
+```{r}
+car::ncvTest(m_2)
+```
+
+-----
+
+## Constant Variance: Correcting SEs
+
+Standard errors are inaccurate when variance of residuals is not constant. A procedure to provide White (1980)^[Long,J.S. and Ervin,L.H. (2000) Using heteroscedasity consistent standard errors in the linear regression model. *The American Statistician* 54, 217–224.;cWhite,H. (1980) A heterskedastic consistent covariance matrix estimator and a direct test of heteroskedasticity.
+*Econometrica* 48, 817–838.] corrected SEs is described in Fox (2008), chapter 12, pp 275-276. 
+
+
+Uncorrected Tests of Coefficients
+```{r}
+broom::tidy(m_2)
+```
+
+White (1980) Heteroscedasticity-corrected SEs and Tests
+
+```{r}
+corrected_ses <- sqrt(diag(hccm(m_2)))
+
+broom::tidy(m_2) |> 
+  select(term, estimate) |> 
+  add_column(std.error = corrected_ses) |> 
+  mutate(statistic = estimate/std.error,
+         p.value = 2*(pt(abs(statistic), df=m_2$df.residual, lower.tail=FALSE)))
+```
+
+
+-----
+
+## Linearity: Component + Residuals Plots
+
+If Linearity assumption is not met, coefficients are biased.  
+
+Plot partial residual ($e_{i(j)} = e_i + b_jX_{ij}$) by each predictor.  
+
+Can include factors but can not include interactions with factors. Code regressors manually. 
+
+```{r}
+model_assumptions(m_2, Type='linear')
+
+# 3 plots not showing up
+```
+
+
+
+-----
+
+
+## Global Test of Model Assumptions
+
+Pena and Slate (2006) validated a global test of linear model assumptions.^[Pena,E.A. and Slate,E.H. (2006). Global validation of linear model assumptions, *Journal of the American Statistical Association*, 101, 341-354.]
+
+Provided by `model_assumptions()` using `gvlma` package
+
+```{r}
+gvlma(m_2)
+```
+
+
+-----
+
+## Transformations: The Family of Powers & Roots
+
+- Power transformations (*next unit*) are very useful for correcting problems with normality, constant, variance, and linearity of errors.
+
+- Polynomial regression (*PSY 710*) is useful when you have quadratic, cubic, etc. effects of $X$s on $Y$.
+
+- Generalized linear models (e.g., Logistic regression; *PSY 710*) are also available.
+
+
+-----
+
+
+
+-----
+
+## Summary of Violation Consequences and Solutions
+
+1. **Exact X**  
+
+    - Inaccurate (biased) parameter estimates.
+    - Use reliable measures of $X$s, use SEM with latent variables.
+
+2. **Independence**
+
+    - Inaccurate standard errors.
+    - Use repeated measures, use multi-level models.
+
+3. **Normally distributed errors**
+
+    - Inefficient standard errors.
+    - Consider omitted variables, use transformations, use generalized linear models.
+
+4. **Constant variance for errors**
+
+    - Inaccurate and inefficient standard errors.
+    - Use SE corrections (but still inefficient), use transformations, use weighted least squares.
+      
+5. **Linearity** (Error distributions all have mean of 0)    
+
+    - Inaccurate (biased) parameter estimates.
+    - Use transformations, use polynomial regression, use generalized linear models.
+
