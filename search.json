@@ -1778,5 +1778,25 @@
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
     ]
+  },
+  {
+    "objectID": "09_transformations.html",
+    "href": "09_transformations.html",
+    "title": "9  Dealing with Messy Data III: Transformations",
+    "section": "",
+    "text": "9.1 Transformations: The Family of Power and Roots\n\\(X\\) –&gt; \\(X^p\\)\nX → Xp If p is negative, then the transformation is an inverse power: X−1 = 1/X, and X−2 = 1/X2 If p is a fraction, then the transformation represents a root: X1/2 = √X and X−1/2 = 1/√X",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Dealing with Messy Data III: Transformations</span>"
+    ]
+  },
+  {
+    "objectID": "09_transformations.html#transformations-the-family-of-power-and-roots",
+    "href": "09_transformations.html#transformations-the-family-of-power-and-roots",
+    "title": "9  Dealing with Messy Data III: Transformations",
+    "section": "",
+    "text": "The GLM makes strong assumptions about the structure of data, assumptions which often fail to hold in practice.\nOne solution is to abandon the GLM for more complicated models (generalized linear models; weighted least squares; robust regression).\nAnother solution is to transform the data (either the \\(X\\)s or \\(Y\\)) so that they conform more closely to the assumptions.\nA particularly useful group of transformations is the family of powers and roots:",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Dealing with Messy Data III: Transformations</span>"
+    ]
   }
 ]
