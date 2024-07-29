@@ -1804,7 +1804,17 @@
     "href": "09_transformations.html#transformations-dealing-with-skew",
     "title": "9  Dealing with Messy Data III: Transformations",
     "section": "9.2 Transformations: Dealing with Skew",
-    "text": "9.2 Transformations: Dealing with Skew\n\nTransforming \\(Y\\) down the ladder can correct positive skew in the errors (most common problem).\nTransforming \\(Y\\) up the ladder corrects negative skew in the errors.",
+    "text": "9.2 Transformations: Dealing with Skew\n\nTransforming \\(Y\\) down the ladder can correct positive skew in the errors (most common problem).\nTransforming \\(Y\\) up the ladder corrects negative skew in the errors.\n\n\n\n\nCode\n# skew transformation plots",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Dealing with Messy Data III: Transformations</span>"
+    ]
+  },
+  {
+    "objectID": "09_transformations.html#transformations-dealing-with-heteroscedasticity",
+    "href": "09_transformations.html#transformations-dealing-with-heteroscedasticity",
+    "title": "9  Dealing with Messy Data III: Transformations",
+    "section": "9.3 Transformations: Dealing with Heteroscedasticity",
+    "text": "9.3 Transformations: Dealing with Heteroscedasticity\n\nTransforming \\(Y\\) down the ladder can correct problems with increasing spread of errors as \\(Y\\) increases (most common problem).\nTransforming \\(Y\\) up the ladder corrects decreasing spread.\nThe problems of unequal spread and skewness commonly occur together and can be corrected together. Therefore, transforming \\(Y\\) down the ladder can correct both issues simultaneously.\n\n\n\n\nCode\n# hetero plots",
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Dealing with Messy Data III: Transformations</span>"
     ]

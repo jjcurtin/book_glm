@@ -320,6 +320,7 @@ window.Quarto = {
   <ul>
   <li><a href="#transformations-the-family-of-power-and-roots" id="toc-transformations-the-family-of-power-and-roots" class="nav-link active" data-scroll-target="#transformations-the-family-of-power-and-roots"><span class="header-section-number">9.1</span> Transformations: The Family of Power and Roots</a></li>
   <li><a href="#transformations-dealing-with-skew" id="toc-transformations-dealing-with-skew" class="nav-link" data-scroll-target="#transformations-dealing-with-skew"><span class="header-section-number">9.2</span> Transformations: Dealing with Skew</a></li>
+  <li><a href="#transformations-dealing-with-heteroscedasticity" id="toc-transformations-dealing-with-heteroscedasticity" class="nav-link" data-scroll-target="#transformations-dealing-with-heteroscedasticity"><span class="header-section-number">9.3</span> Transformations: Dealing with Heteroscedasticity</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/09_transformations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -424,6 +425,29 @@ window.Quarto = {
 <li><p>Transforming <span class="math inline">\(Y\)</span> <em>down the ladder</em> can correct positive skew in the errors (most common problem).</p></li>
 <li><p>Transforming <span class="math inline">\(Y\)</span> <em>up the ladder</em> corrects negative skew in the errors.</p></li>
 </ul>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># skew transformation plots</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+</section>
+<section id="transformations-dealing-with-heteroscedasticity" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="transformations-dealing-with-heteroscedasticity"><span class="header-section-number">9.3</span> Transformations: Dealing with Heteroscedasticity</h2>
+<ul>
+<li><p>Transforming <span class="math inline">\(Y\)</span> <em>down the ladder</em> can correct problems with increasing spread of errors as <span class="math inline">\(Y\)</span> increases (most common problem).</p></li>
+<li><p>Transforming <span class="math inline">\(Y\)</span> <em>up the ladder</em> corrects decreasing spread.</p></li>
+<li><p>The problems of unequal spread and skewness commonly occur together and can be corrected together. Therefore, transforming <span class="math inline">\(Y\)</span> down the ladder can correct both issues simultaneously.</p></li>
+</ul>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hetero plots</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <hr>
 
 
