@@ -319,6 +319,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#transformations-the-family-of-power-and-roots" id="toc-transformations-the-family-of-power-and-roots" class="nav-link active" data-scroll-target="#transformations-the-family-of-power-and-roots"><span class="header-section-number">9.1</span> Transformations: The Family of Power and Roots</a></li>
+  <li><a href="#transformations-dealing-with-skew" id="toc-transformations-dealing-with-skew" class="nav-link" data-scroll-target="#transformations-dealing-with-skew"><span class="header-section-number">9.2</span> Transformations: Dealing with Skew</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/09_transformations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -393,9 +394,35 @@ window.Quarto = {
 <ul>
 <li><p>Some of the transformations, such as log (<span class="math inline">\(p= 0\)</span>) and square root (<span class="math inline">\(p= .5\)</span>), are undefined for negative or zero values of <span class="math inline">\(X\)</span>.</p></li>
 <li><p>Power transformations are not monotone (i.e., they change to order of scores) when there are both positive and negative values among the data.</p></li>
-<li><p>We can add a positive constant (called a <em>start</em>) to each data value to make all of the values positive:</p></li>
-</ul>
+<li><p>We can add a positive constant (called a <em>start</em>) to each data value to make all of the values positive:</p>
 <p><span class="math inline">\(X\)</span> → <span class="math inline">\((X + s)^{(p)}\)</span></p></li>
+</ul></li>
+</ul>
+<hr>
+<ul>
+<li><p>Power transformations are effective only when the ratio of the biggest data values to the smallest ones is sufficiently large; if this ratio is close to 1, then power transformations are nearly linear. For example:</p>
+<ul>
+<li><p>Power transformations will work well if range of <span class="math inline">\(X = 1 – 100\)</span>.</p></li>
+<li><p>Power transformations will have little effect if range of <span class="math inline">\(X = 1000 – 1100\)</span></p></li>
+</ul></li>
+<li><p>Using a negative start can often increase the ratio of highest/lowest score.</p></li>
+<li><p>Using reasonable starts, if necessary, an adequate power transformation can usually be found in the range <span class="math inline">\(−2 \le p \le 3\)</span>.</p></li>
+</ul>
+<hr>
+<ul>
+<li><p>Power transformations of <span class="math inline">\(Y\)</span> (or sometimes <span class="math inline">\(X\)</span>) can correct problems with normality of errors.</p></li>
+<li><p>Power transformations of <span class="math inline">\(Y\)</span> (or sometimes <span class="math inline">\(X\)</span>) can stabilize the variance of the errors.</p></li>
+<li><p>Power transformations of <span class="math inline">\(X\)</span> (or sometimes <span class="math inline">\(Y\)</span>) can make many nonlinear relationships more nearly linear.</p></li>
+<li><p>You can experiment with Box-Cox transformations of <span class="math inline">\(X\)</span> or <span class="math inline">\(Y\)</span> in R using <code>bcPower()</code> in the <code>car</code> package.</p></li>
+<li><p>In many fields, <span class="math inline">\(X^p\)</span> rather than <span class="math inline">\(X^{(p)}\)</span> may be preferred. Particularly, if <span class="math inline">\(p \ge 0\)</span>. This is simply done algebraically.</p></li>
+</ul>
+<hr>
+</section>
+<section id="transformations-dealing-with-skew" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="transformations-dealing-with-skew"><span class="header-section-number">9.2</span> Transformations: Dealing with Skew</h2>
+<ul>
+<li><p>Transforming <span class="math inline">\(Y\)</span> <em>down the ladder</em> can correct positive skew in the errors (most common problem).</p></li>
+<li><p>Transforming <span class="math inline">\(Y\)</span> <em>up the ladder</em> corrects negative skew in the errors.</p></li>
 </ul>
 <hr>
 
