@@ -316,10 +316,14 @@ window.Quarto = {
 <li><p>The GLM makes <strong>strong assumptions</strong> about the structure of data, assumptions which often fail to hold in practice.</p></li>
 <li><p>One solution is to abandon the GLM for more complicated models (generalized linear models; weighted least squares; robust regression).</p></li>
 <li><p>Another solution is to transform the data (either the <span class="math inline">\(X\)</span>s or <span class="math inline">\(Y\)</span>) so that they conform more closely to the assumptions.</p></li>
-<li><p>A particularly useful group of transformations is the <em>family</em> of powers and roots:</p></li>
+<li><p>A particularly useful group of transformations is the <em>family</em> of powers and roots:</p>
+<p><strong><span class="math inline">\(X\)</span> → <span class="math inline">\(X^p\)</span></strong></p>
+<ul>
+<li>If p is negative, then the transformation is an inverse power: <span class="math inline">\(X^-1 = \frac{1}{X}\)</span>, and <span class="math inline">\(X^−2 = \frac{1}{X^2}\)</span>.</li>
+<li>If p is a fraction, then the transformation represents a root: <span class="math inline">\(X^{\frac{1}{2}} = \sqrt{X}\)</span>, and <span class="math inline">\(X^{\frac{-1}{2}} = \frac{1}{\sqrt{X}}\)</span>.</li>
+</ul></li>
 </ul>
-<p><strong><span class="math inline">\(X\)</span> –&gt; <span class="math inline">\(X^p\)</span></strong></p>
-<p>X → Xp If p is negative, then the transformation is an inverse power: X−1 = 1/X, and X−2 = 1/X2 If p is a fraction, then the transformation represents a root: X1/2 = √X and X−1/2 = 1/√X</p>
+<hr>
 
 
 </section>
