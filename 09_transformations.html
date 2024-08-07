@@ -321,6 +321,7 @@ window.Quarto = {
   <li><a href="#transformations-the-family-of-power-and-roots" id="toc-transformations-the-family-of-power-and-roots" class="nav-link active" data-scroll-target="#transformations-the-family-of-power-and-roots"><span class="header-section-number">9.1</span> Transformations: The Family of Power and Roots</a></li>
   <li><a href="#transformations-dealing-with-skew" id="toc-transformations-dealing-with-skew" class="nav-link" data-scroll-target="#transformations-dealing-with-skew"><span class="header-section-number">9.2</span> Transformations: Dealing with Skew</a></li>
   <li><a href="#transformations-dealing-with-heteroscedasticity" id="toc-transformations-dealing-with-heteroscedasticity" class="nav-link" data-scroll-target="#transformations-dealing-with-heteroscedasticity"><span class="header-section-number">9.3</span> Transformations: Dealing with Heteroscedasticity</a></li>
+  <li><a href="#box-cox-transformation-function" id="toc-box-cox-transformation-function" class="nav-link" data-scroll-target="#box-cox-transformation-function"><span class="header-section-number">9.4</span> Box Cox Transformation Function</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/09_transformations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -524,53 +525,77 @@ window.Quarto = {
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model_assumptions</span>(m, <span class="st">"Normal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model_assumptions</span>(m, <span class="at">Type =</span> <span class="st">"normal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Descriptive Statistics for Studentized Residuals
-
-Call:
-lm(formula = fps ~ bac + ta + sex_c, data = data)
-
-Coefficients:
-(Intercept)          bac           ta        sex_c  
-    18.8806    -164.7726       0.1524     -16.0003  
-
-
-ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
-USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
-Level of Significance =  0.05 
-
-Call:
- gvlma(x = Model) 
-
-                          Value       p-value                   Decision
-Global Stat        38.237902165 0.00000010008 Assumptions NOT satisfied!
-Skewness            0.328012219 0.56683191664    Assumptions acceptable.
-Kurtosis           32.023485201 0.00000001523 Assumptions NOT satisfied!
-Link Function       0.000003736 0.99845769428    Assumptions acceptable.
-Heteroscedasticity  5.886401009 0.01525825289 Assumptions NOT satisfied!</code></pre>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_transformations_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_transformations_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <hr>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model_assumptions</span>(m, <span class="st">"Constant"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model_assumptions</span>(m, <span class="at">Type =</span> <span class="st">"constant"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in spreadLevelPlot.lm(Model): 
-2 negative fitted values removed</code></pre>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_transformations_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_transformations_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Suggested power transformation:  0.2328118 
-
-
-Non-constant Variance Score Test 
+Suggested power transformation:  0.2328118 </code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">ncvTest</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Non-constant Variance Score Test 
 Variance formula: ~ fitted.values 
-Chisquare = 15.68997, Df = 1, p = 0.000074619
-
+Chisquare = 15.68997, Df = 1, p = 0.000074619</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gvlma</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
 Call:
 lm(formula = fps ~ bac + ta + sex_c, data = data)
 
@@ -584,7 +609,7 @@ USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
 Level of Significance =  0.05 
 
 Call:
- gvlma(x = Model) 
+ gvlma(x = m) 
 
                           Value       p-value                   Decision
 Global Stat        38.237902165 0.00000010008 Assumptions NOT satisfied!
@@ -595,6 +620,34 @@ Heteroscedasticity  5.886401009 0.01525825289 Assumptions NOT satisfied!</code><
 </div>
 </div>
 <hr>
+</section>
+<section id="box-cox-transformation-function" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="box-cox-transformation-function"><span class="header-section-number">9.4</span> Box Cox Transformation Function</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bac, ta, sex_c, fps) <span class="sc">|&gt;</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  psych<span class="sc">::</span><span class="fu">describe</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(trimmed, mad, se))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      vars  n   mean     sd median   min    max  range  skew kurtosis
+bac      1 96   0.06   0.04   0.06   0.0   0.14   0.14 -0.09    -1.09
+ta       2 96 147.61 105.73 119.00  10.0 445.00 435.00  0.89    -0.06
+sex_c    3 96   0.00   0.50   0.00  -0.5   0.50   1.00  0.00    -2.02
+fps      4 96  32.19  37.54  19.46 -98.1 162.74 260.83  0.62     1.93</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fps_27 =</span> fps <span class="sc">+</span> <span class="dv">27</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>m_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps_27 <span class="sc">~</span> bac <span class="sc">+</span> ta <span class="sc">+</span> sex_c, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
 
 </section>
