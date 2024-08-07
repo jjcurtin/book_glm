@@ -322,6 +322,7 @@ window.Quarto = {
   <li><a href="#transformations-dealing-with-skew" id="toc-transformations-dealing-with-skew" class="nav-link" data-scroll-target="#transformations-dealing-with-skew"><span class="header-section-number">9.2</span> Transformations: Dealing with Skew</a></li>
   <li><a href="#transformations-dealing-with-heteroscedasticity" id="toc-transformations-dealing-with-heteroscedasticity" class="nav-link" data-scroll-target="#transformations-dealing-with-heteroscedasticity"><span class="header-section-number">9.3</span> Transformations: Dealing with Heteroscedasticity</a></li>
   <li><a href="#box-cox-transformation-function" id="toc-box-cox-transformation-function" class="nav-link" data-scroll-target="#box-cox-transformation-function"><span class="header-section-number">9.4</span> Box Cox Transformation Function</a></li>
+  <li><a href="#transformations-dealing-with-non-linearity" id="toc-transformations-dealing-with-non-linearity" class="nav-link" data-scroll-target="#transformations-dealing-with-non-linearity"><span class="header-section-number">9.5</span> Transformations: Dealing with Non-linearity</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/09_transformations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -762,6 +763,51 @@ Heteroscedasticity  7.62546 0.005755008 Assumptions NOT satisfied!</code></pre>
 </div>
 <p><strong>Transformations often don’t help!</strong></p>
 <hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>m_3 <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)  15.5      1.22        12.7  1.08e-21
+2 bac         -39.8     13.7         -2.90 4.70e- 3
+3 ta            0.0219   0.00518      4.22 5.79e- 5
+4 sex_c        -2.54     1.08        -2.35 2.10e- 2</code></pre>
+</div>
+</div>
+<hr>
+<p>White (1980) Heteroscedasticity-corrected SEs and Tests</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>corrected_ses <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">hccm</span>(m)))</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m) <span class="sc">|&gt;</span> </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(term, estimate) <span class="sc">|&gt;</span> </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(<span class="at">std.error =</span> corrected_ses) <span class="sc">|&gt;</span> </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">statistic =</span> estimate<span class="sc">/</span>std.error,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">p.value =</span> <span class="dv">2</span><span class="sc">*</span>(<span class="fu">pt</span>(<span class="fu">abs</span>(statistic), <span class="at">df=</span>m_2<span class="sc">$</span>df.residual, <span class="at">lower.tail=</span><span class="cn">FALSE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)   26.6      6.90        3.85 0.000220 
+2 bac         -229.      72.1        -3.18 0.00204  
+3 ta             0.126    0.0304      4.13 0.0000799
+4 sex_c        -15.5      5.70       -2.72 0.00791  </code></pre>
+</div>
+</div>
+<p><em>Maybe</em> better choicer was untransformed Y (original model) with corrected SEs?</p>
+<p><em>Maybe</em> the problem wasn’t bad enough to do anything?</p>
+<hr>
+</section>
+<section id="transformations-dealing-with-non-linearity" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="transformations-dealing-with-non-linearity"><span class="header-section-number">9.5</span> Transformations: Dealing with Non-linearity</h2>
 
 
 </section>
