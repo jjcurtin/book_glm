@@ -1784,7 +1784,7 @@
     "href": "09_transformations.html",
     "title": "9  Dealing with Messy Data III: Transformations",
     "section": "",
-    "text": "9.1 Transformations: The Family of Power and Roots\nCode\n# box cox transformation figure",
+    "text": "9.1 Transformations: The Family of Power and Roots",
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Dealing with Messy Data III: Transformations</span>"
     ]
