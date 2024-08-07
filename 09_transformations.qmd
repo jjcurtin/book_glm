@@ -10,6 +10,11 @@ editor_options:
 ```{r}
 #| echo: false
 
+library(tidyverse) |> 
+  suppressPackageStartupMessages()
+
+theme_set(theme_classic()) 
+
 options(scipen = 999) # turns off scientfic notation
 options(knitr.kable.NA = '')
 ```
@@ -43,7 +48,19 @@ options(knitr.kable.NA = '')
     - This function also matches level and slope of curve at $X=1$.
     
 ```{r}
-# box cox transformation figure
+#| echo: false
+#| fig-cap: The Box-Cox family of modified power transformations, $X^{(p)}= (X^p - 1)/p$, for values of $p = -1, 0, 1, 2, 3$. When $p = 0, X^{(p)} = log_e X$.
+
+transform <- expand.grid(p = c(-1, 0, 1, 2, 3),
+                    X = c(0, 1, 2, 3, 4)) |> 
+  mutate(`X'` = if_else(p == 0, 
+                        log(X),
+                        (X^p)/p),
+         p = factor(p))
+
+transform |> 
+  ggplot() +
+  geom_line(aes(x = X, y = `X'`, color = p), linewidth = 1)
 ```
 
 -----

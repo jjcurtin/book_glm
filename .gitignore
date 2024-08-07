@@ -5,3 +5,10 @@
 
 /.quarto/
 /_book/
+
+
+02_sampling_distributions_files/
+03_single_mean_files/
+04_single_quantitative_files/
+05_single_dichotomous_files/
+06_two_predictors_files/
