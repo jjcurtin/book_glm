@@ -1784,7 +1784,7 @@
     "href": "09_transformations.html",
     "title": "9  Dealing with Messy Data III: Transformations",
     "section": "",
-    "text": "9.1 Transformations: The Family of Power and Roots",
+    "text": "9.1 Transformations: The Family of Power and Roots\nThe Box-Cox family of modified power transformations, \\(X^{(p)}= (X^p - 1)/p\\), for values of \\(p = -1, 0, 1, 2, 3\\). When \\(p = 0, X^{(p)} = log_e X\\).",
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Dealing with Messy Data III: Transformations</span>"
     ]
