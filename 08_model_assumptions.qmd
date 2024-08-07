@@ -242,7 +242,9 @@ library(gvlma) # needed for model_assumptions
 
 theme_set(theme_classic()) 
 
-data <- read_csv(here::here("data_lecture/7_three_predictors_fps.csv"), 
+path_data <- "data_lecture"
+
+data <- read_csv(here::here(path_data, "7_three_predictors_fps.csv"), 
                  show_col_types = FALSE) |> 
    mutate(sex_c = if_else(sex == "female", -.5, .5))
 ```
@@ -269,7 +271,7 @@ m_2 <- lm(fps ~ bac + ta + sex_c, data = data_rm_outliers)
 ```{r}
 #| eval: false
 
-model_assumptions(m_2, Type = "normal", one.page = TRUE)
+model_assumptions(m_2, Type = "normal")
 ```
 
 ```{r}

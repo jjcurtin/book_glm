@@ -12,6 +12,7 @@ editor_options:
 
 library(tidyverse) |> 
   suppressPackageStartupMessages()
+library(patchwork)
 
 theme_set(theme_classic()) 
 
@@ -46,6 +47,8 @@ options(knitr.kable.NA = '')
 
     - Dividing by p preserves the direction of $X$, which otherwise would be reversed when p is negative.  
     - This function also matches level and slope of curve at $X=1$.
+    
+-----
     
 ```{r}
 #| echo: false
@@ -130,7 +133,48 @@ transform |>
 -----
 
 ```{r}
-# skew transformation plots
+#| code-fold: true
+
+set.seed(102030)
+y <- tibble(y_raw = rchisq(n=500, df=1),
+            y_.5 = car::bcPower(y_raw, .5),
+            y_.25 = car::bcPower(y_raw, .25),
+            y_0 = car::bcPower(y_raw, 0))    
+
+plot_raw <- y |> 
+  ggplot(aes(x = y_raw)) +
+  geom_density() + 
+  scale_x_continuous(limits = c(-.5, 12), breaks = c(0, 2, 4, 6, 8, 10)) +
+  labs(title = "Raw Y",
+       x = NULL,
+       caption = str_c("N = 500; bandwidth = ", round(density(y$y_raw)$bw, 4)))
+
+plot_.5 <- y |> 
+  ggplot(aes(x = y_.5)) +
+  geom_density() + 
+  scale_x_continuous(limits = c(-3, 5), breaks = c(-2, 0, 2, 4)) +
+  labs(title = "p = .5; sqrt(Y)",
+       x = NULL,
+       caption = str_c("N = 500; bandwidth = ", round(density(y$y_.5)$bw, 4)))
+
+plot_.25 <- y |> 
+  ggplot(aes(x = y_.25)) +
+  geom_density() + 
+  scale_x_continuous(limits = c(-4.5, 4), breaks = c(-4, -2, 0, 2, 4)) +
+  labs(title = "p = .25",
+       x = NULL,
+       caption = str_c("N = 500; bandwidth = ", round(density(y$y_.25)$bw, 4)))
+
+plot_0 <- y |> 
+  ggplot(aes(x = y_0)) +
+  geom_density() + 
+  scale_x_continuous(limits = c(-15, 4), breaks = c(-15, -10. -5, 0)) +
+  labs(title = "p = 0; log(Y)",
+       x = NULL,
+       caption = str_c("N = 500; bandwidth = ", round(density(y$y_0)$bw, 4)))
+
+
+(plot_raw + plot_.5) / (plot_.25 + plot_0)
 ```
 
 -----
@@ -146,14 +190,228 @@ transform |>
 -----
 
 ```{r}
-# hetero plots
+#| code-fold: true
+#| message: false
+#| warning: false
+
+library(car) # needed for model_assumptions
+library(psych) # needed for model_assumptions
+library(gvlma) # needed for model_assumptions
+
+path_data <- "data_lecture"
+
+data <- read_csv(here::here(path_data, "7_three_predictors_fps.csv"), 
+                 show_col_types = FALSE) |> 
+   mutate(sex_c = if_else(sex == "female", -.5, .5)) |> 
+   # remove outliers to fit same model as last two units 
+   filter(!subid %in% c("0125", "2112"))
+
+devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/model_assumptions.R?raw=true")
+```
+
+```{r}
+m <- lm(fps ~ bac + ta + sex_c, data = data)
+```
+
+```{r}
+#| eval: false
+
+model_assumptions(m, Type = "normal")
+```
+
+```{r}
+#| echo: false
+
+car::qqPlot(m, id=FALSE, sim=TRUE, main='Quantile-Comparison Plot to Assess Normality', xlab='t Quantiles', ylab ='Studentized Residuals')
+```
+
+-----
+
+```{r}
+#| echo: false
+
+ggplot() +
+  geom_density(aes(x = value), data = enframe(rstudent(m), name = NULL)) +
+  labs(title = "Density Plot to Assess Normality of Residuals",
+       x = "Studentized Residual") +
+  geom_line(aes(x = x, y = y), data = tibble(x = seq(-4, 4, length.out = 100),
+                                      y = dnorm(seq(-4, 4, length.out = 100), 
+                                      mean=0, sd=sd(rstudent(m)))), 
+            linetype = "dashed", color = "blue")
+```
+
+-----
+
+```{r}
+#| eval: false
+
+model_assumptions(m, Type = "constant")
+```
+
+
+```{r}
+#| echo: false
+
+tibble(x = fitted.values(m),
+       y = rstudent(m)) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_point(alpha = .6) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "blue", linewidth = 1) +
+  labs(title = "Studentized Residuals vs. Fitted Values",
+       x = "Fitted Values",
+       y = "Studentized Residuals")
+```
+
+-----
+
+```{r}
+#| echo: false
+#| warning: false
+#| 
+car::spreadLevelPlot(m)
+```
+
+```{r}
+car::ncvTest(m)
 ```
 
 -----
 
 
+```{r}
+gvlma(m)
+```
+
+-----
 
 
+## Box Cox Transformation Function
 
+```{r}
+data |> 
+  select(bac, ta, sex_c, fps) |> 
+  psych::describe() |> 
+  select(-c(trimmed, mad, se))
+```
+
+We are going to first add a constant so all response values are > 0
+```{r}
+data <- data |> 
+  mutate(fps_27 = fps + 27)
+
+m_2 <- lm(fps_27 ~ bac + ta + sex_c, data = data)
+```
+
+-----
+
+Next we will pull the best lambda value from a plot of log-likelihood values by lambda power transformations of response variable.
+```{r}
+car::boxCox(m_2)
+
+round(car::boxCox(m_2)$x[which.max(car::boxCox(m_2)$y)],2)
+```
+
+
+-----
+
+Lastly, we will use the best lambda value to conduct our power transformation and re-evaluate our model assumptions. 
+
+```{r}
+data <- data |> 
+  mutate(fps_bc = car::bcPower(fps_27, .59))
+
+m_3 <- lm(fps_bc ~ bac + ta + sex_c, data = data)
+```
+
+-----
+
+```{r}
+#| echo: false
+
+car::qqPlot(m_3, id=FALSE, sim=TRUE, main='Quantile-Comparison Plot to Assess Normality', xlab='t Quantiles', ylab ='Studentized Residuals')
+```
+
+
+```{r}
+#| echo: false
+
+ggplot() +
+  geom_density(aes(x = value), data = enframe(rstudent(m_3), name = NULL)) +
+  labs(title = "Density Plot to Assess Normality of Residuals",
+       x = "Studentized Residual") +
+  geom_line(aes(x = x, y = y), data = tibble(x = seq(-4, 4, length.out = 100),
+                                      y = dnorm(seq(-4, 4, length.out = 100), 
+                                      mean=0, sd=sd(rstudent(m_3)))), 
+            linetype = "dashed", color = "blue")
+```
+
+-----
+
+```{r}
+#| echo: false
+
+tibble(x = fitted.values(m_3),
+       y = rstudent(m_3)) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_point(alpha = .6) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "blue", linewidth = 1) +
+  labs(title = "Studentized Residuals vs. Fitted Values",
+       x = "Fitted Values",
+       y = "Studentized Residuals")
+```
+
+
+```{r}
+#| echo: false
+#| warning: false
+
+car::spreadLevelPlot(m_3)
+```
+
+```{r}
+#| code-fold: true
+
+car::ncvTest(m_3)
+```
+
+-----
+
+
+```{r}
+#| code-fold: true
+
+gvlma(m_3)
+```
+
+**Transformations often don't help!**
+
+-----
+
+```{r}
+m_3 |> 
+  broom::tidy()
+```
+
+-----
+
+White (1980) Heteroscedasticity-corrected SEs and Tests
+
+```{r}
+corrected_ses <- sqrt(diag(hccm(m)))
+
+broom::tidy(m) |> 
+  select(term, estimate) |> 
+  add_column(std.error = corrected_ses) |> 
+  mutate(statistic = estimate/std.error,
+         p.value = 2*(pt(abs(statistic), df=m_2$df.residual, lower.tail=FALSE)))
+```
+
+*Maybe* better choicer was untransformed Y (original model) with corrected SEs?    
+ 
+*Maybe* the problem wasn’t bad enough to do anything?
+
+-----
+
+## Transformations: Dealing with Non-linearity
 
 
