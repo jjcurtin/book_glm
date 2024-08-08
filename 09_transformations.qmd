@@ -414,4 +414,26 @@ broom::tidy(m) |>
 
 ## Transformations: Dealing with Non-linearity
 
+Power transformations can make simple monotone relationships more linear (Fig A).  Polynomial regression (or other transformations, e.g. logit) is often needed for more complex relationships (Figs, B & C).
+
+
+```{r}
+#figure
+```
+
+
+## Transformations: Mosteller and Tukey’s bulging rule
+
+Simple monotone relationships can be corrected by transforming X or Y.     
+
+X is typical if only one XY relationship is problematic.    
+
+If all Xs have similar non-linear relationship, transform Y.    
+
+```{r}
+
+```
+
+
+
 
