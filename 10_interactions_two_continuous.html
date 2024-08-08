@@ -353,11 +353,13 @@ window.Quarto = {
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>path_data <span class="ot">&lt;-</span> <span class="st">"data_lecture"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>())</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_data, <span class="st">"10_interactions_birth_control.csv"</span>),</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>path_data <span class="ot">&lt;-</span> <span class="st">"data_lecture"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_data, <span class="st">"10_interactions_birth_control.csv"</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 125
@@ -530,7 +532,7 @@ bc  0.75 -0.5  1.00</code></pre>
 <hr>
 <p><span style="color: red;">Question: Where are <span class="math inline">\(b_\text{Att}, b_\text{PP},\)</span> and <span class="math inline">\(b_0\)</span> in the figure below?</span></p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">att =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">pp =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>))</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>preds_y <span class="ot">&lt;-</span> <span class="fu">predict</span>(m_add, <span class="at">newdata =</span> preds)</span>
@@ -555,6 +557,20 @@ bc  0.75 -0.5  1.00</code></pre>
 <p><span style="color: blue;"><span class="math inline">\(b_\text{PP}\)</span> = separation of lines. Lines are separated by <span class="math inline">\(2*b_\text{PP}\)</span>. Constant across Att.</span></p>
 <p><span style="color: blue;"><span class="math inline">\(b_0\)</span> = predicted value at Att = 0 and PP= 0. Not displayed in figure.</span></p>
 <hr>
+<p><span style="color: red;">Question: How might we benefit from including a third regressor in the model to represent the interaction between Att and PP? Hint, there are two benefits.</span></p>
+<hr>
+<ol type="1">
+<li><p><span style="color: blue;">If Att X PP effect is significant, it will increase <span class="math inline">\(R^2\)</span>, decrease SEs, and therefore increase power to test all effects.</span></p></li>
+<li><p><span style="color: blue;">If Att X PP is significant, it will provide us with a more complex, nuanced perspective on the nature of the Att and PP effects on BC.</span></p></li>
+</ol>
+<p><strong>Definition: An interaction exists when the effect of 1 predictor on the DV differs across levels/values of the other predictor.</strong></p>
+<!-- John, you also had this note on your slide "LINK to additive results in this example…" I wasn't sure what it meant-->
+<hr>
+<p>Regressors for interaction terms are calculated as the product of the regressors (for the predictors) in the interaction. In this case, we simply multiply Att X PP.</p>
+<p>You will typically want to <strong>center</strong> the IVs in the primary model to yield tests of <em>main effects</em> of each IV as well as tests of the interaction (More on this as the slides develop).</p>
+<p>In R, you don’t need to actually compute the product term regressor directly. <code>A:B</code> in the <code>lm()</code> formula will include the A X B interaction regressor(s).</p>
+<p><code>A*B</code> is further shorthand to include A, B, and A X B in the model.</p>
+<p>You should <strong>not</strong> include A X B in a model that does not include lower order effects (e.g., A, and B).</p>
 <hr>
 
 
