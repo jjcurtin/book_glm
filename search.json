@@ -1844,7 +1844,7 @@
     "href": "09_transformations.html#transformations-mosteller-and-tukeys-bulging-rule",
     "title": "9  Dealing with Messy Data III: Transformations",
     "section": "9.6 Transformations: Mosteller and Tukey’s bulging rule",
-    "text": "9.6 Transformations: Mosteller and Tukey’s bulging rule\nSimple monotone relationships can be corrected by transforming X or Y.\n\nX is typical if only one XY relationship is problematic.\nIf all Xs have similar non-linear relationship, transform Y.",
+    "text": "9.6 Transformations: Mosteller and Tukey’s bulging rule\nSimple monotone relationships can be corrected by transforming \\(X\\) or \\(Y\\).\n\n\\(X\\) is typical if only one \\(XY\\) relationship is problematic.\nIf all \\(X\\)s have similar non-linear relationship, transform \\(Y\\).\n\n\n\n\n\n\n\n\n\n\n\nQuestion: What 2 transformations would make this relationship linear?\n\n\n\n\n\n\n\n\n\n\nMove \\(X\\) down the ladder (e.g., \\(X^.5\\))\n\n\nCode\ndata_nonlinear  |&gt; \n  ggplot(aes(x = sqrt(X), y = Y)) +\n  geom_point(alpha = .4)\n\n\n\n\n\n\n\n\n\nMove \\(Y\\) up the ladder (e.g., \\(Y^2\\))\n\n\nCode\ndata_nonlinear  |&gt; \n  ggplot(aes(x = X, y = Y^2)) +\n  geom_point(alpha = .4)",
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Dealing with Messy Data III: Transformations</span>"
     ]

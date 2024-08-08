@@ -822,10 +822,10 @@ Heteroscedasticity  7.62546 0.005755008 Assumptions NOT satisfied!</code></pre>
 </section>
 <section id="transformations-mosteller-and-tukeys-bulging-rule" class="level2" data-number="9.6">
 <h2 data-number="9.6" class="anchored" data-anchor-id="transformations-mosteller-and-tukeys-bulging-rule"><span class="header-section-number">9.6</span> Transformations: Mosteller and Tukey’s bulging rule</h2>
-<p>Simple monotone relationships can be corrected by transforming X or Y.</p>
+<p>Simple monotone relationships can be corrected by transforming <span class="math inline">\(X\)</span> or <span class="math inline">\(Y\)</span>.</p>
 <ul>
-<li><p>X is typical if only one XY relationship is problematic.</p></li>
-<li><p>If all Xs have similar non-linear relationship, transform Y.</p></li>
+<li><p><span class="math inline">\(X\)</span> is typical if only one <span class="math inline">\(XY\)</span> relationship is problematic.</p></li>
+<li><p>If all <span class="math inline">\(X\)</span>s have similar non-linear relationship, transform <span class="math inline">\(Y\)</span>.</p></li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
@@ -837,15 +837,50 @@ Heteroscedasticity  7.62546 0.005755008 Assumptions NOT satisfied!</code></pre>
 </div>
 </div>
 <hr>
+<p><span style="color: red;">Question: What 2 transformations would make this relationship linear?</span></p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="figures/mosteller_tukey.png" class="img-fluid figure-img"></p>
+<p><img src="09_transformations_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<hr>
+<p><span style="color: blue;">Move <span class="math inline">\(X\)</span> down the ladder (e.g., <span class="math inline">\(X^.5\)</span>)</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>data_nonlinear  <span class="sc">|&gt;</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">sqrt</span>(X), <span class="at">y =</span> Y)) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_transformations_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span style="color: blue;">Move <span class="math inline">\(Y\)</span> up the ladder (e.g., <span class="math inline">\(Y^2\)</span>)</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>data_nonlinear  <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_transformations_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
 
 
 </section>
