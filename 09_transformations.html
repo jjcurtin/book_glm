@@ -324,6 +324,7 @@ window.Quarto = {
   <li><a href="#box-cox-transformation-function" id="toc-box-cox-transformation-function" class="nav-link" data-scroll-target="#box-cox-transformation-function"><span class="header-section-number">9.4</span> Box Cox Transformation Function</a></li>
   <li><a href="#transformations-dealing-with-non-linearity" id="toc-transformations-dealing-with-non-linearity" class="nav-link" data-scroll-target="#transformations-dealing-with-non-linearity"><span class="header-section-number">9.5</span> Transformations: Dealing with Non-linearity</a></li>
   <li><a href="#transformations-mosteller-and-tukeys-bulging-rule" id="toc-transformations-mosteller-and-tukeys-bulging-rule" class="nav-link" data-scroll-target="#transformations-mosteller-and-tukeys-bulging-rule"><span class="header-section-number">9.6</span> Transformations: Mosteller and Tukey’s bulging rule</a></li>
+  <li><a href="#general-transformations" id="toc-general-transformations" class="nav-link" data-scroll-target="#general-transformations"><span class="header-section-number">9.7</span> General Transformations</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/09_transformations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -880,6 +881,18 @@ Heteroscedasticity  7.62546 0.005755008 Assumptions NOT satisfied!</code></pre>
 </div>
 </div>
 </div>
+<hr>
+</section>
+<section id="general-transformations" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="general-transformations"><span class="header-section-number">9.7</span> General Transformations</h2>
+<ul>
+<li><p>In some fields, certain power transformations (sqrt, log, inverse) are common.</p></li>
+<li><p>If we have a choice between transformations that perform roughly equally well, we may prefer one transformation to another because of interpretability:</p>
+<ul>
+<li>The log transformation has a convenient multiplicative interpretation (e.g., increasing log2 (X) by 1 doubles X; increasing log10 (X) by 1 multiples X by 10).</li>
+</ul></li>
+<li><p>Transformations are a big source of research dfs. Should be pre-registered. You may know what your DV typically <em>needs</em> from prior data. Worst case, report with and without transformations and justify.</p></li>
+</ul>
 <hr>
 
 

@@ -1848,5 +1848,15 @@
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Dealing with Messy Data III: Transformations</span>"
     ]
+  },
+  {
+    "objectID": "09_transformations.html#general-transformations",
+    "href": "09_transformations.html#general-transformations",
+    "title": "9  Dealing with Messy Data III: Transformations",
+    "section": "9.7 General Transformations",
+    "text": "9.7 General Transformations\n\nIn some fields, certain power transformations (sqrt, log, inverse) are common.\nIf we have a choice between transformations that perform roughly equally well, we may prefer one transformation to another because of interpretability:\n\nThe log transformation has a convenient multiplicative interpretation (e.g., increasing log2 (X) by 1 doubles X; increasing log10 (X) by 1 multiples X by 10).\n\nTransformations are a big source of research dfs. Should be pre-registered. You may know what your DV typically needs from prior data. Worst case, report with and without transformations and justify.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Dealing with Messy Data III: Transformations</span>"
+    ]
   }
 ]
