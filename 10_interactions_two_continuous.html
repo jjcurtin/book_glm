@@ -698,15 +698,18 @@ bc  0.75 -0.5  1.00</code></pre>
 </div>
 </div>
 <hr>
+<p><span class="math inline">\(\text{BC} = 11.0 + 3.0 * \text{Att}_c + -2.0*\text{PP}_c\)</span></p>
+<p><span class="math inline">\(\text{BC} = 11.0 + 3.0 * \text{Att}_c + -2.0*\text{PP}_c + -1.0*\text{Att}_c*\text{PP}_c\)</span></p>
+<p><span style="color: red;">Link intercepts and coefficients from each model to their respective figures. Note: figures use raw (not centered) predictors. Means for both predictors are 3.</span></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>m_int <span class="ot">&lt;-</span> <span class="fu">lm</span>(bc <span class="sc">~</span> att <span class="sc">*</span> pp, <span class="at">data =</span> data)</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>preds_y <span class="ot">&lt;-</span> <span class="fu">predict</span>(m_int, <span class="at">newdata =</span> preds)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>preds_int_y <span class="ot">&lt;-</span> <span class="fu">predict</span>(m_int, <span class="at">newdata =</span> preds)</span>
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>plot_m_int <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> preds<span class="sc">$</span>att, <span class="at">y =</span> preds_y, <span class="at">color =</span> <span class="fu">factor</span>(preds<span class="sc">$</span>pp)), </span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> preds<span class="sc">$</span>att, <span class="at">y =</span> preds_int_y, <span class="at">color =</span> <span class="fu">factor</span>(preds<span class="sc">$</span>pp)), </span>
 <span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Attitude about Birth Control"</span>,</span>
 <span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Birth Control Use"</span>,</span>
@@ -722,6 +725,7 @@ bc  0.75 -0.5  1.00</code></pre>
 </div>
 </div>
 </div>
+<hr>
 
 
 </section>
