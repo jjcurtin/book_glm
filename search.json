@@ -1868,5 +1868,15 @@
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Dealing with Messy Data III: Transformations</span>"
     ]
+  },
+  {
+    "objectID": "09_transformations.html#displaying-transformed-results-with-fake-data",
+    "href": "09_transformations.html#displaying-transformed-results-with-fake-data",
+    "title": "9  Dealing with Messy Data III: Transformations",
+    "section": "9.9 Displaying Transformed Results With Fake Data",
+    "text": "9.9 Displaying Transformed Results With Fake Data\n\n\nCode\ndata_fake &lt;- tibble(x = 3 * rchisq(200, df=3),\n                    x_sr = sqrt(x),\n                    y = 3 * x_sr + rnorm(200,mean=0,sd = 1))\n\nm_raw = lm(y ~ x, data = data_fake)\nbroom::tidy(m_raw)\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic  p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)    3.67     0.148       24.9 7.86e-63\n2 x              0.519    0.0147      35.3 2.66e-87\n\n\n\n\nCode\ndata_fake |&gt; \n  ggplot(aes(x = x, y = y)) +\n  geom_point(alpha = .4) +\n  geom_abline(intercept = coef(m_raw)[1], slope = coef(m_raw)[2], color = \"red\")\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nm_sr = lm(y ~ x_sr, data = data_fake)\nbroom::tidy(m_sr)\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic   p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)   -0.151    0.175     -0.863 3.89e-  1\n2 x_sr           3.06     0.0624    49.1   9.18e-113\n\n\n\n\nCode\ndata_fake |&gt; \n  ggplot(aes(x = x_sr, y = y)) +\n  geom_point(alpha = .4) +\n  geom_abline(intercept = coef(m_sr)[1], slope = coef(m_sr)[2], color = \"red\")\n\n\n\n\n\n\n\n\n\n\nYou can display results from linear model but provide scale for raw \\(X\\) instead of Sqrt(\\(X\\)) or in addition to Sqrt(\\(X\\)) on another axis.\n\n\nCode\npreds &lt;- tibble(x_sr = seq(min(data_fake$x_sr),max(data_fake$x_sr), by=.01))\ny_pred = predict(m_sr, newdata = preds)\n\nggplot() +\n  geom_point(aes(x = data_fake$x_sr, y = data_fake$y), alpha = .4) +\n  geom_line(aes(x = preds$x_sr, y = y_pred)) +\n  ylab(\"Y\") +\n  scale_x_continuous(name = \"SQRT(X)\", sec.axis = sec_axis(~.^2, name = \"Raw X\"))\n\n\n\n\n\n\n\n\n\n\nYou can display results from linear model in Raw \\(X\\) Units and use predict() to get the \\(Y\\)s based on transformed \\(X\\).\n\n\nCode\npreds &lt;- tibble(x_sr = sqrt(seq(min(data_fake$x),max(data_fake$x), by=.1)))\ny_pred = predict(m_sr, newdata = preds)\n\nggplot() +\n  geom_point(aes(x = data_fake$x, y = data_fake$y), alpha = .4) +\n  geom_line(aes(x = seq(min(data_fake$x),max(data_fake$x), by=.1), y = y_pred)) +\n  ylab(\"Y\") +\n  xlab(\"X\")",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Dealing with Messy Data III: Transformations</span>"
+    ]
   }
 ]
