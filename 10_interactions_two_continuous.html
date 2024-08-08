@@ -542,8 +542,7 @@ bc  0.75 -0.5  1.00</code></pre>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Attitude about Birth Control"</span>,</span>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Birth Control Use"</span>,</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Peer Pressure"</span>) <span class="sc">+</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Peer Pressure"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -576,6 +575,71 @@ bc  0.75 -0.5  1.00</code></pre>
 </ul>
 <hr>
 <p><span style="color: red;">Question: What will change in the two predictor model if we center both IVs?</span></p>
+<hr>
+<ol type="1">
+<li><p><span style="color: blue;"><span class="math inline">\(b_0\)</span> and its SE will change. <span class="math inline">\(b_0\)</span> is the predicted value at 0 on all regressors in the model.</span> <span style="color: red;">Will SE be bigger or smaller in centered model?</span></p></li>
+<li><p><span style="color: blue;"><span class="math inline">\(b_\text{Att}\)</span> and <span class="math inline">\(b_\text{PP}\)</span> (and their SEs) will remain the same. The additive model forces the effect for each IV to be same across all values of other regressors. Therefore, the effect of ATT is the same if PP = 0 or PP= 1, or PP=3, etc. Given this, centering PP does not change <span class="math inline">\(b\)</span> for ATT.</span></p></li>
+<li><p><span style="color: blue;">Of course, <span class="math inline">\(R^2\)</span> also remains the same.</span></p></li>
+</ol>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_add)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)     8.00     0.701      11.4 5.84e-21
+2 att             3.00     0.157      19.1 1.56e-38
+3 pp             -2.00     0.157     -12.8 3.39e-24</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">glance</span>(m_add)<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8125</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">att_c =</span> att <span class="sc">-</span> <span class="fu">mean</span>(att),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">pp_c =</span> pp <span class="sc">-</span> <span class="fu">mean</span>(pp))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>m_add_c <span class="ot">&lt;-</span> <span class="fu">lm</span>(bc <span class="sc">~</span> att_c <span class="sc">+</span> pp_c, <span class="at">data =</span> data)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_add_c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    11        0.222      49.6 1.01e-82
+2 att_c           3.00     0.157      19.1 1.56e-38
+3 pp_c           -2.00     0.157     -12.8 3.39e-24</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">glance</span>(m_add_c)<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8125</code></pre>
+</div>
+</div>
+<hr>
+<p><span style="color: red;">Question: What will change when we add the interaction term (with centered IVs) relative to the centered two predictor model?</span></p>
+<hr>
+<ol type="1">
+<li><p><span style="color: blue;">An additional regressor will be included for Att x PP.</span></p></li>
+<li><p><span style="color: blue;">If Att x PP accounts for DV variance, <span class="math inline">\(R^2\)</span> will increase and SEs for coefficients (and intercept) will be reduced.</span></p></li>
+<li><p><span style="color: blue;"><span class="math inline">\(b_0\)</span> will remain the predicted value at 0 for all regressors. No change from centered two predictor model.</span></p></li>
+<li><p><span style="color: blue;"><span class="math inline">\(b_\text{Att}\)</span> and <span class="math inline">\(b_\text{PP}\)</span> are respective effects at 0 on all other regressors. Including an interaction now allows for each IV effect to vary across levels/values of other IVs.</span></p></li>
+<li><p><span style="color: blue;">Thus, <span class="math inline">\(b_\text{Att}\)</span> is now the (<em>simple</em>) effect of Att at PP (centered) = 0 and the <span class="math inline">\(b_\text{PP}\)</span> is now the (<em>simple</em>) effect of PP at Att (centered) = 0.</span></p></li>
+</ol>
 <hr>
 
 
