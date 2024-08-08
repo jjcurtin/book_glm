@@ -528,6 +528,34 @@ bc  0.75 -0.5  1.00</code></pre>
 <p><span style="color: blue;">It requires that the effect of each IV on the DV is constant across all levels/scores of the other IV.</span></p>
 <p><span style="color: blue;">We have not tested for an interaction.</span></p>
 <hr>
+<p><span style="color: red;">Question: Where are <span class="math inline">\(b_\text{Att}, b_\text{PP},\)</span> and <span class="math inline">\(b_0\)</span> in the figure below?</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">att =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">pp =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>preds_y <span class="ot">&lt;-</span> <span class="fu">predict</span>(m_add, <span class="at">newdata =</span> preds)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> preds<span class="sc">$</span>att, <span class="at">y =</span> preds_y, <span class="at">color =</span> <span class="fu">factor</span>(preds<span class="sc">$</span>pp)), </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Attitude about Birth Control"</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Birth Control Use"</span>,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Peer Pressure"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="10_interactions_two_continuous_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<p><span style="color: blue;"><span class="math inline">\(b_\text{Att}\)</span> = slope of lines. Constant for all three lines.</span></p>
+<p><span style="color: blue;"><span class="math inline">\(b_\text{PP}\)</span> = separation of lines. Lines are separated by <span class="math inline">\(2*b_\text{PP}\)</span>. Constant across Att.</span></p>
+<p><span style="color: blue;"><span class="math inline">\(b_0\)</span> = predicted value at Att = 0 and PP= 0. Not displayed in figure.</span></p>
+<hr>
+<hr>
 
 
 </section>
