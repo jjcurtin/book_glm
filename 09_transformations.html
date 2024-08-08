@@ -811,10 +811,13 @@ Heteroscedasticity  7.62546 0.005755008 Assumptions NOT satisfied!</code></pre>
 <h2 data-number="9.5" class="anchored" data-anchor-id="transformations-dealing-with-non-linearity"><span class="header-section-number">9.5</span> Transformations: Dealing with Non-linearity</h2>
 <p>Power transformations can make simple monotone relationships more linear (Fig A). Polynomial regression (or other transformations, e.g.&nbsp;logit) is often needed for more complex relationships (Figs, B &amp; C).</p>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#figure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="figures/monotone_relationship.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="transformations-mosteller-and-tukeys-bulging-rule" class="level2" data-number="9.6">
@@ -824,6 +827,16 @@ Heteroscedasticity  7.62546 0.005755008 Assumptions NOT satisfied!</code></pre>
 <li><p>X is typical if only one XY relationship is problematic.</p></li>
 <li><p>If all Xs have similar non-linear relationship, transform Y.</p></li>
 </ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="figures/mosteller_tukey.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
 <div class="cell">
 <div class="cell-output-display">
 <div>
