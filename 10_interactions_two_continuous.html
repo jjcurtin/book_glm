@@ -506,6 +506,28 @@ bc  0.75 -0.5  1.00</code></pre>
 <li><span style="color: blue;">Therefore, <span class="math inline">\(\Delta R^2\)</span> for Att does not change. Att explains the same proportion of <strong>total</strong> variance (error) in both models.</span></li>
 </ul>
 <hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>m_add <span class="ot">&lt;-</span> <span class="fu">lm</span>(bc <span class="sc">~</span> att <span class="sc">+</span> pp, <span class="at">data =</span> data)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_add)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)     8.00     0.701      11.4 5.84e-21
+2 att             3.00     0.157      19.1 1.56e-38
+3 pp             -2.00     0.157     -12.8 3.39e-24</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\text{BC} = 8.0 + 3.0 * \text{Att} + -2.0*\text{PP}\)</span></p>
+<p><span style="color: red;">Question: What has this model required (or what havent we tested for)?</span></p>
+<hr>
+<p><span style="color: blue;">It requires that the effect of each IV on the DV is constant across all levels/scores of the other IV.</span></p>
+<p><span style="color: blue;">We have not tested for an interaction.</span></p>
+<hr>
 
 
 </section>
