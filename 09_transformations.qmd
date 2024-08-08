@@ -194,13 +194,13 @@ plot_0 <- y |>
 #| message: false
 #| warning: false
 
+library(tidyverse)
 library(car) # needed for model_assumptions
 library(psych) # needed for model_assumptions
 library(gvlma) # needed for model_assumptions
 
 path_data <- "data_lecture"
-
-data <- read_csv(here::here(path_data, "7_three_predictors_fps.csv"), 
+data <- read_csv(here::here(path_data, "9_transformations_fps.csv"), 
                  show_col_types = FALSE) |> 
    mutate(sex_c = if_else(sex == "female", -.5, .5)) |> 
    # remove outliers to fit same model as last two units 
@@ -318,7 +318,7 @@ Lastly, we will use the best lambda value to conduct our power transformation an
 
 ```{r}
 data <- data |> 
-  mutate(fps_bc = car::bcPower(fps_27, .59))
+  mutate(fps_bc = car::bcPower(fps_27, .55))
 
 m_3 <- lm(fps_bc ~ bac + ta + sex_c, data = data)
 ```
@@ -418,22 +418,273 @@ Power transformations can make simple monotone relationships more linear (Fig A)
 
 
 ```{r}
-#figure
+#| echo: false
+
+knitr::include_graphics(path = here::here("figures/monotone_relationship.png"))
 ```
 
 
 ## Transformations: Mosteller and Tukey’s bulging rule
 
-Simple monotone relationships can be corrected by transforming X or Y.     
+Simple monotone relationships can be corrected by transforming $X$ or $Y$.     
 
-X is typical if only one XY relationship is problematic.    
+- $X$ is typical if only one $XY$ relationship is problematic.    
 
-If all Xs have similar non-linear relationship, transform Y.    
+- If all $X$s have similar non-linear relationship, transform $Y$.    
 
 ```{r}
+#| echo: false
 
+knitr::include_graphics(path = here::here("figures/mosteller_tukey.png"))
+```
+
+-----
+
+<span style="color: red;">Question: What 2 transformations would make this relationship linear?</span> 
+
+```{r}
+#| echo: false
+
+data_nonlinear <- tibble(X=1:100, Y = sqrt(1:100))
+
+data_nonlinear  |> 
+  ggplot(aes(x = X, y = Y)) +
+  geom_point(alpha = .4)
+```
+
+-----
+
+<span style="color: blue;">Move $X$ down the ladder (e.g., $X^.5$)</span>  
+
+```{r}
+data_nonlinear  |> 
+  ggplot(aes(x = sqrt(X), y = Y)) +
+  geom_point(alpha = .4)
+```
+
+
+<span style="color: blue;">Move $Y$ up the ladder (e.g., $Y^2$)</span>  
+
+```{r}
+data_nonlinear  |> 
+  ggplot(aes(x = X, y = Y^2)) +
+  geom_point(alpha = .4)
+```
+
+-----
+
+## General Transformations
+
+- In some fields, certain power transformations (sqrt, log, inverse) are common.
+
+- If we have a choice between transformations that perform roughly equally well, we may prefer one transformation to another because of interpretability:
+
+    - The log transformation has a convenient multiplicative interpretation (e.g., increasing  log2 (X) by 1 doubles X; increasing log10 (X) by 1 multiples X by 10).
+
+- Transformations are a big source of research dfs. Should be pre-registered.  You may know what your DV typically *needs* from prior data. Worst case, report with and without transformations and justify.
+
+-----
+
+## 5K Race Times
+
+
+```{r}
+data_5k <- read_csv(here::here(path_data, "9_transformations_5k.csv"),
+                    show_col_types = FALSE) |> 
+  glimpse()
+```
+
+```{r}
+m_5k <- lm(time ~ age + miles, data = data_5k)
+
+broom::tidy(m_5k)
+```
+
+-----
+
+```{r}
+#| eval: false
+
+model_assumptions(m_5k, Type = "normal")
+```
+
+```{r}
+#| echo: false
+
+car::qqPlot(m_5k, id=FALSE, sim=TRUE, main='Quantile-Comparison Plot to Assess Normality', xlab='t Quantiles', ylab ='Studentized Residuals')
+```
+
+-----
+
+```{r}
+#| echo: false
+
+ggplot() +
+  geom_density(aes(x = value), data = enframe(rstudent(m_5k), name = NULL)) +
+  labs(title = "Density Plot to Assess Normality of Residuals",
+       x = "Studentized Residual") +
+  geom_line(aes(x = x, y = y), data = tibble(x = seq(-4, 4, length.out = 100),
+                                      y = dnorm(seq(-4, 4, length.out = 100), 
+                                      mean=0, sd=sd(rstudent(m_5k)))), 
+            linetype = "dashed", color = "blue")
+```
+
+-----
+
+```{r}
+#| eval: false
+
+model_assumptions(m_5k, Type = "constant")
+```
+
+
+```{r}
+#| echo: false
+
+tibble(x = fitted.values(m_5k),
+       y = rstudent(m_5k)) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_point(alpha = .6) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "blue", linewidth = 1) +
+  labs(title = "Studentized Residuals vs. Fitted Values",
+       x = "Fitted Values",
+       y = "Studentized Residuals")
+```
+
+-----
+
+```{r}
+#| echo: false
+
+car::spreadLevelPlot(m_5k)
+```
+
+```{r}
+car::ncvTest(m_5k)
+```
+
+-----
+
+```{r}
+#| eval: false
+model_assumptions(m_5k, Type='linear')
+```
+
+
+```{r}
+#| echo: false
+
+car::crPlots(m_5k, ask = FALSE)
+```
+
+
+-----
+
+
+```{r}
+gvlma(m_5k)
+```
+
+-----
+
+
+Let's try transforming miles using `log2()`, a binary logarithm (base 2).
+```{r}
+data_5k <- data_5k |> 
+  mutate(log_miles = log2(miles))
+
+m_5k_tran <- lm(time ~ age + log_miles, data = data_5k)
+
+broom::tidy(m_5k_tran)
+```
+
+-----
+
+
+```{r}
+#| eval: false
+model_assumptions(m_5k_tran, Type='linear')
+```
+
+
+```{r}
+#| echo: false
+
+car::crPlots(m_5k_tran, ask = FALSE)
+```
+
+-----
+
+```{r}
+gvlma(m_5k_tran)
+```
+
+-----
+
+## Displaying Transformed Results With Fake Data
+
+```{r}
+data_fake <- tibble(x = 3 * rchisq(200, df=3),
+                    x_sr = sqrt(x),
+                    y = 3 * x_sr + rnorm(200,mean=0,sd = 1))
+
+m_raw = lm(y ~ x, data = data_fake)
+broom::tidy(m_raw)
+```
+
+```{r}
+data_fake |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_point(alpha = .4) +
+  geom_abline(intercept = coef(m_raw)[1], slope = coef(m_raw)[2], color = "red")
+```
+
+-----
+
+
+```{r}
+m_sr = lm(y ~ x_sr, data = data_fake)
+broom::tidy(m_sr)
+```
+
+```{r}
+data_fake |> 
+  ggplot(aes(x = x_sr, y = y)) +
+  geom_point(alpha = .4) +
+  geom_abline(intercept = coef(m_sr)[1], slope = coef(m_sr)[2], color = "red")
+```
+
+-----
+
+You can display results from linear model but provide scale for raw $X$ instead of Sqrt($X$) or in addition to Sqrt($X$) on another axis.
+
+
+```{r}
+preds <- tibble(x_sr = seq(min(data_fake$x_sr),max(data_fake$x_sr), by=.01))
+y_pred = predict(m_sr, newdata = preds)
+
+ggplot() +
+  geom_point(aes(x = data_fake$x_sr, y = data_fake$y), alpha = .4) +
+  geom_line(aes(x = preds$x_sr, y = y_pred)) +
+  ylab("Y") +
+  scale_x_continuous(name = "SQRT(X)", sec.axis = sec_axis(~.^2, name = "Raw X"))
 ```
 
 
 
+-----
+
+You can display results from linear model in Raw $X$ Units and use `predict()` to get the $Y$s based on transformed $X$.
+
+```{r}
+preds <- tibble(x_sr = sqrt(seq(min(data_fake$x),max(data_fake$x), by=.1)))
+y_pred = predict(m_sr, newdata = preds)
+
+ggplot() +
+  geom_point(aes(x = data_fake$x, y = data_fake$y), alpha = .4) +
+  geom_line(aes(x = seq(min(data_fake$x),max(data_fake$x), by=.1), y = y_pred)) +
+  ylab("Y") +
+  xlab("X")
+
+```
 
