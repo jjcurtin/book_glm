@@ -700,7 +700,8 @@ bc  0.75 -0.5  1.00</code></pre>
 <hr>
 <p><span class="math inline">\(\text{BC} = 11.0 + 3.0 * \text{Att}_c + -2.0*\text{PP}_c\)</span></p>
 <p><span class="math inline">\(\text{BC} = 11.0 + 3.0 * \text{Att}_c + -2.0*\text{PP}_c + -1.0*\text{Att}_c*\text{PP}_c\)</span></p>
-<p><span style="color: red;">Link intercepts and coefficients from each model to their respective figures. Note: figures use raw (not centered) predictors. Means for both predictors are 3.</span></p>
+<p><span style="color: red;">Link intercepts and coefficients from each model to their respective figures.</span></p>
+<p><em>Note:</em> figures use raw (not centered) predictors. Means for both predictors are 3.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -721,6 +722,84 @@ bc  0.75 -0.5  1.00</code></pre>
 <div>
 <figure class="figure">
 <p><img src="10_interactions_two_continuous_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<p><span class="math inline">\(\text{BC} = 11.0 + 3.0 * \text{Att}_c + -2.0*\text{PP}_c + -1.0*\text{Att}_c*\text{PP}_c\)</span></p>
+<p><span style="color: red;">Question: What would the interactive model look like if we hadn’t centered each IV?</span></p>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>m_int <span class="ot">&lt;-</span> <span class="fu">lm</span>(bc <span class="sc">~</span> att <span class="sc">*</span> pp, <span class="at">data =</span> data) </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    -1.00    0.707      -1.41 1.60e- 1
+2 att             6.00    0.213      28.1  6.17e-55
+3 pp              1       0.213       4.69 7.23e- 6
+4 att:pp         -1       0.0643    -15.6  1.20e-30</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">glance</span>(m_int)<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9375</code></pre>
+</div>
+</div>
+<hr>
+<p><span class="math inline">\(\text{BC} = 11.0 + 3.0 * \text{Att}_c + -2.0*\text{PP}_c + -1.0*\text{Att}_c*\text{PP}_c\)</span></p>
+<p><span class="math inline">\(\text{BC} = -1.0 + 6.0 * \text{Att} + 1.0*\text{PP} + -1.0*\text{Att}*\text{PP}\)</span></p>
+<p><span style="color: red;">Link intercept and coefficients from the raw model to the expanded figure below on right.</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>preds_expanded <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">att =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">pp =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>preds_int_y_expanded <span class="ot">&lt;-</span> <span class="fu">predict</span>(m_int, <span class="at">newdata =</span> preds_expanded)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>plot_m_int_expanded <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> preds_expanded<span class="sc">$</span>att, <span class="at">y =</span> preds_int_y_expanded, </span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">color =</span> <span class="fu">factor</span>(preds_expanded<span class="sc">$</span>pp)), </span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Attitude about Birth Control"</span>,</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Birth Control Use"</span>,</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Peer Pressure"</span>) </span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>plot_m_int <span class="sc">+</span> plot_m_int_expanded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="10_interactions_two_continuous_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<p><span class="math inline">\(\text{BC} = 11.0 + 3.0 * \text{Att}_c + -2.0*\text{PP}_c + -1.0*\text{Att}_c*\text{PP}_c\)</span></p>
+<p><span class="math inline">\(\text{BC} = -1.0 + 6.0 * \text{Att} + 1.0*\text{PP} + -1.0*\text{Att}*\text{PP}\)</span></p>
+<p><span style="color: red;">Question: So what does <span class="math inline">\(b_{\text{Att}*\text{PP}}\)</span> indicate?</span></p>
+<hr>
+<p><span style="color: blue;">The coefficient for the interaction indicates how the simple effect of each IV changes for a one unit increase on the other IV.</span></p>
+<p>The interaction coefficient applies symmetrically to both IV effects.</p>
+<p>Considering Att in raw mode:<br>
+- Att effect is 6 for PP = 0 - Att effect is 5 for PP = 1 - Att effect is 4 for PP = 2 - Att effect is 3 for PP = 3 - Att effect is 2 for PP = 4 - Att effect is 1 for PP = 5</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>plot_m_int_expanded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="10_interactions_two_continuous_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
