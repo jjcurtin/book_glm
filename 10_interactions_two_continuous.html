@@ -320,6 +320,12 @@ window.Quarto = {
   <ul>
   <li><a href="#interactive-models-two-quantitative-variables" id="toc-interactive-models-two-quantitative-variables" class="nav-link active" data-scroll-target="#interactive-models-two-quantitative-variables"><span class="header-section-number">10.1</span> Interactive Models: Two Quantitative Variables</a></li>
   <li><a href="#main-effects-and-simple-effects" id="toc-main-effects-and-simple-effects" class="nav-link" data-scroll-target="#main-effects-and-simple-effects"><span class="header-section-number">10.2</span> Main Effects and Simple Effects</a></li>
+  <li><a href="#interactive-models-coefficient-magnitudes" id="toc-interactive-models-coefficient-magnitudes" class="nav-link" data-scroll-target="#interactive-models-coefficient-magnitudes"><span class="header-section-number">10.3</span> Interactive Models: Coefficient Magnitudes</a></li>
+  <li><a href="#interactive-models-raw-model-coefficients" id="toc-interactive-models-raw-model-coefficients" class="nav-link" data-scroll-target="#interactive-models-raw-model-coefficients"><span class="header-section-number">10.4</span> Interactive Models: Raw Model Coefficients</a></li>
+  <li><a href="#interactive-models-simple-effect-magnitudes" id="toc-interactive-models-simple-effect-magnitudes" class="nav-link" data-scroll-target="#interactive-models-simple-effect-magnitudes"><span class="header-section-number">10.5</span> Interactive Models: Simple Effect Magnitudes</a></li>
+  <li><a href="#interactive-models-reporting-considerations" id="toc-interactive-models-reporting-considerations" class="nav-link" data-scroll-target="#interactive-models-reporting-considerations"><span class="header-section-number">10.6</span> Interactive Models: Reporting Considerations</a></li>
+  <li><a href="#interactive-models-sample-report" id="toc-interactive-models-sample-report" class="nav-link" data-scroll-target="#interactive-models-sample-report"><span class="header-section-number">10.7</span> Interactive Models: Sample Report</a></li>
+  <li><a href="#two-quantitative-variables-summary" id="toc-two-quantitative-variables-summary" class="nav-link" data-scroll-target="#two-quantitative-variables-summary"><span class="header-section-number">10.8</span> Two Quantitative Variables: Summary</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/10_interactions_two_continuous.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -846,6 +852,127 @@ bc  0.75 -0.5  1.00</code></pre>
 </div>
 </div>
 <hr>
+</section>
+<section id="interactive-models-coefficient-magnitudes" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="interactive-models-coefficient-magnitudes"><span class="header-section-number">10.3</span> Interactive Models: Coefficient Magnitudes</h2>
+<ul>
+<li><p>Interaction and its test is obtained from any model (regardless of centering).</p></li>
+<li><p><em>Main</em> effects of IVs are obtained from model with all IVs centered on mean. You may or may not choose to report these main effects depending on the situation.</p></li>
+<li><p>Magnitude of <em>simple</em> effects of either IV can be calculated directly from the raw or centered model (I prefer the raw model for ease of thinking in raw units). <span style="color: red;">How?</span></p></li>
+</ul>
+<hr>
+</section>
+<section id="interactive-models-raw-model-coefficients" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="interactive-models-raw-model-coefficients"><span class="header-section-number">10.4</span> Interactive Models: Raw Model Coefficients</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>m_int <span class="ot">&lt;-</span> <span class="fu">lm</span>(bc <span class="sc">~</span> att <span class="sc">*</span> pp, <span class="at">data =</span> data) </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    -1.00    0.707      -1.41 1.60e- 1
+2 att             6.00    0.213      28.1  6.17e-55
+3 pp              1       0.213       4.69 7.23e- 6
+4 att:pp         -1       0.0643    -15.6  1.20e-30</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="interactive-models-simple-effect-magnitudes" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="interactive-models-simple-effect-magnitudes"><span class="header-section-number">10.5</span> Interactive Models: Simple Effect Magnitudes</h2>
+<p>Magnitude of <em>simple</em> effects of either IV can be calculated directly from the raw or centered model (I prefer the raw model for ease of thinking in raw units). <span style="color: red;">How?</span></p>
+<p><span class="math inline">\(\text{BC} = -1.0 + 6.0 * \text{Att} + 1.0*\text{PP} + -1.0*\text{Att}*\text{PP}\)</span></p>
+<p><span style="color: blue;">Effect of Att = 6.0 + -1.0 * PP</span><br>
+<span style="color: blue;">Effect of PP = 1.0 + -1.0 * Att</span></p>
+<p><span style="color: red;">Question: How could you obtain formal significance tests for any specific simple effects (e.g., effect of Att at PP = 1, 3, &amp; 5)?</span></p>
+<hr>
+<p><span class="math inline">\(\text{BC} = -1.0 + 6.0 * \text{Att} + 1.0*\text{PP} + -1.0*\text{Att}*\text{PP}\)</span></p>
+<p><span style="color: blue;">Effect of Att = 6.0 + -1.0 * PP</span><br>
+<span style="color: blue;">Effect of Att = 6.0 + -1.0 * (1) = 5</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pp_1 =</span> pp <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>m_pp_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bc <span class="sc">~</span> att <span class="sc">*</span> pp_1, <span class="at">data =</span> data)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_pp_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term         estimate std.error statistic  p.value
+  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept) -2.54e-14    0.522  -4.87e-14 1.00e+ 0
+2 att          5.00e+ 0    0.157   3.18e+ 1 1.57e-60
+3 pp_1         1.00e+ 0    0.213   4.69e+ 0 7.23e- 6
+4 att:pp_1    -1.00e+ 0    0.0643 -1.56e+ 1 1.20e-30</code></pre>
+</div>
+</div>
+<hr>
+<p><span class="math inline">\(\text{BC} = -1.0 + 6.0 * \text{Att} + 1.0*\text{PP} + -1.0*\text{Att}*\text{PP}\)</span></p>
+<p><span style="color: blue;">Effect of Att = 6.0 + -1.0 * PP</span><br>
+<span style="color: blue;">Effect of Att = 6.0 + -1.0 * (5) = 1</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pp_5 =</span> pp <span class="sc">-</span> <span class="dv">5</span>)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>m_pp_5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bc <span class="sc">~</span> att <span class="sc">*</span> pp_5, <span class="at">data =</span> data)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_pp_5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)     4.00    0.522       7.66 5.12e-12
+2 att             1.00    0.157       6.35 3.91e- 9
+3 pp_5            1.00    0.213       4.69 7.23e- 6
+4 att:pp_5       -1       0.0643    -15.6  1.20e-30</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="interactive-models-reporting-considerations" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="interactive-models-reporting-considerations"><span class="header-section-number">10.6</span> Interactive Models: Reporting Considerations</h2>
+<p><span style="color: red;">Question: So what do you report and in what order?</span></p>
+<hr>
+<p><span style="color: blue;">There is no one answer here. Some say you never report main effects when there are significant interactions. This camp would say, report only interaction and possibly simple effects.</span></p>
+<p><span style="color: blue;">Others (including me) believe that main effects are sometimes useful to report even when interaction is significant. <em>Main</em> effects (effect at “mean” of other IV) provides an anchor for effect. The interaction then indicates how this effect changes across values of the other IV. <em>Simple</em> effects can sometimes allow you to describe further how this effect changes at various values of other IV.</span></p>
+<p><span style="color: blue;">The other complexity surrounds the nature of the two IVs. Sometimes, often, one is focal and one is moderator. However, sometimes neither/both are focal…</span></p>
+<hr>
+</section>
+<section id="interactive-models-sample-report" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="interactive-models-sample-report"><span class="header-section-number">10.7</span> Interactive Models: Sample Report</h2>
+<p><em>A sample brief report: Attitudes are focal, main effect and simple effects reported.</em></p>
+<p>We analyzed birth control use in a General Linear Model with Positive Attitudes about Birth Control (ATT) and Negative Peer Pressure (PP) as quantitatively measured predictors. We also included the interaction between these two predictors in the model. We mean-centered all predictors.</p>
+<p>The overall model accounted for a significant amount of variance in Birth Control use, <span class="math inline">\(R^2= 0.94, F(3,121) = 605.00, p &lt; .001\)</span>. The effect of ATT was significant, 95% CI(b) = [2.8, 3.2], <span class="math inline">\(\Delta R^2 = 0.56, t(121) = 33.00, p &lt; .001\)</span>, such that birth control use increased by 3 units for every one unit increase in positive attitudes about birth control for participants who experienced average peer pressure (i.e., PP=3). However, PP significantly moderated the ATT effect on Birth Control, 95% CI(b)= [-1.1, -0.9], <span class="math inline">\(\Delta R^2 = 0.13, t(121) = 15.56, p &lt; .001\)</span>, indicating that the magnitude of the ATT effect decreased for every one unit increase in PP (see Figure 1). Despite this, the simple effects of ATT remained significant across meaningful levels of PP. For example, the simple effect of ATT for participants who were experiencing high negative peer pressure (i.e., PP = 5) was significant, 95% CI(b)= [0.7, 1.3], <span class="math inline">\(\Delta R^2 = 0.02, t(121) = 6.35, p &lt; .001\)</span>. The simple effect of ATT for participants who were experiencing low negative peer pressure (PP=1) was also significant, 95% CI(b)= [4.7, 5.3], <span class="math inline">\(\Delta R^2 = 0.52, t(121)= 31.75, p &lt; .001\)</span>.</p>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+</section>
+<section id="two-quantitative-variables-summary" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="two-quantitative-variables-summary"><span class="header-section-number">10.8</span> Two Quantitative Variables: Summary</h2>
+<p>For two quantitative IVs, you now know:</p>
+<ul>
+<li>How to quantify and test <em>main</em> effects (effect of IV at mean of other IV).<br>
+</li>
+<li>How to quantify and test for interaction.<br>
+</li>
+<li>How to quantify and test <em>simple</em> effects of each IV at levels of other IV.<br>
+</li>
+<li>How to graphically display effects.</li>
+</ul>
+<p>In case it wasn’t obvious, this is the conceptual equivalent of a factorial ANOVA with two quantitative (rather than categorical) IVs.</p>
 
 
 </section>

@@ -1908,5 +1908,65 @@
     "crumbs": [
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Inferences about Two Continuous Predictors and their Interaction</span>"
     ]
+  },
+  {
+    "objectID": "10_interactions_two_continuous.html#interactive-models-coefficient-magnitudes",
+    "href": "10_interactions_two_continuous.html#interactive-models-coefficient-magnitudes",
+    "title": "10  Inferences about Two Continuous Predictors and their Interaction",
+    "section": "10.3 Interactive Models: Coefficient Magnitudes",
+    "text": "10.3 Interactive Models: Coefficient Magnitudes\n\nInteraction and its test is obtained from any model (regardless of centering).\nMain effects of IVs are obtained from model with all IVs centered on mean. You may or may not choose to report these main effects depending on the situation.\nMagnitude of simple effects of either IV can be calculated directly from the raw or centered model (I prefer the raw model for ease of thinking in raw units). How?",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Inferences about Two Continuous Predictors and their Interaction</span>"
+    ]
+  },
+  {
+    "objectID": "10_interactions_two_continuous.html#interactive-models-raw-model-coefficients",
+    "href": "10_interactions_two_continuous.html#interactive-models-raw-model-coefficients",
+    "title": "10  Inferences about Two Continuous Predictors and their Interaction",
+    "section": "10.4 Interactive Models: Raw Model Coefficients",
+    "text": "10.4 Interactive Models: Raw Model Coefficients\n\n\nCode\nm_int &lt;- lm(bc ~ att * pp, data = data) \nbroom::tidy(m_int)\n\n\n# A tibble: 4 × 5\n  term        estimate std.error statistic  p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)    -1.00    0.707      -1.41 1.60e- 1\n2 att             6.00    0.213      28.1  6.17e-55\n3 pp              1       0.213       4.69 7.23e- 6\n4 att:pp         -1       0.0643    -15.6  1.20e-30",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Inferences about Two Continuous Predictors and their Interaction</span>"
+    ]
+  },
+  {
+    "objectID": "10_interactions_two_continuous.html#interactive-models-simple-effect-magnitudes",
+    "href": "10_interactions_two_continuous.html#interactive-models-simple-effect-magnitudes",
+    "title": "10  Inferences about Two Continuous Predictors and their Interaction",
+    "section": "10.5 Interactive Models: Simple Effect Magnitudes",
+    "text": "10.5 Interactive Models: Simple Effect Magnitudes\nMagnitude of simple effects of either IV can be calculated directly from the raw or centered model (I prefer the raw model for ease of thinking in raw units). How?\n\\(\\text{BC} = -1.0 + 6.0 * \\text{Att} + 1.0*\\text{PP} + -1.0*\\text{Att}*\\text{PP}\\)\nEffect of Att = 6.0 + -1.0 * PP\nEffect of PP = 1.0 + -1.0 * Att\nQuestion: How could you obtain formal significance tests for any specific simple effects (e.g., effect of Att at PP = 1, 3, & 5)?\n\n\\(\\text{BC} = -1.0 + 6.0 * \\text{Att} + 1.0*\\text{PP} + -1.0*\\text{Att}*\\text{PP}\\)\nEffect of Att = 6.0 + -1.0 * PP\nEffect of Att = 6.0 + -1.0 * (1) = 5\n\n\nCode\ndata &lt;- data |&gt; \n  mutate(pp_1 = pp - 1)\n\nm_pp_1 &lt;- lm(bc ~ att * pp_1, data = data)\nbroom::tidy(m_pp_1)\n\n\n# A tibble: 4 × 5\n  term         estimate std.error statistic  p.value\n  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept) -2.54e-14    0.522  -4.87e-14 1.00e+ 0\n2 att          5.00e+ 0    0.157   3.18e+ 1 1.57e-60\n3 pp_1         1.00e+ 0    0.213   4.69e+ 0 7.23e- 6\n4 att:pp_1    -1.00e+ 0    0.0643 -1.56e+ 1 1.20e-30\n\n\n\n\\(\\text{BC} = -1.0 + 6.0 * \\text{Att} + 1.0*\\text{PP} + -1.0*\\text{Att}*\\text{PP}\\)\nEffect of Att = 6.0 + -1.0 * PP\nEffect of Att = 6.0 + -1.0 * (5) = 1\n\n\nCode\ndata &lt;- data |&gt; \n  mutate(pp_5 = pp - 5)\n\nm_pp_5 &lt;- lm(bc ~ att * pp_5, data = data)\nbroom::tidy(m_pp_5)\n\n\n# A tibble: 4 × 5\n  term        estimate std.error statistic  p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)     4.00    0.522       7.66 5.12e-12\n2 att             1.00    0.157       6.35 3.91e- 9\n3 pp_5            1.00    0.213       4.69 7.23e- 6\n4 att:pp_5       -1       0.0643    -15.6  1.20e-30",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Inferences about Two Continuous Predictors and their Interaction</span>"
+    ]
+  },
+  {
+    "objectID": "10_interactions_two_continuous.html#interactive-models-reporting-considerations",
+    "href": "10_interactions_two_continuous.html#interactive-models-reporting-considerations",
+    "title": "10  Inferences about Two Continuous Predictors and their Interaction",
+    "section": "10.6 Interactive Models: Reporting Considerations",
+    "text": "10.6 Interactive Models: Reporting Considerations\nQuestion: So what do you report and in what order?\n\nThere is no one answer here. Some say you never report main effects when there are significant interactions. This camp would say, report only interaction and possibly simple effects.\nOthers (including me) believe that main effects are sometimes useful to report even when interaction is significant. Main effects (effect at “mean” of other IV) provides an anchor for effect. The interaction then indicates how this effect changes across values of the other IV. Simple effects can sometimes allow you to describe further how this effect changes at various values of other IV.\nThe other complexity surrounds the nature of the two IVs. Sometimes, often, one is focal and one is moderator. However, sometimes neither/both are focal…",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Inferences about Two Continuous Predictors and their Interaction</span>"
+    ]
+  },
+  {
+    "objectID": "10_interactions_two_continuous.html#interactive-models-sample-report",
+    "href": "10_interactions_two_continuous.html#interactive-models-sample-report",
+    "title": "10  Inferences about Two Continuous Predictors and their Interaction",
+    "section": "10.7 Interactive Models: Sample Report",
+    "text": "10.7 Interactive Models: Sample Report\nA sample brief report: Attitudes are focal, main effect and simple effects reported.\nWe analyzed birth control use in a General Linear Model with Positive Attitudes about Birth Control (ATT) and Negative Peer Pressure (PP) as quantitatively measured predictors. We also included the interaction between these two predictors in the model. We mean-centered all predictors.\nThe overall model accounted for a significant amount of variance in Birth Control use, \\(R^2= 0.94, F(3,121) = 605.00, p &lt; .001\\). The effect of ATT was significant, 95% CI(b) = [2.8, 3.2], \\(\\Delta R^2 = 0.56, t(121) = 33.00, p &lt; .001\\), such that birth control use increased by 3 units for every one unit increase in positive attitudes about birth control for participants who experienced average peer pressure (i.e., PP=3). However, PP significantly moderated the ATT effect on Birth Control, 95% CI(b)= [-1.1, -0.9], \\(\\Delta R^2 = 0.13, t(121) = 15.56, p &lt; .001\\), indicating that the magnitude of the ATT effect decreased for every one unit increase in PP (see Figure 1). Despite this, the simple effects of ATT remained significant across meaningful levels of PP. For example, the simple effect of ATT for participants who were experiencing high negative peer pressure (i.e., PP = 5) was significant, 95% CI(b)= [0.7, 1.3], \\(\\Delta R^2 = 0.02, t(121) = 6.35, p &lt; .001\\). The simple effect of ATT for participants who were experiencing low negative peer pressure (PP=1) was also significant, 95% CI(b)= [4.7, 5.3], \\(\\Delta R^2 = 0.52, t(121)= 31.75, p &lt; .001\\).\n\n\n\nCode\n# plot",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Inferences about Two Continuous Predictors and their Interaction</span>"
+    ]
+  },
+  {
+    "objectID": "10_interactions_two_continuous.html#two-quantitative-variables-summary",
+    "href": "10_interactions_two_continuous.html#two-quantitative-variables-summary",
+    "title": "10  Inferences about Two Continuous Predictors and their Interaction",
+    "section": "10.8 Two Quantitative Variables: Summary",
+    "text": "10.8 Two Quantitative Variables: Summary\nFor two quantitative IVs, you now know:\n\nHow to quantify and test main effects (effect of IV at mean of other IV).\n\nHow to quantify and test for interaction.\n\nHow to quantify and test simple effects of each IV at levels of other IV.\n\nHow to graphically display effects.\n\nIn case it wasn’t obvious, this is the conceptual equivalent of a factorial ANOVA with two quantitative (rather than categorical) IVs.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Inferences about Two Continuous Predictors and their Interaction</span>"
+    ]
   }
 ]
