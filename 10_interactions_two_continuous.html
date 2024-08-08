@@ -319,6 +319,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#interactive-models-two-quantitative-variables" id="toc-interactive-models-two-quantitative-variables" class="nav-link active" data-scroll-target="#interactive-models-two-quantitative-variables"><span class="header-section-number">10.1</span> Interactive Models: Two Quantitative Variables</a></li>
+  <li><a href="#main-effects-and-simple-effects" id="toc-main-effects-and-simple-effects" class="nav-link" data-scroll-target="#main-effects-and-simple-effects"><span class="header-section-number">10.2</span> Main Effects and Simple Effects</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/10_interactions_two_continuous.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -637,9 +638,62 @@ bc  0.75 -0.5  1.00</code></pre>
 <li><p><span style="color: blue;">An additional regressor will be included for Att x PP.</span></p></li>
 <li><p><span style="color: blue;">If Att x PP accounts for DV variance, <span class="math inline">\(R^2\)</span> will increase and SEs for coefficients (and intercept) will be reduced.</span></p></li>
 <li><p><span style="color: blue;"><span class="math inline">\(b_0\)</span> will remain the predicted value at 0 for all regressors. No change from centered two predictor model.</span></p></li>
-<li><p><span style="color: blue;"><span class="math inline">\(b_\text{Att}\)</span> and <span class="math inline">\(b_\text{PP}\)</span> are respective effects at 0 on all other regressors. Including an interaction now allows for each IV effect to vary across levels/values of other IVs.</span></p></li>
-<li><p><span style="color: blue;">Thus, <span class="math inline">\(b_\text{Att}\)</span> is now the (<em>simple</em>) effect of Att at PP (centered) = 0 and the <span class="math inline">\(b_\text{PP}\)</span> is now the (<em>simple</em>) effect of PP at Att (centered) = 0.</span></p></li>
+<li><p><span style="color: blue;"><span class="math inline">\(b_\text{Att}\)</span> and <span class="math inline">\(b_\text{PP}\)</span> are respective effects at 0 on all other regressors. Including an interaction now allows for each IV effect to vary across levels/values of other IVs.</span></p>
+<p><span style="color: blue;">Thus, <span class="math inline">\(b_\text{Att}\)</span> is now the (<em>simple</em>) effect of Att at PP (centered) = 0 and the <span class="math inline">\(b_\text{PP}\)</span> is now the (<em>simple</em>) effect of PP at Att (centered) = 0.</span></p></li>
 </ol>
+<hr>
+</section>
+<section id="main-effects-and-simple-effects" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="main-effects-and-simple-effects"><span class="header-section-number">10.2</span> Main Effects and Simple Effects</h2>
+<p>In ANOVA terms, The <strong>Main Effect</strong> of an IV is the overall effect of that IV on the DV averaging across the levels of the other IV(s) in the model.</p>
+<p>A <strong>Simple Effect</strong> of an IV is the effect of that IV at a specific level of the other IV(s) in the model.</p>
+<p>From this perspective, you can think about a main effect as a special simple effect where the specific level of the other IV is its average value.</p>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>m_int_c <span class="ot">&lt;-</span> <span class="fu">lm</span>(bc <span class="sc">~</span> att_c <span class="sc">*</span> pp_c, <span class="at">data =</span> data)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_int_c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)    11       0.129       85.6 4.33e-110
+2 att_c           3.00    0.0909      33.0 2.41e- 62
+3 pp_c           -2.00    0.0909     -22   4.16e- 44
+4 att_c:pp_c     -1       0.0643     -15.6 1.20e- 30</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">glance</span>(m_int_c)<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9375</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_add_c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    11        0.222      49.6 1.01e-82
+2 att_c           3.00     0.157      19.1 1.56e-38
+3 pp_c           -2.00     0.157     -12.8 3.39e-24</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">glance</span>(m_add_c)<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8125</code></pre>
+</div>
+</div>
 <hr>
 
 
