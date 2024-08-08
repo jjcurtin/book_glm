@@ -788,9 +788,22 @@ bc  0.75 -0.5  1.00</code></pre>
 <p><span style="color: red;">Question: So what does <span class="math inline">\(b_{\text{Att}*\text{PP}}\)</span> indicate?</span></p>
 <hr>
 <p><span style="color: blue;">The coefficient for the interaction indicates how the simple effect of each IV changes for a one unit increase on the other IV.</span></p>
-<p>The interaction coefficient applies symmetrically to both IV effects.</p>
-<p>Considering Att in raw mode:<br>
-- Att effect is 6 for PP = 0 - Att effect is 5 for PP = 1 - Att effect is 4 for PP = 2 - Att effect is 3 for PP = 3 - Att effect is 2 for PP = 4 - Att effect is 1 for PP = 5</p>
+<p><strong>The interaction coefficient applies symmetrically to both IV effects.</strong></p>
+<hr>
+<p>Considering Att in raw model:</p>
+<ul>
+<li>Att effect is 6 for PP = 0<br>
+</li>
+<li>Att effect is 5 for PP = 1<br>
+</li>
+<li>Att effect is 4 for PP = 2<br>
+</li>
+<li>Att effect is 3 for PP = 3<br>
+</li>
+<li>Att effect is 2 for PP = 4<br>
+</li>
+<li>Att effect is 1 for PP = 5</li>
+</ul>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -800,6 +813,34 @@ bc  0.75 -0.5  1.00</code></pre>
 <div>
 <figure class="figure">
 <p><img src="10_interactions_two_continuous_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<p>Considering PP in raw model:</p>
+<ul>
+<li>PP effect is 1 for Att = 0<br>
+</li>
+<li>PP effect is 0 for Att = 1<br>
+</li>
+<li>PP effect is -1 for Att = 2<br>
+</li>
+<li>PP effect is -2 for Att = 3<br>
+</li>
+<li>PP effect is -3 for Att = 4<br>
+</li>
+<li>PP effect is -4 for Att = 5</li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>plot_m_int_expanded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="10_interactions_two_continuous_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
