@@ -325,6 +325,7 @@ window.Quarto = {
   <li><a href="#transformations-dealing-with-non-linearity" id="toc-transformations-dealing-with-non-linearity" class="nav-link" data-scroll-target="#transformations-dealing-with-non-linearity"><span class="header-section-number">9.5</span> Transformations: Dealing with Non-linearity</a></li>
   <li><a href="#transformations-mosteller-and-tukeys-bulging-rule" id="toc-transformations-mosteller-and-tukeys-bulging-rule" class="nav-link" data-scroll-target="#transformations-mosteller-and-tukeys-bulging-rule"><span class="header-section-number">9.6</span> Transformations: Mosteller and Tukey’s bulging rule</a></li>
   <li><a href="#general-transformations" id="toc-general-transformations" class="nav-link" data-scroll-target="#general-transformations"><span class="header-section-number">9.7</span> General Transformations</a></li>
+  <li><a href="#k-race-times" id="toc-k-race-times" class="nav-link" data-scroll-target="#k-race-times"><span class="header-section-number">9.8</span> 5K Race Times</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/09_transformations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -500,13 +501,13 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car) <span class="co"># needed for model_assumptions</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych) <span class="co"># needed for model_assumptions</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gvlma) <span class="co"># needed for model_assumptions</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>path_data <span class="ot">&lt;-</span> <span class="st">"data_lecture"</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_data, <span class="st">"7_three_predictors_fps.csv"</span>), </span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car) <span class="co"># needed for model_assumptions</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych) <span class="co"># needed for model_assumptions</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gvlma) <span class="co"># needed for model_assumptions</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>path_data <span class="ot">&lt;-</span> <span class="st">"data_lecture"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_data, <span class="st">"9_transformations_fps.csv"</span>), </span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">sex_c =</span> <span class="fu">if_else</span>(sex <span class="sc">==</span> <span class="st">"female"</span>, <span class="sc">-</span>.<span class="dv">5</span>, .<span class="dv">5</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>   <span class="co"># remove outliers to fit same model as last two units </span></span>
@@ -573,7 +574,7 @@ window.Quarto = {
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Suggested power transformation:  0.2555876 </code></pre>
+Suggested power transformation:  0.2370356 </code></pre>
 </div>
 </div>
 <div class="cell">
@@ -584,7 +585,7 @@ Suggested power transformation:  0.2555876 </code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Non-constant Variance Score Test 
 Variance formula: ~ fitted.values 
-Chisquare = 21.89294, Df = 1, p = 0.0000028829</code></pre>
+Chisquare = 13.2232, Df = 1, p = 0.00027651</code></pre>
 </div>
 </div>
 <hr>
@@ -600,7 +601,7 @@ lm(formula = fps ~ bac + ta + sex_c, data = data)
 
 Coefficients:
 (Intercept)          bac           ta        sex_c  
-    26.5528    -228.8721       0.1256     -15.4874  
+    28.7027    -254.5894       0.1231     -15.8550  
 
 
 ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
@@ -610,12 +611,12 @@ Level of Significance =  0.05
 Call:
  gvlma(x = m) 
 
-                    Value  p-value                   Decision
-Global Stat        9.8263 0.043458 Assumptions NOT satisfied!
-Skewness           0.2921 0.588886    Assumptions acceptable.
-Kurtosis           1.0393 0.307987    Assumptions acceptable.
-Link Function      0.1898 0.663091    Assumptions acceptable.
-Heteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!</code></pre>
+                        Value p-value                   Decision
+Global Stat        9.39689053 0.05191    Assumptions acceptable.
+Skewness           3.60145982 0.05773    Assumptions acceptable.
+Kurtosis           0.30834234 0.57870    Assumptions acceptable.
+Link Function      0.00002503 0.99601    Assumptions acceptable.
+Heteroscedasticity 5.48706334 0.01916 Assumptions NOT satisfied!</code></pre>
 </div>
 </div>
 <hr>
@@ -634,7 +635,7 @@ Heteroscedasticity 8.3051 0.003953 Assumptions NOT satisfied!</code></pre>
 <pre><code>      vars  n   mean     sd median    min    max  range  skew kurtosis
 bac      1 94   0.06   0.04   0.06   0.00   0.14   0.14 -0.09    -1.08
 ta       2 94 145.91 104.80 119.00  10.00 445.00 435.00  0.91     0.03
-sex_c    3 94  -0.01   0.50  -0.50  -0.50   0.50   1.00  0.04    -2.02
+sex_c    3 94   0.01   0.50   0.50  -0.50   0.50   1.00 -0.04    -2.02
 fps      4 94  32.19  32.77  19.46 -26.07 136.82 162.89  0.95     0.33</code></pre>
 </div>
 </div>
@@ -665,7 +666,7 @@ fps      4 94  32.19  32.77  19.46 -26.07 136.82 162.89  0.95     0.33</code></p
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.59</code></pre>
+<pre><code>[1] 0.55</code></pre>
 </div>
 </div>
 <hr>
@@ -674,7 +675,7 @@ fps      4 94  32.19  32.77  19.46 -26.07 136.82 162.89  0.95     0.33</code></p
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fps_bc =</span> car<span class="sc">::</span><span class="fu">bcPower</span>(fps_27, .<span class="dv">59</span>))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fps_bc =</span> car<span class="sc">::</span><span class="fu">bcPower</span>(fps_27, .<span class="dv">55</span>))</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>m_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(fps_bc <span class="sc">~</span> bac <span class="sc">+</span> ta <span class="sc">+</span> sex_c, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -718,7 +719,7 @@ fps      4 94  32.19  32.77  19.46 -26.07 136.82 162.89  0.95     0.33</code></p
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Suggested power transformation:  -0.7589885 </code></pre>
+Suggested power transformation:  -0.5446104 </code></pre>
 </div>
 </div>
 <div class="cell">
@@ -729,7 +730,7 @@ Suggested power transformation:  -0.7589885 </code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Non-constant Variance Score Test 
 Variance formula: ~ fitted.values 
-Chisquare = 18.07838, Df = 1, p = 0.000021199</code></pre>
+Chisquare = 6.005664, Df = 1, p = 0.01426</code></pre>
 </div>
 </div>
 <hr>
@@ -745,7 +746,7 @@ lm(formula = fps_bc ~ bac + ta + sex_c, data = data)
 
 Coefficients:
 (Intercept)          bac           ta        sex_c  
-   15.46968    -39.84730      0.02186     -2.54285  
+   14.21548    -37.52098      0.01793     -2.70290  
 
 
 ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
@@ -755,12 +756,12 @@ Level of Significance =  0.05
 Call:
  gvlma(x = m_3) 
 
-                      Value     p-value                   Decision
-Global Stat        33.41750 0.000000981 Assumptions NOT satisfied!
-Skewness            6.39244 0.011460724 Assumptions NOT satisfied!
-Kurtosis           19.36246 0.000010811 Assumptions NOT satisfied!
-Link Function       0.03714 0.847180760    Assumptions acceptable.
-Heteroscedasticity  7.62546 0.005755008 Assumptions NOT satisfied!</code></pre>
+                       Value p-value                   Decision
+Global Stat        12.759981 0.01251 Assumptions NOT satisfied!
+Skewness            1.588199 0.20758    Assumptions acceptable.
+Kurtosis            5.520612 0.01879 Assumptions NOT satisfied!
+Link Function       0.004907 0.94416    Assumptions acceptable.
+Heteroscedasticity  5.646263 0.01749 Assumptions NOT satisfied!</code></pre>
 </div>
 </div>
 <p><strong>Transformations often don’t help!</strong></p>
@@ -775,10 +776,10 @@ Heteroscedasticity  7.62546 0.005755008 Assumptions NOT satisfied!</code></pre>
 <pre><code># A tibble: 4 × 5
   term        estimate std.error statistic  p.value
   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-1 (Intercept)  15.5      1.22        12.7  1.08e-21
-2 bac         -39.8     13.7         -2.90 4.70e- 3
-3 ta            0.0219   0.00518      4.22 5.79e- 5
-4 sex_c        -2.54     1.08        -2.35 2.10e- 2</code></pre>
+1 (Intercept)  14.2      1.03        13.8  6.26e-24
+2 bac         -37.5     11.5         -3.25 1.62e- 3
+3 ta            0.0179   0.00436      4.11 8.62e- 5
+4 sex_c        -2.70     0.910       -2.97 3.82e- 3</code></pre>
 </div>
 </div>
 <hr>
@@ -798,10 +799,10 @@ Heteroscedasticity  7.62546 0.005755008 Assumptions NOT satisfied!</code></pre>
 <pre><code># A tibble: 4 × 5
   term        estimate std.error statistic   p.value
   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1 (Intercept)   26.6      6.90        3.85 0.000220 
-2 bac         -229.      72.1        -3.18 0.00204  
-3 ta             0.126    0.0304      4.13 0.0000799
-4 sex_c        -15.5      5.70       -2.72 0.00791  </code></pre>
+1 (Intercept)   28.7      6.91        4.15 0.0000744
+2 bac         -255.      71.3        -3.57 0.000575 
+3 ta             0.123    0.0320      3.85 0.000224 
+4 sex_c        -15.9      5.87       -2.70 0.00826  </code></pre>
 </div>
 </div>
 <p><em>Maybe</em> better choicer was untransformed Y (original model) with corrected SEs?</p>
@@ -893,6 +894,224 @@ Heteroscedasticity  7.62546 0.005755008 Assumptions NOT satisfied!</code></pre>
 </ul></li>
 <li><p>Transformations are a big source of research dfs. Should be pre-registered. You may know what your DV typically <em>needs</em> from prior data. Worst case, report with and without transformations and justify.</p></li>
 </ul>
+<hr>
+</section>
+<section id="k-race-times" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="k-race-times"><span class="header-section-number">9.8</span> 5K Race Times</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data_5k <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(path_data, <span class="st">"9_transformations_5k.csv"</span>),</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 80
+Columns: 4
+$ subid &lt;chr&gt; "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"…
+$ time  &lt;dbl&gt; 24.91, 21.82, 21.54, 23.03, 25.35, 22.84, 30.16, 27.00, 16.42, 2…
+$ age   &lt;dbl&gt; 29, 25, 27, 25, 37, 31, 43, 44, 46, 53, 58, 30, 27, 36, 32, 45, …
+$ miles &lt;dbl&gt; 24.99984, 30.80905, 52.04042, 66.20958, 26.60005, 48.21255, 12.3…</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>m_5k <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> age <span class="sc">+</span> miles, <span class="at">data =</span> data_5k)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_5k)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)   25.0      1.80       13.9  1.07e-22
+2 age            0.172    0.0333      5.17 1.77e- 6
+3 miles         -0.210    0.0246     -8.53 9.54e-13</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model_assumptions</span>(m_5k, <span class="at">Type =</span> <span class="st">"normal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_transformations_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_transformations_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model_assumptions</span>(m_5k, <span class="at">Type =</span> <span class="st">"constant"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_transformations_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_transformations_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Suggested power transformation:  0.4894249 </code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">ncvTest</span>(m_5k)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Non-constant Variance Score Test 
+Variance formula: ~ fitted.values 
+Chisquare = 0.8077899, Df = 1, p = 0.36877</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model_assumptions</span>(m_5k, <span class="at">Type=</span><span class="st">'linear'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_transformations_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gvlma</span>(m_5k)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = time ~ age + miles, data = data_5k)
+
+Coefficients:
+(Intercept)          age        miles  
+    24.9804       0.1724      -0.2097  
+
+
+ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
+USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
+Level of Significance =  0.05 
+
+Call:
+ gvlma(x = m_5k) 
+
+                      Value   p-value                   Decision
+Global Stat        13.01039 0.0112252 Assumptions NOT satisfied!
+Skewness            0.01435 0.9046389    Assumptions acceptable.
+Kurtosis            0.07603 0.7827462    Assumptions acceptable.
+Link Function      12.82570 0.0003419 Assumptions NOT satisfied!
+Heteroscedasticity  0.09430 0.7587759    Assumptions acceptable.</code></pre>
+</div>
+</div>
+<hr>
+<p>Let’s try transforming miles using <code>log2()</code>, a binary logarithm (base 2).</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>data_5k <span class="ot">&lt;-</span> data_5k <span class="sc">|&gt;</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_miles =</span> <span class="fu">log2</span>(miles))</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>m_5k_tran <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> age <span class="sc">+</span> log_miles, <span class="at">data =</span> data_5k)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_5k_tran)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)   42.5      3.25       13.1  2.88e-21
+2 age            0.170    0.0320      5.32 9.97e- 7
+3 log_miles     -4.98     0.538      -9.26 3.73e-14</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">model_assumptions</span>(m_5k_tran, <span class="at">Type=</span><span class="st">'linear'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_transformations_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gvlma</span>(m_5k_tran)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = time ~ age + log_miles, data = data_5k)
+
+Coefficients:
+(Intercept)          age    log_miles  
+     42.519        0.170       -4.983  
+
+
+ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
+USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
+Level of Significance =  0.05 
+
+Call:
+ gvlma(x = m_5k_tran) 
+
+                     Value p-value                Decision
+Global Stat        1.83180  0.7667 Assumptions acceptable.
+Skewness           0.15584  0.6930 Assumptions acceptable.
+Kurtosis           0.06402  0.8003 Assumptions acceptable.
+Link Function      1.58986  0.2073 Assumptions acceptable.
+Heteroscedasticity 0.02209  0.8819 Assumptions acceptable.</code></pre>
+</div>
+</div>
 <hr>
 
 
