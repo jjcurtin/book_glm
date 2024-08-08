@@ -353,7 +353,7 @@ window.Quarto = {
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>())</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>()) </span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>path_data <span class="ot">&lt;-</span> <span class="st">"data_lecture"</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -566,11 +566,15 @@ bc  0.75 -0.5  1.00</code></pre>
 <p><strong>Definition: An interaction exists when the effect of 1 predictor on the DV differs across levels/values of the other predictor.</strong></p>
 <!-- John, you also had this note on your slide "LINK to additive results in this example…" I wasn't sure what it meant-->
 <hr>
-<p>Regressors for interaction terms are calculated as the product of the regressors (for the predictors) in the interaction. In this case, we simply multiply Att X PP.</p>
-<p>You will typically want to <strong>center</strong> the IVs in the primary model to yield tests of <em>main effects</em> of each IV as well as tests of the interaction (More on this as the slides develop).</p>
-<p>In R, you don’t need to actually compute the product term regressor directly. <code>A:B</code> in the <code>lm()</code> formula will include the A X B interaction regressor(s).</p>
-<p><code>A*B</code> is further shorthand to include A, B, and A X B in the model.</p>
-<p>You should <strong>not</strong> include A X B in a model that does not include lower order effects (e.g., A, and B).</p>
+<ul>
+<li><p>Regressors for interaction terms are calculated as the product of the regressors (for the predictors) in the interaction. In this case, we simply multiply Att X PP.</p></li>
+<li><p>You will typically want to <strong>center</strong> the IVs in the primary model to yield tests of <em>main effects</em> of each IV as well as tests of the interaction (More on this as the slides develop).</p></li>
+<li><p>In R, you don’t need to actually compute the product term regressor directly. <code>A:B</code> in the <code>lm()</code> formula will include the A X B interaction regressor(s).</p></li>
+<li><p><code>A*B</code> is further shorthand to include A, B, and A X B in the model.</p></li>
+<li><p>You should <strong>not</strong> include A X B in a model that does not include lower order effects (e.g., A, and B).</p></li>
+</ul>
+<hr>
+<p><span style="color: red;">Question: What will change in the two predictor model if we center both IVs?</span></p>
 <hr>
 
 
