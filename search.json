@@ -1834,7 +1834,17 @@
     "href": "09_transformations.html#transformations-dealing-with-non-linearity",
     "title": "9  Dealing with Messy Data III: Transformations",
     "section": "9.5 Transformations: Dealing with Non-linearity",
-    "text": "9.5 Transformations: Dealing with Non-linearity",
+    "text": "9.5 Transformations: Dealing with Non-linearity\nPower transformations can make simple monotone relationships more linear (Fig A). Polynomial regression (or other transformations, e.g. logit) is often needed for more complex relationships (Figs, B & C).\n\n\nCode\n#figure",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Dealing with Messy Data III: Transformations</span>"
+    ]
+  },
+  {
+    "objectID": "09_transformations.html#transformations-mosteller-and-tukeys-bulging-rule",
+    "href": "09_transformations.html#transformations-mosteller-and-tukeys-bulging-rule",
+    "title": "9  Dealing with Messy Data III: Transformations",
+    "section": "9.6 Transformations: Mosteller and Tukey’s bulging rule",
+    "text": "9.6 Transformations: Mosteller and Tukey’s bulging rule\nSimple monotone relationships can be corrected by transforming X or Y.\nX is typical if only one XY relationship is problematic.\nIf all Xs have similar non-linear relationship, transform Y.\n\n\nCode\nknitr::include_graphics(path = here::here(\"figures/mosteller_tukey.png\"))",
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Dealing with Messy Data III: Transformations</span>"
     ]

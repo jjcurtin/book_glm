@@ -323,6 +323,7 @@ window.Quarto = {
   <li><a href="#transformations-dealing-with-heteroscedasticity" id="toc-transformations-dealing-with-heteroscedasticity" class="nav-link" data-scroll-target="#transformations-dealing-with-heteroscedasticity"><span class="header-section-number">9.3</span> Transformations: Dealing with Heteroscedasticity</a></li>
   <li><a href="#box-cox-transformation-function" id="toc-box-cox-transformation-function" class="nav-link" data-scroll-target="#box-cox-transformation-function"><span class="header-section-number">9.4</span> Box Cox Transformation Function</a></li>
   <li><a href="#transformations-dealing-with-non-linearity" id="toc-transformations-dealing-with-non-linearity" class="nav-link" data-scroll-target="#transformations-dealing-with-non-linearity"><span class="header-section-number">9.5</span> Transformations: Dealing with Non-linearity</a></li>
+  <li><a href="#transformations-mosteller-and-tukeys-bulging-rule" id="toc-transformations-mosteller-and-tukeys-bulging-rule" class="nav-link" data-scroll-target="#transformations-mosteller-and-tukeys-bulging-rule"><span class="header-section-number">9.6</span> Transformations: Mosteller and Tukey’s bulging rule</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/09_transformations.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -808,6 +809,32 @@ Heteroscedasticity  7.62546 0.005755008 Assumptions NOT satisfied!</code></pre>
 </section>
 <section id="transformations-dealing-with-non-linearity" class="level2" data-number="9.5">
 <h2 data-number="9.5" class="anchored" data-anchor-id="transformations-dealing-with-non-linearity"><span class="header-section-number">9.5</span> Transformations: Dealing with Non-linearity</h2>
+<p>Power transformations can make simple monotone relationships more linear (Fig A). Polynomial regression (or other transformations, e.g.&nbsp;logit) is often needed for more complex relationships (Figs, B &amp; C).</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#figure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="transformations-mosteller-and-tukeys-bulging-rule" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="transformations-mosteller-and-tukeys-bulging-rule"><span class="header-section-number">9.6</span> Transformations: Mosteller and Tukey’s bulging rule</h2>
+<p>Simple monotone relationships can be corrected by transforming X or Y.</p>
+<p>X is typical if only one XY relationship is problematic.</p>
+<p>If all Xs have similar non-linear relationship, transform Y.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="at">path =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"figures/mosteller_tukey.png"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="figures/mosteller_tukey.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
