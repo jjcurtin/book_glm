@@ -25,6 +25,7 @@ Effect of positive attitudes (1-5) about birth control and peer pressure to not 
 ```{r}
 #| message: false
 
+options(conflicts.policy = "depends.ok") 
 library(tidyverse)
 library(patchwork)
 

@@ -1,9 +1,11 @@
 {
-  "hash": "d8f54a6a8c6a69430097941b78b2d98c",
+  "hash": "e02939c352413aeacc626d46c33614eb",
   "result": {
     "engine": "knitr",
-    "markdown": "--- \noutput: html_document \neditor_options:  \n  chunk_output_type: console\n--- \n\n\n\n \n\n# Inferences about a Continuous and Dichotomous Predictor and their Interaction\n\n\n\n\n::: {.cell}\n\n:::\n",
-    "supporting": [],
+    "markdown": "--- \noutput: html_document \neditor_options:  \n  chunk_output_type: console\n--- \n\n\n\n \n\n# Inferences about a Continuous and Dichotomous Predictor and their Interaction\n\n\n\n\n::: {.cell}\n\n:::\n\n\n\n\n\n## Interactive Models: Quantitative and Dichotomous\n\n**Example:**    \n\nEffect of juror implicit bias (0-100) and race of defendant (White = 0; Black =1) on ratings of defendant guilt (0-100).\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\noptions(conflicts.policy = \"depends.ok\") \nlibrary(tidyverse)\nlibrary(patchwork)\n\ntheme_set(theme_classic()) \n\npath_data <- \"data_lecture\"\n\ndata <- read_csv(here::here(path_data, \"11_interactions_jurors.csv\"),\n                 show_col_types = FALSE) |> \n  glimpse()\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\nRows: 240\nColumns: 4\n$ subid        <chr> \"001\", \"002\", \"003\", \"004\", \"005\", \"006\", \"007\", \"008\", \"…\n$ black_defend <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …\n$ bias         <dbl> 42.53833, 52.55506, 57.25757, 46.99403, 52.21168, 18.8001…\n$ guilt        <dbl> 40.83539, 44.44454, 47.90421, 57.45485, 62.45751, 18.2372…\n```\n\n\n:::\n:::\n\n\n\n\n-----\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndata |> \n  pivot_longer(black_defend:guilt, names_to = \"var\") |> \n  group_by(var) |> \n  summarise(mean = mean(value), \n            sd = sd(value), \n            min = min(value), \n            max = max(value))\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n# A tibble: 3 × 5\n  var           mean     sd   min   max\n  <chr>        <dbl>  <dbl> <dbl> <dbl>\n1 bias          34.7 16.2    3.86  63.3\n2 black_defend   0.5  0.501  0      1  \n3 guilt         43.8 18.1   16.7   93.4\n```\n\n\n:::\n:::\n\n\n\n\n<span style=\"color: red;\">Question: How do you conduct an ANCOVA analysis in regression using Bias as a covariate?</span>\n\n-----\n\n\n\n\n-----\n",
+    "supporting": [
+      "11_interactions_continuous_and_dichotomous_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

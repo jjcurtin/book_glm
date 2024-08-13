@@ -15,3 +15,45 @@ options(knitr.kable.NA = '')
 ```
 
 
+## Interactive Models: Quantitative and Dichotomous
+
+**Example:**    
+
+Effect of juror implicit bias (0-100) and race of defendant (White = 0; Black =1) on ratings of defendant guilt (0-100).
+
+```{r}
+#| message: false
+
+options(conflicts.policy = "depends.ok") 
+library(tidyverse)
+library(patchwork)
+
+theme_set(theme_classic()) 
+
+path_data <- "data_lecture"
+
+data <- read_csv(here::here(path_data, "11_interactions_jurors.csv"),
+                 show_col_types = FALSE) |> 
+  glimpse()
+```
+
+-----
+
+```{r}
+data |> 
+  pivot_longer(black_defend:guilt, names_to = "var") |> 
+  group_by(var) |> 
+  summarise(mean = mean(value), 
+            sd = sd(value), 
+            min = min(value), 
+            max = max(value))
+```
+
+<span style="color: red;">Question: How do you conduct an ANCOVA analysis in regression using Bias as a covariate?</span>
+
+-----
+
+
+
+
+-----

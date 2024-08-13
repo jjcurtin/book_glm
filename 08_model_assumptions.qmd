@@ -234,10 +234,11 @@ Transformations may correct shape of residuals (*Unit 9*).
 #| message: false
 #| warning: false
 
+options(conflicts.policy = "depends.ok") 
 library(tidyverse)
 library(patchwork)
-library(car) # needed for model_assumptions
-library(psych) # needed for model_assumptions
+library(car, exclude = c("recode", "some")) # needed for model_assumptions
+library(psych, exclude = c("logit", "%+%", "alpha")) # needed for model_assumptions
 library(gvlma) # needed for model_assumptions
 
 theme_set(theme_classic()) 

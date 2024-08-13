@@ -194,9 +194,10 @@ plot_0 <- y |>
 #| message: false
 #| warning: false
 
+options(conflicts.policy = "depends.ok") 
 library(tidyverse)
-library(car) # needed for model_assumptions
-library(psych) # needed for model_assumptions
+library(car, exclude = c("recode", "some")) # needed for model_assumptions
+library(psych, exclude = c("logit", "%+%", "alpha")) # needed for model_assumptions
 library(gvlma) # needed for model_assumptions
 
 path_data <- "data_lecture"

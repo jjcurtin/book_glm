@@ -70,6 +70,7 @@ Dummy coding involves assigning 1’s and 0’s to the regressor in a specific p
 ```{r}
 #| message: false
 
+options(conflicts.policy = "depends.ok") 
 library(tidyverse)
 library(patchwork)
 

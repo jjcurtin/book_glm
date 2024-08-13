@@ -188,6 +188,7 @@ For this reason, we tend to prefer to estimate our models by minimizing the sum 
 ```{r}
 #| message: false
 
+options(conflicts.policy = "depends.ok") 
 library(tidyverse)
 theme_set(theme_classic()) 
 path_data <- "data_lecture"  

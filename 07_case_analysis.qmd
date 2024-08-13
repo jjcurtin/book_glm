@@ -127,9 +127,10 @@ SSE = `r round(sum(residuals(lm(y4 ~ x4, data = Quartet))^2), 2)`
 ```{r}
 #| message: false
 
+options(conflicts.policy = "depends.ok") 
 library(tidyverse)
 library(patchwork)
-library(car)
+library(car, exclude = c("recode", "some")) #<1>
 
 theme_set(theme_classic()) 
 
@@ -137,6 +138,9 @@ data <- read_csv(here::here("data_lecture/7_three_predictors_fps.csv"),
                  show_col_types = FALSE) |> 
   glimpse()
 ```
+
+1. We are handling conflicts with two functions in the `car` package by excluding them upon loading. As a reminder you can see more about handling conflicts [here](https://jjcurtin.github.io/book_dwvt/conflicts.html).   
+
 
 Notice sex is of character class type. We can't use character stings in most of our analyes so we will want to handle character predictors immediately. For example, with our sex variable we could turn it into a factor, dummy code it, center it, or use any other contrast/combination of the above.  
 

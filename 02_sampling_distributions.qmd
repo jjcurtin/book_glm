@@ -104,14 +104,17 @@ A sampling distribution, like a population, is an abstract concept that represen
 ```{r}
 #| message: false
 
+options(conflicts.policy = "depends.ok")  # <1> 
 library(tidyverse)
-path_data <- "data_lecture"  # <1> 
+path_data <- "data_lecture"  # <2> 
 
-data <- read_csv(here::here(path_data, "2_sampling_distributions_like.csv"), # <2>
+data <- read_csv(here::here(path_data, "2_sampling_distributions_like.csv"), # <3>
                  show_col_types = FALSE) 
 ```
-1. This path points to where your data is and should be a relative path from your R project. 
-2. we use the `here()` function in the `here` package (`here::here()`) to define paths within a function. This approach (vs. `file.path()`) works well when using R Projects. 
+
+1. This line of code will tell will tell us when we load two packages with conflicting functions (i.e., they have the same name) by producing an error. There are ways to set custom conflict policies and work around conflicts (e.g., only loading certain functions from a package). You can find more documentation [here](https://jjcurtin.github.io/book_dwvt/conflicts.html).   
+2. This path points to where your data is and should be a relative path from your R project. 
+3. we use the `here()` function in the `here` package (`here::here()`) to define paths within a function. This approach (vs. `file.path()`) works well when using R Projects. 
 
 -----
 

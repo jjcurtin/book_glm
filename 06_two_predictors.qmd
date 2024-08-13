@@ -214,6 +214,7 @@ m_2 |>
 ```{r}
 #| messages: false
 
+options(conflicts.policy = "depends.ok") 
 library(tidyverse)
 library(patchwork)
 theme_set(theme_classic()) 

@@ -225,6 +225,7 @@ If $\beta_1 > 0$, this means FPS increases with increasing BAC (people are more 
 ```{r}
 #| message: false
 
+options(conflicts.policy = "depends.ok") 
 library(tidyverse)
 library(patchwork)
 
