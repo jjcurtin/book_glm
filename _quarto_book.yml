@@ -39,8 +39,9 @@ book:
     - 11_interactions_continuous_and_dichotomous.qmd
     - 12_interactions_two_dichotomous.qmd
     - 13_categorical_variables.qmd
-    - 14_repeated_measures.qmd
-    - 15_power.qmd
+    - 14_power.qmd
+    - 15_the_generalized_linear_model.qmd
     - part: Appendices
       chapters:
         - app_terminology.qmd
+        - repeated_measures.qmd
