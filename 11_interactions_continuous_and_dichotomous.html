@@ -103,6 +103,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="book.css">
 </head>
@@ -252,14 +281,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./14_repeated_measures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Repeated Measures GLM</span></span></a>
+  <a href="./14_power.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Power Analysis and Statistical Validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15_power.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Power Analysis and Statistical Validity</span></span></a>
+  <a href="./15_the_generalized_linear_model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">The Generalized Linear Model</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -277,6 +306,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Key Terminology and Concepts</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./repeated_measures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Repeated Measures</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -290,6 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#interactive-models-quantitative-and-dichotomous" id="toc-interactive-models-quantitative-and-dichotomous" class="nav-link active" data-scroll-target="#interactive-models-quantitative-and-dichotomous"><span class="header-section-number">11.1</span> Interactive Models: Quantitative and Dichotomous</a></li>
+  <li><a href="#quantitative-dichotomous-predictor-main-effects" id="toc-quantitative-dichotomous-predictor-main-effects" class="nav-link" data-scroll-target="#quantitative-dichotomous-predictor-main-effects"><span class="header-section-number">11.2</span> Quantitative &amp; Dichotomous: Predictor <em>Main</em> effects</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/11_interactions_continuous_and_dichotomous.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -364,9 +400,241 @@ $ guilt        &lt;dbl&gt; 40.83539, 44.44454, 47.90421, 57.45485, 62.45751, 18.
 3 guilt         43.8 18.1   16.7   93.4</code></pre>
 </div>
 </div>
-<p><span style="color: red;">Question: How do you conduct an ANCOVA analysis in regression using Bias as a covariate?</span></p>
+<p><span style="color: red;">Question: How do you conduct an ANCOVA analysis in regression using bias as a covariate?</span></p>
 <hr>
+<p><span style="color: blue;">Regress guilt on defendant race and bias in an additive model. Test &amp; interpret bias effect.</span></p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>m_add <span class="ot">&lt;-</span> <span class="fu">lm</span>(guilt <span class="sc">~</span> black_defend <span class="sc">+</span> bias, <span class="at">data =</span> data)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>m_add <span class="sc">|&gt;</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term         estimate std.error statistic  p.value
+  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    11.8      2.02        5.84 1.71e- 8
+2 black_defend    8.50     1.56        5.45 1.28e- 7
+3 bias            0.799    0.0484     16.5  2.83e-41</code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m_add)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 2.5 %   97.5 %
+(Intercept)  7.8288544 15.79898
+black_defend 5.4267932 11.57569
+bias         0.7039293  0.89468</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\eta_p^2\)</span> for bias</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(guilt <span class="sc">~</span> black_defend, data))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_add)<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(guilt <span class="sc">~</span> black_defend, data))<span class="sc">^</span><span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5349119</code></pre>
+</div>
+</div>
+<p><span style="color: red;">Question: What do we conclude? What do we report?</span></p>
 <hr>
+<p><span style="color: red;">Question: What is the specific interpretation in terms of the effect of defendant race?</span></p>
+<hr>
+<p><span style="color: blue;">On average, Black defendants are judged to be 8.5 units more guilty than White defendants, controlling for (holding constant) implicit bias.</span></p>
+<hr>
+<p><span style="color: red;">Question: What does this model require with respect to this group comparison across various levels of implicit bias?</span></p>
+<hr>
+<p><span style="color: blue;">It requires that the magnitude of the Black defendant (vs.&nbsp;White defendant) group difference (<span class="math inline">\(b=8.5\)</span>) be the same for all levels of implicit bias <strong>and</strong> the bias effect be the same for both defendant races.</span></p>
+<hr>
+<p><span style="color: red;">Question: How can you remove that constraint?</span></p>
+<hr>
+<p><span style="color: blue;">Include an interaction between defendent race and bias.</span></p>
+<p><span style="color: red;">Question: But what is now important to do with <span class="math inline">\(X\)</span>s?</span></p>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">black_defend_c =</span> <span class="fu">if_else</span>(black_defend <span class="sc">==</span> <span class="dv">0</span>, <span class="sc">-</span>.<span class="dv">5</span>, .<span class="dv">5</span>),</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">bias_c =</span> bias <span class="sc">-</span> <span class="fu">mean</span>(bias))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Always check that your transformations work as expected (mean, min, max, N, exemplar values).</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_head</span>(data, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 6
+  subid black_defend  bias guilt black_defend_c bias_c
+  &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;          &lt;dbl&gt;  &lt;dbl&gt;
+1 001              0  42.5  40.8           -0.5   7.86
+2 002              0  52.6  44.4           -0.5  17.9 
+3 003              0  57.3  47.9           -0.5  22.6 
+4 004              0  47.0  57.5           -0.5  12.3 
+5 005              0  52.2  62.5           -0.5  17.5 </code></pre>
+</div>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(black_defend_c, bias_c), <span class="at">names_to =</span> <span class="st">"var"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(var) <span class="sc">|&gt;</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(value), </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(value), </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(value), </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(value))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  var                 mean     sd   min   max
+  &lt;chr&gt;              &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 bias_c         -1.97e-15 16.2   -30.8  28.7
+2 black_defend_c  0         0.501  -0.5   0.5</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>m_int <span class="ot">&lt;-</span> <span class="fu">lm</span>(guilt <span class="sc">~</span> black_defend_c <span class="sc">*</span> bias_c, <span class="at">data =</span> data)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>m_int <span class="sc">|&gt;</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term                  estimate std.error statistic   p.value
+  &lt;chr&gt;                    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)             43.9      0.751      58.4  2.78e-142
+2 black_defend_c           8.50     1.50        5.66 4.40e-  8
+3 bias_c                   0.797    0.0466     17.1  3.24e- 43
+4 black_defend_c:bias_c    0.415    0.0932      4.45 1.31e-  5</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m_int)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                           2.5 %     97.5 %
+(Intercept)           42.3761677 45.3354438
+black_defend_c         5.5405532 11.4591055
+bias_c                 0.7054229  0.8890371
+black_defend_c:bias_c  0.2312938  0.5985222</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\eta_p^2\)</span> for interaction between bias and defendent race (centered)</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(guilt <span class="sc">~</span> black_defend_c <span class="sc">+</span> bias_c, data))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_int)<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(guilt <span class="sc">~</span> black_defend_c <span class="sc">+</span> bias_c, data))<span class="sc">^</span><span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.07746803</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\eta_p^2\)</span> for bias (centered)</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(guilt <span class="sc">~</span> black_defend_c <span class="sc">+</span> bias_c<span class="sc">:</span>black_defend_c, data))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_int)<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(guilt <span class="sc">~</span> black_defend_c <span class="sc">+</span> bias_c<span class="sc">:</span>black_defend_c, data))<span class="sc">^</span><span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5535959</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\eta_p^2\)</span> for defendant race (centered)</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(guilt <span class="sc">~</span> bias_c <span class="sc">+</span> bias_c<span class="sc">:</span>black_defend_c, data))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_int)<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(guilt <span class="sc">~</span> bias_c <span class="sc">+</span> bias_c<span class="sc">:</span>black_defend_c, data))<span class="sc">^</span><span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1194663</code></pre>
+</div>
+</div>
+<hr>
+<p><strong>Additive Model:</strong></p>
+<p><span class="math inline">\(\text{guilt} = 11.8 + 8.5*\text{black_defend} + 0.8*\text{bias}\)</span></p>
+<p><strong>Interactive Model:</strong></p>
+<p><span class="math inline">\(\text{guilt} = 43.9 + 8.5*\text{black_defend_c} + 0.8*\text{bias_c} + .4*\text{black_defend_c}*\text{bias_c}\)</span></p>
+<p><span style="color: red;">Link model coefficients to each figure.</span></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>preds_add <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">bias =</span> <span class="fu">seq</span>(<span class="dv">3</span>, <span class="dv">65</span>, <span class="at">by =</span> <span class="dv">1</span>), <span class="at">black_defend =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>preds_y_add <span class="ot">&lt;-</span> <span class="fu">predict</span>(m_add, <span class="at">newdata =</span> preds_add, <span class="at">se.fit =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>plot_add <span class="ot">&lt;-</span> preds_add <span class="sc">|&gt;</span> </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(preds_y_add) <span class="sc">|&gt;</span> </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span>  </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">upper =</span> fit <span class="sc">+</span> se.fit,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">lower=</span> fit <span class="sc">-</span> se.fit) <span class="sc">|&gt;</span> </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x =</span> bias, <span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper, </span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">group =</span> <span class="fu">factor</span>(black_defend, </span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"White"</span>, <span class="st">"Black"</span>))), </span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> bias, <span class="at">y =</span> fit, </span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">color =</span> <span class="fu">factor</span>(black_defend, </span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"White"</span>, <span class="st">"Black"</span>))), </span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Juror Implicit Bias"</span>,</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Defendant Guilt"</span>,</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Defendant Race"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>preds_int <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">bias_c =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">31</span>, <span class="dv">29</span>, <span class="at">by =</span> <span class="dv">1</span>), <span class="at">black_defend_c =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">5</span>, .<span class="dv">5</span>))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>preds_y_int <span class="ot">&lt;-</span> <span class="fu">predict</span>(m_int, <span class="at">newdata =</span> preds_int, <span class="at">se.fit =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>plot_int <span class="ot">&lt;-</span> preds_int <span class="sc">|&gt;</span> </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(preds_y_int) <span class="sc">|&gt;</span> </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span>  </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">upper =</span> fit <span class="sc">+</span> se.fit,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">lower=</span> fit <span class="sc">-</span> se.fit) <span class="sc">|&gt;</span> </span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x =</span> bias_c, <span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper, </span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">group =</span> <span class="fu">factor</span>(black_defend_c, </span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">levels =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">5</span>,.<span class="dv">5</span>),</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"White"</span>, <span class="st">"Black"</span>))), </span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> bias_c, <span class="at">y =</span> fit, </span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">color =</span> <span class="fu">factor</span>(black_defend_c, </span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">levels =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">5</span>,.<span class="dv">5</span>),</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"White"</span>, <span class="st">"Black"</span>))), </span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Juror Implicit Bias"</span>,</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Defendant Guilt"</span>,</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Defendant Race"</span>) </span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>plot_add <span class="sc">+</span> plot_int</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11_interactions_continuous_and_dichotomous_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="quantitative-dichotomous-predictor-main-effects" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="quantitative-dichotomous-predictor-main-effects"><span class="header-section-number">11.2</span> Quantitative &amp; Dichotomous: Predictor <em>Main</em> effects</h2>
 
 
 </section>

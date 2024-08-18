@@ -46,7 +46,7 @@
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/11_interactions_continuous_and_dichotomous.html</loc>
-    <lastmod>2024-08-13T22:52:50.077Z</lastmod>
+    <lastmod>2024-08-18T00:21:05.319Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/12_interactions_two_dichotomous.html</loc>
@@ -57,15 +57,19 @@
     <lastmod>2024-07-28T00:18:28.297Z</lastmod>
   </url>
   <url>
-    <loc>https://github.io/jjcurtin/book_glm/14_repeated_measures.html</loc>
-    <lastmod>2024-07-28T00:19:42.487Z</lastmod>
+    <loc>https://github.io/jjcurtin/book_glm/14_power.html</loc>
+    <lastmod>2024-08-15T17:42:31.407Z</lastmod>
   </url>
   <url>
-    <loc>https://github.io/jjcurtin/book_glm/15_power.html</loc>
-    <lastmod>2024-07-28T00:20:52.379Z</lastmod>
+    <loc>https://github.io/jjcurtin/book_glm/15_the_generalized_linear_model.html</loc>
+    <lastmod>2024-08-18T00:23:21.307Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/app_terminology.html</loc>
     <lastmod>2024-06-11T14:20:17.399Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.io/jjcurtin/book_glm/repeated_measures.html</loc>
+    <lastmod>2024-08-18T00:23:44.427Z</lastmod>
   </url>
 </urlset>
