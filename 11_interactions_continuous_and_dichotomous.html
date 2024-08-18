@@ -565,7 +565,7 @@ black_defend_c:bias_c  0.2312938  0.5985222</code></pre>
 <p><strong>Additive Model:</strong></p>
 <p><span class="math inline">\(\text{guilt} = 11.8 + 8.5*\text{black defend} + 0.8*\text{bias}\)</span></p>
 <p><strong>Interactive Model:</strong></p>
-<p><span class="math inline">\(\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias_c} + .4*\text{black defend}_c*\text{bias}_c\)</span></p>
+<p><span class="math inline">\(\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c\)</span></p>
 <p><span style="color: red;">Link model coefficients to each figure.</span></p>
 <div class="cell">
 <details class="code-fold">
@@ -635,6 +635,78 @@ black_defend_c:bias_c  0.2312938  0.5985222</code></pre>
 </section>
 <section id="quantitative-dichotomous-predictor-main-effects" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="quantitative-dichotomous-predictor-main-effects"><span class="header-section-number">11.2</span> Quantitative &amp; Dichotomous: Predictor <em>Main</em> effects</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>m_int <span class="sc">|&gt;</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term                  estimate std.error statistic   p.value
+  &lt;chr&gt;                    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)             43.9      0.751      58.4  2.78e-142
+2 black_defend_c           8.50     1.50        5.66 4.40e-  8
+3 bias_c                   0.797    0.0466     17.1  3.24e- 43
+4 black_defend_c:bias_c    0.415    0.0932      4.45 1.31e-  5</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c\)</span></p>
+<p><span style="color: red;">Question: What is the interpretation of <span class="math inline">\(b= 0.8\)</span> for bias (centered)?</span></p>
+<hr>
+<p><span style="color: blue;">This is the unweighted effect of bias averaged across White and Black defendants.</span></p>
+<p><span style="color: blue;">You can think about this like a main effect in ANOVA. For every one unit increase in bias, ratings of defendants’ guilt increased by 0.8 units when averaging across defendants of both races (holding constant race at its unweighted average), <span class="math inline">\(t(236)= 17.1, p &lt; .001\)</span>.</span></p>
+<p>You should also describe the effect with the 95% CI for <span class="math inline">\(b\)</span> and a variance effect size estimate.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>plot_int</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11_interactions_continuous_and_dichotomous_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>m_int <span class="sc">|&gt;</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term                  estimate std.error statistic   p.value
+  &lt;chr&gt;                    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)             43.9      0.751      58.4  2.78e-142
+2 black_defend_c           8.50     1.50        5.66 4.40e-  8
+3 bias_c                   0.797    0.0466     17.1  3.24e- 43
+4 black_defend_c:bias_c    0.415    0.0932      4.45 1.31e-  5</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c\)</span></p>
+<p><span style="color: red;">Question: What is the interpretation of <span class="math inline">\(b= 8.5\)</span> for defendent race (centered)?</span></p>
+<hr>
+<p><span style="color: blue;">This is the effect of defendent race for participants of average implicit bias. You can think about this like a main effect in ANOVA.</span></p>
+<p><span style="color: blue;">Black defendants are rated 8.5 units more guilty than White defendants among jurors with average bias (holding constant bias at its mean), <span class="math inline">\(t(236) = 5.66, p &lt; .001\)</span>.</span></p>
+<p>You should also describe the effect with the 95% CI for <span class="math inline">\(b\)</span> and a variance effect size estimate.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>plot_int</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11_interactions_continuous_and_dichotomous_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
 
 
 </section>
