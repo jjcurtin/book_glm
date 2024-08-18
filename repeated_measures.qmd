@@ -5,7 +5,7 @@ editor_options:
 --- 
  
 
-# Repeated Measures GLM
+# Repeated Measures
 
 ```{r}
 #| echo: false
@@ -13,5 +13,3 @@ editor_options:
 options(scipen = 999) # turns off scientfic notation
 options(knitr.kable.NA = '')
 ```
-
-

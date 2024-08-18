@@ -1,0 +1,15 @@
+{
+  "hash": "95859303f31441904e235339daf3e474",
+  "result": {
+    "engine": "knitr",
+    "markdown": "--- \noutput: html_document \neditor_options:  \n  chunk_output_type: console\n--- \n\n\n\n \n\n# The Generalized Linear Model\n\n\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
