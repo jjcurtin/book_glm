@@ -328,8 +328,7 @@ window.Quarto = {
   <li><a href="#quantitative-dichotomous-predictor-main-effects" id="toc-quantitative-dichotomous-predictor-main-effects" class="nav-link" data-scroll-target="#quantitative-dichotomous-predictor-main-effects"><span class="header-section-number">11.2</span> Quantitative &amp; Dichotomous: Predictor <em>Main</em> effects</a></li>
   <li><a href="#quantitative-dichotomous-predictor-simple-effects" id="toc-quantitative-dichotomous-predictor-simple-effects" class="nav-link" data-scroll-target="#quantitative-dichotomous-predictor-simple-effects"><span class="header-section-number">11.3</span> Quantitative &amp; Dichotomous: Predictor <em>simple</em> effects</a></li>
   <li><a href="#quantitative-dichotomous-dichotomous-simple-effects" id="toc-quantitative-dichotomous-dichotomous-simple-effects" class="nav-link" data-scroll-target="#quantitative-dichotomous-dichotomous-simple-effects"><span class="header-section-number">11.4</span> Quantitative &amp; Dichotomous: Dichotomous <em>simple</em> effects</a></li>
-  <li><a href="#note-it-is-easy-to-confuse-these-transformations.-do-a-logical-check-on-your-results." id="toc-note-it-is-easy-to-confuse-these-transformations.-do-a-logical-check-on-your-results." class="nav-link" data-scroll-target="#note-it-is-easy-to-confuse-these-transformations.-do-a-logical-check-on-your-results."><span class="header-section-number">11.5</span> <em>Note</em>: It is easy to confuse these transformations. Do a logical check on your results.</a></li>
-  <li><a href="#a-sample-brief-report-defendant-race-is-focal" id="toc-a-sample-brief-report-defendant-race-is-focal" class="nav-link" data-scroll-target="#a-sample-brief-report-defendant-race-is-focal"><span class="header-section-number">11.6</span> A sample brief report: Defendant race is focal</a></li>
+  <li><a href="#a-sample-brief-report-defendant-race-is-focal" id="toc-a-sample-brief-report-defendant-race-is-focal" class="nav-link" data-scroll-target="#a-sample-brief-report-defendant-race-is-focal"><span class="header-section-number">11.5</span> A sample brief report: Defendant race is focal</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/11_interactions_continuous_and_dichotomous.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -897,13 +896,13 @@ black_defend_c:bias_c  0.2312938  0.5985222</code></pre>
 <hr>
 <p><strong>From Dummy, White = 0 model</strong></p>
 <p><span style="color: blue;">For Whites:</span></p>
-<pre><code>- Bias effect = $0.6*\text{bias}_c + .4*\text{black defend}*\text{bias}_c$  
-- Bias effect = $0.6*\text{bias}_c + .4*0*\text{bias}_c$  
-- Bias effect = $0.6*\text{bias}_c$</code></pre>
+<p>Bias effect = <span class="math inline">\(0.6*\text{bias}_c + .4*\text{black defend}*\text{bias}_c\)</span><br>
+Bias effect = <span class="math inline">\(0.6*\text{bias}_c + .4*0*\text{bias}_c\)</span><br>
+Bias effect = <span class="math inline">\(0.6*\text{bias}_c\)</span></p>
 <p><span style="color: blue;">For Blacks:</span></p>
-<pre><code>- Bias effect = $0.6*\text{bias}_c + .4*\text{black defend}*\text{bias}_c$  
-- Bias effect = $0.6*\text{bias}_c + .4*1*\text{bias}_c$  
-- Bias effect = $1.0*\text{bias}_c$</code></pre>
+<p>Bias effect = <span class="math inline">\(0.6*\text{bias}_c + .4*\text{black defend}*\text{bias}_c\)</span><br>
+Bias effect = <span class="math inline">\(0.6*\text{bias}_c + .4*1*\text{bias}_c\)</span><br>
+Bias effect = <span class="math inline">\(1.0*\text{bias}_c\)</span></p>
 <hr>
 </section>
 <section id="quantitative-dichotomous-dichotomous-simple-effects" class="level2" data-number="11.4">
@@ -924,28 +923,27 @@ black_defend_c:bias_c  0.2312938  0.5985222</code></pre>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bias_hi =</span> bias_c <span class="sc">-</span> <span class="fu">sd</span>(bias_c))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bias_hi =</span> bias_c <span class="sc">-</span> <span class="fu">sd</span>(bias_c))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>-1 SD = 0</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bias_lo =</span> bias_c <span class="sc">+</span> <span class="fu">sd</span>(bias_c))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bias_lo =</span> bias_c <span class="sc">+</span> <span class="fu">sd</span>(bias_c))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section>
-<section id="note-it-is-easy-to-confuse-these-transformations.-do-a-logical-check-on-your-results." class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="note-it-is-easy-to-confuse-these-transformations.-do-a-logical-check-on-your-results."><span class="header-section-number">11.5</span> <em>Note</em>: It is easy to confuse these transformations. Do a logical check on your results.</h2>
+<p><em>Note</em>: It is easy to confuse these transformations. Do a logical check on your results.</p>
+<hr>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>m_bias_hi <span class="ot">=</span> <span class="fu">lm</span>(guilt <span class="sc">~</span> black_defend_c <span class="sc">*</span> bias_hi, <span class="at">data =</span> data)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>m_bias_hi <span class="sc">|&gt;</span> </span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>m_bias_hi <span class="ot">=</span> <span class="fu">lm</span>(guilt <span class="sc">~</span> black_defend_c <span class="sc">*</span> bias_hi, <span class="at">data =</span> data)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>m_bias_hi <span class="sc">|&gt;</span> </span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 5
@@ -962,10 +960,10 @@ black_defend_c:bias_c  0.2312938  0.5985222</code></pre>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>m_bias_lo <span class="ot">=</span> <span class="fu">lm</span>(guilt <span class="sc">~</span> black_defend_c <span class="sc">*</span> bias_lo, <span class="at">data =</span> data)</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>m_bias_lo <span class="sc">|&gt;</span> </span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>m_bias_lo <span class="ot">=</span> <span class="fu">lm</span>(guilt <span class="sc">~</span> black_defend_c <span class="sc">*</span> bias_lo, <span class="at">data =</span> data)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>m_bias_lo <span class="sc">|&gt;</span> </span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 5
@@ -1037,24 +1035,24 @@ black_defend_c:bias_c  0.2312938  0.5985222</code></pre>
 <hr>
 <p><strong>From centered model</strong></p>
 <p><span style="color: blue;">Mean:</span></p>
-<pre><code>- Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*\text{bias}_c$  
-- Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*0$  
-- Defendant race effect = $8.5*\text{black defend}_c$</code></pre>
+<p>Defendant race effect = <span class="math inline">\(8.5*\text{black defend}_c + .4*\text{black defend}_c*\text{bias}_c\)</span><br>
+Defendant race effect = <span class="math inline">\(8.5*\text{black defend}_c + .4*\text{black defend}_c*0\)</span><br>
+Defendant race effect = <span class="math inline">\(8.5*\text{black defend}_c\)</span></p>
 <p><span style="color: blue;">-1 SD:</span></p>
-<pre><code>- Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*\text{bias}_c$  
-- Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*-16.2$  
-- Defendant race effect = $1.8*\text{black defend}_c$ (w/rounding error)</code></pre>
+<p>Defendant race effect = <span class="math inline">\(8.5*\text{black defend}_c + .4*\text{black defend}_c*\text{bias}_c\)</span><br>
+Defendant race effect = <span class="math inline">\(8.5*\text{black defend}_c + .4*\text{black defend}_c*-16.2\)</span><br>
+Defendant race effect = <span class="math inline">\(1.8*\text{black defend}_c\)</span> (w/rounding error)</p>
 <p><span style="color: blue;">+1 SD:</span></p>
-<pre><code>- Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*\text{bias}_c$  
-- Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*16.2$  
-- Defendant race effect = $15.2*\text{black defend}_c$ (w/rounding error)</code></pre>
+<p>Defendant race effect = <span class="math inline">\(8.5*\text{black defend}_c + .4*\text{black defend}_c*\text{bias}_c\)</span><br>
+Defendant race effect = <span class="math inline">\(8.5*\text{black defend}_c + .4*\text{black defend}_c*16.2\)</span><br>
+Defendant race effect = <span class="math inline">\(15.2*\text{black defend}_c\)</span> (w/rounding error)</p>
 <hr>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>plot_int <span class="sc">+</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(data<span class="sc">$</span>bias) <span class="sc">+</span> <span class="fu">sd</span>(data<span class="sc">$</span>bias), <span class="at">linewidth =</span> .<span class="dv">75</span>) <span class="sc">+</span></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(data<span class="sc">$</span>bias) <span class="sc">-</span> <span class="fu">sd</span>(data<span class="sc">$</span>bias), <span class="at">linewidth =</span> .<span class="dv">75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>plot_int <span class="sc">+</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(data<span class="sc">$</span>bias) <span class="sc">+</span> <span class="fu">sd</span>(data<span class="sc">$</span>bias), <span class="at">linewidth =</span> .<span class="dv">75</span>) <span class="sc">+</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(data<span class="sc">$</span>bias) <span class="sc">-</span> <span class="fu">sd</span>(data<span class="sc">$</span>bias), <span class="at">linewidth =</span> .<span class="dv">75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -1066,8 +1064,8 @@ black_defend_c:bias_c  0.2312938  0.5985222</code></pre>
 </div>
 <hr>
 </section>
-<section id="a-sample-brief-report-defendant-race-is-focal" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="a-sample-brief-report-defendant-race-is-focal"><span class="header-section-number">11.6</span> A sample brief report: Defendant race is focal</h2>
+<section id="a-sample-brief-report-defendant-race-is-focal" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="a-sample-brief-report-defendant-race-is-focal"><span class="header-section-number">11.5</span> A sample brief report: Defendant race is focal</h2>
 <p>Defendant guilt ratings were analyzed in a General Linear Model with defendant race (Black vs.&nbsp;White) as a dichotomous variable and juror implicit bias (mean centered) as a quantitative variable. The interaction between these two variables was also included in the model.</p>
 <p>The overall model accounted for a significant amount of variance in guilt ratings, <span class="math inline">\(R^2= 0.59, F(3,236) = 114.00, p &lt; .001\)</span>. A significant main effect of defendant race was observed, 95% CI(<span class="math inline">\(b\)</span>)= [5.5,11.5], <span class="math inline">\(\Delta R^2=.06, t(236) = 5.66, p &lt; .001\)</span>, such that Black defendants were rated as 8.5 units more guilty than White defendants among jurors of mean bias. However, juror bias significantly moderated the defendant race effect, 95% CI(<span class="math inline">\(b\)</span>)= [0.2,0.6], <span class="math inline">\(\Delta R^2=.03, t(236) = 4.45, p &lt; .001\)</span>, indicating that the magnitude of the defendant race effect increased by 0.4 units for every one unit increase in juror bias (see Figure 1). Given this, the simple effect of defendant race was substantially reduced and non-significant among jurors who were low on bias (1 SD below the mean), 95% CI(<span class="math inline">\(b\)</span>)= [-2.4,5.6], <span class="math inline">\(\Delta R^2=.00, t(236)= 0.85, p= .399\)</span>. In contrast, the effect of defendant race was substantially larger and significant among jurors who were high on bias, 95% CI(<span class="math inline">\(b\)</span>)= [11.0,19.4], <span class="math inline">\(\Delta R^2=.09, t(236)= 7.15, p &lt; .001\)</span>.</p>
 
