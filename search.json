@@ -84,7 +84,47 @@
     "href": "01_overview.html#the-general-linear-model",
     "title": "1  Overview",
     "section": "1.6 The General Linear Model",
-    "text": "1.6 The General Linear Model",
+    "text": "1.6 The General Linear Model\nTop level: General Linear Models\n3rd level: Multiple Regression Models\n2nd level: Simple Regression Models\nBottom level: Single Mean Models",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "01_overview.html#single-mean-models-bottom-level",
+    "href": "01_overview.html#single-mean-models-bottom-level",
+    "title": "1  Overview",
+    "section": "1.7 Single Mean Models (Bottom level)",
+    "text": "1.7 Single Mean Models (Bottom level)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "01_overview.html#simple-regression-models-2nd-level",
+    "href": "01_overview.html#simple-regression-models-2nd-level",
+    "title": "1  Overview",
+    "section": "1.8 Simple Regression Models (2nd level)",
+    "text": "1.8 Simple Regression Models (2nd level)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "01_overview.html#multiple-regression-models-3rd-level",
+    "href": "01_overview.html#multiple-regression-models-3rd-level",
+    "title": "1  Overview",
+    "section": "1.9 Multiple Regression Models (3rd level)",
+    "text": "1.9 Multiple Regression Models (3rd level)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "01_overview.html#general-linear-models-top-level",
+    "href": "01_overview.html#general-linear-models-top-level",
+    "title": "1  Overview",
+    "section": "1.10 General Linear Models (Top level)",
+    "text": "1.10 General Linear Models (Top level)",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
