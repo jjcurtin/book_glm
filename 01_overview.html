@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="book.css">
 </head>
@@ -361,15 +390,108 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="single-mean-models-bottom-level" class="level2" data-number="1.7">
 <h2 data-number="1.7" class="anchored" data-anchor-id="single-mean-models-bottom-level"><span class="header-section-number">1.7</span> Single Mean Models (Bottom level)</h2>
+<p><strong>Basic Question</strong></p>
+<p>What is the mean of an outcome/dependent/criterion variable in a sample? Is that mean different from some specified value?</p>
+<p><span class="math inline">\(Y = b_0\)</span></p>
+<p><strong>Example</strong></p>
+<p>What is the mean IQ of Psyc 610 students? Is it different from the average IQ of 100?</p>
+<p><span style="color: red;">Question: What is this GLM special case analysis often called?</span></p>
+<hr>
+<p><span style="color: blue;">One sample t-test</span></p>
 <hr>
 </section>
 <section id="simple-regression-models-2nd-level" class="level2" data-number="1.8">
 <h2 data-number="1.8" class="anchored" data-anchor-id="simple-regression-models-2nd-level"><span class="header-section-number">1.8</span> Simple Regression Models (2nd level)</h2>
+<p><strong>Basic Question</strong></p>
+<p>What is the relationship between a predictor variable and a dependent variable?</p>
+<p><span class="math inline">\(Y = b_0 + b_1*X_1\)</span></p>
+<p><strong>Example</strong></p>
+<p>Is trait level of positive emotionality related to satisfaction with a romantic relationship?</p>
+<p><span style="color: red;">Question: What is the special case analysis when both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are quantitative?</span></p>
+<hr>
+<p><span style="color: blue;">Pearson’s correlation (also simple bivariate regression)</span></p>
+<hr>
+<p><span style="color: red;">Question: What is the special case analysis when <span class="math inline">\(X\)</span> is a regressor coding for a dichotomous variable representing group membership (e.g., sex)?</span></p>
+<hr>
+<p><span style="color: blue;">Between groups (independent samples) t-test (or one-way ANOVA with two groups)</span></p>
 <hr>
 </section>
 <section id="multiple-regression-models-3rd-level" class="level2" data-number="1.9">
 <h2 data-number="1.9" class="anchored" data-anchor-id="multiple-regression-models-3rd-level"><span class="header-section-number">1.9</span> Multiple Regression Models (3rd level)</h2>
-<hr>
+<p><strong>Basic Question</strong></p>
+<p>What are the relationships between a linear combination of predictors and a dependent variable?</p>
+<p><span class="math inline">\(Y = b_0 + b_1*X_1 + b_2*X_2 + b_3*X_3\)</span></p>
+<p><strong>Example</strong></p>
+<p>How well do the variables of (a) number of absences, (b) time spent studying, and (c) interest predict final exam scores?</p>
+<p><span style="color: red;">Question: What is the special case analysis when <span class="math inline">\(X\)</span>s are regressors coding for categorical variable(s) representing group membership?</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><span style="color: blue;">Analysis of Variance (ANOVA)</span></td>
+</tr>
+<tr class="even">
+<td><strong>Basic Question</strong></td>
+</tr>
+<tr class="odd">
+<td>What are the mean differences in the dependent variable between the groups represented by the independent variable(s)?</td>
+</tr>
+<tr class="even">
+<td><strong>Example</strong></td>
+</tr>
+<tr class="odd">
+<td>Are there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock?</td>
+</tr>
+</tbody>
+</table>
+<p><span style="color: red;">Question: What is the special case analysis when <span class="math inline">\(X\)</span>s are regressors coding for categorical variables representing group membership, and one or more quantitative <em>covariates</em>?</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><span style="color: blue;">Analysis of Covariance (ANCOVA)</span></td>
+</tr>
+<tr class="even">
+<td><strong>Basic Question</strong></td>
+</tr>
+<tr class="odd">
+<td>What are the mean differences in the dependent variable between the groups represented by the independent variable(s), holding one or more <em>covariates</em> constant?</td>
+</tr>
+<tr class="even">
+<td><strong>Example</strong></td>
+</tr>
+<tr class="odd">
+<td>Are there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock, after equating the groups on trait anxiety scores?</td>
+</tr>
+</tbody>
+</table>
+<p><span style="color: red;">Question: What is the special case analysis when <span class="math inline">\(X\)</span>s are regressors coding for categorical and quantitative variables representing group membership and quantitative scores on individual difference variables?</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><span style="color: blue;">Aptitude Treatment Interaction (ATI)</span></td>
+</tr>
+<tr class="even">
+<td><strong>Basic Question</strong></td>
+</tr>
+<tr class="odd">
+<td>Are the magnitudes of the contrasts among groups different across different levels of some individual difference variable?</td>
+</tr>
+<tr class="even">
+<td><strong>Example</strong></td>
+</tr>
+<tr class="odd">
+<td>Does the effect of CBT treatment (i.e., contrast of CBT vs.&nbsp;wait list control) on subsequent alcohol related problems differ dependent upon level of intelligence?</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="general-linear-models-top-level" class="level2" data-number="1.10">
 <h2 data-number="1.10" class="anchored" data-anchor-id="general-linear-models-top-level"><span class="header-section-number">1.10</span> General Linear Models (Top level)</h2>

@@ -94,7 +94,7 @@
     "href": "01_overview.html#single-mean-models-bottom-level",
     "title": "1  Overview",
     "section": "1.7 Single Mean Models (Bottom level)",
-    "text": "1.7 Single Mean Models (Bottom level)",
+    "text": "1.7 Single Mean Models (Bottom level)\nBasic Question\nWhat is the mean of an outcome/dependent/criterion variable in a sample? Is that mean different from some specified value?\n\\(Y = b_0\\)\nExample\nWhat is the mean IQ of Psyc 610 students? Is it different from the average IQ of 100?\nQuestion: What is this GLM special case analysis often called?\n\nOne sample t-test",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
@@ -104,7 +104,7 @@
     "href": "01_overview.html#simple-regression-models-2nd-level",
     "title": "1  Overview",
     "section": "1.8 Simple Regression Models (2nd level)",
-    "text": "1.8 Simple Regression Models (2nd level)",
+    "text": "1.8 Simple Regression Models (2nd level)\nBasic Question\nWhat is the relationship between a predictor variable and a dependent variable?\n\\(Y = b_0 + b_1*X_1\\)\nExample\nIs trait level of positive emotionality related to satisfaction with a romantic relationship?\nQuestion: What is the special case analysis when both \\(X\\) and \\(Y\\) are quantitative?\n\nPearson’s correlation (also simple bivariate regression)\n\nQuestion: What is the special case analysis when \\(X\\) is a regressor coding for a dichotomous variable representing group membership (e.g., sex)?\n\nBetween groups (independent samples) t-test (or one-way ANOVA with two groups)",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
@@ -114,7 +114,7 @@
     "href": "01_overview.html#multiple-regression-models-3rd-level",
     "title": "1  Overview",
     "section": "1.9 Multiple Regression Models (3rd level)",
-    "text": "1.9 Multiple Regression Models (3rd level)",
+    "text": "1.9 Multiple Regression Models (3rd level)\nBasic Question\nWhat are the relationships between a linear combination of predictors and a dependent variable?\n\\(Y = b_0 + b_1*X_1 + b_2*X_2 + b_3*X_3\\)\nExample\nHow well do the variables of (a) number of absences, (b) time spent studying, and (c) interest predict final exam scores?\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical variable(s) representing group membership?\n\n\n\n\n\n\nAnalysis of Variance (ANOVA)\n\n\nBasic Question\n\n\nWhat are the mean differences in the dependent variable between the groups represented by the independent variable(s)?\n\n\nExample\n\n\nAre there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock?\n\n\n\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical variables representing group membership, and one or more quantitative covariates?\n\n\n\n\n\n\nAnalysis of Covariance (ANCOVA)\n\n\nBasic Question\n\n\nWhat are the mean differences in the dependent variable between the groups represented by the independent variable(s), holding one or more covariates constant?\n\n\nExample\n\n\nAre there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock, after equating the groups on trait anxiety scores?\n\n\n\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical and quantitative variables representing group membership and quantitative scores on individual difference variables?\n\n\n\n\n\n\nAptitude Treatment Interaction (ATI)\n\n\nBasic Question\n\n\nAre the magnitudes of the contrasts among groups different across different levels of some individual difference variable?\n\n\nExample\n\n\nDoes the effect of CBT treatment (i.e., contrast of CBT vs. wait list control) on subsequent alcohol related problems differ dependent upon level of intelligence?",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
