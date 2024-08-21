@@ -20,6 +20,76 @@
     ]
   },
   {
+    "objectID": "01_overview.html",
+    "href": "01_overview.html",
+    "title": "1  Overview",
+    "section": "",
+    "text": "1.1 Today’s Outline",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "01_overview.html#todays-outline",
+    "href": "01_overview.html#todays-outline",
+    "title": "1  Overview",
+    "section": "",
+    "text": "Quick introductions\nSyllabus and course outline\nGeneral Linear Model framework",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "01_overview.html#my-research",
+    "href": "01_overview.html#my-research",
+    "title": "1  Overview",
+    "section": "1.2 My Research",
+    "text": "1.2 My Research\nI am a clinical psychologist.\nMy laboratory focuses on algorithm development for temporally precise psychiatric risk prediction (e.g., moment by moment relapse risk prediction; efficient and early psychiatric screening) and “just-in-time” personalized interventions that adapt to both characteristics of the patient and their moment in time.\nTo this end, we combine analytic approaches from machine learning with novel, highly informative signals (e.g., geolocation; cellular communications; social media activity; physiology via wearable biosensors) derived by passive personal sensing.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "01_overview.html#my-personal-life",
+    "href": "01_overview.html#my-personal-life",
+    "title": "1  Overview",
+    "section": "1.3 My Personal Life",
+    "text": "1.3 My Personal Life\n\n\n\n\n\n\n\n\n\n\n\nMy family\nSports: Running, biking, cross-country skiing, all things mountain…\n“John”",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "01_overview.html#so-tell-us-who-you-are",
+    "href": "01_overview.html#so-tell-us-who-you-are",
+    "title": "1  Overview",
+    "section": "1.4 So tell us who you are …",
+    "text": "1.4 So tell us who you are …\n\nOur TAs\nYou\n\nYour preferred name/nickname\nDepartment/area group",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "01_overview.html#the-syllabus-and-course-webbook",
+    "href": "01_overview.html#the-syllabus-and-course-webbook",
+    "title": "1  Overview",
+    "section": "1.5 The Syllabus and Course Webbook",
+    "text": "1.5 The Syllabus and Course Webbook\nhttps://jjcurtin.github.io/book_glm/",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "01_overview.html#the-general-linear-model",
+    "href": "01_overview.html#the-general-linear-model",
+    "title": "1  Overview",
+    "section": "1.6 The General Linear Model",
+    "text": "1.6 The General Linear Model",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
     "objectID": "02_sampling_distributions.html",
     "href": "02_sampling_distributions.html",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
