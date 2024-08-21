@@ -124,7 +124,27 @@
     "href": "01_overview.html#general-linear-models-top-level",
     "title": "1  Overview",
     "section": "1.10 General Linear Models (Top level)",
-    "text": "1.10 General Linear Models (Top level)",
+    "text": "1.10 General Linear Models (Top level)\nBasic Question\nWhat are the relationships between linear combinations of two sets of variables?\n\\(b_{Y1}*Y_1 + b_{Y2}*Y_2 + b_{Y3}*Y_3 = b_1*X_1 + b_2*X_2 + b_3*X_3\\)\nExample\nWhat are relationships between (a) Personality and temperamental variables, and (b) frequency/quantity of substance use, problems, and motives for use?\nQuestion: What is this GLM special case analysis called?\n\nCanonical correlation\n\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical variables representing group membership?\n\n\n\n\n\n\nMultivariate Analysis of Variance (MANOVA)\n\n\nBasic Question\n\n\nWhat linear combination of dependent variables (\\(Y\\)s) maximally differentiates groups?\n\n\nExample\n\n\nDo children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning?\n\n\n\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical and quantitative variables representing group membership and quantitative covariates?\n\n\n\n\n\n\nMultivariate Analysis of Covariance (MANCOVA)\n\n\nBasic Question\n\n\nWhat linear combination of dependent variables (\\(Y\\)s) maximally differentiates groups, holding constant one or more covariates?\n\n\nExample\n\n\nDo children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning, when equated for parental expectations?\n\n\n\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for quantitative variables and \\(Y\\)s are categorical variables representing group membership?\n\n\n\n\n\n\nDiscriminant Analysis\n\n\n\n\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical variables (or constant) representing group membership and \\(Y\\)s are repeated measures of a continuous/quantitative variable?\n\n\n\nRepeated measures or mixed model ANOVA\nBasic Question\nWhat are the mean differences across \\(Y\\)s, overall or between the groups represented by the independent variables (\\(X\\)s)?\nExample\nDoes affective response differ when viewing pleasant, neutral vs. unpleasant slides? Does this slide type effect differ among participants in two beverage groups (alcohol vs. no-alcohol)?",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "01_overview.html#survey-of-glm-landscape",
+    "href": "01_overview.html#survey-of-glm-landscape",
+    "title": "1  Overview",
+    "section": "1.11 Survey of GLM Landscape",
+    "text": "1.11 Survey of GLM Landscape",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "01_overview.html#final-mind-blowing-wrinkles",
+    "href": "01_overview.html#final-mind-blowing-wrinkles",
+    "title": "1  Overview",
+    "section": "1.12 Final, Mind-blowing Wrinkles",
+    "text": "1.12 Final, Mind-blowing Wrinkles\n\nThe top-level General Linear Model is itself a special case of an even more general statistical model - the Generalized Linear Model - which allows for models with dependent measures (errors really) from different distributions and non-linear link functions connecting \\(X\\)s and \\(Y\\)s.\nThe General Linear Model can also be thought of as a special case of Structural Equation Modeling.\n\nAll of the variables that we have described so far are single-indicator, observed variables (i.e., individual constructs of interest are measured using a single task or measure).\nEach of the statistics we have described have a multiple-indicator, latent variable analog. They are special cases of these latent models in which there is only one indicator per individual construct.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]

@@ -300,6 +300,8 @@ window.Quarto = {
   <li><a href="#simple-regression-models-2nd-level" id="toc-simple-regression-models-2nd-level" class="nav-link" data-scroll-target="#simple-regression-models-2nd-level"><span class="header-section-number">1.8</span> Simple Regression Models (2nd level)</a></li>
   <li><a href="#multiple-regression-models-3rd-level" id="toc-multiple-regression-models-3rd-level" class="nav-link" data-scroll-target="#multiple-regression-models-3rd-level"><span class="header-section-number">1.9</span> Multiple Regression Models (3rd level)</a></li>
   <li><a href="#general-linear-models-top-level" id="toc-general-linear-models-top-level" class="nav-link" data-scroll-target="#general-linear-models-top-level"><span class="header-section-number">1.10</span> General Linear Models (Top level)</a></li>
+  <li><a href="#survey-of-glm-landscape" id="toc-survey-of-glm-landscape" class="nav-link" data-scroll-target="#survey-of-glm-landscape"><span class="header-section-number">1.11</span> Survey of GLM Landscape</a></li>
+  <li><a href="#final-mind-blowing-wrinkles" id="toc-final-mind-blowing-wrinkles" class="nav-link" data-scroll-target="#final-mind-blowing-wrinkles"><span class="header-section-number">1.12</span> Final, Mind-blowing Wrinkles</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/01_overview.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -495,7 +497,98 @@ window.Quarto = {
 </section>
 <section id="general-linear-models-top-level" class="level2" data-number="1.10">
 <h2 data-number="1.10" class="anchored" data-anchor-id="general-linear-models-top-level"><span class="header-section-number">1.10</span> General Linear Models (Top level)</h2>
+<p><strong>Basic Question</strong></p>
+<p>What are the relationships between linear combinations of two sets of variables?</p>
+<p><span class="math inline">\(b_{Y1}*Y_1 + b_{Y2}*Y_2 + b_{Y3}*Y_3 = b_1*X_1 + b_2*X_2 + b_3*X_3\)</span></p>
+<p><strong>Example</strong></p>
+<p>What are relationships between (a) Personality and temperamental variables, and (b) frequency/quantity of substance use, problems, and motives for use?</p>
+<p><span style="color: red;">Question: What is this GLM special case analysis called?</span></p>
 <hr>
+<p><span style="color: blue;">Canonical correlation</span></p>
+<hr>
+<p><span style="color: red;">Question: What is the special GLM case when <span class="math inline">\(X\)</span>s are regressors coding for categorical variables representing group membership?</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><span style="color: blue;">Multivariate Analysis of Variance (MANOVA)</span></td>
+</tr>
+<tr class="even">
+<td><strong>Basic Question</strong></td>
+</tr>
+<tr class="odd">
+<td>What linear combination of dependent variables (<span class="math inline">\(Y\)</span>s) maximally differentiates groups?</td>
+</tr>
+<tr class="even">
+<td><strong>Example</strong></td>
+</tr>
+<tr class="odd">
+<td>Do children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning?</td>
+</tr>
+</tbody>
+</table>
+<p><span style="color: red;">Question: What is the special GLM case when <span class="math inline">\(X\)</span>s are regressors coding for categorical and quantitative variables representing group membership and quantitative <em>covariates</em>?</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><span style="color: blue;">Multivariate Analysis of Covariance (MANCOVA)</span></td>
+</tr>
+<tr class="even">
+<td><strong>Basic Question</strong></td>
+</tr>
+<tr class="odd">
+<td>What linear combination of dependent variables (<span class="math inline">\(Y\)</span>s) maximally differentiates groups, holding constant one or more covariates?</td>
+</tr>
+<tr class="even">
+<td><strong>Example</strong></td>
+</tr>
+<tr class="odd">
+<td>Do children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning, when equated for parental expectations?</td>
+</tr>
+</tbody>
+</table>
+<p><span style="color: red;">Question: What is the special GLM case when <span class="math inline">\(X\)</span>s are regressors coding for quantitative variables and <span class="math inline">\(Y\)</span>s are categorical variables representing group membership?</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span style="color: blue;">Discriminant Analysis</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span style="color: red;">Question: What is the special GLM case when <span class="math inline">\(X\)</span>s are regressors coding for categorical variables (or constant) representing group membership and <span class="math inline">\(Y\)</span>s are repeated measures of a continuous/quantitative variable?</span></td>
+</tr>
+</tbody>
+</table>
+<p><span style="color: blue;">Repeated measures or mixed model ANOVA</span></p>
+<p><strong>Basic Question</strong></p>
+<p>What are the mean differences across <span class="math inline">\(Y\)</span>s, overall or between the groups represented by the independent variables (<span class="math inline">\(X\)</span>s)?</p>
+<p><strong>Example</strong></p>
+<p>Does affective response differ when viewing pleasant, neutral vs.&nbsp;unpleasant slides? Does this slide type effect differ among participants in two beverage groups (alcohol vs.&nbsp;no-alcohol)?</p>
+<hr>
+</section>
+<section id="survey-of-glm-landscape" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="survey-of-glm-landscape"><span class="header-section-number">1.11</span> Survey of GLM Landscape</h2>
+<hr>
+</section>
+<section id="final-mind-blowing-wrinkles" class="level2" data-number="1.12">
+<h2 data-number="1.12" class="anchored" data-anchor-id="final-mind-blowing-wrinkles"><span class="header-section-number">1.12</span> Final, Mind-blowing Wrinkles</h2>
+<ul>
+<li><p>The top-level General Linear Model is itself a special case of an even more general statistical model - the <strong>Generalized Linear Model</strong> - which allows for models with dependent measures (errors really) from different distributions and non-linear link functions connecting <span class="math inline">\(X\)</span>s and <span class="math inline">\(Y\)</span>s.</p></li>
+<li><p>The General Linear Model can also be thought of as a special case of Structural Equation Modeling.</p>
+<ul>
+<li><p>All of the variables that we have described so far are single-indicator, observed variables (i.e., individual constructs of interest are measured using a single task or measure).</p></li>
+<li><p>Each of the statistics we have described have a multiple-indicator, latent variable analog. They are special cases of these latent models in which there is only one indicator per individual construct.</p></li>
+</ul></li>
+</ul>
 
 
 </section>
