@@ -1,0 +1,163 @@
+---
+title: "Homework #3" 
+author: "Your Name" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+Due <!--Wednesday, September 27, 2023, 1:30pm--> on Canvas
+-	Select the Assignments menu and find HW Week 3
+-	Submit both an HTML file and a .qmd file
+-	Make sure you can access this folder ahead of the homework due date
+
+
+## Part A. Reading Questions
+
+
+### 1.	Define Type I and Type II error. For each type, give an example of how a researcher could reduce the risk of committing the error.
+
+
+### 2.	In practical terms, what does the numerator of the F statistic equation represent? The denominator?
+
+
+### 3.	Statistical terms: What special name is given to the mean-squared-error from the mean-only model?
+
+
+
+## Part B. Reliability and Validity Exercise
+
+Take the personality test found at https://www.matthewbarr.co.uk/personality/. This test identifies which character from the original Star Wars movies you are most like. 
+
+
+### 4.	What does it mean for a test to be reliable? Take the test a second time. Does it seem to be reliable?
+
+
+### 5.	What does it mean for a test to be valid? Does this test seem valid? Explain your answer referring to one of the four types of validity.
+
+
+## Part C. Practice with `ggplot2()`
+
+In ChatGPT, paste the following prompt: *Fifty students answer the questions: (1) How many Badger shirts do you own? and (2) How many Badger football games did you attend? The variables are named badger_shirts and games_attended, respectively. Badger_shirts has a minimum of 0 and a maximum of 20 and games_attended has a minimum of 0 and a maximum of 10. Generate a fake dataset for me in R so that as badger_shirts increases games_attended increases. Also, include 6 outliers.*
+
+
+### 6. Set up your global options for your script. This includes loading any libraries you need.
+
+```{r}
+
+```
+
+
+### 7.	Copy the code that ChatGPT provides into your quarto doc and run it. You don’t necessarily need to know what this code is doing. Note: If you want to save a dataset in R, you can use `write.csv()` to save it in your working directory. However, you won’t need to save this dataset.
+
+```{r}
+
+```
+
+
+### 8.	Now, use the ggplot2 cheat sheet to create a quick and dirty scatterplot with the two variables. The plot should have a white background, meaningful x- and y-axis labels, and a title. Don’t worry about adding a best-fit line or error bands.
+
+```{r}
+
+```
+
+
+## Part D. Data analysis
+
+For this homework, we will use the `stray_animals.csv` file. This data set contains (fictitious) statistics about the number of stray animals (in thousands) in each of the 50 US states. The data set contains information about the number of stray dogs, cats, and other animals measured in one year. The data set also specifies whether the state participated in a nation-wide TNR (trap-neuter-return) program that was launched in an attempt to reduce the number of stray cats. In the data file, states that adopted the TNR program have a 1 in the `tnr` variable. States that did not adopt the program have a 0 in the `tnr` variable. Finally, the data set also includes information about the number of animal shelters per 10,000 people in each state. 
+
+### 9.	Read in the data and inspect them (summaries, structure, descriptive stats).
+
+```{r}
+
+```
+
+
+### 10.	Create a quick and dirty plot that shows whether the number of stray dogs is related to the number of animal shelters in the state. This time, use the `plot()` function.
+
+a.	Create the plot.
+
+```{r}
+
+```
+
+b.	Add a best fitting line.
+
+```{r}
+
+```
+
+c.	Does the relationship appear positive or negative? Strong, moderate, or weak?
+
+```{r}
+
+```
+
+
+### 11.	Go through the following steps to create a composite score that reflects the overall numbers of stray animals, referred to as the `stray_index` in these questions:
+
+a.	Standardize the measures for stray dogs, stray cats, and other stray animals.
+
+```{r}
+
+```
+
+
+b.	Check to make sure you standardized these variables correctly. 
+
+```{r}
+
+```
+
+
+c.	Create a new variable (`strays_z_m`) representing the average of these standardized scores.
+
+```{r}
+
+```
+
+
+d.	Comment on the researchers’ decision to standardize then average these scores. Does their decision make sense or not? How does this measure differ (in practical terms) from one in which the researchers average the scores without standardizing them? 
+
+### 12.	Create two histograms of the number of stray cats. One for the states that took part in the program, and the other for the states that did not. Label your histograms properly. 
+
+```{r}
+
+```
+
+
+### 13.	What is the formula for each of the two models you should compare if you want to know whether the number of stray cats is different from zero? 
+
+
+### 14.	Compute the SSE for each of the two models in the previous question. Do so by using a step-by-step brute force method, like we did in lab. Remember to label clearly (e.g., `sse_null`, `sse_mean`). 
+
+```{r}
+
+```
+
+
+### 15.	Compare the two models by calculating the appropriate F statistic and p value. 
+
+a.	Is estimating the mean worth the increased complexity of the model? Why? Interpret the result in plain English.
+
+```{r}
+
+```
+
+
+b.	Why is this model comparison not super informative (i.e., why are you not surprised 0 is a worse predictor for the number of stray cats per year? Why is the null model “stupid”?).
+
+### 16.	Sometimes learning stats or programming is difficult and you just need a little positive feedback. Figure out which package contains the `praise()` function, and complete all the steps you need in order to write a line of code using `praise()` to tell you something nice. 
+
+
+```{r}
+
+```
+
+
+### Part E. Tell us how long it took you to complete this assignment. 
