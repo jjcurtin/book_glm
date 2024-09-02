@@ -1,0 +1,124 @@
+---
+title: "Homework #4" 
+author: "Your Name" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+Due <!--Wednesday, October 4th, 2023, at 1:30 PM. --> on Canvas.   
+
+-	Select the Assignments menu and find HW Week 4
+-	Submit both an HTML file and a .qmd file
+-	Make sure you can access this folder ahead of the homework due date
+
+
+## Part A. Reading Questions
+
+
+### 1.	Sampling procedures: What core assumption is required for the mean to be the most efficient estimator for a given sample? 
+
+
+
+### 2.	F statistic: What are the two reasons for calculating F, according to Judd et al.’s Data Analysis? 
+
+
+
+### 3.	Statistical terms: What special name is given to the square root of the mean-squared-error from the mean-only model? 
+
+
+
+### 4.	Confidence Intervals: According to Judd and colleagues, what information does one need in order to calculate the 95% confidence intervals for the parameter of a simple linear regression that represents the slope?
+
+
+
+
+## Part B. Data analysis
+
+A group of researchers is interested in determining why people believe conspiracy theories. Specifically, the researchers want to see if individuals who have high anxiety scores are more likely to also believe conspiracy theories. The researchers want to further test if individuals who use social media are more likely to believe conspiracy theories than individuals who do not use social media.   
+
+The data file `conspiracy.csv` contains data from 1,974 (fake) participants who completed a survey assessing their (1) belief in conspiracy theories, (2) anxiety, (3) use of social media, and (4) demographic characteristics for age, gender, and political affiliation. Further information about each variable is written below.    
+
+Variables:   
+
+- `id`: a unique id assigned to each participant ranging from 1 to 1974.
+- `cons1` – `cons15`: 15 items assessing the extent to which individuals believe conspiracy theories. All fifteen conspiracy items are forward coded. Response options range from 1 to 5 with greater scores indicating stronger belief in conspiracy theories.
+- `SocialMedia`: Indicates whether or not an individual uses social media. A score of 1 indicates a person does not use social media. A score of 2 indicates a person does use social media.
+- `AnnoyingVariable`: this is a useless variable that your TAs included so that you can practice removing it.
+- `Anx1` – `Anx5`: 5 items assessing an individual’s anxiety. Items `Anx4` and `Anx5` are reverse coded. Response options range from 1 to 5 with greater scores indicating higher anxiety.
+- `Age`: the participant’s age.
+- `Gender`: the participant’s gender identity. Gender was identified as 1 (woman), 2 (man), 3 (another Gender Identity), 4 (prefer not to say).  
+- Political Affiliation was measured using the American National Election Studies 7-Point Political Party Affiliation Scale. This scale includes 4 separate items of which participants only answer 2. The four items contained within the ANES scale are described as follows: 
+
+    - `anes_0`: In this scale participants are first asked if they are a (1) Republican, (2) Democrat, or (3) an Independent (i.e., someone who is neither a Republican nor Democrat). Responses to this first item are included in the `anes_0` column.
+    - `anes_rep`: If participants answer “Republican” to `anes_0`, they complete question `anes_rep` - a score of 1 indicates the participant is a “Strong Republican” and a score of 2 indicates the participant is a “Weak Republican.”
+    - `anes_dem`: If participants answer “Democrat” to `anes_0`, they complete question `anes_dem` - a score of 7 indicates the participant is a “Strong Democrat” and a score of 6 indicates the participant is a “Weak Democrat.”
+    - `anes_ind`: If participants answer “Independent” to `anes_0`, they complete question `anes_ind` (for independents) - a score of 3 indicates the participant is a “Republican Leaning Independent,” a score of 4 indicates the participant is an “Independent,” and a score of 5 indicates the participant is a “Democratic Leaning Independent.”
+
+
+### 1.	Set up your script and read in the data. You will notice our data is a little messy. 
+
+
+
+**a. convert variable names to snake case.**
+
+
+**b. Create a composite score for political affiliation by combing `anes_rep`, `anes_dem`, and `anes_ind`. The resulting variable should a factor that includes the following levels and labels: 1 (Strong Republican), 2 (Weak Republican), 3 (Republican Leaning Independent), 4 (Independent), 5 (Democratic Leaning Independent), 6 (Weak Democrat), and 7 (Strong Democrat). You can remove the original variables: `anes_rep`, `anes_dem`, and `anes_ind`. You may need to use external sources like google and Chat GPT to complete this question.**
+
+
+**c. Convert any other ordinal variables to factors with descriptive labels.**   
+
+
+
+**d. Get summary statistics for each of the variables in the data frame.** 
+
+
+### 2.	Notice that there is a variable that we do not need for these analyses (labeled `annoying_variable`). Remove this variable. Run a command that shows the names of the variables that are left. 
+
+
+
+### 3.	Prepare your two predictor variables and your outcome variable for data analysis. To do so, create composite scores for participant’s belief in conspiracy theory scores and anxiety scores. Do not include any participant in a composite score if they have missed more than 1/3 of the response items for a variable. While it will not affect your interpretation of b1, later in the homework we will ask you to interpret b0. For the sake of easier interpretation of b0, recode social media use age -0.5 (does not use social media) and 0.5 (uses social media).
+
+
+
+### 4.	Make two quick and dirty plots exploring our main questions (i.e., do anxiety or social media predict the belief in conspiracy theories?).
+
+
+### 5.	Fit a linear model to determine if anxiety predicts the belief in conspiracy theories. Report the corresponding (b1) parameter estimate, F-statistic, df, p-value, and PRE. Provide a 95% confidence interval for the (b1) parameter estimate. 
+
+
+### 6.	Create a publication-quality graph that depicts the model that you fit in Question 5. Make sure you label each axis and include the data points. 
+
+
+
+### 7.	Fit a linear model to determine if social media use predicts the belief in conspiracy theories. Report the corresponding (b1) parameter estimate, F-statistic, df, and p-value. Provide a 95% confidence interval for the (b1) parameter estimate and PRE (partial eta squared).  
+
+
+
+### 8.	Provide a one sentence interpretation of PRE for the effect of social media use on the belief in conspiracy theories. 
+
+
+
+### 9.	From the output of the linear model from Question 7, interpret the “intercept” or b0 coefficient. What does it mean in this sample? What does its corresponding p value mean?
+
+
+
+### 10.	Create a publication-quality graph that depicts the model you fit in Question 7. 
+
+
+
+### 11.	Write a concise (a few sentences) description of the tests you conducted in Questions 5 and 7. Include the statistical results of your tests, and the practical interpretation of the results. Write your response so that someone who does not know anything about these data could understand your results.
+
+
+
+### 12.	Provide statistics for your demographic variables. For age, report a mean and standard deviation. For gender and political affiliation, identify the number and percentage of participants in each demographic category (i.e., the number of Strong Republicans, Weak Republicans, etc.). The table does not need to be publication quality.
+
+
+
+
+## Part C. Tell us how long it took you to complete this assignment. 
