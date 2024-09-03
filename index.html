@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.45">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="book.css">
 </head>
@@ -79,13 +108,13 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Course Syllabus</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -101,17 +130,17 @@ ul.task-list li input[type="checkbox"] {
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/jjcurtin/book_glm" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-facebook pe-1"></i>
+              <i class="bi bi-bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-linkedin pe-1"></i>
+              <i class="bi bi-bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
@@ -230,9 +259,9 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -263,29 +292,27 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#course-syllabus" id="toc-course-syllabus" class="nav-link active" data-scroll-target="#course-syllabus">Course Syllabus</a>
   <ul class="collapse">
+  <li><a href="#course-designations-and-attributes" id="toc-course-designations-and-attributes" class="nav-link" data-scroll-target="#course-designations-and-attributes">Course Designations And Attributes</a></li>
+  <li><a href="#meeting-time-and-location" id="toc-meeting-time-and-location" class="nav-link" data-scroll-target="#meeting-time-and-location">Meeting Time And Location</a></li>
   <li><a href="#instructor" id="toc-instructor" class="nav-link" data-scroll-target="#instructor">Instructor</a></li>
   <li><a href="#teaching-assistants" id="toc-teaching-assistants" class="nav-link" data-scroll-target="#teaching-assistants">Teaching Assistants</a></li>
-  <li><a href="#course-website" id="toc-course-website" class="nav-link" data-scroll-target="#course-website">Course Website</a></li>
   <li><a href="#communications" id="toc-communications" class="nav-link" data-scroll-target="#communications">Communications</a></li>
-  <li><a href="#meeting-times" id="toc-meeting-times" class="nav-link" data-scroll-target="#meeting-times">Meeting Times</a></li>
   <li><a href="#course-description" id="toc-course-description" class="nav-link" data-scroll-target="#course-description">Course Description</a></li>
-  <li><a href="#requisites" id="toc-requisites" class="nav-link" data-scroll-target="#requisites">Requisites</a></li>
-  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes">Learning Outcomes</a></li>
-  <li><a href="#course-topics" id="toc-course-topics" class="nav-link" data-scroll-target="#course-topics">Course Topics</a></li>
-  <li><a href="#schedule" id="toc-schedule" class="nav-link" data-scroll-target="#schedule">Schedule</a></li>
-  <li><a href="#required-textbooks-and-software" id="toc-required-textbooks-and-software" class="nav-link" data-scroll-target="#required-textbooks-and-software">Required Textbooks and Software</a></li>
-  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
-  <li><a href="#exams-application-assignments-and-quizzes" id="toc-exams-application-assignments-and-quizzes" class="nav-link" data-scroll-target="#exams-application-assignments-and-quizzes">Exams, Application Assignments and Quizzes</a></li>
-  <li><a href="#application-assignments" id="toc-application-assignments" class="nav-link" data-scroll-target="#application-assignments">Application Assignments</a></li>
-  <li><a href="#chatgpt" id="toc-chatgpt" class="nav-link" data-scroll-target="#chatgpt">ChatGPT</a></li>
-  <li><a href="#student-ethics" id="toc-student-ethics" class="nav-link" data-scroll-target="#student-ethics">Student Ethics</a></li>
-  <li><a href="#diversity-and-inclusion" id="toc-diversity-and-inclusion" class="nav-link" data-scroll-target="#diversity-and-inclusion">Diversity and Inclusion</a></li>
+  <li><a href="#course-goals" id="toc-course-goals" class="nav-link" data-scroll-target="#course-goals">Course Goals</a></li>
+  <li><a href="#course-learning-outcomes" id="toc-course-learning-outcomes" class="nav-link" data-scroll-target="#course-learning-outcomes">Course Learning Outcomes</a></li>
+  <li><a href="#course-requirements-and-grades" id="toc-course-requirements-and-grades" class="nav-link" data-scroll-target="#course-requirements-and-grades">Course Requirements And Grades</a></li>
+  <li><a href="#required-texts" id="toc-required-texts" class="nav-link" data-scroll-target="#required-texts">Required Texts</a></li>
+  <li><a href="#additional-required-readings" id="toc-additional-required-readings" class="nav-link" data-scroll-target="#additional-required-readings">Additional Required Readings</a></li>
+  <li><a href="#required-software" id="toc-required-software" class="nav-link" data-scroll-target="#required-software">Required Software</a></li>
+  <li><a href="#course-schedule" id="toc-course-schedule" class="nav-link" data-scroll-target="#course-schedule">Course Schedule</a></li>
+  <li><a href="#recommended-general-texts-for-data-analysis-and-research-methodology" id="toc-recommended-general-texts-for-data-analysis-and-research-methodology" class="nav-link" data-scroll-target="#recommended-general-texts-for-data-analysis-and-research-methodology">Recommended General Texts For Data Analysis And Research Methodology</a></li>
+  <li><a href="#ethics-of-being-a-student-in-the-department-of-psychology" id="toc-ethics-of-being-a-student-in-the-department-of-psychology" class="nav-link" data-scroll-target="#ethics-of-being-a-student-in-the-department-of-psychology">Ethics of Being a Student in the Department of Psychology</a></li>
   <li><a href="#academic-integrity" id="toc-academic-integrity" class="nav-link" data-scroll-target="#academic-integrity">Academic Integrity</a></li>
-  <li><a href="#accommodations-polices" id="toc-accommodations-polices" class="nav-link" data-scroll-target="#accommodations-polices">Accommodations Polices</a></li>
+  <li><a href="#chatgpt-and-other-llms" id="toc-chatgpt-and-other-llms" class="nav-link" data-scroll-target="#chatgpt-and-other-llms">ChatGPT and other LLMs</a></li>
+  <li><a href="#accommodations-policies" id="toc-accommodations-policies" class="nav-link" data-scroll-target="#accommodations-policies">Accommodations Policies</a></li>
+  <li><a href="#diversity-inclusion" id="toc-diversity-inclusion" class="nav-link" data-scroll-target="#diversity-inclusion">Diversity &amp; Inclusion</a></li>
   <li><a href="#complaints" id="toc-complaints" class="nav-link" data-scroll-target="#complaints">Complaints</a></li>
-  <li><a href="#privacy-of-student-information-digital-tools" id="toc-privacy-of-student-information-digital-tools" class="nav-link" data-scroll-target="#privacy-of-student-information-digital-tools">Privacy of Student Information &amp; Digital Tools</a></li>
-  <li><a href="#privacy-of-student-records-the-use-of-audio-recorded-lectures" id="toc-privacy-of-student-records-the-use-of-audio-recorded-lectures" class="nav-link" data-scroll-target="#privacy-of-student-records-the-use-of-audio-recorded-lectures">Privacy of Student Records &amp; the Use of Audio Recorded Lectures</a></li>
-  <li><a href="#academic-calendar-religious-observances" id="toc-academic-calendar-religious-observances" class="nav-link" data-scroll-target="#academic-calendar-religious-observances">Academic Calendar &amp; Religious Observances</a></li>
+  <li><a href="#concerns-about-sexual-misconduct" id="toc-concerns-about-sexual-misconduct" class="nav-link" data-scroll-target="#concerns-about-sexual-misconduct">Concerns About Sexual Misconduct</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -318,199 +345,304 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="course-syllabus" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="course-syllabus">Course Syllabus</h2>
-<section id="instructor" class="level3">
-<h3 class="anchored" data-anchor-id="instructor">Instructor</h3>
-<p><strong>John Curtin</strong></p>
+<section id="course-syllabus" class="level1 unnumbered">
+<h1 class="unnumbered">Course Syllabus</h1>
+<section id="course-designations-and-attributes" class="level2">
+<h2 class="anchored" data-anchor-id="course-designations-and-attributes">Course Designations And Attributes</h2>
 <ul>
-<li>Office hours: Thursdays, 1-2 pm or by appointment in Brogden 326</li>
-<li>Email: jjcurtin@wisc.edu (but please use Slack DM or channel posts for all course communications during this semester)</li>
+<li><strong>Course Website</strong>: <a href="https://jjcurtin.github.io/book_glm/">https://jjcurtin.github.io/book_glm/</a></li>
+<li><strong>Credits</strong>: 4</li>
+<li><strong>Level</strong>: Advanced</li>
+<li><strong>Breadth</strong>: Social Science</li>
+<li><strong>L&amp;S</strong> Credit Type: Counts as LAS credit (L&amp;S)</li>
+<li><strong>Instructional</strong> Mode: All face-to-face</li>
+<li><strong>How Credit Hours are met by the Course</strong>: Four and ½ hours of classroom or direct faculty/instructor instruction and a minimum of eight hours of out of class student work each week over approximately 14 weeks.</li>
+<li><strong>Requisites</strong>: None</li>
 </ul>
 </section>
-<section id="teaching-assistants" class="level3">
-<h3 class="anchored" data-anchor-id="teaching-assistants">Teaching Assistants</h3>
-<p><strong>Michelle Marji</strong></p>
+<section id="meeting-time-and-location" class="level2">
+<h2 class="anchored" data-anchor-id="meeting-time-and-location">Meeting Time And Location</h2>
 <ul>
-<li>Office hours: Wednesdays, 10-11 am in Brogden 391 or by appointment</li>
-<li>Email: michelle.marji@wisc.edu</li>
-</ul>
-<p><strong>Kendra Wyant</strong></p>
+<li><strong>Lecture</strong>: Monday and Wednesday, 2:30-3:45 pm; Psychology 103</li>
+<li><strong>Labs</strong>:
 <ul>
-<li>Office hours: Tuesdays, 12:30-1:30 pm in Brodgen 325 or by appointment</li>
-<li>Email: kpaquette2@wisc.edu</li>
-</ul>
-</section>
-<section id="course-website" class="level3">
-<h3 class="anchored" data-anchor-id="course-website">Course Website</h3>
-<p>https://jjcurtin.github.io/book_iaml/</p>
-</section>
-<section id="communications" class="level3">
-<h3 class="anchored" data-anchor-id="communications">Communications</h3>
-<p>All course communications will occur in the course’s Slack workspace (https://iaml-2024.slack.com/). You should have received an invitation to join the workspace. If you have difficulty joining, please contact me by my email above. The TAs and I will respond to all Slack messages within 1 business day (and often much quicker). Please plan accordingly (e.g., weekend messages may not receive a response until Monday). For general questions about class, coding assignments, etc., please post the question to the appropriate public channel. If you have the question, you are probably not alone. For issues relevant only to you (e.g., class absences, accommodations, etc.), you can send a direct message in Slack to me. However, I may share the DM with the TAs unless you request otherwise. In general, we prefer that all course communication occur within Slack rather than by email so that it is centralized in one location.</p>
-</section>
-<section id="meeting-times" class="level3">
-<h3 class="anchored" data-anchor-id="meeting-times">Meeting Times</h3>
-<p>The scheduled course meeting times are Tuesdays and Thursdays from 11:00 - 12:15 pm. Tuesdays are generally used by the TAs to discuss application issues from the homework or in the course more generally. Thursdays are generally led by John and used to discuss topics from the video lectures and readings.</p>
-<p>All required videos, readings, and application assignments are described on the course website at the beginning of each unit.</p>
-</section>
-<section id="course-description" class="level3">
-<h3 class="anchored" data-anchor-id="course-description">Course Description</h3>
-<p>This course is designed to introduce students to a variety of computational approaches in machine learning. The course is designed with two key foci. First, students will focus on the application of common, “out-of-the-box” statistical learning algorithms that have good performance and are implemented in tidymodels in R. Second, students will focus on the application of these approaches in the context of common questions in behavioral science in academia and industry.</p>
-</section>
-<section id="requisites" class="level3">
-<h3 class="anchored" data-anchor-id="requisites">Requisites</h3>
-<p>Students are required to have completed Psychology 610 with a grade of B or better or a comparable course with my consent.</p>
-</section>
-<section id="learning-outcomes" class="level3">
-<h3 class="anchored" data-anchor-id="learning-outcomes">Learning Outcomes</h3>
-<ul>
-<li><p>Students will develop and refine best practices for data wrangling, general programming, and analysis in R.</p></li>
-<li><p>Students will distinguish among a variety of machine learning settings: supervised learning vs.&nbsp;unsupervised learning, regression vs.&nbsp;classification</p></li>
-<li><p>Students will be able to implement a broad toolbox of well-supported machine-learning methods: decision trees, nearest neighbor, general and generalized linear models, penalized models including ridge, lasso, and elastic-nets, neural nets, random forests.</p></li>
-<li><p>Students will develop expertise with common feature extraction techniques for quantitative and categorical predictors.</p></li>
-<li><p>Students will be able to use natural language processing approaches to extract meaningful features from text data.</p></li>
-<li><p>Students will know how to characterize how well their regression and classification models perform and they will employ appropriate methodology for evaluating their: cross validation, ROC and PR curves, hypothesis testing.</p></li>
-<li><p>Students will learn to apply their skills to common learning problems in psychology and behavioral sciences more generally.</p></li>
+<li>Friday 9:00-11:00 am (section 301, room 228; Punturieri)</li>
+<li>Friday 1:30-3:30 pm (section 302, room 228; Yu)</li>
+<li>Friday 9:00-11:00 am (section 303, room 311i; Dong)</li>
+</ul></li>
 </ul>
 </section>
-<section id="course-topics" class="level3">
-<h3 class="anchored" data-anchor-id="course-topics">Course Topics</h3>
+<section id="instructor" class="level2">
+<h2 class="anchored" data-anchor-id="instructor">Instructor</h2>
 <ul>
-<li>Overview of Machine Learning Concepts and Uses</li>
-<li>Data wrangling in R using tidyverse and tidymodels</li>
-<li>Iterations, functions, simulations in R</li>
-<li>Regression models</li>
-<li>Classification models</li>
-<li>Model performance metrics</li>
-<li>ROCs</li>
-<li>Cross validation and other resampling methods</li>
-<li>Model selection and regularization</li>
-<li>Approaches to parallel processing</li>
-<li>Feature engineering techniques</li>
-<li>Natural language processing</li>
-<li>Tree based methods</li>
-<li>Bagging and boosting</li>
-<li>Neural networks</li>
-<li>Dimensionality reduction and feature selection</li>
-<li>Explanatory methods including variable importance, partial dependence plots, etc</li>
-<li>Ethics and privacy issues</li>
+<li>John J. Curtin, Ph.D.</li>
+<li>Office hours: Room 326, Wednesdays, 3:45 - 4:45 pm or by appt.</li>
 </ul>
 </section>
-<section id="schedule" class="level3">
-<h3 class="anchored" data-anchor-id="schedule">Schedule</h3>
-<p>The course is organized around 14 weeks of academic instruction covering the following topics:</p>
+<section id="teaching-assistants" class="level2">
+<h2 class="anchored" data-anchor-id="teaching-assistants">Teaching Assistants</h2>
+<ul>
+<li>LiChen Dong; Office hours: Room 626, Mondays, 11 - 12 pm</li>
+<li>Claire Punturieri; Office hours: Room 325, Tuesdays, 8:30 - 9:30 am</li>
+<li>Coco Yu; Office hours: Room 325, Tuesdays, 1 - 2 pm</li>
+</ul>
+</section>
+<section id="communications" class="level2">
+<h2 class="anchored" data-anchor-id="communications">Communications</h2>
+<p>All course communications will occur in the course’s Slack workspace. You should have received an invitation to join the workspace. If you have difficulty joining, please let me know immediately. The TAs and I will respond to all Slack messages within 1 business day (and often much quicker). Please plan accordingly (e.g., weekend messages may not receive a response until Monday). For general questions about class, coding assignments, etc., please post the question to the appropriate public channel. If you have the question, you are probably not alone. For issues relevant only to you (e.g., class absences, accommodations, etc.), you can send a direct message in Slack to me and the TAs. If you DM only me, I will share the DM with the TAs unless you request otherwise. Therefore, it is generally best if you include all three TAs on the DM when you start the thread. In general, we prefer that all course communication occur within Slack rather than by email so that it is centralized in one location.</p>
+</section>
+<section id="course-description" class="level2">
+<h2 class="anchored" data-anchor-id="course-description">Course Description</h2>
+<p>One-sample t-test, independent-samples t-test, simple and multiple regression, effect size indicators, analysis of variance (ANOVA), analysis of covariance (ANCOVA), case analysis, model assumptions, transformations, and the generalized linear model</p>
+</section>
+<section id="course-goals" class="level2">
+<h2 class="anchored" data-anchor-id="course-goals">Course Goals</h2>
+<p>The goal of this course is to familiarize you with a statistical data analysis procedure called the general linear model. We will spend most of the semester on the use of the general linear model as a tool for analyzing data from psychological experiments. We will give special attention to the interpretation of model parameter estimates, models with quantitative and categorical predictors, and the interpretation of interaction effects in the general linear model. We will be using the statistics software R (http://www.r-project.org/). Please know that extensive work outside the classroom is required in order to succeed in this class. You are encouraged to participate actively in the class, both the lecture and the lab session.</p>
+</section>
+<section id="course-learning-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="course-learning-outcomes">Course Learning Outcomes</h2>
+<p>By the end of the course, the students should master the following data-analytic techniques and skills: - Inferences about a single mean (t-test) - The analysis of single and multiple dichotomous/categorical predictors - The analysis of single and multiple quantitative predictors - The analysis of interactions among predictors - The analysis of contrasts among levels of categorical predictors - The use of centering predictors in interactive models - Assessment and remediation techniques for case analysis and model assumptions - Logistic regression as exemplar of the generalized linear model - Generating publication-level graphs</p>
+</section>
+<section id="course-requirements-and-grades" class="level2">
+<h2 class="anchored" data-anchor-id="course-requirements-and-grades">Course Requirements And Grades</h2>
+<p>Course requirements include regular attendance, active participation in class discussion, and completion of all exams and application assignments.</p>
+<p>There will be two closed-book concepts exams completed in class to assess conceptual knowledge and three application exams completed outside of class to assess your ability to implement your conceptual knowledge with real data (each of these 5 exams counts for 15% of your total grade). The second concepts exam is scheduled during the exam period on Wednesday, December 18 from 8:15 - 9:45 am (room TBD). Please plan your end of semester travel accordingly. The midterm concepts exam and the three application exams will be schedule according to the pace of our progress through the material.</p>
+<p>There will also be approximately weekly application assignments, which will involve hands-on application of the material similar to (but shorter than) the application exams. They are assigned Wednesdays at 3:45 pm and are due the following Wednesday at 1:30 pm. These application assignments are graded on a pass/fail basis, and together constitute 20% of your total grade.</p>
+<p>Finally, 5% of your grade will be determined by your attendance and participation in lecture and lab.</p>
+<p>Final letter grades are based on total course percentages as follows:</p>
+<ul>
+<li>A: 93 or above</li>
+<li>AB: 88 - 92</li>
+<li>B: 83 - 87</li>
+<li>BC: 78 - 82</li>
+<li>C: 70 - 77</li>
+<li>D: 60-69</li>
+<li>F: &lt; 60</li>
+</ul>
+</section>
+<section id="required-texts" class="level2">
+<h2 class="anchored" data-anchor-id="required-texts">Required Texts</h2>
+<p>Judd, C.M., McClelland, G. H., &amp; Ryan, C. (2017). Data Analysis: A Model- Comparison Approach. 3rd Edition. New York, US: Routledge. ISBN: 9780805833881.</p>
+</section>
+<section id="additional-required-readings" class="level2">
+<h2 class="anchored" data-anchor-id="additional-required-readings">Additional Required Readings</h2>
+<p>Additional required readings will be provided as pdfs on the course website. The readings are pulled from various texts and primary sources. Supplemental readings and recommended reference texts are also provided on the course website and the end of this document. You are expected to read only the required readings. You will not be tested on the other readings.</p>
+</section>
+<section id="required-software" class="level2">
+<h2 class="anchored" data-anchor-id="required-software">Required Software</h2>
+<p>This course will contain a significant applied component. As such, access to statistical analysis software is required. In the context of this course, we will rely heavily on <a href="http://www.r-project.org/">R</a>. R is freely available and is rapidly becoming the standard for statistical analysis in many disciplines.</p>
+<p>A secondary goal of the course will be to provide you with introductory data wrangling skills in R within the <a href="https://www.tidyverse.org/">Tidyverse</a> ecosystem of packages. The Tidyverse is “an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.” It is arguably the dominant approach for data science in R today.</p>
+</section>
+<section id="course-schedule" class="level2">
+<h2 class="anchored" data-anchor-id="course-schedule">Course Schedule</h2>
+<p>This schedule is provisional so that we may adjust our rate of progress as necessary to ensure maximal mastery of the material. See course website for the most up to date version of the assigned readings and topics.</p>
 <ol type="1">
-<li>Introduction to course and machine learning</li>
-<li>Exploratory data analysis</li>
-<li>Regression models</li>
-<li>Classification models</li>
-<li>Resampling methods for model selection and evaluation</li>
-<li>Regularization and penalized models</li>
-<li>Midterm exam/project</li>
-<li>Advanced performance metrics</li>
-<li>Model comparisons</li>
-<li>Advanced models: Random forests and ensemble methods (bagging, boosting, stacking)</li>
-<li>Advanced models: Neural networks</li>
-<li>Natural Language Processing I: Text processing and feature engineering</li>
-<li>Applications</li>
-<li>Ethics</li>
+<li>Introduction to inferential statistics (1 day)</li>
 </ol>
 <ul>
-<li>The final exam is during exam week on Tuesday May 7th from 11 - 12:15 in our normal classroom.</li>
-<li>The final project is due during exam week on Wednesday May 8th at 8 pm.</li>
+<li>introduction to the course</li>
+<li>the GLM framework</li>
+<li>data exploration in R (descriptive statistics, visual displays) (lab only)</li>
 </ul>
-</section>
-<section id="required-textbooks-and-software" class="level3">
-<h3 class="anchored" data-anchor-id="required-textbooks-and-software">Required Textbooks and Software</h3>
-<p>All required textbooks are freely available online (though hard copies can also be purchased if desired). There are eight required textbooks for the course. The primary text for which we will read many chapters is:</p>
+<ol start="2" type="1">
+<li>Sampling Distributions (1 day)</li>
+</ol>
 <ul>
-<li>James, G., Witten, D., Hastie, T., &amp; Tibshirani, R. An Introduction to Statistical Learning: With Applications in R (2023; 2nd Edition). (<a href="https://www.statlearning.com/">website</a>)</li>
+<li>standard deviation, standard error of the mean</li>
+<li>theory of null hypothesis significance testing</li>
 </ul>
-<p>We will also read sections to chapters in each of the following texts:</p>
+<ol start="3" type="1">
+<li>Inferences about a single mean (one-sample t test) (1 day)</li>
+</ol>
 <ul>
-<li><p>Wickham, H. &amp; Grolemund, G. R for Data Science: Import, Tidy, Transform, Visualize, and Model Data (1st ed.). Sebastopol, CA: O’Reilly Media, Inc.&nbsp;(<a href="https://r4ds.hadley.nz/">website</a>)</p></li>
-<li><p>Hvitfeldt, E. &amp; Silge, J. Supervised Machine Learning for Text Analysis in R (<a href="https://smltar.com/">website</a>)</p></li>
-<li><p>Kuhn, M. &amp; Johnson, K. Applied Predictive Modeling. New York, NYL Springer Science. (<a href="http://appliedpredictivemodeling.com/">website</a>)</p></li>
-<li><p>Kuhn, M., &amp; Johnson, K. Feature Engineering and Selection: A Practical Approach for Predictive Models (1st ed.). Boca Raton, FL: Chapman and Hall/CRC. (<a href="http://www.feat.engineering/">website</a>)</p></li>
-<li><p>Kuhn, M. &amp; Silge, J. Tidy Modeling with R. (<a href="https://www.tmwr.org/">website</a>)</p></li>
-<li><p>Molnar, C. Intepretable Machine Learning: A Guide for Makiong Black Box Models Explainable (2nd ed.). (<a href="https://christophm.github.io/interpretable-ml-book/">website</a></p></li>
-<li><p>Silge, J., &amp; Robinson, D. Text Mining with R: A Tidy Approach (1st ed.). Beijing; Boston: O’Reilly Media. (<a href="https://www.tidytextmining.com/">website</a>)</p></li>
-<li><p>Wickham, H. The Tidy Style Guide. (<a href="https://style.tidyverse.org/">website</a>)</p></li>
-<li><p>Boehmke, Brad and Greenwell, Brandon M. (2019). Hands-On Machine Learning with R. Chapman and Hall/CRC. (<a href="https://bradleyboehmke.github.io/HOML/">website</a>)</p></li>
-<li><p>Ng, Andrew (2018). Machine Learning Yearning: Technical Strategy for AI Engineers in the Age of Deep Learning. DeepLearning.AI. (<a href="https://github.com/ajaymache/machine-learning-yearning">website</a>)</p></li>
-<li><p>Wickham, H. (2019). Advanced R. Chapman and Hall/CRC. (<a href="https://adv-r.hadley.nz/">website</a>)</p></li>
+<li>the null model (<span class="math inline">\(Y = b_{0}\)</span>)</li>
+<li>sum of squares, number of estimated parameters, residuals, etc.</li>
+<li>the basic model (<span class="math inline">\(Y = b_{0}\)</span>)</li>
+<li>statistical inference (comparison of basic model with null model, computation of t, interpretation of p)</li>
+<li>writing up the results (text, graphs, tables) of a one-sample t test</li>
 </ul>
-<p>Additional articles will be assigned and provided by pdf through the course website.</p>
-<p>All data processing and analysis will be accomplished using R (and we recommend the RStudio IDE). R is a free software environment for statistical computing and graphics. It compiles and runs on a wide variety of UNIX platforms, Windows and MacOS.</p>
-</section>
-<section id="grading" class="level3">
-<h3 class="anchored" data-anchor-id="grading">Grading</h3>
+<ol start="4" type="1">
+<li>Inferences about a single quantitative predictor (simple regression) (2 days)</li>
+</ol>
 <ul>
-<li>Quizzes (13 anticipated): 15%</li>
-<li>Application assignments (11 anticipated): 25%</li>
-<li>Midterm application exam: 15%</li>
-<li>Midterm conceptual exam: 15%</li>
-<li>Final application exam: 15%</li>
-<li>Final conceptual exam: 15%</li>
+<li>the model : <span class="math inline">\(Y = b_0 + b_{1}X_{1}\)</span> when <span class="math inline">\(X_{1}\)</span> is quantitative</li>
+<li>computation of residuals, meaning of residuals</li>
+<li>graphic representation: intercept, slope, residuals</li>
+<li>statistical inference (comparison of the new model with the basic model, computation of t and F, interpretation of p)</li>
+<li>proportion of variance explained, computation of <span class="math inline">\(R^{2}\)</span>, interpretation of <span class="math inline">\(R^{2}\)</span>, effect sizes</li>
+<li>running a simple regression in R and interpreting the R output</li>
+<li>writing up the results (text, graphs, tables) of a simple regression analysis</li>
 </ul>
-<p>Final letter grades may be curved upward, but a minimum guarantee is made of an A for 93 or above, AB for 88 - 92, B for 83 - 87, BC for 78 - 82, C for 70 - 77, D for 60-69, and F for &lt; 60.</p>
-</section>
-<section id="exams-application-assignments-and-quizzes" class="level3">
-<h3 class="anchored" data-anchor-id="exams-application-assignments-and-quizzes">Exams, Application Assignments and Quizzes</h3>
+<ol start="5" type="1">
+<li>Inferences about a single dichotomous predictor (independent-samples t test) (1 day)</li>
+</ol>
 <ul>
-<li>The midterm application exam will be due during the 7th week of the course on Wednesday, March 6th at 8 pm.</li>
-<li>The midterm conceptual exam will be administered during class on Thursday, March 7th.</li>
-<li>The final exam is during exam week on Tuesday May 7th from 11 - 12:15 in our normal classroom.</li>
-<li>The final project is due during exam week on Wednesday May 8th at 8 pm.</li>
-<li>Approximately weekly quizzes will be administered through Canvas and due each Wednesday at 8 pm</li>
-<li>Approximately weekly application assignments will be submitted via Canvas and due each Wednesday at 8 pm.</li>
+<li>the model: <span class="math inline">\(Y = b_{0} + b_{1}X_{1}\)</span> when <span class="math inline">\(X_{1}\)</span> is dichotomous</li>
+<li>computation of residuals, meaning of residuals (= within-group variance)</li>
+<li>graphic representation: intercept, slope, residuals; comparison with bar graph</li>
+<li>statistical inference (comparison of the new model with the basic model, computation of t and F, interpretation of p)</li>
+<li>running an independent-samples t test in R (using the <code>lm()</code> function in R) and interpreting the R output</li>
+<li>writing up the results (text, graphs, tables) of an independent-samples t test</li>
+</ul>
+<ol start="6" type="1">
+<li>Inferences about two (or more) predictors (multiple regression without interaction) (4 days)</li>
+</ol>
+<ul>
+<li>the model: <span class="math inline">\(Y = b_{0} + b_{1}X_{1} + b_{2}X_{2}\)</span> when <span class="math inline">\(X_{1}\)</span> is dichotomous and <span class="math inline">\(X_{2}\)</span> is quantitative</li>
+<li>the model: <span class="math inline">\(Y = b_{0} + b_{1}X_{1} + b_{2}X_{2}\)</span> when <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span> are both quantitative</li>
+<li>computation of residuals, meaning of residuals</li>
+<li>graphic representation: two lines, intercepts, slopes, residuals</li>
+<li>statistical inference (model comparison, interpretation of the effect of one variable on DV while controlling for the effects of another variable)</li>
+<li>computation of partial r, interpretation of partial r</li>
+<li>different theoretical predictions that can be answered by multiple regression analyses that do not contain interactions</li>
+<li>models with 3, 4, 5, etc. predictors</li>
+<li>issues of collinearity, variance inflation, tolerance</li>
+<li>data fishing, overfitting, hierarchical vs.&nbsp;stepwise vs.&nbsp;simultaneous models</li>
+<li>raw vs.&nbsp;standardized coefficients, partial r</li>
+<li>writing up the results of a multiple regression analysis</li>
+</ul>
+<ol start="7" type="1">
+<li>Dealing with messy data I – case analysis (1 day)</li>
+</ol>
+<ul>
+<li>the different ways of being an outlier</li>
+<li>outlier statistics: levers <span class="math inline">\(h_{ij}\)</span>, studentized deleted residuals, Cook’s D</li>
+<li>dealing with outliers</li>
+</ul>
+<ol start="8" type="1">
+<li>Dealing with messy data II – model assumptions (1 day)</li>
+</ol>
+<ul>
+<li>the 5 assumptions of the GLM: exact X, independence, normality, constant variance, and linearity</li>
+<li>data exploration in R (visual displays: residual plots, normal quantile plots, density plots, spread-level plots, etc.)</li>
+<li>statistical indicators: ncv test, gvlma test</li>
+<li>first remedies: heteroscedasticity-corrected standard errors, weighted least squares</li>
+</ul>
+<ol start="9" type="1">
+<li>Dealing with messy data III – transformations (1 day)</li>
+</ol>
+<ul>
+<li>How to address violations of GLM model assumptions: power transformations, root transformations, how to find the best transformations</li>
+<li>how to analyze proportions and correlations as data</li>
+</ul>
+<ol start="10" type="1">
+<li>Inferences about two predictors and their interaction (= moderation) (1 day)</li>
+</ol>
+<ul>
+<li>centering variables: mean deviation form, contrast codes</li>
+<li>the model: <span class="math inline">\(Y = b_{0} + b_{1}X_{1}c + b_{2}X_{2}c + b_{3}(X_{1}c * X_{2}c\)</span>) when <span class="math inline">\(X_{1}\)</span> is dichotomous, <span class="math inline">\(X_{2}\)</span> is quantitative and both predictors are centered]</li>
+<li>graphic representation: different slopes for different folks, <span class="math inline">\(b_{3}\)</span> tests the difference between the two slopes</li>
+<li>what happens if variables are not centered?</li>
+<li>interpretation of an interaction</li>
+<li>writing up the results of a multiple regression analysis with an interaction</li>
+</ul>
+<ol start="11" type="1">
+<li>Inferences about two quantitative predictors and their interaction (1 day)</li>
+</ol>
+<ul>
+<li>the model: <span class="math inline">\(Y = b_{0} + b_{1}X_{1}c + b_{2}X_{2}c + b_{3}(X_{1}c * X_{2}c\)</span>) when <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span> are both quantitative</li>
+<li>interpretation of an interaction between two quantitative predictors</li>
+<li>the pitfalls of dichotomization II: imaginary interaction effects</li>
+</ul>
+<ol start="12" type="1">
+<li>Inferences about two dichotomous predictors and their interaction (= 2 x 2 ANOVA) (1 day)</li>
+</ol>
+<ul>
+<li>the model: <span class="math inline">\(Y = b_{0} + b_{1}X_{1}c + b_{2}X_{2}c + b_{3}(X_{1}c * X_{2}c\)</span>) when <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span> are both dichotomous</li>
+<li>difference between main effects and simple effects</li>
+<li>interpretation of interactions in 2 x 2 ANOVAs (Rosnow &amp; Rosenthal)</li>
+<li>comparison of the GLM terminology and the ANOVA terminology</li>
+<li>the pitfalls of dichotomization I: loss of power, biased estimates</li>
+<li>writing up the results of a 2 x 2 ANOVA</li>
+</ul>
+<ol start="13" type="1">
+<li>Inferences about three predictors and one interaction (= ANCOVA) (1 day)</li>
+</ol>
+<ul>
+<li>the model: <span class="math inline">\(Y = b_{0} + b_{1}X_{1}c + b_{2}X_{2}c + b_{3}(X_{1}c * X_{2}c) + b_{4}X_{3}\)</span> when <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span> are both dichotomous and <span class="math inline">\(X_{3}\)</span> is quantitative</li>
+<li>interpretation of <span class="math inline">\(b_{3}\)</span></li>
+<li>generalization to other models (e.g., the covariate is dichotomous, one of the predictors is quantitative)</li>
+<li>appropriate and “inappropriate” uses of ANCOVA</li>
+<li>writing up the results of an ANCOVA</li>
+</ul>
+<ol start="14" type="1">
+<li>Statistical power and power analysis (2 day)</li>
+</ol>
+<ul>
+<li>type I and type II errors</li>
+<li>factors determining statistical power</li>
+<li>how to compute power</li>
+<li>positive predictive value</li>
+<li>Readings: Button et al.&nbsp;(2013). Cohen (1992).</li>
+</ul>
+<ol start="15" type="1">
+<li>Inferences about categorical predictors with three or more levels (2 days)</li>
+</ol>
+<ul>
+<li>orthogonal and non-orthogonal contrasts</li>
+<li>comparing several experimental groups to one reference group (dummy codes)</li>
+<li>test-wise error rate vs.&nbsp;family-wise error rate</li>
+<li>Fisher LSD Protected Testing for two or three planned comparisons</li>
+<li>Holm-Bonferroni Adjustment for four or more planned comparisons</li>
+<li>Scheffé Approach for unplanned comparisons</li>
+<li>Readings: Abelson &amp; Prentice (1997). Guggenmos et al.&nbsp;(2018).</li>
 </ul>
 </section>
-<section id="application-assignments" class="level3">
-<h3 class="anchored" data-anchor-id="application-assignments">Application Assignments</h3>
-<p>The approximately weekly application assignments are due on Wednesdays at 8 pm through Canvas. These assignments are to be done individually. Please do not share answers or code. You are also encouraged to make use of online resources (e.g., stack overflow) for assistance. All assignments will be completed using R markdown to provide both the code and documentation as might be provided to your mentor or employer to fully describe your solution. Late assignments are not accepted because problem solutions are provided immediately after the due date. Application assignments are graded on a three-point scale (0 = not completed, 1 = partially completed and/or with many errors, 2 = fully completed and at least mostly correct). Grades for each assignment will be posted by the following Monday at the latest.</p>
+<section id="recommended-general-texts-for-data-analysis-and-research-methodology" class="level2">
+<h2 class="anchored" data-anchor-id="recommended-general-texts-for-data-analysis-and-research-methodology">Recommended General Texts For Data Analysis And Research Methodology</h2>
+<ul>
+<li>Abelson, R. P. (1995). Statistics as Principled Argument. Hillsdale, NJ: Lawrence Erlbaum Associates.</li>
+<li>Aiken, L. S., &amp; West, S. G. (1991). Multiple Regression: Testing and Interpreting Interactions. Newbury Park, CA.: Sage.</li>
+<li>Chambers, J (2008). Software for Data Analysis: Programming with R. New York: Springer Science Business Media.</li>
+<li>Cook, T. D., &amp; Campbell, D. T. (1979). Quasi-Experimentation - Design and Analysis Issues for Field Settings. Boston, MA: Houghton Mifflin Company.</li>
+<li>Cohen, J., Cohen, P., West, S. G., &amp; Aiken,, L. S. (2003). Applied Multiple Regression/Correlation Analysis for the Behavioral Sciences (3rd. Ed.). Mahwah, NJ: Lawrence Erlbaum Associates.</li>
+<li>Dalgaard, P. (2008) Introductory Statistics with R (2nd edition). New York: Springer Science Business Media.</li>
+<li>Fox, J. (2015). Applied Regression, Generalized Linear Models, and Related Methods, Third Edition. Sage Publications.</li>
+<li>Fox, J., &amp; Weisberg, S. (2010). An R Companion to Applied Regression (3rd Edition). Sage Publications.</li>
+<li>Hayes, A. F. (2013). Introduction to mediation, moderation, and conditional process analysis; A regression-based approach (3rd edition). NY, US: Guilford Press.</li>
+<li>Healy, K. (2019). Data Visualization A Practical Introduction. Princeton, NJ: Princeton University Press</li>
+<li>Hoyle, R. H., Harris, M. J., &amp; Judd, C. M. (2006). Research Methods in Social Relations (8th edition). Belmont, CA, US: Allyn &amp; Bacon.</li>
+<li>Judd, C. M., &amp; Kenny, D. A. (1981). Estimating the Effects of Social Interventions. New York, NY: Cambridge University Press.</li>
+<li>Kline, R. B. (2016). Principles and practice of structural equation modeling (5th edition). New York, US: The Guilford Press</li>
+<li>Kutner, M., Nachtscheim, C., &amp; Neter, J (2004). Applied Linear Regression Models, Fourth edition, McGraw-Hill.</li>
+<li>Raudenbush, S. W., &amp; Bryk, A. S. (2002). Hierarchical Linear Models. Applications and Data Analysis Methods (2nd ed.). Newbury Park, CA: Sage.</li>
+<li>Reis, H. T., &amp; Judd, C. M. (2014). Handbook of Research Methods in Social and Personality Social Psychology (2nd ed.). New York, NY: Cambridge University Press.</li>
+<li>Snijders, T. A. B., &amp; Bosker, R. J. (2012). Multilevel Analysis: An Introduction to Basic and Advanced Multilevel Modeling (2nd ed.). London, UK: Sage Publishers.</li>
+<li>Tabachnick, B. G., &amp; Fidell, L. S. (2018). Using Multivariate Statistics (7th edition). New York, NY: Pearson.</li>
+<li>Wickham, H., &amp; Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data (2nd edition). Sebastopol, CA: O’Reilly Media</li>
+</ul>
 </section>
-<section id="chatgpt" class="level3">
-<h3 class="anchored" data-anchor-id="chatgpt">ChatGPT</h3>
-<p>I suspect you have all seen discussions of all that ChatGPT can do by now and its impact on teaching and assessment. I believe that AI like ChatGPT will eventually become an incredible tool for data scientists and programmers. As such, I view these advances with excitement. Of course, I don’t plan to assign a grade to ChatGPT so I want to make sure that we are clear on when you can and when you cannot use it. Given that I expect AI like ChatGPT to become a useful tool in our workflow as professionals, now is the time to start to learn how it can help. Therefore, you are free to use it during any of our <strong>application assignments</strong> AND the <strong>application questions on the mid-term and final exams</strong>. Code from ChatGPT is unlikely to be sufficient in either context (and my testing suggests it can be flat out wrong in some instances!) but I suspect that it will still be useful. In contrast, you CANNOT use ChatGPT to answer the conceptual questions on the two exams or the weekly quizzes. Those questions are designed to assess your working knowledge about concepts and best practices. That information must be in YOUR head and I want to be 100% clear that use of ChatGPT to answer those questions will be considered cheating and handled as such if detected. There will be a zero tolerance policy for such cheating. It will be reported to the Dean of Students on first offense.</p>
+<section id="ethics-of-being-a-student-in-the-department-of-psychology" class="level2">
+<h2 class="anchored" data-anchor-id="ethics-of-being-a-student-in-the-department-of-psychology">Ethics of Being a Student in the Department of Psychology</h2>
+<p>The members of the faculty of the Department of Psychology at UW-Madison uphold the highest ethical standards of teaching and research. They expect their students to uphold the same standards of ethical conduct. By registering for this course, you are implicitly agreeing to conduct yourself with the utmost integrity throughout the semester. In the Department of Psychology, acts of academic misconduct are taken very seriously. Such acts diminish the educational experience for all involved – students who commit the acts, classmates who would never consider engaging in such behaviors, and instructors. Academic misconduct includes, but is not limited to, cheating on assignments and exams, stealing exams, sabotaging the work of classmates, submitting fraudulent data, plagiarizing the work of classmates or published and/or online sources, acquiring previously written papers and submitting them (altered or unaltered) for course assignments, collaborating with classmates when such collaboration is not authorized, and assisting fellow students in acts of misconduct. Students who have knowledge that classmates have engaged in academic misconduct should report this to the instructor.</p>
 </section>
-<section id="student-ethics" class="level3">
-<h3 class="anchored" data-anchor-id="student-ethics">Student Ethics</h3>
-<p>The members of the faculty of the Department of Psychology at UW-Madison uphold the highest ethical standards of teaching and research. They expect their students to uphold the same standards of ethical conduct. By registering for this course, you are implicitly agreeing to conduct yourself with the utmost integrity throughout the semester.</p>
-<p>In the Department of Psychology, acts of academic misconduct are taken very seriously. Such acts diminish the educational experience for all involved – students who commit the acts, classmates who would never consider engaging in such behaviors, and instructors. Academic misconduct includes, but is not limited to, cheating on assignments and exams, stealing exams, sabotaging the work of classmates, submitting fraudulent data, plagiarizing the work of classmates or published and/or online sources, acquiring previously written papers and submitting them (altered or unaltered) for course assignments, collaborating with classmates when such collaboration is not authorized, and assisting fellow students in acts of misconduct. Students who have knowledge that classmates have engaged in academic misconduct should report this to the instructor.</p>
+<section id="academic-integrity" class="level2">
+<h2 class="anchored" data-anchor-id="academic-integrity">Academic Integrity</h2>
+<p>By enrolling in this course, each student assumes the responsibilities of an active participant in UW-Madison’s community of scholars in which everyone’s academic work and behavior are held to the highest academic integrity standards. Academic misconduct compromises the integrity of the university. Cheating, fabrication, plagiarism, unauthorized collaboration, and helping others commit these acts are examples of academic misconduct, which can result in disciplinary action. This includes but is not limited to failure on the assignment/course, disciplinary probation, or suspension. Substantial or repeated cases of misconduct will be forwarded to the Office of Student Conduct &amp; Community Standards for additional review. For more information, refer to <a href="https://conduct.students.wisc.edu/academic-misconduct/">https://conduct.students.wisc.edu/academic-misconduct/</a></p>
 </section>
-<section id="diversity-and-inclusion" class="level3">
-<h3 class="anchored" data-anchor-id="diversity-and-inclusion">Diversity and Inclusion</h3>
+<section id="chatgpt-and-other-llms" class="level2">
+<h2 class="anchored" data-anchor-id="chatgpt-and-other-llms">ChatGPT and other LLMs</h2>
+<p>I suspect you have all seen discussions of all that ChatGPT and other LLMs can do by now and their impact on teaching and assessment. I believe that AI like ChatGPT will eventually become an incredible tool for data scientists and programmers. As such, I view these advances with excitement. Of course, I don’t plan to assign a grade to ChatGPT so I want to make sure that we are clear on when you can and when you cannot use it.</p>
+<p>Given that I expect AI like ChatGPT and other LLMs to become a useful tool in our workflow as professionals, now is the time to start to learn how they can help. Therefore, you are free to use them for coding assistance during any of our <strong>application assignments</strong> AND the <strong>application exams</strong>. Code from ChatGPT is unlikely to be sufficient in either context (and my testing suggests it can be flat out wrong in some instances!) but I suspect that it will still be useful.</p>
+<p>In contrast, you <strong>cannot</strong> use ChatGPT or other LLMs/AI to answer the conceptual questions on the conceptual exams. Those questions are designed to assess your working knowledge about concepts and best practices. That information must be in YOUR head and I want to be 100% clear that use of ChatGPT/AI (or any other sources other than what is in your head) to answer those questions will be considered cheating and handled as such if detected. There will be a zero tolerance policy for such cheating. It will be reported to the Dean of Students on first offense.</p>
+</section>
+<section id="accommodations-policies" class="level2">
+<h2 class="anchored" data-anchor-id="accommodations-policies">Accommodations Policies</h2>
+<p>McBurney Disability Resource Center syllabus statement: “The University of Wisconsin- Madison supports the right of all enrolled students to a full and equal educational opportunity. The Americans with Disabilities Act (ADA), Wisconsin State Statute (36.12), and UW-Madison policy (Faculty Document 1071) require that students with disabilities be reasonably accommodated in instruction and campus life. Reasonable accommodations for students with disabilities is a shared faculty and student responsibility. Students are expected to inform faculty [me] of their need for instructional accommodations by the end of the third week of the semester, or as soon as possible after a disability has been incurred or recognized. Faculty [I], will work either directly with the student [you] or in coordination with the McBurney Center to identify and provide reasonable instructional accommodations. Disability information, including instructional accommodations as part of a student’s educational record, is confidential and protected under FERPA.” <a href="http://mcburney.wisc.edu/facstaffother/faculty/syllabus.php">http://mcburney.wisc.edu/facstaffother/faculty/syllabus.php</a></p>
+<p>UW-Madison students who have experienced sexual misconduct (which can include sexual harassment, sexual assault, dating violence and/or stalking) also have the right to request academic accommodations. This right is afforded them under Federal legislation (Title IX). Information about services and resources (including information about how to request accommodations) is available through Survivor Services, a part of University Health Services: <a href="https://www.uhs.wisc.edu/survivor-services/">https://www.uhs.wisc.edu/survivor-services/</a>.</p>
+</section>
+<section id="diversity-inclusion" class="level2">
+<h2 class="anchored" data-anchor-id="diversity-inclusion">Diversity &amp; Inclusion</h2>
 <p>Institutional statement on diversity: “Diversity is a source of strength, creativity, and innovation for UW-Madison. We value the contributions of each person and respect the profound ways their identity, culture, background, experience, status, abilities, and opinion enrich the university community. We commit ourselves to the pursuit of excellence in teaching, research, outreach, and diversity as inextricably linked goals.</p>
-<p>The University of Wisconsin-Madison fulfills its public mission by creating a welcoming and inclusive community for people from every background – people who as students, faculty, and staff serve Wisconsin and the world.” https://diversity.wisc.edu/</p>
+<p>The University of Wisconsin-Madison fulfills its public mission by creating a welcoming and inclusive community for people from every background – people who as students, faculty, and staff serve Wisconsin and the world.” <a href="https://diversity.wisc.edu/">https://diversity.wisc.edu/</a></p>
 </section>
-<section id="academic-integrity" class="level3">
-<h3 class="anchored" data-anchor-id="academic-integrity">Academic Integrity</h3>
-<p>By enrolling in this course, each student assumes the responsibilities of an active participant in UW-Madison’s community of scholars in which everyone’s academic work and behavior are held to the highest academic integrity standards. Academic misconduct compromises the integrity of the university. Cheating, fabrication, plagiarism, unauthorized collaboration, and helping others commit these acts are examples of academic misconduct, which can result in disciplinary action. This includes but is not limited to failure on the assignment/course, disciplinary probation, or suspension. Substantial or repeated cases of misconduct will be forwarded to the Office of Student Conduct &amp; Community Standards for additional review. For more information, refer to http://studentconduct.wiscweb.wisc.edu/academic-integrity</p>
+<section id="complaints" class="level2">
+<h2 class="anchored" data-anchor-id="complaints">Complaints</h2>
+<p>Occasionally, a student may have a complaint about a TA or course instructor. If that happens, you should feel free to discuss the matter directly with the TA or instructor. If the complaint is about the TA and you do not feel comfortable discussing it with the individual, you should discuss it with the course instructor. Complaints about mistakes in grading should be resolved with the TA and/or instructor in the great majority of cases. If the complaint is about the instructor (other than ordinary grading questions) and you do not feel comfortable discussing it with the individual, make an appointment to speak to the Associate Chair for Graduate Studies, Professor Shawn Green, cshawn.green@wisc.edu. If you have concerns about climate or bias in this class, or if you wish to report an incident of bias or hate that has occurred in class, you may contact the Chair of the Department, Professor Allyson Bennett (allyson.j.bennett@wisc.edu) or the Chair of the Psychology Department Climate &amp; Diversity Committee, Martha Alibali (martha.alibali@wisc.edu). You may also use the University’s bias incident reporting system, which you can reach at the following link: <a href="https://doso.students.wisc.edu/services/bias-reporting-process/">https://doso.students.wisc.edu/services/bias-reporting-process/</a>.</p>
 </section>
-<section id="accommodations-polices" class="level3">
-<h3 class="anchored" data-anchor-id="accommodations-polices">Accommodations Polices</h3>
-<p><strong>McBurney Disability Resource Center syllabus statement</strong>: “The University of Wisconsin-Madison supports the right of all enrolled students to a full and equal educational opportunity. The Americans with Disabilities Act (ADA), Wisconsin State Statute (36.12), and UW-Madison policy (Faculty Document 1071) require that students with disabilities be reasonably accommodated in instruction and campus life. Reasonable accommodations for students with disabilities is a shared faculty and student responsibility. Students are expected to inform faculty [me] of their need for instructional accommodations by the end of the third week of the semester, or as soon as possible after a disability has been incurred or recognized. Faculty [I], will work either directly with the student [you] or in coordination with the McBurney Center to identify and provide reasonable instructional accommodations. Disability information, including instructional accommodations as part of a student’s educational record, is confidential and protected under FERPA.” http://mcburney.wisc.edu/facstaffother/faculty/syllabus.php</p>
-<p>UW-Madison students who have experienced sexual misconduct (which can include sexual harassment, sexual assault, dating violence and/or stalking) also have the right to request academic accommodations. This right is afforded them under Federal legislation (Title IX). Information about services and resources (including information about how to request accommodations) is available through Survivor Services, a part of University Health Services: https://www.uhs.wisc.edu/survivor-services/</p>
-</section>
-<section id="complaints" class="level3">
-<h3 class="anchored" data-anchor-id="complaints">Complaints</h3>
-<p>Occasionally, a student may have a complaint about a TA or course instructor. If that happens, you should feel free to discuss the matter directly with the TA or instructor. If the complaint is about the TA and you do not feel comfortable discussing it with the individual, you should discuss it with the course instructor. Complaints about mistakes in grading should be resolved with the TA and/or instructor in the great majority of cases. If the complaint is about the instructor (other than ordinary grading questions) and you do not feel comfortable discussing it with the individual, make an appointment to speak to the Associate Chair for Graduate Studies, Professor Shawn Green, cshawngreen@wisc.edu.</p>
-<p>If you have concerns about climate or bias in this class, or if you wish to report an incident of bias or hate that has occurred in class, you may contact the Chair of the Department, Professor Allyson Bennett (allyson.j.bennett@wisc.edu) or the Chair of the Psychology Department Climate &amp; Diversity Committee, Martha Alibali (martha.alibali@wisc.edu). You may also use the <a href="https://doso.students.wisc.edu/services/bias-reporting-process/">University’s bias incident reporting system</a></p>
-</section>
-<section id="privacy-of-student-information-digital-tools" class="level3">
-<h3 class="anchored" data-anchor-id="privacy-of-student-information-digital-tools">Privacy of Student Information &amp; Digital Tools</h3>
-<p>The privacy and security of faculty, staff and students’ personal information is a top priority for UW-Madison. The university carefully reviews and vets all campus-supported digital tools used to support teaching and learning, to help support success through learning analytics, and to enable proctoring capabilities. UW-Madison takes necessary steps to ensure that the providers of such tools prioritize proper handling of sensitive data in alignment with FERPA, industry standards and best practices. Under the Family Educational Rights and Privacy Act (FERPA which protects the privacy of student education records), student consent is not required for the university to share with school officials those student education records necessary for carrying out those university functions in which they have legitimate educational interest. 34 CFR 99.31(a)(1)(i)(B). FERPA specifically allows universities to designate vendors such as digital tool providers as school officials, and accordingly to share with them personally identifiable information from student education records if they perform appropriate services for the university and are subject to all applicable requirements governing the use, disclosure and protection of student data.</p>
-</section>
-<section id="privacy-of-student-records-the-use-of-audio-recorded-lectures" class="level3">
-<h3 class="anchored" data-anchor-id="privacy-of-student-records-the-use-of-audio-recorded-lectures">Privacy of Student Records &amp; the Use of Audio Recorded Lectures</h3>
-<p>See information about privacy of student records and the usage of audio-recorded lectures.<br>
-Lecture materials and recordings for this course are protected intellectual property at UW-Madison. Students in this course may use the materials and recordings for their personal use related to participation in this class. Students may also take notes solely for their personal use. If a lecture is not already recorded, you are not authorized to record my lectures without my permission unless you are considered by the university to be a qualified student with a disability requiring accommodation. [Regent Policy Document 4-1] Students may not copy or have lecture materials and recordings outside of class, including posting on internet sites or selling to commercial entities. Students are also prohibited from providing or selling their personal notes to anyone else or being paid for taking notes by any person or commercial firm without the instructor’s express written permission. Unauthorized use of these copyrighted lecture materials and recordings constitutes copyright infringement and may be addressed under the university’s policies, UWS Chapters 14 and 17, governing student academic and non-academic misconduct.</p>
-</section>
-<section id="academic-calendar-religious-observances" class="level3">
-<h3 class="anchored" data-anchor-id="academic-calendar-religious-observances">Academic Calendar &amp; Religious Observances</h3>
-<p>Students who wish to inquire about religious observance accommodations for exams or assignments should contact the instructor within the first two weeks of class, following the <a href="https://secfac.wisc.edu/academic-calendar/#religious-observances">university’s policy on religious observance conflicts</a></p>
+<section id="concerns-about-sexual-misconduct" class="level2">
+<h2 class="anchored" data-anchor-id="concerns-about-sexual-misconduct">Concerns About Sexual Misconduct</h2>
+<p>All students deserve to be safe and respected at UW-Madison. Unfortunately, we know that sexual and relationship violence do happen here. Free, confidential resources are available on and off campus for students impacted by sexual assault, sexual harassment, dating violence, and stalking (regardless of when the violence occurred). You don’t have to label your experience to seek help. Friends of survivors can reach out for support too. A list of resources can be found at <a href="https://www.uhs.wisc.edu/survivor-resources/">https://www.uhs.wisc.edu/survivor-resources/</a> If you wish to speak to someone in the Department of Psychology about your concerns, you may contact the Chair of the Department, Professor Allyson Bennett (allyson.j.bennett@wisc.edu) or the Associate Chair of Graduate Studies, Professor Shawn Green (cshawn.green@wisc.edu). Please note that all of these individuals are Responsible Employees (<a href="https://compliance.wisc.edu/titleix/mandatory-reporting/#responsible-employees">https://compliance.wisc.edu/titleix/mandatory-reporting/#responsible-employees)</a>.</p>
 
 
 </section>
@@ -552,7 +684,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -584,47 +727,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/github\.io\/jjcurtin\/book_glm");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -659,11 +762,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
