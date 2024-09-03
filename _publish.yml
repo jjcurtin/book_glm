@@ -18,3 +18,7 @@
   quarto-pub:
     - id: acc9adad-24da-46f6-afc7-fbcd2f41f70e
       url: 'https://kendra-wyant.quarto.pub/06_two_predictors'
+- source: 01_overview.qmd
+  quarto-pub:
+    - id: 2f6825dc-c9f5-4d33-836e-72b6d986f9ac
+      url: 'https://jjcurtin.quarto.pub/01_overview'

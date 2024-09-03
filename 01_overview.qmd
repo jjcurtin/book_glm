@@ -152,6 +152,8 @@ How well do the variables of (a) number of absences, (b) time spent studying, an
 
 <span style="color: blue;">Analysis of Variance (ANOVA)</span>    
 
+-----
+
 **Basic Question**  
 
 What are the mean differences in the dependent variable between the groups represented by the independent variable(s)?     
@@ -160,13 +162,14 @@ What are the mean differences in the dependent variable between the groups repre
 
 Are there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock?
   
------
 
 <span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical variables representing group membership, and one or more quantitative *covariates*?</span>  
 
 -----
 
 <span style="color: blue;">Analysis of Covariance (ANCOVA)</span>    
+
+-----
 
 **Basic Question**  
 
@@ -176,8 +179,6 @@ What are the mean differences in the dependent variable between the groups repre
 
 Are there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock, after equating the groups on trait anxiety scores?     
 
-  
------
 
 <span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical and quantitative variables representing group membership and quantitative scores on individual difference variables?</span>  
 
@@ -185,6 +186,8 @@ Are there differences among control, placebo and alcohol groups on mean fear res
 
 <span style="color: blue;">Aptitude Treatment Interaction (ATI)</span>    
 
+-----
+ 
 **Basic Question**  
 
 Are the magnitudes of the contrasts among groups different across different levels of some individual difference variable?     
@@ -232,8 +235,6 @@ What linear combination of dependent variables ($Y$s) maximally differentiates g
 
 Do children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning?    
 
-  
------
 
 <span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical and quantitative variables representing group membership and quantitative *covariates*?</span>  
 
@@ -257,6 +258,8 @@ Do children with ADHD who receive (a) medication, (b) parent behavioral training
 -----
 
 <span style="color: blue;">Discriminant Analysis</span>    
+
+-----
 
 **Basic Question**  
 
