@@ -1,207 +1,244 @@
-## Course Syllabus {.unnumbered}
+# Course Syllabus {.unnumbered}
 
-### Instructor
+## Course Designations And Attributes
 
-**John Curtin**
+- **Course Website**: [https://jjcurtin.github.io/book_glm/](https://jjcurtin.github.io/book_glm/)
+- **Credits**: 4
+- **Level**: Advanced
+- **Breadth**: Social Science
+- **L&S** Credit Type: Counts as LAS credit (L&S)
+- **Instructional** Mode: All face-to-face
+- **How Credit Hours are met by the Course**: Four and ½ hours of classroom or direct faculty/instructor instruction and a minimum of eight hours of out of class student work each week over approximately 14 weeks.
+- **Requisites**: None
 
-- Office hours: Thursdays, 1-2 pm or by appointment in Brogden 326
-- Email: jjcurtin@wisc.edu (but please use Slack DM or channel posts for all course communications during this semester)
+## Meeting Time And Location
 
-### Teaching Assistants
+- **Lecture**: Monday and Wednesday, 2:30-3:45 pm; Psychology 103 
+- **Labs**: 
+  - Friday 9:00-11:00 am (section 301, room 228; Punturieri) 
+  - Friday 1:30-3:30 pm  (section 302, room 228; Yu) 
+  - Friday 9:00-11:00 am (section 303, room 311i; Dong)
 
-**Michelle Marji**
+## Instructor
 
-- Office hours: Wednesdays, 10-11 am in Brogden 391 or by appointment
-- Email: michelle.marji@wisc.edu 
+- John J. Curtin, Ph.D.
+- Office hours: Room 326, Wednesdays, 3:45 - 4:45 pm or by appt. 
 
+## Teaching Assistants
 
-**Kendra Wyant**
+- LiChen Dong; Office hours: Room 626, Mondays, 11 - 12 pm 
+- Claire Punturieri; Office hours:  Room 325, Tuesdays, 8:30 - 9:30 am
+- Coco Yu; Office hours: Room 325, Tuesdays, 1 - 2 pm
 
-- Office hours: Tuesdays, 12:30-1:30 pm in Brodgen 325 or by appointment 
-- Email: kpaquette2@wisc.edu
+## Communications
+All course communications will occur in the course’s Slack workspace.  You should have received an invitation to join the workspace.  If you have difficulty joining, please let me know immediately.  The TAs and I will respond to all Slack messages within 1 business day (and often much quicker).  Please plan accordingly (e.g., weekend messages may not receive a response until Monday).  For general questions about class, coding assignments, etc., please post the question to the appropriate public channel.  If you have the question, you are probably not alone.  For issues relevant only to you (e.g., class absences, accommodations, etc.), you can send a direct message in Slack to me and the TAs.  If you DM only me, I will share the DM with the TAs unless you request otherwise. Therefore, it is generally best if you include all three TAs on the DM when you start the thread.  In general, we prefer that all course communication occur within Slack rather than by email so that it is centralized in one location.   
 
+## Course Description 
+One-sample t-test, independent-samples t-test, simple and multiple regression, effect size indicators, analysis of variance (ANOVA), analysis of covariance (ANCOVA), case analysis, model assumptions, transformations, and the generalized linear model 
 
-### Course Website
-https://jjcurtin.github.io/book_iaml/
+## Course Goals 
+The goal of this course is to familiarize you with a statistical data analysis procedure called the general linear model. We will spend most of the semester on the use of the general linear model as a tool for analyzing data from psychological experiments. We will give special attention to the interpretation of model parameter estimates, models with quantitative and categorical predictors, and the interpretation of interaction effects in the general linear model. We will be using the statistics software R (http://www.r-project.org/). Please know that extensive work outside the classroom is required in order to succeed in this class. You are encouraged to participate actively in the class, both the lecture and the lab session.
 
+## Course Learning Outcomes
 
-### Communications
-All course communications will occur in the course’s Slack workspace (https://iaml-2024.slack.com/).  You should have received an invitation to join the workspace.  If you have difficulty joining, please contact me by my email above.  The TAs and I will respond to all Slack messages within 1 business day (and often much quicker).  Please plan accordingly (e.g., weekend messages may not receive a response until Monday).  For general questions about class, coding assignments, etc., please post the question to the appropriate public channel.  If you have the question, you are probably not alone.  For issues relevant only to you (e.g., class absences, accommodations, etc.), you can send a direct message in Slack to me.  However, I may share the DM with the TAs unless you request otherwise. In general, we prefer that all course communication occur within Slack rather than by email so that it is centralized in one location.   
+By the end of the course, the students should master the following data-analytic techniques and skills:
+- Inferences about a single mean (t-test)
+- The analysis of single and multiple dichotomous/categorical predictors
+- The analysis of single and multiple quantitative predictors
+- The analysis of interactions among predictors
+- The analysis of contrasts among levels of categorical predictors
+- The use of centering predictors in interactive models
+- Assessment and remediation techniques for case analysis and model assumptions
+- Logistic regression as exemplar of the generalized linear model
+- Generating publication-level graphs
 
+## Course Requirements And Grades
 
-### Meeting Times
-The scheduled course meeting times are Tuesdays and Thursdays from 11:00 - 12:15 pm.   Tuesdays are generally used by the TAs to discuss application issues from the homework or in the course more generally.  Thursdays are generally led by John and used to discuss topics from the video lectures and readings. 
+Course requirements include regular attendance, active participation in class discussion, and completion of all exams and application assignments. 
 
-All required videos, readings, and application assignments are described on the course website at the beginning of each unit.  
+There will be two closed-book concepts exams completed in class to assess conceptual knowledge and three application exams completed outside of class to assess your ability to implement your conceptual knowledge with real data (each of these 5 exams counts for 15% of your total grade). The second concepts exam is scheduled during the exam period on Wednesday, December 18 from 8:15 - 9:45 am (room TBD). Please plan your end of semester travel accordingly. The midterm concepts exam and the three application exams will be schedule according to the pace of our progress through the material.
 
+There will also be approximately weekly application assignments, which will involve hands-on application of the material similar to (but shorter than) the application exams. They are assigned Wednesdays at 3:45 pm and are due the following Wednesday at 1:30 pm. These application assignments are graded on a pass/fail basis, and together constitute 20% of your total grade. 
 
-### Course Description
-This course is designed to introduce students to a variety of computational approaches in machine learning.  The course is designed with two key foci.  First, students will focus on the application of common, “out-of-the-box” statistical learning algorithms that have good performance and are implemented in tidymodels in R.  Second, students will focus on the application of these approaches in the context of common questions in behavioral science in academia and industry.
+Finally, 5% of your grade will be determined by your attendance and participation in lecture and lab.
 
+Final letter grades are based on total course percentages as follows: 
 
-### Requisites
-Students are required to have completed Psychology 610 with a grade of B or better or a comparable course with my consent.
+- A: 93 or above 
+- AB: 88 - 92 
+- B: 83 - 87
+- BC: 78 - 82
+- C: 70 - 77
+- D: 60-69
+- F: < 60
 
+## Required Texts
+Judd, C.M., McClelland, G. H., & Ryan, C. (2017). Data Analysis: A Model-
+Comparison Approach. 3rd Edition. New York, US: Routledge. ISBN: 9780805833881.
 
-### Learning Outcomes
-* Students will develop and refine best practices for data wrangling, general programming, and analysis in R.
+## Additional Required Readings
+Additional required readings will be provided as pdfs on the course website. The readings are pulled from various texts and primary sources. Supplemental readings and recommended reference texts are also provided on the course website and the end of this document. You are expected to read only the required readings. You will not be tested on the other readings.
 
-*	Students will distinguish among a variety of machine learning settings: supervised learning vs. unsupervised learning, regression vs. classification 
+## Required Software
+This course will contain a significant applied component. As such, access to statistical analysis software is required. In the context of this course, we will rely heavily on [R](http://www.r-project.org/). R is freely available and is rapidly becoming the standard for statistical analysis in many disciplines. 
 
-*	Students will be able to implement a broad toolbox of well-supported machine-learning methods: decision trees, nearest neighbor, general and generalized linear models, penalized models including ridge, lasso, and elastic-nets, neural nets, random forests.
+A secondary goal of the course will be to provide you with introductory data wrangling skills in R within the [Tidyverse](https://www.tidyverse.org/) ecosystem of packages. The Tidyverse is "an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures." It is arguably the dominant approach for data science in R today.
 
-*	Students will develop expertise with common feature extraction techniques for quantitative and categorical predictors.  
+## Course Schedule
+This schedule is provisional so that we may adjust our rate of progress as necessary to ensure maximal mastery of the material. See course website for the most up to date version of the assigned readings and topics.
 
-*	Students will be able to use natural language processing approaches to extract meaningful features from text data. 
+1) Introduction to inferential statistics (1 day)
+- introduction to the course
+- the GLM framework
+- data exploration in R (descriptive statistics, visual displays) (lab only)
 
-*	Students will know how to characterize how well their regression and classification models perform and they will employ appropriate methodology for evaluating their: cross validation, ROC and PR curves, hypothesis testing.
+2) Sampling Distributions (1 day)
+- standard deviation, standard error of the mean
+- theory of null hypothesis significance testing
 
-*	Students will learn to apply their skills to common learning problems in psychology and behavioral sciences more generally.  
- 
+3) Inferences about a single mean (one-sample t test) (1 day)
+- the null model ($Y = b_{0}$)
+- sum of squares, number of estimated parameters, residuals, etc.
+- the basic model ($Y = b_{0}$)
+- statistical inference (comparison of basic model with null model, computation of t, interpretation of p)
+- writing up the results (text, graphs, tables) of a one-sample t test
 
-### Course Topics
-*	Overview of Machine Learning Concepts and Uses
-*	Data wrangling in R using tidyverse and tidymodels
-*	Iterations, functions, simulations in R
-*	Regression models
-*	Classification models
-*	Model performance metrics
-*	ROCs
-*	Cross validation and other resampling methods
-*	Model selection and regularization
-*	Approaches to parallel processing
-*	Feature engineering techniques
-*	Natural language processing
-*	Tree based methods
-*	Bagging and boosting
-*	Neural networks
-*	Dimensionality reduction and feature selection
-*	Explanatory methods including variable importance, partial dependence plots, etc
-*	Ethics and privacy issues
+4) Inferences about a single quantitative predictor (simple regression) (2 days)
+- the model : $Y = b_0 + b_{1}X_{1}$ when $X_{1}$ is quantitative
+- computation of residuals, meaning of residuals
+- graphic representation: intercept, slope, residuals
+- statistical inference (comparison of the new model with the basic model, computation of t and F, interpretation of p)
+- proportion of variance explained, computation of $R^{2}$, interpretation of $R^{2}$, effect sizes
+- running a simple regression in R and interpreting the R output
+- writing up the results (text, graphs, tables) of a simple regression analysis
 
-### Schedule
-The course is organized around 14 weeks of academic instruction covering the following topics:
+5) Inferences about a single dichotomous predictor (independent-samples t test) (1 day)
+- the model: $Y = b_{0} + b_{1}X_{1}$ when $X_{1}$ is dichotomous
+- computation of residuals, meaning of residuals (= within-group variance)
+- graphic representation: intercept, slope, residuals; comparison with bar graph
+- statistical inference (comparison of the new model with the basic model, computation of t and F, interpretation of p)
+- running an independent-samples t test in R (using the `lm()` function in R) and interpreting the R output
+- writing up the results (text, graphs, tables) of an independent-samples t test
 
-1. Introduction to course and machine learning
-2. Exploratory data analysis
-3. Regression models
-4. Classification models
-5. Resampling methods for model selection and evaluation
-6. Regularization and penalized models
-7. Midterm exam/project
-8. Advanced performance metrics
-9. Model comparisons
-10. Advanced models: Random forests and ensemble methods (bagging, boosting, stacking)
-11. Advanced models: Neural networks
-12. Natural Language Processing I: Text processing and feature engineering
-13. Applications
-14. Ethics
+6) Inferences about two (or more) predictors (multiple regression without interaction) (4 days)
+- the model: $Y = b_{0} + b_{1}X_{1} + b_{2}X_{2}$ when $X_{1}$ is dichotomous and $X_{2}$ is quantitative
+- the model: $Y = b_{0} + b_{1}X_{1} + b_{2}X_{2}$ when $X_{1}$ and $X_{2}$ are both quantitative
+- computation of residuals, meaning of residuals
+- graphic representation: two lines, intercepts, slopes, residuals
+- statistical inference (model comparison, interpretation of the effect of one variable on DV while controlling for the effects of another variable)
+- computation of partial r, interpretation of partial r
+- different theoretical predictions that can be answered by multiple regression analyses that do not contain interactions
+- models with 3, 4, 5, etc. predictors
+- issues of collinearity, variance inflation, tolerance
+- data fishing, overfitting, hierarchical vs. stepwise vs. simultaneous models
+- raw vs. standardized coefficients, partial r
+- writing up the results of a multiple regression analysis
 
-- The final exam is during exam week on Tuesday May 7th from 11 - 12:15 in our normal classroom.
-- The final project is due during exam week on Wednesday May 8th at 8 pm.
+7)  Dealing with messy data I – case analysis (1 day)
+- the different ways of being an outlier
+- outlier statistics: levers $h_{ij}$, studentized deleted residuals, Cook's D
+- dealing with outliers
 
+8)  Dealing with messy data II – model assumptions (1 day)
+- the 5 assumptions of the GLM: exact X, independence, normality, constant variance, and linearity
+- data exploration in R (visual displays: residual plots, normal quantile plots, density plots, spread-level plots, etc.)
+- statistical indicators: ncv test, gvlma test
+- first remedies: heteroscedasticity-corrected standard errors, weighted least squares
 
-### Required Textbooks and Software
-All required textbooks are freely available online (though hard copies can also be purchased if desired).  There are eight required textbooks for the course.  The primary text for which we will read many chapters is: 
+9)  Dealing with messy data III – transformations (1 day)
+- How to address violations of GLM model assumptions: power transformations, root transformations, how to find the best transformations
+- how to analyze proportions and correlations as data
 
-* James, G., Witten, D., Hastie, T., & Tibshirani, R. An Introduction to Statistical Learning: With Applications in R (2023; 2nd Edition). ([website](https://www.statlearning.com/)) 
+10) Inferences about two predictors and their interaction (= moderation) (1 day)
+- centering variables: mean deviation form, contrast codes
+- the model: $Y = b_{0} + b_{1}X_{1}c + b_{2}X_{2}c + b_{3}(X_{1}c * X_{2}c$) when $X_{1}$ is dichotomous, $X_{2}$ is quantitative and both predictors are centered]
+- graphic representation: different slopes for different folks, $b_{3}$ tests the difference between the two slopes
+- what happens if variables are not centered?
+- interpretation of an interaction
+- writing up the results of a multiple regression analysis with an interaction
 
+11)  Inferences about two quantitative predictors and their interaction (1 day)
+- the model: $Y = b_{0} + b_{1}X_{1}c + b_{2}X_{2}c + b_{3}(X_{1}c * X_{2}c$) when $X_{1}$ and $X_{2}$ are both quantitative
+- interpretation of an interaction between two quantitative predictors
+- the pitfalls of dichotomization II: imaginary interaction effects
 
-We will also read sections to chapters in each of the following texts:
+12)  Inferences about two dichotomous predictors and their interaction (= 2 x 2 ANOVA) (1 day)
+- the model: $Y = b_{0} + b_{1}X_{1}c + b_{2}X_{2}c + b_{3}(X_{1}c * X_{2}c$) when $X_{1}$ and $X_{2}$ are both dichotomous
+- difference between main effects and simple effects
+- interpretation of interactions in 2 x 2 ANOVAs (Rosnow & Rosenthal)
+- comparison of the GLM terminology and the ANOVA terminology
+- the pitfalls of dichotomization I: loss of power, biased estimates
+- writing up the results of a 2 x 2 ANOVA
 
-* Wickham, H. & Grolemund, G. R for Data Science: Import, Tidy, Transform, Visualize, and Model Data (1st ed.). Sebastopol, CA: O’Reilly Media, Inc. ([website](https://r4ds.hadley.nz/)) 
+13)  Inferences about three predictors and one interaction (= ANCOVA) (1 day)
+- the model: $Y = b_{0} + b_{1}X_{1}c + b_{2}X_{2}c + b_{3}(X_{1}c * X_{2}c) + b_{4}X_{3}$ when $X_{1}$ and $X_{2}$ are both dichotomous and $X_{3}$ is quantitative
+- interpretation of $b_{3}$
+- generalization to other models (e.g., the covariate is dichotomous, one of the predictors is quantitative)
+- appropriate and "inappropriate" uses of ANCOVA
+- writing up the results of an ANCOVA
 
-* Hvitfeldt, E. & Silge, J. Supervised Machine Learning for Text Analysis in R ([website](https://smltar.com/))
+14) Statistical power and power analysis (2 day)
+- type I and type II errors
+- factors determining statistical power
+- how to compute power
+- positive predictive value 
+- Readings: Button et al. (2013). Cohen (1992). 
 
-* Kuhn, M. & Johnson, K.  Applied Predictive Modeling. New York, NYL Springer Science. ([website](http://appliedpredictivemodeling.com/))
+15) Inferences about categorical predictors with three or more levels (2 days)
+- orthogonal and non-orthogonal contrasts
+- comparing several experimental groups to one reference group (dummy codes)
+- test-wise error rate vs. family-wise error rate
+- Fisher LSD Protected Testing for two or three planned comparisons
+- Holm-Bonferroni Adjustment for four or more planned comparisons
+- Scheffé Approach for unplanned comparisons
+- Readings: Abelson & Prentice (1997). Guggenmos et al. (2018).
 
-* Kuhn, M., & Johnson, K. Feature Engineering and Selection: A Practical Approach for Predictive Models (1st ed.). Boca Raton, FL: Chapman and Hall/CRC. ([website](http://www.feat.engineering/))
+## Recommended General Texts For Data Analysis And Research Methodology
+- Abelson, R. P. (1995). Statistics as Principled Argument. Hillsdale, NJ: Lawrence Erlbaum Associates.
+- Aiken, L. S., & West, S. G. (1991). Multiple Regression: Testing and Interpreting Interactions. Newbury Park, CA.: Sage.
+- Chambers, J (2008). Software for Data Analysis: Programming with R. New York: Springer Science Business Media.
+- Cook, T. D., & Campbell, D. T. (1979). Quasi-Experimentation - Design and Analysis Issues for Field Settings. Boston, MA: Houghton Mifflin Company.
+- Cohen, J., Cohen, P., West, S. G., & Aiken,, L. S. (2003). Applied Multiple Regression/Correlation Analysis for the Behavioral Sciences (3rd. Ed.). Mahwah, NJ: Lawrence Erlbaum Associates.
+- Dalgaard, P. (2008) Introductory Statistics with R (2nd edition). New York: Springer Science Business Media.
+- Fox, J. (2015). Applied Regression, Generalized Linear Models, and Related Methods, Third Edition. Sage Publications.
+- Fox, J., & Weisberg, S. (2010). An R Companion to Applied Regression (3rd Edition). Sage Publications.
+- Hayes, A. F. (2013). Introduction to mediation, moderation, and conditional process analysis; A regression-based approach (3rd edition). NY, US: Guilford Press.
+- Healy, K. (2019). Data Visualization A Practical Introduction. Princeton, NJ: Princeton University Press
+- Hoyle, R. H., Harris, M. J., & Judd, C. M. (2006). Research Methods in Social Relations (8th edition). Belmont, CA, US: Allyn & Bacon.
+- Judd, C. M., & Kenny, D. A. (1981). Estimating the Effects of Social Interventions. New York, NY: Cambridge University Press.
+- Kline, R. B. (2016). Principles and practice of structural equation modeling (5th edition). New York, US: The Guilford Press
+- Kutner, M., Nachtscheim, C., & Neter, J (2004). Applied Linear Regression Models, Fourth edition, McGraw-Hill.
+- Raudenbush, S. W., & Bryk, A. S. (2002). Hierarchical Linear Models. Applications and Data Analysis Methods (2nd ed.). Newbury Park, CA: Sage.
+- Reis, H. T., & Judd, C. M. (2014). Handbook of Research Methods in Social and Personality Social Psychology (2nd ed.). New York, NY: Cambridge University Press.
+- Snijders, T. A. B., & Bosker, R. J. (2012). Multilevel Analysis: An Introduction to Basic and Advanced Multilevel Modeling (2nd ed.). London, UK: Sage Publishers.
+- Tabachnick, B. G., & Fidell, L. S. (2018). Using Multivariate Statistics (7th edition). New York, NY: Pearson.
+- Wickham, H., & Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data (2nd edition). Sebastopol, CA: O’Reilly Media
 
-* Kuhn, M. & Silge, J. Tidy Modeling with R. ([website](https://www.tmwr.org/))
+## Ethics of Being a Student in the Department of Psychology
+The members of the faculty of the Department of Psychology at UW-Madison uphold the highest ethical standards of teaching and research. They expect their students to uphold the same standards of ethical conduct. By registering for this course, you are implicitly agreeing to conduct yourself with the utmost integrity throughout the semester. In the Department of Psychology, acts of academic misconduct are taken very seriously. Such acts diminish the educational experience for all involved – students who commit the acts, classmates who would never consider engaging in such behaviors, and instructors. Academic misconduct includes, but is not limited to, cheating on assignments and exams, stealing exams, sabotaging the work of classmates, submitting fraudulent data, plagiarizing the work of classmates or published and/or online sources, acquiring previously written papers and submitting them (altered or unaltered) for course assignments, collaborating with classmates when such collaboration is not authorized, and assisting fellow students in acts of misconduct. Students who have knowledge that classmates have engaged in academic misconduct should report this to the instructor.
 
-* Molnar, C. Intepretable Machine Learning: A Guide for Makiong Black Box Models Explainable (2nd ed.). ([website](https://christophm.github.io/interpretable-ml-book/)
+## Academic Integrity
+By enrolling in this course, each student assumes the responsibilities of an active participant in UW-Madison’s community of scholars in which everyone’s academic work and behavior are held to the highest academic integrity standards. Academic misconduct compromises the integrity of the university. Cheating, fabrication, plagiarism, unauthorized collaboration, and helping others commit these acts are examples of academic misconduct, which can result in disciplinary action. This includes but is not limited to failure on the assignment/course, disciplinary probation, or suspension. Substantial or repeated cases of misconduct will be forwarded to the Office of Student Conduct & Community Standards for additional review. For more information, refer to [https://conduct.students.wisc.edu/academic-misconduct/](https://conduct.students.wisc.edu/academic-misconduct/)
 
-* Silge, J., & Robinson, D. Text Mining with R: A Tidy Approach (1st ed.). Beijing; Boston: O’Reilly Media. ([website](https://www.tidytextmining.com/)) 
+## ChatGPT and other LLMs
+I suspect you have all seen discussions of all that ChatGPT and other LLMs can do by now and their impact on teaching and assessment.  I believe that AI like ChatGPT will eventually become an incredible tool for data scientists and programmers.  As such, I view these advances with excitement.  Of course, I don't plan to assign a grade to ChatGPT so I want to make sure that we are clear on when you can and when you cannot use it.   
 
-* Wickham, H.  The Tidy Style Guide. ([website](https://style.tidyverse.org/))
+Given that I expect AI like ChatGPT and other LLMs to become a useful tool in our workflow as  professionals, now is the time to start to learn how they can help.  Therefore, you are free to use them for coding assistance during any of our **application assignments** AND the **application exams**.  Code from ChatGPT is unlikely to be sufficient in either context (and my testing suggests it can be flat out wrong in some instances!) but I suspect that it will still be useful.  
 
-* Boehmke, Brad and Greenwell, Brandon M. (2019).  Hands-On Machine Learning with R.  Chapman and Hall/CRC.  ([website](https://bradleyboehmke.github.io/HOML/))
+In contrast, you **cannot** use ChatGPT or other LLMs/AI to answer the conceptual questions on the conceptual exams.   Those questions are designed to assess your working knowledge about concepts and best practices.  That information must be in YOUR head and I want to be 100% clear that use of ChatGPT/AI (or any other sources other than what is in your head) to answer those questions will be considered cheating and handled as such if detected.  There will be a zero tolerance policy for such cheating.  It will be reported to the Dean of Students on first offense.
 
-* Ng, Andrew (2018). Machine Learning Yearning: Technical Strategy for AI Engineers in the Age of Deep Learning.  DeepLearning.AI.  ([website](https://github.com/ajaymache/machine-learning-yearning))
+## Accommodations Policies
+McBurney Disability Resource Center syllabus statement: “The University of Wisconsin- Madison supports the right of all enrolled students to a full and equal educational opportunity. The Americans with Disabilities Act (ADA), Wisconsin State Statute (36.12), and UW-Madison policy (Faculty Document 1071) require that students with disabilities be reasonably accommodated in instruction and campus life. Reasonable accommodations for students with disabilities is a shared faculty and student responsibility. Students are expected to inform faculty [me] of their need for instructional accommodations by the end of the third week of the semester, or as soon as possible after a disability has been incurred or recognized. Faculty [I], will work either directly with the student [you] or in coordination with the McBurney Center to identify and provide reasonable instructional accommodations. Disability information, including instructional accommodations as part of a student's educational record, is confidential and protected under FERPA.” [http://mcburney.wisc.edu/facstaffother/faculty/syllabus.php](http://mcburney.wisc.edu/facstaffother/faculty/syllabus.php) 
 
-* Wickham, H. (2019). Advanced R. Chapman and Hall/CRC. ([website](https://adv-r.hadley.nz/))
+UW-Madison students who have experienced sexual misconduct (which can include sexual harassment, sexual assault, dating violence and/or stalking) also have the right to request academic accommodations. This right is afforded them under Federal legislation (Title IX). Information about services and resources (including information about how to request accommodations) is available through Survivor Services, a part of University Health Services: [https://www.uhs.wisc.edu/survivor-services/](https://www.uhs.wisc.edu/survivor-services/).
 
-Additional articles will be assigned and provided by pdf through the course website.
-
-
-All data processing and analysis will be accomplished using R (and we recommend the RStudio IDE).  R is a free software environment for statistical computing and graphics. It compiles and runs on a wide variety of UNIX platforms, Windows and MacOS.
-
-
-### Grading
-*	Quizzes (13 anticipated): 15%
-*	Application assignments (11 anticipated): 25% 
-*	Midterm application exam: 15% 
-*	Midterm conceptual exam: 15% 
-*	Final application exam: 15% 
-*	Final conceptual exam: 15% 
-
-Final letter grades may be curved upward, but a minimum guarantee is made of an A for 93 or above, AB for 88 - 92, B for 83 - 87, BC for 78 - 82, C for 70 - 77, D for 60-69, and F for < 60.
-
-
-### Exams, Application Assignments and Quizzes
-- The midterm application exam will be due during the 7th week of the course on Wednesday, March 6th at 8 pm.
-- The midterm conceptual exam will be administered during class on Thursday, March 7th.
-- The final exam is during exam week on Tuesday May 7th from 11 - 12:15 in our normal classroom.
-- The final project is due during exam week on Wednesday May 8th at 8 pm.
-- Approximately weekly quizzes will be administered through Canvas and due each Wednesday at 8 pm
-- Approximately weekly application assignments will be submitted via Canvas and due each Wednesday at 8 pm.  
-
-
-### Application Assignments
-The approximately weekly application assignments are due on Wednesdays at 8 pm through Canvas.  These assignments are to be done individually. Please do not share answers or code. You are also encouraged to make use of online resources (e.g., stack overflow) for assistance.  All assignments will be completed using R markdown to provide both the code and documentation as might be provided to your mentor or employer to fully describe your solution.  Late assignments are not accepted because problem solutions are provided immediately after the due date.  Application assignments are graded on a three-point scale (0 = not completed, 1 = partially completed and/or with many errors, 2 = fully completed and at least mostly correct).  Grades for each assignment will be posted by the following Monday at the latest.
-
-### ChatGPT
-I suspect you have all seen discussions of all that ChatGPT can do by now and its impact on teaching and assessment.  I believe that AI like ChatGPT will eventually become an incredible tool for data scientists and programmers.  As such, I view these advances with excitement.  Of course, I don't plan to assign a grade to ChatGPT so I want to make sure that we are clear on when you can and when you cannot use it.   Given that I expect AI like ChatGPT to become a useful tool in our workflow as  professionals, now is the time to start to learn how it can help.  Therefore, you are free to use it during any of our **application assignments** AND the **application questions on the mid-term and final exams**.  Code from ChatGPT is unlikely to be sufficient in either context (and my testing suggests it can be flat out wrong in some instances!) but I suspect that it will still be useful.  In contrast, you CANNOT use ChatGPT to answer the conceptual questions on the two exams or the weekly quizzes.   Those questions are designed to assess your working knowledge about concepts and best practices.  That information must be in YOUR head and I want to be 100% clear that use of ChatGPT to answer those questions will be considered cheating and handled as such if detected.  There will be a zero tolerance policy for such cheating.  It will be reported to the Dean of Students on first offense.
-
-### Student Ethics
-The members of the faculty of the Department of Psychology at UW-Madison uphold the highest ethical standards of teaching and research.  They expect their students to uphold the same standards of ethical conduct. By registering for this course, you are implicitly agreeing to conduct yourself with the utmost integrity throughout the semester.  
-
-In the Department of Psychology, acts of academic misconduct are taken very seriously.  Such acts diminish the educational experience for all involved – students who commit the acts, classmates who would never consider engaging in such behaviors, and instructors.  Academic misconduct includes, but is not limited to, cheating on assignments and exams, stealing exams, sabotaging the work of classmates, submitting fraudulent data, plagiarizing the work of classmates or published and/or online sources, acquiring previously written papers and submitting them (altered or unaltered) for course assignments, collaborating with classmates when such collaboration is not authorized, and assisting fellow students in acts of misconduct.  Students who have knowledge that classmates have engaged in academic misconduct should report this to the instructor.
-
-
-### Diversity and Inclusion
+## Diversity & Inclusion
 Institutional statement on diversity: “Diversity is a source of strength, creativity, and innovation for UW-Madison. We value the contributions of each person and respect the profound ways their identity, culture, background, experience, status, abilities, and opinion enrich the university community. We commit ourselves to the pursuit of excellence in teaching, research, outreach, and diversity as inextricably linked goals.
 
-The University of Wisconsin-Madison fulfills its public mission by creating a welcoming and inclusive community for people from every background – people who as students, faculty, and staff serve Wisconsin and the world.” https://diversity.wisc.edu/ 
+The University of Wisconsin-Madison fulfills its public mission by creating a welcoming and inclusive community for people from every background – people who as students, faculty, and staff serve Wisconsin and the world.” [https://diversity.wisc.edu/](https://diversity.wisc.edu/)
 
+## Complaints
+Occasionally, a student may have a complaint about a TA or course instructor. If that happens, you should feel free to discuss the matter directly with the TA or instructor. If the complaint is about the TA and you do not feel comfortable discussing it with the individual, you should discuss it with the course instructor. Complaints about mistakes in grading should be resolved with the TA and/or instructor in the great majority of cases. If the complaint is about the instructor (other than ordinary grading questions) and you do not feel comfortable discussing it with the individual, make an appointment to speak to the Associate Chair for Graduate Studies, Professor Shawn Green, cshawn.green@wisc.edu. If you have concerns about climate or bias in this class, or if you wish to report an incident of bias or hate that has occurred in class, you may contact the Chair of the Department, Professor Allyson Bennett (allyson.j.bennett@wisc.edu) or the Chair of the Psychology Department Climate & Diversity Committee, Martha Alibali (martha.alibali@wisc.edu). You may also use the University’s bias incident reporting system, which you can reach at the following link: [https://doso.students.wisc.edu/services/bias-reporting-process/](https://doso.students.wisc.edu/services/bias-reporting-process/).
 
-### Academic Integrity
-By enrolling in this course, each student assumes the responsibilities of an active participant in UW-Madison’s community of scholars in which everyone’s academic work and behavior are held to the highest academic integrity standards. Academic misconduct compromises the integrity of the university. Cheating, fabrication, plagiarism, unauthorized collaboration, and helping others commit these acts are examples of academic misconduct, which can result in disciplinary action. This includes but is not limited to failure on the assignment/course, disciplinary probation, or suspension. Substantial or repeated cases of misconduct will be forwarded to the Office of Student Conduct & Community Standards for additional review. For more information, refer to http://studentconduct.wiscweb.wisc.edu/academic-integrity  
-
-
-### Accommodations Polices
-**McBurney Disability Resource Center syllabus statement**: “The University of Wisconsin-Madison supports the right of all enrolled students to a full and equal educational opportunity. The Americans with Disabilities Act (ADA), Wisconsin State Statute (36.12), and UW-Madison policy (Faculty Document 1071) require that students with disabilities be reasonably accommodated in instruction and campus life. Reasonable accommodations for students with disabilities is a shared faculty and student responsibility. Students are expected to inform faculty [me] of their need for instructional accommodations by the end of the third week of the semester, or as soon as possible after a disability has been incurred or recognized. Faculty [I], will work either directly with the student [you] or in coordination with the McBurney Center to identify and provide reasonable instructional accommodations. Disability information, including instructional accommodations as part of a student's educational record, is confidential and protected under FERPA.” http://mcburney.wisc.edu/facstaffother/faculty/syllabus.php
-
-UW-Madison students who have experienced sexual misconduct (which can include sexual harassment, sexual assault, dating violence and/or stalking) also have the right to request academic accommodations. This right is afforded them under Federal legislation (Title IX). Information about services and resources (including information about how to request accommodations) is available through Survivor Services, a part of University Health Services: https://www.uhs.wisc.edu/survivor-services/ 
-
-
-### Complaints
-Occasionally, a student may have a complaint about a TA or course instructor. If that happens, you should feel free to discuss the matter directly with the TA or instructor. If the complaint is about the TA and you do not feel comfortable discussing it with the individual, you should discuss it with the course instructor. Complaints about mistakes in grading should be resolved with the TA and/or instructor in the great majority of cases. If the complaint is about the instructor (other than ordinary grading questions) and you do not feel comfortable discussing it with the individual, make an appointment to speak to the Associate Chair for Graduate Studies, Professor Shawn Green, cshawngreen@wisc.edu.
-
-If you have concerns about climate or bias in this class, or if you wish to report an incident of bias or hate that has occurred in class, you may contact the Chair of the Department, Professor Allyson Bennett (allyson.j.bennett@wisc.edu) or the Chair of the Psychology Department Climate & Diversity Committee, Martha Alibali (martha.alibali@wisc.edu). You may also use the [University’s bias incident reporting system](https://doso.students.wisc.edu/services/bias-reporting-process/)
-
-
-### Privacy of Student Information & Digital Tools
-The privacy and security of faculty, staff and students’ personal information is a top priority for UW-Madison. The university carefully reviews and vets all campus-supported digital tools used to support teaching and learning, to help support success through learning analytics, and to enable proctoring capabilities. UW-Madison takes necessary steps to ensure that the providers of such tools prioritize proper handling of sensitive data in alignment with FERPA, industry standards and best practices.	
-Under the Family Educational Rights and Privacy Act (FERPA which protects the privacy of student education records), student consent is not required for the university to share with school officials those student education records necessary for carrying out those university functions in which they have 	legitimate educational interest. 34 CFR 99.31(a)(1)(i)(B).  FERPA specifically allows universities to designate vendors such as digital tool providers as school officials, and accordingly to share with them personally identifiable information from student education records if they perform appropriate services for the university and are subject to all applicable requirements governing the use, disclosure and protection of student data.
-
-
-### Privacy of Student Records & the Use of Audio Recorded Lectures
-See information about privacy of student records and the usage of audio-recorded lectures.	
-Lecture materials and recordings for this course are protected intellectual property at UW-Madison. Students in this course may use the materials and recordings for their personal use related to participation in this class. Students may also take notes solely for their personal use. If a lecture is not already recorded, you are not authorized to record my lectures without my permission unless you are considered by the university to be a qualified student with a disability requiring accommodation. [Regent Policy Document 4-1] Students may not copy or have lecture materials and recordings outside of class, including posting on internet sites or selling to commercial entities. Students are also prohibited from providing or selling their personal notes to anyone else or being paid for taking notes by any person or commercial firm without the instructor’s express written permission. Unauthorized use of these copyrighted lecture materials and recordings constitutes copyright infringement and may be addressed under the university’s policies, UWS Chapters 14 and 17, governing student academic and non-academic misconduct.
-
-
-### Academic Calendar & Religious Observances
-
-Students who wish to inquire about religious observance accommodations for exams or assignments should contact the instructor within the first two weeks of class, following the [university’s policy on religious observance conflicts](https://secfac.wisc.edu/academic-calendar/#religious-observances)
- 
+## Concerns About Sexual Misconduct
+All students deserve to be safe and respected at UW-Madison. Unfortunately, we know that sexual and relationship violence do happen here. Free, confidential resources are available on and off campus for students impacted by sexual assault, sexual harassment, dating violence, and stalking (regardless of when the violence occurred). You don’t have to label your experience to seek help. Friends of survivors can reach out for support too. A list of resources can be found at [https://www.uhs.wisc.edu/survivor-resources/](https://www.uhs.wisc.edu/survivor-resources/) If you wish to speak to someone in the Department of Psychology about your concerns, you may contact the Chair of the Department, Professor Allyson Bennett (allyson.j.bennett@wisc.edu) or the Associate Chair of Graduate Studies, Professor Shawn Green (cshawn.green@wisc.edu). Please note that all of these individuals are Responsible Employees ([https://compliance.wisc.edu/titleix/mandatory-reporting/#responsible-employees)](https://compliance.wisc.edu/titleix/mandatory-reporting/#responsible-employees).
