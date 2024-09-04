@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.5.45">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to the General Linear Model - 1&nbsp; Overview</title>
+<title>1&nbsp; Overview – Introduction to the General Linear Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./02_sampling_distributions_shell.html" rel="next">
+<link href="./02_sampling_distributions.html" rel="next">
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -69,9 +69,11 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -110,13 +112,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_overview.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -132,17 +134,17 @@ window.Quarto = {
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/jjcurtin/book_glm" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-bi-facebook pe-1"></i>
+              <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-bi-linkedin pe-1"></i>
+              <i class="bi bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
@@ -177,93 +179,93 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02_sampling_distributions_shell.html" class="sidebar-item-text sidebar-link">
+  <a href="./02_sampling_distributions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sampling Distributions, Parameters, and Parameter Estimates</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_single_mean_shell.html" class="sidebar-item-text sidebar-link">
+  <a href="./03_single_mean.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Inferences About a Single Mean (1 Parameter Models)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_single_quantitative_shell.html" class="sidebar-item-text sidebar-link">
+  <a href="./04_single_quantitative.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Inferences About a Single Quantitative Predictor</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_single_dichotomous_shell.html" class="sidebar-item-text sidebar-link">
+  <a href="./05_single_dichotomous.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Inferences about a Single Dichotomous Predictor</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_two_predictors_shell.html" class="sidebar-item-text sidebar-link">
+  <a href="./06_two_predictors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inferences about two predictors (multiple regression without interaction)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07_case_analysis_shell.html" class="sidebar-item-text sidebar-link">
+  <a href="./07_case_analysis.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dealing with Messy Data I: Case Analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08_model_assumptions_shell.html" class="sidebar-item-text sidebar-link">
+  <a href="./08_model_assumptions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dealing with Messy Data II: Model Assumptions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09_transformations_shell.html" class="sidebar-item-text sidebar-link">
+  <a href="./09_transformations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dealing with Messy Data III: Transformations</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10_interactions_two_quantitative_shell.html" class="sidebar-item-text sidebar-link">
+  <a href="./10_interactions_two_quantitative.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Inferences about Two Continuous Predictors and their Interaction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11_interactions_quantitative_and_dichotomous_shell.html" class="sidebar-item-text sidebar-link">
+  <a href="./11_interactions_quantitative_and_dichotomous.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Inferences about a Continuous and Dichotomous Predictor and their Interaction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12_interactions_two_dichotomous_shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Inferences about a Two Dichotomous Predictors and their Interaction</span></span></a>
+  <a href="./12_interactions_two_dichotomous.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Inferences about Two Dichotomous Predictors and their Interaction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./13_categorical_variables_shell.html" class="sidebar-item-text sidebar-link">
+  <a href="./13_categorical_variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Categorical Variables &gt; 2 Levels</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./14_power_shell.html" class="sidebar-item-text sidebar-link">
+  <a href="./14_power.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Power Analysis and Statistical Validity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15_the_generalized_linear_model_shell.html" class="sidebar-item-text sidebar-link">
+  <a href="./15_the_generalized_linear_model.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">The Generalized Linear Model</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -292,19 +294,18 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#assignments" id="toc-assignments" class="nav-link active" data-scroll-target="#assignments"><span class="header-section-number">1.1</span> Assignments</a></li>
-  <li><a href="#todays-outline" id="toc-todays-outline" class="nav-link" data-scroll-target="#todays-outline"><span class="header-section-number">1.2</span> Today’s Outline</a></li>
-  <li><a href="#my-research" id="toc-my-research" class="nav-link" data-scroll-target="#my-research"><span class="header-section-number">1.3</span> My Research</a></li>
-  <li><a href="#my-personal-life" id="toc-my-personal-life" class="nav-link" data-scroll-target="#my-personal-life"><span class="header-section-number">1.4</span> My Personal Life</a></li>
-  <li><a href="#so-tell-us-who-you-are" id="toc-so-tell-us-who-you-are" class="nav-link" data-scroll-target="#so-tell-us-who-you-are"><span class="header-section-number">1.5</span> So tell us who you are …</a></li>
-  <li><a href="#the-syllabus-and-course-webbook" id="toc-the-syllabus-and-course-webbook" class="nav-link" data-scroll-target="#the-syllabus-and-course-webbook"><span class="header-section-number">1.6</span> The Syllabus and Course Webbook</a></li>
-  <li><a href="#the-general-linear-model" id="toc-the-general-linear-model" class="nav-link" data-scroll-target="#the-general-linear-model"><span class="header-section-number">1.7</span> The General Linear Model</a></li>
-  <li><a href="#single-mean-models-bottom-level" id="toc-single-mean-models-bottom-level" class="nav-link" data-scroll-target="#single-mean-models-bottom-level"><span class="header-section-number">1.8</span> Single Mean Models (Bottom level)</a></li>
-  <li><a href="#simple-regression-models-2nd-level" id="toc-simple-regression-models-2nd-level" class="nav-link" data-scroll-target="#simple-regression-models-2nd-level"><span class="header-section-number">1.9</span> Simple Regression Models (2nd level)</a></li>
-  <li><a href="#multiple-regression-models-3rd-level" id="toc-multiple-regression-models-3rd-level" class="nav-link" data-scroll-target="#multiple-regression-models-3rd-level"><span class="header-section-number">1.10</span> Multiple Regression Models (3rd level)</a></li>
-  <li><a href="#general-linear-models-top-level" id="toc-general-linear-models-top-level" class="nav-link" data-scroll-target="#general-linear-models-top-level"><span class="header-section-number">1.11</span> General Linear Models (Top level)</a></li>
-  <li><a href="#survey-of-glm-landscape" id="toc-survey-of-glm-landscape" class="nav-link" data-scroll-target="#survey-of-glm-landscape"><span class="header-section-number">1.12</span> Survey of GLM Landscape</a></li>
-  <li><a href="#final-mind-blowing-wrinkles" id="toc-final-mind-blowing-wrinkles" class="nav-link" data-scroll-target="#final-mind-blowing-wrinkles"><span class="header-section-number">1.13</span> Final, Mind-blowing Wrinkles</a></li>
+  <li><a href="#todays-outline" id="toc-todays-outline" class="nav-link active" data-scroll-target="#todays-outline"><span class="header-section-number">1.1</span> Today’s Outline</a></li>
+  <li><a href="#my-research" id="toc-my-research" class="nav-link" data-scroll-target="#my-research"><span class="header-section-number">1.2</span> My Research</a></li>
+  <li><a href="#my-personal-life" id="toc-my-personal-life" class="nav-link" data-scroll-target="#my-personal-life"><span class="header-section-number">1.3</span> My Personal Life</a></li>
+  <li><a href="#so-tell-us-who-you-are" id="toc-so-tell-us-who-you-are" class="nav-link" data-scroll-target="#so-tell-us-who-you-are"><span class="header-section-number">1.4</span> So tell us who you are …</a></li>
+  <li><a href="#the-syllabus-and-course-webbook" id="toc-the-syllabus-and-course-webbook" class="nav-link" data-scroll-target="#the-syllabus-and-course-webbook"><span class="header-section-number">1.5</span> The Syllabus and Course Webbook</a></li>
+  <li><a href="#the-general-linear-model" id="toc-the-general-linear-model" class="nav-link" data-scroll-target="#the-general-linear-model"><span class="header-section-number">1.6</span> The General Linear Model</a></li>
+  <li><a href="#single-mean-models-bottom-level" id="toc-single-mean-models-bottom-level" class="nav-link" data-scroll-target="#single-mean-models-bottom-level"><span class="header-section-number">1.7</span> Single Mean Models (Bottom level)</a></li>
+  <li><a href="#simple-regression-models-2nd-level" id="toc-simple-regression-models-2nd-level" class="nav-link" data-scroll-target="#simple-regression-models-2nd-level"><span class="header-section-number">1.8</span> Simple Regression Models (2nd level)</a></li>
+  <li><a href="#multiple-regression-models-3rd-level" id="toc-multiple-regression-models-3rd-level" class="nav-link" data-scroll-target="#multiple-regression-models-3rd-level"><span class="header-section-number">1.9</span> Multiple Regression Models (3rd level)</a></li>
+  <li><a href="#general-linear-models-top-level" id="toc-general-linear-models-top-level" class="nav-link" data-scroll-target="#general-linear-models-top-level"><span class="header-section-number">1.10</span> General Linear Models (Top level)</a></li>
+  <li><a href="#survey-of-glm-landscape" id="toc-survey-of-glm-landscape" class="nav-link" data-scroll-target="#survey-of-glm-landscape"><span class="header-section-number">1.11</span> Survey of GLM Landscape</a></li>
+  <li><a href="#final-mind-blowing-wrinkles" id="toc-final-mind-blowing-wrinkles" class="nav-link" data-scroll-target="#final-mind-blowing-wrinkles"><span class="header-section-number">1.12</span> Final, Mind-blowing Wrinkles</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/01_overview.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -330,22 +331,8 @@ window.Quarto = {
 </header>
 
 
-<section id="assignments" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="assignments"><span class="header-section-number">1.1</span> Assignments</h2>
-<p><a href="">Survey</a> (complete ASAP)</p>
-<p>Read</p>
-<ul>
-<li>Judd et al.&nbsp;Chapter 1, Introduction to Data Analysis</li>
-</ul>
-<p>Application assignment (due 9/11 @ 1:30 via Canvas)</p>
-<ul>
-<li><a href="./_homework/week_01/hw_01">assignment</a></li>
-<li><a href="">data</a></li>
-<li><a href="">key</a></li>
-</ul>
-</section>
-<section id="todays-outline" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="todays-outline"><span class="header-section-number">1.2</span> Today’s Outline</h2>
+<section id="todays-outline" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="todays-outline"><span class="header-section-number">1.1</span> Today’s Outline</h2>
 <ul>
 <li><p>Quick introductions</p></li>
 <li><p>Syllabus and course outline</p></li>
@@ -353,58 +340,37 @@ window.Quarto = {
 </ul>
 <hr>
 </section>
-<section id="my-research" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="my-research"><span class="header-section-number">1.3</span> My Research</h2>
-<p>I am a clinical psychologist with a focus on Substance Use Disorders.</p>
+<section id="my-research" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="my-research"><span class="header-section-number">1.2</span> My Research</h2>
+<p>I am a clinical psychologist.</p>
 <p>My laboratory focuses on algorithm development for temporally precise psychiatric risk prediction (e.g., moment by moment relapse risk prediction; efficient and early psychiatric screening) and “just-in-time” personalized interventions that adapt to both characteristics of the patient and their moment in time.</p>
 <p>To this end, we combine analytic approaches from machine learning with novel, highly informative signals (e.g., geolocation; cellular communications; social media activity; physiology via wearable biosensors) derived by passive personal sensing.</p>
-<p>I also teach an introductory course on Applied Machine Learning each spring (Psychohology 752).</p>
 <hr>
 </section>
-<section id="my-personal-life" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="my-personal-life"><span class="header-section-number">1.4</span> My Personal Life</h2>
+<section id="my-personal-life" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="my-personal-life"><span class="header-section-number">1.3</span> My Personal Life</h2>
 <p>I was born on a small island…</p>
-<p><img src="./pics/long_island.jpg" class="img-fluid" style="width:80.0%"></p>
-<hr>
-<ul>
-<li>My family
-<ul>
-<li>Melody, Jacob (13 years old) and Hana (10 years old)</li>
-</ul></li>
-</ul>
-<p><img src="./pics/sail_family.jpg" class="img-fluid" style="width:80.0%"></p>
-<hr>
-<ul>
-<li>My/our passions
-<ul>
-<li>Running, biking, nordic skiing, all things mountain…</li>
-</ul></li>
-</ul>
+<div class="cell">
+<div class="cell-output-display">
 <div>
-
-</div>
-<div class="quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<p><img src="./pics/mtb_john.jpg" class="img-fluid"> <img src="./pics/bike_hana_2.jpg" class="img-fluid"> <img src="./pics/co_14_3.jpg" class="img-fluid"> <img src="./pics/hike_hana_1.jpg" class="img-fluid"> <img src="./pics/xc_run_jacob.jpg" class="img-fluid"> <img src="./pics/madnorski.jpg" class="img-fluid"></p>
+<figure class="figure">
+<p><img src="figures/john_long_island.jpg" class="img-fluid figure-img" width="480"></p>
+</figure>
 </div>
 </div>
 </div>
 <hr>
 <ul>
-<li>My other family…..</li>
-</ul>
-<p><img src="./pics/lab.jpg" class="img-fluid"></p>
-<hr>
-<ul>
-<li>“John”, he/him</li>
+<li><p>My family</p></li>
+<li><p>Sports: Running, biking, cross-country skiing, all things mountain…</p></li>
+<li><p>“John”</p></li>
 </ul>
 <hr>
 <!--Add pictures here?-->
 <hr>
 </section>
-<section id="so-tell-us-who-you-are" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="so-tell-us-who-you-are"><span class="header-section-number">1.5</span> So tell us who you are …</h2>
+<section id="so-tell-us-who-you-are" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="so-tell-us-who-you-are"><span class="header-section-number">1.4</span> So tell us who you are …</h2>
 <ul>
 <li><p>Our TAs</p></li>
 <li><p>You</p>
@@ -415,21 +381,21 @@ window.Quarto = {
 </ul>
 <hr>
 </section>
-<section id="the-syllabus-and-course-webbook" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="the-syllabus-and-course-webbook"><span class="header-section-number">1.6</span> The Syllabus and Course Webbook</h2>
+<section id="the-syllabus-and-course-webbook" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="the-syllabus-and-course-webbook"><span class="header-section-number">1.5</span> The Syllabus and Course Webbook</h2>
 <p><a href="https://jjcurtin.github.io/book_glm/">https://jjcurtin.github.io/book_glm/</a></p>
 <hr>
 </section>
-<section id="the-general-linear-model" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="the-general-linear-model"><span class="header-section-number">1.7</span> The General Linear Model</h2>
+<section id="the-general-linear-model" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="the-general-linear-model"><span class="header-section-number">1.6</span> The General Linear Model</h2>
 <p><strong>Top level:</strong> General Linear Models</p>
 <p><strong>3rd level:</strong> Multiple Regression Models</p>
 <p><strong>2nd level:</strong> Simple Regression Models</p>
 <p><strong>Bottom level:</strong> Single Mean Models</p>
 <hr>
 </section>
-<section id="single-mean-models-bottom-level" class="level2" data-number="1.8">
-<h2 data-number="1.8" class="anchored" data-anchor-id="single-mean-models-bottom-level"><span class="header-section-number">1.8</span> Single Mean Models (Bottom level)</h2>
+<section id="single-mean-models-bottom-level" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="single-mean-models-bottom-level"><span class="header-section-number">1.7</span> Single Mean Models (Bottom level)</h2>
 <p><strong>Basic Question</strong></p>
 <p>What is the mean of an outcome/dependent/criterion variable in a sample? Is that mean different from some specified value?</p>
 <p><span class="math inline">\(Y = b_0\)</span></p>
@@ -440,8 +406,8 @@ window.Quarto = {
 <p><span style="color: blue;">One sample t-test</span></p>
 <hr>
 </section>
-<section id="simple-regression-models-2nd-level" class="level2" data-number="1.9">
-<h2 data-number="1.9" class="anchored" data-anchor-id="simple-regression-models-2nd-level"><span class="header-section-number">1.9</span> Simple Regression Models (2nd level)</h2>
+<section id="simple-regression-models-2nd-level" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="simple-regression-models-2nd-level"><span class="header-section-number">1.8</span> Simple Regression Models (2nd level)</h2>
 <p><strong>Basic Question</strong></p>
 <p>What is the relationship between a predictor variable and a dependent variable?</p>
 <p><span class="math inline">\(Y = b_0 + b_1*X_1\)</span></p>
@@ -456,8 +422,8 @@ window.Quarto = {
 <p><span style="color: blue;">Between groups (independent samples) t-test (or one-way ANOVA with two groups)</span></p>
 <hr>
 </section>
-<section id="multiple-regression-models-3rd-level" class="level2" data-number="1.10">
-<h2 data-number="1.10" class="anchored" data-anchor-id="multiple-regression-models-3rd-level"><span class="header-section-number">1.10</span> Multiple Regression Models (3rd level)</h2>
+<section id="multiple-regression-models-3rd-level" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="multiple-regression-models-3rd-level"><span class="header-section-number">1.9</span> Multiple Regression Models (3rd level)</h2>
 <p><strong>Basic Question</strong></p>
 <p>What are the relationships between a linear combination of predictors and a dependent variable?</p>
 <p><span class="math inline">\(Y = b_0 + b_1*X_1 + b_2*X_2 + b_3*X_3\)</span></p>
@@ -489,8 +455,8 @@ window.Quarto = {
 <p>Does the effect of CBT treatment (i.e., contrast of CBT vs.&nbsp;wait list control) on subsequent alcohol related problems differ dependent upon level of intelligence?</p>
 <hr>
 </section>
-<section id="general-linear-models-top-level" class="level2" data-number="1.11">
-<h2 data-number="1.11" class="anchored" data-anchor-id="general-linear-models-top-level"><span class="header-section-number">1.11</span> General Linear Models (Top level)</h2>
+<section id="general-linear-models-top-level" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="general-linear-models-top-level"><span class="header-section-number">1.10</span> General Linear Models (Top level)</h2>
 <p><strong>Basic Question</strong></p>
 <p>What are the relationships between linear combinations of two sets of variables?</p>
 <p><span class="math inline">\(b_{Y1}*Y_1 + b_{Y2}*Y_2 + b_{Y3}*Y_3 = b_1*X_1 + b_2*X_2 + b_3*X_3\)</span></p>
@@ -533,13 +499,12 @@ window.Quarto = {
 <p>Does affective response differ when viewing pleasant, neutral vs.&nbsp;unpleasant slides? Does this slide type effect differ among participants in two beverage groups (alcohol vs.&nbsp;no-alcohol)?</p>
 <hr>
 </section>
-<section id="survey-of-glm-landscape" class="level2" data-number="1.12">
-<h2 data-number="1.12" class="anchored" data-anchor-id="survey-of-glm-landscape"><span class="header-section-number">1.12</span> Survey of GLM Landscape</h2>
+<section id="survey-of-glm-landscape" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="survey-of-glm-landscape"><span class="header-section-number">1.11</span> Survey of GLM Landscape</h2>
 <p><strong>Single Y</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
 <colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
@@ -585,12 +550,10 @@ Measurement of Xs
 
 </div>
 </div>
-</div>
 <p><strong>Multiple Ys</strong></p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
 <colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
@@ -636,11 +599,10 @@ Measurement of X/Y
 
 </div>
 </div>
-</div>
 <hr>
 </section>
-<section id="final-mind-blowing-wrinkles" class="level2" data-number="1.13">
-<h2 data-number="1.13" class="anchored" data-anchor-id="final-mind-blowing-wrinkles"><span class="header-section-number">1.13</span> Final, Mind-blowing Wrinkles</h2>
+<section id="final-mind-blowing-wrinkles" class="level2" data-number="1.12">
+<h2 data-number="1.12" class="anchored" data-anchor-id="final-mind-blowing-wrinkles"><span class="header-section-number">1.12</span> Final, Mind-blowing Wrinkles</h2>
 <ul>
 <li><p>The top-level General Linear Model is itself a special case of an even more general statistical model - the <strong>Generalized Linear Model</strong> - which allows for models with dependent measures (errors really) from different distributions and non-linear link functions connecting <span class="math inline">\(X\)</span>s and <span class="math inline">\(Y\)</span>s.</p></li>
 <li><p>The General Linear Model can also be thought of as a special case of Structural Equation Modeling.</p>
@@ -689,18 +651,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -732,7 +683,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/github\.io\/jjcurtin\/book_glm");
@@ -740,7 +713,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1070,7 +1043,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./02_sampling_distributions_shell.html" class="pagination-link" aria-label="Sampling Distributions, Parameters, and Parameter Estimates">
+      <a href="./02_sampling_distributions.html" class="pagination-link" aria-label="Sampling Distributions, Parameters, and Parameter Estimates">
         <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sampling Distributions, Parameters, and Parameter Estimates</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
