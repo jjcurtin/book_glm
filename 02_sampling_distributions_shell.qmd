@@ -6,7 +6,7 @@ editor_options:
  
 # Sampling Distributions, Parameters, and Parameter Estimates 
 
-## Assignments
+## Materials and Assignments
 
 Read
 

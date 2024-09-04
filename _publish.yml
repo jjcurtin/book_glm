@@ -22,3 +22,7 @@
   quarto-pub:
     - id: 2f6825dc-c9f5-4d33-836e-72b6d986f9ac
       url: 'https://jjcurtin.quarto.pub/01_overview'
+- source: index.qmd
+  quarto-pub:
+    - id: f9d9d347-9b1d-44be-844d-0ee0e64a2eaf
+      url: 'https://jjcurtin.quarto.pub/610_syllabus'

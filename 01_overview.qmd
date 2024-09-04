@@ -5,25 +5,12 @@ editor_options:
 ---
 
 
-# Overview
+# Unit 1: Overview
 
-## Assignments
-
-[Survey]() (complete ASAP)
-
-Read
-
-- Judd et al. Chapter 1,  Introduction to Data Analysis
-
-Application assignment (due 9/11 @ 1:30 via Canvas)
-
-- [assignment](./_homework/week_01/hw_01)
-- [data]()
-- [key]()
 
 ## Today's Outline
 
-- Quick introductions
+- Quick introductions of TAs and me
 
 - Syllabus and course outline
 
@@ -33,13 +20,13 @@ Application assignment (due 9/11 @ 1:30 via Canvas)
 
 ## My Research 
 
-I am a clinical psychologist with a focus on Substance Use Disorders.
+- I am a clinical psychologist with a focus on Substance Use Disorders.
 
-My laboratory focuses on algorithm development for temporally precise psychiatric risk prediction (e.g., moment by moment relapse risk prediction; efficient and early psychiatric screening) and “just-in-time” personalized interventions that adapt to both characteristics of the patient and their moment in time. 
+- My laboratory focuses on algorithm development for temporally precise psychiatric risk prediction (e.g., moment by moment relapse risk prediction; efficient and early psychiatric screening) and “just-in-time” personalized interventions that adapt to both characteristics of the patient and their moment in time. 
 
-To this end, we combine analytic approaches from machine learning with novel, highly informative signals (e.g., geolocation; cellular communications; social media activity; physiology via wearable biosensors) derived by passive personal sensing.
+- To this end, we combine analytic approaches from machine learning with novel, highly informative signals (e.g., geolocation; cellular communications; social media activity; physiology via wearable biosensors) derived by passive personal sensing.
 
-I also teach an introductory course on Applied Machine Learning each spring (Psychohology 752).
+- I also teach an introductory course on Applied Machine Learning each spring (Psychohology 752).
 
 -----
 
@@ -93,25 +80,34 @@ I was born on a small island...
 
 - "John", he/him
 
------
-
-## So tell us who you are ...
-
 - Our TAs
 
-- You 
-  - Last name (e.g., Curtin with a C) (and pause for TAs to find you)
-  - Your first name/nickname
-  - Preferred pronouns
-  - Department and area group/program
+- Your first name/nickname
 
 -----
 
-## Course Materials
+## Materials and Assignments
 
-- [https://jjcurtin.github.io/book_glm/](https://jjcurtin.github.io/book_glm/)
+### Materials
+
+- [Unit 1 Slide Deck](https://jjcurtin.quarto.pub/01_overview/#/unit-1-overview)
+- All slide decks on course website ([https://jjcurtin.github.io/book_glm/](https://jjcurtin.github.io/book_glm/))
 - And Canvas for application assignments and exams
-- [syllabus](syllabus.pdf) 
+- [syllabus](syllabus.pdf)
+
+### Assignments
+
+- [Survey](https://forms.gle/qGH2Cppei3P4ppTP7) (complete ASAP)
+
+- Read
+  - Judd et al. Chapter 1,  Introduction to Data Analysis
+
+- Application assignment (due 9/11 @ 1:30 via Canvas)
+  - [assignment](./_homework/week_01/hw_01)
+  - [data]()
+  - [key]()
+
+- Slack DM to John and TAs with Name/Nickname and preferred pronouns
 
 -----
 
@@ -129,11 +125,14 @@ I was born on a small island...
 
 ## Single Mean Models (Bottom level)
 
+
+$\widehat{Y} = \beta_0$  
+
+\
+
 **Basic Question**  
 
-What is the mean of an outcome/dependent/criterion variable in a sample? Is that mean different from some specified value?   
-
-$Y = b_0$  
+What is the mean of an outcome/dependent variable in a sample? Is that mean different from some specified value?   
 
 \
 
@@ -158,11 +157,13 @@ What is the mean IQ of Psych 610 students? Is it different from the average IQ o
 
 ## Simple Regression Models (2nd level)
 
+$\widehat{Y} = \beta_0 + \beta_1*X_1$  
+
+\
+
 **Basic Question**  
 
 What is the relationship between a predictor variable and a dependent variable?     
-
-$Y = b_0 + b_1*X_1$  
 
 \
 
@@ -170,11 +171,15 @@ $Y = b_0 + b_1*X_1$
 
 Is trait level of positive emotionality related to satisfaction with a romantic relationship?   
 
-\
+-----
+
+$\widehat{Y} = \beta_0 + \beta_1*X_1$  
 
 <span style="color: red;">Question: What is the special case analysis when both $X$ and $Y$ are quantitative?</span>  
 
 -----
+
+$\widehat{Y} = \beta_0 + \beta_1*X_1$  
 
 <span style="color: red;">Question: What is the special case analysis when both $X$ and $Y$ are quantitative?</span>  
 
@@ -184,9 +189,13 @@ Is trait level of positive emotionality related to satisfaction with a romantic 
 
 -----
 
+$\widehat{Y} = \beta_0 + \beta_1*X_1$  
+
 <span style="color: red;">Question: What is the special case analysis when $X$ is a regressor coding for a dichotomous variable representing group membership (e.g., sex)?</span>  
 
 -----
+
+$\widehat{Y} = \beta_0 + \beta_1*X_1$  
 
 <span style="color: red;">Question: What is the special case analysis when $X$ is a regressor coding for a dichotomous variable representing group membership (e.g., sex)?</span>  
 
@@ -198,25 +207,31 @@ Is trait level of positive emotionality related to satisfaction with a romantic 
 
 ## Multiple Regression Models (3rd level)
 
-**Basic Question**  
-
-What are the relationships between a linear combination of predictors and a dependent variable?   
-     
-$Y = b_0 + b_1*X_1 + b_2*X_2 + b_3*X_3$    
+$\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
 \
+
+**Basic Question**  
+
+What are the relationships between a linear combination of predictors and a dependent variable? 
+
+\     
 
 **Example**    
 
 How well do the predictors: (a) number of absences, (b) time spent studying, and (c) interest predict final exam scores?    
 
-\
+-----
 
-<span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical variable(s) representing group membership?</span>  
+$\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
+<span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical predictors (e.g., independent variables) representing group membership?</span>  
 
 -----
 
-<span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical variable(s) representing group membership?</span>  
+$\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
+<span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical predictors (e.g., independent variables) representing group membership?</span>  
 
 \
 
@@ -224,11 +239,11 @@ How well do the predictors: (a) number of absences, (b) time spent studying, and
 
 -----
 
-**Basic Question**  
+**Basic Question for (one-way) ANOVA**  
 
 What are the mean differences in the dependent variable between the groups represented by the independent variable(s)?     
 
-$Y = b_0 + b_1*X_1 + b_2*X_2 + b_3*X_3$    
+$\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
 \  
 
@@ -236,12 +251,16 @@ $Y = b_0 + b_1*X_1 + b_2*X_2 + b_3*X_3$
 
 Are there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock?
   
-\
+-----
+
+$\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
 <span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical variables representing group membership, and one or more quantitative *covariates*?</span>  
 
 
 -----
+
+$\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
 <span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical variables representing group membership, and one or more quantitative *covariates*?</span>  
 
@@ -251,11 +270,11 @@ Are there differences among control, placebo and alcohol groups on mean fear res
 
 -----
 
-**Basic Question**  
+**Basic Question for (one-way) ANCOVA**  
 
 What are the mean differences in the dependent variable between the groups represented by the independent variable(s), holding one or more *covariates* constant?    
 
-$Y = b_0 + b_1*X_1 + b_2*X_2 + b_3*X_3$    
+$\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
 \    
 
@@ -263,11 +282,15 @@ $Y = b_0 + b_1*X_1 + b_2*X_2 + b_3*X_3$
 
 Are there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock, after equating the groups on trait anxiety scores?     
 
-\
+-----
+
+$\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
 <span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical and quantitative variables representing group membership, and quantitative scores on individual difference variables, and their interactions?</span>  
 
 -----
+
+$\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
 <span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical and quantitative variables representing group membership, and quantitative scores on individual difference variables, and their interactions?</span>  
 
@@ -277,11 +300,11 @@ Are there differences among control, placebo and alcohol groups on mean fear res
 
 -----
  
-**Basic Question**  
+**Basic Question for ATI**  
 
 Are the magnitudes of the contrasts among groups different across different levels of some individual difference variable?     
-  
-$Y = b_0 + b_1*X_1 + b_2*X_2 + b_3*X_3$    
+
+$\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
 \    
 
@@ -293,34 +316,44 @@ Does the effect of CBT treatment (i.e., contrast of CBT vs. wait list control) o
 
 ## General Linear Models (Top level)
 
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
+\
+
 **Basic Question**  
 
 What are the relationships between linear combinations of two sets of variables?     
-     
-$b_{Y1}*Y_1 + b_{Y2}*Y_2 + b_{Y3}*Y_3 = b_1*X_1 + b_2*X_2 + b_3*X_3$    
 
-\
+\     
 
 **Example**    
 
 What are relationships between (a) Personality and temperamental variables, and (b) frequency/quantity of substance use, problems, and motives for use?   
   
-\  
+-----
 
-<span style="color: red;">Question: What is this GLM special case analysis called?</span>  
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
+<span style="color: red;">Question: What is this GLM special case analysis called when all the regressors for $X$ and $Y$ are quantitative?</span>  
 
 -----
 
-<span style="color: red;">Question: What is this GLM special case analysis called?</span>  
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
+<span style="color: red;">Question: What is this GLM special case analysis called when all the regressors for $X$ and $Y$ are quantitative?</span>  
 
 \
 <span style="color: blue;">Canonical correlation</span> 
 
 -----
 
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
 <span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical variables representing group membership?</span>  
 
 -----
+
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
 <span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical variables representing group membership?</span>  
 
@@ -330,33 +363,42 @@ What are relationships between (a) Personality and temperamental variables, and 
 
 -----
 
-**Basic Question**  
+**Basic Question for MANOVA**  
 
 What linear combination of dependent variables ($Y$s) maximally differentiates groups?      
      
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
 \  
 
 **Example**    
 
 Do children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning?    
 
-\
+-----
+
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
 <span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical and quantitative variables representing group membership and quantitative *covariates*?</span>  
 
 -----
 
-<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical and quantitative variables representing group membership and quantitative *covariates*?</span>  
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
+<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical and quantitative variables representing group membership and quantitative *covariates*?</span> 
+
+\
+
 <span style="color: blue;">Multivariate Analysis of Covariance (MANCOVA)</span>    
 
-\
-
 -----
 
-**Basic Question**  
+**Basic Question for MANCOVA**  
 
 What linear combination of dependent variables ($Y$s) maximally differentiates groups, holding constant one or more covariates?     
    
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
 \ 
 
 **Example**    
@@ -365,9 +407,13 @@ Do children with ADHD who receive (a) medication, (b) parent behavioral training
 
 -----
 
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
 <span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for quantitative variables and $Y$s are categorical variables representing group membership?</span>  
 
 -----
+
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
 <span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for quantitative variables and $Y$s are categorical variables representing group membership?</span>  
 
@@ -376,7 +422,7 @@ Do children with ADHD who receive (a) medication, (b) parent behavioral training
 
 -----
 
-**Basic Question**  
+**Basic Question for Discriminant Analysis**  
 
 What linear combination of independent variables ($X$s) maximally differentiates groups (represented categorically by $Y$s)?    
     
@@ -386,13 +432,17 @@ What linear combination of independent variables ($X$s) maximally differentiates
 
 What combination of sociocultural, personality, and intellectual variables best differentiates repeat juvenile offenders and non-repeat juvenile offenders upon completion of boot-camp?   
 
-\
+-----
 
-<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical variables (or constant) representing group membership and $Y$s are repeated measures of a continuous/quantitative variable?</span>  
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
+<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical variables representing group membership and $Y$s are repeated measures of a quantitative variable?</span>  
 
 -----
 
-<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical variables (or constant) representing group membership and $Y$s are repeated measures of a continuous/quantitative variable?</span>  
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
+<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical variables representing group membership and $Y$s are repeated measures of a quantitative variable?</span>  
 
 \
 
@@ -404,6 +454,8 @@ What combination of sociocultural, personality, and intellectual variables best 
 
 What are the mean differences across $Y$s, overall or between the groups represented by the independent variables ($X$s)?    
   
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
 \   
 
 **Example**    
@@ -412,9 +464,11 @@ Does affective response differ when viewing pleasant, neutral vs. unpleasant sli
 
 -----
 
-## Survey of GLM Landscape
+## Survey of GLM Landscape with One Y
 
-**Single Y**
+- 610 only adddresses GLMs with a single Y
+
+
 ```{r}
 #| echo: false
 
@@ -429,20 +483,8 @@ tibble::tibble(Xs = c("0", "1", ">1"),
   kableExtra::column_spec(2:4, width = "30%")
 ```
 
-**Multiple Ys**
-```{r}
-#| echo: false
-
-tibble::tibble(Xs = c("0", "1", ">1"),
-       Quantitative = c("", "", "Canonical correlation"),
-       Categorical = c("Repeated measures ANOVA", "Hotelling's T", "One way MANOVA; Factorial MANOVA; Discriminant analysis"),
-       Mixed = c("Mixed model ANOVA; Mixed model ANCOVA", "", "MANCOVA")) |> 
-  kableExtra::kbl() |> 
-  kableExtra::kable_styling() |> 
-  kableExtra::add_header_above(c(" " = 1, "Measurement of X/Y" = 3)) |> 
-  kableExtra::column_spec(1, bold = TRUE, width = "10%") |> 
-  kableExtra::column_spec(2:4, width = "30%")
-```
+- 710 handles multiple Ys in the context of repeated measures analyses
+- Multivariate statistics courses address other contexts with multiple Ys
 
 -----
 
