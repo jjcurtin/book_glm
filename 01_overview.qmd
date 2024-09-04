@@ -4,8 +4,22 @@ editor_options:
   chunk_output_type: console
 ---
 
+
 # Overview
 
+## Assignments
+
+[Survey]() (complete ASAP)
+
+Read
+
+- Judd et al. Chapter 1,  Introduction to Data Analysis
+
+Application assignment (due 9/11 @ 1:30 via Canvas)
+
+- [assignment](./_homework/week_01/hw_01)
+- [data]()
+- [key]()
 
 ## Today's Outline
 
@@ -19,11 +33,13 @@ editor_options:
 
 ## My Research 
 
-I am a clinical psychologist.  
+I am a clinical psychologist with a focus on Substance Use Disorders.
 
 My laboratory focuses on algorithm development for temporally precise psychiatric risk prediction (e.g., moment by moment relapse risk prediction; efficient and early psychiatric screening) and “just-in-time” personalized interventions that adapt to both characteristics of the patient and their moment in time. 
 
 To this end, we combine analytic approaches from machine learning with novel, highly informative signals (e.g., geolocation; cellular communications; social media activity; physiology via wearable biosensors) derived by passive personal sensing.
+
+I also teach an introductory course on Applied Machine Learning each spring (Psychohology 752).
 
 -----
 
@@ -31,19 +47,20 @@ To this end, we combine analytic approaches from machine learning with novel, hi
 
 I was born on a small island...
 
+![long island](./pics/long_island.jpg){width=80%}
 ```{r}
 #| echo: false
 
-knitr::include_graphics(path = here::here("figures/john_long_island.jpg"))
+# knitr::include_graphics(path = here::here("figures/john_long_island.jpg"))
 ```
 
 -----
 
 - My family  
 
-- Sports: Running, biking, cross-country skiing, all things mountain...
+- Sports: Running, biking, nordic skiing, all things mountain...
 
-- "John"
+- "John", he/him
 
 -----
 
