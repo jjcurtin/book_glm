@@ -47,7 +47,7 @@ I also teach an introductory course on Applied Machine Learning each spring (Psy
 
 I was born on a small island...
 
-![long island](./pics/long_island.jpg){width=80%}
+![](./pics/long_island.jpg){width=80%}
 ```{r}
 #| echo: false
 
@@ -57,8 +57,39 @@ I was born on a small island...
 -----
 
 - My family  
+  - Melody, Jacob (13 years old) and Hana (10 years old)
 
-- Sports: Running, biking, nordic skiing, all things mountain...
+
+![](./pics/sail_family.jpg){width=80%}
+
+-----
+
+- My/our passions
+  - Running, biking, nordic skiing, all things mountain...
+
+::: {layout-ncol=2}
+
+![](./pics/mtb_john.jpg)
+
+![](./pics/bike_hana_2.jpg)
+
+![](./pics/co_14_3.jpg)
+
+![](./pics/hike_hana_1.jpg)
+
+![](./pics/xc_run_jacob.jpg)
+
+![](./pics/madnorski.jpg)
+
+:::
+
+-----
+
+- My other family.....
+
+![](./pics/lab.jpg)
+
+-----
 
 - "John", he/him
 

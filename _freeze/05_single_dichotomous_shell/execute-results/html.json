@@ -1,0 +1,15 @@
+{
+  "hash": "db1431d4cd58996bca46151d2b485e48",
+  "result": {
+    "engine": "knitr",
+    "markdown": "--- \noutput: html_document \neditor_options:  \n  chunk_output_type: console\n--- \n\n \n\n# Inferences about a Single Dichotomous Predictor\n\n\n::: {.cell}\n\n:::\n\n\n\n## Assignments\n\nRead\n\n- TBD \n\nApplication assignment (due ??? @ 1:30 via Canvas)\n\n- [assignment]()\n- [data]()\n- [key]()\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

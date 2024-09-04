@@ -15,7 +15,6 @@ if [ "$FORMAT" = "book" ]; then
   quarto publish gh-pages --no-browser 
   git restore _quarto.yml
   rm -r _book
-  rm -r *_files
 fi
 
  
