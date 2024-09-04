@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to the General Linear Model - 16&nbsp; Key Terminology and Concepts</title>
+<title>Introduction to the General Linear Model - 2&nbsp; Sampling Distributions, Parameters, and Parameter Estimates</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./repeated_measures.html" rel="next">
-<link href="./15_the_generalized_linear_model_shell.html" rel="prev">
+<link href="./03_single_mean_shell.html" rel="next">
+<link href="./01_overview.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app_terminology.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app_terminology.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Key Terminology and Concepts</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_sampling_distributions_shell.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sampling Distributions, Parameters, and Parameter Estimates</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -146,7 +146,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02_sampling_distributions_shell.html" class="sidebar-item-text sidebar-link">
+  <a href="./02_sampling_distributions_shell.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sampling Distributions, Parameters, and Parameter Estimates</span></span></a>
   </div>
 </li>
@@ -239,7 +239,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app_terminology.html" class="sidebar-item-text sidebar-link active">
+  <a href="./app_terminology.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Key Terminology and Concepts</span></span></a>
   </div>
 </li>
@@ -257,14 +257,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#assignments" id="toc-assignments" class="nav-link active" data-scroll-target="#assignments"><span class="header-section-number">2.1</span> Assignments</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/02_sampling_distributions_shell.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app_terminology.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app_terminology.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Key Terminology and Concepts</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Key Terminology and Concepts</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sampling Distributions, Parameters, and Parameter Estimates</span></h1>
 </div>
 
 
@@ -281,8 +287,22 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="assignments" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="assignments"><span class="header-section-number">2.1</span> Assignments</h2>
+<p>Read</p>
+<ul>
+<li>Judd et al.&nbsp;Chapter 2, Definitions of Error and Parameter Estimates</li>
+<li>Judd et al.&nbsp;Chapter 3, Models of Error and Sampling Distributions</li>
+</ul>
+<p>Application assignment (due 9/18 @ 1:30 via Canvas)</p>
+<ul>
+<li><a href="">assignment</a></li>
+<li><a href="">data</a></li>
+<li><a href="">key</a></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -696,13 +716,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./15_the_generalized_linear_model_shell.html" class="pagination-link" aria-label="The Generalized Linear Model">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">The Generalized Linear Model</span></span>
+      <a href="./01_overview.html" class="pagination-link" aria-label="Overview">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Overview</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./repeated_measures.html" class="pagination-link" aria-label="Repeated Measures">
-        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Repeated Measures</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./03_single_mean_shell.html" class="pagination-link" aria-label="Inferences About a Single Mean (1 Parameter Models)">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Inferences About a Single Mean (1 Parameter Models)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -711,4 +731,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/app_terminology.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/02_sampling_distributions_shell.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
