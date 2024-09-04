@@ -27,12 +27,21 @@ book:
   chapters:
     - index.qmd
     - 01_overview.qmd
-    - 02_sampling_distributions.qmd
-    - 03_single_mean.qmd
-    - 04_single_quantitative.qmd
-    - 05_single_dichotomous.qmd
-    - 06_two_predictors.qmd
-    - 07_case_analysis.qmd
+    - 02_sampling_distributions_shell.qmd
+    - 03_single_mean_shell.qmd
+    - 04_single_quantitative_shell.qmd
+    - 05_single_dichotomous_shell.qmd
+    - 06_two_predictors_shell.qmd
+    - 07_case_analysis_shell.qmd
+    - 08_model_assumptions_shell.qmd
+    - 09_transformations_shell.qmd
+    - 10_interactions_two_quantitative_shell.qmd
+    - 11_interactions_quantitative_and_dichotomous_shell.qmd
+    - 12_interactions_two_dichotomous_shell.qmd
+    - 13_categorical_variables_shell.qmd
+    - 14_power_shell.qmd
+    - 15_the_generalized_linear_model_shell.qmd
     - part: Appendices
       chapters:
         - app_terminology.qmd
+        - repeated_measures.qmd
