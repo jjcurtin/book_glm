@@ -65,7 +65,7 @@ I was born on a small island...
 -----
 
 - My/our passions
-  - Running, biking, nordic skiing, all things mountain...
+  - Trail running, biking, nordic skiing, all things mountain...
 
 ::: {layout-ncol=2}
 
@@ -77,7 +77,7 @@ I was born on a small island...
 
 ![](./pics/hike_hana_1.jpg)
 
-![](./pics/xc_run_jacob.jpg)
+![](./pics/xc_run_1.jpg)
 
 ![](./pics/madnorski.jpg)
 
@@ -95,30 +95,27 @@ I was born on a small island...
 
 -----
 
-<!--Add pictures here?-->
-
------
-
 ## So tell us who you are ...
 
 - Our TAs
 
 - You 
-
-    - Your preferred name/nickname
-    - Department/area group
+  - Last name (e.g., Curtin with a C) (and pause for TAs to find you)
+  - Your first name/nickname
+  - Preferred pronouns
+  - Department and area group/program
 
 -----
 
-## The Syllabus and Course Webbook
+## Course Materials
 
-[https://jjcurtin.github.io/book_glm/](https://jjcurtin.github.io/book_glm/)
-
+- [https://jjcurtin.github.io/book_glm/](https://jjcurtin.github.io/book_glm/)
+- And Canvas for application assignments and exams
+- [syllabus](syllabus.pdf) 
 
 -----
 
 ## The General Linear Model
-
 
 **Top level:** General Linear Models   
 
@@ -138,14 +135,21 @@ What is the mean of an outcome/dependent/criterion variable in a sample? Is that
 
 $Y = b_0$  
 
+\
+
 **Example**    
 
-What is the mean IQ of Psyc 610 students? Is it different from the average IQ of 100?   
+What is the mean IQ of Psych 610 students? Is it different from the average IQ of 100?   
 
+\
 
 <span style="color: red;">Question: What is this GLM special case analysis often called?</span>  
 
 -----
+
+<span style="color: red;">Question: What is this GLM special case analysis often called?</span>
+
+\
 
 <span style="color: blue;">One sample t-test</span>
 
@@ -160,22 +164,33 @@ What is the relationship between a predictor variable and a dependent variable?
 
 $Y = b_0 + b_1*X_1$  
 
+\
+
 **Example**    
 
 Is trait level of positive emotionality related to satisfaction with a romantic relationship?   
 
+\
 
 <span style="color: red;">Question: What is the special case analysis when both $X$ and $Y$ are quantitative?</span>  
 
 -----
 
-<span style="color: blue;">Pearson's correlation (also simple bivariate regression)</span>
+<span style="color: red;">Question: What is the special case analysis when both $X$ and $Y$ are quantitative?</span>  
+
+\
+
+<span style="color: blue;">Pearson's correlation</span>
 
 -----
 
 <span style="color: red;">Question: What is the special case analysis when $X$ is a regressor coding for a dichotomous variable representing group membership (e.g., sex)?</span>  
 
 -----
+
+<span style="color: red;">Question: What is the special case analysis when $X$ is a regressor coding for a dichotomous variable representing group membership (e.g., sex)?</span>  
+
+\
 
 <span style="color: blue;">Between groups (independent samples) t-test (or one-way ANOVA with two groups)</span>
 
@@ -189,14 +204,21 @@ What are the relationships between a linear combination of predictors and a depe
      
 $Y = b_0 + b_1*X_1 + b_2*X_2 + b_3*X_3$    
 
+\
+
 **Example**    
 
-How well do the variables of (a) number of absences, (b) time spent studying, and (c) interest predict final exam scores?    
+How well do the predictors: (a) number of absences, (b) time spent studying, and (c) interest predict final exam scores?    
 
+\
 
 <span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical variable(s) representing group membership?</span>  
 
 -----
+
+<span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical variable(s) representing group membership?</span>  
+
+\
 
 <span style="color: blue;">Analysis of Variance (ANOVA)</span>    
 
@@ -205,15 +227,25 @@ How well do the variables of (a) number of absences, (b) time spent studying, an
 **Basic Question**  
 
 What are the mean differences in the dependent variable between the groups represented by the independent variable(s)?     
-   
+
+$Y = b_0 + b_1*X_1 + b_2*X_2 + b_3*X_3$    
+
+\  
+
 **Example**    
 
 Are there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock?
   
+\
 
 <span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical variables representing group membership, and one or more quantitative *covariates*?</span>  
 
+
 -----
+
+<span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical variables representing group membership, and one or more quantitative *covariates*?</span>  
+
+\
 
 <span style="color: blue;">Analysis of Covariance (ANCOVA)</span>    
 
@@ -222,15 +254,24 @@ Are there differences among control, placebo and alcohol groups on mean fear res
 **Basic Question**  
 
 What are the mean differences in the dependent variable between the groups represented by the independent variable(s), holding one or more *covariates* constant?    
-    
+
+$Y = b_0 + b_1*X_1 + b_2*X_2 + b_3*X_3$    
+
+\    
+
 **Example**    
 
 Are there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock, after equating the groups on trait anxiety scores?     
 
+\
 
-<span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical and quantitative variables representing group membership and quantitative scores on individual difference variables?</span>  
+<span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical and quantitative variables representing group membership, and quantitative scores on individual difference variables, and their interactions?</span>  
 
 -----
+
+<span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical and quantitative variables representing group membership, and quantitative scores on individual difference variables, and their interactions?</span>  
+
+\
 
 <span style="color: blue;">Aptitude Treatment Interaction (ATI)</span>    
 
@@ -240,10 +281,13 @@ Are there differences among control, placebo and alcohol groups on mean fear res
 
 Are the magnitudes of the contrasts among groups different across different levels of some individual difference variable?     
   
-    
+$Y = b_0 + b_1*X_1 + b_2*X_2 + b_3*X_3$    
+
+\    
+
 **Example**    
 
-Does the effect of CBT treatment (i.e., contrast of CBT vs. wait list control) on subsequent alcohol related problems differ dependent upon level of  intelligence?
+Does the effect of CBT treatment (i.e., contrast of CBT vs. wait list control) on subsequent alcohol related problems differ dependent upon level of intelligence?
   
 -----
 
@@ -255,15 +299,21 @@ What are the relationships between linear combinations of two sets of variables?
      
 $b_{Y1}*Y_1 + b_{Y2}*Y_2 + b_{Y3}*Y_3 = b_1*X_1 + b_2*X_2 + b_3*X_3$    
 
+\
+
 **Example**    
 
 What are relationships between (a) Personality and temperamental variables, and (b) frequency/quantity of substance use, problems, and motives for use?   
   
-  
+\  
+
 <span style="color: red;">Question: What is this GLM special case analysis called?</span>  
 
 -----
 
+<span style="color: red;">Question: What is this GLM special case analysis called?</span>  
+
+\
 <span style="color: blue;">Canonical correlation</span> 
 
 -----
@@ -272,29 +322,43 @@ What are relationships between (a) Personality and temperamental variables, and 
 
 -----
 
+<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical variables representing group membership?</span>  
+
+\
+
 <span style="color: blue;">Multivariate Analysis of Variance (MANOVA)</span>    
+
+-----
 
 **Basic Question**  
 
 What linear combination of dependent variables ($Y$s) maximally differentiates groups?      
      
-  
+\  
+
 **Example**    
 
 Do children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning?    
 
+\
 
 <span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical and quantitative variables representing group membership and quantitative *covariates*?</span>  
 
 -----
 
+<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical and quantitative variables representing group membership and quantitative *covariates*?</span>  
 <span style="color: blue;">Multivariate Analysis of Covariance (MANCOVA)</span>    
+
+\
+
+-----
 
 **Basic Question**  
 
 What linear combination of dependent variables ($Y$s) maximally differentiates groups, holding constant one or more covariates?     
    
-  
+\ 
+
 **Example**    
 
 Do children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning, when equated for parental expectations? 
@@ -305,6 +369,9 @@ Do children with ADHD who receive (a) medication, (b) parent behavioral training
 
 -----
 
+<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for quantitative variables and $Y$s are categorical variables representing group membership?</span>  
+
+\
 <span style="color: blue;">Discriminant Analysis</span>    
 
 -----
@@ -313,24 +380,32 @@ Do children with ADHD who receive (a) medication, (b) parent behavioral training
 
 What linear combination of independent variables ($X$s) maximally differentiates groups (represented categorically by $Y$s)?    
     
+\
+
 **Example**    
 
 What combination of sociocultural, personality, and intellectual variables best differentiates repeat juvenile offenders and non-repeat juvenile offenders upon completion of boot-camp?   
 
------
+\
 
 <span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical variables (or constant) representing group membership and $Y$s are repeated measures of a continuous/quantitative variable?</span>  
 
 -----
 
-<span style="color: blue;">Repeated measures or mixed model ANOVA</span>   
+<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical variables (or constant) representing group membership and $Y$s are repeated measures of a continuous/quantitative variable?</span>  
 
+\
+
+<span style="color: blue;">Repeated measures ANOVA</span>   
+
+-----
 
 **Basic Question**  
 
 What are the mean differences across $Y$s, overall or between the groups represented by the independent variables ($X$s)?    
   
-    
+\   
+
 **Example**    
 
 Does affective response differ when viewing pleasant, neutral vs. unpleasant slides? Does this slide type effect differ among participants in two beverage groups (alcohol vs. no-alcohol)?   
