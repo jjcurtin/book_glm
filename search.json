@@ -84,7 +84,7 @@
     "href": "index.html#course-learning-outcomes",
     "title": "Introduction to the General Linear Model",
     "section": "Course Learning Outcomes",
-    "text": "Course Learning Outcomes\nBy the end of the course, the students should master the following data-analytic techniques and skills: - Inferences about a single mean (t-test) - The analysis of single and multiple dichotomous/categorical predictors - The analysis of single and multiple quantitative predictors - The analysis of interactions among predictors - The analysis of contrasts among levels of categorical predictors - The use of centering predictors in interactive models - Assessment and remediation techniques for case analysis and model assumptions - Logistic regression as exemplar of the generalized linear model - Generating publication-level graphs",
+    "text": "Course Learning Outcomes\nBy the end of the course, the students should master the following data-analytic techniques and skills:\n\nInferences about a single mean (t-test)\nThe analysis of single and multiple dichotomous/categorical predictors\nThe analysis of single and multiple quantitative predictors\nThe analysis of interactions among predictors\nThe analysis of contrasts among levels of categorical predictors\nThe use of centering predictors in interactive models\nAssessment and remediation techniques for case analysis and model assumptions\nLogistic regression as exemplar of the generalized linear model\nGenerating publication-level graphs",
     "crumbs": [
       "Course Syllabus"
     ]
@@ -174,17 +174,7 @@
     "href": "index.html#chatgpt-and-other-llms",
     "title": "Introduction to the General Linear Model",
     "section": "ChatGPT and other LLMs",
-    "text": "ChatGPT and other LLMs\nI suspect you have all seen discussions of all that ChatGPT and other LLMs can do by now and their impact on teaching and assessment. I believe that AI like ChatGPT will eventually become an incredible tool for data scientists and programmers. As such, I view these advances with excitement. Of course, I don’t plan to assign a grade to ChatGPT so I want to make sure that we are clear on when you can and when you cannot use it.\nGiven that I expect AI like ChatGPT and other LLMs to become a useful tool in our workflow as professionals, now is the time to start to learn how they can help. Therefore, you are free to use them for coding assistance during any of our application assignments AND the application exams. Code from ChatGPT is unlikely to be sufficient in either context (and my testing suggests it can be flat out wrong in some instances!) but I suspect that it will still be useful.\nIn contrast, you cannot use ChatGPT or other LLMs/AI to answer the conceptual questions on the conceptual exams. Those questions are designed to assess your working knowledge about concepts and best practices. That information must be in YOUR head and I want to be 100% clear that use of ChatGPT/AI (or any other sources other than what is in your head) to answer those questions will be considered cheating and handled as such if detected. There will be a zero tolerance policy for such cheating. It will be reported to the Dean of Students on first offense.",
-    "crumbs": [
-      "Course Syllabus"
-    ]
-  },
-  {
-    "objectID": "index.html#accommodations-policies",
-    "href": "index.html#accommodations-policies",
-    "title": "Introduction to the General Linear Model",
-    "section": "Accommodations Policies",
-    "text": "Accommodations Policies\nMcBurney Disability Resource Center syllabus statement: “The University of Wisconsin- Madison supports the right of all enrolled students to a full and equal educational opportunity. The Americans with Disabilities Act (ADA), Wisconsin State Statute (36.12), and UW-Madison policy (Faculty Document 1071) require that students with disabilities be reasonably accommodated in instruction and campus life. Reasonable accommodations for students with disabilities is a shared faculty and student responsibility. Students are expected to inform faculty [me] of their need for instructional accommodations by the end of the third week of the semester, or as soon as possible after a disability has been incurred or recognized. Faculty [I], will work either directly with the student [you] or in coordination with the McBurney Center to identify and provide reasonable instructional accommodations. Disability information, including instructional accommodations as part of a student’s educational record, is confidential and protected under FERPA.” http://mcburney.wisc.edu/facstaffother/faculty/syllabus.php\nUW-Madison students who have experienced sexual misconduct (which can include sexual harassment, sexual assault, dating violence and/or stalking) also have the right to request academic accommodations. This right is afforded them under Federal legislation (Title IX). Information about services and resources (including information about how to request accommodations) is available through Survivor Services, a part of University Health Services: https://www.uhs.wisc.edu/survivor-services/.",
+    "text": "ChatGPT and other LLMs\nI suspect you have all seen discussions of all that ChatGPT and other LLMs can do by now and their impact on teaching and assessment. I believe that AI like ChatGPT will eventually become an incredible tool for data scientists and programmers. As such, I view these advances with excitement. Of course, I don’t plan to assign a grade to ChatGPT so I want to make sure that we are clear on when you can and when you cannot use it.\nGiven that I expect AI like ChatGPT and other LLMs to become a useful tool in our workflow as professionals, now is the time to start to learn how they can help. Therefore, you are free to use them for coding assistance during any of our application assignments AND the application exams. Code from ChatGPT is unlikely to be sufficient in either context (and my testing suggests it can be flat out wrong in some instances!) but I suspect that it will still be useful.\nIn contrast, you cannot use ChatGPT or other LLMs/AI to answer the conceptual questions on the conceptual exams. Those questions are designed to assess your working knowledge about concepts and best practices. That information must be in YOUR head and I want to be 100% clear that use of ChatGPT/AI (or any other sources other than what is in your head) to answer those questions will be considered cheating and handled as such if detected. There will be a zero tolerance policy for such cheating and it will be considered academic misconduct and disciplined as such. ## Accommodations Policies McBurney Disability Resource Center syllabus statement: “The University of Wisconsin- Madison supports the right of all enrolled students to a full and equal educational opportunity. The Americans with Disabilities Act (ADA), Wisconsin State Statute (36.12), and UW-Madison policy (Faculty Document 1071) require that students with disabilities be reasonably accommodated in instruction and campus life. Reasonable accommodations for students with disabilities is a shared faculty and student responsibility. Students are expected to inform faculty [me] of their need for instructional accommodations by the end of the third week of the semester, or as soon as possible after a disability has been incurred or recognized. Faculty [I], will work either directly with the student [you] or in coordination with the McBurney Center to identify and provide reasonable instructional accommodations. Disability information, including instructional accommodations as part of a student’s educational record, is confidential and protected under FERPA.” http://mcburney.wisc.edu/facstaffother/faculty/syllabus.php\nUW-Madison students who have experienced sexual misconduct (which can include sexual harassment, sexual assault, dating violence and/or stalking) also have the right to request academic accommodations. This right is afforded them under Federal legislation (Title IX). Information about services and resources (including information about how to request accommodations) is available through Survivor Services, a part of University Health Services: https://www.uhs.wisc.edu/survivor-services/.",
     "crumbs": [
       "Course Syllabus"
     ]
@@ -224,7 +214,17 @@
     "href": "01_overview.html",
     "title": "1  Overview",
     "section": "",
-    "text": "1.1 Today’s Outline",
+    "text": "1.1 Assignments\nSurvey (complete ASAP)\nRead\nApplication assignment (due 9/11 @ 1:30 via Canvas)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "01_overview.html#assignments",
+    "href": "01_overview.html#assignments",
+    "title": "1  Overview",
+    "section": "",
+    "text": "Judd et al. Chapter 1, Introduction to Data Analysis\n\n\n\nassignment\ndata\nkey",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
@@ -233,8 +233,8 @@
     "objectID": "01_overview.html#todays-outline",
     "href": "01_overview.html#todays-outline",
     "title": "1  Overview",
-    "section": "",
-    "text": "Quick introductions\nSyllabus and course outline\nGeneral Linear Model framework",
+    "section": "1.2 Today’s Outline",
+    "text": "1.2 Today’s Outline\n\nQuick introductions\nSyllabus and course outline\nGeneral Linear Model framework",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
@@ -243,8 +243,8 @@
     "objectID": "01_overview.html#my-research",
     "href": "01_overview.html#my-research",
     "title": "1  Overview",
-    "section": "1.2 My Research",
-    "text": "1.2 My Research\nI am a clinical psychologist.\nMy laboratory focuses on algorithm development for temporally precise psychiatric risk prediction (e.g., moment by moment relapse risk prediction; efficient and early psychiatric screening) and “just-in-time” personalized interventions that adapt to both characteristics of the patient and their moment in time.\nTo this end, we combine analytic approaches from machine learning with novel, highly informative signals (e.g., geolocation; cellular communications; social media activity; physiology via wearable biosensors) derived by passive personal sensing.",
+    "section": "1.3 My Research",
+    "text": "1.3 My Research\nI am a clinical psychologist with a focus on Substance Use Disorders.\nMy laboratory focuses on algorithm development for temporally precise psychiatric risk prediction (e.g., moment by moment relapse risk prediction; efficient and early psychiatric screening) and “just-in-time” personalized interventions that adapt to both characteristics of the patient and their moment in time.\nTo this end, we combine analytic approaches from machine learning with novel, highly informative signals (e.g., geolocation; cellular communications; social media activity; physiology via wearable biosensors) derived by passive personal sensing.\nI also teach an introductory course on Applied Machine Learning each spring (Psychohology 752).",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
@@ -253,8 +253,8 @@
     "objectID": "01_overview.html#my-personal-life",
     "href": "01_overview.html#my-personal-life",
     "title": "1  Overview",
-    "section": "1.3 My Personal Life",
-    "text": "1.3 My Personal Life\nI was born on a small island…\n\n\n\n\n\n\n\n\n\n\n\nMy family\nSports: Running, biking, cross-country skiing, all things mountain…\n“John”",
+    "section": "1.4 My Personal Life",
+    "text": "1.4 My Personal Life\nI was born on a small island…\n\n\n\nlong island\n\n\n\n\nMy family\nSports: Running, biking, cross-country skiing, all things mountain…\n“John”",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
@@ -263,8 +263,8 @@
     "objectID": "01_overview.html#so-tell-us-who-you-are",
     "href": "01_overview.html#so-tell-us-who-you-are",
     "title": "1  Overview",
-    "section": "1.4 So tell us who you are …",
-    "text": "1.4 So tell us who you are …\n\nOur TAs\nYou\n\nYour preferred name/nickname\nDepartment/area group",
+    "section": "1.5 So tell us who you are …",
+    "text": "1.5 So tell us who you are …\n\nOur TAs\nYou\n\nYour preferred name/nickname\nDepartment/area group",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
@@ -273,8 +273,8 @@
     "objectID": "01_overview.html#the-syllabus-and-course-webbook",
     "href": "01_overview.html#the-syllabus-and-course-webbook",
     "title": "1  Overview",
-    "section": "1.5 The Syllabus and Course Webbook",
-    "text": "1.5 The Syllabus and Course Webbook\nhttps://jjcurtin.github.io/book_glm/",
+    "section": "1.6 The Syllabus and Course Webbook",
+    "text": "1.6 The Syllabus and Course Webbook\nhttps://jjcurtin.github.io/book_glm/",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
@@ -283,8 +283,8 @@
     "objectID": "01_overview.html#the-general-linear-model",
     "href": "01_overview.html#the-general-linear-model",
     "title": "1  Overview",
-    "section": "1.6 The General Linear Model",
-    "text": "1.6 The General Linear Model\nTop level: General Linear Models\n3rd level: Multiple Regression Models\n2nd level: Simple Regression Models\nBottom level: Single Mean Models",
+    "section": "1.7 The General Linear Model",
+    "text": "1.7 The General Linear Model\nTop level: General Linear Models\n3rd level: Multiple Regression Models\n2nd level: Simple Regression Models\nBottom level: Single Mean Models",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
@@ -293,8 +293,8 @@
     "objectID": "01_overview.html#single-mean-models-bottom-level",
     "href": "01_overview.html#single-mean-models-bottom-level",
     "title": "1  Overview",
-    "section": "1.7 Single Mean Models (Bottom level)",
-    "text": "1.7 Single Mean Models (Bottom level)\nBasic Question\nWhat is the mean of an outcome/dependent/criterion variable in a sample? Is that mean different from some specified value?\n\\(Y = b_0\\)\nExample\nWhat is the mean IQ of Psyc 610 students? Is it different from the average IQ of 100?\nQuestion: What is this GLM special case analysis often called?\n\nOne sample t-test",
+    "section": "1.8 Single Mean Models (Bottom level)",
+    "text": "1.8 Single Mean Models (Bottom level)\nBasic Question\nWhat is the mean of an outcome/dependent/criterion variable in a sample? Is that mean different from some specified value?\n\\(Y = b_0\\)\nExample\nWhat is the mean IQ of Psyc 610 students? Is it different from the average IQ of 100?\nQuestion: What is this GLM special case analysis often called?\n\nOne sample t-test",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
@@ -303,8 +303,8 @@
     "objectID": "01_overview.html#simple-regression-models-2nd-level",
     "href": "01_overview.html#simple-regression-models-2nd-level",
     "title": "1  Overview",
-    "section": "1.8 Simple Regression Models (2nd level)",
-    "text": "1.8 Simple Regression Models (2nd level)\nBasic Question\nWhat is the relationship between a predictor variable and a dependent variable?\n\\(Y = b_0 + b_1*X_1\\)\nExample\nIs trait level of positive emotionality related to satisfaction with a romantic relationship?\nQuestion: What is the special case analysis when both \\(X\\) and \\(Y\\) are quantitative?\n\nPearson’s correlation (also simple bivariate regression)\n\nQuestion: What is the special case analysis when \\(X\\) is a regressor coding for a dichotomous variable representing group membership (e.g., sex)?\n\nBetween groups (independent samples) t-test (or one-way ANOVA with two groups)",
+    "section": "1.9 Simple Regression Models (2nd level)",
+    "text": "1.9 Simple Regression Models (2nd level)\nBasic Question\nWhat is the relationship between a predictor variable and a dependent variable?\n\\(Y = b_0 + b_1*X_1\\)\nExample\nIs trait level of positive emotionality related to satisfaction with a romantic relationship?\nQuestion: What is the special case analysis when both \\(X\\) and \\(Y\\) are quantitative?\n\nPearson’s correlation (also simple bivariate regression)\n\nQuestion: What is the special case analysis when \\(X\\) is a regressor coding for a dichotomous variable representing group membership (e.g., sex)?\n\nBetween groups (independent samples) t-test (or one-way ANOVA with two groups)",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
@@ -313,8 +313,8 @@
     "objectID": "01_overview.html#multiple-regression-models-3rd-level",
     "href": "01_overview.html#multiple-regression-models-3rd-level",
     "title": "1  Overview",
-    "section": "1.9 Multiple Regression Models (3rd level)",
-    "text": "1.9 Multiple Regression Models (3rd level)\nBasic Question\nWhat are the relationships between a linear combination of predictors and a dependent variable?\n\\(Y = b_0 + b_1*X_1 + b_2*X_2 + b_3*X_3\\)\nExample\nHow well do the variables of (a) number of absences, (b) time spent studying, and (c) interest predict final exam scores?\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical variable(s) representing group membership?\n\nAnalysis of Variance (ANOVA)\nBasic Question\nWhat are the mean differences in the dependent variable between the groups represented by the independent variable(s)?\nExample\nAre there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock?\n\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical variables representing group membership, and one or more quantitative covariates?\n\nAnalysis of Covariance (ANCOVA)\nBasic Question\nWhat are the mean differences in the dependent variable between the groups represented by the independent variable(s), holding one or more covariates constant?\nExample\nAre there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock, after equating the groups on trait anxiety scores?\n\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical and quantitative variables representing group membership and quantitative scores on individual difference variables?\n\nAptitude Treatment Interaction (ATI)\nBasic Question\nAre the magnitudes of the contrasts among groups different across different levels of some individual difference variable?\nExample\nDoes the effect of CBT treatment (i.e., contrast of CBT vs. wait list control) on subsequent alcohol related problems differ dependent upon level of intelligence?",
+    "section": "1.10 Multiple Regression Models (3rd level)",
+    "text": "1.10 Multiple Regression Models (3rd level)\nBasic Question\nWhat are the relationships between a linear combination of predictors and a dependent variable?\n\\(Y = b_0 + b_1*X_1 + b_2*X_2 + b_3*X_3\\)\nExample\nHow well do the variables of (a) number of absences, (b) time spent studying, and (c) interest predict final exam scores?\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical variable(s) representing group membership?\n\nAnalysis of Variance (ANOVA)\n\nBasic Question\nWhat are the mean differences in the dependent variable between the groups represented by the independent variable(s)?\nExample\nAre there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock?\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical variables representing group membership, and one or more quantitative covariates?\n\nAnalysis of Covariance (ANCOVA)\n\nBasic Question\nWhat are the mean differences in the dependent variable between the groups represented by the independent variable(s), holding one or more covariates constant?\nExample\nAre there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock, after equating the groups on trait anxiety scores?\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical and quantitative variables representing group membership and quantitative scores on individual difference variables?\n\nAptitude Treatment Interaction (ATI)\n\nBasic Question\nAre the magnitudes of the contrasts among groups different across different levels of some individual difference variable?\nExample\nDoes the effect of CBT treatment (i.e., contrast of CBT vs. wait list control) on subsequent alcohol related problems differ dependent upon level of intelligence?",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
@@ -323,8 +323,8 @@
     "objectID": "01_overview.html#general-linear-models-top-level",
     "href": "01_overview.html#general-linear-models-top-level",
     "title": "1  Overview",
-    "section": "1.10 General Linear Models (Top level)",
-    "text": "1.10 General Linear Models (Top level)\nBasic Question\nWhat are the relationships between linear combinations of two sets of variables?\n\\(b_{Y1}*Y_1 + b_{Y2}*Y_2 + b_{Y3}*Y_3 = b_1*X_1 + b_2*X_2 + b_3*X_3\\)\nExample\nWhat are relationships between (a) Personality and temperamental variables, and (b) frequency/quantity of substance use, problems, and motives for use?\nQuestion: What is this GLM special case analysis called?\n\nCanonical correlation\n\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical variables representing group membership?\n\nMultivariate Analysis of Variance (MANOVA)\nBasic Question\nWhat linear combination of dependent variables (\\(Y\\)s) maximally differentiates groups?\nExample\nDo children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning?\n\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical and quantitative variables representing group membership and quantitative covariates?\n\nMultivariate Analysis of Covariance (MANCOVA)\nBasic Question\nWhat linear combination of dependent variables (\\(Y\\)s) maximally differentiates groups, holding constant one or more covariates?\nExample\nDo children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning, when equated for parental expectations?\n\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for quantitative variables and \\(Y\\)s are categorical variables representing group membership?\n\nDiscriminant Analysis\nBasic Question\nWhat linear combination of independent variables (\\(X\\)s) maximally differentiates groups (represented categorically by \\(Y\\)s)?\nExample\nWhat combination of sociocultural, personality, and intellectual variables best differentiates repeat juvenile offenders and non-repeat juvenile offenders upon completion of boot-camp?\n\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical variables (or constant) representing group membership and \\(Y\\)s are repeated measures of a continuous/quantitative variable?\n\nRepeated measures or mixed model ANOVA\nBasic Question\nWhat are the mean differences across \\(Y\\)s, overall or between the groups represented by the independent variables (\\(X\\)s)?\nExample\nDoes affective response differ when viewing pleasant, neutral vs. unpleasant slides? Does this slide type effect differ among participants in two beverage groups (alcohol vs. no-alcohol)?",
+    "section": "1.11 General Linear Models (Top level)",
+    "text": "1.11 General Linear Models (Top level)\nBasic Question\nWhat are the relationships between linear combinations of two sets of variables?\n\\(b_{Y1}*Y_1 + b_{Y2}*Y_2 + b_{Y3}*Y_3 = b_1*X_1 + b_2*X_2 + b_3*X_3\\)\nExample\nWhat are relationships between (a) Personality and temperamental variables, and (b) frequency/quantity of substance use, problems, and motives for use?\nQuestion: What is this GLM special case analysis called?\n\nCanonical correlation\n\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical variables representing group membership?\n\nMultivariate Analysis of Variance (MANOVA)\nBasic Question\nWhat linear combination of dependent variables (\\(Y\\)s) maximally differentiates groups?\nExample\nDo children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning?\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical and quantitative variables representing group membership and quantitative covariates?\n\nMultivariate Analysis of Covariance (MANCOVA)\nBasic Question\nWhat linear combination of dependent variables (\\(Y\\)s) maximally differentiates groups, holding constant one or more covariates?\nExample\nDo children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning, when equated for parental expectations?\n\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for quantitative variables and \\(Y\\)s are categorical variables representing group membership?\n\nDiscriminant Analysis\n\nBasic Question\nWhat linear combination of independent variables (\\(X\\)s) maximally differentiates groups (represented categorically by \\(Y\\)s)?\nExample\nWhat combination of sociocultural, personality, and intellectual variables best differentiates repeat juvenile offenders and non-repeat juvenile offenders upon completion of boot-camp?\n\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical variables (or constant) representing group membership and \\(Y\\)s are repeated measures of a continuous/quantitative variable?\n\nRepeated measures or mixed model ANOVA\nBasic Question\nWhat are the mean differences across \\(Y\\)s, overall or between the groups represented by the independent variables (\\(X\\)s)?\nExample\nDoes affective response differ when viewing pleasant, neutral vs. unpleasant slides? Does this slide type effect differ among participants in two beverage groups (alcohol vs. no-alcohol)?",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
@@ -333,8 +333,8 @@
     "objectID": "01_overview.html#survey-of-glm-landscape",
     "href": "01_overview.html#survey-of-glm-landscape",
     "title": "1  Overview",
-    "section": "1.11 Survey of GLM Landscape",
-    "text": "1.11 Survey of GLM Landscape\nSingle Y\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMeasurement of Xs\n\n\n\nXs\nQuantitative\nCategorical\nMixed\n\n\n\n\n0\nOne sample t-test\n\n\n\n\n1\nSimple regression; Pearson's r\nIndependent t-test; Point biserial r\n\n\n\n&gt;1\nMultiple regression\nOne way ANOVA; Factorial ANOVA\nANCOVA; ATI\n\n\n\n\n\n\n\n\nMultiple Ys\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMeasurement of X/Y\n\n\n\nXs\nQuantitative\nCategorical\nMixed\n\n\n\n\n0\n\nRepeated measures ANOVA\nMixed model ANOVA; Mixed model ANCOVA\n\n\n1\n\nHotelling's T\n\n\n\n&gt;1\nCanonical correlation\nOne way MANOVA; Factorial MANOVA; Discriminant analysis\nMANCOVA",
+    "section": "1.12 Survey of GLM Landscape",
+    "text": "1.12 Survey of GLM Landscape\nSingle Y\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMeasurement of Xs\n\n\n\nXs\nQuantitative\nCategorical\nMixed\n\n\n\n\n0\nOne sample t-test\n\n\n\n\n1\nSimple regression; Pearson's r\nIndependent t-test; Point biserial r\n\n\n\n&gt;1\nMultiple regression\nOne way ANOVA; Factorial ANOVA\nANCOVA; ATI\n\n\n\n\n\n\n\n\nMultiple Ys\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMeasurement of X/Y\n\n\n\nXs\nQuantitative\nCategorical\nMixed\n\n\n\n\n0\n\nRepeated measures ANOVA\nMixed model ANOVA; Mixed model ANCOVA\n\n\n1\n\nHotelling's T\n\n\n\n&gt;1\nCanonical correlation\nOne way MANOVA; Factorial MANOVA; Discriminant analysis\nMANCOVA",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
@@ -343,8 +343,8 @@
     "objectID": "01_overview.html#final-mind-blowing-wrinkles",
     "href": "01_overview.html#final-mind-blowing-wrinkles",
     "title": "1  Overview",
-    "section": "1.12 Final, Mind-blowing Wrinkles",
-    "text": "1.12 Final, Mind-blowing Wrinkles\n\nThe top-level General Linear Model is itself a special case of an even more general statistical model - the Generalized Linear Model - which allows for models with dependent measures (errors really) from different distributions and non-linear link functions connecting \\(X\\)s and \\(Y\\)s.\nThe General Linear Model can also be thought of as a special case of Structural Equation Modeling.\n\nAll of the variables that we have described so far are single-indicator, observed variables (i.e., individual constructs of interest are measured using a single task or measure).\nEach of the statistics we have described have a multiple-indicator, latent variable analog. They are special cases of these latent models in which there is only one indicator per individual construct.",
+    "section": "1.13 Final, Mind-blowing Wrinkles",
+    "text": "1.13 Final, Mind-blowing Wrinkles\n\nThe top-level General Linear Model is itself a special case of an even more general statistical model - the Generalized Linear Model - which allows for models with dependent measures (errors really) from different distributions and non-linear link functions connecting \\(X\\)s and \\(Y\\)s.\nThe General Linear Model can also be thought of as a special case of Structural Equation Modeling.\n\nAll of the variables that we have described so far are single-indicator, observed variables (i.e., individual constructs of interest are measured using a single task or measure).\nEach of the statistics we have described have a multiple-indicator, latent variable analog. They are special cases of these latent models in which there is only one indicator per individual construct.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Overview</span>"
     ]
@@ -354,7 +354,27 @@
     "href": "02_sampling_distributions.html",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "",
-    "text": "2.1 Inferential Statistics\nInferential statistics are used to estimate parameters in the population from parameter estimates in a sample drawn from that population.\nIn inferential statistics, we use these parameter estimates to test hypotheses (predictions; null and alternative hypotheses) about the size of the population parameter.\nThese predictions about the size of population parameters typically map directly onto research questions about (causal) relationships between variables (IVs and DV).\nAnswers from inferential statistics are probabilistic. In other words, all answers have the potential to be wrong and you will provide an index of that probability along with your results.",
+    "text": "2.1 Assignments\nRead\nApplication assignment (due 9/18 @ 1:30 via Canvas)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#assignments",
+    "href": "02_sampling_distributions.html#assignments",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "",
+    "text": "Judd et al. Chapter 2, Definitions of Error and Parameter Estimates\nJudd et al. Chapter 3, Models of Error and Sampling Distributions\n\n\n\nassignment\ndata\nkey",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#inferential-statistics",
+    "href": "02_sampling_distributions.html#inferential-statistics",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.2 Inferential Statistics",
+    "text": "2.2 Inferential Statistics\nInferential statistics are used to estimate parameters in the population from parameter estimates in a sample drawn from that population.\nIn inferential statistics, we use these parameter estimates to test hypotheses (predictions; null and alternative hypotheses) about the size of the population parameter.\nThese predictions about the size of population parameters typically map directly onto research questions about (causal) relationships between variables (IVs and DV).\nAnswers from inferential statistics are probabilistic. In other words, all answers have the potential to be wrong and you will provide an index of that probability along with your results.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -363,8 +383,8 @@
     "objectID": "02_sampling_distributions.html#populations",
     "href": "02_sampling_distributions.html#populations",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.2 Populations",
-    "text": "2.2 Populations\nA population is any clearly defined set of objects or events (people, occurrences, animals, etc.). Populations usually represent all events in a particular class (e.g., all college students, all alcoholics, all depressed people, all people). It is often an abstract concept because in many/most instances you will never have access to the entire population.\nFor example, many of our studies may have the population of all people as its target.\nNonetheless, researchers usually want to describe or draw conclusions about populations (e.g., We don’t care if some new drug is an effective treatment for 100 people in your sample. Will it work, on average, for everyone we might treat?).",
+    "section": "2.3 Populations",
+    "text": "2.3 Populations\nA population is any clearly defined set of objects or events (people, occurrences, animals, etc.). Populations usually represent all events in a particular class (e.g., all college students, all alcoholics, all depressed people, all people). It is often an abstract concept because in many/most instances you will never have access to the entire population.\nFor example, many of our studies may have the population of all people as its target.\nNonetheless, researchers usually want to describe or draw conclusions about populations (e.g., We don’t care if some new drug is an effective treatment for 100 people in your sample. Will it work, on average, for everyone we might treat?).",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -373,8 +393,8 @@
     "objectID": "02_sampling_distributions.html#population-parameters",
     "href": "02_sampling_distributions.html#population-parameters",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.3 (Population) Parameters",
-    "text": "2.3 (Population) Parameters\nA parameter is a value used to describe a certain characteristic of a population. It is usually unknown and therefore has to be estimated.\nFor example, the population mean is a parameter that is often used to indicate the average/typical value of a variable in the population.\nWithin a population, a parameter is a fixed value which does not vary within the population at the time of measurement (e.g., the mean height of people in the US at the present moment).\nYou typically can’t calculate these parameters directly because you don’t have access to the entire population.\nWe use Greek letters to represent population parameters (\\(\\mu\\), \\(\\sigma\\), \\(\\sigma^2\\), \\(\\beta_0\\), \\(\\beta_j\\)).",
+    "section": "2.4 (Population) Parameters",
+    "text": "2.4 (Population) Parameters\nA parameter is a value used to describe a certain characteristic of a population. It is usually unknown and therefore has to be estimated.\nFor example, the population mean is a parameter that is often used to indicate the average/typical value of a variable in the population.\nWithin a population, a parameter is a fixed value which does not vary within the population at the time of measurement (e.g., the mean height of people in the US at the present moment).\nYou typically can’t calculate these parameters directly because you don’t have access to the entire population.\nWe use Greek letters to represent population parameters (\\(\\mu\\), \\(\\sigma\\), \\(\\sigma^2\\), \\(\\beta_0\\), \\(\\beta_j\\)).",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -383,8 +403,8 @@
     "objectID": "02_sampling_distributions.html#samples-parameter-estimates",
     "href": "02_sampling_distributions.html#samples-parameter-estimates",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.4 Samples & Parameter Estimates",
-    "text": "2.4 Samples & Parameter Estimates\nA sample is a finite group of units (e.g., participants) selected from the population of interest.\nA sample is generally selected for a study because the population is too large to study in its entirety. We typically have only one sample in a study.\nWe use the sample to estimate and test parameters in the population.\nThese estimates are called parameter estimates.\nWe use Roman letters to represent sample parameter estimates (\\(\\overline{X}\\), \\(s\\), \\(s^2\\), \\(b_0\\), \\(b_j\\)).",
+    "section": "2.5 Samples & Parameter Estimates",
+    "text": "2.5 Samples & Parameter Estimates\nA sample is a finite group of units (e.g., participants) selected from the population of interest.\nA sample is generally selected for a study because the population is too large to study in its entirety. We typically have only one sample in a study.\nWe use the sample to estimate and test parameters in the population.\nThese estimates are called parameter estimates.\nWe use Roman letters to represent sample parameter estimates (\\(\\overline{X}\\), \\(s\\), \\(s^2\\), \\(b_0\\), \\(b_j\\)).",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -393,8 +413,8 @@
     "objectID": "02_sampling_distributions.html#sampling-error",
     "href": "02_sampling_distributions.html#sampling-error",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.5 Sampling Error",
-    "text": "2.5 Sampling Error\nSince a sample does not include all members of the population, parameter estimates generally differ from parameters on the entire population (e.g., use mean height of a sample of 1000 people to estimate mean height of US population).\nThe difference between the (sample) parameter estimate and the (population) parameter is sampling error.\nYou will not be able to calculate the sampling error of your parameter estimate directly because you don’t know the value of the population parameter. However, you can estimate it by probabilistic modeling of the hypothetical sampling distibution for that parameter.",
+    "section": "2.6 Sampling Error",
+    "text": "2.6 Sampling Error\nSince a sample does not include all members of the population, parameter estimates generally differ from parameters on the entire population (e.g., use mean height of a sample of 1000 people to estimate mean height of US population).\nThe difference between the (sample) parameter estimate and the (population) parameter is sampling error.\nYou will not be able to calculate the sampling error of your parameter estimate directly because you don’t know the value of the population parameter. However, you can estimate it by probabilistic modeling of the hypothetical sampling distibution for that parameter.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -403,8 +423,8 @@
     "objectID": "02_sampling_distributions.html#hypothetical-sampling-distribution",
     "href": "02_sampling_distributions.html#hypothetical-sampling-distribution",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.6 Hypothetical Sampling Distribution",
-    "text": "2.6 Hypothetical Sampling Distribution\nA sampling distribution is a probability distribution for a parameter estimate drawn from all possible samples of size \\(N\\) taken from a population.\nA sampling distribution can be formed for any population parameter.\nEach time you draw a sample of size \\(N\\) from a population you can calculate an estimate of that population parameter from that sample.\nBecause of sampling error, these parameter estimates will not exactly equal the population parameter. They will not equal each other either. They will form a distribution.\nA sampling distribution, like a population, is an abstract concept that represents the outcome of repeated (infinite) sampling. You will typically only have one sample.",
+    "section": "2.7 Hypothetical Sampling Distribution",
+    "text": "2.7 Hypothetical Sampling Distribution\nA sampling distribution is a probability distribution for a parameter estimate drawn from all possible samples of size \\(N\\) taken from a population.\nA sampling distribution can be formed for any population parameter.\nEach time you draw a sample of size \\(N\\) from a population you can calculate an estimate of that population parameter from that sample.\nBecause of sampling error, these parameter estimates will not exactly equal the population parameter. They will not equal each other either. They will form a distribution.\nA sampling distribution, like a population, is an abstract concept that represents the outcome of repeated (infinite) sampling. You will typically only have one sample.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -413,8 +433,8 @@
     "objectID": "02_sampling_distributions.html#what-if-we-didnt-need-samples",
     "href": "02_sampling_distributions.html#what-if-we-didnt-need-samples",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.7 What if we didn’t need samples?",
-    "text": "2.7 What if we didn’t need samples?\nResearch question: How do inhabitants of a remote pacific island feel about the ocean? Population size = 10,000.\nDependent measure: Ocean liking scale scores that range from -100 (strongly dislike) to 100 (strongly like). 0 represents neutral.\nHypotheses: \\(H_0: \\mu = 0; H_a: \\mu \\neq 0\\)\nQuestion: How would you answer this question if you had unlimited resources (e.g., time, money, and patience)?\n\nAdminister the Ocean liking scale to all 10,000 inhabitants in the population and calculate the population mean score. Is it 0? If not, the inhabitants are not neutral on average.",
+    "section": "2.8 What if we didn’t need samples?",
+    "text": "2.8 What if we didn’t need samples?\nResearch question: How do inhabitants of a remote pacific island feel about the ocean? Population size = 10,000.\nDependent measure: Ocean liking scale scores that range from -100 (strongly dislike) to 100 (strongly like). 0 represents neutral.\nHypotheses: \\(H_0: \\mu = 0; H_a: \\mu \\neq 0\\)\nQuestion: How would you answer this question if you had unlimited resources (e.g., time, money, and patience)?\n\nAdminister the Ocean liking scale to all 10,000 inhabitants in the population and calculate the population mean score. Is it 0? If not, the inhabitants are not neutral on average.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -423,8 +443,8 @@
     "objectID": "02_sampling_distributions.html#ocean-liking-scale-scores-in-full-population",
     "href": "02_sampling_distributions.html#ocean-liking-scale-scores-in-full-population",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.8 Ocean Liking Scale Scores in Full Population",
-    "text": "2.8 Ocean Liking Scale Scores in Full Population\n\n\nCode\n1options(conflicts.policy = \"depends.ok\")\nlibrary(tidyverse)\n2path_data &lt;- \"data_lecture\"\n\n3data &lt;- read_csv(here::here(path_data, \"2_sampling_distributions_like.csv\"),\n                 show_col_types = FALSE) \n\n\n\n1\n\nThis line of code will tell will tell us when we load two packages with conflicting functions (i.e., they have the same name) by producing an error. There are ways to set custom conflict policies and work around conflicts (e.g., only loading certain functions from a package). You can find more documentation here.\n\n\n2\n\nThis path points to where your data is and should be a relative path from your R project.\n\n3\n\nwe use the here() function in the here package (here::here()) to define paths within a function. This approach (vs. file.path()) works well when using R Projects.\n\n\n\n\n\nSee also:\nview() allows you to open up the data frame in rstudio.\nglimpse() is a useful function that you can pipe tibbles into when first reading them in. It shows you useful information, like number of rows and column, variable (column) names, a sample of what the data look like, and the class of each variable (e.g., double, character, factor).\n\n\nCode\ndata |&gt; \n  glimpse()\n\n\nRows: 10,000\nColumns: 2\n$ subid      &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, …\n$ like_score &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 23.6…\n\n\n\nskim() and other functions in the skimr package are helpful for quick summaries of your data (e.g., missingness, distribution, type of data)\n\n\nCode\ndata |&gt; \n  skimr::skim()\n\n\n\nData summary\n\n\nName\ndata\n\n\nNumber of rows\n10000\n\n\nNumber of columns\n2\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\nnumeric\n2\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\n\nsubid\n0\n1\n5000.5\n2886.90\n1.00\n2500.75\n5000.5\n7500.25\n10000.00\n▇▇▇▇▇\n\n\nlike_score\n0\n1\n0.0\n23.67\n-86.64\n-16.08\n0.1\n16.14\n84.46\n▁▃▇▃▁\n\n\n\n\n\n\nIf we want less information about the distribution we can use summarise and specify the descriptive statistics we want.\n\n\nCode\ndata |&gt; \n  summarise(n = n(),\n            mean = mean(like_score),\n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n      mean    sd\n  &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;\n1 10000 -6.27e-16  23.7\n\n\n\nYou can also pull out a few rows to look at your data. This can be done using slice_head() to pull out \\(n\\) top rows of the data set, slice_tail() to pull out \\(n\\) bottom rows of the data set, or slice_sample() to pull out a random \\(n\\) of rows from the data set.\n\n\nCode\ndata |&gt; \n  slice_head(n = 5) \n\n\n# A tibble: 5 × 2\n  subid like_score\n  &lt;dbl&gt;      &lt;dbl&gt;\n1     1     -23.6 \n2     2      -9.01\n3     3      30.5 \n4     4       5.89\n5     5      -9.16\n\n\n\n\nCode\ndata |&gt; \n  slice_tail(n = 5) \n\n\n# A tibble: 5 × 2\n  subid like_score\n  &lt;dbl&gt;      &lt;dbl&gt;\n1  9996     -16.6 \n2  9997      -8.37\n3  9998      18.6 \n4  9999     -16.2 \n5 10000     -17.0 \n\n\n\n\n\nCode\n1set.seed(101)\ndata |&gt; \n  slice_sample(n = 5)\n\n\n\n1\n\nWhenever you are using random numbers it is important to set a seed first (set.seed()). This ensures you can reproduce that randomness!\n\n\n\n\n# A tibble: 5 × 2\n  subid like_score\n  &lt;dbl&gt;      &lt;dbl&gt;\n1  8009     -27.0 \n2  2873     -41.5 \n3  3281      17.8 \n4  5562      27.4 \n5  5471      -9.84\n\n\n\n\n\nCode\nplot_raw &lt;- data |&gt; \n  ggplot(aes(x = like_score)) +\n  geom_histogram(color = \"black\", fill = \"light grey\", bins = 20) + \n  scale_x_continuous(limits = c(-100, 100)) +\n1  theme_classic()\n\n\n\n1\n\nWe can use themes to customize the output of our figures. This can be piped into your ggplot() code or set globally at the top of your script using the code below:\n\n\n\n\n\n\nCode\ntheme_set(theme_classic()) \n\n\n\n\n\nCode\nplot_raw",
+    "section": "2.9 Ocean Liking Scale Scores in Full Population",
+    "text": "2.9 Ocean Liking Scale Scores in Full Population\n\n\nCode\n1options(conflicts.policy = \"depends.ok\")\nlibrary(tidyverse)\n2path_data &lt;- \"data_lecture\"\n\n3data &lt;- read_csv(here::here(path_data, \"2_sampling_distributions_like.csv\"),\n                 show_col_types = FALSE) \n\n\n\n1\n\nThis line of code will tell will tell us when we load two packages with conflicting functions (i.e., they have the same name) by producing an error. There are ways to set custom conflict policies and work around conflicts (e.g., only loading certain functions from a package). You can find more documentation here.\n\n\n2\n\nThis path points to where your data is and should be a relative path from your R project.\n\n3\n\nwe use the here() function in the here package (here::here()) to define paths within a function. This approach (vs. file.path()) works well when using R Projects.\n\n\n\n\n\nSee also:\nview() allows you to open up the data frame in rstudio.\nglimpse() is a useful function that you can pipe tibbles into when first reading them in. It shows you useful information, like number of rows and column, variable (column) names, a sample of what the data look like, and the class of each variable (e.g., double, character, factor).\n\n\nCode\ndata |&gt; \n  glimpse()\n\n\nRows: 10,000\nColumns: 2\n$ subid      &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, …\n$ like_score &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 23.6…\n\n\n\nskim() and other functions in the skimr package are helpful for quick summaries of your data (e.g., missingness, distribution, type of data)\n\n\nCode\ndata |&gt; \n  skimr::skim()\n\n\n\nData summary\n\n\nName\ndata\n\n\nNumber of rows\n10000\n\n\nNumber of columns\n2\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\nnumeric\n2\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\n\nsubid\n0\n1\n5000.5\n2886.90\n1.00\n2500.75\n5000.5\n7500.25\n10000.00\n▇▇▇▇▇\n\n\nlike_score\n0\n1\n0.0\n23.67\n-86.64\n-16.08\n0.1\n16.14\n84.46\n▁▃▇▃▁\n\n\n\n\n\n\nIf we want less information about the distribution we can use summarise and specify the descriptive statistics we want.\n\n\nCode\ndata |&gt; \n  summarise(n = n(),\n            mean = mean(like_score),\n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n      mean    sd\n  &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;\n1 10000 -6.27e-16  23.7\n\n\n\nYou can also pull out a few rows to look at your data. This can be done using slice_head() to pull out \\(n\\) top rows of the data set, slice_tail() to pull out \\(n\\) bottom rows of the data set, or slice_sample() to pull out a random \\(n\\) of rows from the data set.\n\n\nCode\ndata |&gt; \n  slice_head(n = 5) \n\n\n# A tibble: 5 × 2\n  subid like_score\n  &lt;dbl&gt;      &lt;dbl&gt;\n1     1     -23.6 \n2     2      -9.01\n3     3      30.5 \n4     4       5.89\n5     5      -9.16\n\n\n\n\nCode\ndata |&gt; \n  slice_tail(n = 5) \n\n\n# A tibble: 5 × 2\n  subid like_score\n  &lt;dbl&gt;      &lt;dbl&gt;\n1  9996     -16.6 \n2  9997      -8.37\n3  9998      18.6 \n4  9999     -16.2 \n5 10000     -17.0 \n\n\n\n\n\nCode\n1set.seed(101)\ndata |&gt; \n  slice_sample(n = 5)\n\n\n\n1\n\nWhenever you are using random numbers it is important to set a seed first (set.seed()). This ensures you can reproduce that randomness!\n\n\n\n\n# A tibble: 5 × 2\n  subid like_score\n  &lt;dbl&gt;      &lt;dbl&gt;\n1  8009     -27.0 \n2  2873     -41.5 \n3  3281      17.8 \n4  5562      27.4 \n5  5471      -9.84\n\n\n\n\n\nCode\nplot_raw &lt;- data |&gt; \n  ggplot(aes(x = like_score)) +\n  geom_histogram(color = \"black\", fill = \"light grey\", bins = 20) + \n  scale_x_continuous(limits = c(-100, 100)) +\n1  theme_classic()\n\n\n\n1\n\nWe can use themes to customize the output of our figures. This can be piped into your ggplot() code or set globally at the top of your script using the code below:\n\n\n\n\n\n\nCode\ntheme_set(theme_classic()) \n\n\n\n\n\nCode\nplot_raw",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -433,8 +453,8 @@
     "objectID": "02_sampling_distributions.html#parameter-estimation-and-testing",
     "href": "02_sampling_distributions.html#parameter-estimation-and-testing",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.9 Parameter Estimation and Testing",
-    "text": "2.9 Parameter Estimation and Testing\nQuestion: What do you conclude?\n\nInhabitants of the island are neutral on average on the Ocean Liking Scale; \\(\\mu\\) = 0.\n\nQuestion: How confident are you about this conclusion?\n\nExcluding issues of measurement of the scale (i.e., reliability), you are 100% confident that the population mean score on this scale is 0 (\\(\\mu\\) = 0).\n\nQuestion: Of course, this approach to answering a research question is not typical. Why? And how would you normally answer this question?\n\nYou will very rarely have access to all scores in the population. Instead, you have to use inferential statistics to “infer” (estimate) the size of the population parameter from a sample.",
+    "section": "2.10 Parameter Estimation and Testing",
+    "text": "2.10 Parameter Estimation and Testing\nQuestion: What do you conclude?\n\nInhabitants of the island are neutral on average on the Ocean Liking Scale; \\(\\mu\\) = 0.\n\nQuestion: How confident are you about this conclusion?\n\nExcluding issues of measurement of the scale (i.e., reliability), you are 100% confident that the population mean score on this scale is 0 (\\(\\mu\\) = 0).\n\nQuestion: Of course, this approach to answering a research question is not typical. Why? And how would you normally answer this question?\n\nYou will very rarely have access to all scores in the population. Instead, you have to use inferential statistics to “infer” (estimate) the size of the population parameter from a sample.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -443,8 +463,8 @@
     "objectID": "02_sampling_distributions.html#obtain-a-sample",
     "href": "02_sampling_distributions.html#obtain-a-sample",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.10 Obtain a Sample",
-    "text": "2.10 Obtain a Sample\nYou are a poor graduate student. All you can afford is \\(N = 10\\).\n\n\nCode\nset.seed(2005) \ndata_sample_1 &lt;- data |&gt; \n   slice_sample(n = 10)\n\ndata_sample_1 |&gt; \n  summarise(n = n(),\n            mean = mean(like_score),\n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n  mean    sd\n  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    10  2.14  19.4\n\n\nQuestion: What do you conclude and why?\n\nA sample mean of 2.14 is not 0. However, you know that the sample mean will not match the population mean exactly. How likely is it to get a sample mean of 2.14 if the population mean is 0 (think about it!)?\n\nYour friend is a poor graduate student too. All she can afford is \\(N = 10\\) too.\n\n\nCode\ndata_sample_2 &lt;- data |&gt; \n   slice_sample(n = 10)\n\ndata_sample_2 |&gt; \n  summarise(n = n(),\n            mean = mean(like_score),\n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n  mean    sd\n  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    10  1.74  23.0\n\n\nQuestion: What does she conclude and why?\n\nA sample mean of 1.74 is not 0. However, she knows that the sample mean will not match the population mean exactly. It is more likely to get a sample mean of 1.74 than 2.14 if the population mean is 0 but she still doesn’t know how likely either outcome is. What if she obtained a sample with mean of 30?",
+    "section": "2.11 Obtain a Sample",
+    "text": "2.11 Obtain a Sample\nYou are a poor graduate student. All you can afford is \\(N = 10\\).\n\n\nCode\nset.seed(2005) \ndata_sample_1 &lt;- data |&gt; \n   slice_sample(n = 10)\n\ndata_sample_1 |&gt; \n  summarise(n = n(),\n            mean = mean(like_score),\n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n  mean    sd\n  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    10  2.14  19.4\n\n\nQuestion: What do you conclude and why?\n\nA sample mean of 2.14 is not 0. However, you know that the sample mean will not match the population mean exactly. How likely is it to get a sample mean of 2.14 if the population mean is 0 (think about it!)?\n\nYour friend is a poor graduate student too. All she can afford is \\(N = 10\\) too.\n\n\nCode\ndata_sample_2 &lt;- data |&gt; \n   slice_sample(n = 10)\n\ndata_sample_2 |&gt; \n  summarise(n = n(),\n            mean = mean(like_score),\n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n  mean    sd\n  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    10  1.74  23.0\n\n\nQuestion: What does she conclude and why?\n\nA sample mean of 1.74 is not 0. However, she knows that the sample mean will not match the population mean exactly. It is more likely to get a sample mean of 1.74 than 2.14 if the population mean is 0 but she still doesn’t know how likely either outcome is. What if she obtained a sample with mean of 30?",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -453,8 +473,8 @@
     "objectID": "02_sampling_distributions.html#sampling-distribution-of-the-mean",
     "href": "02_sampling_distributions.html#sampling-distribution-of-the-mean",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.11 Sampling Distribution of the Mean",
-    "text": "2.11 Sampling Distribution of the Mean\nYou can construct a sampling distribution for any parameter estimate (e.g., mean, \\(s\\), min, max, \\(r\\), \\(b_0\\), \\(b_1\\)).\nFor the mean, you can think of the sampling distribution conceptually as follows:\n\nImagine drawing many samples (lets say 1000 samples but in theory, the sampling distribution is infinite) of \\(N\\)=10 participants (10 participants in each sample) from your population.\nNext, calculate the mean for each of these samples of 10 participants.\nFinally, create a histogram (or density plot) of these sample means.\n\n\n\n2.11.1 1000 Samples of \\(N\\)=10\n\n\nCode\n1get_sample_mean &lt;- function(data, n_sub) {\n  data |&gt; \n  slice_sample(n = n_sub) |&gt; \n  summarise(across(everything(), list(mean = mean, sd = sd), .names = \"{fn}\")) |&gt; \n  mutate(n = n_sub) \n}\n\n\n\n1\n\nHere we are writing a function that we will use to generate descriptive statistics over 1000 samples. We are keeping this function generic because we are going to use this function again later in the chapter for more simulation examples!\n\n\n\n\n\n\n\nCode\nset.seed(101)\nsamples &lt;- 1:1000 |&gt; \n1  map(\\(i) get_sample_mean(data = data[, \"like_score\"], n_sub = 10)) |&gt;\n  list_rbind()\n\nsamples\n\n\n\n1\n\nWe use the map() function to repeat our function 1000 times.\n\n\n\n\n# A tibble: 1,000 × 3\n     mean    sd     n\n    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 -6.89   22.4    10\n 2 11.9    20.2    10\n 3  0.147  15.9    10\n 4 -8.93   27.3    10\n 5  8.52   20.0    10\n 6  2.02   10.6    10\n 7 -0.198  16.9    10\n 8 -0.230  21.1    10\n 9  1.01   22.7    10\n10  6.26   28.4    10\n# ℹ 990 more rows\n\n\n\n\n\n2.11.2 Sampling Distribution of the Mean\n\n\nCode\nsamples |&gt; \n  summarise(n = n(), \n            mean_m = mean(mean), \n            sd = sd(mean))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1  1000 -0.238  7.69\n\n\nCode\nplot_samples &lt;- samples |&gt; \n  ggplot(aes(x = mean)) +\n  geom_histogram(color = \"black\", fill = \"light grey\", bins = 20) + \n  scale_x_continuous(\"sample means\", limits = c(-100, 100))\n\n\n\n\n\nCode\nplot_samples\n\n\n\n\n\n\n\n\n\nNote: In your research, you don’t form a sampling distribution by repeated sampling. You (typically) only have one sample.",
+    "section": "2.12 Sampling Distribution of the Mean",
+    "text": "2.12 Sampling Distribution of the Mean\nYou can construct a sampling distribution for any parameter estimate (e.g., mean, \\(s\\), min, max, \\(r\\), \\(b_0\\), \\(b_1\\)).\nFor the mean, you can think of the sampling distribution conceptually as follows:\n\nImagine drawing many samples (lets say 1000 samples but in theory, the sampling distribution is infinite) of \\(N\\)=10 participants (10 participants in each sample) from your population.\nNext, calculate the mean for each of these samples of 10 participants.\nFinally, create a histogram (or density plot) of these sample means.\n\n\n\n2.12.1 1000 Samples of \\(N\\)=10\n\n\nCode\n1get_sample_mean &lt;- function(data, n_sub) {\n  data |&gt; \n  slice_sample(n = n_sub) |&gt; \n  summarise(across(everything(), list(mean = mean, sd = sd), .names = \"{fn}\")) |&gt; \n  mutate(n = n_sub) \n}\n\n\n\n1\n\nHere we are writing a function that we will use to generate descriptive statistics over 1000 samples. We are keeping this function generic because we are going to use this function again later in the chapter for more simulation examples!\n\n\n\n\n\n\n\nCode\nset.seed(101)\nsamples &lt;- 1:1000 |&gt; \n1  map(\\(i) get_sample_mean(data = data[, \"like_score\"], n_sub = 10)) |&gt;\n  list_rbind()\n\nsamples\n\n\n\n1\n\nWe use the map() function to repeat our function 1000 times.\n\n\n\n\n# A tibble: 1,000 × 3\n     mean    sd     n\n    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 -6.89   22.4    10\n 2 11.9    20.2    10\n 3  0.147  15.9    10\n 4 -8.93   27.3    10\n 5  8.52   20.0    10\n 6  2.02   10.6    10\n 7 -0.198  16.9    10\n 8 -0.230  21.1    10\n 9  1.01   22.7    10\n10  6.26   28.4    10\n# ℹ 990 more rows\n\n\n\n\n\n2.12.2 Sampling Distribution of the Mean\n\n\nCode\nsamples |&gt; \n  summarise(n = n(), \n            mean_m = mean(mean), \n            sd = sd(mean))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1  1000 -0.238  7.69\n\n\nCode\nplot_samples &lt;- samples |&gt; \n  ggplot(aes(x = mean)) +\n  geom_histogram(color = \"black\", fill = \"light grey\", bins = 20) + \n  scale_x_continuous(\"sample means\", limits = c(-100, 100))\n\n\n\n\n\nCode\nplot_samples\n\n\n\n\n\n\n\n\n\nNote: In your research, you don’t form a sampling distribution by repeated sampling. You (typically) only have one sample.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -463,8 +483,8 @@
     "objectID": "02_sampling_distributions.html#raw-score-distribution-vs.-sampling-distribution",
     "href": "02_sampling_distributions.html#raw-score-distribution-vs.-sampling-distribution",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.12 Raw Score Distribution vs. Sampling Distribution",
-    "text": "2.12 Raw Score Distribution vs. Sampling Distribution\nThe distinction between the raw score distribution and your sample distribution is very important to keep clear in your mind!\n\n\nCode\n1library(patchwork)\n\n\n\n1\n\nThe patchwork package is an easy and customizable way to combine ggplot() objects. For more information see https://patchwork.data-imaginist.com/.\n\n\n\n\n\n\n\nCode\nplot_raw + plot_samples",
+    "section": "2.13 Raw Score Distribution vs. Sampling Distribution",
+    "text": "2.13 Raw Score Distribution vs. Sampling Distribution\nThe distinction between the raw score distribution and your sample distribution is very important to keep clear in your mind!\n\n\nCode\n1library(patchwork)\n\n\n\n1\n\nThe patchwork package is an easy and customizable way to combine ggplot() objects. For more information see https://patchwork.data-imaginist.com/.\n\n\n\n\n\n\n\nCode\nplot_raw + plot_samples",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -473,8 +493,8 @@
     "objectID": "02_sampling_distributions.html#sampling-distribution-of-the-mean-2",
     "href": "02_sampling_distributions.html#sampling-distribution-of-the-mean-2",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.13 Sampling Distribution of the Mean",
-    "text": "2.13 Sampling Distribution of the Mean\nQuestion: What will the mean of the sample means be? In other words, what is the mean of the sampling distribution?\n\nThe mean of the sample means (i.e., the mean of the sampling distribution) will equal the population mean of raw scores on the dependent measure. This is important because it indicates that the sample mean is an unbiased estimator of the population mean.\n\n\nCode\nplot_samples\n\n\n\n\n\n\n\n\n\n\nThe mean is an unbiased estimator: The mean of the sample means will equal the mean of the population. Therefore, individual sample means will neither systematically under or overestimate the population mean.\nRaw Ocean Liking Scores:\n\n\nCode\ndata |&gt; \n  summarise(n = n(), \n            mean_m = round(mean(like_score), 2), \n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1 10000      0  23.7\n\n\nSample (N=10) Means:\n\n\nCode\nsamples |&gt; \n  summarise(n = n(), \n            mean_m = round(mean(mean), 2), \n            sd = sd(mean))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1  1000  -0.24  7.69\n\n\n\nThe sample variance (\\(s^2\\); with n-1 denominator) is also an unbiased estimator of the population variance (\\(\\sigma^2\\)). In other words, the mean of the sample \\(s^2\\)’s will approximate the population variance. Sample \\(s\\) is negatively biased.\n\nQuestion: Will all of the sample means be the same?\n\nNo, there was a distribution of means that varied from each other. The mean of the sampling distribution was the population mean but the standard deviation was not zero.\n\n\nCode\nsamples |&gt; \n  summarise(n = n(), \n            mean_m = round(mean(mean), 2), \n            sd = sd(mean))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1  1000  -0.24  7.69\n\n\n\n\nCode\nplot_samples",
+    "section": "2.14 Sampling Distribution of the Mean",
+    "text": "2.14 Sampling Distribution of the Mean\nQuestion: What will the mean of the sample means be? In other words, what is the mean of the sampling distribution?\n\nThe mean of the sample means (i.e., the mean of the sampling distribution) will equal the population mean of raw scores on the dependent measure. This is important because it indicates that the sample mean is an unbiased estimator of the population mean.\n\n\nCode\nplot_samples\n\n\n\n\n\n\n\n\n\n\nThe mean is an unbiased estimator: The mean of the sample means will equal the mean of the population. Therefore, individual sample means will neither systematically under or overestimate the population mean.\nRaw Ocean Liking Scores:\n\n\nCode\ndata |&gt; \n  summarise(n = n(), \n            mean_m = round(mean(like_score), 2), \n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1 10000      0  23.7\n\n\nSample (N=10) Means:\n\n\nCode\nsamples |&gt; \n  summarise(n = n(), \n            mean_m = round(mean(mean), 2), \n            sd = sd(mean))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1  1000  -0.24  7.69\n\n\n\nThe sample variance (\\(s^2\\); with n-1 denominator) is also an unbiased estimator of the population variance (\\(\\sigma^2\\)). In other words, the mean of the sample \\(s^2\\)’s will approximate the population variance. Sample \\(s\\) is negatively biased.\n\nQuestion: Will all of the sample means be the same?\n\nNo, there was a distribution of means that varied from each other. The mean of the sampling distribution was the population mean but the standard deviation was not zero.\n\n\nCode\nsamples |&gt; \n  summarise(n = n(), \n            mean_m = round(mean(mean), 2), \n            sd = sd(mean))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1  1000  -0.24  7.69\n\n\n\n\nCode\nplot_samples",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -483,8 +503,8 @@
     "objectID": "02_sampling_distributions.html#standard-errorse",
     "href": "02_sampling_distributions.html#standard-errorse",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.14 Standard Error(SE)",
-    "text": "2.14 Standard Error(SE)\nThe standard deviation of the sampling distribution (i.e., standard deviation of the infinite sample means) is equal to:\n\\(\\frac{\\sigma}{\\sqrt{N_{sample}}}\\)\nWhere \\(\\sigma\\) is the standard deviation of the population raw scores.\nThis variability in the sampling distribution is due to sampling error.\nTherefore, because we use parameter estimates calculated in our sample to estimate population parameters, we would like to minimize sampling error.\nThe standard deviation of the sampling distribution for a parameter estimate has a technical name. It is called the standard error of the parameter estimate. Here, we are talking about the standard error of the mean.\n\nQuestion: What factors affect the size of the sampling error of the mean (i.e., the standard error)?\n\nThe standard deviation of the population raw scores and the sample size.\n\nQuestion: Variation among raw scores for a variable in the population is broadly caused by two factors. What are they?\n\n1. Individual differences.\n2. Measurement error (the opposite of reliability)\n\nQuestion: What is the relationship between population variability (\\(\\sigma\\)) and SE?\n\nAs the variability of the variable increases in the population, the SE increases..\n\nQuestion: What would happen to SE if there was no variation in population scores?\n\nThe SE would equal 0 no matter which participants you sampled. They would all have the same scores!\n\nQuestion: What is the relationship between sample size and SE?\n\nAs the sample size increases, the SE for the statistic will decrease.\n\nQuestion: What would the SE be if the sample size equalled population size?\n\nIf the sample contained all participants from the population, the SE would be equal to 0 because each sample mean would have exactly the same value as the overall population mean (because all same scores).\n\nQuestion: What would happen if the samples contained only 1 participant?\n\nIf each sample contained only 1 participant, the SE would be equal to the variation (\\(\\sigma\\)) observed within the population.",
+    "section": "2.15 Standard Error(SE)",
+    "text": "2.15 Standard Error(SE)\nThe standard deviation of the sampling distribution (i.e., standard deviation of the infinite sample means) is equal to:\n\\(\\frac{\\sigma}{\\sqrt{N_{sample}}}\\)\nWhere \\(\\sigma\\) is the standard deviation of the population raw scores.\nThis variability in the sampling distribution is due to sampling error.\nTherefore, because we use parameter estimates calculated in our sample to estimate population parameters, we would like to minimize sampling error.\nThe standard deviation of the sampling distribution for a parameter estimate has a technical name. It is called the standard error of the parameter estimate. Here, we are talking about the standard error of the mean.\n\nQuestion: What factors affect the size of the sampling error of the mean (i.e., the standard error)?\n\nThe standard deviation of the population raw scores and the sample size.\n\nQuestion: Variation among raw scores for a variable in the population is broadly caused by two factors. What are they?\n\n1. Individual differences.\n2. Measurement error (the opposite of reliability)\n\nQuestion: What is the relationship between population variability (\\(\\sigma\\)) and SE?\n\nAs the variability of the variable increases in the population, the SE increases..\n\nQuestion: What would happen to SE if there was no variation in population scores?\n\nThe SE would equal 0 no matter which participants you sampled. They would all have the same scores!\n\nQuestion: What is the relationship between sample size and SE?\n\nAs the sample size increases, the SE for the statistic will decrease.\n\nQuestion: What would the SE be if the sample size equalled population size?\n\nIf the sample contained all participants from the population, the SE would be equal to 0 because each sample mean would have exactly the same value as the overall population mean (because all same scores).\n\nQuestion: What would happen if the samples contained only 1 participant?\n\nIf each sample contained only 1 participant, the SE would be equal to the variation (\\(\\sigma\\)) observed within the population.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -493,8 +513,8 @@
     "objectID": "02_sampling_distributions.html#shape-of-the-sampling-distribution",
     "href": "02_sampling_distributions.html#shape-of-the-sampling-distribution",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.15 Shape of the Sampling Distribution",
-    "text": "2.15 Shape of the Sampling Distribution\nCentral Limit Theorem: The shape of the sampling distribution approaches normal as \\(N\\) increases.\nThe shape is roughly normal even for moderate sample sizes assuming that the original distribution isn’t really weird (i.e., non-normal).",
+    "section": "2.16 Shape of the Sampling Distribution",
+    "text": "2.16 Shape of the Sampling Distribution\nCentral Limit Theorem: The shape of the sampling distribution approaches normal as \\(N\\) increases.\nThe shape is roughly normal even for moderate sample sizes assuming that the original distribution isn’t really weird (i.e., non-normal).",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -503,8 +523,8 @@
     "objectID": "02_sampling_distributions.html#normal-population-and-various-sampling-distributions",
     "href": "02_sampling_distributions.html#normal-population-and-various-sampling-distributions",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.16 Normal Population and Various Sampling Distributions",
-    "text": "2.16 Normal Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.",
+    "section": "2.17 Normal Population and Various Sampling Distributions",
+    "text": "2.17 Normal Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -513,8 +533,8 @@
     "objectID": "02_sampling_distributions.html#uniform-population-and-various-sampling-distributions",
     "href": "02_sampling_distributions.html#uniform-population-and-various-sampling-distributions",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.17 Uniform Population and Various Sampling Distributions",
-    "text": "2.17 Uniform Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.",
+    "section": "2.18 Uniform Population and Various Sampling Distributions",
+    "text": "2.18 Uniform Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -523,8 +543,8 @@
     "objectID": "02_sampling_distributions.html#skewed-population-and-various-sampling-distributions",
     "href": "02_sampling_distributions.html#skewed-population-and-various-sampling-distributions",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.18 Skewed Population and Various Sampling Distributions",
-    "text": "2.18 Skewed Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.",
+    "section": "2.19 Skewed Population and Various Sampling Distributions",
+    "text": "2.19 Skewed Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -533,8 +553,8 @@
     "objectID": "02_sampling_distributions.html#an-important-normal-distribution-z-scores",
     "href": "02_sampling_distributions.html#an-important-normal-distribution-z-scores",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.19 An Important Normal Distribution: Z-scores",
-    "text": "2.19 An Important Normal Distribution: Z-scores\nThe \\(z\\) distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.\nYou can therefore think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.\nThe probability distribution is known for the \\(z\\) distribution.",
+    "section": "2.20 An Important Normal Distribution: Z-scores",
+    "text": "2.20 An Important Normal Distribution: Z-scores\nThe \\(z\\) distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.\nYou can therefore think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.\nThe probability distribution is known for the \\(z\\) distribution.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -543,8 +563,8 @@
     "objectID": "02_sampling_distributions.html#probability-of-parameter-estimate-given-h_0",
     "href": "02_sampling_distributions.html#probability-of-parameter-estimate-given-h_0",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.20 Probability of Parameter Estimate Given \\(H_0\\)",
-    "text": "2.20 Probability of Parameter Estimate Given \\(H_0\\)\nHow could you use the \\(z\\) distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of \\(N=10\\) from a population of Ocean Liking scores with a population mean (parameter) of 0?\nThink about it……",
+    "section": "2.21 Probability of Parameter Estimate Given \\(H_0\\)",
+    "text": "2.21 Probability of Parameter Estimate Given \\(H_0\\)\nHow could you use the \\(z\\) distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of \\(N=10\\) from a population of Ocean Liking scores with a population mean (parameter) of 0?\nThink about it……",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -553,8 +573,8 @@
     "objectID": "02_sampling_distributions.html#hypothetical-sampling-distribution-for-h_0",
     "href": "02_sampling_distributions.html#hypothetical-sampling-distribution-for-h_0",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.21 Hypothetical Sampling Distribution for \\(H_0\\)",
-    "text": "2.21 Hypothetical Sampling Distribution for \\(H_0\\)\nIf \\(H_0\\) is true; the sampling distribution has a mean of 0 and standard deviation of \\(\\frac{\\sigma}{\\sqrt{N_{sample}}} =  \\frac{23.7}{\\sqrt{10}}  =  7.5\\).\n\n\n\n\n\n\n\n\n\n\nQuestion: If \\(H_0\\) is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?\n\n\n\n\n\n\n\n\n\n\nPretty likely…\nBut we can do better than that!",
+    "section": "2.22 Hypothetical Sampling Distribution for \\(H_0\\)",
+    "text": "2.22 Hypothetical Sampling Distribution for \\(H_0\\)\nIf \\(H_0\\) is true; the sampling distribution has a mean of 0 and standard deviation of \\(\\frac{\\sigma}{\\sqrt{N_{sample}}} =  \\frac{23.7}{\\sqrt{10}}  =  7.5\\).\n\n\n\n\n\n\n\n\n\n\nQuestion: If \\(H_0\\) is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?\n\n\n\n\n\n\n\n\n\n\nPretty likely…\nBut we can do better than that!",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -563,8 +583,8 @@
     "objectID": "02_sampling_distributions.html#our-first-inferential-test-the-z-test",
     "href": "02_sampling_distributions.html#our-first-inferential-test-the-z-test",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.22 Our First Inferential Test: The z-test",
-    "text": "2.22 Our First Inferential Test: The z-test\n\\(z = \\frac{2.4 - 0}{7.5} = 0.32; p \\le .749\\)\n\n\nCode\npnorm(0.32, mean=0, sd=1, lower.tail=FALSE) * 2 \n\n\n[1] 0.7489683",
+    "section": "2.23 Our First Inferential Test: The z-test",
+    "text": "2.23 Our First Inferential Test: The z-test\n\\(z = \\frac{2.4 - 0}{7.5} = 0.32; p \\le .749\\)\n\n\nCode\npnorm(0.32, mean=0, sd=1, lower.tail=FALSE) * 2 \n\n\n[1] 0.7489683",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -573,8 +593,8 @@
     "objectID": "02_sampling_distributions.html#t-vs.-z",
     "href": "02_sampling_distributions.html#t-vs.-z",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.23 \\(t\\) vs. \\(z\\)",
-    "text": "2.23 \\(t\\) vs. \\(z\\)\n\\(z = \\frac{2.4 - 0}{7.5} = 0.32\\)\nQuestion: Where did we get the 2.4 from in our z-test?\n\nOur sample mean from our study. This is our parameter estimate of the population mean of OLS (like_score) scores.\n\nQuestion: Where did we get the 7.5 from in our z-test and what is the problem with this?\n\nThis was our estimate of the standard deviation of the sampling distribution.\n\\(\\frac{\\sigma}{\\sqrt{N_{sample}}}\\)\nWe do not know \\(\\sigma\\).\n\nQuestion: How can we estimate \\(\\sigma\\)?\n\nWe can use our sample standard deviation (\\(s\\)), but \\(s\\) is a negatively biased parameter estimate. On average, it will underestimate \\(\\sigma\\).\n\nQuestion: So what do we do?\n\nWe account for this underestimation of \\(\\sigma\\) and therefore of the standard deviation (standard error) of the sampling distribution by using the \\(t\\) distribution rather than the \\(z\\) distribution to calculate the probability of our parameter estimate if \\(H_0\\) is true.\nThe \\(t\\) distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.",
+    "section": "2.24 \\(t\\) vs. \\(z\\)",
+    "text": "2.24 \\(t\\) vs. \\(z\\)\n\\(z = \\frac{2.4 - 0}{7.5} = 0.32\\)\nQuestion: Where did we get the 2.4 from in our z-test?\n\nOur sample mean from our study. This is our parameter estimate of the population mean of OLS (like_score) scores.\n\nQuestion: Where did we get the 7.5 from in our z-test and what is the problem with this?\n\nThis was our estimate of the standard deviation of the sampling distribution.\n\\(\\frac{\\sigma}{\\sqrt{N_{sample}}}\\)\nWe do not know \\(\\sigma\\).\n\nQuestion: How can we estimate \\(\\sigma\\)?\n\nWe can use our sample standard deviation (\\(s\\)), but \\(s\\) is a negatively biased parameter estimate. On average, it will underestimate \\(\\sigma\\).\n\nQuestion: So what do we do?\n\nWe account for this underestimation of \\(\\sigma\\) and therefore of the standard deviation (standard error) of the sampling distribution by using the \\(t\\) distribution rather than the \\(z\\) distribution to calculate the probability of our parameter estimate if \\(H_0\\) is true.\nThe \\(t\\) distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -583,8 +603,8 @@
     "objectID": "02_sampling_distributions.html#our-second-inferential-test-one-sample-t-test",
     "href": "02_sampling_distributions.html#our-second-inferential-test-one-sample-t-test",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.24 Our Second Inferential Test: One Sample t-test",
-    "text": "2.24 Our Second Inferential Test: One Sample t-test\n\\(t(df)\\) = \\(\\frac{\\text{Parameter estimate – Parameter:} H_0}{\\text{Standard error of parameter estimate}}\\)\nWhere SE is estimated using \\(s\\) from sample data.\n\\(df = N – P = 10 - 1 = 9\\)\n\n\n\n\n\n\n\n\n\n\nThe bias in \\(s\\) decreases with increasing \\(N\\). Therefore, \\(t\\) approaches \\(z\\) with larger sample sizes.",
+    "section": "2.25 Our Second Inferential Test: One Sample t-test",
+    "text": "2.25 Our Second Inferential Test: One Sample t-test\n\\(t(df)\\) = \\(\\frac{\\text{Parameter estimate – Parameter:} H_0}{\\text{Standard error of parameter estimate}}\\)\nWhere SE is estimated using \\(s\\) from sample data.\n\\(df = N – P = 10 - 1 = 9\\)\n\n\n\n\n\n\n\n\n\n\nThe bias in \\(s\\) decreases with increasing \\(N\\). Therefore, \\(t\\) approaches \\(z\\) with larger sample sizes.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -593,8 +613,8 @@
     "objectID": "02_sampling_distributions.html#null-hypothesis-significance-testing-nhst",
     "href": "02_sampling_distributions.html#null-hypothesis-significance-testing-nhst",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.25 Null Hypothesis Significance Testing (NHST)",
-    "text": "2.25 Null Hypothesis Significance Testing (NHST)\n\nDivide reality regarding the size of the population parameter into two non-overlapping possibilities: Null hypothesis (\\(H_0\\)) & Alternate hypothesis (\\(H_a\\)).\nAssume that \\(H_0\\) is true.\nCollect data.\nCalculate the probability (\\(p\\)-value) of obtaining your parameter estimate (or a more extreme estimate) given your assumption (i.e., \\(H_0\\) is true)\nCompare probability to some cut-off value (alpha level).\n\nIf this parameter estimate is less probable than cut-off value, reject \\(H_0\\) in favor of \\(H_a\\).\nIf data is not less probable, fail to reject \\(H_0\\).",
+    "section": "2.26 Null Hypothesis Significance Testing (NHST)",
+    "text": "2.26 Null Hypothesis Significance Testing (NHST)\n\nDivide reality regarding the size of the population parameter into two non-overlapping possibilities: Null hypothesis (\\(H_0\\)) & Alternate hypothesis (\\(H_a\\)).\nAssume that \\(H_0\\) is true.\nCollect data.\nCalculate the probability (\\(p\\)-value) of obtaining your parameter estimate (or a more extreme estimate) given your assumption (i.e., \\(H_0\\) is true)\nCompare probability to some cut-off value (alpha level).\n\nIf this parameter estimate is less probable than cut-off value, reject \\(H_0\\) in favor of \\(H_a\\).\nIf data is not less probable, fail to reject \\(H_0\\).",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
