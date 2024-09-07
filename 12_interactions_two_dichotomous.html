@@ -1654,10 +1654,172 @@ Attitude: 1–10 with higher scores indicating more permissive attitudes</p>
 </section>
 <section id="on-your-own" class="level2" data-number="12.11">
 <h2 data-number="12.11" class="anchored" data-anchor-id="on-your-own"><span class="header-section-number">12.11</span> On your Own</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">certain</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">uncertain</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">sober</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">110</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">drunk</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">90</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">100</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><strong>Centered</strong><br>
+<code>group_c</code>: sober (-0.5), drunk (0.5)<br>
+<code>threat_c</code>: certain (-0.5), uncertain (0.5)</p>
+<p><span style="color: red;"><span class="math inline">\(\text{fps} =  b_0 +  b_1*\text{group}_c + b_2*\text{threat}_c + b_3*\text{group}_c*\text{threat}_c\)</span></span></p>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">certain</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">uncertain</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">sober</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">110</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">drunk</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">90</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">100</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><strong>Centered</strong><br>
+<code>group_c</code>: sober (-0.5), drunk (0.5)<br>
+<code>threat_c</code>: certain (-0.5), uncertain (0.5)</p>
+<p><span style="color: blue;"><span class="math inline">\(\text{fps} =  100 +  -20*\text{group}_c + 10*\text{threat}_c + -20*\text{group}_c*\text{threat}_c\)</span></span></p>
 <hr>
 </section>
 <section id="on-your-own-continued" class="level2" data-number="12.12">
 <h2 data-number="12.12" class="anchored" data-anchor-id="on-your-own-continued"><span class="header-section-number">12.12</span> On your Own (Continued)</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">certain</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">uncertain</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">sober</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">110</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">drunk</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">90</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">100</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><strong>Dummy</strong><br>
+<code>group_d</code>: sober (0), drunk (1)<br>
+<code>threat_d</code>: certain (0), uncertain (1)</p>
+<p><span style="color: red;"><span class="math inline">\(\text{fps} =  b_0 +  b_1*\text{group}_d + b_2*\text{threat}_d + b_3*\text{group}_d*\text{threat}_d\)</span></span></p>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">certain</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">uncertain</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">sober</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">110</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">drunk</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">90</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">105</td>
+<td style="text-align: right;">100</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><strong>Dummy</strong><br>
+<code>group_d</code>: sober (0), drunk (1)<br>
+<code>threat_d</code>: certain (0), uncertain (1)</p>
+<p><span style="color: blue;"><span class="math inline">\(\text{fps} =  100 +  -10*\text{group}_d + 20*\text{threat}_d + -20*\text{group}_d*\text{threat}_d\)</span></span></p>
 <hr>
 </section>
 <section id="learning-outcomes" class="level2" data-number="12.13">

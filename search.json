@@ -644,7 +644,7 @@
     "href": "12_interactions_two_dichotomous.html#on-your-own",
     "title": "12  Inferences about Two Dichotomous Predictors and their Interaction",
     "section": "12.11 On your Own",
-    "text": "12.11 On your Own",
+    "text": "12.11 On your Own\n\n\n\n\n\n\ncertain\nuncertain\nall\n\n\n\n\nsober\n100\n120\n110\n\n\ndrunk\n90\n90\n90\n\n\nall\n95\n105\n100\n\n\n\n\n\n\n\nCentered\ngroup_c: sober (-0.5), drunk (0.5)\nthreat_c: certain (-0.5), uncertain (0.5)\n\\(\\text{fps} =  b_0 +  b_1*\\text{group}_c + b_2*\\text{threat}_c + b_3*\\text{group}_c*\\text{threat}_c\\)\n\n\n\n\n\n\n\ncertain\nuncertain\nall\n\n\n\n\nsober\n100\n120\n110\n\n\ndrunk\n90\n90\n90\n\n\nall\n95\n105\n100\n\n\n\n\n\n\n\nCentered\ngroup_c: sober (-0.5), drunk (0.5)\nthreat_c: certain (-0.5), uncertain (0.5)\n\\(\\text{fps} =  100 +  -20*\\text{group}_c + 10*\\text{threat}_c + -20*\\text{group}_c*\\text{threat}_c\\)",
     "crumbs": [
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Inferences about Two Dichotomous Predictors and their Interaction</span>"
     ]
@@ -654,7 +654,7 @@
     "href": "12_interactions_two_dichotomous.html#on-your-own-continued",
     "title": "12  Inferences about Two Dichotomous Predictors and their Interaction",
     "section": "12.12 On your Own (Continued)",
-    "text": "12.12 On your Own (Continued)",
+    "text": "12.12 On your Own (Continued)\n\n\n\n\n\n\ncertain\nuncertain\nall\n\n\n\n\nsober\n100\n120\n110\n\n\ndrunk\n90\n90\n90\n\n\nall\n95\n105\n100\n\n\n\n\n\n\n\nDummy\ngroup_d: sober (0), drunk (1)\nthreat_d: certain (0), uncertain (1)\n\\(\\text{fps} =  b_0 +  b_1*\\text{group}_d + b_2*\\text{threat}_d + b_3*\\text{group}_d*\\text{threat}_d\\)\n\n\n\n\n\n\n\ncertain\nuncertain\nall\n\n\n\n\nsober\n100\n120\n110\n\n\ndrunk\n90\n90\n90\n\n\nall\n95\n105\n100\n\n\n\n\n\n\n\nDummy\ngroup_d: sober (0), drunk (1)\nthreat_d: certain (0), uncertain (1)\n\\(\\text{fps} =  100 +  -10*\\text{group}_d + 20*\\text{threat}_d + -20*\\text{group}_d*\\text{threat}_d\\)",
     "crumbs": [
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Inferences about Two Dichotomous Predictors and their Interaction</span>"
     ]
