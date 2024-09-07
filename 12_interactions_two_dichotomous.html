@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.5.45">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to the General Linear Model - 12&nbsp; Inferences about a Two Dichotomous Predictors and their Interaction</title>
+<title>12&nbsp; Inferences about Two Dichotomous Predictors and their Interaction – Introduction to the General Linear Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,7 +68,40 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="book.css">
 </head>
@@ -79,13 +112,13 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12_interactions_two_dichotomous_shell.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Inferences about a Two Dichotomous Predictors and their Interaction</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12_interactions_two_dichotomous.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Inferences about Two Dichotomous Predictors and their Interaction</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -101,17 +134,17 @@ ul.task-list li input[type="checkbox"] {
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/jjcurtin/book_glm" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-bi-facebook pe-1"></i>
+              <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-bi-linkedin pe-1"></i>
+              <i class="bi bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
@@ -206,8 +239,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12_interactions_two_dichotomous_shell.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Inferences about a Two Dichotomous Predictors and their Interaction</span></span></a>
+  <a href="./12_interactions_two_dichotomous.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Inferences about Two Dichotomous Predictors and their Interaction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -230,9 +263,9 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -261,16 +294,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#assignments" id="toc-assignments" class="nav-link active" data-scroll-target="#assignments"><span class="header-section-number">12.1</span> Assignments</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">12.1</span> Learning Objectives</a></li>
+  <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example"><span class="header-section-number">12.2</span> An Example</a></li>
+  <li><a href="#terms-and-brief-definitions" id="toc-terms-and-brief-definitions" class="nav-link" data-scroll-target="#terms-and-brief-definitions"><span class="header-section-number">12.3</span> Terms and Brief Definitions</a></li>
+  <li><a href="#describing-effects" id="toc-describing-effects" class="nav-link" data-scroll-target="#describing-effects"><span class="header-section-number">12.4</span> Describing Effects</a></li>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes"><span class="header-section-number">12.5</span> Learning Outcomes</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/12_interactions_two_dichotomous_shell.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/12_interactions_two_dichotomous.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Inferences about a Two Dichotomous Predictors and their Interaction</span></h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Inferences about Two Dichotomous Predictors and their Interaction</span></h1>
 </div>
 
 
@@ -287,17 +324,430 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="assignments" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="assignments"><span class="header-section-number">12.1</span> Assignments</h2>
-<p>Read</p>
+<section id="learning-objectives" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">12.1</span> Learning Objectives</h2>
+<p>For models with dichotomous independent variables, you will learn:</p>
 <ul>
-<li>TBD</li>
+<li><p>Basic terminology from ANOVA framework.</p></li>
+<li><p>How to identify main effects, simple effects, and interactions in table of means and figures.</p></li>
+<li><p>How to link coefficients from interactive models with each coding system to table of means and figures (both directions).</p></li>
+<li><p>How to calculate simple effects.</p></li>
+<li><p>How to write up and display results.</p></li>
 </ul>
-<p>Application assignment (due ??? @ 1:30 via Canvas)</p>
+<hr>
+</section>
+<section id="an-example" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="an-example"><span class="header-section-number">12.2</span> An Example</h2>
+<p><strong>Example:</strong><br>
+Attitudes toward abortion as a function of sex and religion.</p>
+<p>Sex: Male vs.&nbsp;Female<br>
+Religion: Catholic vs.&nbsp;Jewish<br>
+Attitude: 1–10 with higher scores indicating more permissive attitudes</p>
+<p>Equal <span class="math inline">\(n = 20\)</span> in each cell (<span class="math inline">\(N = 80\)</span>).</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<hr>
+</section>
+<section id="terms-and-brief-definitions" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="terms-and-brief-definitions"><span class="header-section-number">12.3</span> Terms and Brief Definitions</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><strong>Common terminology:</strong> One-way ANOVA, Two-way ANOVA, Three-way ANOVA; 2 X 2 ANOVA; 2 X 3 X 2 ANOVA; Factorial ANOVA.</p>
+<p><strong>Cell mean:</strong> The mean of a group of participants at specific levels on each factor (e.g., Catholic men, Jewish women, etc.).</p>
+<p><strong>Marginal mean:</strong> The mean of cell means across a row or column.</p>
+<p><strong>Grand mean:</strong> The mean of all cell means.</p>
+<p><strong>Unweighted vs.&nbsp;weighted means</strong></p>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><strong>Main effect</strong>: The <em>average</em> effect of an IV on the DV across the levels of another IV in the model (The effect of an IV at the average level of another IV). Evaluated with marginal means for IV.</p>
+<p><strong>Simple effect</strong>: The effect of an IV on the DV at a specific level of the other IV. Evaluated with cell means for focal IV at specific level of other IV (moderator).</p>
+<p><strong>Interaction</strong>: The simple effect of a (focal) IV on the DV differs across the levels of another (moderator) IV in the model.</p>
+<hr>
+</section>
+<section id="describing-effects" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="describing-effects"><span class="header-section-number">12.4</span> Describing Effects</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><span style="color: red;">Describe the magnitude of the <strong>main effect</strong> of sex on attitudes.</span></p>
+<hr>
+<p><span style="color: blue;">Women have 3 points more permissive attitudes about abortion than men.</span></p>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><span style="color: red;">Describe the magnitude of the <strong>main effect</strong> of religion on attitudes.</span></p>
+<hr>
+<p><span style="color: blue;">Jews have 1 point more permissive attitudes about abortion than Catholics.</span></p>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><span style="color: red;">Describe the magnitude of the <strong>simple effects</strong> of sex on attitudes.</span></p>
+<hr>
+<p><span style="color: blue;">Among Catholics, women have 2 points more permissive attitudes about abortion than men.</span></p>
+<p><span style="color: blue;">Among Jews, women have 4 points more permissive attitudes about abortion than men.</span></p>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><span style="color: red;">Describe the magnitude of the <strong>simple effects</strong> of religion on attitudes.</span></p>
+<hr>
+<p><span style="color: blue;">Among men, there is no different in attitudes between Jews and Catholics.</span></p>
+<p><span style="color: blue;">Among women, Jews have 2 points more permissive attitudes about abortion than Catholics.</span></p>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><span style="color: red;">Question: Does there appear to be an interaction between sex and religion? Why or why not?</span></p>
+<hr>
+<p><span style="color: blue;">Yes, there does appear to be an interaction. The simple effects of sex appear to be different across Jews (4 points) than Catholics (2 points). Alternatively, the simple effects of religion appear to be different across women (2 points) and men (0 points).</span></p>
+<p><span style="color: blue;">Of course, you can’t tell if the interaction is significant by looking at the data descriptively, you have to test the interaction.</span></p>
+<hr>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><span style="color: red;">Question: How might you quantify the magnitude of the interaction?</span></p>
+<hr>
+<p><span style="color: blue;">The simple effect of sex increases by 2 points from Catholics (2) to Jews (4).</span></p>
+<p><span style="color: blue;">The simple effect of religion increases by 2 points from men (0) to women (2).</span></p>
+<p><span style="color: blue;">This will be the parameter estimate for the interaction!</span></p>
+<hr>
+<p>You have learned that there are two common options for coding the regressors for categorical IVs: <em>Dummy</em> codes and <em>Centered</em> codes.</p>
+<p><strong>Centered</strong><br>
+<code>sex_c</code>: male (-0.5), female (0.5)<br>
+<code>rel_c</code>: Catholic (-0.5), Jewish (0.5)</p>
+<p><strong>Dummy</strong><br>
+<code>sex_c</code>: male (0), female (1)<br>
+<code>rel_c</code>: Catholic (0), Jewish (1)</p>
+<p>The two systems yield essentially the same result (except for <span class="math inline">\(b_0\)</span>) for <strong>additive models</strong>.</p>
+<hr>
+<p><strong>Centered</strong><br>
+<code>sex_c</code>: male (-0.5), female (0.5)<br>
+<code>rel_c</code>: Catholic (-0.5), Jewish (0.5)</p>
+<p><span class="math inline">\(\text{Attitudes} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c\)</span></p>
+<p><span style="color: red;">Link parameter estimates <span class="math inline">\(b_0, b_1, &amp; b_2\)</span> to the figure below.</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12_interactions_two_dichotomous_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="learning-outcomes" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">12.5</span> Learning Outcomes</h2>
+<p>For models with dichotomous independent variables, you learned:</p>
 <ul>
-<li><a href="">assignment</a></li>
-<li><a href="">data</a></li>
-<li><a href="">key</a></li>
+<li><p>Basic terminology from ANOVA framework.</p></li>
+<li><p>How to identify main effects, simple effects, and interactions in table of means and figures.</p></li>
+<li><p>How to link coefficients from interactive models with each coding system to table of means and figures (both directions).</p></li>
+<li><p>How to calculate simple effects.</p></li>
+<li><p>How to write up and display results.</p></li>
 </ul>
 
 
@@ -339,18 +789,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -382,7 +821,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/github\.io\/jjcurtin\/book_glm");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -417,7 +896,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -708,4 +1191,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/12_interactions_two_dichotomous_shell.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/12_interactions_two_dichotomous.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
