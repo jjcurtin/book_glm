@@ -302,7 +302,9 @@ window.Quarto = {
   <li><a href="#interactive-models" id="toc-interactive-models" class="nav-link" data-scroll-target="#interactive-models"><span class="header-section-number">12.6</span> Interactive Models</a></li>
   <li><a href="#centered-codes-for-interactive-model" id="toc-centered-codes-for-interactive-model" class="nav-link" data-scroll-target="#centered-codes-for-interactive-model"><span class="header-section-number">12.7</span> Centered Codes for Interactive Model</a></li>
   <li><a href="#dummy-codes-for-interactive-model" id="toc-dummy-codes-for-interactive-model" class="nav-link" data-scroll-target="#dummy-codes-for-interactive-model"><span class="header-section-number">12.8</span> Dummy Codes for Interactive Model</a></li>
-  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes"><span class="header-section-number">12.9</span> Learning Outcomes</a></li>
+  <li><a href="#sample-writeup" id="toc-sample-writeup" class="nav-link" data-scroll-target="#sample-writeup"><span class="header-section-number">12.9</span> Sample Writeup</a></li>
+  <li><a href="#figure" id="toc-figure" class="nav-link" data-scroll-target="#figure"><span class="header-section-number">12.10</span> Figure</a></li>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes"><span class="header-section-number">12.11</span> Learning Outcomes</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/12_interactions_two_dichotomous.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1468,10 +1470,71 @@ Attitude: 1–10 with higher scores indicating more permissive attitudes</p>
 <p>Jewish women: <span class="math inline">\(3 + 2*(1) + 0*(1) + 2*(1)*(1) = 7\)</span></p>
 <p>Etc…</p>
 <hr>
+<p><strong>Dummy</strong><br>
+<code>sex_c</code>: male (0), female (1)<br>
+<code>rel_c</code>: Catholic (0), Jewish (1)</p>
+<p><span class="math inline">\(\text{att} =  3 +  2*\text{sex}_d + 0*\text{rel}_d + 2*\text{sex}_d*\text{rel}_d\)</span></p>
+<p><span style="color: red;">Question: The above dummy coding system gave us the above regression equation where $b_1# was the simple effect of sex for Catholics. How do we get the simple effect of sex for Jews?</span></p>
+<hr>
+<p><span style="color: blue;">Recode religion with dummy codes: Jewish = 0 and Catholic = 1. Now the sex effect will be the simple effect for Jews because Jews = 0.</span></p>
+<hr>
+<p><strong>Dummy</strong><br>
+<code>sex_c</code>: male (0), female (1)<br>
+<code>rel_c</code>: Catholic (1), Jewish (0)</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><span style="color: red;">Question: What will the regression equation be now?</span></p>
+<hr>
+<p><span style="color: blue;"><span class="math inline">\(\text{att} =  3 +  4*\text{sex}_d + 0*\text{rel}_d + -2*\text{sex}_d*\text{rel}_d\)</span></span></p>
+<p><span style="color: blue;">Recoding the moderator changes the simple effect for the focal variable. With dummy codes, the parameter estimate for the focal variable is always the simple effect when the moderator = 0.</span></p>
 <hr>
 </section>
-<section id="learning-outcomes" class="level2" data-number="12.9">
-<h2 data-number="12.9" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">12.9</span> Learning Outcomes</h2>
+<section id="sample-writeup" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="sample-writeup"><span class="header-section-number">12.9</span> Sample Writeup</h2>
+<p>We analyzed attitudes about abortion in a general linear model with centered, unit-weighted regressors for sex (female vs.&nbsp;male), religion (Jewish vs.&nbsp;Catholic) and their interaction. We report both raw GLM coefficients (<span class="math inline">\(b\)</span>) and partial eta-squared (<span class="math inline">\(\eta_p^2\)</span>) to document effect sizes.</p>
+<p>The main effect of sex was significant, 95% CI(<span class="math inline">\(b\)</span>)=[2.22, 3.78], <span class="math inline">\(\eta_p^2= 0.##, t(76) = #.##, p = 0.###\)</span>, indicating that women’s attitudes about abortion were 3 points higher than men on average. However, the sex X religion interaction was also significant, 95% CI(<span class="math inline">\(b\)</span>)=[0.44, 3.56], <span class="math inline">\(\eta_p^2= 0.##, t(76) = #.##, p = 0.###\)</span> (see Figure 1). This indicates that the magnitude of the sex effect was significantly greater in Jews (95% CI(<span class="math inline">\(b\)</span>)=[#,#], <span class="math inline">\(\eta_p^2= 0.##, p= 0.###\)</span>) than in Catholics (95% CI(<span class="math inline">\(b\)</span>%)=[#,#], <span class="math inline">\(\eta_p^2 = 0.##, p=0.###\)</span>).</p>
+<hr>
+</section>
+<section id="figure" class="level2" data-number="12.10">
+<h2 data-number="12.10" class="anchored" data-anchor-id="figure"><span class="header-section-number">12.10</span> Figure</h2>
+<hr>
+</section>
+<section id="learning-outcomes" class="level2" data-number="12.11">
+<h2 data-number="12.11" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">12.11</span> Learning Outcomes</h2>
 <p>For models with dichotomous independent variables, you learned:</p>
 <ul>
 <li><p>Basic terminology from ANOVA framework.</p></li>
