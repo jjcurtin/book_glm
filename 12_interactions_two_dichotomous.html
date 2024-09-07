@@ -786,42 +786,6 @@ Attitude: 1–10 with higher scores indicating more permissive attitudes</p>
 </div>
 </div>
 <hr>
-<div class="cell">
-<div class="cell-output-display">
-<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Catholic</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">4.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Jewish</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">5.0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">all</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">4.5</td>
-</tr>
-</tbody>
-</table>
-
-
-</div>
-</div>
 <p><span class="math inline">\(\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c\)</span></p>
 <p><span style="color: blue;"><span class="math inline">\(b_0\)</span> is the predicted value for attitudes for 0 on both regressors. This is the grand mean.</span></p>
 <p><span style="color: blue;"><span class="math inline">\(b_1\)</span> is the effect of sex. It will be forced to be constant across religions (6 – 3 = 3).</span></p>
@@ -886,7 +850,122 @@ Attitude: 1–10 with higher scores indicating more permissive attitudes</p>
 </section>
 <section id="centered-codes-for-interactive-models" class="level2" data-number="12.7">
 <h2 data-number="12.7" class="anchored" data-anchor-id="centered-codes-for-interactive-models"><span class="header-section-number">12.7</span> Centered codes for interactive models</h2>
+<p><strong>Centered</strong><br>
+<code>sex_c</code>: male (-0.5), female (0.5)<br>
+<code>rel_c</code>: Catholic (-0.5), Jewish (0.5)</p>
+<p><span class="math inline">\(\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c + 2*\text{sex}_c*\text{rel}_c\)</span></p>
+<p><span style="color: red;">Link parameter estimates <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span>, &amp; <span class="math inline">\(b_2\)</span> to the table of means below.</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
 <hr>
+<p><span class="math inline">\(\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c + 2*\text{sex}_c*\text{rel}_c\)</span></p>
+<p><span style="color: blue;"><span class="math inline">\(b_0\)</span> is the predicted value for attitudes for 0 on both regressors. This is the grand mean.</span></p>
+<p><span style="color: blue;"><span class="math inline">\(b_1\)</span> is the main effect of sex (6 – 3 = 3).</span></p>
+<p><span style="color: blue;"><span class="math inline">\(b_2\)</span> is the main effect of religion (5 – 4 = 1).</span></p>
+<hr>
+<p><strong>Centered</strong><br>
+<code>sex_c</code>: male (-0.5), female (0.5)<br>
+<code>rel_c</code>: Catholic (-0.5), Jewish (0.5)</p>
+<p><span class="math inline">\(\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c + 2*\text{sex}_c*\text{rel}_c\)</span></p>
+<p><span style="color: red;">Link <span class="math inline">\(b_3\)</span> to the table of means below considering sex as the focal variable.</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c + 2*\text{sex}_c*\text{rel}_c\)</span></td>
+</tr>
+<tr class="even">
+<td><span style="color: blue;"><span class="math inline">\(b_3\)</span> is the change in the magnitude of the (simple) sex effect across religions.</span></td>
+</tr>
+<tr class="odd">
+<td>::: {.cell} ::: {.cell-output-display}</td>
+</tr>
+<tr class="even">
+<td>`````{=html}</td>
+</tr>
+<tr class="odd">
+<td>`````</td>
+</tr>
+<tr class="even">
+<td>::: :::</td>
+</tr>
+<tr class="odd">
+<td><span style="color: blue;">(7 - 3; Jewish) - (5 - 3; Catholic) = 2</span></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="learning-outcomes" class="level2" data-number="12.8">
 <h2 data-number="12.8" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">12.8</span> Learning Outcomes</h2>
