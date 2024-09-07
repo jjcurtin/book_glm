@@ -338,7 +338,9 @@ window.Quarto = {
   <li><a href="#dummy-codes-for-interactive-model" id="toc-dummy-codes-for-interactive-model" class="nav-link" data-scroll-target="#dummy-codes-for-interactive-model"><span class="header-section-number">12.8</span> Dummy Codes for Interactive Model</a></li>
   <li><a href="#sample-writeup" id="toc-sample-writeup" class="nav-link" data-scroll-target="#sample-writeup"><span class="header-section-number">12.9</span> Sample Writeup</a></li>
   <li><a href="#figure" id="toc-figure" class="nav-link" data-scroll-target="#figure"><span class="header-section-number">12.10</span> Figure</a></li>
-  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes"><span class="header-section-number">12.11</span> Learning Outcomes</a></li>
+  <li><a href="#on-your-own" id="toc-on-your-own" class="nav-link" data-scroll-target="#on-your-own"><span class="header-section-number">12.11</span> On your Own</a></li>
+  <li><a href="#on-your-own-continued" id="toc-on-your-own-continued" class="nav-link" data-scroll-target="#on-your-own-continued"><span class="header-section-number">12.12</span> On your Own (Continued)</a></li>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes"><span class="header-section-number">12.13</span> Learning Outcomes</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/12_interactions_two_dichotomous.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1601,10 +1603,65 @@ Attitude: 1–10 with higher scores indicating more permissive attitudes</p>
 </section>
 <section id="figure" class="level2" data-number="12.10">
 <h2 data-number="12.10" class="anchored" data-anchor-id="figure"><span class="header-section-number">12.10</span> Figure</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_plot <span class="ot">&lt;-</span>  <span class="fu">expand.grid</span>(<span class="at">sex_c =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">5</span>, .<span class="dv">5</span>), <span class="at">rel_c =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">5</span>, .<span class="dv">5</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">att =</span> <span class="fu">predict</span>(m_int,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">expand.grid</span>(<span class="at">sex_c =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">5</span>, .<span class="dv">5</span>), </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">rel_c =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">5</span>, .<span class="dv">5</span>))))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plot_bar <span class="ot">&lt;-</span> data_plot <span class="sc">|&gt;</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rel_c =</span> <span class="fu">factor</span>(rel_c, </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">5</span>, .<span class="dv">5</span>), </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Catholic"</span>, <span class="st">"Jewish"</span>)),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">sex_c =</span> <span class="fu">factor</span>(sex_c, </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">5</span>, .<span class="dv">5</span>),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rel_c, <span class="at">y =</span> att, <span class="at">group =</span> sex_c, <span class="at">fill =</span> sex_c)) <span class="sc">+</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="cn">NULL</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Attitudes about abortion"</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"light blue"</span>, <span class="st">"orange"</span>))</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>plot_bar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12_interactions_two_dichotomous_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span style="color: red;">Question: What else should be included in this publication quality figure?</span></p>
+<hr>
+<p><span style="color: blue;">Confidence intervals (+1 SE)</span></p>
+<p><span style="color: blue;">Raw data points (4 columns, jittered)</span></p>
+<p><span style="color: blue;">Notation to indicate simple effects for focal variable?</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12_interactions_two_dichotomous_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <hr>
 </section>
-<section id="learning-outcomes" class="level2" data-number="12.11">
-<h2 data-number="12.11" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">12.11</span> Learning Outcomes</h2>
+<section id="on-your-own" class="level2" data-number="12.11">
+<h2 data-number="12.11" class="anchored" data-anchor-id="on-your-own"><span class="header-section-number">12.11</span> On your Own</h2>
+<hr>
+</section>
+<section id="on-your-own-continued" class="level2" data-number="12.12">
+<h2 data-number="12.12" class="anchored" data-anchor-id="on-your-own-continued"><span class="header-section-number">12.12</span> On your Own (Continued)</h2>
+<hr>
+</section>
+<section id="learning-outcomes" class="level2" data-number="12.13">
+<h2 data-number="12.13" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">12.13</span> Learning Outcomes</h2>
 <p>For models with dichotomous independent variables, you learned:</p>
 <ul>
 <li><p>Basic terminology from ANOVA framework.</p></li>
