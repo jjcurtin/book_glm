@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -1526,7 +1560,43 @@ Attitude: 1–10 with higher scores indicating more permissive attitudes</p>
 <section id="sample-writeup" class="level2" data-number="12.9">
 <h2 data-number="12.9" class="anchored" data-anchor-id="sample-writeup"><span class="header-section-number">12.9</span> Sample Writeup</h2>
 <p>We analyzed attitudes about abortion in a general linear model with centered, unit-weighted regressors for sex (female vs.&nbsp;male), religion (Jewish vs.&nbsp;Catholic) and their interaction. We report both raw GLM coefficients (<span class="math inline">\(b\)</span>) and partial eta-squared (<span class="math inline">\(\eta_p^2\)</span>) to document effect sizes.</p>
-<p>The main effect of sex was significant, 95% CI(<span class="math inline">\(b\)</span>)=[2.22, 3.78], <span class="math inline">\(\eta_p^2= 0.##, t(76) = #.##, p = 0.###\)</span>, indicating that women’s attitudes about abortion were 3 points higher than men on average. However, the sex X religion interaction was also significant, 95% CI(<span class="math inline">\(b\)</span>)=[0.44, 3.56], <span class="math inline">\(\eta_p^2= 0.##, t(76) = #.##, p = 0.###\)</span> (see Figure 1). This indicates that the magnitude of the sex effect was significantly greater in Jews (95% CI(<span class="math inline">\(b\)</span>)=[#,#], <span class="math inline">\(\eta_p^2= 0.##, p= 0.###\)</span>) than in Catholics (95% CI(<span class="math inline">\(b\)</span>%)=[#,#], <span class="math inline">\(\eta_p^2 = 0.##, p=0.###\)</span>).</p>
+<p>The main effect of sex was significant, 95% CI(<span class="math inline">\(b\)</span>)=[2.22, 3.78], <span class="math inline">\(\eta_p^2= 0.44, t(76) = 7.68, p &lt; .001\)</span>, indicating that women’s attitudes about abortion were 3 points higher than men on average. However, the sex X religion interaction was also significant, 95% CI(<span class="math inline">\(b\)</span>)=[0.44, 3.56], <span class="math inline">\(\eta_p^2= 0.08, t(76) = 2.56, p = .001\)</span> (see Figure 1). This indicates that the magnitude of the sex effect was significantly greater in Jews (95% CI(<span class="math inline">\(b\)</span>)=[2.90, 5.10], <span class="math inline">\(\eta_p^2= 0.41, p &lt; .001\)</span>) than in Catholics (95% CI(<span class="math inline">\(b\)</span>%)=[0.90, 3.10], <span class="math inline">\(\eta_p^2 = 0.15, p &lt; .001\)</span>).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># centered interactive model</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>m_int <span class="ot">&lt;-</span> <span class="fu">lm</span>(att <span class="sc">~</span> sex_c<span class="sc">*</span>rel_c, data)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_int)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m_int)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># peta sex main effect</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(att <span class="sc">~</span> rel_c <span class="sc">+</span> sex_c<span class="sc">:</span>rel_c, data))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_int)<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(att <span class="sc">~</span> rel_c <span class="sc">+</span> sex_c<span class="sc">:</span>rel_c, data))<span class="sc">^</span><span class="dv">2</span>) </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># peta interaction</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(att <span class="sc">~</span> rel_c <span class="sc">+</span> sex_c, data))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_int)<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(att <span class="sc">~</span> rel_c <span class="sc">+</span> sex_c, data))<span class="sc">^</span><span class="dv">2</span>) </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># simple effect for Jews (coded 0)</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rel_d =</span> <span class="fu">if_else</span>(rel <span class="sc">==</span> <span class="st">"Catholic"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>m_int_se_j <span class="ot">&lt;-</span> <span class="fu">lm</span>(att <span class="sc">~</span> rel_d<span class="sc">*</span>sex_d, data)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_int_se_j)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m_int_se_j)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(att <span class="sc">~</span> rel_d <span class="sc">+</span> sex_d<span class="sc">:</span>rel_d, data))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_int_se_j)<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(att <span class="sc">~</span> rel_d <span class="sc">+</span> sex_d<span class="sc">:</span>rel_d, data))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># simple effect for Catholic (coded 0)</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rel_d =</span> <span class="fu">if_else</span>(rel <span class="sc">==</span> <span class="st">"Catholic"</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>m_int_se_c <span class="ot">&lt;-</span> <span class="fu">lm</span>(att <span class="sc">~</span> rel_d<span class="sc">*</span>sex_d, data)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(m_int_se_c)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m_int_se_c)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>(<span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(att <span class="sc">~</span> rel_d <span class="sc">+</span> sex_d<span class="sc">:</span>rel_d, data))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(m_int_se_c)<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">sum</span>(<span class="fu">residuals</span>(<span class="fu">lm</span>(att <span class="sc">~</span> rel_d <span class="sc">+</span> sex_d<span class="sc">:</span>rel_d, data))<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <hr>
 </section>
 <section id="figure" class="level2" data-number="12.10">
