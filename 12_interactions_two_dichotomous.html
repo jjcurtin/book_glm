@@ -300,8 +300,9 @@ window.Quarto = {
   <li><a href="#describing-effects" id="toc-describing-effects" class="nav-link" data-scroll-target="#describing-effects"><span class="header-section-number">12.4</span> Describing Effects</a></li>
   <li><a href="#centered-codes-for-additive-model" id="toc-centered-codes-for-additive-model" class="nav-link" data-scroll-target="#centered-codes-for-additive-model"><span class="header-section-number">12.5</span> Centered Codes for Additive Model</a></li>
   <li><a href="#interactive-models" id="toc-interactive-models" class="nav-link" data-scroll-target="#interactive-models"><span class="header-section-number">12.6</span> Interactive Models</a></li>
-  <li><a href="#centered-codes-for-interactive-models" id="toc-centered-codes-for-interactive-models" class="nav-link" data-scroll-target="#centered-codes-for-interactive-models"><span class="header-section-number">12.7</span> Centered codes for interactive models</a></li>
-  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes"><span class="header-section-number">12.8</span> Learning Outcomes</a></li>
+  <li><a href="#centered-codes-for-interactive-model" id="toc-centered-codes-for-interactive-model" class="nav-link" data-scroll-target="#centered-codes-for-interactive-model"><span class="header-section-number">12.7</span> Centered Codes for Interactive Model</a></li>
+  <li><a href="#dummy-codes-for-interactive-model" id="toc-dummy-codes-for-interactive-model" class="nav-link" data-scroll-target="#dummy-codes-for-interactive-model"><span class="header-section-number">12.8</span> Dummy Codes for Interactive Model</a></li>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes"><span class="header-section-number">12.9</span> Learning Outcomes</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/12_interactions_two_dichotomous.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -848,8 +849,8 @@ Attitude: 1–10 with higher scores indicating more permissive attitudes</p>
 <p>The parameter estimate for the interaction and its interpretation is the same across these systems.</p>
 <hr>
 </section>
-<section id="centered-codes-for-interactive-models" class="level2" data-number="12.7">
-<h2 data-number="12.7" class="anchored" data-anchor-id="centered-codes-for-interactive-models"><span class="header-section-number">12.7</span> Centered codes for interactive models</h2>
+<section id="centered-codes-for-interactive-model" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="centered-codes-for-interactive-model"><span class="header-section-number">12.7</span> Centered Codes for Interactive Model</h2>
 <p><strong>Centered</strong><br>
 <code>sex_c</code>: male (-0.5), female (0.5)<br>
 <code>rel_c</code>: Catholic (-0.5), Jewish (0.5)</p>
@@ -1061,10 +1062,73 @@ Attitude: 1–10 with higher scores indicating more permissive attitudes</p>
 </div>
 <p><span style="color: blue;">(7 - 5; female) - (3 - 3; male) = 2</span></p>
 <hr>
+<p><strong>Centered</strong><br>
+<code>sex_c</code>: male (-0.5), female (0.5)<br>
+<code>rel_c</code>: Catholic (-0.5), Jewish (0.5)</p>
+<p><span class="math inline">\(\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c + 2*\text{sex}_c*\text{rel}_c\)</span></p>
+<p><span style="color: red;">Link all coefficients to the figure below.</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="12_interactions_two_dichotomous_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<p><strong>Centered</strong><br>
+<code>sex_c</code>: male (-0.5), female (0.5)<br>
+<code>rel_c</code>: Catholic (-0.5), Jewish (0.5)</p>
+<p><span class="math inline">\(\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c + 2*\text{sex}_c*\text{rel}_c\)</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><strong>You can use the model to reproduce cell means.</strong></p>
+<p>Catholic men: <span class="math inline">\(4.5 + 3*(-.5) + 1*(-.5) + 2*(-.5)*(-.5) = 3\)</span></p>
+<p>Jewish women: <span class="math inline">\(4.5 + 3*(.5) + 1*(.5) + 2*(.5)*(-.5) = 7\)</span></p>
+<p>Etc…</p>
 <hr>
 </section>
-<section id="learning-outcomes" class="level2" data-number="12.8">
-<h2 data-number="12.8" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">12.8</span> Learning Outcomes</h2>
+<section id="dummy-codes-for-interactive-model" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="dummy-codes-for-interactive-model"><span class="header-section-number">12.8</span> Dummy Codes for Interactive Model</h2>
+<hr>
+</section>
+<section id="learning-outcomes" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">12.9</span> Learning Outcomes</h2>
 <p>For models with dichotomous independent variables, you learned:</p>
 <ul>
 <li><p>Basic terminology from ANOVA framework.</p></li>
