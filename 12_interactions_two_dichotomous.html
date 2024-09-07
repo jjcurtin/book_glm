@@ -897,6 +897,42 @@ Attitude: 1–10 with higher scores indicating more permissive attitudes</p>
 <p><span style="color: blue;"><span class="math inline">\(b_0\)</span> is the predicted value for attitudes for 0 on both regressors. This is the grand mean.</span></p>
 <p><span style="color: blue;"><span class="math inline">\(b_1\)</span> is the main effect of sex (6 – 3 = 3).</span></p>
 <p><span style="color: blue;"><span class="math inline">\(b_2\)</span> is the main effect of religion (5 – 4 = 1).</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
 <hr>
 <p><strong>Centered</strong><br>
 <code>sex_c</code>: male (-0.5), female (0.5)<br>
@@ -1071,7 +1107,7 @@ Attitude: 1–10 with higher scores indicating more permissive attitudes</p>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="12_interactions_two_dichotomous_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="12_interactions_two_dichotomous_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1125,6 +1161,89 @@ Attitude: 1–10 with higher scores indicating more permissive attitudes</p>
 </section>
 <section id="dummy-codes-for-interactive-model" class="level2" data-number="12.8">
 <h2 data-number="12.8" class="anchored" data-anchor-id="dummy-codes-for-interactive-model"><span class="header-section-number">12.8</span> Dummy Codes for Interactive Model</h2>
+<p><strong>Dummy</strong><br>
+<code>sex_c</code>: male (0), female (1)<br>
+<code>rel_c</code>: Catholic (0), Jewish (1)</p>
+<p><span class="math inline">\(\text{att} =  3 +  2*\text{sex}_d + 0*\text{rel}_d + 2*\text{sex}_d*\text{rel}_d\)</span></p>
+<p><span style="color: red;">Link parameter estimates <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span>, &amp; <span class="math inline">\(b_2\)</span> to the table of means below.</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<hr>
+<p><span class="math inline">\(\text{att} =  3 +  2*\text{sex}_d + 0*\text{rel}_d + 2*\text{sex}_d*\text{rel}_d\)</span></p>
+<p><span style="color: blue;"><span class="math inline">\(b_0\)</span> is the predicted value for attitudes for 0 on both regressors. This is the predicted value for male Catholics.</span></p>
+<p><span style="color: blue;"><span class="math inline">\(b_1\)</span> is the simple effect of sex for Catholics (5 - 3 = 2).</span></p>
+<p><span style="color: blue;"><span class="math inline">\(b_2\)</span> is the simple effect of religion for men (3 – 3 = 0).</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<hr>
 <hr>
 </section>
 <section id="learning-outcomes" class="level2" data-number="12.9">
