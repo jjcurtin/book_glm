@@ -298,7 +298,10 @@ window.Quarto = {
   <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example"><span class="header-section-number">12.2</span> An Example</a></li>
   <li><a href="#terms-and-brief-definitions" id="toc-terms-and-brief-definitions" class="nav-link" data-scroll-target="#terms-and-brief-definitions"><span class="header-section-number">12.3</span> Terms and Brief Definitions</a></li>
   <li><a href="#describing-effects" id="toc-describing-effects" class="nav-link" data-scroll-target="#describing-effects"><span class="header-section-number">12.4</span> Describing Effects</a></li>
-  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes"><span class="header-section-number">12.5</span> Learning Outcomes</a></li>
+  <li><a href="#centered-codes-for-additive-model" id="toc-centered-codes-for-additive-model" class="nav-link" data-scroll-target="#centered-codes-for-additive-model"><span class="header-section-number">12.5</span> Centered Codes for Additive Model</a></li>
+  <li><a href="#interactive-models" id="toc-interactive-models" class="nav-link" data-scroll-target="#interactive-models"><span class="header-section-number">12.6</span> Interactive Models</a></li>
+  <li><a href="#centered-codes-for-interactive-models" id="toc-centered-codes-for-interactive-models" class="nav-link" data-scroll-target="#centered-codes-for-interactive-models"><span class="header-section-number">12.7</span> Centered codes for interactive models</a></li>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes"><span class="header-section-number">12.8</span> Learning Outcomes</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/12_interactions_two_dichotomous.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -723,6 +726,9 @@ Attitude: 1–10 with higher scores indicating more permissive attitudes</p>
 <code>rel_c</code>: Catholic (0), Jewish (1)</p>
 <p>The two systems yield essentially the same result (except for <span class="math inline">\(b_0\)</span>) for <strong>additive models</strong>.</p>
 <hr>
+</section>
+<section id="centered-codes-for-additive-model" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="centered-codes-for-additive-model"><span class="header-section-number">12.5</span> Centered Codes for Additive Model</h2>
 <p><strong>Centered</strong><br>
 <code>sex_c</code>: male (-0.5), female (0.5)<br>
 <code>rel_c</code>: Catholic (-0.5), Jewish (0.5)</p>
@@ -780,10 +786,110 @@ Attitude: 1–10 with higher scores indicating more permissive attitudes</p>
 </div>
 </div>
 <hr>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><span class="math inline">\(\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c\)</span></p>
+<p><span style="color: blue;"><span class="math inline">\(b_0\)</span> is the predicted value for attitudes for 0 on both regressors. This is the grand mean.</span></p>
+<p><span style="color: blue;"><span class="math inline">\(b_1\)</span> is the effect of sex. It will be forced to be constant across religions (6 – 3 = 3).</span></p>
+<p><span style="color: blue;"><span class="math inline">\(b_2\)</span> is the effect of religion constant across sexes (5 – 4 = 1).</span></p>
+<hr>
+<p><span style="color: red;">Question: What constraints were imposed in the additive model?</span></p>
+<hr>
+<p><span style="color: blue;">The effect of sex was constrained to be the same for both Catholics and Jews. 3 is the <em>best</em> parameter value because it is the average of the two simple effects of sex (2 vs.&nbsp;4).</span></p>
+<p><span style="color: blue;">The effect of religion was constrained to be the same for both men and women. 1 is the <em>best</em> parameter value because it is the average of the two simple effects of religion (0 vs.&nbsp;2).</span></p>
 <hr>
 </section>
-<section id="learning-outcomes" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">12.5</span> Learning Outcomes</h2>
+<section id="interactive-models" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="interactive-models"><span class="header-section-number">12.6</span> Interactive Models</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">male</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">female</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">all</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Catholic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jewish</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">all</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">4.5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p><span style="color: red;">Question: How do you relax this constraint and test the interaction between sex and religion?</span></p>
+<hr>
+<p><span style="color: blue;">Regress attitudes on sex, religion and their interaction (calculated as the product of sex * religion).</span></p>
+<p><span class="math inline">\(\text{att} =  b_0 +  b_1*\text{sex} + b_2*\text{rel} + b_3*\text{sex}*\text{rel}\)</span></p>
+<p><span style="color: blue;">The test of the <span class="math inline">\(b_3\)</span> coefficient against zero is the test of the interaction (Alternatively: the comparison of this model to the compact model:</span></p>
+<p><span class="math inline">\(\text{att} =  b_0 +  b_1*\text{sex} + b_2*\text{rel} + 0*\text{sex}*\text{rel}\)</span></p>
+<hr>
+<p>In interactive models, centered codes and dummy codes yield very different results because they are testing different questions.</p>
+<p>You will use <strong>centered codes</strong> when you want to test main effects and interactions. The parameter estimate for the regressors coding for the IVs test the main effect of each IV. <strong>This is the approach you will almost always use for your primary analysis.</strong></p>
+<p>You will use <strong>dummy codes</strong> when you want to test simple effects. The parameter estimate for the regressors coding for the IVs will test a specific simple effect of each IV. You will often need to recode your IVs more than once to test all relevant simple effects.</p>
+<p>The parameter estimate for the interaction and its interpretation is the same across these systems.</p>
+<hr>
+</section>
+<section id="centered-codes-for-interactive-models" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="centered-codes-for-interactive-models"><span class="header-section-number">12.7</span> Centered codes for interactive models</h2>
+<hr>
+</section>
+<section id="learning-outcomes" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="learning-outcomes"><span class="header-section-number">12.8</span> Learning Outcomes</h2>
 <p>For models with dichotomous independent variables, you learned:</p>
 <ul>
 <li><p>Basic terminology from ANOVA framework.</p></li>
