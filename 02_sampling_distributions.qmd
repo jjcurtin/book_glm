@@ -495,7 +495,7 @@ plot_samples
 
 -----
 
-## Standard Error(SE)
+## Standard Error
 
 The standard deviation of the sampling distribution (i.e., standard deviation of the infinite sample means) is equal to:   
 
@@ -514,11 +514,11 @@ This variability in the sampling distribution is due to sampling error
 
 -----
 
-<span style="color: red;">Question: What factors affect the size of the standard error (i.e., its sampling error) of the mean (i.e., the standard error)?</span>
+<span style="color: red;">Question: What factors affect the size of the standard error of the mean(i.e., its sampling error)?</span>
 
 -----
 
-<span style="color: red;">Question: What factors affect the size of the sampling error of the mean (i.e., the standard error)?</span>
+<span style="color: red;">Question: What factors affect the size of the standard error of the mean(i.e., its sampling error)?</span>
 
 \
 
@@ -580,7 +580,12 @@ This variability in the sampling distribution is due to sampling error
 
 -----
 
+<span style="color: red;">Question: What would the standard error of the mean be if the sample size equalled the population size?</span>
+
+\
+
 <span style="color: blue;">If the sample contained all participants from the population, the standard error of the mean would be equal to 0 because each sample mean would have exactly the same value as the overall population mean (because all same scores).  In this instance, there would be no sampling error because you sampled the full population!</span>   
+
 
 -----
 
@@ -588,13 +593,20 @@ This variability in the sampling distribution is due to sampling error
 
 -----
 
-<span style="color: blue;">If each sample contained only 1 participant, the the standard error of the mean would be equal to the standard deviation ($\sigma$) observed for the population raw scores.  This is the upper bound of the for how much sampling error you can expect (its biggest when you have the smallest possible sample size)</span>   
+<span style="color: red;">Question: What would happen if the samples contained only 1 participant?</span>
+
+\
+
+<span style="color: blue;">If each sample contained only 1 participant, the the standard error of the mean would be equal to the standard deviation ($\sigma$) observed for the population raw scores.  This is the upper bound for how much sampling error you can expect (it is biggest when you have the smallest possible sample size)</span>   
 
 -----
 
 ## Shape of the Sampling Distribution
 
 ***Central Limit Theorem:*** The shape of the sampling distribution approaches normal as $N$ increases. 
+
+\
+\
 
 The shape is roughly normal even for moderate sample sizes assuming that the original distribution isn’t really weird (i.e., non-normal). 
 
@@ -948,9 +960,9 @@ samp_skew_100_plot <- samp_skew_100 |>
 
 The $z$ distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.
 
-You can therefore think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.
+- You can think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.
 
-The probability distribution is known for the $z$ distribution.
+- The probability distribution is known for the $z$ distribution.
 
 ```{r}
 #| echo: false
@@ -1007,7 +1019,7 @@ probability_1sd + probability_2sd + probability_3sd
 
 ## Probability of Parameter Estimate Given $H_0$
 
-How could you use the $z$ distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of $N=10$ from a population of Ocean Liking scores with a population mean (parameter) of 0?
+How could you use the $z$ distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of $N=10$ from a population of Ocean Liking scores with a population mean (parameter) of 0 and population standard deviation of 10?
 
 
 
@@ -1083,7 +1095,6 @@ probability <- tibble(x=seq(-6.7,6.7,.001),
   annotate("text", x = -4, y = .2, label = "37.4%", size = 6) +
   annotate("text", x = 4, y = .2, label = "37.4%", size = 6)
 
-
 hist_samples_vline + probability
 ```
 
@@ -1098,25 +1109,37 @@ $z = \frac{2.4 - 0}{7.5} = 0.32$
 
 -----
 
-<span style="color: blue;">Our sample mean from our study. This is our parameter estimate of the population mean of OLS (like_score) scores.</span>   
+<span style="color: red;">Question: Where did we get the 2.4 from in our z-test?</span>
+
+\
+
+<span style="color: blue;">Our sample mean from our study. This is our parameter estimate of the population mean for ocean like scores (like_score) scores.</span>   
 
 -----
 
-<span style="color: red;">Question: Where did we get the 7.5 from in our z-test and what is the problem with this?</span>
+<span style="color: red;">Question: where did we get the 7.5 from in our z-test and what is the problem with this?</span>
 
 -----
+
+<span style="color: red;">Question: where did we get the 7.5 from in our z-test and what is the problem with this?</span>
+
+\
 
 <span style="color: blue;">This was our estimate of the standard deviation of the sampling distribution.</span>  
 
 <span style="color: blue;">$\frac{\sigma}{\sqrt{N_{sample}}}$</span>  
 
-<span style="color: blue;">We do not know $\sigma$.</span>   
+<span style="color: blue;">... But we do not know $\sigma$.</span>   
 
 -----
 
 <span style="color: red;">Question: How can we estimate $\sigma$?</span>
 
 -----
+
+<span style="color: red;">Question: How can we estimate $\sigma$?</span>
+
+\
 
 <span style="color: blue;">We can use our sample standard deviation ($s$), but $s$ is a negatively biased parameter estimate.  On average, it will underestimate $\sigma$.</span>   
 
@@ -1136,7 +1159,7 @@ $z = \frac{2.4 - 0}{7.5} = 0.32$
 
 $t(df)$ = $\frac{\text{Parameter estimate – Parameter:} H_0}{\text{Standard error of parameter estimate}}$   
          
-Where SE is estimated using $s$ from sample data.
+Where the standard error of the mean is estimated using $s$ from sample data.
 
 $df = N – P = 10 - 1 = 9$
 
