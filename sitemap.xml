@@ -2,74 +2,74 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://github.io/jjcurtin/book_glm/index.html</loc>
-    <lastmod>2024-09-04T12:56:27.789Z</lastmod>
+    <lastmod>2024-09-09T01:59:39.165Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/01_overview.html</loc>
-    <lastmod>2024-09-07T13:01:06.890Z</lastmod>
+    <lastmod>2024-09-09T01:59:39.037Z</lastmod>
   </url>
   <url>
-    <loc>https://github.io/jjcurtin/book_glm/02_sampling_distributions_shell.html</loc>
-    <lastmod>2024-09-07T13:01:06.892Z</lastmod>
+    <loc>https://github.io/jjcurtin/book_glm/02_sampling_distributions.html</loc>
+    <lastmod>2024-09-09T03:05:51.161Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/03_single_mean_shell.html</loc>
-    <lastmod>2024-09-04T13:38:21.096Z</lastmod>
+    <lastmod>2024-09-09T01:59:39.037Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/04_single_quantitative_shell.html</loc>
-    <lastmod>2024-09-04T13:38:21.099Z</lastmod>
+    <lastmod>2024-09-09T01:59:39.037Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/05_single_dichotomous_shell.html</loc>
-    <lastmod>2024-09-04T13:38:21.100Z</lastmod>
+    <lastmod>2024-09-09T01:59:39.037Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/06_two_predictors_shell.html</loc>
-    <lastmod>2024-09-04T13:38:21.104Z</lastmod>
+    <lastmod>2024-09-09T01:59:39.037Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/07_case_analysis_shell.html</loc>
-    <lastmod>2024-09-04T13:38:21.105Z</lastmod>
+    <lastmod>2024-09-09T01:59:39.037Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/08_model_assumptions_shell.html</loc>
-    <lastmod>2024-09-04T13:38:21.105Z</lastmod>
+    <lastmod>2024-09-09T01:59:39.037Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/09_transformations_shell.html</loc>
-    <lastmod>2024-09-04T13:38:21.106Z</lastmod>
+    <lastmod>2024-09-09T01:59:39.037Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/10_interactions_two_quantitative_shell.html</loc>
-    <lastmod>2024-09-04T13:38:21.109Z</lastmod>
+    <lastmod>2024-09-09T01:59:39.037Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/11_interactions_quantitative_and_dichotomous_shell.html</loc>
-    <lastmod>2024-09-04T13:38:21.111Z</lastmod>
+    <lastmod>2024-09-09T01:59:39.041Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/12_interactions_two_dichotomous_shell.html</loc>
-    <lastmod>2024-09-04T13:38:21.112Z</lastmod>
+    <lastmod>2024-09-09T01:59:39.041Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/13_categorical_variables_shell.html</loc>
-    <lastmod>2024-09-04T13:38:21.112Z</lastmod>
+    <lastmod>2024-09-09T01:59:39.041Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/14_power_shell.html</loc>
-    <lastmod>2024-09-04T13:38:21.115Z</lastmod>
+    <lastmod>2024-09-09T01:59:39.041Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/15_the_generalized_linear_model_shell.html</loc>
-    <lastmod>2024-09-04T13:38:21.117Z</lastmod>
+    <lastmod>2024-09-09T01:59:39.041Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/app_terminology.html</loc>
-    <lastmod>2024-06-11T14:20:17.399Z</lastmod>
+    <lastmod>2024-08-29T20:20:10.511Z</lastmod>
   </url>
   <url>
     <loc>https://github.io/jjcurtin/book_glm/repeated_measures.html</loc>
-    <lastmod>2024-08-18T00:23:44.427Z</lastmod>
+    <lastmod>2024-08-29T20:20:10.515Z</lastmod>
   </url>
 </urlset>

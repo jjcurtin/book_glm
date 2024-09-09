@@ -330,21 +330,271 @@
     ]
   },
   {
-    "objectID": "02_sampling_distributions_shell.html",
-    "href": "02_sampling_distributions_shell.html",
+    "objectID": "02_sampling_distributions.html",
+    "href": "02_sampling_distributions.html",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "",
-    "text": "2.1 Materials and Assignments\nRead\nApplication assignment (due 9/18 @ 1:30 via Canvas)",
+    "text": "2.1 Assignments\nRead\nApplication assignment (due 9/18 @ 1:30 via Canvas)\nSlide deck on QuartoPub",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
   },
   {
-    "objectID": "02_sampling_distributions_shell.html#materials-and-assignments",
-    "href": "02_sampling_distributions_shell.html#materials-and-assignments",
+    "objectID": "02_sampling_distributions.html#assignments",
+    "href": "02_sampling_distributions.html#assignments",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "",
     "text": "Judd et al. Chapter 2, Definitions of Error and Parameter Estimates\nJudd et al. Chapter 3, Models of Error and Sampling Distributions\n\n\n\nassignment\ndata\nkey",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#inferential-statistics",
+    "href": "02_sampling_distributions.html#inferential-statistics",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.2 Inferential Statistics",
+    "text": "2.2 Inferential Statistics\nInferential statistics are used to estimate parameters in the population from parameter estimates in a sample drawn from that population.\n\nWe use these parameter estimates to test hypotheses (predictions; null and alternative hypotheses) about the size of the population parameter.\nThese hypotheses about the size of population parameters typically map directly onto research questions about relationships between variables (IVs/predictors and DVs/outcomes).\nOur conclusions about our hypotheses are probabilistic. In other words, all conclusions have the potential to be wrong and you will provide an index of that probability along with your results.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#populations",
+    "href": "02_sampling_distributions.html#populations",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.3 Populations",
+    "text": "2.3 Populations\nA population is any clearly defined set of objects or events (people, occurrences, animals, etc.)\n\nPopulations usually represent all events in a particular class (e.g., all college students, all alcoholics, all depressed people, all people)\nIt is often an abstract concept because in many/most instances you will never have access to the entire population\nMany of our studies may have the population of all people as its implicit target\n\n\n\n\nResearchers usually want to describe or draw conclusions about populations\n\nWe don’t care if some new drug is an effective treatment for 100 people in your sample\nInstead, we want to know if it will, on average, for everyone we might treat",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#population-parameters",
+    "href": "02_sampling_distributions.html#population-parameters",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.4 (Population) Parameters",
+    "text": "2.4 (Population) Parameters\nA parameter is a value used to describe a certain characteristic of a population\nFor example, the population mean is a parameter that is often used to indicate the average/typical value of a variable in the population\n\nThe value for a population parameter is a fixed and does not vary within the population at the time of measurement (e.g., the mean height of people in the US at the present moment).\nThe value for a population parameter is usually unknown and can’t be calculated directly because we dont have access to the entire population.\nWe use Greek letters to represent population parameters (\\(\\mu\\), \\(\\sigma\\), \\(\\sigma^2\\), \\(\\beta_0\\), \\(\\beta_j\\)).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#samples-parameter-estimates",
+    "href": "02_sampling_distributions.html#samples-parameter-estimates",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.5 Samples & Parameter Estimates",
+    "text": "2.5 Samples & Parameter Estimates\nA sample is a finite group of units (e.g., participants) selected from the population of interest.\n\nA sample is generally selected for a study because the population is too large to study in its entirety\nWe typically have only one sample in a study\n\n\n\n\nWe use the sample to estimate and test parameters in the population\n\nThese estimates are called parameter estimates.\nWe use Roman letters to represent sample parameter estimates (\\(\\overline{X}\\), \\(s\\), \\(s^2\\), \\(b_0\\), \\(b_j\\)).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#sampling-error",
+    "href": "02_sampling_distributions.html#sampling-error",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.6 Sampling Error",
+    "text": "2.6 Sampling Error\nSince a sample does not include all members of the population, the value for any parameter estimate from any specific sample generally differs from the associated parameter from the entire population\n\nFor example, the mean height of a sample of 1000 people drawn randomly from the US population will not exactly match the mean height of US population\nThis difference between the (sample) parameter estimate and the (population) parameter is called sampling error\n\n\n\n\nYou will not be able to calculate the sampling error of your parameter estimate directly because you don’t know the value of the population parameter. However, you can estimate it by probabilistic modeling of the hypothetical sampling distibution for that parameter.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#hypothetical-sampling-distribution",
+    "href": "02_sampling_distributions.html#hypothetical-sampling-distribution",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.7 Hypothetical Sampling Distribution",
+    "text": "2.7 Hypothetical Sampling Distribution\nA sampling distribution is a probability distribution for a parameter estimate drawn from all possible samples of size \\(N\\) taken from that population.\n\nA sampling distribution can be formed for any population parameter.\nEach time you draw a sample of size \\(N\\) from a population you can calculate an estimate of that population parameter from that sample.\nBecause of sampling error, these parameter estimates will not exactly equal the population parameter. They will not equal each other either. They will form a distribution.\nA sampling distribution is an abstract concept that represents the outcome of repeated (infinite) sampling. You will typically only have one sample.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#what-if-we-didnt-need-samples",
+    "href": "02_sampling_distributions.html#what-if-we-didnt-need-samples",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.8 What if we didn’t need samples?",
+    "text": "2.8 What if we didn’t need samples?\nResearch question: How do inhabitants of a remote pacific island feel about the ocean? Population size = 10,000.\nDependent measure: Ocean liking scale scores that range from -100 (strongly dislike) to 100 (strongly like). 0 represents neutral.\nHypotheses: \\(H_0: \\mu = 0; H_a: \\mu \\neq 0\\)\nQuestion: How would you answer this question if you had unlimited resources (e.g., time, money, and patience)?\n\nQuestion: How would you answer this question if you had unlimited resources (e.g., time, money, and patience)?\n\n\nAdminister the Ocean liking scale to all 10,000 inhabitants in the population and calculate the population mean score. Is it 0? If not, the inhabitants are not neutral on average.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#ocean-liking-scale-scores-in-full-population",
+    "href": "02_sampling_distributions.html#ocean-liking-scale-scores-in-full-population",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.9 Ocean Liking Scale Scores in Full Population",
+    "text": "2.9 Ocean Liking Scale Scores in Full Population\n\n\nCode\n1options(conflicts.policy = \"depends.ok\")\nlibrary(tidyverse)\n2path_data &lt;- \"data_lecture\"\n\n3data &lt;- read_csv(here::here(path_data, \"02_sampling_distributions_like.csv\"),\n                 show_col_types = FALSE) \n\n\n\n1\n\nThis line of code will tell will tell us when we load two packages with conflicting functions (i.e., they have the same name) by producing an error. There are ways to set custom conflict policies and work around conflicts (e.g., only loading certain functions from a package). You can find more documentation here.\n\n\n2\n\nThis path points to where your data is and should be a relative path from your R project.\n\n3\n\nWe use the here() function in the here package (here::here()) to define paths within a function. This approach (vs. file.path()) works well when using R Projects in quarto notebooks.\n\n\n\n\n\nglimpse() can be used to display useful information, like number of rows and column, variable (column) names, a sample of what the data look like, and the class of each variable (e.g., double, character, factor).\n\nIt can used by itself (see below) or directly in a pipeline when reading in the the data (e.g., could have been add to the pipline above on a line following read_csv())\n\n\n\n\n\nCode\ndata |&gt; \n  glimpse()\n\n\nRows: 10,000\nColumns: 2\n$ subid      &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, …\n$ like_score &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 23.6…\n\n\n\n\nSee also:\nview() allows you to open up the data frame in a GUI window in RStudio.\n\nskim() and other functions in the skimr package are helpful for quick summaries of your data (e.g., missingness, distribution, type of data)\n\n\n\n\nCode\ndata |&gt; \n1  skimr::skim()\n\n\n\n1\n\nWe add the name of the package and :: to the function name to call skim because we having loaded the full skimr package in our sript.\n\n\n\n\n\nData summary\n\n\nName\ndata\n\n\nNumber of rows\n10000\n\n\nNumber of columns\n2\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\nnumeric\n2\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\n\nsubid\n0\n1\n5000.5\n2886.90\n1.00\n2500.75\n5000.5\n7500.25\n10000.00\n▇▇▇▇▇\n\n\nlike_score\n0\n1\n0.0\n23.67\n-86.64\n-16.08\n0.1\n16.14\n84.46\n▁▃▇▃▁\n\n\n\n\n\n\nIf we want less information about the distribution we can use summarise and specify the descriptive statistics we want.\n\n\n\n\nCode\ndata |&gt; \n  summarise(n = n(),\n            mean = mean(like_score),\n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n      mean    sd\n  &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;\n1 10000 -6.27e-16  23.7\n\n\n\nYou can also pull out a few rows from the dataframe/tibble to look at your data. This can be done using\n\nslice_head() to pull out \\(n\\) top rows of the data set,\nslice_tail() to pull out \\(n\\) bottom rows of the data set, or\nslice_sample() to pull out a random \\(n\\) of rows from the data set\n\n\n\n\n\nCode\ndata |&gt; \n  slice_head(n = 5) \n\n\n# A tibble: 5 × 2\n  subid like_score\n  &lt;dbl&gt;      &lt;dbl&gt;\n1     1     -23.6 \n2     2      -9.01\n3     3      30.5 \n4     4       5.89\n5     5      -9.16\n\n\n\n\n\nCode\ndata |&gt; \n  slice_tail(n = 5) \n\n\n# A tibble: 5 × 2\n  subid like_score\n  &lt;dbl&gt;      &lt;dbl&gt;\n1  9996     -16.6 \n2  9997      -8.37\n3  9998      18.6 \n4  9999     -16.2 \n5 10000     -17.0 \n\n\n\n\n\nCode\n1set.seed(101)\ndata |&gt; \n  slice_sample(n = 5)\n\n\n\n1\n\nWhenever you are using random numbers it is important to set a seed first (set.seed()). This ensures you can reproduce that randomness!\n\n\n\n\n# A tibble: 5 × 2\n  subid like_score\n  &lt;dbl&gt;      &lt;dbl&gt;\n1  8009     -27.0 \n2  2873     -41.5 \n3  3281      17.8 \n4  5562      27.4 \n5  5471      -9.84\n\n\n\nWe can view the distribution of raw scores using a histogram\n\n\n\n\nCode\nplot_raw &lt;- data |&gt; \n  ggplot(aes(x = like_score)) +\n  geom_histogram(color = \"black\", fill = \"light grey\", bins = 20) + \n  scale_x_continuous(limits = c(-100, 100)) +\n1  theme_classic()\n\n\n\n1\n\nWe can use themes to customize the output of our figures. This can be piped into your ggplot() code or set globally at the top of your script (see next slide)\n\n\n\n\n\n\n\nCode\ntheme_set(theme_classic()) \nplot_raw",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#parameter-estimation-and-testing",
+    "href": "02_sampling_distributions.html#parameter-estimation-and-testing",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.10 Parameter Estimation and Testing",
+    "text": "2.10 Parameter Estimation and Testing\nQuestion: What do you conclude?\n\nQuestion: What do you conclude?\n\n\nInhabitants of the island are neutral on average on the Ocean Liking Scale; \\(\\mu\\) = 0.\n\nQuestion: How confident are you about this conclusion?\n\nQuestion: How confident are you about this conclusion?\n\n\nExcluding issues of measurement of the scale (i.e., reliability), you are 100% confident that the population mean score on this scale is 0 because you calculated the mean using all the scores in the population(\\(\\mu\\) = 0).\n\nQuestion: Of course, this approach to answering a research question is not typical. Why? And how would you normally answer this question?\n\nQuestion: Of course, this approach to answering a research question is not typical. Why? And how would you normally answer this question?\n\nYou will very rarely have access to all scores in the population. Instead, you have to use inferential statistics to “infer” (estimate) the size of the population parameter using a parameter estimate calculated from a sample of that population.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#obtain-a-sample",
+    "href": "02_sampling_distributions.html#obtain-a-sample",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.11 Obtain a Sample",
+    "text": "2.11 Obtain a Sample\nYou are a poor graduate student. All you can afford is \\(N = 10\\).\n\n\n\n\nCode\nset.seed(2005) \ndata |&gt; \n  slice_sample(n = 10) |&gt; \n  summarise(n = n(),\n            mean = mean(like_score),\n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n  mean    sd\n  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    10  2.14  19.4\n\n\n\n\nQuestion: What do you conclude and why?\n\nQuestion: What do you conclude and why?\n\n\nA sample mean of 2.14 is not 0. However, you know that the sample mean will not match the population mean exactly. How likely is it to get a sample mean of 2.14 if the population mean is 0 (think about it!)?\n\nYour friend is a poor graduate student too. All she can afford is \\(N = 10\\) too.\n\n\n\n\nCode\ndata |&gt; \n  slice_sample(n = 10) |&gt; \n  summarise(n = n(),\n            mean = mean(like_score),\n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n  mean    sd\n  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    10  1.74  23.0\n\n\nQuestion: What does she conclude and why?\n\nQuestion: What does she conclude and why?\n\n\nA sample mean of 1.74 is not 0. However, she knows that the sample mean will not match the population mean exactly. It is more likely to get a sample mean of 1.74 than 2.14 if the population mean is 0 but she still doesn’t know how likely either outcome is. What if she obtained a sample with mean of 30?",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#sampling-distribution-of-the-mean",
+    "href": "02_sampling_distributions.html#sampling-distribution-of-the-mean",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.12 Sampling Distribution of the Mean",
+    "text": "2.12 Sampling Distribution of the Mean\nYou can construct a sampling distribution for any parameter estimate (e.g., mean, \\(s\\), min, max, \\(r\\), \\(b_0\\), \\(b_1\\)).\n\n\n\nFor the mean, you can think of the sampling distribution conceptually as follows:\n\nImagine drawing many samples (lets say 1000 samples but in theory, the sampling distribution is infinite) of \\(N\\)=10 participants (10 participants in each sample) from your population.\nNext, calculate the mean for each of these samples of 10 participants.\nFinally, create a histogram (or density plot) of these sample means.\n\n\n\n\nNote: In your research, you don’t form a sampling distribution by repeated sampling. You (typically) only have one sample\n\n\n2.12.1 1000 Samples of \\(N\\)=10\n\n\nCode\n1get_sample_mean &lt;- function(data, n_sub) {\n  data |&gt; \n  slice_sample(n = n_sub) |&gt; \n  summarise(across(everything(), \n                   list(mean = mean, \n                        sd = sd), \n                        .names = \"{fn}\")) |&gt; \n  mutate(n = n_sub) \n}\n\n\n\n1\n\nHere we are writing a function that we will use to generate descriptive statistics over 1000 samples. We are keeping this function generic because we are going to use this function again later in the chapter for more simulation examples!\n\n\n\n\n\n\n\nCode\nset.seed(101)\nsamples &lt;- 1:1000 |&gt; \n1  map(\\(i) get_sample_mean(data = data[, \"like_score\"], n_sub = 10)) |&gt;\n  list_rbind()\n\n\n\n1\n\nWe use the map() function to repeat our function 1000 times. We do this by piping in a vector of 1000 numbers using 1:1000\n\n\n\n\n\n\n\n\n\nCode\nsamples  |&gt; slice_head(n = 20)\n\n\n# A tibble: 20 × 3\n      mean    sd     n\n     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1  -6.89   22.4    10\n 2  11.9    20.2    10\n 3   0.147  15.9    10\n 4  -8.93   27.3    10\n 5   8.52   20.0    10\n 6   2.02   10.6    10\n 7  -0.198  16.9    10\n 8  -0.230  21.1    10\n 9   1.01   22.7    10\n10   6.26   28.4    10\n11 -11.5    30.1    10\n12   6.63   22.0    10\n13  -4.20   13.2    10\n14   4.96   15.7    10\n15   7.34   18.3    10\n16 -11.3    24.0    10\n17   2.05   16.9    10\n18  -4.31   27.4    10\n19   1.91   22.4    10\n20  -0.303  23.7    10\n\n\n\n\n\n2.12.2 Sampling Distribution of the Mean\n\n\nCode\nsamples |&gt; \n  summarise(n = n(), \n            mean_m = mean(mean), \n            sd = sd(mean))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1  1000 -0.238  7.69\n\n\n\n\n\nCode\nplot_samples &lt;- samples |&gt; \n  ggplot(aes(x = mean)) +\n  geom_histogram(color = \"black\", \n                 fill = \"light grey\", bins = 20) + \n  scale_x_continuous(\"sample means\", \n                     limits = c(-100, 100))\n\nplot_samples",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#raw-score-distribution-vs.-sampling-distribution",
+    "href": "02_sampling_distributions.html#raw-score-distribution-vs.-sampling-distribution",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.13 Raw Score Distribution vs. Sampling Distribution",
+    "text": "2.13 Raw Score Distribution vs. Sampling Distribution\nThe distinction between the raw score distribution and your sampling distribution is very important to keep clear in your mind!\n\n\n\nCode\n1library(patchwork)\nplot_raw + plot_samples\n\n\n\n1\n\nThe patchwork package is an easy and customizable way to combine ggplot() objects. For more information see https://patchwork.data-imaginist.com/.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#sampling-distribution-of-the-mean-2",
+    "href": "02_sampling_distributions.html#sampling-distribution-of-the-mean-2",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.14 Sampling Distribution of the Mean",
+    "text": "2.14 Sampling Distribution of the Mean\nQuestion: What will the mean of the sample means be? In other words, what is the mean of the sampling distribution?\n\nQuestion: What will the mean of the sample means be? In other words, what is the mean of the sampling distribution?\n\n\nThe mean of the sample means (i.e., the mean of the sampling distribution) will equal the population mean of raw scores on the dependent measure. This is important because it indicates that the sample mean is an unbiased estimator of the population mean.\n\n\nCode\nplot_samples\n\n\n\n\n\n\n\n\n\n\nThe mean is an unbiased estimator\n\nThe mean of the sample means will equal the mean of the population.\nTherefore, individual sample means will neither systematically under or overestimate the population mean.\n\nRaw Ocean Liking Scores\n\n\nCode\ndata |&gt; \n  summarise(n = n(), \n            mean_m = round(mean(like_score), 2), \n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1 10000      0  23.7\n\n\n\n\nSample (N=10) Means:\n\n\nCode\nsamples |&gt; \n  summarise(n = n(), \n            mean_m = round(mean(mean), 2), \n            sd = sd(mean))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1  1000  -0.24  7.69\n\n\n\nThe sample variance (\\(s^2\\); with n-1 denominator) is also an unbiased estimator of the population variance (\\(\\sigma^2\\)).\n\nIn other words, the mean of the sample \\(s^2\\)’s will approximate the population variance\nSample \\(s\\) is negatively biased\n\n\nQuestion: Will all of the sample means be the same?\n\nQuestion: Will all of the sample means be the same?\n\n\nNo, there was a distribution of means that varied from each other. The mean of the sampling distribution was the population mean but the standard deviation was not zero.\n\n\nCode\nsamples |&gt; \n  summarise(n = n(), \n            mean_m = round(mean(mean), 2), \n            sd = sd(mean))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1  1000  -0.24  7.69\n\n\n\n\nCode\nplot_samples",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#standard-error",
+    "href": "02_sampling_distributions.html#standard-error",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.15 Standard Error",
+    "text": "2.15 Standard Error\nThe standard deviation of the sampling distribution (i.e., standard deviation of the infinite sample means) is equal to:\n\\(\\frac{\\sigma}{\\sqrt{N_{sample}}}\\)\nWhere \\(\\sigma\\) is the standard deviation of the population raw scores.\n\n\n\nThis variability in the sampling distribution is due to sampling error\n\nBecause we use parameter estimates calculated in our sample to estimate population parameters, we would like to minimize sampling error\nThe standard deviation of the sampling distribution for a parameter estimate has a technical name. It is called the standard error of the parameter estimate. Here, we are talking about the standard error of the mean.\n\n\nQuestion: What factors affect the size of the standard error of the mean(i.e., its sampling error)?\n\nQuestion: What factors affect the size of the standard error of the mean(i.e., its sampling error)?\n\n\nThe standard deviation of the population raw scores and the sample size.\n\nQuestion: Variation among raw scores for a variable in the population is broadly caused by two factors. What are they?\n\nQuestion: Variation among raw scores for a variable in the population is broadly caused by two factors. What are they?\n\n\n1. Individual differences.\n2. Measurement error (the opposite of reliability)\n\nQuestion: What is the relationship between population variability in the raw scores (\\(\\sigma\\)) and the standard error of the mean?\n\nQuestion: What is the relationship between population variability in the raw scores (\\(\\sigma\\)) and the standard error of the mean?\n\n\nAs the variability (e.g., its standard deviation) of the raw scores on the variable increases in the population, the standard error of the mean increases..\n\nQuestion: What would happen to standard error of the mean if there was no variation in population scores?\n\nQuestion: What would happen to standard error of the mean if there was no variation in population scores?\n\n\nThe standard error of the mean would equal 0 no matter which participants you sampled. They would all have the same scores!\n\nQuestion: What is the relationship between sample size and the standard error of the mean?\n\nQuestion: What is the relationship between sample size and the standard error of the mean?\n\n\nAs the sample size increases, the standard error of the mean for the statistic will decrease.\n\nQuestion: What would the standard error of the mean be if the sample size equalled the population size?\n\nQuestion: What would the standard error of the mean be if the sample size equalled the population size?\n\n\nIf the sample contained all participants from the population, the standard error of the mean would be equal to 0 because each sample mean would have exactly the same value as the overall population mean (because all same scores). In this instance, there would be no sampling error because you sampled the full population!\n\nQuestion: What would happen if the samples contained only 1 participant?\n\nQuestion: What would happen if the samples contained only 1 participant?\n\n\nIf each sample contained only 1 participant, the the standard error of the mean would be equal to the standard deviation (\\(\\sigma\\)) observed for the population raw scores. This is the upper bound for how much sampling error you can expect (it is biggest when you have the smallest possible sample size)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#shape-of-the-sampling-distribution",
+    "href": "02_sampling_distributions.html#shape-of-the-sampling-distribution",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.16 Shape of the Sampling Distribution",
+    "text": "2.16 Shape of the Sampling Distribution\nCentral Limit Theorem: The shape of the sampling distribution approaches normal as \\(N\\) increases.\n\n\n\nThe shape is roughly normal even for moderate sample sizes assuming that the original distribution isn’t really weird (i.e., non-normal).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#normal-population-and-various-sampling-distributions",
+    "href": "02_sampling_distributions.html#normal-population-and-various-sampling-distributions",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.17 Normal Population and Various Sampling Distributions",
+    "text": "2.17 Normal Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#uniform-population-and-various-sampling-distributions",
+    "href": "02_sampling_distributions.html#uniform-population-and-various-sampling-distributions",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.18 Uniform Population and Various Sampling Distributions",
+    "text": "2.18 Uniform Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#skewed-population-and-various-sampling-distributions",
+    "href": "02_sampling_distributions.html#skewed-population-and-various-sampling-distributions",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.19 Skewed Population and Various Sampling Distributions",
+    "text": "2.19 Skewed Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#an-important-normal-distribution-z-scores",
+    "href": "02_sampling_distributions.html#an-important-normal-distribution-z-scores",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.20 An Important Normal Distribution: Z-scores",
+    "text": "2.20 An Important Normal Distribution: Z-scores\nThe \\(z\\) distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.\n\nYou can think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.\nThe probability distribution is known for the \\(z\\) distribution.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#probability-of-parameter-estimate-given-h_0",
+    "href": "02_sampling_distributions.html#probability-of-parameter-estimate-given-h_0",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.21 Probability of Parameter Estimate Given \\(H_0\\)",
+    "text": "2.21 Probability of Parameter Estimate Given \\(H_0\\)\nHow could you use the \\(z\\) distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of \\(N=10\\) from a population of Ocean Liking scores with a population mean (parameter) of 0 and population standard deviation of 10?\nThink about it……",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#hypothetical-sampling-distribution-for-h_0",
+    "href": "02_sampling_distributions.html#hypothetical-sampling-distribution-for-h_0",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.22 Hypothetical Sampling Distribution for \\(H_0\\)",
+    "text": "2.22 Hypothetical Sampling Distribution for \\(H_0\\)\nIf \\(H_0\\) is true; the sampling distribution has a mean of 0 and standard deviation of \\(\\frac{\\sigma}{\\sqrt{N_{sample}}} =  \\frac{23.7}{\\sqrt{10}}  =  7.5\\).\n\n\n\n\n\n\n\n\n\n\nQuestion: If \\(H_0\\) is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?\n\n\n\n\n\n\n\n\n\n\nPretty likely…\nBut we can do better than that!",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#our-first-inferential-test-the-z-test",
+    "href": "02_sampling_distributions.html#our-first-inferential-test-the-z-test",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.23 Our First Inferential Test: The z-test",
+    "text": "2.23 Our First Inferential Test: The z-test\n\\(z = \\frac{2.4 - 0}{7.5} = 0.32; p \\le .749\\)\n\n\n\n\n\nCode\npnorm(0.32, mean=0, sd=1, lower.tail=FALSE) * 2 \n\n\n[1] 0.7489683",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#t-vs.-z",
+    "href": "02_sampling_distributions.html#t-vs.-z",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.24 t vs. z",
+    "text": "2.24 t vs. z\n\\(z = \\frac{2.4 - 0}{7.5} = 0.32\\)\n\n\n\nQuestion: Where did we get the 2.4 from in our z-test?\n\nQuestion: Where did we get the 2.4 from in our z-test?\n\n\nOur sample mean from our study. This is our parameter estimate of the population mean for ocean like scores (like_score) scores.\n\nQuestion: where did we get the 7.5 from in our z-test and what is the problem with this?\n\nQuestion: where did we get the 7.5 from in our z-test and what is the problem with this?\n\n\nThis was our estimate of the standard deviation of the sampling distribution.\n\n\n\\(\\frac{\\sigma}{\\sqrt{N_{sample}}}\\)\n\n\n… But we do not know \\(\\sigma\\).\n\nQuestion: How can we estimate \\(\\sigma\\)?\n\nQuestion: How can we estimate \\(\\sigma\\)?\n\n\nWe can use our sample standard deviation (\\(s\\)), but \\(s\\) is a negatively biased parameter estimate. On average, it will underestimate \\(\\sigma\\).\n\nQuestion: So what do we do?\n\nQuestion: So what do we do?\n\n\nWe account for this underestimation of \\(\\sigma\\) and therefore of the standard deviation (standard error) of the sampling distribution by using the \\(t\\) distribution rather than the \\(z\\) distribution to calculate the probability of our parameter estimate if \\(H_0\\) is true.\n\n\nThe \\(t\\) distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#our-second-inferential-test-one-sample-t-test",
+    "href": "02_sampling_distributions.html#our-second-inferential-test-one-sample-t-test",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.25 Our Second Inferential Test: One Sample t-test",
+    "text": "2.25 Our Second Inferential Test: One Sample t-test\n\\(t(df)\\) = \\(\\frac{\\text{Parameter estimate – Parameter:} H_0}{\\text{Standard error of parameter estimate}}\\)\n \nWhere the standard error of the mean is estimated using \\(s\\) from sample data.\n\\(df = N – 1 = 10 - 1 = 9\\)\n\n\n\n\n\n\n\n\n\n\n\n\nThe bias in \\(s\\) decreases with increasing \\(N\\). Therefore, \\(t\\) approaches \\(z\\) with larger sample sizes.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
+    ]
+  },
+  {
+    "objectID": "02_sampling_distributions.html#null-hypothesis-significance-testing-nhst",
+    "href": "02_sampling_distributions.html#null-hypothesis-significance-testing-nhst",
+    "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "2.26 Null Hypothesis Significance Testing (NHST)",
+    "text": "2.26 Null Hypothesis Significance Testing (NHST)\n\nDivide reality regarding the size of the population parameter into two non-overlapping possibilities: Null hypothesis (\\(H_0\\)) & Alternate hypothesis (\\(H_a\\)).\nAssume that \\(H_0\\) is true.\nCollect data.\nCalculate the probability (\\(p\\)-value) of obtaining your parameter estimate (or a more extreme estimate) given your assumption (i.e., \\(H_0\\) is true)\nCompare probability to some cut-off value (alpha level).\n\nIf this parameter estimate is less probable than cut-off value, reject \\(H_0\\) in favor of \\(H_a\\).\nIf data is not less probable, fail to reject \\(H_0\\).",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
