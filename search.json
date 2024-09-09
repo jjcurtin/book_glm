@@ -314,7 +314,7 @@
     "href": "01_overview.html#survey-of-glm-landscape-with-one-y",
     "title": "1  Unit 1: Overview",
     "section": "1.10 Survey of GLM Landscape with One Y",
-    "text": "1.10 Survey of GLM Landscape with One Y\n\n610 only adddresses GLMs with a single Y\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMeasurement of Xs\n\n\n\nXs\nQuantitative\nCategorical\nMixed\n\n\n\n\n0\nOne sample t-test\n\n\n\n\n1\nSimple regression; Pearson's r\nIndependent t-test; Point biserial r\n\n\n\n&gt;1\nMultiple regression\nOne way ANOVA; Factorial ANOVA\nANCOVA; ATI\n\n\n\n\n\n\n\n\n710 handles multiple Ys in the context of repeated measures analyses\nMultivariate statistics courses address other contexts with multiple Ys",
+    "text": "1.10 Survey of GLM Landscape with One Y\n\n610 only adddresses GLMs with a single Y\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMeasurement of Xs\n\n\n\nXs\nQuantitative\nCategorical\nMixed\n\n\n\n\n0\nOne sample t-test\n\n\n\n\n1\nSimple regression; Pearson's r\nIndependent t-test; Point biserial r\n\n\n\n&gt;1\nMultiple regression\nOne way ANOVA; Factorial ANOVA\nANCOVA; ATI\n\n\n\n\n\n\n\n\n\n710 handles multiple Ys in the context of repeated measures analyses\nMultivariate statistics courses address other contexts with multiple Ys",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Unit 1: Overview</span>"
     ]
@@ -334,7 +334,7 @@
     "href": "02_sampling_distributions.html",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "",
-    "text": "2.1 Assignments\nRead\nApplication assignment (due 9/18 @ 1:30 via Canvas)\nSlide deck on QuartoPub",
+    "text": "2.1 Assignments\nRead\nApplication assignment (due 9/18 @ 1:30 via Canvas)",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
@@ -344,7 +344,7 @@
     "href": "02_sampling_distributions.html#assignments",
     "title": "2  Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "",
-    "text": "Judd et al. Chapter 2, Definitions of Error and Parameter Estimates\nJudd et al. Chapter 3, Models of Error and Sampling Distributions\n\n\n\nassignment\ndata\nkey",
+    "text": "Slide deck on QuartoPub\n\n\n\nJudd et al. Chapter 2, Definitions of Error and Parameter Estimates\nJudd et al. Chapter 3, Models of Error and Sampling Distributions\n\n\n\nassignment\ndata\nkey",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sampling Distributions, Parameters, and Parameter Estimates</span>"
     ]
