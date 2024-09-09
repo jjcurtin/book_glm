@@ -6,7 +6,6 @@ editor_options:
  
 # Sampling Distributions, Parameters, and Parameter Estimates 
 
-[Slide deck]() on QuartoPub
 
 ## Assignments
 
@@ -21,6 +20,8 @@ Application assignment (due 9/18 @ 1:30 via Canvas)
 - [data]()
 - [key]()
 - 
+
+[Slide deck]() on QuartoPub
 
 -----
 
@@ -148,13 +149,17 @@ data <- read_csv(here::here(path_data, "02_sampling_distributions_like.csv"), # 
 -----
 
 `glimpse()` can be used to display useful information, like number of rows and column, variable (column) names, a sample of what the data look like, and the class of each variable (e.g., double, character, factor).
+
 - It can used by itself (see below) or directly in a pipeline when reading in the the data (e.g., could have been add to the pipline above on a line following `read_csv()`) 
+
+\
 
 ```{r}
 data |> 
   glimpse()
 ```
 
+\
 
 **See also:**    
 `view()` allows you to open up the data frame in a GUI window in RStudio.    
@@ -162,6 +167,9 @@ data |>
 -----
 
 `skim()` and other functions in the `skimr` package are helpful for quick summaries of your data (e.g., missingness, distribution, type of data)
+
+\
+
 ```{r}
 data |> 
   skimr::skim() # <1>
@@ -172,6 +180,9 @@ data |>
 -----
 
 If we want less information about the distribution we can use `summarise` and specify the descriptive statistics we want.
+
+\
+
 ```{r}
 data |> 
   summarise(n = n(),
@@ -187,10 +198,14 @@ You can also pull out a few rows from the dataframe/tibble to look at your data.
 - `slice_tail()` to pull out $n$ bottom rows of the data set, or 
 - `slice_sample()` to pull out a random $n$ of rows from the data set
 
+\
+
 ```{r}
 data |> 
   slice_head(n = 5) 
 ```
+
+-----
 
 ```{r}
 data |> 
@@ -211,6 +226,8 @@ data |>
 
 We can view the distribution of raw scores using a histogram
 
+\
+
 ```{r}
 plot_raw <- data |> 
   ggplot(aes(x = like_score)) +
@@ -224,10 +241,6 @@ plot_raw <- data |>
 
 ```{r}
 theme_set(theme_classic()) 
-```
-
-
-```{r}
 plot_raw
 ```
 
@@ -274,16 +287,18 @@ plot_raw
 
 You are a poor graduate student. All you can afford is $N = 10$. 
 
+\
+
 ```{r}
 set.seed(2005) 
-data_sample_1 <- data |> 
-   slice_sample(n = 10)
-
-data_sample_1 |> 
+data |> 
+  slice_sample(n = 10) |> 
   summarise(n = n(),
             mean = mean(like_score),
             sd = sd(like_score))
 ```
+
+\
 
 <span style="color: red;">Question: What do you conclude and why?
 
@@ -299,11 +314,11 @@ data_sample_1 |>
 
 Your friend is a poor graduate student too. All she can afford is $N = 10$ too.
 
-```{r}
-data_sample_2 <- data |> 
-   slice_sample(n = 10)
+\
 
-data_sample_2 |> 
+```{r}
+data |> 
+  slice_sample(n = 10) |> 
   summarise(n = n(),
             mean = mean(like_score),
             sd = sd(like_score))
@@ -338,6 +353,7 @@ For the mean, you can think of the sampling distribution conceptually as follows
 \
 
 **Note**: In your research, you don't form a sampling distribution by repeated sampling. You (typically) only have one sample
+
 -----
 
 ### 1000 Samples of $N$=10
@@ -346,7 +362,10 @@ For the mean, you can think of the sampling distribution conceptually as follows
 get_sample_mean <- function(data, n_sub) { # <1>
   data |> 
   slice_sample(n = n_sub) |> 
-  summarise(across(everything(), list(mean = mean, sd = sd), .names = "{fn}")) |> 
+  summarise(across(everything(), 
+                   list(mean = mean, 
+                        sd = sd), 
+                        .names = "{fn}")) |> 
   mutate(n = n_sub) 
 }
 ```
@@ -360,13 +379,15 @@ set.seed(101)
 samples <- 1:1000 |> 
   map(\(i) get_sample_mean(data = data[, "like_score"], n_sub = 10)) |>  #<1>
   list_rbind()
-
 ```
 
 1. We use the `map()` function to repeat our function 1000 times.  We do this by piping in a vector of 1000 numbers using `1:1000`
 
+\
+\
+
 ```{r}
-samples  |> slide_head(n = 20)
+samples  |> slice_head(n = 20)
 ```
 
 -----
@@ -385,8 +406,10 @@ samples |>
 ```{r}
 plot_samples <- samples |> 
   ggplot(aes(x = mean)) +
-  geom_histogram(color = "black", fill = "light grey", bins = 20) + 
-  scale_x_continuous("sample means", limits = c(-100, 100))
+  geom_histogram(color = "black", 
+                 fill = "light grey", bins = 20) + 
+  scale_x_continuous("sample means", 
+                     limits = c(-100, 100))
 
 plot_samples
 ```
@@ -397,18 +420,14 @@ plot_samples
 
 The distinction between the raw score distribution and your sampling distribution is very important to keep clear in your mind!
 
-
-```{r}
-library(patchwork) # <1> 
-```
-
-1. The `patchwork` package is an easy and customizable way to combine `ggplot()` objects. For more information see <https://patchwork.data-imaginist.com/>.
-
 -----
 
 ```{r}
+library(patchwork) # <1> 
 plot_raw + plot_samples
 ```
+
+1. The `patchwork` package is an easy and customizable way to combine `ggplot()` objects. For more information see <https://patchwork.data-imaginist.com/>.
 
 -----
 
@@ -1051,7 +1070,6 @@ hist_samples
 
 -----
 
-
 <span style="color: red;">Question: If $H_0$ is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?</span>
 
 ```{r}
@@ -1075,10 +1093,14 @@ hist_samples_vline
 
 $z = \frac{2.4 - 0}{7.5} = 0.32; p \le .749$  
 
+\
+\
+
 ```{r}
 pnorm(0.32, mean=0, sd=1, lower.tail=FALSE) * 2 
 ```
 
+\
 
 ```{r}
 #| warning: false
@@ -1098,12 +1120,14 @@ probability <- tibble(x=seq(-6.7,6.7,.001),
 hist_samples_vline + probability
 ```
 
-
 -----
 
-## $t$ vs. $z$
+## t vs. z
 
 $z = \frac{2.4 - 0}{7.5} = 0.32$  
+
+\
+\
 
 <span style="color: red;">Question: Where did we get the 2.4 from in our z-test?</span>
 
@@ -1127,7 +1151,11 @@ $z = \frac{2.4 - 0}{7.5} = 0.32$
 
 <span style="color: blue;">This was our estimate of the standard deviation of the sampling distribution.</span>  
 
+\
+
 <span style="color: blue;">$\frac{\sigma}{\sqrt{N_{sample}}}$</span>  
+
+\
 
 <span style="color: blue;">... But we do not know $\sigma$.</span>   
 
@@ -1149,7 +1177,13 @@ $z = \frac{2.4 - 0}{7.5} = 0.32$
 
 -----
 
+<span style="color: red;">Question: So what do we do?</span>
+
+\
+
 <span style="color: blue;">We account for this underestimation of $\sigma$ and therefore of the standard deviation (standard error) of the sampling distribution by using the $t$ distribution rather than the $z$ distribution to calculate the probability of our parameter estimate if $H_0$ is true.</span>    
+
+\
 
 <span style="color: blue;">The $t$ distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.</span>
 
@@ -1158,11 +1192,14 @@ $z = \frac{2.4 - 0}{7.5} = 0.32$
 ## Our Second Inferential Test: One Sample t-test
 
 $t(df)$ = $\frac{\text{Parameter estimate – Parameter:} H_0}{\text{Standard error of parameter estimate}}$   
-         
+
+\         
+
 Where the standard error of the mean is estimated using $s$ from sample data.
 
-$df = N – P = 10 - 1 = 9$
+$df = N – 1 = 10 - 1 = 9$
 
+\
 
 ```{r}
 #| echo: false

@@ -27,7 +27,7 @@ book:
   chapters:
     - index.qmd
     - 01_overview.qmd
-    - 02_sampling_distributions_shell.qmd
+    - 02_sampling_distributions.qmd
     - 03_single_mean_shell.qmd
     - 04_single_quantitative_shell.qmd
     - 05_single_dichotomous_shell.qmd
