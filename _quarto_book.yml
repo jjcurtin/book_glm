@@ -28,7 +28,7 @@ book:
     - index.qmd
     - 01_overview.qmd
     - 02_sampling_distributions.qmd
-    - 03_single_mean_shell.qmd
+    - 03_single_mean.qmd
     - 04_single_quantitative_shell.qmd
     - 05_single_dichotomous_shell.qmd
     - 06_two_predictors_shell.qmd

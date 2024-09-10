@@ -4,7 +4,19 @@ editor_options:
   chunk_output_type: console
 --- 
  
-# Inferences About a Single Mean (1 Parameter Models) 
+# Unit 3: Inferences About a Single Mean (1 Parameter Models) 
+
+
+## Assignments
+
+- [Slide deck](https://jjcurtin.quarto.pub/03_single_mean/) on QuartoPub
+
+Read
+
+- Judd et al. Chapter 4. Simple Models: Statistical Inferences about Parameter Values
+ 
+Application assignment (due 9/15 @ 1:30 via Canvas)
+
 
 ```{r}
 #| echo: false
@@ -17,13 +29,13 @@ options(scipen = 999) # turns off scientfic notation
 ## Units 3-4 Organization
 
 
-- First, consider details of simplest model (one parameter estimate; mean-only model; no $X$s).
+- First, consider details of simplest model (one parameter estimate; mean-only model; no $X$s)
 
-- Next, examine simple regression (two parameter estimates; one $X$ for one quantitative predictor variable).
+- Next, examine simple (bivariate) regression (two parameter estimates; one $X$ for one quantitative predictor)
 
-- These provide a critical foundation for all linear models.
+- These provide a critical foundation for all linear models
 
-- Subsequent units will generalize to one dichotomous variable (*Unit 5*), multiple predictor variables (*Units 6-7*), and beyond...
+- Subsequent units will generalize to one dichotomous variable (**Unit 5**), multiple predictors (**Units 6-7**), and beyond...
 
 
 -----
@@ -31,31 +43,48 @@ options(scipen = 999) # turns off scientfic notation
 
 ## Linear Models as Models
 
-Linear models (including regression) are *models*.
+Linear models (including regression) are **models**.
 
-**DATA = MODEL + ERROR**
+$DATA = MODEL + ERROR$
+
+\
+\
 
 Three general uses for models:  
 
-1. ***Describe*** and summarize DATA ($Y$s) in a simpler form using MODEL.
-2. ***Predict*** DATA ($Y$s) from MODEL.
-3. ***Understand*** (test inferences about) complex relationships between individual regressors ($X$s) in MODEL and the DATA ($Y$s). How precise are estimates of relationship?
+1. **Describe** and summarize DATA ($Y$s) in a simpler form using MODEL.
+2. **Predict** DATA ($Y$s) from MODEL.
+3. **Understand** (test inferences about) complex relationships between individual regressors ($X$s) in MODEL and the DATA ($Y$s). How precise are estimates of relationship?
 
+\
+\
 
-MODELS are simplifications of reality. As such, there is ERROR. They also make assumptions that must be evaluated.
+-----
+
+$DATA = MODEL + ERROR$
+
+\
+\
+
+MODELS are simplifications of reality 
+
+- As such, there is ERROR 
+- They also make assumptions that must be evaluated
+
 
 -----
 
 ## Fear Potential Startle
 
-We are interested in producing anxiety in the laboratory.
+We were interested in producing anxiety in the laboratory
 
-To do this, we develop a procedure where we expose people to periods of unpredictable electric shock administration alternating with periods of safety.
+- To do this, we developed a procedure where we expose people to periods of unpredictable electric shock administration alternating with periods of safety
 
-We measure their startle response in the shock and safe periods.
+- We measure their startle response in the shock and safe periods
+ 
+- We use the difference between their startle during shock – safe to determine if they are anxious
 
-We use the difference between their startle during shock – safe to determine if they are anxious. 
-This is called **Fear potentiated startle (FPS)**. Our procedure works if FPS > 0.  We need a model of FPS scores to determine if FPS > 0.
+- This is called **Fear potentiated startle (FPS)**. Our procedure works if FPS > 0.  We need a model of FPS scores to determine if FPS > 0
 
 ------
 
@@ -66,16 +95,24 @@ A very simple model for the population of FPS scores would predict the same valu
 $\hat{Y}_i=\beta_0$
 
 
-We would like this value to be the *best* prediction.
+We would like this value to be the **best** prediction.
 
 
-<span style="color: red;">Question: In the context of DATA = MODEL + ERROR, how can we quantify *best*?</span>
+<span style="color: red;">Question: In the context of DATA = MODEL + ERROR, how can we quantify **best**?</span>
 
 -----
 
+<span style="color: red;">Question: In the context of DATA = MODEL + ERROR, how can we quantify **best**?</span>
+
+\
+
 <span style="color: blue;">We want to predict some characteristic about the population of FPS scores that minimizes the ERROR from our model.</span>   
 
+\
+
 <span style="color: blue;">ERROR = DATA – MODEL</span>   
+
+\
 
 <span style="color: blue;">$\varepsilon_i=Y_i-\hat{Y}_i$; There is an error ($\varepsilon_i$) for each population score.</span>
 
@@ -87,19 +124,25 @@ We would like this value to be the *best* prediction.
 
 ## Total Error
 
+<span style="color: red;">Question: How can we quantify total model error?</span>
+
+\
+
 <span style="color: blue;">**Sum of errors**</span> across all scores in the population isn’t ideal because positive and negative errors will tend to cancel each other out.
 
 $\sum(Y_i-\hat{Y}_i)$
+
+\
 
 <span style="color: blue;">**Sum of absolute values of errors**</span> could work. If we selected $\beta_0$ to minimize the sum of the absolute value of errors, $\beta_0$ would equal the median of the population.
 
 $\sum(|Y_i-\hat{Y}_i|)$
 
+\
 
 <span style="color: blue;">**Sum of squared errors (SSE)**</span> could work. If we selected $\beta_0$ to minimize the sum of squared errors, $\beta_0$ would equal the mean of the population.
 
 $\sum(Y_i-\hat{Y}_i)^2$
-
 
 -----
 
@@ -115,9 +158,21 @@ $\hat{Y}_i=\beta_0$ where $\beta_0=\mu$
 
 -----
 
+<span style="color: red;">question: what is the problem with this model and how can we fix this problem?</span>
+
+\
+
 <span style="color: blue;">We don't know the population mean for FPS scores ($\mu$).</span>
 
-<span style="color: blue;">We can collect a sample from the population and use the sample mean ($\overline{X}$) as an estimate of the population mean ($\mu$). $\overline{X}$ is an unbiased estimate for $\mu$.</span>
+\
+\
+
+<span style="color: red;">Question: How could we solve this problem to develop a model?</span>
+
+-----
+
+
+<span style="color: blue;">... But we  collect a sample from the population and use the sample mean ($\overline{X}$) as an estimate of the population mean ($\mu$). $\overline{X}$ is an unbiased estimate for $\mu$.</span>
 
 -----
 

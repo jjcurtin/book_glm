@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 --- 
  
-# Sampling Distributions, Parameters, and Parameter Estimates 
+# Unit 2: Sampling Distributions, Parameters, and Parameter Estimates 
 
 
 ## Assignments
@@ -21,8 +21,6 @@ Application assignment (due 9/18 @ 1:30 via Canvas)
 - [assignment]()
 - [data]()
 - [key]()
-- 
-
 
 -----
 
