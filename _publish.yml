@@ -1,15 +1,11 @@
 - source: 02_sampling_distributions.qmd
   quarto-pub:
-    - id: 524d6fcd-0102-4ef4-aca6-e445ba9adc69
-      url: 'https://kendra-wyant.quarto.pub/02_sampling_distributions'
-    - id: 1caa077d-d207-42d7-a491-d638ffcd7921
-      url: 'https://jjcurtin.quarto.pub/02_sampling_distributions-0807'
     - id: 7342940d-7bde-44e2-8154-5831257c90b8
       url: 'https://jjcurtin.quarto.pub/02_sampling_distributions'
 - source: 03_single_mean.qmd
   quarto-pub:
-    - id: 436f3f00-00eb-4fbd-8d17-15a01c67d252
-      url: 'https://kendra-wyant.quarto.pub/03_single_mean'
+    - id: fb4fe633-6af5-4a4b-af8a-4fab0169e799
+      url: 'https://jjcurtin.quarto.pub/03_single_mean'
 - source: 04_single_quantitative.qmd
   quarto-pub:
     - id: 776c00af-79fa-4713-9ce0-58ca6900cf34
