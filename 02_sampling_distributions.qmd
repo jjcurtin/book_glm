@@ -9,6 +9,8 @@ editor_options:
 
 ## Assignments
 
+- [Slide deck](https://jjcurtin.quarto.pub/02_sampling_distributions/) on QuartoPub
+
 Read
 
 - Judd et al. Chapter 2, Definitions of Error and Parameter Estimates
@@ -21,15 +23,14 @@ Application assignment (due 9/18 @ 1:30 via Canvas)
 - [key]()
 - 
 
-[Slide deck]() on QuartoPub
 
 -----
 
 ## Inferential Statistics
 
-Inferential statistics are used to estimate **parameters** in the population from parameter estimates in a sample drawn from that population. 
+Inferential statistics are used to estimate **parameters** in the **population** from **parameter estimates** in a **sample** drawn from that population. 
 
-- We use these parameter estimates to test hypotheses (predictions; null and alternative hypotheses) about the size of the population parameter. 
+- We use these parameter estimates to test **hypotheses** (predictions; null and alternative hypotheses) about the size of the population parameter. 
 
 - These hypotheses about the size of population parameters typically map directly onto research questions about relationships between variables (IVs/predictors and DVs/outcomes).
 
@@ -73,6 +74,7 @@ A sample is a finite group of units (e.g., participants) selected from the popul
 
 - A sample is generally selected for a study because the population is too large to study in its entirety
 - We typically have only one sample in a study
+- Samples can be selected randomly or not (e.g., convenience samples) from the population, which has implications for the conclusions we reach but not necessarily for the analyses.
 
 \
 \
@@ -94,7 +96,7 @@ Since a sample does not include all members of the population, the value for any
 \
 \
 
-You will not be able to calculate the sampling error of your parameter estimate directly because you don't know the value of the population parameter. However, you can estimate it by probabilistic modeling of the *hypothetical sampling distibution* for that parameter.
+You will not be able to calculate the sampling error of your parameter estimate directly because you don't know the value of the population parameter. However, you can estimate it by probabilistic modeling of the **hypothetical sampling distibution** for that parameter.
 
 -----
 
@@ -113,9 +115,15 @@ A sampling distribution is a probability distribution for a parameter estimate d
 
 ***Research question:*** How do inhabitants of a remote pacific island feel about the ocean? Population size = 10,000.
 
+\
+
 ***Dependent measure:*** Ocean liking scale scores that range from -100 (strongly dislike) to 100 (strongly like). 0 represents neutral.
 
+\
+
 ***Hypotheses:*** $H_0: \mu = 0; H_a: \mu \neq 0$ 
+
+\
 
 <span style="color: red;">Question: How would you answer this question if you had unlimited resources (e.g., time, money, and patience)?</span>
 
@@ -138,7 +146,8 @@ options(conflicts.policy = "depends.ok")  # <1>
 library(tidyverse)
 path_data <- "data_lecture"  # <2> 
 
-data <- read_csv(here::here(path_data, "02_sampling_distributions_like.csv"), # <3>
+data <- read_csv(here::here(path_data, 
+                            "02_sampling_distributions_like.csv"), # <3>
                  show_col_types = FALSE) 
 ```
 
@@ -148,9 +157,11 @@ data <- read_csv(here::here(path_data, "02_sampling_distributions_like.csv"), # 
 
 -----
 
-`glimpse()` can be used to display useful information, like number of rows and column, variable (column) names, a sample of what the data look like, and the class of each variable (e.g., double, character, factor).
+`glimpse()` 
 
-- It can used by itself (see below) or directly in a pipeline when reading in the the data (e.g., could have been add to the pipline above on a line following `read_csv()`) 
+- can be used to display useful information, like number of rows and column, variable (column) names, a sample of what the data look like, and the class of each variable (e.g., double, character, factor).
+
+- can used by itself (see below) or directly in a pipeline when reading in the the data (e.g., could have been add to the pipline above on a line following `read_csv()`) 
 
 \
 
@@ -323,6 +334,8 @@ data |>
             mean = mean(like_score),
             sd = sd(like_score))
 ```
+
+\
 
 <span style="color: red;">Question: What does she conclude and why?</span>
 
@@ -516,7 +529,7 @@ plot_samples
 
 ## Standard Error
 
-The standard deviation of the sampling distribution (i.e., standard deviation of the infinite sample means) is equal to:   
+The standard deviation of the sampling distribution of the mean (i.e., standard deviation of the infinite sample means) is equal to:   
 
 $\frac{\sigma}{\sqrt{N_{sample}}}$
 
@@ -566,7 +579,7 @@ This variability in the sampling distribution is due to sampling error
 
 \
 
-<span style="color: blue;">As the variability (e.g., its standard deviation) of the raw scores on the variable increases in the population, the standard error of the mean increases.</span>.    
+<span style="color: blue;">As the variability (e.g., its standard deviation) of the raw scores on the variable increases in the population, the standard error of the mean increases.</span>    
 
 -----
 
@@ -591,7 +604,7 @@ This variability in the sampling distribution is due to sampling error
 
 \
 
-<span style="color: blue;">As the sample size increases, the standard error of the mean for the statistic will decrease.</span>   
+<span style="color: blue;">As the sample size increases, the standard error of the mean will decrease.</span>   
 
 -----
 
@@ -616,7 +629,7 @@ This variability in the sampling distribution is due to sampling error
 
 \
 
-<span style="color: blue;">If each sample contained only 1 participant, the the standard error of the mean would be equal to the standard deviation ($\sigma$) observed for the population raw scores.  This is the upper bound for how much sampling error you can expect (it is biggest when you have the smallest possible sample size)</span>   
+<span style="color: blue;">If each sample contained only 1 participant, the standard error of the mean would be equal to the standard deviation ($\sigma$) observed for the population raw scores.  This is the upper bound for how much sampling error you can expect (it is biggest when you have the smallest possible sample size)</span>   
 
 -----
 
@@ -1048,7 +1061,7 @@ Think about it……
 
 ## Hypothetical Sampling Distribution for $H_0$
 
-If $H_0$ is true; the sampling distribution has a mean of 0 and standard deviation of $\frac{\sigma}{\sqrt{N_{sample}}} =  \frac{23.7}{\sqrt{10}}  =  7.5$.   
+If $H_0$ is true; the sampling distribution (for $N$ = 10) has a mean of 0 and standard deviation of $\frac{\sigma}{\sqrt{N_{sample}}} =  \frac{23.7}{\sqrt{10}}  =  7.5$.   
 
 
 ```{r}
