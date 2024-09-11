@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to the General Linear Model - Dealing with Messy Data I: Case Analysis</title>
+<title>Introduction to the General Linear Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./08_model_assumptions_shell.html" rel="next">
-<link href="./06_two_predictors_shell.html" rel="prev">
+<link href="./app_terminology.html" rel="next">
+<link href="./application_assignments.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07_case_analysis_shell.html">Dealing with Messy Data I: Case Analysis</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lab_materials.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">lab_materials.html</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -152,92 +152,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_overview.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Unit 1: Overview</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./02_sampling_distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./03_single_mean.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Unit 3: Inferences About a Single Mean (1 Parameter Models)</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./04_single_quantitative_shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Inferences About a Single Quantitative Predictor</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./05_single_dichotomous_shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Inferences about a Single Dichotomous Predictor</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06_two_predictors_shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Inferences about two predictors (multiple regression without interaction)</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./07_case_analysis_shell.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Dealing with Messy Data I: Case Analysis</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./08_model_assumptions_shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Dealing with Messy Data II: Model Assumptions</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./09_transformations_shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Dealing with Messy Data III: Transformations</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./10_interactions_two_quantitative_shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Inferences about Two Continuous Predictors and their Interaction</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./11_interactions_quantitative_and_dichotomous_shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Inferences about a Continuous and Dichotomous Predictor and their Interaction</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./12_interactions_two_dichotomous_shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Inferences about a Two Dichotomous Predictors and their Interaction</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./13_categorical_variables_shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Categorical Variables &gt; 2 Levels</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./14_power_shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Power Analysis and Statistical Validity</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./15_the_generalized_linear_model_shell.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The Generalized Linear Model</span></span></a>
+  <a href="./lab_materials.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">lab_materials.html</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -255,12 +171,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Key Terminology and Concepts</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./repeated_measures.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Repeated Measures</span></a>
-  </div>
-</li>
       </ul>
   </li>
     </ul>
@@ -269,51 +179,16 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#assignments" id="toc-assignments" class="nav-link active" data-scroll-target="#assignments">Assignments</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/07_case_analysis_shell.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Dealing with Messy Data I: Case Analysis</h1>
-</div>
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
 
 
-</header>
-
-
-<section id="assignments" class="level2">
-<h2 class="anchored" data-anchor-id="assignments">Assignments</h2>
-<p>Read</p>
-<ul>
-<li>TBD</li>
-</ul>
-<p>Application assignment (due ??? @ 1:30 via Canvas)</p>
-<ul>
-<li><a href="">assignment</a></li>
-<li><a href="">data</a></li>
-<li><a href="">key</a></li>
-</ul>
-
-
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -705,13 +580,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./06_two_predictors_shell.html" class="pagination-link" aria-label="Inferences about two predictors (multiple regression without interaction)">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Inferences about two predictors (multiple regression without interaction)</span>
+      <a href="./application_assignments.html" class="pagination-link" aria-label="Application Assignments">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Application Assignments</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./08_model_assumptions_shell.html" class="pagination-link" aria-label="Dealing with Messy Data II: Model Assumptions">
-        <span class="nav-page-text">Dealing with Messy Data II: Model Assumptions</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./app_terminology.html" class="pagination-link" aria-label="Key Terminology and Concepts">
+        <span class="nav-page-text">Key Terminology and Concepts</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -720,4 +595,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/07_case_analysis_shell.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/lab_materials.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
