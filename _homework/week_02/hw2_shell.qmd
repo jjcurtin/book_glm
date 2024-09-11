@@ -160,7 +160,7 @@ Check that your new variable is indeed mean-centered using code.
 
 
 ## 4. Center condition 
-recode (have teach and explore as labels) - to make numeric (assign 2 values - -.5, .5)
+Recode (have teach and explore as labels) - to make numeric (assign 2 values - -.5, .5)
 
 
 
