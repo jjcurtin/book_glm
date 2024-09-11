@@ -11,16 +11,16 @@ editor_options:
 
 - [Slide deck](https://jjcurtin.quarto.pub/02_sampling_distributions/) on QuartoPub
 
-Read
+\
 
-- Judd et al. Chapter 2, Definitions of Error and Parameter Estimates
-- Judd et al. Chapter 3, Models of Error and Sampling Distributions
- 
-Application assignment (due 9/18 @ 1:30 via Canvas)
+- Read
 
-- [assignment]()
-- [data]()
-- [key]()
+  - Judd et al. Chapter 2, Definitions of Error and Parameter Estimates
+  - Judd et al. Chapter 3, Models of Error and Sampling Distributions
+
+\ 
+
+- Week 2 Application Assignment (due 9/18 @ 1:30 via Canvas)
 
 -----
 

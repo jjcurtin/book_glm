@@ -11,11 +11,11 @@ editor_options:
 
 - [Slide deck](https://jjcurtin.quarto.pub/03_single_mean/) on QuartoPub
 
-Read
+- Read
+  - Judd et al. Chapter 4. Simple Models: Statistical Inferences about Parameter Values
 
-- Judd et al. Chapter 4. Simple Models: Statistical Inferences about Parameter Values
- 
-Application assignment (due 9/15 @ 1:30 via Canvas)
+- Week 2 Application Assignment (due 9/18 @ 1:30 via Canvas)
+- Week 3 Application Assignment (due 9/15 @ 1:30 via Canvas)
 
 
 ```{r}
@@ -156,7 +156,7 @@ $\sum(Y_i-\hat{Y}_i)^2$
 For the moment, lets assume we prefer to minimize SSE (more on that in a moment). You should predict the population mean FPS for everyone.  
 
 \
-$\hat{Y}_i=\beta_0$ where $\beta_0=\mu$
+$\hat{Y}_i=\beta_0$  ...  where $\beta_0=\mu$
 
 
 \
@@ -166,7 +166,7 @@ $\hat{Y}_i=\beta_0$ where $\beta_0=\mu$
 
 <span style="color: red;">Question: What is the problem with this model?</span>
 
-$\hat{Y}_i=\beta_0$ where $\beta_0=\mu$
+$\hat{Y}_i=\beta_0$  ...  where $\beta_0=\mu$
 
 \
 
@@ -183,35 +183,42 @@ $\hat{Y}_i=\beta_0$ where $\beta_0=\mu$
 
 \
 
-<span style="color: blue;">... We can collect a sample from the population and use the sample mean ($\overline{X}$) as an estimate of the population mean ($\mu$).</span> 
+<span style="color: blue;">We can collect a sample from the population and use the sample mean ($\overline{X}$) as an estimate of the population mean ($\mu$).</span> 
+
+\
+
 <span style="color: blue;">$\overline{X}$ is an unbiased estimate for $\mu$.</span>
 
 -----
 
 ## Model Parameter Estimation
 
+DATA = MODEL + ERROR
+
+\
+\
 
 **Population model**    
 
-$\hat{Y}_i=\beta_0$ ... where $\beta_0=\mu$  
-
 $Y_i=\beta_0+\varepsilon_i$   
+
+$\hat{Y}_i=\beta_0$ ... where $\beta_0=\mu$  
 
 \
 \
 
 **Estimate population parameters from sample**
 
+$Y_i=b_0+e_i$   
 
 $\hat{Y}_i=b_0$ ... where $b_0=\overline{X}$  
 
-$Y_i=b_0+e_i$   
 
 -----
 
 ## Least Squares Criterion
 
-In ordinary least squares (OLS) regression and other least squares linear models, the model parameter estimates (e.g., $b_0$) are calculated such that they minimize the sum of squared errors (SSE) in the sample in which you estimate the model.  
+In ordinary least squares (OLS) regression and other least squares linear models, the model **parameter estimates (e.g., $b_0$) are calculated such that they minimize the sum of squared errors (SSE**) in the sample in which you estimate the model.  
 
 \
 
@@ -309,18 +316,14 @@ data |>
 
 \
 
-1. Create a simple model of FPS scores in the population
-
+- Create a simple model of FPS scores in the population
   - $\text{FPS}=\beta_0$   
 
+- Collect sample of $N=96$ to estimate $\beta_0$
 
-2. Collect sample of $N=96$ to estimate $\beta_0$
+- Calculate sample parameter estimate ($b_0$) that minimizes SSE in sample
 
-
-3. Calculate sample parameter estimate ($b_0$) that minimizes SSE in sample
-
-
-4. Use $b_0$ to test hypotheses
+- Use $b_0$ to test hypotheses
 
   - $H_0: \beta_0 = 0$    
   - $H_a: \beta_0 \neq 0$
@@ -358,7 +361,8 @@ sum(residuals(m)^2)
 
 \
 
-This tells us about how well the model fits the data.  Specifically it is the sum of the squared differences between the predicted values and the actual participant scores
+- This tells us about how well the model fits the data.  
+- Specifically it is the sum of the squared differences between the predicted values and the actual participant scores
 
 -----
 
@@ -437,19 +441,22 @@ $H_0: \beta_0 = 0; H_a: \beta_0 \neq 0$
 
 <span style="color: blue;">2. If $H_0$ is true, the sampling distribution for $\beta_0$ will have a mean of 0. We can estimate standard deviation of the sampling distribution with SE for $b_0$.</span>    
 
-$t(df=N-P)=\frac{b_0-0}{\text{SE}_{b_0}}=\frac{32.2-0}{3.8}=8.40$   
-
 \
 
 <span style="color: blue;">3. $b_0$ is approximately `r round(broom::tidy(m)$estimate/broom::tidy(m)$std.error)` standard deviations above the expected mean of the distribution if $H_0$ is true.</span>  
 
+$t(df=N-P)=\frac{b_0-0}{\text{SE}_{b_0}}=\frac{32.2-0}{3.8}=8.40$   
 \
 
 [continue on next slide]
 
 -----
 
-<span style="color: blue;">4. We can use `pt()` to calculate the $p$ value.</span>
+<span style="color: blue;">4. We can use `pt()` to calculate the exact $p$ value for this parameter estimate given $H_0$.</span>
+
+\
+
+<span style="color: blue;">The probability of obtaining a sample $b_0$ = `r round(broom::tidy(m)$estimate, 1)` (or more extreme) if $H_0$ is true is very low (< .05). Therefore we reject $H_0$ and conclude that $\beta_0 \neq 0$ and $b_0$ is our best (unbiased) estimate of it.</span>
 
 \
 
@@ -459,7 +466,7 @@ pt(8.40,95,lower.tail=FALSE) * 2
 
 \
 
-<span style="color: blue;">5. The probability of obtaining a sample $b_0$ = `r round(broom::tidy(m)$estimate, 1)` (or more extreme) if $H_0$ is true is very low (< .05). Therefore we reject $H_0$ and conclude that $\beta_0 \neq 0$ and $b_0$ is our best (unbiased) estimate of it.</span>
+<span style="color: blue;">Of courese, we don't need to calculate the p-value with `pt()` because we got it directly from `tidy()`</span>
 
 -----
 
@@ -538,13 +545,14 @@ Augmented model: $\hat{\text{FPS}_i}=\beta_0 (\approx b_0)$
 We can compare (and choose between) these two models by comparing their total error (SSE) in our sample.  
 
 
+$\text{SSE}_c = \sum(Y_i-0)^2$   
+
 $\text{SSE}_a = \sum(Y_i-\hat{Y}_i)^2$   
 
-$\text{SSE}_c = \sum(Y_i-0)^2$   
 
 -----
 
-We can calculate $\text{SSE}_a = \sum(Y_i-\hat{Y}_i)^2$ as follows:
+We can calculate $\text{SSE}_c = \sum(Y_i-\hat{Y}_i)^2$ as follows:
 
 ```{r}
 sum((data$fps - 0)^2)
