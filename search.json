@@ -220,6 +220,16 @@
     ]
   },
   {
+    "objectID": "required_readings.html",
+    "href": "required_readings.html",
+    "title": "Required Reading",
+    "section": "",
+    "text": "Unit 1\n\nJudd et a., Chapter 1, Introduction to Data Analysis\n\n\n\nUnit 2\n\nJudd et al. Chapter 2, Definitions of Error and Parameter Estimates\nJudd et al. Chapter 3, Models of Error and Sampling Distributions\n\n\n\nUnit 3\n\nJudd et al. Chapter 4. Simple Models: Statistical Inferences about Parameter Values",
+    "crumbs": [
+      "Required Reading"
+    ]
+  },
+  {
     "objectID": "application_assignments.html",
     "href": "application_assignments.html",
     "title": "Application Assignments",
