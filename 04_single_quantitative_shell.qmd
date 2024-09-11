@@ -5,7 +5,7 @@ editor_options:
 --- 
  
 
-# Inferences About a Single Quantitative Predictor
+# Inferences About a Single Quantitative Predictor {.unnumbered}
 
 ```{r}
 #| echo: false

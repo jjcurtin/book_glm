@@ -5,7 +5,7 @@ editor_options:
 --- 
  
 
-# Power Analysis and Statistical Validity
+# Power Analysis and Statistical Validity {.unnumbered}
 
 ```{r}
 #| echo: false

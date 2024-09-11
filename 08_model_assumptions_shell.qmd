@@ -5,7 +5,7 @@ editor_options:
 --- 
  
 
-# Dealing with Messy Data II: Model Assumptions
+# Dealing with Messy Data II: Model Assumptions {.unnumbered}
 
 ```{r}
 #| echo: false

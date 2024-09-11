@@ -5,7 +5,7 @@ editor_options:
 --- 
  
 
-# Dealing with Messy Data III: Transformations
+# Dealing with Messy Data III: Transformations {.unnumbered}
 
 ```{r}
 #| echo: false

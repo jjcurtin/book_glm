@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 --- 
  
-# Unit 3: Inferences About a Single Mean (1 Parameter Models) 
+# Unit 3: Inferences About a Single Mean (1 Parameter Models)  {.unnumbered}
 
 
 ## Assignments

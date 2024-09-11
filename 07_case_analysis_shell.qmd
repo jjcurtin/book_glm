@@ -5,7 +5,7 @@ editor_options:
 --- 
  
 
-# Dealing with Messy Data I: Case Analysis
+# Dealing with Messy Data I: Case Analysis {.unnumbered}
 
 ```{r}
 #| echo: false

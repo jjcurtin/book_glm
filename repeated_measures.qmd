@@ -5,7 +5,7 @@ editor_options:
 --- 
  
 
-# Repeated Measures
+# Repeated Measures {.unnumbered}
 
 ```{r}
 #| echo: false

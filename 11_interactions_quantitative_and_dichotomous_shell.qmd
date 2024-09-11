@@ -5,7 +5,7 @@ editor_options:
 --- 
  
 
-# Inferences about a Continuous and Dichotomous Predictor and their Interaction
+# Inferences about a Continuous and Dichotomous Predictor and their Interaction {.unnumbered}
 
 ```{r}
 #| echo: false

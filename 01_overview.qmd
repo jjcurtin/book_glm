@@ -5,7 +5,7 @@ editor_options:
 ---
 
 
-# Unit 1: Overview
+# Unit 1: Overview {.unnumbered}
 
 
 ## Today's Outline

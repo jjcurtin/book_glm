@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 --- 
  
-# Unit 2: Sampling Distributions, Parameters, and Parameter Estimates 
+# Unit 2: Sampling Distributions, Parameters, and Parameter Estimates {.unnumbered} 
 
 
 ## Assignments
