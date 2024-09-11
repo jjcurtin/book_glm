@@ -1,9 +1,11 @@
 {
-  "hash": "69d662104d27c979c22744e1d7dcf571",
+  "hash": "041785c775afc32ed592eb093bcf4bd8",
   "result": {
     "engine": "knitr",
-    "markdown": "--- \noutput: html_document \neditor_options:  \n  chunk_output_type: console\n--- \n\n \n\n# Inferences about two predictors (multiple regression without interaction)\n\n\n::: {.cell}\n\n:::\n\n\n\n## Assignments\n\nRead\n\n- TBD \n\nApplication assignment (due ??? @ 1:30 via Canvas)\n\n- [assignment]()\n- [data]()\n- [key]()\n",
-    "supporting": [],
+    "markdown": "--- \noutput: html_document \neditor_options:  \n  chunk_output_type: console\n--- \n\n \n\n# Inferences about two predictors (multiple regression without interaction) {.unnumbered}\n\n\n::: {.cell}\n\n:::\n\n\n\n## Assignments\n\nRead\n\n- TBD \n\nApplication assignment (due ??? @ 1:30 via Canvas)\n\n- [assignment]()\n- [data]()\n- [key]()\n",
+    "supporting": [
+      "06_two_predictors_shell_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

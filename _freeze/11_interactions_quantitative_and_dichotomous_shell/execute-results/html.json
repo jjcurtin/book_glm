@@ -1,9 +1,11 @@
 {
-  "hash": "238ddbb5cb8ebeef1c91aee0f176fd8a",
+  "hash": "cd35a03faf336de8b9417bf771f70cd8",
   "result": {
     "engine": "knitr",
-    "markdown": "--- \noutput: html_document \neditor_options:  \n  chunk_output_type: console\n--- \n\n \n\n# Inferences about a Continuous and Dichotomous Predictor and their Interaction\n\n\n::: {.cell}\n\n:::\n\n\n## Assignments\n\nRead\n\n- TBD \n\nApplication assignment (due ??? @ 1:30 via Canvas)\n\n- [assignment]()\n- [data]()\n- [key]()\n\n\n",
-    "supporting": [],
+    "markdown": "--- \noutput: html_document \neditor_options:  \n  chunk_output_type: console\n--- \n\n \n\n# Inferences about a Continuous and Dichotomous Predictor and their Interaction {.unnumbered}\n\n\n::: {.cell}\n\n:::\n\n\n## Assignments\n\nRead\n\n- TBD \n\nApplication assignment (due ??? @ 1:30 via Canvas)\n\n- [assignment]()\n- [data]()\n- [key]()\n\n\n",
+    "supporting": [
+      "11_interactions_quantitative_and_dichotomous_shell_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

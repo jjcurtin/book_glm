@@ -1,9 +1,11 @@
 {
-  "hash": "6fbb121a187c2331e6b1aa02178948ab",
+  "hash": "0567963ac565d320bd259c6da48c4b09",
   "result": {
     "engine": "knitr",
-    "markdown": "--- \noutput: html_document \neditor_options:  \n  chunk_output_type: console\n--- \n\n \n\n# Dealing with Messy Data III: Transformations\n\n\n::: {.cell}\n\n:::\n\n\n## Assignments\n\nRead\n\n- TBD \n\nApplication assignment (due ??? @ 1:30 via Canvas)\n\n- [assignment]()\n- [data]()\n- [key]()",
-    "supporting": [],
+    "markdown": "--- \noutput: html_document \neditor_options:  \n  chunk_output_type: console\n--- \n\n \n\n# Dealing with Messy Data III: Transformations {.unnumbered}\n\n\n::: {.cell}\n\n:::\n\n\n## Assignments\n\nRead\n\n- TBD \n\nApplication assignment (due ??? @ 1:30 via Canvas)\n\n- [assignment]()\n- [data]()\n- [key]()",
+    "supporting": [
+      "09_transformations_shell_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],
