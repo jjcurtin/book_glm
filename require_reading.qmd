@@ -1,0 +1,14 @@
+# Required Reading {.unnumbered}
+
+# Unit 1
+
+- Judd et a., Chapter 1, Introduction to Data Analysis
+
+# Unit 2
+  
+- Judd et al. Chapter 2, Definitions of Error and Parameter Estimates
+- Judd et al. Chapter 3, Models of Error and Sampling Distributions
+
+# Unit 3
+
+- Judd et al. Chapter 4. Simple Models: Statistical Inferences about Parameter Values

@@ -6,28 +6,7 @@ editor_options:
  
 # Unit 3: Inferences About a Single Mean (1 Parameter Models)  {.unnumbered}
 
-
-## Assignments
-
-- [Slide deck](https://jjcurtin.quarto.pub/03_single_mean/) on QuartoPub
-
-- Read
-  - Judd et al. Chapter 4. Simple Models: Statistical Inferences about Parameter Values
-
-- Week 2 Application Assignment (due 9/18 @ 1:30 via Canvas)
-- Week 3 Application Assignment (due 9/15 @ 1:30 via Canvas)
-
-
-```{r}
-#| echo: false
-
-options(scipen = 999) # turns off scientfic notation
-```
-
------
-
 ## Units 3-4 Organization
-
 
 - First, consider details of simplest model (one parameter estimate; mean-only model; no $X$s)
 
@@ -37,9 +16,7 @@ options(scipen = 999) # turns off scientfic notation
 
 - Subsequent units will generalize to one dichotomous variable (**Unit 5**), multiple predictors (**Units 6-7**), and beyond...
 
-
 -----
-
 
 ## Linear Models as Models
 
@@ -439,7 +416,7 @@ $H_0: \beta_0 = 0; H_a: \beta_0 \neq 0$
 
 \
 
-<span style="color: blue;">2. If $H_0$ is true, the sampling distribution for $\beta_0$ will have a mean of 0. We can estimate standard deviation of the sampling distribution with SE for $b_0$.</span>    
+<span style="color: blue;">2. If $H_0$ is true, the sampling distribution for $b_0$ will have a mean of 0. We can estimate standard deviation of the sampling distribution with SE for $b_0$.</span>    
 
 \
 
@@ -466,7 +443,7 @@ pt(8.40,95,lower.tail=FALSE) * 2
 
 \
 
-<span style="color: blue;">Of courese, we don't need to calculate the p-value with `pt()` because we got it directly from `tidy()`</span>
+<span style="color: blue;">Of course, we don't need to calculate the p-value with `pt()` because we got it directly from `tidy()`</span>
 
 -----
 

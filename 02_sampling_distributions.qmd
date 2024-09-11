@@ -6,24 +6,6 @@ editor_options:
  
 # Unit 2: Sampling Distributions, Parameters, and Parameter Estimates {.unnumbered} 
 
-
-## Assignments
-
-- [Slide deck](https://jjcurtin.quarto.pub/02_sampling_distributions/) on QuartoPub
-
-\
-
-- Read
-
-  - Judd et al. Chapter 2, Definitions of Error and Parameter Estimates
-  - Judd et al. Chapter 3, Models of Error and Sampling Distributions
-
-\ 
-
-- Week 2 Application Assignment (due 9/18 @ 1:30 via Canvas)
-
------
-
 ## Inferential Statistics
 
 Inferential statistics are used to estimate **parameters** in the **population** from **parameter estimates** in a **sample** drawn from that population. 
