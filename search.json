@@ -252,901 +252,901 @@
   {
     "objectID": "01_overview.html",
     "href": "01_overview.html",
-    "title": "1  Unit 1: Overview",
+    "title": "Unit 1: Overview",
     "section": "",
-    "text": "1.1 Today’s Outline",
+    "text": "Today’s Outline",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Unit 1: Overview</span>"
+      "Unit 1: Overview"
     ]
   },
   {
     "objectID": "01_overview.html#todays-outline",
     "href": "01_overview.html#todays-outline",
-    "title": "1  Unit 1: Overview",
+    "title": "Unit 1: Overview",
     "section": "",
     "text": "Quick introductions of TAs and me\nSyllabus and course outline\nGeneral Linear Model framework",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Unit 1: Overview</span>"
+      "Unit 1: Overview"
     ]
   },
   {
     "objectID": "01_overview.html#my-research",
     "href": "01_overview.html#my-research",
-    "title": "1  Unit 1: Overview",
-    "section": "1.2 My Research",
-    "text": "1.2 My Research\n\nI am a clinical psychologist with a focus on Substance Use Disorders.\nMy laboratory focuses on algorithm development for temporally precise psychiatric risk prediction (e.g., moment by moment relapse risk prediction; efficient and early psychiatric screening) and “just-in-time” personalized interventions that adapt to both characteristics of the patient and their moment in time.\nTo this end, we combine analytic approaches from machine learning with novel, highly informative signals (e.g., geolocation; cellular communications; social media activity; physiology via wearable biosensors) derived by passive personal sensing.\nI also teach an introductory course on Applied Machine Learning each spring (Psychohology 752).",
+    "title": "Unit 1: Overview",
+    "section": "My Research",
+    "text": "My Research\n\nI am a clinical psychologist with a focus on Substance Use Disorders.\nMy laboratory focuses on algorithm development for temporally precise psychiatric risk prediction (e.g., moment by moment relapse risk prediction; efficient and early psychiatric screening) and “just-in-time” personalized interventions that adapt to both characteristics of the patient and their moment in time.\nTo this end, we combine analytic approaches from machine learning with novel, highly informative signals (e.g., geolocation; cellular communications; social media activity; physiology via wearable biosensors) derived by passive personal sensing.\nI also teach an introductory course on Applied Machine Learning each spring (Psychohology 752).",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Unit 1: Overview</span>"
+      "Unit 1: Overview"
     ]
   },
   {
     "objectID": "01_overview.html#my-personal-life",
     "href": "01_overview.html#my-personal-life",
-    "title": "1  Unit 1: Overview",
-    "section": "1.3 My Personal Life",
-    "text": "1.3 My Personal Life\nI was born on a small island…\n\n\n\nMy family\n\nMelody, Jacob (13 years old) and Hana (10 years old)\n\n\n\n\n\nMy/our passions\n\nTrail running, biking, nordic skiing, all things mountain…\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMy other family…..\n\n\n\n\n“John”, he/him\nOur TAs\nYour first name/nickname",
+    "title": "Unit 1: Overview",
+    "section": "My Personal Life",
+    "text": "My Personal Life\nI was born on a small island…\n\n\n\nMy family\n\nMelody, Jacob (13 years old) and Hana (10 years old)\n\n\n\n\n\nMy/our passions\n\nTrail running, biking, nordic skiing, all things mountain…\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMy other family…..\n\n\n\n\n“John”, he/him\nOur TAs\nYour first name/nickname",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Unit 1: Overview</span>"
+      "Unit 1: Overview"
     ]
   },
   {
     "objectID": "01_overview.html#materials-and-assignments",
     "href": "01_overview.html#materials-and-assignments",
-    "title": "1  Unit 1: Overview",
-    "section": "1.4 Materials and Assignments",
-    "text": "1.4 Materials and Assignments\n\n1.4.1 Materials\n\nUnit 1 Slide Deck\nAll slide decks on course website (https://jjcurtin.github.io/book_glm/)\nAnd Canvas for application assignments and exams\nsyllabus\n\n\n\n1.4.2 Assignments\n\nSurvey (complete ASAP)\nRead\n\nJudd et al. Chapter 1, Introduction to Data Analysis\n\nApplication assignment (due 9/11 @ 1:30 via Canvas)\n\nassignment\ndata\nkey\n\nSlack DM to John and TAs with Name/Nickname and preferred pronouns",
+    "title": "Unit 1: Overview",
+    "section": "Materials and Assignments",
+    "text": "Materials and Assignments\n\nMaterials\n\nUnit 1 Slide Deck\nAll slide decks on course website (https://jjcurtin.github.io/book_glm/)\nAnd Canvas for application assignments and exams\nsyllabus\n\n\n\nAssignments\n\nSurvey (complete ASAP)\nRead\n\nJudd et al. Chapter 1, Introduction to Data Analysis\n\nApplication assignment (due 9/11 @ 1:30 via Canvas)\n\nassignment\ndata\nkey\n\nSlack DM to John and TAs with Name/Nickname and preferred pronouns",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Unit 1: Overview</span>"
+      "Unit 1: Overview"
     ]
   },
   {
     "objectID": "01_overview.html#the-general-linear-model",
     "href": "01_overview.html#the-general-linear-model",
-    "title": "1  Unit 1: Overview",
-    "section": "1.5 The General Linear Model",
-    "text": "1.5 The General Linear Model\nTop level: General Linear Models\n3rd level: Multiple Regression Models\n2nd level: Simple Regression Models\nBottom level: Single Mean Models",
+    "title": "Unit 1: Overview",
+    "section": "The General Linear Model",
+    "text": "The General Linear Model\nTop level: General Linear Models\n3rd level: Multiple Regression Models\n2nd level: Simple Regression Models\nBottom level: Single Mean Models",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Unit 1: Overview</span>"
+      "Unit 1: Overview"
     ]
   },
   {
     "objectID": "01_overview.html#single-mean-models-bottom-level",
     "href": "01_overview.html#single-mean-models-bottom-level",
-    "title": "1  Unit 1: Overview",
-    "section": "1.6 Single Mean Models (Bottom level)",
-    "text": "1.6 Single Mean Models (Bottom level)\n\\(\\widehat{Y} = \\beta_0\\)\n\n\nBasic Question\nWhat is the mean of an outcome/dependent variable in a sample? Is that mean different from some specified value?\n\n\nExample\nWhat is the mean IQ of Psych 610 students? Is it different from the average IQ of 100?\n\n\nQuestion: What is this GLM special case analysis often called?\n\nQuestion: What is this GLM special case analysis often called?\n\n\nOne sample t-test",
+    "title": "Unit 1: Overview",
+    "section": "Single Mean Models (Bottom level)",
+    "text": "Single Mean Models (Bottom level)\n\\(\\widehat{Y} = \\beta_0\\)\n\n\nBasic Question\nWhat is the mean of an outcome/dependent variable in a sample? Is that mean different from some specified value?\n\n\nExample\nWhat is the mean IQ of Psych 610 students? Is it different from the average IQ of 100?\n\n\nQuestion: What is this GLM special case analysis often called?\n\nQuestion: What is this GLM special case analysis often called?\n\n\nOne sample t-test",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Unit 1: Overview</span>"
+      "Unit 1: Overview"
     ]
   },
   {
     "objectID": "01_overview.html#simple-regression-models-2nd-level",
     "href": "01_overview.html#simple-regression-models-2nd-level",
-    "title": "1  Unit 1: Overview",
-    "section": "1.7 Simple Regression Models (2nd level)",
-    "text": "1.7 Simple Regression Models (2nd level)\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1\\)\n\n\nBasic Question\nWhat is the relationship between a predictor variable and a dependent variable?\n\n\nExample\nIs trait level of positive emotionality related to satisfaction with a romantic relationship?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1\\)\nQuestion: What is the special case analysis when both \\(X\\) and \\(Y\\) are quantitative?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1\\)\nQuestion: What is the special case analysis when both \\(X\\) and \\(Y\\) are quantitative?\n\n\nPearson’s correlation\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1\\)\nQuestion: What is the special case analysis when \\(X\\) is a regressor coding for a dichotomous variable representing group membership (e.g., sex)?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1\\)\nQuestion: What is the special case analysis when \\(X\\) is a regressor coding for a dichotomous variable representing group membership (e.g., sex)?\n\n\nBetween groups (independent samples) t-test (or one-way ANOVA with two groups)",
+    "title": "Unit 1: Overview",
+    "section": "Simple Regression Models (2nd level)",
+    "text": "Simple Regression Models (2nd level)\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1\\)\n\n\nBasic Question\nWhat is the relationship between a predictor variable and a dependent variable?\n\n\nExample\nIs trait level of positive emotionality related to satisfaction with a romantic relationship?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1\\)\nQuestion: What is the special case analysis when both \\(X\\) and \\(Y\\) are quantitative?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1\\)\nQuestion: What is the special case analysis when both \\(X\\) and \\(Y\\) are quantitative?\n\n\nPearson’s correlation\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1\\)\nQuestion: What is the special case analysis when \\(X\\) is a regressor coding for a dichotomous variable representing group membership (e.g., sex)?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1\\)\nQuestion: What is the special case analysis when \\(X\\) is a regressor coding for a dichotomous variable representing group membership (e.g., sex)?\n\n\nBetween groups (independent samples) t-test (or one-way ANOVA with two groups)",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Unit 1: Overview</span>"
+      "Unit 1: Overview"
     ]
   },
   {
     "objectID": "01_overview.html#multiple-regression-models-3rd-level",
     "href": "01_overview.html#multiple-regression-models-3rd-level",
-    "title": "1  Unit 1: Overview",
-    "section": "1.8 Multiple Regression Models (3rd level)",
-    "text": "1.8 Multiple Regression Models (3rd level)\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\n\n\nBasic Question\nWhat are the relationships between a linear combination of predictors and a dependent variable?\n \nExample\nHow well do the predictors: (a) number of absences, (b) time spent studying, and (c) interest predict final exam scores?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical predictors (e.g., independent variables) representing group membership?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical predictors (e.g., independent variables) representing group membership?\n\n\nAnalysis of Variance (ANOVA)\n\nBasic Question for (one-way) ANOVA\nWhat are the mean differences in the dependent variable between the groups represented by the independent variable(s)?\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\n \nExample\nAre there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical variables representing group membership, and one or more quantitative covariates?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical variables representing group membership, and one or more quantitative covariates?\n\n\nAnalysis of Covariance (ANCOVA)\n\nBasic Question for (one-way) ANCOVA\nWhat are the mean differences in the dependent variable between the groups represented by the independent variable(s), holding one or more covariates constant?\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\n \nExample\nAre there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock, after equating the groups on trait anxiety scores?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical and quantitative variables representing group membership, and quantitative scores on individual difference variables, and their interactions?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical and quantitative variables representing group membership, and quantitative scores on individual difference variables, and their interactions?\n\n\nAptitude Treatment Interaction (ATI)\n\nBasic Question for ATI\nAre the magnitudes of the contrasts among groups different across different levels of some individual difference variable?\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\n \nExample\nDoes the effect of CBT treatment (i.e., contrast of CBT vs. wait list control) on subsequent alcohol related problems differ dependent upon level of intelligence?",
+    "title": "Unit 1: Overview",
+    "section": "Multiple Regression Models (3rd level)",
+    "text": "Multiple Regression Models (3rd level)\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\n\n\nBasic Question\nWhat are the relationships between a linear combination of predictors and a dependent variable?\n \nExample\nHow well do the predictors: (a) number of absences, (b) time spent studying, and (c) interest predict final exam scores?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical predictors (e.g., independent variables) representing group membership?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical predictors (e.g., independent variables) representing group membership?\n\n\nAnalysis of Variance (ANOVA)\n\nBasic Question for (one-way) ANOVA\nWhat are the mean differences in the dependent variable between the groups represented by the independent variable(s)?\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\n \nExample\nAre there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical variables representing group membership, and one or more quantitative covariates?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical variables representing group membership, and one or more quantitative covariates?\n\n\nAnalysis of Covariance (ANCOVA)\n\nBasic Question for (one-way) ANCOVA\nWhat are the mean differences in the dependent variable between the groups represented by the independent variable(s), holding one or more covariates constant?\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\n \nExample\nAre there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock, after equating the groups on trait anxiety scores?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical and quantitative variables representing group membership, and quantitative scores on individual difference variables, and their interactions?\n\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special case analysis when \\(X\\)s are regressors coding for categorical and quantitative variables representing group membership, and quantitative scores on individual difference variables, and their interactions?\n\n\nAptitude Treatment Interaction (ATI)\n\nBasic Question for ATI\nAre the magnitudes of the contrasts among groups different across different levels of some individual difference variable?\n\\(\\widehat{Y} = \\beta_0 + \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\n \nExample\nDoes the effect of CBT treatment (i.e., contrast of CBT vs. wait list control) on subsequent alcohol related problems differ dependent upon level of intelligence?",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Unit 1: Overview</span>"
+      "Unit 1: Overview"
     ]
   },
   {
     "objectID": "01_overview.html#general-linear-models-top-level",
     "href": "01_overview.html#general-linear-models-top-level",
-    "title": "1  Unit 1: Overview",
-    "section": "1.9 General Linear Models (Top level)",
-    "text": "1.9 General Linear Models (Top level)\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\n\n\nBasic Question\nWhat are the relationships between linear combinations of two sets of variables?\n \nExample\nWhat are relationships between (a) Personality and temperamental variables, and (b) frequency/quantity of substance use, problems, and motives for use?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is this GLM special case analysis called when all the regressors for \\(X\\) and \\(Y\\) are quantitative?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is this GLM special case analysis called when all the regressors for \\(X\\) and \\(Y\\) are quantitative?\n\nCanonical correlation\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical variables representing group membership?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical variables representing group membership?\n\n\nMultivariate Analysis of Variance (MANOVA)\n\nBasic Question for MANOVA\nWhat linear combination of dependent variables (\\(Y\\)s) maximally differentiates groups?\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\n \nExample\nDo children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical and quantitative variables representing group membership and quantitative covariates?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical and quantitative variables representing group membership and quantitative covariates?\n\n\nMultivariate Analysis of Covariance (MANCOVA)\n\nBasic Question for MANCOVA\nWhat linear combination of dependent variables (\\(Y\\)s) maximally differentiates groups, holding constant one or more covariates?\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\n \nExample\nDo children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning, when equated for parental expectations?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for quantitative variables and \\(Y\\)s are categorical variables representing group membership?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for quantitative variables and \\(Y\\)s are categorical variables representing group membership?\n\nDiscriminant Analysis\n\nBasic Question for Discriminant Analysis\nWhat linear combination of independent variables (\\(X\\)s) maximally differentiates groups (represented categorically by \\(Y\\)s)?\n\n\nExample\nWhat combination of sociocultural, personality, and intellectual variables best differentiates repeat juvenile offenders and non-repeat juvenile offenders upon completion of boot-camp?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical variables representing group membership and \\(Y\\)s are repeated measures of a quantitative variable?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical variables representing group membership and \\(Y\\)s are repeated measures of a quantitative variable?\n\n\nRepeated measures ANOVA\n\nBasic Question\nWhat are the mean differences across \\(Y\\)s, overall or between the groups represented by the independent variables (\\(X\\)s)?\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\n \nExample\nDoes affective response differ when viewing pleasant, neutral vs. unpleasant slides? Does this slide type effect differ among participants in two beverage groups (alcohol vs. no-alcohol)?",
+    "title": "Unit 1: Overview",
+    "section": "General Linear Models (Top level)",
+    "text": "General Linear Models (Top level)\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\n\n\nBasic Question\nWhat are the relationships between linear combinations of two sets of variables?\n \nExample\nWhat are relationships between (a) Personality and temperamental variables, and (b) frequency/quantity of substance use, problems, and motives for use?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is this GLM special case analysis called when all the regressors for \\(X\\) and \\(Y\\) are quantitative?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is this GLM special case analysis called when all the regressors for \\(X\\) and \\(Y\\) are quantitative?\n\nCanonical correlation\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical variables representing group membership?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical variables representing group membership?\n\n\nMultivariate Analysis of Variance (MANOVA)\n\nBasic Question for MANOVA\nWhat linear combination of dependent variables (\\(Y\\)s) maximally differentiates groups?\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\n \nExample\nDo children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical and quantitative variables representing group membership and quantitative covariates?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical and quantitative variables representing group membership and quantitative covariates?\n\n\nMultivariate Analysis of Covariance (MANCOVA)\n\nBasic Question for MANCOVA\nWhat linear combination of dependent variables (\\(Y\\)s) maximally differentiates groups, holding constant one or more covariates?\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\n \nExample\nDo children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning, when equated for parental expectations?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for quantitative variables and \\(Y\\)s are categorical variables representing group membership?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for quantitative variables and \\(Y\\)s are categorical variables representing group membership?\n\nDiscriminant Analysis\n\nBasic Question for Discriminant Analysis\nWhat linear combination of independent variables (\\(X\\)s) maximally differentiates groups (represented categorically by \\(Y\\)s)?\n\n\nExample\nWhat combination of sociocultural, personality, and intellectual variables best differentiates repeat juvenile offenders and non-repeat juvenile offenders upon completion of boot-camp?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical variables representing group membership and \\(Y\\)s are repeated measures of a quantitative variable?\n\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\nQuestion: What is the special GLM case when \\(X\\)s are regressors coding for categorical variables representing group membership and \\(Y\\)s are repeated measures of a quantitative variable?\n\n\nRepeated measures ANOVA\n\nBasic Question\nWhat are the mean differences across \\(Y\\)s, overall or between the groups represented by the independent variables (\\(X\\)s)?\n\\(\\beta_{Y1}*Y_1 + \\beta_{Y2}*Y_2 + \\beta_{Y3}*Y_3 = \\beta_1*X_1 + \\beta_2*X_2 + \\beta_3*X_3\\)\n \nExample\nDoes affective response differ when viewing pleasant, neutral vs. unpleasant slides? Does this slide type effect differ among participants in two beverage groups (alcohol vs. no-alcohol)?",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Unit 1: Overview</span>"
+      "Unit 1: Overview"
     ]
   },
   {
     "objectID": "01_overview.html#survey-of-glm-landscape-with-one-y",
     "href": "01_overview.html#survey-of-glm-landscape-with-one-y",
-    "title": "1  Unit 1: Overview",
-    "section": "1.10 Survey of GLM Landscape with One Y",
-    "text": "1.10 Survey of GLM Landscape with One Y\n\n610 only adddresses GLMs with a single Y\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMeasurement of Xs\n\n\n\nXs\nQuantitative\nCategorical\nMixed\n\n\n\n\n0\nOne sample t-test\n\n\n\n\n1\nSimple regression; Pearson's r\nIndependent t-test; Point biserial r\n\n\n\n&gt;1\nMultiple regression\nOne way ANOVA; Factorial ANOVA\nANCOVA; ATI\n\n\n\n\n\n\n\n\n\n710 handles multiple Ys in the context of repeated measures analyses\nMultivariate statistics courses address other contexts with multiple Ys",
+    "title": "Unit 1: Overview",
+    "section": "Survey of GLM Landscape with One Y",
+    "text": "Survey of GLM Landscape with One Y\n\n610 only adddresses GLMs with a single Y\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMeasurement of Xs\n\n\n\nXs\nQuantitative\nCategorical\nMixed\n\n\n\n\n0\nOne sample t-test\n\n\n\n\n1\nSimple regression; Pearson's r\nIndependent t-test; Point biserial r\n\n\n\n&gt;1\nMultiple regression\nOne way ANOVA; Factorial ANOVA\nANCOVA; ATI\n\n\n\n\n\n\n\n\n\n710 handles multiple Ys in the context of repeated measures analyses\nMultivariate statistics courses address other contexts with multiple Ys",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Unit 1: Overview</span>"
+      "Unit 1: Overview"
     ]
   },
   {
     "objectID": "01_overview.html#final-mind-blowing-wrinkles",
     "href": "01_overview.html#final-mind-blowing-wrinkles",
-    "title": "1  Unit 1: Overview",
-    "section": "1.11 Final, Mind-blowing Wrinkles",
-    "text": "1.11 Final, Mind-blowing Wrinkles\n\nThe top-level General Linear Model is itself a special case of an even more general statistical model - the Generalized Linear Model - which allows for models with dependent measures (errors really) from different distributions and non-linear link functions connecting \\(X\\)s and \\(Y\\)s.\nThe General Linear Model can also be thought of as a special case of Structural Equation Modeling.\n\nAll of the variables that we have described so far are single-indicator, observed variables (i.e., individual constructs of interest are measured using a single task or measure).\nEach of the statistics we have described have a multiple-indicator, latent variable analog. They are special cases of these latent models in which there is only one indicator per individual construct.",
+    "title": "Unit 1: Overview",
+    "section": "Final, Mind-blowing Wrinkles",
+    "text": "Final, Mind-blowing Wrinkles\n\nThe top-level General Linear Model is itself a special case of an even more general statistical model - the Generalized Linear Model - which allows for models with dependent measures (errors really) from different distributions and non-linear link functions connecting \\(X\\)s and \\(Y\\)s.\nThe General Linear Model can also be thought of as a special case of Structural Equation Modeling.\n\nAll of the variables that we have described so far are single-indicator, observed variables (i.e., individual constructs of interest are measured using a single task or measure).\nEach of the statistics we have described have a multiple-indicator, latent variable analog. They are special cases of these latent models in which there is only one indicator per individual construct.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Unit 1: Overview</span>"
+      "Unit 1: Overview"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html",
     "href": "02_sampling_distributions.html",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "",
-    "text": "2.1 Assignments\nRead\nApplication assignment (due 9/18 @ 1:30 via Canvas)",
+    "text": "Assignments\nRead\nApplication assignment (due 9/18 @ 1:30 via Canvas)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#assignments",
     "href": "02_sampling_distributions.html#assignments",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
     "section": "",
     "text": "Slide deck on QuartoPub\n\n\n\nJudd et al. Chapter 2, Definitions of Error and Parameter Estimates\nJudd et al. Chapter 3, Models of Error and Sampling Distributions\n\n\n\nassignment\ndata\nkey",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#inferential-statistics",
     "href": "02_sampling_distributions.html#inferential-statistics",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.2 Inferential Statistics",
-    "text": "2.2 Inferential Statistics\nInferential statistics are used to estimate parameters in the population from parameter estimates in a sample drawn from that population.\n\nWe use these parameter estimates to test hypotheses (predictions; null and alternative hypotheses) about the size of the population parameter.\nThese hypotheses about the size of population parameters typically map directly onto research questions about relationships between variables (IVs/predictors and DVs/outcomes).\nOur conclusions about our hypotheses are probabilistic. In other words, all conclusions have the potential to be wrong and you will provide an index of that probability along with your results.",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Inferential Statistics",
+    "text": "Inferential Statistics\nInferential statistics are used to estimate parameters in the population from parameter estimates in a sample drawn from that population.\n\nWe use these parameter estimates to test hypotheses (predictions; null and alternative hypotheses) about the size of the population parameter.\nThese hypotheses about the size of population parameters typically map directly onto research questions about relationships between variables (IVs/predictors and DVs/outcomes).\nOur conclusions about our hypotheses are probabilistic. In other words, all conclusions have the potential to be wrong and you will provide an index of that probability along with your results.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#populations",
     "href": "02_sampling_distributions.html#populations",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.3 Populations",
-    "text": "2.3 Populations\nA population is any clearly defined set of objects or events (people, occurrences, animals, etc.)\n\nPopulations usually represent all events in a particular class (e.g., all college students, all alcoholics, all depressed people, all people)\nIt is often an abstract concept because in many/most instances you will never have access to the entire population\nMany of our studies may have the population of all people as its implicit target\n\n\n\n\nResearchers usually want to describe or draw conclusions about populations\n\nWe don’t care if some new drug is an effective treatment for 100 people in your sample\nInstead, we want to know if it will, on average, for everyone we might treat",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Populations",
+    "text": "Populations\nA population is any clearly defined set of objects or events (people, occurrences, animals, etc.)\n\nPopulations usually represent all events in a particular class (e.g., all college students, all alcoholics, all depressed people, all people)\nIt is often an abstract concept because in many/most instances you will never have access to the entire population\nMany of our studies may have the population of all people as its implicit target\n\n\n\n\nResearchers usually want to describe or draw conclusions about populations\n\nWe don’t care if some new drug is an effective treatment for 100 people in your sample\nInstead, we want to know if it will, on average, for everyone we might treat",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#population-parameters",
     "href": "02_sampling_distributions.html#population-parameters",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.4 (Population) Parameters",
-    "text": "2.4 (Population) Parameters\nA parameter is a value used to describe a certain characteristic of a population\nFor example, the population mean is a parameter that is often used to indicate the average/typical value of a variable in the population\n\nThe value for a population parameter is a fixed and does not vary within the population at the time of measurement (e.g., the mean height of people in the US at the present moment).\nThe value for a population parameter is usually unknown and can’t be calculated directly because we dont have access to the entire population.\nWe use Greek letters to represent population parameters (\\(\\mu\\), \\(\\sigma\\), \\(\\sigma^2\\), \\(\\beta_0\\), \\(\\beta_j\\)).",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "(Population) Parameters",
+    "text": "(Population) Parameters\nA parameter is a value used to describe a certain characteristic of a population\nFor example, the population mean is a parameter that is often used to indicate the average/typical value of a variable in the population\n\nThe value for a population parameter is a fixed and does not vary within the population at the time of measurement (e.g., the mean height of people in the US at the present moment).\nThe value for a population parameter is usually unknown and can’t be calculated directly because we dont have access to the entire population.\nWe use Greek letters to represent population parameters (\\(\\mu\\), \\(\\sigma\\), \\(\\sigma^2\\), \\(\\beta_0\\), \\(\\beta_j\\)).",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#samples-parameter-estimates",
     "href": "02_sampling_distributions.html#samples-parameter-estimates",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.5 Samples & Parameter Estimates",
-    "text": "2.5 Samples & Parameter Estimates\nA sample is a finite group of units (e.g., participants) selected from the population of interest.\n\nA sample is generally selected for a study because the population is too large to study in its entirety\nWe typically have only one sample in a study\nSamples can be selected randomly or not (e.g., convenience samples) from the population, which has implications for the conclusions we reach but not necessarily for the analyses.\n\n\n\n\nWe use the sample to estimate and test parameters in the population\n\nThese estimates are called parameter estimates.\nWe use Roman letters to represent sample parameter estimates (\\(\\overline{X}\\), \\(s\\), \\(s^2\\), \\(b_0\\), \\(b_j\\)).",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Samples & Parameter Estimates",
+    "text": "Samples & Parameter Estimates\nA sample is a finite group of units (e.g., participants) selected from the population of interest.\n\nA sample is generally selected for a study because the population is too large to study in its entirety\nWe typically have only one sample in a study\nSamples can be selected randomly or not (e.g., convenience samples) from the population, which has implications for the conclusions we reach but not necessarily for the analyses.\n\n\n\n\nWe use the sample to estimate and test parameters in the population\n\nThese estimates are called parameter estimates.\nWe use Roman letters to represent sample parameter estimates (\\(\\overline{X}\\), \\(s\\), \\(s^2\\), \\(b_0\\), \\(b_j\\)).",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#sampling-error",
     "href": "02_sampling_distributions.html#sampling-error",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.6 Sampling Error",
-    "text": "2.6 Sampling Error\nSince a sample does not include all members of the population, the value for any parameter estimate from any specific sample generally differs from the associated parameter from the entire population\n\nFor example, the mean height of a sample of 1000 people drawn randomly from the US population will not exactly match the mean height of US population\nThis difference between the (sample) parameter estimate and the (population) parameter is called sampling error\n\n\n\n\nYou will not be able to calculate the sampling error of your parameter estimate directly because you don’t know the value of the population parameter. However, you can estimate it by probabilistic modeling of the hypothetical sampling distibution for that parameter.",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Sampling Error",
+    "text": "Sampling Error\nSince a sample does not include all members of the population, the value for any parameter estimate from any specific sample generally differs from the associated parameter from the entire population\n\nFor example, the mean height of a sample of 1000 people drawn randomly from the US population will not exactly match the mean height of US population\nThis difference between the (sample) parameter estimate and the (population) parameter is called sampling error\n\n\n\n\nYou will not be able to calculate the sampling error of your parameter estimate directly because you don’t know the value of the population parameter. However, you can estimate it by probabilistic modeling of the hypothetical sampling distibution for that parameter.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#hypothetical-sampling-distribution",
     "href": "02_sampling_distributions.html#hypothetical-sampling-distribution",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.7 Hypothetical Sampling Distribution",
-    "text": "2.7 Hypothetical Sampling Distribution\nA sampling distribution is a probability distribution for a parameter estimate drawn from all possible samples of size \\(N\\) taken from that population.\n\nA sampling distribution can be formed for any population parameter.\nEach time you draw a sample of size \\(N\\) from a population you can calculate an estimate of that population parameter from that sample.\nBecause of sampling error, these parameter estimates will not exactly equal the population parameter. They will not equal each other either. They will form a distribution.\nA sampling distribution is an abstract concept that represents the outcome of repeated (infinite) sampling. You will typically only have one sample.",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Hypothetical Sampling Distribution",
+    "text": "Hypothetical Sampling Distribution\nA sampling distribution is a probability distribution for a parameter estimate drawn from all possible samples of size \\(N\\) taken from that population.\n\nA sampling distribution can be formed for any population parameter.\nEach time you draw a sample of size \\(N\\) from a population you can calculate an estimate of that population parameter from that sample.\nBecause of sampling error, these parameter estimates will not exactly equal the population parameter. They will not equal each other either. They will form a distribution.\nA sampling distribution is an abstract concept that represents the outcome of repeated (infinite) sampling. You will typically only have one sample.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#what-if-we-didnt-need-samples",
     "href": "02_sampling_distributions.html#what-if-we-didnt-need-samples",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.8 What if we didn’t need samples?",
-    "text": "2.8 What if we didn’t need samples?\nResearch question: How do inhabitants of a remote pacific island feel about the ocean? Population size = 10,000.\n\n\nDependent measure: Ocean liking scale scores that range from -100 (strongly dislike) to 100 (strongly like). 0 represents neutral.\n\n\nHypotheses: \\(H_0: \\mu = 0; H_a: \\mu \\neq 0\\)\n\n\nQuestion: How would you answer this question if you had unlimited resources (e.g., time, money, and patience)?\n\nQuestion: How would you answer this question if you had unlimited resources (e.g., time, money, and patience)?\n\n\nAdminister the Ocean liking scale to all 10,000 inhabitants in the population and calculate the population mean score. Is it 0? If not, the inhabitants are not neutral on average.",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "What if we didn’t need samples?",
+    "text": "What if we didn’t need samples?\nResearch question: How do inhabitants of a remote pacific island feel about the ocean? Population size = 10,000.\n\n\nDependent measure: Ocean liking scale scores that range from -100 (strongly dislike) to 100 (strongly like). 0 represents neutral.\n\n\nHypotheses: \\(H_0: \\mu = 0; H_a: \\mu \\neq 0\\)\n\n\nQuestion: How would you answer this question if you had unlimited resources (e.g., time, money, and patience)?\n\nQuestion: How would you answer this question if you had unlimited resources (e.g., time, money, and patience)?\n\n\nAdminister the Ocean liking scale to all 10,000 inhabitants in the population and calculate the population mean score. Is it 0? If not, the inhabitants are not neutral on average.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#ocean-liking-scale-scores-in-full-population",
     "href": "02_sampling_distributions.html#ocean-liking-scale-scores-in-full-population",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.9 Ocean Liking Scale Scores in Full Population",
-    "text": "2.9 Ocean Liking Scale Scores in Full Population\n\n\nCode\n1options(conflicts.policy = \"depends.ok\")\nlibrary(tidyverse)\n2path_data &lt;- \"data_lecture\"\n\ndata &lt;- read_csv(here::here(path_data, \n3                            \"02_sampling_distributions_like.csv\"),\n                 show_col_types = FALSE) \n\n\n\n1\n\nThis line of code will tell will tell us when we load two packages with conflicting functions (i.e., they have the same name) by producing an error. There are ways to set custom conflict policies and work around conflicts (e.g., only loading certain functions from a package). You can find more documentation here.\n\n\n2\n\nThis path points to where your data is and should be a relative path from your R project.\n\n3\n\nWe use the here() function in the here package (here::here()) to define paths within a function. This approach (vs. file.path()) works well when using R Projects in quarto notebooks.\n\n\n\n\n\nglimpse()\n\ncan be used to display useful information, like number of rows and column, variable (column) names, a sample of what the data look like, and the class of each variable (e.g., double, character, factor).\ncan used by itself (see below) or directly in a pipeline when reading in the the data (e.g., could have been add to the pipline above on a line following read_csv())\n\n\n\n\n\nCode\ndata |&gt; \n  glimpse()\n\n\nRows: 10,000\nColumns: 2\n$ subid      &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, …\n$ like_score &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 23.6…\n\n\n\n\nSee also:\nview() allows you to open up the data frame in a GUI window in RStudio.\n\nskim() and other functions in the skimr package are helpful for quick summaries of your data (e.g., missingness, distribution, type of data)\n\n\n\n\nCode\ndata |&gt; \n1  skimr::skim()\n\n\n\n1\n\nWe add the name of the package and :: to the function name to call skim because we having loaded the full skimr package in our sript.\n\n\n\n\n\nData summary\n\n\nName\ndata\n\n\nNumber of rows\n10000\n\n\nNumber of columns\n2\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\nnumeric\n2\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\n\nsubid\n0\n1\n5000.5\n2886.90\n1.00\n2500.75\n5000.5\n7500.25\n10000.00\n▇▇▇▇▇\n\n\nlike_score\n0\n1\n0.0\n23.67\n-86.64\n-16.08\n0.1\n16.14\n84.46\n▁▃▇▃▁\n\n\n\n\n\n\nIf we want less information about the distribution we can use summarise and specify the descriptive statistics we want.\n\n\n\n\nCode\ndata |&gt; \n  summarise(n = n(),\n            mean = mean(like_score),\n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n      mean    sd\n  &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;\n1 10000 -6.27e-16  23.7\n\n\n\nYou can also pull out a few rows from the dataframe/tibble to look at your data. This can be done using\n\nslice_head() to pull out \\(n\\) top rows of the data set,\nslice_tail() to pull out \\(n\\) bottom rows of the data set, or\nslice_sample() to pull out a random \\(n\\) of rows from the data set\n\n\n\n\n\nCode\ndata |&gt; \n  slice_head(n = 5) \n\n\n# A tibble: 5 × 2\n  subid like_score\n  &lt;dbl&gt;      &lt;dbl&gt;\n1     1     -23.6 \n2     2      -9.01\n3     3      30.5 \n4     4       5.89\n5     5      -9.16\n\n\n\n\n\nCode\ndata |&gt; \n  slice_tail(n = 5) \n\n\n# A tibble: 5 × 2\n  subid like_score\n  &lt;dbl&gt;      &lt;dbl&gt;\n1  9996     -16.6 \n2  9997      -8.37\n3  9998      18.6 \n4  9999     -16.2 \n5 10000     -17.0 \n\n\n\n\n\nCode\n1set.seed(101)\ndata |&gt; \n  slice_sample(n = 5)\n\n\n\n1\n\nWhenever you are using random numbers it is important to set a seed first (set.seed()). This ensures you can reproduce that randomness!\n\n\n\n\n# A tibble: 5 × 2\n  subid like_score\n  &lt;dbl&gt;      &lt;dbl&gt;\n1  8009     -27.0 \n2  2873     -41.5 \n3  3281      17.8 \n4  5562      27.4 \n5  5471      -9.84\n\n\n\nWe can view the distribution of raw scores using a histogram\n\n\n\n\nCode\nplot_raw &lt;- data |&gt; \n  ggplot(aes(x = like_score)) +\n  geom_histogram(color = \"black\", fill = \"light grey\", bins = 20) + \n  scale_x_continuous(limits = c(-100, 100)) +\n1  theme_classic()\n\n\n\n1\n\nWe can use themes to customize the output of our figures. This can be piped into your ggplot() code or set globally at the top of your script (see next slide)\n\n\n\n\n\n\n\nCode\ntheme_set(theme_classic()) \nplot_raw",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Ocean Liking Scale Scores in Full Population",
+    "text": "Ocean Liking Scale Scores in Full Population\n\n\nCode\n1options(conflicts.policy = \"depends.ok\")\nlibrary(tidyverse)\n2path_data &lt;- \"data_lecture\"\n\ndata &lt;- read_csv(here::here(path_data, \n3                            \"02_sampling_distributions_like.csv\"),\n                 show_col_types = FALSE) \n\n\n\n1\n\nThis line of code will tell will tell us when we load two packages with conflicting functions (i.e., they have the same name) by producing an error. There are ways to set custom conflict policies and work around conflicts (e.g., only loading certain functions from a package). You can find more documentation here.\n\n\n2\n\nThis path points to where your data is and should be a relative path from your R project.\n\n3\n\nWe use the here() function in the here package (here::here()) to define paths within a function. This approach (vs. file.path()) works well when using R Projects in quarto notebooks.\n\n\n\n\n\nglimpse()\n\ncan be used to display useful information, like number of rows and column, variable (column) names, a sample of what the data look like, and the class of each variable (e.g., double, character, factor).\ncan used by itself (see below) or directly in a pipeline when reading in the the data (e.g., could have been add to the pipline above on a line following read_csv())\n\n\n\n\n\nCode\ndata |&gt; \n  glimpse()\n\n\nRows: 10,000\nColumns: 2\n$ subid      &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, …\n$ like_score &lt;dbl&gt; -23.608554, -9.011961, 30.536791, 5.886441, -9.164940, 23.6…\n\n\n\n\nSee also:\nview() allows you to open up the data frame in a GUI window in RStudio.\n\nskim() and other functions in the skimr package are helpful for quick summaries of your data (e.g., missingness, distribution, type of data)\n\n\n\n\nCode\ndata |&gt; \n1  skimr::skim()\n\n\n\n1\n\nWe add the name of the package and :: to the function name to call skim because we having loaded the full skimr package in our sript.\n\n\n\n\n\nData summary\n\n\nName\ndata\n\n\nNumber of rows\n10000\n\n\nNumber of columns\n2\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\nnumeric\n2\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\n\nsubid\n0\n1\n5000.5\n2886.90\n1.00\n2500.75\n5000.5\n7500.25\n10000.00\n▇▇▇▇▇\n\n\nlike_score\n0\n1\n0.0\n23.67\n-86.64\n-16.08\n0.1\n16.14\n84.46\n▁▃▇▃▁\n\n\n\n\n\n\nIf we want less information about the distribution we can use summarise and specify the descriptive statistics we want.\n\n\n\n\nCode\ndata |&gt; \n  summarise(n = n(),\n            mean = mean(like_score),\n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n      mean    sd\n  &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;\n1 10000 -6.27e-16  23.7\n\n\n\nYou can also pull out a few rows from the dataframe/tibble to look at your data. This can be done using\n\nslice_head() to pull out \\(n\\) top rows of the data set,\nslice_tail() to pull out \\(n\\) bottom rows of the data set, or\nslice_sample() to pull out a random \\(n\\) of rows from the data set\n\n\n\n\n\nCode\ndata |&gt; \n  slice_head(n = 5) \n\n\n# A tibble: 5 × 2\n  subid like_score\n  &lt;dbl&gt;      &lt;dbl&gt;\n1     1     -23.6 \n2     2      -9.01\n3     3      30.5 \n4     4       5.89\n5     5      -9.16\n\n\n\n\n\nCode\ndata |&gt; \n  slice_tail(n = 5) \n\n\n# A tibble: 5 × 2\n  subid like_score\n  &lt;dbl&gt;      &lt;dbl&gt;\n1  9996     -16.6 \n2  9997      -8.37\n3  9998      18.6 \n4  9999     -16.2 \n5 10000     -17.0 \n\n\n\n\n\nCode\n1set.seed(101)\ndata |&gt; \n  slice_sample(n = 5)\n\n\n\n1\n\nWhenever you are using random numbers it is important to set a seed first (set.seed()). This ensures you can reproduce that randomness!\n\n\n\n\n# A tibble: 5 × 2\n  subid like_score\n  &lt;dbl&gt;      &lt;dbl&gt;\n1  8009     -27.0 \n2  2873     -41.5 \n3  3281      17.8 \n4  5562      27.4 \n5  5471      -9.84\n\n\n\nWe can view the distribution of raw scores using a histogram\n\n\n\n\nCode\nplot_raw &lt;- data |&gt; \n  ggplot(aes(x = like_score)) +\n  geom_histogram(color = \"black\", fill = \"light grey\", bins = 20) + \n  scale_x_continuous(limits = c(-100, 100)) +\n1  theme_classic()\n\n\n\n1\n\nWe can use themes to customize the output of our figures. This can be piped into your ggplot() code or set globally at the top of your script (see next slide)\n\n\n\n\n\n\n\nCode\ntheme_set(theme_classic()) \nplot_raw",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#parameter-estimation-and-testing",
     "href": "02_sampling_distributions.html#parameter-estimation-and-testing",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.10 Parameter Estimation and Testing",
-    "text": "2.10 Parameter Estimation and Testing\nQuestion: What do you conclude?\n\nQuestion: What do you conclude?\n\n\nInhabitants of the island are neutral on average on the Ocean Liking Scale; \\(\\mu\\) = 0.\n\nQuestion: How confident are you about this conclusion?\n\nQuestion: How confident are you about this conclusion?\n\n\nExcluding issues of measurement of the scale (i.e., reliability), you are 100% confident that the population mean score on this scale is 0 because you calculated the mean using all the scores in the population(\\(\\mu\\) = 0).\n\nQuestion: Of course, this approach to answering a research question is not typical. Why? And how would you normally answer this question?\n\nQuestion: Of course, this approach to answering a research question is not typical. Why? And how would you normally answer this question?\n\nYou will very rarely have access to all scores in the population. Instead, you have to use inferential statistics to “infer” (estimate) the size of the population parameter using a parameter estimate calculated from a sample of that population.",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Parameter Estimation and Testing",
+    "text": "Parameter Estimation and Testing\nQuestion: What do you conclude?\n\nQuestion: What do you conclude?\n\n\nInhabitants of the island are neutral on average on the Ocean Liking Scale; \\(\\mu\\) = 0.\n\nQuestion: How confident are you about this conclusion?\n\nQuestion: How confident are you about this conclusion?\n\n\nExcluding issues of measurement of the scale (i.e., reliability), you are 100% confident that the population mean score on this scale is 0 because you calculated the mean using all the scores in the population(\\(\\mu\\) = 0).\n\nQuestion: Of course, this approach to answering a research question is not typical. Why? And how would you normally answer this question?\n\nQuestion: Of course, this approach to answering a research question is not typical. Why? And how would you normally answer this question?\n\nYou will very rarely have access to all scores in the population. Instead, you have to use inferential statistics to “infer” (estimate) the size of the population parameter using a parameter estimate calculated from a sample of that population.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#obtain-a-sample",
     "href": "02_sampling_distributions.html#obtain-a-sample",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.11 Obtain a Sample",
-    "text": "2.11 Obtain a Sample\nYou are a poor graduate student. All you can afford is \\(N = 10\\).\n\n\n\n\nCode\nset.seed(2005) \ndata |&gt; \n  slice_sample(n = 10) |&gt; \n  summarise(n = n(),\n            mean = mean(like_score),\n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n  mean    sd\n  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    10  2.14  19.4\n\n\n\n\nQuestion: What do you conclude and why?\n\nQuestion: What do you conclude and why?\n\n\nA sample mean of 2.14 is not 0. However, you know that the sample mean will not match the population mean exactly. How likely is it to get a sample mean of 2.14 if the population mean is 0 (think about it!)?\n\nYour friend is a poor graduate student too. All she can afford is \\(N = 10\\) too.\n\n\n\n\nCode\ndata |&gt; \n  slice_sample(n = 10) |&gt; \n  summarise(n = n(),\n            mean = mean(like_score),\n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n  mean    sd\n  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    10  1.74  23.0\n\n\n\n\nQuestion: What does she conclude and why?\n\nQuestion: What does she conclude and why?\n\n\nA sample mean of 1.74 is not 0. However, she knows that the sample mean will not match the population mean exactly. It is more likely to get a sample mean of 1.74 than 2.14 if the population mean is 0 but she still doesn’t know how likely either outcome is. What if she obtained a sample with mean of 30?",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Obtain a Sample",
+    "text": "Obtain a Sample\nYou are a poor graduate student. All you can afford is \\(N = 10\\).\n\n\n\n\nCode\nset.seed(2005) \ndata |&gt; \n  slice_sample(n = 10) |&gt; \n  summarise(n = n(),\n            mean = mean(like_score),\n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n  mean    sd\n  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    10  2.14  19.4\n\n\n\n\nQuestion: What do you conclude and why?\n\nQuestion: What do you conclude and why?\n\n\nA sample mean of 2.14 is not 0. However, you know that the sample mean will not match the population mean exactly. How likely is it to get a sample mean of 2.14 if the population mean is 0 (think about it!)?\n\nYour friend is a poor graduate student too. All she can afford is \\(N = 10\\) too.\n\n\n\n\nCode\ndata |&gt; \n  slice_sample(n = 10) |&gt; \n  summarise(n = n(),\n            mean = mean(like_score),\n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n  mean    sd\n  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    10  1.74  23.0\n\n\n\n\nQuestion: What does she conclude and why?\n\nQuestion: What does she conclude and why?\n\n\nA sample mean of 1.74 is not 0. However, she knows that the sample mean will not match the population mean exactly. It is more likely to get a sample mean of 1.74 than 2.14 if the population mean is 0 but she still doesn’t know how likely either outcome is. What if she obtained a sample with mean of 30?",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#sampling-distribution-of-the-mean",
     "href": "02_sampling_distributions.html#sampling-distribution-of-the-mean",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.12 Sampling Distribution of the Mean",
-    "text": "2.12 Sampling Distribution of the Mean\nYou can construct a sampling distribution for any parameter estimate (e.g., mean, \\(s\\), min, max, \\(r\\), \\(b_0\\), \\(b_1\\)).\n\n\n\nFor the mean, you can think of the sampling distribution conceptually as follows:\n\nImagine drawing many samples (lets say 1000 samples but in theory, the sampling distribution is infinite) of \\(N\\)=10 participants (10 participants in each sample) from your population.\nNext, calculate the mean for each of these samples of 10 participants.\nFinally, create a histogram (or density plot) of these sample means.\n\n\n\n\nNote: In your research, you don’t form a sampling distribution by repeated sampling. You (typically) only have one sample\n\n\n2.12.1 1000 Samples of \\(N\\)=10\n\n\nCode\n1get_sample_mean &lt;- function(data, n_sub) {\n  data |&gt; \n  slice_sample(n = n_sub) |&gt; \n  summarise(across(everything(), \n                   list(mean = mean, \n                        sd = sd), \n                        .names = \"{fn}\")) |&gt; \n  mutate(n = n_sub) \n}\n\n\n\n1\n\nHere we are writing a function that we will use to generate descriptive statistics over 1000 samples. We are keeping this function generic because we are going to use this function again later in the chapter for more simulation examples!\n\n\n\n\n\n\n\nCode\nset.seed(101)\nsamples &lt;- 1:1000 |&gt; \n1  map(\\(i) get_sample_mean(data = data[, \"like_score\"], n_sub = 10)) |&gt;\n  list_rbind()\n\n\n\n1\n\nWe use the map() function to repeat our function 1000 times. We do this by piping in a vector of 1000 numbers using 1:1000\n\n\n\n\n\n\n\n\n\nCode\nsamples  |&gt; slice_head(n = 20)\n\n\n# A tibble: 20 × 3\n      mean    sd     n\n     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1  -6.89   22.4    10\n 2  11.9    20.2    10\n 3   0.147  15.9    10\n 4  -8.93   27.3    10\n 5   8.52   20.0    10\n 6   2.02   10.6    10\n 7  -0.198  16.9    10\n 8  -0.230  21.1    10\n 9   1.01   22.7    10\n10   6.26   28.4    10\n11 -11.5    30.1    10\n12   6.63   22.0    10\n13  -4.20   13.2    10\n14   4.96   15.7    10\n15   7.34   18.3    10\n16 -11.3    24.0    10\n17   2.05   16.9    10\n18  -4.31   27.4    10\n19   1.91   22.4    10\n20  -0.303  23.7    10\n\n\n\n\n\n2.12.2 Sampling Distribution of the Mean\n\n\nCode\nsamples |&gt; \n  summarise(n = n(), \n            mean_m = mean(mean), \n            sd = sd(mean))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1  1000 -0.238  7.69\n\n\n\n\n\nCode\nplot_samples &lt;- samples |&gt; \n  ggplot(aes(x = mean)) +\n  geom_histogram(color = \"black\", \n                 fill = \"light grey\", bins = 20) + \n  scale_x_continuous(\"sample means\", \n                     limits = c(-100, 100))\n\nplot_samples",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Sampling Distribution of the Mean",
+    "text": "Sampling Distribution of the Mean\nYou can construct a sampling distribution for any parameter estimate (e.g., mean, \\(s\\), min, max, \\(r\\), \\(b_0\\), \\(b_1\\)).\n\n\n\nFor the mean, you can think of the sampling distribution conceptually as follows:\n\nImagine drawing many samples (lets say 1000 samples but in theory, the sampling distribution is infinite) of \\(N\\)=10 participants (10 participants in each sample) from your population.\nNext, calculate the mean for each of these samples of 10 participants.\nFinally, create a histogram (or density plot) of these sample means.\n\n\n\n\nNote: In your research, you don’t form a sampling distribution by repeated sampling. You (typically) only have one sample\n\n\n1000 Samples of \\(N\\)=10\n\n\nCode\n1get_sample_mean &lt;- function(data, n_sub) {\n  data |&gt; \n  slice_sample(n = n_sub) |&gt; \n  summarise(across(everything(), \n                   list(mean = mean, \n                        sd = sd), \n                        .names = \"{fn}\")) |&gt; \n  mutate(n = n_sub) \n}\n\n\n\n1\n\nHere we are writing a function that we will use to generate descriptive statistics over 1000 samples. We are keeping this function generic because we are going to use this function again later in the chapter for more simulation examples!\n\n\n\n\n\n\n\nCode\nset.seed(101)\nsamples &lt;- 1:1000 |&gt; \n1  map(\\(i) get_sample_mean(data = data[, \"like_score\"], n_sub = 10)) |&gt;\n  list_rbind()\n\n\n\n1\n\nWe use the map() function to repeat our function 1000 times. We do this by piping in a vector of 1000 numbers using 1:1000\n\n\n\n\n\n\n\n\n\nCode\nsamples  |&gt; slice_head(n = 20)\n\n\n# A tibble: 20 × 3\n      mean    sd     n\n     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1  -6.89   22.4    10\n 2  11.9    20.2    10\n 3   0.147  15.9    10\n 4  -8.93   27.3    10\n 5   8.52   20.0    10\n 6   2.02   10.6    10\n 7  -0.198  16.9    10\n 8  -0.230  21.1    10\n 9   1.01   22.7    10\n10   6.26   28.4    10\n11 -11.5    30.1    10\n12   6.63   22.0    10\n13  -4.20   13.2    10\n14   4.96   15.7    10\n15   7.34   18.3    10\n16 -11.3    24.0    10\n17   2.05   16.9    10\n18  -4.31   27.4    10\n19   1.91   22.4    10\n20  -0.303  23.7    10\n\n\n\n\n\nSampling Distribution of the Mean\n\n\nCode\nsamples |&gt; \n  summarise(n = n(), \n            mean_m = mean(mean), \n            sd = sd(mean))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1  1000 -0.238  7.69\n\n\n\n\n\nCode\nplot_samples &lt;- samples |&gt; \n  ggplot(aes(x = mean)) +\n  geom_histogram(color = \"black\", \n                 fill = \"light grey\", bins = 20) + \n  scale_x_continuous(\"sample means\", \n                     limits = c(-100, 100))\n\nplot_samples",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#raw-score-distribution-vs.-sampling-distribution",
     "href": "02_sampling_distributions.html#raw-score-distribution-vs.-sampling-distribution",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.13 Raw Score Distribution vs. Sampling Distribution",
-    "text": "2.13 Raw Score Distribution vs. Sampling Distribution\nThe distinction between the raw score distribution and your sampling distribution is very important to keep clear in your mind!\n\n\n\nCode\n1library(patchwork)\nplot_raw + plot_samples\n\n\n\n1\n\nThe patchwork package is an easy and customizable way to combine ggplot() objects. For more information see https://patchwork.data-imaginist.com/.",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Raw Score Distribution vs. Sampling Distribution",
+    "text": "Raw Score Distribution vs. Sampling Distribution\nThe distinction between the raw score distribution and your sampling distribution is very important to keep clear in your mind!\n\n\n\nCode\n1library(patchwork)\nplot_raw + plot_samples\n\n\n\n1\n\nThe patchwork package is an easy and customizable way to combine ggplot() objects. For more information see https://patchwork.data-imaginist.com/.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#sampling-distribution-of-the-mean-2",
     "href": "02_sampling_distributions.html#sampling-distribution-of-the-mean-2",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.14 Sampling Distribution of the Mean",
-    "text": "2.14 Sampling Distribution of the Mean\nQuestion: What will the mean of the sample means be? In other words, what is the mean of the sampling distribution?\n\nQuestion: What will the mean of the sample means be? In other words, what is the mean of the sampling distribution?\n\n\nThe mean of the sample means (i.e., the mean of the sampling distribution) will equal the population mean of raw scores on the dependent measure. This is important because it indicates that the sample mean is an unbiased estimator of the population mean.\n\n\nCode\nplot_samples\n\n\n\n\n\n\n\n\n\n\nThe mean is an unbiased estimator\n\nThe mean of the sample means will equal the mean of the population.\nTherefore, individual sample means will neither systematically under or overestimate the population mean.\n\nRaw Ocean Liking Scores\n\n\nCode\ndata |&gt; \n  summarise(n = n(), \n            mean_m = round(mean(like_score), 2), \n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1 10000      0  23.7\n\n\n\n\nSample (N=10) Means:\n\n\nCode\nsamples |&gt; \n  summarise(n = n(), \n            mean_m = round(mean(mean), 2), \n            sd = sd(mean))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1  1000  -0.24  7.69\n\n\n\nThe sample variance (\\(s^2\\); with n-1 denominator) is also an unbiased estimator of the population variance (\\(\\sigma^2\\)).\n\nIn other words, the mean of the sample \\(s^2\\)’s will approximate the population variance\nSample \\(s\\) is negatively biased\n\n\nQuestion: Will all of the sample means be the same?\n\nQuestion: Will all of the sample means be the same?\n\n\nNo, there was a distribution of means that varied from each other. The mean of the sampling distribution was the population mean but the standard deviation was not zero.\n\n\nCode\nsamples |&gt; \n  summarise(n = n(), \n            mean_m = round(mean(mean), 2), \n            sd = sd(mean))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1  1000  -0.24  7.69\n\n\n\n\nCode\nplot_samples",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Sampling Distribution of the Mean",
+    "text": "Sampling Distribution of the Mean\nQuestion: What will the mean of the sample means be? In other words, what is the mean of the sampling distribution?\n\nQuestion: What will the mean of the sample means be? In other words, what is the mean of the sampling distribution?\n\n\nThe mean of the sample means (i.e., the mean of the sampling distribution) will equal the population mean of raw scores on the dependent measure. This is important because it indicates that the sample mean is an unbiased estimator of the population mean.\n\n\nCode\nplot_samples\n\n\n\n\n\n\n\n\n\n\nThe mean is an unbiased estimator\n\nThe mean of the sample means will equal the mean of the population.\nTherefore, individual sample means will neither systematically under or overestimate the population mean.\n\nRaw Ocean Liking Scores\n\n\nCode\ndata |&gt; \n  summarise(n = n(), \n            mean_m = round(mean(like_score), 2), \n            sd = sd(like_score))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1 10000      0  23.7\n\n\n\n\nSample (N=10) Means:\n\n\nCode\nsamples |&gt; \n  summarise(n = n(), \n            mean_m = round(mean(mean), 2), \n            sd = sd(mean))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1  1000  -0.24  7.69\n\n\n\nThe sample variance (\\(s^2\\); with n-1 denominator) is also an unbiased estimator of the population variance (\\(\\sigma^2\\)).\n\nIn other words, the mean of the sample \\(s^2\\)’s will approximate the population variance\nSample \\(s\\) is negatively biased\n\n\nQuestion: Will all of the sample means be the same?\n\nQuestion: Will all of the sample means be the same?\n\n\nNo, there was a distribution of means that varied from each other. The mean of the sampling distribution was the population mean but the standard deviation was not zero.\n\n\nCode\nsamples |&gt; \n  summarise(n = n(), \n            mean_m = round(mean(mean), 2), \n            sd = sd(mean))\n\n\n# A tibble: 1 × 3\n      n mean_m    sd\n  &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1  1000  -0.24  7.69\n\n\n\n\nCode\nplot_samples",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#standard-error",
     "href": "02_sampling_distributions.html#standard-error",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.15 Standard Error",
-    "text": "2.15 Standard Error\nThe standard deviation of the sampling distribution of the mean (i.e., standard deviation of the infinite sample means) is equal to:\n\\(\\frac{\\sigma}{\\sqrt{N_{sample}}}\\)\nWhere \\(\\sigma\\) is the standard deviation of the population raw scores.\n\n\n\nThis variability in the sampling distribution is due to sampling error\n\nBecause we use parameter estimates calculated in our sample to estimate population parameters, we would like to minimize sampling error\nThe standard deviation of the sampling distribution for a parameter estimate has a technical name. It is called the standard error of the parameter estimate. Here, we are talking about the standard error of the mean.\n\n\nQuestion: What factors affect the size of the standard error of the mean(i.e., its sampling error)?\n\nQuestion: What factors affect the size of the standard error of the mean(i.e., its sampling error)?\n\n\nThe standard deviation of the population raw scores and the sample size.\n\nQuestion: Variation among raw scores for a variable in the population is broadly caused by two factors. What are they?\n\nQuestion: Variation among raw scores for a variable in the population is broadly caused by two factors. What are they?\n\n\n1. Individual differences.\n2. Measurement error (the opposite of reliability)\n\nQuestion: What is the relationship between population variability in the raw scores (\\(\\sigma\\)) and the standard error of the mean?\n\nQuestion: What is the relationship between population variability in the raw scores (\\(\\sigma\\)) and the standard error of the mean?\n\n\nAs the variability (e.g., its standard deviation) of the raw scores on the variable increases in the population, the standard error of the mean increases.\n\nQuestion: What would happen to standard error of the mean if there was no variation in population scores?\n\nQuestion: What would happen to standard error of the mean if there was no variation in population scores?\n\n\nThe standard error of the mean would equal 0 no matter which participants you sampled. They would all have the same scores!\n\nQuestion: What is the relationship between sample size and the standard error of the mean?\n\nQuestion: What is the relationship between sample size and the standard error of the mean?\n\n\nAs the sample size increases, the standard error of the mean will decrease.\n\nQuestion: What would the standard error of the mean be if the sample size equalled the population size?\n\nQuestion: What would the standard error of the mean be if the sample size equalled the population size?\n\n\nIf the sample contained all participants from the population, the standard error of the mean would be equal to 0 because each sample mean would have exactly the same value as the overall population mean (because all same scores). In this instance, there would be no sampling error because you sampled the full population!\n\nQuestion: What would happen if the samples contained only 1 participant?\n\nQuestion: What would happen if the samples contained only 1 participant?\n\n\nIf each sample contained only 1 participant, the standard error of the mean would be equal to the standard deviation (\\(\\sigma\\)) observed for the population raw scores. This is the upper bound for how much sampling error you can expect (it is biggest when you have the smallest possible sample size)",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Standard Error",
+    "text": "Standard Error\nThe standard deviation of the sampling distribution of the mean (i.e., standard deviation of the infinite sample means) is equal to:\n\\(\\frac{\\sigma}{\\sqrt{N_{sample}}}\\)\nWhere \\(\\sigma\\) is the standard deviation of the population raw scores.\n\n\n\nThis variability in the sampling distribution is due to sampling error\n\nBecause we use parameter estimates calculated in our sample to estimate population parameters, we would like to minimize sampling error\nThe standard deviation of the sampling distribution for a parameter estimate has a technical name. It is called the standard error of the parameter estimate. Here, we are talking about the standard error of the mean.\n\n\nQuestion: What factors affect the size of the standard error of the mean(i.e., its sampling error)?\n\nQuestion: What factors affect the size of the standard error of the mean(i.e., its sampling error)?\n\n\nThe standard deviation of the population raw scores and the sample size.\n\nQuestion: Variation among raw scores for a variable in the population is broadly caused by two factors. What are they?\n\nQuestion: Variation among raw scores for a variable in the population is broadly caused by two factors. What are they?\n\n\n1. Individual differences.\n2. Measurement error (the opposite of reliability)\n\nQuestion: What is the relationship between population variability in the raw scores (\\(\\sigma\\)) and the standard error of the mean?\n\nQuestion: What is the relationship between population variability in the raw scores (\\(\\sigma\\)) and the standard error of the mean?\n\n\nAs the variability (e.g., its standard deviation) of the raw scores on the variable increases in the population, the standard error of the mean increases.\n\nQuestion: What would happen to standard error of the mean if there was no variation in population scores?\n\nQuestion: What would happen to standard error of the mean if there was no variation in population scores?\n\n\nThe standard error of the mean would equal 0 no matter which participants you sampled. They would all have the same scores!\n\nQuestion: What is the relationship between sample size and the standard error of the mean?\n\nQuestion: What is the relationship between sample size and the standard error of the mean?\n\n\nAs the sample size increases, the standard error of the mean will decrease.\n\nQuestion: What would the standard error of the mean be if the sample size equalled the population size?\n\nQuestion: What would the standard error of the mean be if the sample size equalled the population size?\n\n\nIf the sample contained all participants from the population, the standard error of the mean would be equal to 0 because each sample mean would have exactly the same value as the overall population mean (because all same scores). In this instance, there would be no sampling error because you sampled the full population!\n\nQuestion: What would happen if the samples contained only 1 participant?\n\nQuestion: What would happen if the samples contained only 1 participant?\n\n\nIf each sample contained only 1 participant, the standard error of the mean would be equal to the standard deviation (\\(\\sigma\\)) observed for the population raw scores. This is the upper bound for how much sampling error you can expect (it is biggest when you have the smallest possible sample size)",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#shape-of-the-sampling-distribution",
     "href": "02_sampling_distributions.html#shape-of-the-sampling-distribution",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.16 Shape of the Sampling Distribution",
-    "text": "2.16 Shape of the Sampling Distribution\nCentral Limit Theorem: The shape of the sampling distribution approaches normal as \\(N\\) increases.\n\n\n\nThe shape is roughly normal even for moderate sample sizes assuming that the original distribution isn’t really weird (i.e., non-normal).",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Shape of the Sampling Distribution",
+    "text": "Shape of the Sampling Distribution\nCentral Limit Theorem: The shape of the sampling distribution approaches normal as \\(N\\) increases.\n\n\n\nThe shape is roughly normal even for moderate sample sizes assuming that the original distribution isn’t really weird (i.e., non-normal).",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#normal-population-and-various-sampling-distributions",
     "href": "02_sampling_distributions.html#normal-population-and-various-sampling-distributions",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.17 Normal Population and Various Sampling Distributions",
-    "text": "2.17 Normal Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Normal Population and Various Sampling Distributions",
+    "text": "Normal Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#uniform-population-and-various-sampling-distributions",
     "href": "02_sampling_distributions.html#uniform-population-and-various-sampling-distributions",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.18 Uniform Population and Various Sampling Distributions",
-    "text": "2.18 Uniform Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Uniform Population and Various Sampling Distributions",
+    "text": "Uniform Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#skewed-population-and-various-sampling-distributions",
     "href": "02_sampling_distributions.html#skewed-population-and-various-sampling-distributions",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.19 Skewed Population and Various Sampling Distributions",
-    "text": "2.19 Skewed Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Skewed Population and Various Sampling Distributions",
+    "text": "Skewed Population and Various Sampling Distributions\nPopulation size: 100,000; Simulated 10,000 samples.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#an-important-normal-distribution-z-scores",
     "href": "02_sampling_distributions.html#an-important-normal-distribution-z-scores",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.20 An Important Normal Distribution: Z-scores",
-    "text": "2.20 An Important Normal Distribution: Z-scores\nThe \\(z\\) distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.\n\nYou can think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.\nThe probability distribution is known for the \\(z\\) distribution.",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "An Important Normal Distribution: Z-scores",
+    "text": "An Important Normal Distribution: Z-scores\nThe \\(z\\) distribution contains normally distributed scores with a mean of 0 and a standard deviation of 1.\n\nYou can think of any specific z-score as telling you the position of the score in terms of standard deviations above the mean.\nThe probability distribution is known for the \\(z\\) distribution.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#probability-of-parameter-estimate-given-h_0",
     "href": "02_sampling_distributions.html#probability-of-parameter-estimate-given-h_0",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.21 Probability of Parameter Estimate Given \\(H_0\\)",
-    "text": "2.21 Probability of Parameter Estimate Given \\(H_0\\)\nHow could you use the \\(z\\) distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of \\(N=10\\) from a population of Ocean Liking scores with a population mean (parameter) of 0 and population standard deviation of 10?\nThink about it……",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Probability of Parameter Estimate Given \\(H_0\\)",
+    "text": "Probability of Parameter Estimate Given \\(H_0\\)\nHow could you use the \\(z\\) distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of \\(N=10\\) from a population of Ocean Liking scores with a population mean (parameter) of 0 and population standard deviation of 10?\nThink about it……",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#hypothetical-sampling-distribution-for-h_0",
     "href": "02_sampling_distributions.html#hypothetical-sampling-distribution-for-h_0",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.22 Hypothetical Sampling Distribution for \\(H_0\\)",
-    "text": "2.22 Hypothetical Sampling Distribution for \\(H_0\\)\nIf \\(H_0\\) is true; the sampling distribution (for \\(N\\) = 10) has a mean of 0 and standard deviation of \\(\\frac{\\sigma}{\\sqrt{N_{sample}}} =  \\frac{23.7}{\\sqrt{10}}  =  7.5\\).\n\n\n\n\n\n\n\n\n\n\nQuestion: If \\(H_0\\) is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?\n\n\n\n\n\n\n\n\n\n\nPretty likely…\nBut we can do better than that!",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Hypothetical Sampling Distribution for \\(H_0\\)",
+    "text": "Hypothetical Sampling Distribution for \\(H_0\\)\nIf \\(H_0\\) is true; the sampling distribution (for \\(N\\) = 10) has a mean of 0 and standard deviation of \\(\\frac{\\sigma}{\\sqrt{N_{sample}}} =  \\frac{23.7}{\\sqrt{10}}  =  7.5\\).\n\n\n\n\n\n\n\n\n\n\nQuestion: If \\(H_0\\) is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?\n\n\n\n\n\n\n\n\n\n\nPretty likely…\nBut we can do better than that!",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#our-first-inferential-test-the-z-test",
     "href": "02_sampling_distributions.html#our-first-inferential-test-the-z-test",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.23 Our First Inferential Test: The z-test",
-    "text": "2.23 Our First Inferential Test: The z-test\n\\(z = \\frac{2.4 - 0}{7.5} = 0.32; p \\le .749\\)\n\n\n\n\n\nCode\npnorm(0.32, mean=0, sd=1, lower.tail=FALSE) * 2 \n\n\n[1] 0.7489683",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Our First Inferential Test: The z-test",
+    "text": "Our First Inferential Test: The z-test\n\\(z = \\frac{2.4 - 0}{7.5} = 0.32; p \\le .749\\)\n\n\n\n\n\nCode\npnorm(0.32, mean=0, sd=1, lower.tail=FALSE) * 2 \n\n\n[1] 0.7489683",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#t-vs.-z",
     "href": "02_sampling_distributions.html#t-vs.-z",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.24 t vs. z",
-    "text": "2.24 t vs. z\n\\(z = \\frac{2.4 - 0}{7.5} = 0.32\\)\n\n\n\nQuestion: Where did we get the 2.4 from in our z-test?\n\nQuestion: Where did we get the 2.4 from in our z-test?\n\n\nOur sample mean from our study. This is our parameter estimate of the population mean for ocean like scores (like_score) scores.\n\nQuestion: where did we get the 7.5 from in our z-test and what is the problem with this?\n\nQuestion: where did we get the 7.5 from in our z-test and what is the problem with this?\n\n\nThis was our estimate of the standard deviation of the sampling distribution.\n\n\n\\(\\frac{\\sigma}{\\sqrt{N_{sample}}}\\)\n\n\n… But we do not know \\(\\sigma\\).\n\nQuestion: How can we estimate \\(\\sigma\\)?\n\nQuestion: How can we estimate \\(\\sigma\\)?\n\n\nWe can use our sample standard deviation (\\(s\\)), but \\(s\\) is a negatively biased parameter estimate. On average, it will underestimate \\(\\sigma\\).\n\nQuestion: So what do we do?\n\nQuestion: So what do we do?\n\n\nWe account for this underestimation of \\(\\sigma\\) and therefore of the standard deviation (standard error) of the sampling distribution by using the \\(t\\) distribution rather than the \\(z\\) distribution to calculate the probability of our parameter estimate if \\(H_0\\) is true.\n\n\nThe \\(t\\) distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "t vs. z",
+    "text": "t vs. z\n\\(z = \\frac{2.4 - 0}{7.5} = 0.32\\)\n\n\n\nQuestion: Where did we get the 2.4 from in our z-test?\n\nQuestion: Where did we get the 2.4 from in our z-test?\n\n\nOur sample mean from our study. This is our parameter estimate of the population mean for ocean like scores (like_score) scores.\n\nQuestion: where did we get the 7.5 from in our z-test and what is the problem with this?\n\nQuestion: where did we get the 7.5 from in our z-test and what is the problem with this?\n\n\nThis was our estimate of the standard deviation of the sampling distribution.\n\n\n\\(\\frac{\\sigma}{\\sqrt{N_{sample}}}\\)\n\n\n… But we do not know \\(\\sigma\\).\n\nQuestion: How can we estimate \\(\\sigma\\)?\n\nQuestion: How can we estimate \\(\\sigma\\)?\n\n\nWe can use our sample standard deviation (\\(s\\)), but \\(s\\) is a negatively biased parameter estimate. On average, it will underestimate \\(\\sigma\\).\n\nQuestion: So what do we do?\n\nQuestion: So what do we do?\n\n\nWe account for this underestimation of \\(\\sigma\\) and therefore of the standard deviation (standard error) of the sampling distribution by using the \\(t\\) distribution rather than the \\(z\\) distribution to calculate the probability of our parameter estimate if \\(H_0\\) is true.\n\n\nThe \\(t\\) distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#our-second-inferential-test-one-sample-t-test",
     "href": "02_sampling_distributions.html#our-second-inferential-test-one-sample-t-test",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.25 Our Second Inferential Test: One Sample t-test",
-    "text": "2.25 Our Second Inferential Test: One Sample t-test\n\\(t(df)\\) = \\(\\frac{\\text{Parameter estimate – Parameter:} H_0}{\\text{Standard error of parameter estimate}}\\)\n \nWhere the standard error of the mean is estimated using \\(s\\) from sample data.\n\\(df = N – 1 = 10 - 1 = 9\\)\n\n\n\n\n\n\n\n\n\n\n\n\nThe bias in \\(s\\) decreases with increasing \\(N\\). Therefore, \\(t\\) approaches \\(z\\) with larger sample sizes.",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Our Second Inferential Test: One Sample t-test",
+    "text": "Our Second Inferential Test: One Sample t-test\n\\(t(df)\\) = \\(\\frac{\\text{Parameter estimate – Parameter:} H_0}{\\text{Standard error of parameter estimate}}\\)\n \nWhere the standard error of the mean is estimated using \\(s\\) from sample data.\n\\(df = N – 1 = 10 - 1 = 9\\)\n\n\n\n\n\n\n\n\n\n\n\n\nThe bias in \\(s\\) decreases with increasing \\(N\\). Therefore, \\(t\\) approaches \\(z\\) with larger sample sizes.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "02_sampling_distributions.html#null-hypothesis-significance-testing-nhst",
     "href": "02_sampling_distributions.html#null-hypothesis-significance-testing-nhst",
-    "title": "2  Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
-    "section": "2.26 Null Hypothesis Significance Testing (NHST)",
-    "text": "2.26 Null Hypothesis Significance Testing (NHST)\n\nDivide reality regarding the size of the population parameter into two non-overlapping possibilities: Null hypothesis (\\(H_0\\)) & Alternate hypothesis (\\(H_a\\)).\nAssume that \\(H_0\\) is true.\nCollect data.\nCalculate the probability (\\(p\\)-value) of obtaining your parameter estimate (or a more extreme estimate) given your assumption (i.e., \\(H_0\\) is true)\nCompare probability to some cut-off value (alpha level).\n\nIf this parameter estimate is less probable than cut-off value, reject \\(H_0\\) in favor of \\(H_a\\).\nIf data is not less probable, fail to reject \\(H_0\\).",
+    "title": "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates",
+    "section": "Null Hypothesis Significance Testing (NHST)",
+    "text": "Null Hypothesis Significance Testing (NHST)\n\nDivide reality regarding the size of the population parameter into two non-overlapping possibilities: Null hypothesis (\\(H_0\\)) & Alternate hypothesis (\\(H_a\\)).\nAssume that \\(H_0\\) is true.\nCollect data.\nCalculate the probability (\\(p\\)-value) of obtaining your parameter estimate (or a more extreme estimate) given your assumption (i.e., \\(H_0\\) is true)\nCompare probability to some cut-off value (alpha level).\n\nIf this parameter estimate is less probable than cut-off value, reject \\(H_0\\) in favor of \\(H_a\\).\nIf data is not less probable, fail to reject \\(H_0\\).",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Unit 2: Sampling Distributions, Parameters, and Parameter Estimates</span>"
+      "Unit 2: Sampling Distributions, Parameters, and Parameter Estimates"
     ]
   },
   {
     "objectID": "03_single_mean.html",
     "href": "03_single_mean.html",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
     "section": "",
-    "text": "3.1 Assignments\nRead\nApplication assignment (due 9/15 @ 1:30 via Canvas)",
+    "text": "Assignments\nRead\nApplication assignment (due 9/15 @ 1:30 via Canvas)",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#assignments",
     "href": "03_single_mean.html#assignments",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
     "section": "",
     "text": "Slide deck on QuartoPub\n\n\n\nJudd et al. Chapter 4. Simple Models: Statistical Inferences about Parameter Values",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#units-3-4-organization",
     "href": "03_single_mean.html#units-3-4-organization",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.2 Units 3-4 Organization",
-    "text": "3.2 Units 3-4 Organization\n\nFirst, consider details of simplest model (one parameter estimate; mean-only model; no \\(X\\)s)\nNext, examine simple (bivariate) regression (two parameter estimates; one \\(X\\) for one quantitative predictor)\nThese provide a critical foundation for all linear models\nSubsequent units will generalize to one dichotomous variable (Unit 5), multiple predictors (Units 6-7), and beyond…",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Units 3-4 Organization",
+    "text": "Units 3-4 Organization\n\nFirst, consider details of simplest model (one parameter estimate; mean-only model; no \\(X\\)s)\nNext, examine simple (bivariate) regression (two parameter estimates; one \\(X\\) for one quantitative predictor)\nThese provide a critical foundation for all linear models\nSubsequent units will generalize to one dichotomous variable (Unit 5), multiple predictors (Units 6-7), and beyond…",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#linear-models-as-models",
     "href": "03_single_mean.html#linear-models-as-models",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.3 Linear Models as Models",
-    "text": "3.3 Linear Models as Models\nLinear models (including regression) are models.\n\\(DATA = MODEL + ERROR\\)\n\n\n\nThree general uses for models:\n\nDescribe and summarize DATA (\\(Y\\)s) in a simpler form using MODEL.\nPredict DATA (\\(Y\\)s) from MODEL.\nUnderstand (test inferences about) complex relationships between individual regressors (\\(X\\)s) in MODEL and the DATA (\\(Y\\)s). How precise are estimates of relationship?\n\n\n\n\n\n\\(DATA = MODEL + ERROR\\)\n\n\n\nMODELS are simplifications of reality\n\nAs such, there is ERROR\nThey also make assumptions that must be evaluated",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Linear Models as Models",
+    "text": "Linear Models as Models\nLinear models (including regression) are models.\n\\(DATA = MODEL + ERROR\\)\n\n\n\nThree general uses for models:\n\nDescribe and summarize DATA (\\(Y\\)s) in a simpler form using MODEL.\nPredict DATA (\\(Y\\)s) from MODEL.\nUnderstand (test inferences about) complex relationships between individual regressors (\\(X\\)s) in MODEL and the DATA (\\(Y\\)s). How precise are estimates of relationship?\n\n\n\n\n\n\\(DATA = MODEL + ERROR\\)\n\n\n\nMODELS are simplifications of reality\n\nAs such, there is ERROR\nThey also make assumptions that must be evaluated",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#fear-potential-startle",
     "href": "03_single_mean.html#fear-potential-startle",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.4 Fear Potential Startle",
-    "text": "3.4 Fear Potential Startle\nWe were interested in producing anxiety in the laboratory\n\nTo do this, we developed a procedure where we expose people to periods of unpredictable electric shock administration alternating with periods of safety\nWe measure their startle response in the shock and safe periods\nWe use the difference between their startle during shock – safe to determine if they are anxious\nThis is called Fear potentiated startle (FPS). Our procedure works if FPS &gt; 0. We need a model of FPS scores to determine if FPS &gt; 0",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Fear Potential Startle",
+    "text": "Fear Potential Startle\nWe were interested in producing anxiety in the laboratory\n\nTo do this, we developed a procedure where we expose people to periods of unpredictable electric shock administration alternating with periods of safety\nWe measure their startle response in the shock and safe periods\nWe use the difference between their startle during shock – safe to determine if they are anxious\nThis is called Fear potentiated startle (FPS). Our procedure works if FPS &gt; 0. We need a model of FPS scores to determine if FPS &gt; 0",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#fear-potentiated-startle-one-parameter-model",
     "href": "03_single_mean.html#fear-potentiated-startle-one-parameter-model",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.5 Fear Potentiated Startle: One parameter model",
-    "text": "3.5 Fear Potentiated Startle: One parameter model\nA very simple model for the population of FPS scores would predict the same value for everyone in the population.\n\\(\\hat{Y}_i=\\beta_0\\)\n\n\nWe would like this value to be the best prediction.\n\n\nQuestion: In the context of DATA = MODEL + ERROR, how can we quantify best?\n\nQuestion: In the context of DATA = MODEL + ERROR, how can we quantify best?\n\n\nWe want to predict some characteristic about the population of FPS scores that minimizes the ERROR from our model.\n\n\nERROR = DATA – MODEL\n\n\n\\(\\varepsilon_i=Y_i-\\hat{Y}_i\\)\nThere is an error (\\(\\varepsilon_i\\)) for each population score.",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Fear Potentiated Startle: One parameter model",
+    "text": "Fear Potentiated Startle: One parameter model\nA very simple model for the population of FPS scores would predict the same value for everyone in the population.\n\\(\\hat{Y}_i=\\beta_0\\)\n\n\nWe would like this value to be the best prediction.\n\n\nQuestion: In the context of DATA = MODEL + ERROR, how can we quantify best?\n\nQuestion: In the context of DATA = MODEL + ERROR, how can we quantify best?\n\n\nWe want to predict some characteristic about the population of FPS scores that minimizes the ERROR from our model.\n\n\nERROR = DATA – MODEL\n\n\n\\(\\varepsilon_i=Y_i-\\hat{Y}_i\\)\nThere is an error (\\(\\varepsilon_i\\)) for each population score.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#total-error",
     "href": "03_single_mean.html#total-error",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.6 Total Error",
-    "text": "3.6 Total Error\nQuestion: How can we quantify total model error?\n\nQuestion: How can we quantify total model error?\n\n\nSum of errors across all scores in the population isn’t ideal because positive and negative errors will tend to cancel each other out.\n\\(\\sum(Y_i-\\hat{Y}_i)\\)\n\n\nSum of absolute values of errors could work. If we selected \\(\\beta_0\\) to minimize the sum of the absolute value of errors, \\(\\beta_0\\) would equal the median of the population.\n\\(\\sum(|Y_i-\\hat{Y}_i|)\\)\n\n\nSum of squared errors (SSE) could work. If we selected \\(\\beta_0\\) to minimize the sum of squared errors, \\(\\beta_0\\) would equal the mean of the population.\n\\(\\sum(Y_i-\\hat{Y}_i)^2\\)",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Total Error",
+    "text": "Total Error\nQuestion: How can we quantify total model error?\n\nQuestion: How can we quantify total model error?\n\n\nSum of errors across all scores in the population isn’t ideal because positive and negative errors will tend to cancel each other out.\n\\(\\sum(Y_i-\\hat{Y}_i)\\)\n\n\nSum of absolute values of errors could work. If we selected \\(\\beta_0\\) to minimize the sum of the absolute value of errors, \\(\\beta_0\\) would equal the median of the population.\n\\(\\sum(|Y_i-\\hat{Y}_i|)\\)\n\n\nSum of squared errors (SSE) could work. If we selected \\(\\beta_0\\) to minimize the sum of squared errors, \\(\\beta_0\\) would equal the mean of the population.\n\\(\\sum(Y_i-\\hat{Y}_i)^2\\)",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#one-parameter-model-for-fps",
     "href": "03_single_mean.html#one-parameter-model-for-fps",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.7 One Parameter Model for FPS",
-    "text": "3.7 One Parameter Model for FPS\nFor the moment, lets assume we prefer to minimize SSE (more on that in a moment). You should predict the population mean FPS for everyone.\n\n\\(\\hat{Y}_i=\\beta_0\\) where \\(\\beta_0=\\mu\\)\n\nQuestion: What is the problem with this model?\n\nQuestion: What is the problem with this model?\n\\(\\hat{Y}_i=\\beta_0\\) where \\(\\beta_0=\\mu\\)\n\n\nWe don’t know the population mean for FPS scores (\\(\\mu\\)).\n\n\n\nQuestion: How could we solve this problem to develop a model?\n\nQuestion: How could we solve this problem to develop a model?\n\n\n… We can collect a sample from the population and use the sample mean (\\(\\overline{X}\\)) as an estimate of the population mean (\\(\\mu\\)). \\(\\overline{X}\\) is an unbiased estimate for \\(\\mu\\).",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "One Parameter Model for FPS",
+    "text": "One Parameter Model for FPS\nFor the moment, lets assume we prefer to minimize SSE (more on that in a moment). You should predict the population mean FPS for everyone.\n\n\\(\\hat{Y}_i=\\beta_0\\) where \\(\\beta_0=\\mu\\)\n\nQuestion: What is the problem with this model?\n\nQuestion: What is the problem with this model?\n\\(\\hat{Y}_i=\\beta_0\\) where \\(\\beta_0=\\mu\\)\n\n\nWe don’t know the population mean for FPS scores (\\(\\mu\\)).\n\n\n\nQuestion: How could we solve this problem to develop a model?\n\nQuestion: How could we solve this problem to develop a model?\n\n\n… We can collect a sample from the population and use the sample mean (\\(\\overline{X}\\)) as an estimate of the population mean (\\(\\mu\\)). \\(\\overline{X}\\) is an unbiased estimate for \\(\\mu\\).",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#model-parameter-estimation",
     "href": "03_single_mean.html#model-parameter-estimation",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.8 Model Parameter Estimation",
-    "text": "3.8 Model Parameter Estimation\nPopulation model\n\\(\\hat{Y}_i=\\beta_0\\) … where \\(\\beta_0=\\mu\\)\n\\(Y_i=\\beta_0+\\varepsilon_i\\)\n\n\n\nEstimate population parameters from sample\n\\(\\hat{Y}_i=b_0\\) … where \\(b_0=\\overline{X}\\)\n\\(Y_i=b_0+e_i\\)",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Model Parameter Estimation",
+    "text": "Model Parameter Estimation\nPopulation model\n\\(\\hat{Y}_i=\\beta_0\\) … where \\(\\beta_0=\\mu\\)\n\\(Y_i=\\beta_0+\\varepsilon_i\\)\n\n\n\nEstimate population parameters from sample\n\\(\\hat{Y}_i=b_0\\) … where \\(b_0=\\overline{X}\\)\n\\(Y_i=b_0+e_i\\)",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#least-squares-criterion",
     "href": "03_single_mean.html#least-squares-criterion",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.9 Least Squares Criterion",
-    "text": "3.9 Least Squares Criterion\nIn ordinary least squares (OLS) regression and other least squares linear models, the model parameter estimates (e.g., \\(b_0\\)) are calculated such that they minimize the sum of squared errors (SSE) in the sample in which you estimate the model.\n\n\n\\(\\text{SSE}=\\sum(Y_i-\\hat{Y}_i)^2\\)\n\n\n\\(\\text{SSE}=\\sum e_i^2\\)",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Least Squares Criterion",
+    "text": "Least Squares Criterion\nIn ordinary least squares (OLS) regression and other least squares linear models, the model parameter estimates (e.g., \\(b_0\\)) are calculated such that they minimize the sum of squared errors (SSE) in the sample in which you estimate the model.\n\n\n\\(\\text{SSE}=\\sum(Y_i-\\hat{Y}_i)^2\\)\n\n\n\\(\\text{SSE}=\\sum e_i^2\\)",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#properties-of-parameter-estimates",
     "href": "03_single_mean.html#properties-of-parameter-estimates",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.10 Properties of Parameter Estimates",
-    "text": "3.10 Properties of Parameter Estimates\nThere are three properties that make a parameter estimate attractive.\n\nUnbiased: Mean of the sampling distribution for the parameter estimate is equal to the value for that parameter in the population.\n\n\n\n\nEfficient: The sample estimates are close to the population parameter. In other words, the narrower the sampling distribution for any specific sample size \\(N\\), the more efficient the estimator. Efficient means small SE for parameter estimate.\n\n\n\n\nConsistent: As the sample size increases, the sampling distribution becomes narrower (more efficient). Consistent means as \\(N\\) increases, SE for parameter estimate decreases",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Properties of Parameter Estimates",
+    "text": "Properties of Parameter Estimates\nThere are three properties that make a parameter estimate attractive.\n\nUnbiased: Mean of the sampling distribution for the parameter estimate is equal to the value for that parameter in the population.\n\n\n\n\nEfficient: The sample estimates are close to the population parameter. In other words, the narrower the sampling distribution for any specific sample size \\(N\\), the more efficient the estimator. Efficient means small SE for parameter estimate.\n\n\n\n\nConsistent: As the sample size increases, the sampling distribution becomes narrower (more efficient). Consistent means as \\(N\\) increases, SE for parameter estimate decreases",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#least-squares-criterion-continued",
     "href": "03_single_mean.html#least-squares-criterion-continued",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.11 Least Squares Criterion (Continued)",
-    "text": "3.11 Least Squares Criterion (Continued)\nIf the \\(\\varepsilon_i\\) are normally distributed, both the median and the mean are unbiased and consistent estimators.\n\n\nThe variance of the sampling distribution for the mean is:\n\\(\\frac{\\sigma^2}{N}\\)\n\n\nThe variance of the sampling distribution for the median is:\n\\(\\frac{\\pi\\sigma^2}{2N}\\)\n\n\n\nTherefore, the mean is the more efficient parameter.\nFor this reason, we tend to prefer to estimate our models by minimizing the sum of squared errors.",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Least Squares Criterion (Continued)",
+    "text": "Least Squares Criterion (Continued)\nIf the \\(\\varepsilon_i\\) are normally distributed, both the median and the mean are unbiased and consistent estimators.\n\n\nThe variance of the sampling distribution for the mean is:\n\\(\\frac{\\sigma^2}{N}\\)\n\n\nThe variance of the sampling distribution for the median is:\n\\(\\frac{\\pi\\sigma^2}{2N}\\)\n\n\n\nTherefore, the mean is the more efficient parameter.\nFor this reason, we tend to prefer to estimate our models by minimizing the sum of squared errors.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#fear-potentiated-startle-during-threat-of-shock",
     "href": "03_single_mean.html#fear-potentiated-startle-during-threat-of-shock",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.12 Fear-potentiated Startle During Threat of Shock",
-    "text": "3.12 Fear-potentiated Startle During Threat of Shock\n\n\nCode\noptions(conflicts.policy = \"depends.ok\") \nlibrary(tidyverse)\ntheme_set(theme_classic()) \npath_data &lt;- \"data_lecture\"  \n\ndata &lt;- read_csv(here::here(path_data, \"3_single_mean_fps.csv\"), \n                 show_col_types = FALSE) |&gt; \n  glimpse()\n\n\nRows: 96\nColumns: 2\n$ subid &lt;dbl&gt; 11, 12, 13, 14, 15, 16, 21, 22, 23, 24, 25, 26, 111, 112, 113, 1…\n$ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 40.5…",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Fear-potentiated Startle During Threat of Shock",
+    "text": "Fear-potentiated Startle During Threat of Shock\n\n\nCode\noptions(conflicts.policy = \"depends.ok\") \nlibrary(tidyverse)\ntheme_set(theme_classic()) \npath_data &lt;- \"data_lecture\"  \n\ndata &lt;- read_csv(here::here(path_data, \"3_single_mean_fps.csv\"), \n                 show_col_types = FALSE) |&gt; \n  glimpse()\n\n\nRows: 96\nColumns: 2\n$ subid &lt;dbl&gt; 11, 12, 13, 14, 15, 16, 21, 22, 23, 24, 25, 26, 111, 112, 113, 1…\n$ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 40.5…",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#descriptives-and-univariate-plots",
     "href": "03_single_mean.html#descriptives-and-univariate-plots",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.13 Descriptives and Univariate Plots",
-    "text": "3.13 Descriptives and Univariate Plots\n\n\nCode\ndata |&gt; \n  summarise(n = n(),\n            mean = mean(fps),\n            sd = sd(fps),\n            min = min(fps),\n            max = max(fps))\n\n\n# A tibble: 1 × 5\n      n  mean    sd   min   max\n  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    96  32.2  37.5 -98.1  163.\n\n\n\n\n\nCode\ndata |&gt; \n  ggplot(aes(x = fps)) +\n  geom_histogram(color = \"black\", fill = \"light grey\", bins = 20) + \n  scale_x_continuous(breaks = c(-100, -50, 0, 50, 100, 150, 200))",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Descriptives and Univariate Plots",
+    "text": "Descriptives and Univariate Plots\n\n\nCode\ndata |&gt; \n  summarise(n = n(),\n            mean = mean(fps),\n            sd = sd(fps),\n            min = min(fps),\n            max = max(fps))\n\n\n# A tibble: 1 × 5\n      n  mean    sd   min   max\n  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    96  32.2  37.5 -98.1  163.\n\n\n\n\n\nCode\ndata |&gt; \n  ggplot(aes(x = fps)) +\n  geom_histogram(color = \"black\", fill = \"light grey\", bins = 20) + \n  scale_x_continuous(breaks = c(-100, -50, 0, 50, 100, 150, 200))",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#fps-experiment-the-inference-details",
     "href": "03_single_mean.html#fps-experiment-the-inference-details",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.14 FPS Experiment: The Inference Details",
-    "text": "3.14 FPS Experiment: The Inference Details\nGoal: Determine if our shock threat procedure is effective at potentiating startle (increasing startle during threat relative to safe).\n\n\n\nCreate a simple model of FPS scores in the population\n\n\n\\(\\text{FPS}=\\beta_0\\)\n\n\nCollect sample of \\(N=96\\) to estimate \\(\\beta_0\\)\nCalculate sample parameter estimate (\\(b_0\\)) that minimizes SSE in sample\nUse \\(b_0\\) to test hypotheses\n\n\n\\(H_0: \\beta_0 = 0\\)\n\n\\(H_a: \\beta_0 \\neq 0\\)",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "FPS Experiment: The Inference Details",
+    "text": "FPS Experiment: The Inference Details\nGoal: Determine if our shock threat procedure is effective at potentiating startle (increasing startle during threat relative to safe).\n\n\n\nCreate a simple model of FPS scores in the population\n\n\n\\(\\text{FPS}=\\beta_0\\)\n\n\nCollect sample of \\(N=96\\) to estimate \\(\\beta_0\\)\nCalculate sample parameter estimate (\\(b_0\\)) that minimizes SSE in sample\nUse \\(b_0\\) to test hypotheses\n\n\n\\(H_0: \\beta_0 = 0\\)\n\n\\(H_a: \\beta_0 \\neq 0\\)",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#estimating-a-one-parameter-model-in-r",
     "href": "03_single_mean.html#estimating-a-one-parameter-model-in-r",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.15 Estimating a One Parameter Model in R",
-    "text": "3.15 Estimating a One Parameter Model in R\n\n\nCode\n1m &lt;- lm(fps ~ 1, data = data)\n\n\n\n1\n\nHere we are fitting a linear model with FPS regressed on the intercept. In other words, we are fitting a model that predicts FPS using only the mean.\n\n\n\n\n\nWe can pull out the errors (\\(e_i=Y_i-\\hat{Y}i\\)) for each observation in the sample using residuals()\n\n\n\n\nCode\nresiduals(m)\n\n\n           1            2            3            4            5            6 \n -12.6999127   16.2161040  -54.7193405  -25.4670572   57.4678817    8.3829373 \n           7            8            9           10           11           12 \n  -2.7175738  -16.8541238   19.6643817   58.6873817   78.7543262   35.0963817 \n          13           14           15           16           17           18 \n -29.4627960   72.7258928  -31.7275460   36.5672151   19.1260706  -30.9964738 \n          19           20           21           22           23           24 \n   1.5669373   11.7176040    9.3662151  -25.3710072 -130.2886183   53.1913817 \n          25           26           27           28           29           30 \n  29.8681317   59.8164373  -14.1219516   34.7095484   17.9774928   47.3338484 \n          31           32           33           34           35           36 \n  61.4058262   67.7537262  104.6339928   36.5526595   14.2658262  -16.7506349 \n          37           38           39           40           41           42 \n -29.6592294   12.9909373   20.9858817  -29.1695572  -24.1598966  -19.2076849 \n          43           44           45           46           47           48 \n  11.7108262  -25.2434516  -18.4250627  -20.3317905   -8.4337683  -18.0094960 \n          49           50           51           52           53           54 \n -12.7704849    3.9210484  -58.2597294  -35.5108960  -32.0183927   -1.7377294 \n          55           56           57           58           59           60 \n   0.3123817  -35.5405016  -12.5921183   25.0772151  -20.6439405   37.4066428 \n          61           62           63           64           65           66 \n   9.3974373  130.5457706    5.2138262  -13.0036627   -9.8150183  -27.4784549 \n          67           68           69           70           71           72 \n  17.0578817   27.5951151  -28.0089794  -28.5735072  -23.4260627    4.5087151 \n          73           74           75           76           77           78 \n  77.8639373  -21.4575572  -18.5716738  -17.1700072   27.4325484  -26.4386960 \n          79           80           81           82           83           84 \n -18.1054016    6.1488262  -14.5139683    1.6943262  -21.4997294  -25.3833322 \n          85           86           87           88           89           90 \n -26.9358794  -17.5872294  -25.7722738    4.8073817  -26.9565572  -32.1845627 \n          91           92           93           94           95           96 \n -31.0086183  -34.0540127  -17.4630572  -31.4756127  -31.8114616  -15.9328183 \n\n\n\nWe can also easily calculate the SSE with the following code:\n\n\n\n\nCode\nsum(residuals(m)^2)\n\n\n[1] 133888.3\n\n\n\n\nThis tells us about how well the model fits the data. Specifically it is the sum of the squared differences between the predicted values and the actual participant scores\n\nWe can get the predicted value for each individual in the sample using this model with the function predict().\n\\(\\hat{Y}=32.19\\)\n\n\n\n\nCode\npredict(m)\n\n\n       1        2        3        4        5        6        7        8 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n       9       10       11       12       13       14       15       16 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      17       18       19       20       21       22       23       24 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      25       26       27       28       29       30       31       32 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      33       34       35       36       37       38       39       40 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      41       42       43       44       45       46       47       48 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      49       50       51       52       53       54       55       56 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      57       58       59       60       61       62       63       64 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      65       66       67       68       69       70       71       72 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      73       74       75       76       77       78       79       80 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      81       82       83       84       85       86       87       88 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      89       90       91       92       93       94       95       96 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n\n\n\nWe also may want to look at the parameter estimates\n\nWe will also call these model (or regression) coefficients (In this case we are only looking at the intercept)\nWe can use the tidy() function from the broom package to do this\n\n\n\n\n\nCode\nm |&gt; \n  broom::tidy()\n\n\n# A tibble: 1 × 5\n  term        estimate std.error statistic  p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)     32.2      3.83      8.40 4.26e-13\n\n\n\n\nThe estimate is \\(b_0\\), the unbiased sample estimate of \\(\\beta_0\\), and its standard error.\nIt is also called the intercept in regression (more on this later).\n\\(\\hat{Y}_i=b_0=32.2\\)\n\n\n\nCode\nm |&gt; \n  broom::tidy()\n\n\n# A tibble: 1 × 5\n  term        estimate std.error statistic  p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)     32.2      3.83      8.40 4.26e-13\n\n\n\n\nThe statistic is the t-statistic to test the \\(H_0\\) that \\(\\beta_0=0\\).\nThe probability (p-value) of obtaining a sample \\(b_0=32.2\\) if \\(H_0\\) is true (\\(\\beta_0=0\\)) is &lt; .0001.",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Estimating a One Parameter Model in R",
+    "text": "Estimating a One Parameter Model in R\n\n\nCode\n1m &lt;- lm(fps ~ 1, data = data)\n\n\n\n1\n\nHere we are fitting a linear model with FPS regressed on the intercept. In other words, we are fitting a model that predicts FPS using only the mean.\n\n\n\n\n\nWe can pull out the errors (\\(e_i=Y_i-\\hat{Y}i\\)) for each observation in the sample using residuals()\n\n\n\n\nCode\nresiduals(m)\n\n\n           1            2            3            4            5            6 \n -12.6999127   16.2161040  -54.7193405  -25.4670572   57.4678817    8.3829373 \n           7            8            9           10           11           12 \n  -2.7175738  -16.8541238   19.6643817   58.6873817   78.7543262   35.0963817 \n          13           14           15           16           17           18 \n -29.4627960   72.7258928  -31.7275460   36.5672151   19.1260706  -30.9964738 \n          19           20           21           22           23           24 \n   1.5669373   11.7176040    9.3662151  -25.3710072 -130.2886183   53.1913817 \n          25           26           27           28           29           30 \n  29.8681317   59.8164373  -14.1219516   34.7095484   17.9774928   47.3338484 \n          31           32           33           34           35           36 \n  61.4058262   67.7537262  104.6339928   36.5526595   14.2658262  -16.7506349 \n          37           38           39           40           41           42 \n -29.6592294   12.9909373   20.9858817  -29.1695572  -24.1598966  -19.2076849 \n          43           44           45           46           47           48 \n  11.7108262  -25.2434516  -18.4250627  -20.3317905   -8.4337683  -18.0094960 \n          49           50           51           52           53           54 \n -12.7704849    3.9210484  -58.2597294  -35.5108960  -32.0183927   -1.7377294 \n          55           56           57           58           59           60 \n   0.3123817  -35.5405016  -12.5921183   25.0772151  -20.6439405   37.4066428 \n          61           62           63           64           65           66 \n   9.3974373  130.5457706    5.2138262  -13.0036627   -9.8150183  -27.4784549 \n          67           68           69           70           71           72 \n  17.0578817   27.5951151  -28.0089794  -28.5735072  -23.4260627    4.5087151 \n          73           74           75           76           77           78 \n  77.8639373  -21.4575572  -18.5716738  -17.1700072   27.4325484  -26.4386960 \n          79           80           81           82           83           84 \n -18.1054016    6.1488262  -14.5139683    1.6943262  -21.4997294  -25.3833322 \n          85           86           87           88           89           90 \n -26.9358794  -17.5872294  -25.7722738    4.8073817  -26.9565572  -32.1845627 \n          91           92           93           94           95           96 \n -31.0086183  -34.0540127  -17.4630572  -31.4756127  -31.8114616  -15.9328183 \n\n\n\nWe can also easily calculate the SSE with the following code:\n\n\n\n\nCode\nsum(residuals(m)^2)\n\n\n[1] 133888.3\n\n\n\n\nThis tells us about how well the model fits the data. Specifically it is the sum of the squared differences between the predicted values and the actual participant scores\n\nWe can get the predicted value for each individual in the sample using this model with the function predict().\n\\(\\hat{Y}=32.19\\)\n\n\n\n\nCode\npredict(m)\n\n\n       1        2        3        4        5        6        7        8 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n       9       10       11       12       13       14       15       16 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      17       18       19       20       21       22       23       24 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      25       26       27       28       29       30       31       32 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      33       34       35       36       37       38       39       40 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      41       42       43       44       45       46       47       48 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      49       50       51       52       53       54       55       56 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      57       58       59       60       61       62       63       64 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      65       66       67       68       69       70       71       72 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      73       74       75       76       77       78       79       80 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      81       82       83       84       85       86       87       88 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n      89       90       91       92       93       94       95       96 \n32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 32.19084 \n\n\n\nWe also may want to look at the parameter estimates\n\nWe will also call these model (or regression) coefficients (In this case we are only looking at the intercept)\nWe can use the tidy() function from the broom package to do this\n\n\n\n\n\nCode\nm |&gt; \n  broom::tidy()\n\n\n# A tibble: 1 × 5\n  term        estimate std.error statistic  p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)     32.2      3.83      8.40 4.26e-13\n\n\n\n\nThe estimate is \\(b_0\\), the unbiased sample estimate of \\(\\beta_0\\), and its standard error.\nIt is also called the intercept in regression (more on this later).\n\\(\\hat{Y}_i=b_0=32.2\\)\n\n\n\nCode\nm |&gt; \n  broom::tidy()\n\n\n# A tibble: 1 × 5\n  term        estimate std.error statistic  p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)     32.2      3.83      8.40 4.26e-13\n\n\n\n\nThe statistic is the t-statistic to test the \\(H_0\\) that \\(\\beta_0=0\\).\nThe probability (p-value) of obtaining a sample \\(b_0=32.2\\) if \\(H_0\\) is true (\\(\\beta_0=0\\)) is &lt; .0001.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#sampling-distribution-testing-inferences-about-beta_0",
     "href": "03_single_mean.html#sampling-distribution-testing-inferences-about-beta_0",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.16 Sampling Distribution: Testing Inferences About \\(\\beta_0\\)",
-    "text": "3.16 Sampling Distribution: Testing Inferences About \\(\\beta_0\\)\n\n\nCode\nm |&gt; \n  broom::tidy()\n\n\n# A tibble: 1 × 5\n  term        estimate std.error statistic  p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)     32.2      3.83      8.40 4.26e-13\n\n\n\n\nDescribe the logic of how the t statistic and p-value were determined given your understanding of sampling distributions.\n\nDescribe the logic of how the t statistic and p-value were determined given your understanding of sampling distributions.\n\n\n1. Establish null and alternative hypotheses.\n\\(H_0: \\beta_0 = 0; H_a: \\beta_0 \\neq 0\\)\n\n\n2. If \\(H_0\\) is true, the sampling distribution for \\(\\beta_0\\) will have a mean of 0. We can estimate standard deviation of the sampling distribution with SE for \\(b_0\\).\n\\(t(df=N-P)=\\frac{b_0-0}{\\text{SE}_{b_0}}=\\frac{32.2-0}{3.8}=8.40\\)\n\n\n3. \\(b_0\\) is approximately 8 standard deviations above the expected mean of the distribution if \\(H_0\\) is true.\n\n\n[continue on next slide]\n\n4. We can use pt() to calculate the \\(p\\) value.\n\n\n\n\nCode\npt(8.40,95,lower.tail=FALSE) * 2\n\n\n[1] 0.0000000000004293253\n\n\n\n\n5. The probability of obtaining a sample \\(b_0\\) = 32.2 (or more extreme) if \\(H_0\\) is true is very low (&lt; .05). Therefore we reject \\(H_0\\) and conclude that \\(\\beta_0 \\neq 0\\) and \\(b_0\\) is our best (unbiased) estimate of it.\n\n\n\nCode\ntibble(b0 = seq(-40,40,.01),\n       probability = dt(b0/broom::tidy(m)$std.error, m$df.residual)) |&gt; \n  ggplot(aes(x = b0, y = probability)) +\n  geom_line() +\n  geom_vline(xintercept = broom::tidy(m)$estimate, color = \"red\") +\n  labs(title = \"Sampling Distribution for b0\")",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Sampling Distribution: Testing Inferences About \\(\\beta_0\\)",
+    "text": "Sampling Distribution: Testing Inferences About \\(\\beta_0\\)\n\n\nCode\nm |&gt; \n  broom::tidy()\n\n\n# A tibble: 1 × 5\n  term        estimate std.error statistic  p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 (Intercept)     32.2      3.83      8.40 4.26e-13\n\n\n\n\nDescribe the logic of how the t statistic and p-value were determined given your understanding of sampling distributions.\n\nDescribe the logic of how the t statistic and p-value were determined given your understanding of sampling distributions.\n\n\n1. Establish null and alternative hypotheses.\n\\(H_0: \\beta_0 = 0; H_a: \\beta_0 \\neq 0\\)\n\n\n2. If \\(H_0\\) is true, the sampling distribution for \\(\\beta_0\\) will have a mean of 0. We can estimate standard deviation of the sampling distribution with SE for \\(b_0\\).\n\\(t(df=N-P)=\\frac{b_0-0}{\\text{SE}_{b_0}}=\\frac{32.2-0}{3.8}=8.40\\)\n\n\n3. \\(b_0\\) is approximately 8 standard deviations above the expected mean of the distribution if \\(H_0\\) is true.\n\n\n[continue on next slide]\n\n4. We can use pt() to calculate the \\(p\\) value.\n\n\n\n\nCode\npt(8.40,95,lower.tail=FALSE) * 2\n\n\n[1] 0.0000000000004293253\n\n\n\n\n5. The probability of obtaining a sample \\(b_0\\) = 32.2 (or more extreme) if \\(H_0\\) is true is very low (&lt; .05). Therefore we reject \\(H_0\\) and conclude that \\(\\beta_0 \\neq 0\\) and \\(b_0\\) is our best (unbiased) estimate of it.\n\n\n\nCode\ntibble(b0 = seq(-40,40,.01),\n       probability = dt(b0/broom::tidy(m)$std.error, m$df.residual)) |&gt; \n  ggplot(aes(x = b0, y = probability)) +\n  geom_line() +\n  geom_vline(xintercept = broom::tidy(m)$estimate, color = \"red\") +\n  labs(title = \"Sampling Distribution for b0\")",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#statistical-inference-and-model-comparisons",
     "href": "03_single_mean.html#statistical-inference-and-model-comparisons",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.17 Statistical Inference and Model Comparisons",
-    "text": "3.17 Statistical Inference and Model Comparisons\nStatistical inference about parameters is fundamentally about model comparisons.\n\nYou are implicitly (t-test of parameter estimate) or explicitly (F-test of model comparison) comparing two different models of your data.\nWe follow Judd et al and call these two models the compact model and the augmented model.\nThe compact model will represent reality as the null hypothesis predicts. The augmented model will represent reality as the alternative hypothesis predicts.\nThe compact model is simpler (fewer parameters) than the augmented model. It is also nested in the augmented model (i.e. a subset of parameters).",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Statistical Inference and Model Comparisons",
+    "text": "Statistical Inference and Model Comparisons\nStatistical inference about parameters is fundamentally about model comparisons.\n\nYou are implicitly (t-test of parameter estimate) or explicitly (F-test of model comparison) comparing two different models of your data.\nWe follow Judd et al and call these two models the compact model and the augmented model.\nThe compact model will represent reality as the null hypothesis predicts. The augmented model will represent reality as the alternative hypothesis predicts.\nThe compact model is simpler (fewer parameters) than the augmented model. It is also nested in the augmented model (i.e. a subset of parameters).",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#model-comparisons-testing-inferences-about-beta_0",
     "href": "03_single_mean.html#model-comparisons-testing-inferences-about-beta_0",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.18 Model Comparisons: Testing Inferences about \\(\\beta_0\\)",
-    "text": "3.18 Model Comparisons: Testing Inferences about \\(\\beta_0\\)\n\\(\\hat{\\text{FPS}_i}=\\beta_0\\)\n\\(H_0: \\beta_0 = 0\\)\n\\(H_a: \\beta_0 \\neq 0\\)\n\n\n\nCompact model: \\(\\hat{\\text{FPS}_i}=0\\)\nAugmented model: \\(\\hat{\\text{FPS}_i}=\\beta_0 (\\approx b_0)\\)\n\n\nWe estimate 0 parameters (\\(P=0\\)) in this compact model.\nWe estimate 1 parameter (\\(P=1\\)) in this augmented model.\n\n\n\nChoosing between these two models is equivalent to testing if \\(\\beta_0 = 0\\) as you did with the t-test.",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Model Comparisons: Testing Inferences about \\(\\beta_0\\)",
+    "text": "Model Comparisons: Testing Inferences about \\(\\beta_0\\)\n\\(\\hat{\\text{FPS}_i}=\\beta_0\\)\n\\(H_0: \\beta_0 = 0\\)\n\\(H_a: \\beta_0 \\neq 0\\)\n\n\n\nCompact model: \\(\\hat{\\text{FPS}_i}=0\\)\nAugmented model: \\(\\hat{\\text{FPS}_i}=\\beta_0 (\\approx b_0)\\)\n\n\nWe estimate 0 parameters (\\(P=0\\)) in this compact model.\nWe estimate 1 parameter (\\(P=1\\)) in this augmented model.\n\n\n\nChoosing between these two models is equivalent to testing if \\(\\beta_0 = 0\\) as you did with the t-test.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#model-comparison-plots",
     "href": "03_single_mean.html#model-comparison-plots",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.19 Model Comparison Plots",
-    "text": "3.19 Model Comparison Plots\n\n\nCode\ndata |&gt; \n  ggplot(aes(x = \"\", y = fps)) +\n  geom_jitter(width = 0.1, alpha = .6, size = 2) +\n  theme(axis.line.x = element_blank(),\n        axis.ticks.x = element_blank()) +\n  xlab(NULL) +\n  geom_hline(yintercept = 0, color = \"red\", linewidth = 1) +\n  geom_hline(yintercept = broom::tidy(m)$estimate, color = \"blue\", linewidth = 1)",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Model Comparison Plots",
+    "text": "Model Comparison Plots\n\n\nCode\ndata |&gt; \n  ggplot(aes(x = \"\", y = fps)) +\n  geom_jitter(width = 0.1, alpha = .6, size = 2) +\n  theme(axis.line.x = element_blank(),\n        axis.ticks.x = element_blank()) +\n  xlab(NULL) +\n  geom_hline(yintercept = 0, color = \"red\", linewidth = 1) +\n  geom_hline(yintercept = broom::tidy(m)$estimate, color = \"blue\", linewidth = 1)",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#model-comparisons-testing-inferences-about-beta_0-continued",
     "href": "03_single_mean.html#model-comparisons-testing-inferences-about-beta_0-continued",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.20 Model Comparisons: Testing Inferences about \\(\\beta_0\\) (Continued)",
-    "text": "3.20 Model Comparisons: Testing Inferences about \\(\\beta_0\\) (Continued)\nCompact model: \\(\\hat{\\text{FPS}_i}=0\\)\nAugmented model: \\(\\hat{\\text{FPS}_i}=\\beta_0 (\\approx b_0)\\)\n\nWe can compare (and choose between) these two models by comparing their total error (SSE) in our sample.\n\\(\\text{SSE}_a = \\sum(Y_i-\\hat{Y}_i)^2\\)\n\\(\\text{SSE}_c = \\sum(Y_i-0)^2\\)\n\nWe can calculate \\(\\text{SSE}_a = \\sum(Y_i-\\hat{Y}_i)^2\\) as follows:\n\n\nCode\nsum((data$fps - 0)^2)\n\n\n[1] 233368.3\n\n\n\n\nWe can calcuate \\(\\text{SSE}_a = \\sum(Y_i- 32.2 )^2\\) as follows:\n\n\n\n\nCode\nsum((data$fps - broom::tidy(m)$estimate)^2) \n\n\n[1] 133888.3\n\n\n\n\nor\n\n\n\n\nCode\nsum(residuals(m)^2)\n\n\n[1] 133888.3\n\n\n\nCompact model: \\(\\hat{\\text{FPS}_i}=0\\)\nSSE = 233368.3\nP = 0\n\n\nAugmented model: \\(\\hat{\\text{FPS}_i}=\\beta_0 (\\approx b_0)\\)\nSSE = 133888.3\nP = 1\n\n\n\n\\(F(P_a-P_c, N-P_a) = \\frac{(\\text{SSE}_c-\\text{SSE}_a)/(P_a-P_c)}{\\text{SSE}_a/(N-P_a)}\\)\n\\(F(1-0, 96 -1)= \\frac{(233368.3 - 133888.3)/(1-0)}{133888.3 / (96 - 1)}\\)\n\\(F(1, 95 )= 70.59, p &lt; .0001\\)\n\n\n\n\nCode\npf(70.59, 1, 95, lower.tail = FALSE)\n\n\n[1] 0.0000000000004255967",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Model Comparisons: Testing Inferences about \\(\\beta_0\\) (Continued)",
+    "text": "Model Comparisons: Testing Inferences about \\(\\beta_0\\) (Continued)\nCompact model: \\(\\hat{\\text{FPS}_i}=0\\)\nAugmented model: \\(\\hat{\\text{FPS}_i}=\\beta_0 (\\approx b_0)\\)\n\nWe can compare (and choose between) these two models by comparing their total error (SSE) in our sample.\n\\(\\text{SSE}_a = \\sum(Y_i-\\hat{Y}_i)^2\\)\n\\(\\text{SSE}_c = \\sum(Y_i-0)^2\\)\n\nWe can calculate \\(\\text{SSE}_a = \\sum(Y_i-\\hat{Y}_i)^2\\) as follows:\n\n\nCode\nsum((data$fps - 0)^2)\n\n\n[1] 233368.3\n\n\n\n\nWe can calcuate \\(\\text{SSE}_a = \\sum(Y_i- 32.2 )^2\\) as follows:\n\n\n\n\nCode\nsum((data$fps - broom::tidy(m)$estimate)^2) \n\n\n[1] 133888.3\n\n\n\n\nor\n\n\n\n\nCode\nsum(residuals(m)^2)\n\n\n[1] 133888.3\n\n\n\nCompact model: \\(\\hat{\\text{FPS}_i}=0\\)\nSSE = 233368.3\nP = 0\n\n\nAugmented model: \\(\\hat{\\text{FPS}_i}=\\beta_0 (\\approx b_0)\\)\nSSE = 133888.3\nP = 1\n\n\n\n\\(F(P_a-P_c, N-P_a) = \\frac{(\\text{SSE}_c-\\text{SSE}_a)/(P_a-P_c)}{\\text{SSE}_a/(N-P_a)}\\)\n\\(F(1-0, 96 -1)= \\frac{(233368.3 - 133888.3)/(1-0)}{133888.3 / (96 - 1)}\\)\n\\(F(1, 95 )= 70.59, p &lt; .0001\\)\n\n\n\n\nCode\npf(70.59, 1, 95, lower.tail = FALSE)\n\n\n[1] 0.0000000000004255967",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#sampling-distribution-vs.-model-comparison",
     "href": "03_single_mean.html#sampling-distribution-vs.-model-comparison",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.21 Sampling Distribution vs. Model Comparison",
-    "text": "3.21 Sampling Distribution vs. Model Comparison\nThe two approaches to testing \\(H_0\\) about parameters (\\(\\beta_0, \\beta_j\\)) are statistically equivalent.\n\n\nThey are complementary approaches with respect to conceptual understanding of GLMs.\n\n\nSampling Distribution\n\nFocus on population parameters and their estimates.\n\nTight connection to sampling and probability distributions.\n\nUnderstanding of SE (sampling error/power; confidence intervals, graphic displays).\n\n\n\nModel Comparison\n\nFocus on models themselves.\n\nHighlights model fit (SSE) and model parsimony (P).\n\nClearer link to PRE (\\(\\eta_p^2\\)).\nTest comparisons that differ by &gt;1 parameter (discouraged).",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Sampling Distribution vs. Model Comparison",
+    "text": "Sampling Distribution vs. Model Comparison\nThe two approaches to testing \\(H_0\\) about parameters (\\(\\beta_0, \\beta_j\\)) are statistically equivalent.\n\n\nThey are complementary approaches with respect to conceptual understanding of GLMs.\n\n\nSampling Distribution\n\nFocus on population parameters and their estimates.\n\nTight connection to sampling and probability distributions.\n\nUnderstanding of SE (sampling error/power; confidence intervals, graphic displays).\n\n\n\nModel Comparison\n\nFocus on models themselves.\n\nHighlights model fit (SSE) and model parsimony (P).\n\nClearer link to PRE (\\(\\eta_p^2\\)).\nTest comparisons that differ by &gt;1 parameter (discouraged).",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#effect-sizes",
     "href": "03_single_mean.html#effect-sizes",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.22 Effect Sizes",
-    "text": "3.22 Effect Sizes\nYour parameter estimates are descriptive. They describe effects in the original units of the predictors and DV. Report them in your paper.\n\n\nThere are many other effect size estimates available. You will learn two that we prefer.\n\nPartial eta squared (\\(\\eta_p^2\\)): Judd et al call this PRE (proportional reduction in error).\nEta squared (\\(\\eta^2\\)): This is also commonly referred to as \\(\\Delta R^2\\) in regression.\n\n\nCompact model: \\(\\hat{\\text{FPS}_i}=0\\)\nSSE = 233368.3\nP = 0\n\n\nAugmented model: \\(\\hat{\\text{FPS}_i}=\\beta_0 (\\approx b_0)\\)\nSSE = 133888.3\nP = 1\n\n\nHow much was the error reduced in the augmented model relative to the compact model?\n\\(\\frac{\\text{SSE}_c-\\text{SSE}_a}{\\text{SSE}_c} = \\frac{233368.3 - 133888.3}{233368.3} = 0.426\\)\n\n\nOur more complex model that includes \\(\\beta_0\\) reduces prediction error (SSE) by approximately 43%. Not bad!",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Effect Sizes",
+    "text": "Effect Sizes\nYour parameter estimates are descriptive. They describe effects in the original units of the predictors and DV. Report them in your paper.\n\n\nThere are many other effect size estimates available. You will learn two that we prefer.\n\nPartial eta squared (\\(\\eta_p^2\\)): Judd et al call this PRE (proportional reduction in error).\nEta squared (\\(\\eta^2\\)): This is also commonly referred to as \\(\\Delta R^2\\) in regression.\n\n\nCompact model: \\(\\hat{\\text{FPS}_i}=0\\)\nSSE = 233368.3\nP = 0\n\n\nAugmented model: \\(\\hat{\\text{FPS}_i}=\\beta_0 (\\approx b_0)\\)\nSSE = 133888.3\nP = 1\n\n\nHow much was the error reduced in the augmented model relative to the compact model?\n\\(\\frac{\\text{SSE}_c-\\text{SSE}_a}{\\text{SSE}_c} = \\frac{233368.3 - 133888.3}{233368.3} = 0.426\\)\n\n\nOur more complex model that includes \\(\\beta_0\\) reduces prediction error (SSE) by approximately 43%. Not bad!",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#confidence-interval-for-b_0",
     "href": "03_single_mean.html#confidence-interval-for-b_0",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.23 Confidence Interval for \\(b_0\\)",
-    "text": "3.23 Confidence Interval for \\(b_0\\)\nA confidence interval (CI) is an interval for a parameter estimate in which you can be fairly confident that you will capture the true population parameter (in this case, \\(\\beta_0\\)).\n\nMost commonly reported is the 95% CI.\nAcross repeated samples, 95% of the calculated CIs will include the population parameter.\n\n\n\n\n\nCode\n1confint(m)\n\n\n\n1\n\nUse the confint() function to calculate confidence intervals. The default is to provide 95% CIs, but you can change this using the level parameter if you wish.\n\n\n\n\n               2.5 %   97.5 %\n(Intercept) 24.58426 39.79742\n\n\n\nQuestion: Given what you now know about confidence intervals and sampling distributions, what should the formula be?\n\nQuestion: Given what you now know about confidence intervals and sampling distributions, what should the formula be?\n\n\n\\(\\text{CI}(b_0)= b_0 \\pm t(\\alpha;N-P) * \\text{SE}_{b_0}\\)\n\n\nFor the 95% confidence interval this is approximately 2 SEs around our unbiased estimate of \\(\\beta_0\\).\n\nQuestion: How can we tell if a parameter is significant using only the confidence interval?\n\nQuestion: How can we tell if a parameter is significant using only the confidence interval?\n\n\nIf a parameter estimate \\(\\neq\\) 0 at \\(\\alpha\\) = .05, then the 95% confidence interval for its parameter estimate should not include 0.\n\n\nThis is also true for testing whether the parameter estimate is equal to any other non-zero value for the population parameter.",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Confidence Interval for \\(b_0\\)",
+    "text": "Confidence Interval for \\(b_0\\)\nA confidence interval (CI) is an interval for a parameter estimate in which you can be fairly confident that you will capture the true population parameter (in this case, \\(\\beta_0\\)).\n\nMost commonly reported is the 95% CI.\nAcross repeated samples, 95% of the calculated CIs will include the population parameter.\n\n\n\n\n\nCode\n1confint(m)\n\n\n\n1\n\nUse the confint() function to calculate confidence intervals. The default is to provide 95% CIs, but you can change this using the level parameter if you wish.\n\n\n\n\n               2.5 %   97.5 %\n(Intercept) 24.58426 39.79742\n\n\n\nQuestion: Given what you now know about confidence intervals and sampling distributions, what should the formula be?\n\nQuestion: Given what you now know about confidence intervals and sampling distributions, what should the formula be?\n\n\n\\(\\text{CI}(b_0)= b_0 \\pm t(\\alpha;N-P) * \\text{SE}_{b_0}\\)\n\n\nFor the 95% confidence interval this is approximately 2 SEs around our unbiased estimate of \\(\\beta_0\\).\n\nQuestion: How can we tell if a parameter is significant using only the confidence interval?\n\nQuestion: How can we tell if a parameter is significant using only the confidence interval?\n\n\nIf a parameter estimate \\(\\neq\\) 0 at \\(\\alpha\\) = .05, then the 95% confidence interval for its parameter estimate should not include 0.\n\n\nThis is also true for testing whether the parameter estimate is equal to any other non-zero value for the population parameter.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#the-one-parameter-mean-only-model-special-case",
     "href": "03_single_mean.html#the-one-parameter-mean-only-model-special-case",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.24 The one parameter (mean-only) model: Special Case",
-    "text": "3.24 The one parameter (mean-only) model: Special Case\nQuestion: What special case (specific analytic test) is statistically equivalent to the test of the null hypothesis: \\(\\beta_0\\) = 0 in the one parameter model?\n\nQuestion: What special case (specific analytic test) is statistically equivalent to the test of the null hypothesis: \\(\\beta_0\\) = 0 in the one parameter model?\n\n\nThe one sample t-test testing if a population mean = 0.\n\n\n\n\nCode\nt.test(data$fps)\n\n\n\n    One Sample t-test\n\ndata:  data$fps\nt = 8.4015, df = 95, p-value = 0.0000000000004261\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n 24.58426 39.79742\nsample estimates:\nmean of x \n 32.19084",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "The one parameter (mean-only) model: Special Case",
+    "text": "The one parameter (mean-only) model: Special Case\nQuestion: What special case (specific analytic test) is statistically equivalent to the test of the null hypothesis: \\(\\beta_0\\) = 0 in the one parameter model?\n\nQuestion: What special case (specific analytic test) is statistically equivalent to the test of the null hypothesis: \\(\\beta_0\\) = 0 in the one parameter model?\n\n\nThe one sample t-test testing if a population mean = 0.\n\n\n\n\nCode\nt.test(data$fps)\n\n\n\n    One Sample t-test\n\ndata:  data$fps\nt = 8.4015, df = 95, p-value = 0.0000000000004261\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n 24.58426 39.79742\nsample estimates:\nmean of x \n 32.19084",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#testing-beta_0-non-zero-values",
     "href": "03_single_mean.html#testing-beta_0-non-zero-values",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.25 Testing \\(\\beta_0\\) = non-zero values",
-    "text": "3.25 Testing \\(\\beta_0\\) = non-zero values\nQuestion: How could you test an \\(H_0\\) regarding \\(B_0\\) = some value other than 0 (e.g., 10)? HINT: There are at least three methods.\n\nQuestion: How could you test an \\(H_0\\) regarding \\(B_0\\) = some value other than 0 (e.g., 10)? HINT: There are at least three methods.\n\n\nOption 1: Compare SSE for the augmented model (\\(\\hat{Y}_i= \\beta_0\\)) to SSE from a different compact model for this new \\(H_0\\) (\\(\\hat{Y}_i= 10\\)).\n\n\nOption 2: Recalculate t-statistic using this new \\(H_0\\).\n\\(t= \\frac{b_0 - 10}{\\text{SE}_{b_0}}\\)\n\n\nOption 3: Does the confidence interval for the parameter estimate contain this other value? No p-value provided.\n\n\n\n\nCode\nconfint(m)\n\n\n               2.5 %   97.5 %\n(Intercept) 24.58426 39.79742",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Testing \\(\\beta_0\\) = non-zero values",
+    "text": "Testing \\(\\beta_0\\) = non-zero values\nQuestion: How could you test an \\(H_0\\) regarding \\(B_0\\) = some value other than 0 (e.g., 10)? HINT: There are at least three methods.\n\nQuestion: How could you test an \\(H_0\\) regarding \\(B_0\\) = some value other than 0 (e.g., 10)? HINT: There are at least three methods.\n\n\nOption 1: Compare SSE for the augmented model (\\(\\hat{Y}_i= \\beta_0\\)) to SSE from a different compact model for this new \\(H_0\\) (\\(\\hat{Y}_i= 10\\)).\n\n\nOption 2: Recalculate t-statistic using this new \\(H_0\\).\n\\(t= \\frac{b_0 - 10}{\\text{SE}_{b_0}}\\)\n\n\nOption 3: Does the confidence interval for the parameter estimate contain this other value? No p-value provided.\n\n\n\n\nCode\nconfint(m)\n\n\n               2.5 %   97.5 %\n(Intercept) 24.58426 39.79742",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "03_single_mean.html#intermission",
     "href": "03_single_mean.html#intermission",
-    "title": "3  Unit 3: Inferences About a Single Mean (1 Parameter Models)",
-    "section": "3.26 Intermission…",
-    "text": "3.26 Intermission…\nOne parameter (\\(\\beta_0\\)) mean-only model\n\nDescription: \\(b_0\\) describes mean of \\(Y\\).\nPrediction: \\(b_0\\) is predicted value that minimizes sample SSE.\nInference: Use \\(b_0\\) to test id \\(\\beta_0 = 0\\) (default) or any other value. One sample t-test.\n\n\n\n\nTwo parameter (\\(\\beta_0, \\beta_1\\)) model\n\nDescription: \\(b_1\\) describes how \\(Y\\) changes as a function of \\(X_1\\). \\(b_0\\) describes expected value of \\(Y\\) ar specific value (0) for \\(X_1\\).\nPrediction: \\(b_0\\) and \\(b_1\\) yield predicted values that vary by \\(X_1\\) and minimize SSE in sample.\nInference: Test if \\(\\beta_1 = 0\\). Pearson’s \\(r\\); independent sample t-test. Test if \\(\\beta_0=0\\). Analogous to one-sample t-test controlling for \\(X_1\\), if \\(X_1\\) is mean-centered. Very flexible!",
+    "title": "Unit 3: Inferences About a Single Mean (1 Parameter Models)",
+    "section": "Intermission…",
+    "text": "Intermission…\nOne parameter (\\(\\beta_0\\)) mean-only model\n\nDescription: \\(b_0\\) describes mean of \\(Y\\).\nPrediction: \\(b_0\\) is predicted value that minimizes sample SSE.\nInference: Use \\(b_0\\) to test id \\(\\beta_0 = 0\\) (default) or any other value. One sample t-test.\n\n\n\n\nTwo parameter (\\(\\beta_0, \\beta_1\\)) model\n\nDescription: \\(b_1\\) describes how \\(Y\\) changes as a function of \\(X_1\\). \\(b_0\\) describes expected value of \\(Y\\) ar specific value (0) for \\(X_1\\).\nPrediction: \\(b_0\\) and \\(b_1\\) yield predicted values that vary by \\(X_1\\) and minimize SSE in sample.\nInference: Test if \\(\\beta_1 = 0\\). Pearson’s \\(r\\); independent sample t-test. Test if \\(\\beta_0=0\\). Analogous to one-sample t-test controlling for \\(X_1\\), if \\(X_1\\) is mean-centered. Very flexible!",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Unit 3: Inferences About a Single Mean (1 Parameter Models)</span>"
+      "Unit 3: Inferences About a Single Mean (1 Parameter Models)"
     ]
   },
   {
     "objectID": "04_single_quantitative_shell.html",
     "href": "04_single_quantitative_shell.html",
-    "title": "4  Inferences About a Single Quantitative Predictor",
+    "title": "Inferences About a Single Quantitative Predictor",
     "section": "",
-    "text": "4.1 Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
+    "text": "Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Inferences About a Single Quantitative Predictor</span>"
+      "Inferences About a Single Quantitative Predictor"
     ]
   },
   {
     "objectID": "04_single_quantitative_shell.html#assignments",
     "href": "04_single_quantitative_shell.html#assignments",
-    "title": "4  Inferences About a Single Quantitative Predictor",
+    "title": "Inferences About a Single Quantitative Predictor",
     "section": "",
     "text": "TBD\n\n\n\nassignment\ndata\nkey",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Inferences About a Single Quantitative Predictor</span>"
+      "Inferences About a Single Quantitative Predictor"
     ]
   },
   {
     "objectID": "05_single_dichotomous_shell.html",
     "href": "05_single_dichotomous_shell.html",
-    "title": "5  Inferences about a Single Dichotomous Predictor",
+    "title": "Inferences about a Single Dichotomous Predictor",
     "section": "",
-    "text": "5.1 Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
+    "text": "Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Inferences about a Single Dichotomous Predictor</span>"
+      "Inferences about a Single Dichotomous Predictor"
     ]
   },
   {
     "objectID": "05_single_dichotomous_shell.html#assignments",
     "href": "05_single_dichotomous_shell.html#assignments",
-    "title": "5  Inferences about a Single Dichotomous Predictor",
+    "title": "Inferences about a Single Dichotomous Predictor",
     "section": "",
     "text": "TBD\n\n\n\nassignment\ndata\nkey",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Inferences about a Single Dichotomous Predictor</span>"
+      "Inferences about a Single Dichotomous Predictor"
     ]
   },
   {
     "objectID": "06_two_predictors_shell.html",
     "href": "06_two_predictors_shell.html",
-    "title": "6  Inferences about two predictors (multiple regression without interaction)",
+    "title": "Inferences about two predictors (multiple regression without interaction)",
     "section": "",
-    "text": "6.1 Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
+    "text": "Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
+      "Inferences about two predictors (multiple regression without interaction)"
     ]
   },
   {
     "objectID": "06_two_predictors_shell.html#assignments",
     "href": "06_two_predictors_shell.html#assignments",
-    "title": "6  Inferences about two predictors (multiple regression without interaction)",
+    "title": "Inferences about two predictors (multiple regression without interaction)",
     "section": "",
     "text": "TBD\n\n\n\nassignment\ndata\nkey",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Inferences about two predictors (multiple regression without interaction)</span>"
+      "Inferences about two predictors (multiple regression without interaction)"
     ]
   },
   {
     "objectID": "07_case_analysis_shell.html",
     "href": "07_case_analysis_shell.html",
-    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "title": "Dealing with Messy Data I: Case Analysis",
     "section": "",
-    "text": "7.1 Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
+    "text": "Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+      "Dealing with Messy Data I: Case Analysis"
     ]
   },
   {
     "objectID": "07_case_analysis_shell.html#assignments",
     "href": "07_case_analysis_shell.html#assignments",
-    "title": "7  Dealing with Messy Data I: Case Analysis",
+    "title": "Dealing with Messy Data I: Case Analysis",
     "section": "",
     "text": "TBD\n\n\n\nassignment\ndata\nkey",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Dealing with Messy Data I: Case Analysis</span>"
+      "Dealing with Messy Data I: Case Analysis"
     ]
   },
   {
     "objectID": "08_model_assumptions_shell.html",
     "href": "08_model_assumptions_shell.html",
-    "title": "8  Dealing with Messy Data II: Model Assumptions",
+    "title": "Dealing with Messy Data II: Model Assumptions",
     "section": "",
-    "text": "8.1 Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
+    "text": "Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
+      "Dealing with Messy Data II: Model Assumptions"
     ]
   },
   {
     "objectID": "08_model_assumptions_shell.html#assignments",
     "href": "08_model_assumptions_shell.html#assignments",
-    "title": "8  Dealing with Messy Data II: Model Assumptions",
+    "title": "Dealing with Messy Data II: Model Assumptions",
     "section": "",
     "text": "TBD\n\n\n\nassignment\ndata\nkey",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dealing with Messy Data II: Model Assumptions</span>"
+      "Dealing with Messy Data II: Model Assumptions"
     ]
   },
   {
     "objectID": "09_transformations_shell.html",
     "href": "09_transformations_shell.html",
-    "title": "9  Dealing with Messy Data III: Transformations",
+    "title": "Dealing with Messy Data III: Transformations",
     "section": "",
-    "text": "9.1 Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
+    "text": "Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Dealing with Messy Data III: Transformations</span>"
+      "Dealing with Messy Data III: Transformations"
     ]
   },
   {
     "objectID": "09_transformations_shell.html#assignments",
     "href": "09_transformations_shell.html#assignments",
-    "title": "9  Dealing with Messy Data III: Transformations",
+    "title": "Dealing with Messy Data III: Transformations",
     "section": "",
     "text": "TBD\n\n\n\nassignment\ndata\nkey",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Dealing with Messy Data III: Transformations</span>"
+      "Dealing with Messy Data III: Transformations"
     ]
   },
   {
     "objectID": "10_interactions_two_quantitative_shell.html",
     "href": "10_interactions_two_quantitative_shell.html",
-    "title": "10  Inferences about Two Continuous Predictors and their Interaction",
+    "title": "Inferences about Two Continuous Predictors and their Interaction",
     "section": "",
-    "text": "10.1 Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
+    "text": "Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Inferences about Two Continuous Predictors and their Interaction</span>"
+      "Inferences about Two Continuous Predictors and their Interaction"
     ]
   },
   {
     "objectID": "10_interactions_two_quantitative_shell.html#assignments",
     "href": "10_interactions_two_quantitative_shell.html#assignments",
-    "title": "10  Inferences about Two Continuous Predictors and their Interaction",
+    "title": "Inferences about Two Continuous Predictors and their Interaction",
     "section": "",
     "text": "TBD\n\n\n\nassignment\ndata\nkey",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Inferences about Two Continuous Predictors and their Interaction</span>"
+      "Inferences about Two Continuous Predictors and their Interaction"
     ]
   },
   {
     "objectID": "11_interactions_quantitative_and_dichotomous_shell.html",
     "href": "11_interactions_quantitative_and_dichotomous_shell.html",
-    "title": "11  Inferences about a Continuous and Dichotomous Predictor and their Interaction",
+    "title": "Inferences about a Continuous and Dichotomous Predictor and their Interaction",
     "section": "",
-    "text": "11.1 Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
+    "text": "Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
     "crumbs": [
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Inferences about a Continuous and Dichotomous Predictor and their Interaction</span>"
+      "Inferences about a Continuous and Dichotomous Predictor and their Interaction"
     ]
   },
   {
     "objectID": "11_interactions_quantitative_and_dichotomous_shell.html#assignments",
     "href": "11_interactions_quantitative_and_dichotomous_shell.html#assignments",
-    "title": "11  Inferences about a Continuous and Dichotomous Predictor and their Interaction",
+    "title": "Inferences about a Continuous and Dichotomous Predictor and their Interaction",
     "section": "",
     "text": "TBD\n\n\n\nassignment\ndata\nkey",
     "crumbs": [
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Inferences about a Continuous and Dichotomous Predictor and their Interaction</span>"
+      "Inferences about a Continuous and Dichotomous Predictor and their Interaction"
     ]
   },
   {
     "objectID": "12_interactions_two_dichotomous_shell.html",
     "href": "12_interactions_two_dichotomous_shell.html",
-    "title": "12  Inferences about a Two Dichotomous Predictors and their Interaction",
+    "title": "Inferences about a Two Dichotomous Predictors and their Interaction",
     "section": "",
-    "text": "12.1 Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
+    "text": "Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Inferences about a Two Dichotomous Predictors and their Interaction</span>"
+      "Inferences about a Two Dichotomous Predictors and their Interaction"
     ]
   },
   {
     "objectID": "12_interactions_two_dichotomous_shell.html#assignments",
     "href": "12_interactions_two_dichotomous_shell.html#assignments",
-    "title": "12  Inferences about a Two Dichotomous Predictors and their Interaction",
+    "title": "Inferences about a Two Dichotomous Predictors and their Interaction",
     "section": "",
     "text": "TBD\n\n\n\nassignment\ndata\nkey",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Inferences about a Two Dichotomous Predictors and their Interaction</span>"
+      "Inferences about a Two Dichotomous Predictors and their Interaction"
     ]
   },
   {
     "objectID": "13_categorical_variables_shell.html",
     "href": "13_categorical_variables_shell.html",
-    "title": "13  Categorical Variables > 2 Levels",
+    "title": "1  Categorical Variables > 2 Levels",
     "section": "",
-    "text": "13.1 Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
+    "text": "1.1 Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Categorical Variables > 2 Levels</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Categorical Variables > 2 Levels</span>"
     ]
   },
   {
     "objectID": "13_categorical_variables_shell.html#assignments",
     "href": "13_categorical_variables_shell.html#assignments",
-    "title": "13  Categorical Variables > 2 Levels",
+    "title": "1  Categorical Variables > 2 Levels",
     "section": "",
     "text": "TBD\n\n\n\nassignment\ndata\nkey",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Categorical Variables > 2 Levels</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Categorical Variables > 2 Levels</span>"
     ]
   },
   {
     "objectID": "14_power_shell.html",
     "href": "14_power_shell.html",
-    "title": "14  Power Analysis and Statistical Validity",
+    "title": "Power Analysis and Statistical Validity",
     "section": "",
-    "text": "14.1 Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
+    "text": "Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
     "crumbs": [
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Power Analysis and Statistical Validity</span>"
+      "Power Analysis and Statistical Validity"
     ]
   },
   {
     "objectID": "14_power_shell.html#assignments",
     "href": "14_power_shell.html#assignments",
-    "title": "14  Power Analysis and Statistical Validity",
+    "title": "Power Analysis and Statistical Validity",
     "section": "",
     "text": "TBD\n\n\n\nassignment\ndata\nkey",
     "crumbs": [
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Power Analysis and Statistical Validity</span>"
+      "Power Analysis and Statistical Validity"
     ]
   },
   {
     "objectID": "15_the_generalized_linear_model_shell.html",
     "href": "15_the_generalized_linear_model_shell.html",
-    "title": "15  The Generalized Linear Model",
+    "title": "2  The Generalized Linear Model",
     "section": "",
-    "text": "15.1 Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
+    "text": "2.1 Assignments\nRead\nApplication assignment (due ??? @ 1:30 via Canvas)",
     "crumbs": [
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>The Generalized Linear Model</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>The Generalized Linear Model</span>"
     ]
   },
   {
     "objectID": "15_the_generalized_linear_model_shell.html#assignments",
     "href": "15_the_generalized_linear_model_shell.html#assignments",
-    "title": "15  The Generalized Linear Model",
+    "title": "2  The Generalized Linear Model",
     "section": "",
     "text": "TBD\n\n\n\nassignment\ndata\nkey",
     "crumbs": [
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>The Generalized Linear Model</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>The Generalized Linear Model</span>"
     ]
   }
 ]
