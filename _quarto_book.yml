@@ -26,6 +26,8 @@ book:
   reader-mode: true
   chapters:
     - index.qmd
+    - slide_decks.qmd
+    - application_assignments.qmd
     - 01_overview.qmd
     - 02_sampling_distributions.qmd
     - 03_single_mean.qmd
