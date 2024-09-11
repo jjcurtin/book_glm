@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -390,13 +390,14 @@ window.Quarto = {
 <section id="assignments" class="level2">
 <h2 class="anchored" data-anchor-id="assignments">Assignments</h2>
 <ul>
-<li><a href="https://jjcurtin.quarto.pub/03_single_mean/">Slide deck</a> on QuartoPub</li>
-</ul>
-<p>Read</p>
+<li><p><a href="https://jjcurtin.quarto.pub/03_single_mean/">Slide deck</a> on QuartoPub</p></li>
+<li><p>Read</p>
 <ul>
 <li>Judd et al.&nbsp;Chapter 4. Simple Models: Statistical Inferences about Parameter Values</li>
+</ul></li>
+<li><p>Week 2 Application Assignment (due 9/18 @ 1:30 via Canvas)</p></li>
+<li><p>Week 3 Application Assignment (due 9/15 @ 1:30 via Canvas)</p></li>
 </ul>
-<p>Application assignment (due 9/15 @ 1:30 via Canvas)</p>
 <hr>
 </section>
 <section id="units-3-4-organization" class="level2">
@@ -495,12 +496,12 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="one-parameter-model-for-fps">One Parameter Model for FPS</h2>
 <p>For the moment, lets assume we prefer to minimize SSE (more on that in a moment). You should predict the population mean FPS for everyone.</p>
 <p><br>
-<span class="math inline">\(\hat{Y}_i=\beta_0\)</span> where <span class="math inline">\(\beta_0=\mu\)</span></p>
+<span class="math inline">\(\hat{Y}_i=\beta_0\)</span> … where <span class="math inline">\(\beta_0=\mu\)</span></p>
 <p><br>
 <span style="color: red;">Question: What is the problem with this model?</span></p>
 <hr>
 <p><span style="color: red;">Question: What is the problem with this model?</span></p>
-<p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span> where <span class="math inline">\(\beta_0=\mu\)</span></p>
+<p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span> … where <span class="math inline">\(\beta_0=\mu\)</span></p>
 <p><br>
 </p>
 <p><span style="color: blue;">We don’t know the population mean for FPS scores (<span class="math inline">\(\mu\)</span>).</span></p>
@@ -512,25 +513,32 @@ window.Quarto = {
 <p><span style="color: red;">Question: How could we solve this problem to develop a model?</span></p>
 <p><br>
 </p>
-<p><span style="color: blue;">… We can collect a sample from the population and use the sample mean (<span class="math inline">\(\overline{X}\)</span>) as an estimate of the population mean (<span class="math inline">\(\mu\)</span>).</span> <span style="color: blue;"><span class="math inline">\(\overline{X}\)</span> is an unbiased estimate for <span class="math inline">\(\mu\)</span>.</span></p>
+<p><span style="color: blue;">We can collect a sample from the population and use the sample mean (<span class="math inline">\(\overline{X}\)</span>) as an estimate of the population mean (<span class="math inline">\(\mu\)</span>).</span></p>
+<p><br>
+</p>
+<p><span style="color: blue;"><span class="math inline">\(\overline{X}\)</span> is an unbiased estimate for <span class="math inline">\(\mu\)</span>.</span></p>
 <hr>
 </section>
 <section id="model-parameter-estimation" class="level2">
 <h2 class="anchored" data-anchor-id="model-parameter-estimation">Model Parameter Estimation</h2>
+<p>DATA = MODEL + ERROR</p>
+<p><br>
+<br>
+</p>
 <p><strong>Population model</strong></p>
-<p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span> … where <span class="math inline">\(\beta_0=\mu\)</span></p>
 <p><span class="math inline">\(Y_i=\beta_0+\varepsilon_i\)</span></p>
+<p><span class="math inline">\(\hat{Y}_i=\beta_0\)</span> … where <span class="math inline">\(\beta_0=\mu\)</span></p>
 <p><br>
 <br>
 </p>
 <p><strong>Estimate population parameters from sample</strong></p>
-<p><span class="math inline">\(\hat{Y}_i=b_0\)</span> … where <span class="math inline">\(b_0=\overline{X}\)</span></p>
 <p><span class="math inline">\(Y_i=b_0+e_i\)</span></p>
+<p><span class="math inline">\(\hat{Y}_i=b_0\)</span> … where <span class="math inline">\(b_0=\overline{X}\)</span></p>
 <hr>
 </section>
 <section id="least-squares-criterion" class="level2">
 <h2 class="anchored" data-anchor-id="least-squares-criterion">Least Squares Criterion</h2>
-<p>In ordinary least squares (OLS) regression and other least squares linear models, the model parameter estimates (e.g., <span class="math inline">\(b_0\)</span>) are calculated such that they minimize the sum of squared errors (SSE) in the sample in which you estimate the model.</p>
+<p>In ordinary least squares (OLS) regression and other least squares linear models, the model <strong>parameter estimates (e.g., <span class="math inline">\(b_0\)</span>) are calculated such that they minimize the sum of squared errors (SSE</strong>) in the sample in which you estimate the model.</p>
 <p><br>
 </p>
 <p><span class="math inline">\(\text{SSE}=\sum(Y_i-\hat{Y}_i)^2\)</span></p>
@@ -641,21 +649,19 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 <p><strong>Goal:</strong> Determine if our shock threat procedure is effective at potentiating startle (increasing startle during threat relative to safe).</p>
 <p><br>
 </p>
-<ol type="1">
-<li>Create a simple model of FPS scores in the population</li>
-</ol>
+<ul>
+<li><p>Create a simple model of FPS scores in the population</p>
 <ul>
 <li><span class="math inline">\(\text{FPS}=\beta_0\)</span></li>
-</ul>
-<ol start="2" type="1">
+</ul></li>
 <li><p>Collect sample of <span class="math inline">\(N=96\)</span> to estimate <span class="math inline">\(\beta_0\)</span></p></li>
 <li><p>Calculate sample parameter estimate (<span class="math inline">\(b_0\)</span>) that minimizes SSE in sample</p></li>
-<li><p>Use <span class="math inline">\(b_0\)</span> to test hypotheses</p></li>
-</ol>
+<li><p>Use <span class="math inline">\(b_0\)</span> to test hypotheses</p>
 <ul>
 <li><span class="math inline">\(H_0: \beta_0 = 0\)</span><br>
 </li>
 <li><span class="math inline">\(H_a: \beta_0 \neq 0\)</span></li>
+</ul></li>
 </ul>
 <hr>
 </section>
@@ -734,7 +740,11 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 </div>
 <p><br>
 </p>
-<p>This tells us about how well the model fits the data. Specifically it is the sum of the squared differences between the predicted values and the actual participant scores</p>
+<ul>
+<li>This tells us about how well the model fits the data.<br>
+</li>
+<li>Specifically it is the sum of the squared differences between the predicted values and the actual participant scores</li>
+</ul>
 <hr>
 <p>We can get the predicted value for each individual in the sample using this model with the function <code>predict()</code>.</p>
 <p><span class="math inline">\(\hat{Y}=32.19\)</span></p>
@@ -837,9 +847,9 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 </div>
 <p><br>
 </p>
-<p><span style="color: red;">Describe the logic of how the t statistic and p-value were determined given your understanding of sampling distributions.</span></p>
+<p><span style="color: red;">Describe the logic of how the standard error, t statistic and p-value were determined given your understanding of sampling distributions.</span></p>
 <hr>
-<p><span style="color: red;">Describe the logic of how the t statistic and p-value were determined given your understanding of sampling distributions.</span></p>
+<p><span style="color: red;">Describe the logic of how the standard error, t statistic and p-value were determined given your understanding of sampling distributions.</span></p>
 <p><br>
 </p>
 <p><span style="color: blue;">1. Establish null and alternative hypotheses.</span></p>
@@ -847,15 +857,18 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 <p><br>
 </p>
 <p><span style="color: blue;">2. If <span class="math inline">\(H_0\)</span> is true, the sampling distribution for <span class="math inline">\(\beta_0\)</span> will have a mean of 0. We can estimate standard deviation of the sampling distribution with SE for <span class="math inline">\(b_0\)</span>.</span></p>
-<p><span class="math inline">\(t(df=N-P)=\frac{b_0-0}{\text{SE}_{b_0}}=\frac{32.2-0}{3.8}=8.40\)</span></p>
 <p><br>
 </p>
 <p><span style="color: blue;">3. <span class="math inline">\(b_0\)</span> is approximately 8 standard deviations above the expected mean of the distribution if <span class="math inline">\(H_0\)</span> is true.</span></p>
-<p><br>
+<p><span class="math inline">\(t(df=N-P)=\frac{b_0-0}{\text{SE}_{b_0}}=\frac{32.2-0}{3.8}=8.40\)</span><br>
+<br>
 </p>
 <p>[continue on next slide]</p>
 <hr>
-<p><span style="color: blue;">4. We can use <code>pt()</code> to calculate the <span class="math inline">\(p\)</span> value.</span></p>
+<p><span style="color: blue;">4. We can use <code>pt()</code> to calculate the exact <span class="math inline">\(p\)</span> value for this parameter estimate given <span class="math inline">\(H_0\)</span>.</span></p>
+<p><br>
+</p>
+<p><span style="color: blue;">The probability of obtaining a sample <span class="math inline">\(b_0\)</span> = 32.2 (or more extreme) if <span class="math inline">\(H_0\)</span> is true is very low (&lt; .05). Therefore we reject <span class="math inline">\(H_0\)</span> and conclude that <span class="math inline">\(\beta_0 \neq 0\)</span> and <span class="math inline">\(b_0\)</span> is our best (unbiased) estimate of it.</span></p>
 <p><br>
 </p>
 <div class="cell">
@@ -869,7 +882,7 @@ $ fps   &lt;dbl&gt; 19.4909278, 48.4069444, -22.5285000, 6.7237833, 89.6587222, 
 </div>
 <p><br>
 </p>
-<p><span style="color: blue;">5. The probability of obtaining a sample <span class="math inline">\(b_0\)</span> = 32.2 (or more extreme) if <span class="math inline">\(H_0\)</span> is true is very low (&lt; .05). Therefore we reject <span class="math inline">\(H_0\)</span> and conclude that <span class="math inline">\(\beta_0 \neq 0\)</span> and <span class="math inline">\(b_0\)</span> is our best (unbiased) estimate of it.</span></p>
+<p><span style="color: blue;">Of courese, we don’t need to calculate the p-value with <code>pt()</code> because we got it directly from <code>tidy()</code></span></p>
 <hr>
 <div class="cell">
 <details open="" class="code-fold">
@@ -952,10 +965,10 @@ We estimate 1 parameter (<span class="math inline">\(P=1\)</span>) in this augme
 Augmented model: <span class="math inline">\(\hat{\text{FPS}_i}=\beta_0 (\approx b_0)\)</span></p>
 <p><br>
 We can compare (and choose between) these two models by comparing their total error (SSE) in our sample.</p>
-<p><span class="math inline">\(\text{SSE}_a = \sum(Y_i-\hat{Y}_i)^2\)</span></p>
 <p><span class="math inline">\(\text{SSE}_c = \sum(Y_i-0)^2\)</span></p>
+<p><span class="math inline">\(\text{SSE}_a = \sum(Y_i-\hat{Y}_i)^2\)</span></p>
 <hr>
-<p>We can calculate <span class="math inline">\(\text{SSE}_a = \sum(Y_i-\hat{Y}_i)^2\)</span> as follows:</p>
+<p>We can calculate <span class="math inline">\(\text{SSE}_c = \sum(Y_i-\hat{Y}_i)^2\)</span> as follows:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -1288,24 +1301,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/github\.io\/jjcurtin\/book_glm");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1340,11 +1335,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
