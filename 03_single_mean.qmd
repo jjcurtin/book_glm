@@ -425,11 +425,11 @@ m |>
 
 \
 
-<span style="color: red;">Describe the logic of how the t statistic and p-value were determined given your understanding of sampling distributions.</span>
+<span style="color: red;">Describe the logic of how the standard error, t statistic and p-value were determined given your understanding of sampling distributions.</span>
 
 -----
 
-<span style="color: red;">Describe the logic of how the t statistic and p-value were determined given your understanding of sampling distributions.</span>
+<span style="color: red;">Describe the logic of how the standard error, t statistic and p-value were determined given your understanding of sampling distributions.</span>
 
 \
 
