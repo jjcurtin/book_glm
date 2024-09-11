@@ -11,37 +11,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Code Chunks and Regular text in .qmd
-
-You can write plain text in these parts of the script. You can write R code in the code chunks below, which begin with three back ticks and `{r}` and end with three more back ticks.
-
-### Example HW Question: what is 1 + 1?
-
-Verbal response to the HW question goes here. 1 + 1 = 1.
-
-```{r}
-# code you ran to answer the question goes here
-
-
-```
-
-You can insert your own code chunks with a keyboard shortcut (`command` + `option` + `I` on Mac, `ctrl` + `alt` + `I` on PC).
-
-To run a single line of code in the code chunk, select the line of code (or put your cursor on the line) and hit `command` + `enter` (Mac) or `control` + `enter` (PC). To run an entire code chunk you can click the small green triangle at the top-left corner of the chunk.
-
-## Headings and formatting
-
-Headings can be a useful way to organize your rendered document. Here are some examples of headings. 
-
-# This is a 1st Level Heading
-
-## This is a 2nd Level Heading
-
-### This is a 3rd Level Heading
-
-You can also use various markdown syntax for formatting (e.g., bold, italics, math equations). Read more about formatting in markdown [here](https://bookdown.org/yihui/rmarkdown/markdown-syntax.html).
-
-## Set up
+# Set up
 
 To keep in line with best practices, we ask you do the following things in a code chunk at the beginning of each quarto document. 
 
@@ -54,13 +24,15 @@ To keep in line with best practices, we ask you do the following things in a cod
     - You should load the **minimum** number of packages needed to execute your code. Often times this may just be `tidyverse`. Loading as few as possible packages also helps reduce the likelihood of conflicts.    
 
     - To load packages use the `library()` function. If you have never installed the package you will need to do that using `install.packages()` before the first time you use the package.  
+    
+    - In this assignment, load tidyverse and skimr
 
 3. **Set path**   
 
     - This should be a relative path from your R project pointing to your homework folder.   
     
 
-A few other things to notice in the example setup code chunk below:   
+4. A few other things to notice in the example setup code chunk below:   
 
 - You can customize code chunk settings. For example, in the chunk below we are using `#| message: false` to indicate that we do not want to print out messages associated with loading a library. **These settings will only take effect for when you render the document.**  
 
@@ -69,12 +41,10 @@ A few other things to notice in the example setup code chunk below:
 - We are setting a `ggplot2` theme using `theme_set(theme_classic())`. This applies a specific theme to all plots in the quarto document. There are several themes you can choose. We like `theme_classic()` because it is pretty and close to APA format.  
 
 ```{r}
-#| message: false
+# suppress messages
 
 # setup code goes here
 
-# set data path
-path_data <- "homework/week_2"
 ```
 
 
@@ -120,17 +90,27 @@ Use one of the functions we learned in lab to inspect the data.
 
 ```
 
-
-Maybe you tried to customize the specific information you wanted out of the data frame?
-- intermediary steps
-- how to get same thing with skim
-- Look into skim package - customize variables and descriptives
-
+What object class does skim() return?
 
 ```{r}
 
 ```
 
+Glimpse results from skim()
+
+```{r}
+
+```
+
+
+Practice skimming a subset of the dataframe (from condition to post_proc)
+
+```{r}
+
+```
+
+
+Next, show how you can get the same information using the summarise() function.
 
 ```{r}
 
@@ -147,145 +127,108 @@ DVs:
 
 
 ## 2. Obtain the following basic information about your data:
+
 Now try create your own code chunks.
 
 ### a.
-Get a summary of the data.
 
-```{r}
+You can also skim your dataframe without generating the histogram for numeric variables. Google which function in `skimr` package allows you to do that.
 
-```
+`your response goes here`
+
+Generate descriptive stats (mean, median, standard deviation, etc.) without any charts for all variables in the `d` dataframe.
 
 
 ### b.
-Generate descriptive stats (mean, median, standard deviation, etc.) without any charts for all variables in the `d` dataframe.
-```{r}
+Get descriptive statistics for just the pretest variable.
 
-```
 
 
 ### c.
-Get descriptive statistics for just the pretest variable.
-```{r}
-
-```
-
-
-### d.
 Generate a histogram for the pretest variable
-```{r}
 
-```
-
-
-### e.
-Create a new variable that is the difference between the posttest conceptual understanding score (`post_con`) and perceptual problem encoding score (`post_perc`)
-```{r}
-
-```
-
-change to average of 3 post scales
 
 ## 3. Centering pretest:
-Now try organizing sub-headings by the structure of HW1 yourself.
 
 ### a.
 Create a new variable that is the mean-centered score for pretest knowledge. Give this variable a good name (following the class conventions covered in lab).
-```{r}
 
-```
 
 ### b.
 Check that your new variable is indeed mean-centered using code.
-```{r}
 
-```
 
 
 ## 4. Center condition 
 recode (have teach and explore as labels) - to make numeric (assign 2 values - -.5, .5)
-```{r}
 
-```
 
 
 ## 5. Create a single global measure of overall learning by averaging the posttest measures:
 
 ### a.
-Create a variable that is the average of the three posttest variables (ignore missing data). Name this variable `posttest_m` 
 
-delete other mean average
+Create a variable that is the average of the three posttest variables (ignore missing data). Name this variable `posttest_m` 
 
 ```{r}
 
 ```
 
+Now see if you can achieve the same thing with `rowwise()` and `mutate()`
+
+```{r}
+
+```
 
 
 ### b.
 What are the mean and standard deviation of `posttest_m`? Answer in .qmd as plain text.
 
-The mean is ?? and the sd is ??
-```{r}
+The mean is `YOUR RESPONSE GOES HERE` and the sd is `YOUR RESPONSE GOES HERE`
 
-```
-
+`INSERT CODE CHUNK`
 
 ### c.
 Generate descriptive statistics of `posttest_m` for each of the experimental conditions.
-```{r}
 
-```
 
+### d.
+
+Create a new variable (`post_diff`) that is the difference between the mean posttest score (`posttest_m`) and pretest score on knowledge of the physics concept (`pretest`)
 
 ## 6. Standardizing post_con score:
 
 ### a.
 Create a standardized variable for the conceptual understanding measure, with an appropriate name (following class conventions).
-```{r}
 
-```
 
 
 ### b.
 Using one line of code, check your work to make sure this is the standardized score.
-```{r}
 
-```
 
 
 ### c.
 You have now created several new variables. Write out a command that shows the names of all the variables (also known as “columns”) in the d data frame (it’s okay if the command shows you more information than just the column names, but finding a command that will give you only this information is a good opportunity to practice Googling!)
+
+
+
+
+## 7. Make a scatter plot with raw pretest score on the x-axis, mean posttest score on the y-axis.
+
 ```{r}
 
 ```
-
-
-## 7. Create a table of descriptive stats in a Word document...
-
-
-**Write the code that allowed you to fill in the table.**
-```{r}
-
-```
-
-
-## 8. Make a scatter plot with raw pretest score on the x-axis, mean posttest score on the y-axis.
 
 These data look strange because there seems to be no relationship between participants' pretest score and mean posttest score (however we cannot say for sure just by eyeballing; we need to statistically test it). The mean posttest score is also divided into two extreme clusters with few individuals scoring in the 70-75 range. This is unusual, and may indicate that the data are fake!
+
+## 8. Use the command we learned in lab to generate the mean posttest score for each condition.
+
 ```{r}
 
 ```
 
-
-## 9. Use the command we learned in lab to generate the mean posttest score for each condition.
 It seems that those in Explore condition scored higher on the mean posttest score than those in Teach condition, suggesting active exploration promotes learning compared to passive teaching.
-
-
-```{r}
-
-```
-
 
 # Part II: Reading Questions (Chapters 1 and 2)
 Answer the following questions in a few sentences directly in your qmd file (not within a code chunk).
