@@ -63,15 +63,15 @@ At the end of the study, participants’ learning was assessed using three postt
 
 * `sub_id` (Subject ID number) 
 
-* `pretest` (pretest score on knowledge of the physics concept)
+* `science_aptitude` (pretest score on knowledge of the physics concept)
 
 * `condition` (0 = Teach; 1 = Explore)
 
-* `post_con` (conceptual understanding score)
+* `physics_con_con` (conceptual understanding score)
 
-* `post_proc` (procedural competence score)
+* `physics_con_proc` (procedural competence score)
 
-* `post_perc` (perceptual problem encoding score)
+* `physics_con_perc` (perceptual problem encoding score)
 
 The researchers hope to use these data to answer the following question: do participants’ pretest score and condition (Explore vs. Teach) predict posttest score?
 
@@ -103,7 +103,7 @@ Glimpse results from skim()
 ```
 
 
-Practice skimming a subset of the dataframe (from condition to post_proc)
+Practice skimming a subset of the dataframe (from condition to physics_proc)
 
 ```{r}
 
@@ -194,9 +194,9 @@ Generate descriptive statistics of `posttest_m` for each of the experimental con
 
 ### d.
 
-Create a new variable (`post_diff`) that is the difference between the mean posttest score (`posttest_m`) and pretest score on knowledge of the physics concept (`pretest`)
+Create a new variable (`post_diff`) that is the difference between the mean posttest score (`posttest_m`) and pretest score on knowledge of the physics concept (`science_aptitude`)
 
-## 6. Standardizing post_con score:
+## 6. Standardizing physics_con score:
 
 ### a.
 Create a standardized variable for the conceptual understanding measure, with an appropriate name (following class conventions).
@@ -214,7 +214,7 @@ You have now created several new variables. Write out a command that shows the n
 
 
 
-## 7. Make a scatter plot with raw pretest score on the x-axis, mean posttest score on the y-axis.
+## 7. Make a scatter plot with raw pretest score (`science_aptitude`) on the x-axis, mean posttest score on the y-axis.
 
 ```{r}
 

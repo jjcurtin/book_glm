@@ -1,4 +1,4 @@
-sub_id,condition,pretest,post_con,post_perc,post_proc
+sub_id,condition,science_aptitude,physics_con,physics_perc,physics_proc
 1,1,57,83,76,87
 2,1,65,86,76,90
 3,1,60,77,85,85
