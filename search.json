@@ -270,11 +270,21 @@
     ]
   },
   {
+    "objectID": "application_assignments.html#unit-1",
+    "href": "application_assignments.html#unit-1",
+    "title": "Application Assignments",
+    "section": "",
+    "text": "instructions\nkey: html; qmd",
+    "crumbs": [
+      "Application Assignments"
+    ]
+  },
+  {
     "objectID": "application_assignments.html#unit-2",
     "href": "application_assignments.html#unit-2",
     "title": "Application Assignments",
     "section": "Unit 2",
-    "text": "Unit 2",
+    "text": "Unit 2\n\nshell\ndata\nkey: html; qmd",
     "crumbs": [
       "Application Assignments"
     ]
