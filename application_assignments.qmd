@@ -1,5 +1,9 @@
 # Application Assignments {.unnumbered}
 
+- shell
+- data
+- key: [html](https://dionysus.psych.wisc.edu/610/hw1_key.html); [qmd](https://dionysus.psych.wisc.edu/610/hw1_key.qmd)
+
 ## Unit 1
 
 ## Unit 2
