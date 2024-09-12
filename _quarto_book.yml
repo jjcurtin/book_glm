@@ -30,6 +30,7 @@ book:
     - required_readings.qmd
     - application_assignments.qmd
     - lab_materials.qmd
+    - exams.qmd
     - part: Appendices
       chapters:
         - app_terminology.qmd
