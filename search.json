@@ -224,7 +224,37 @@
     "href": "required_readings.html",
     "title": "Required Reading",
     "section": "",
-    "text": "Unit 1\n\nJudd et a., Chapter 1, Introduction to Data Analysis\n\n\n\nUnit 2\n\nJudd et al. Chapter 2, Definitions of Error and Parameter Estimates\nJudd et al. Chapter 3, Models of Error and Sampling Distributions\n\n\n\nUnit 3\n\nJudd et al. Chapter 4. Simple Models: Statistical Inferences about Parameter Values",
+    "text": "Unit 1",
+    "crumbs": [
+      "Required Reading"
+    ]
+  },
+  {
+    "objectID": "required_readings.html#unit-1",
+    "href": "required_readings.html#unit-1",
+    "title": "Required Reading",
+    "section": "",
+    "text": "Judd et a., Chapter 1, Introduction to Data Analysis",
+    "crumbs": [
+      "Required Reading"
+    ]
+  },
+  {
+    "objectID": "required_readings.html#unit-2",
+    "href": "required_readings.html#unit-2",
+    "title": "Required Reading",
+    "section": "Unit 2",
+    "text": "Unit 2\n\nJudd et al. Chapter 2, Definitions of Error and Parameter Estimates\nJudd et al. Chapter 3, Models of Error and Sampling Distributions",
+    "crumbs": [
+      "Required Reading"
+    ]
+  },
+  {
+    "objectID": "required_readings.html#unit-3",
+    "href": "required_readings.html#unit-3",
+    "title": "Required Reading",
+    "section": "Unit 3",
+    "text": "Unit 3\n\nJudd et al. Chapter 4. Simple Models: Statistical Inferences about Parameter Values",
     "crumbs": [
       "Required Reading"
     ]
