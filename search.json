@@ -430,11 +430,21 @@
     ]
   },
   {
+    "objectID": "web5_labs.html#week-1-0906",
+    "href": "web5_labs.html#week-1-0906",
+    "title": "Lab Materials",
+    "section": "",
+    "text": "Installing R, R Studio, & Quarto\nStudent shell\nTA notebook: qmd; html",
+    "crumbs": [
+      "Lab Materials"
+    ]
+  },
+  {
     "objectID": "web5_labs.html#week-2-0913",
     "href": "web5_labs.html#week-2-0913",
     "title": "Lab Materials",
     "section": "Week 2: 09/13",
-    "text": "Week 2: 09/13",
+    "text": "Week 2: 09/13\n\nStudent shell\nTA notebook: qmd; html",
     "crumbs": [
       "Lab Materials"
     ]
