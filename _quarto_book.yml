@@ -26,11 +26,11 @@ book:
   reader-mode: true
   chapters:
     - index.qmd
-    - slide_decks.qmd
-    - required_readings.qmd
-    - application_assignments.qmd
-    - lab_materials.qmd
-    - exams.qmd
+    - web2_slide_decks.qmd
+    - web3_required_readings.qmd
+    - web4_application_assignments.qmd
+    - web5_labs.qmd
+    - web6_exams.qmd
     - part: Appendices
       chapters:
-        - app_terminology.qmd
+        - app1_terminology.qmd
