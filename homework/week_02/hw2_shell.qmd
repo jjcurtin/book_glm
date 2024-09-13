@@ -67,11 +67,11 @@ At the end of the study, participants’ learning was assessed using three postt
 
 * `condition` (0 = Teach; 1 = Explore)
 
-* `physics_con_con` (conceptual understanding score)
+* `physics_con` (conceptual understanding score)
 
-* `physics_con_proc` (procedural competence score)
+* `physics_proc` (procedural competence score)
 
-* `physics_con_perc` (perceptual problem encoding score)
+* `physics_perc` (perceptual problem encoding score)
 
 The researchers hope to use these data to answer the following question: do participants’ pretest score and condition (Explore vs. Teach) predict posttest score?
 
@@ -140,7 +140,7 @@ Generate descriptive stats (mean, median, standard deviation, etc.) without any 
 
 
 ### b.
-Get descriptive statistics for just the pretest variable.
+Get descriptive statistics for just the pretest knowledge variable (`science_aptitude`).
 
 
 
@@ -160,7 +160,7 @@ Check that your new variable is indeed mean-centered using code.
 
 
 ## 4. Center condition 
-Recode (have teach and explore as labels) - to make numeric (assign 2 values - -.5, .5)
+Recode `condition` into a new numeric variable where teach = -.5 and explore = -0.5 
 
 
 
@@ -191,10 +191,6 @@ The mean is `YOUR RESPONSE GOES HERE` and the sd is `YOUR RESPONSE GOES HERE`
 ### c.
 Generate descriptive statistics of `posttest_m` for each of the experimental conditions.
 
-
-### d.
-
-Create a new variable (`post_diff`) that is the difference between the mean posttest score (`posttest_m`) and pretest score on knowledge of the physics concept (`science_aptitude`)
 
 ## 6. Standardizing physics_con score:
 
@@ -253,8 +249,8 @@ Take a minute to reflect on the materials covered in this homework.
 
 ## 15. Render your quarto doc using the render button near the top of your RStudio window. 
 
-If rendering is successful, RStudio will also output an HTML file of your homework. Please submit your .qmd file, your HTML file, and your Word doc for question 7 in Canvas.
+If rendering is successful, RStudio will also output a single HTML file of your homework. Please submit your .qmd file, your .html file in Canvas.
 
 If you have trouble rendering your file, please contact LiChen, Claire, or Coco.
 
-**Congrats on finishing HW 1!**
+**Congrats on finishing your second application assignment!**
