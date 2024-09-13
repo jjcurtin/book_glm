@@ -7,8 +7,8 @@
 
 ## Week 02: Due Wednesday, 09/18 at 1:30 pm
 
-- [shell]()
-- [data]()
+- [shell](homework/week_02/hw2_shell.qmd)
+- [data](homework/week_02/hw2_data.csv)
 - key: [html](); [qmd]()
 
 ## Week 03: Due Wednesday, 09/25 at 1:30 pm
