@@ -1,15 +1,13 @@
 ---
-title: "Slideset Q&A Demo"
+title: "Slideset Q&A Style Demo"
 format: revealjs
 ---
 
+## Fragments
 
+This is a new revealJS feature does exactly what we want! A "fragment" only appears when you click, as if advancing the slide. It allows a Q&A to remain on a single slide, while retaining the functionality of advancing between slides.
 
-## Fragments!!
-
-This is a new revealJS feature does exactly what we want! A "fragment" only appears when you click, as if advancing the slide.
-
-In this case I have hidden both the question and the answer. This forces people to read/listen and not just jump to the question:
+In this case I have hidden both the question and the answer, each inside a separate 3-colon fence. This forces people to read/listen to the initial text on the side, and not just jump to the question:
 
 :::{.fragment}
 [Here's a question?]{style="color:red;"}
@@ -17,16 +15,22 @@ In this case I have hidden both the question and the answer. This forces people 
 
 :::{.fragment}
 [Here's the answer.]{style="color:green;"}
-
-You can also use the .fragment specification on an image without the triple-colon fences:
 :::
 
+## Ways to Define Fragments
+
+You can use the `{.fragment}` specification directly on text or image, and it's exactly the same as enclosing it in the 3-colon fence, just less typing:
+
+An image just has the brace at the end:
 ![](https://dionysus.psych.wisc.edu/Facebook/cover.png){.fragment}
 
+### So does a header{.fragment}
 
-## Nested Fragments
+[Text must be inside square brackets, followed by the .fragment brace.]{.fragment}
 
-Nested fragments allow us to hide code or a graph in our answer as well.
+## Fragments with Graphs
+
+You can add other items besides text in a fragment:
 
 ::: {.callout-important}
 ## What is the question?
@@ -34,9 +38,9 @@ Nested fragments allow us to hide code or a graph in our answer as well.
 
 :::{.fragment}
 Here's an answer. Advance again to see a graph!
+:::
 
 :::{.fragment}
-
 
 ```{r}
 #| echo: true
@@ -46,23 +50,20 @@ ggplot(airquality, aes(Temp, Ozone)) +
   geom_smooth(method = "loess")
 ```
 :::
-:::
 
+## Fragment for code output
 
-## Nested Fragments 2
-
-Maybe you want the code to appear before the output. In that case, use nested fragments and ALSO specify the output-location code chunk as fragment:
+Maybe you want the code for a graph to appear before the output. In that case, put the code chunk in a fragment and ALSO specify the `#| output-location: fragment` option.
 
 ::: {.callout-important}
 ## What is the question?
 :::
 
 :::{.fragment}
-Here's an answer. Only the code will appear next:
+Here's an answer. Only the code will appear next. Advance one more time to see the graph.
+:::
 
 :::{.fragment}
-
-
 ```{r}
 #| echo: true
 #| output-location: fragment
@@ -72,17 +73,32 @@ ggplot(airquality, aes(Temp, Ozone)) +
   geom_smooth(method = "loess")
 ```
 :::
+
+## Nested Fragments
+
+If you nest fragment fences, you can sequentially apply multiple styles to a single object:
+
+::: {.fragment .fade-in}
+:::: {.fragment .highlight-red}
+::::: {.fragment .semi-fade-out}
+Fade in > Turn red > Semi fade out
+:::::
+::::
 :::
 
-## Question stying
+Fragments can decorate text as well as just display it! See [this reference document](https://quarto.org/docs/presentations/revealjs/advanced.html#fragments) for more fragment options.
 
-I've gone back and forth between using a simple red styling and applying the callout styling to a question. Here are a few options side by side. Styling and fragment can be applied in the same braces.
+## Question Styling
+
+You can use either simple red styling or apply the callout styling to a question. Here are a few options side by side. Note that styling and fragment can be applied in the same braces, whether used with fences or directly on an object or text.
 
 ::: {.fragment .callout-important}
-## Question with callout styling
+## Question with callout styling (John's preferred)
 :::
 
-[Answer]{.fragment style="color:green;"} 
+:::{.fragment style="color:green;"} 
+Answer.
+:::
 
 ### Question as header (bold/larger text) with red styling{.fragment style="color:red;"}
 
@@ -97,7 +113,7 @@ I've gone back and forth between using a simple red styling and applying the cal
 [I also tested fragments with printing. All fragments are revealed in the output when using ctrl-P from a browser!]{.fragment style="color:blue;"} 
 
 
-# Historical Record of Previous Styles
+## Historical Record of Previous Styles
 
 For reference only, here are some older styles and the reasons we stopped using them
 
