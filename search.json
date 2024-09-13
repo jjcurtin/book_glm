@@ -210,8 +210,8 @@
     ]
   },
   {
-    "objectID": "slide_decks.html",
-    "href": "slide_decks.html",
+    "objectID": "web2_slide_decks.html",
+    "href": "web2_slide_decks.html",
     "title": "Slide Decks",
     "section": "",
     "text": "Unit 1: Overview\nUnit 2: Sampling Distributions, Parameters, and Parameter Estimates\nUnit 3: Inferences About a Single Mean (1 Parameter Models)",
@@ -220,8 +220,8 @@
     ]
   },
   {
-    "objectID": "required_readings.html",
-    "href": "required_readings.html",
+    "objectID": "web3_required_readings.html",
+    "href": "web3_required_readings.html",
     "title": "Required Reading",
     "section": "",
     "text": "Unit 1",
@@ -230,8 +230,8 @@
     ]
   },
   {
-    "objectID": "required_readings.html#unit-1",
-    "href": "required_readings.html#unit-1",
+    "objectID": "web3_required_readings.html#unit-1",
+    "href": "web3_required_readings.html#unit-1",
     "title": "Required Reading",
     "section": "",
     "text": "Judd et a., Chapter 1, Introduction to Data Analysis",
@@ -240,8 +240,8 @@
     ]
   },
   {
-    "objectID": "required_readings.html#unit-2",
-    "href": "required_readings.html#unit-2",
+    "objectID": "web3_required_readings.html#unit-2",
+    "href": "web3_required_readings.html#unit-2",
     "title": "Required Reading",
     "section": "Unit 2",
     "text": "Unit 2\n\nJudd et al. Chapter 2, Definitions of Error and Parameter Estimates\nJudd et al. Chapter 3, Models of Error and Sampling Distributions",
@@ -250,8 +250,8 @@
     ]
   },
   {
-    "objectID": "required_readings.html#unit-3",
-    "href": "required_readings.html#unit-3",
+    "objectID": "web3_required_readings.html#unit-3",
+    "href": "web3_required_readings.html#unit-3",
     "title": "Required Reading",
     "section": "Unit 3",
     "text": "Unit 3\n\nJudd et al. Chapter 4. Simple Models: Statistical Inferences about Parameter Values",
@@ -260,8 +260,8 @@
     ]
   },
   {
-    "objectID": "application_assignments.html",
-    "href": "application_assignments.html",
+    "objectID": "web4_application_assignments.html",
+    "href": "web4_application_assignments.html",
     "title": "Application Assignments",
     "section": "",
     "text": "Week 01: Due Wednesday, 9/11 at 1:30 pm",
@@ -270,8 +270,8 @@
     ]
   },
   {
-    "objectID": "application_assignments.html#week-01-due-wednesday-911-at-130-pm",
-    "href": "application_assignments.html#week-01-due-wednesday-911-at-130-pm",
+    "objectID": "web4_application_assignments.html#week-01-due-wednesday-911-at-130-pm",
+    "href": "web4_application_assignments.html#week-01-due-wednesday-911-at-130-pm",
     "title": "Application Assignments",
     "section": "",
     "text": "instructions\nkey: html; qmd",
@@ -280,8 +280,8 @@
     ]
   },
   {
-    "objectID": "application_assignments.html#week-02-due-wednesday-0918-at-130-pm",
-    "href": "application_assignments.html#week-02-due-wednesday-0918-at-130-pm",
+    "objectID": "web4_application_assignments.html#week-02-due-wednesday-0918-at-130-pm",
+    "href": "web4_application_assignments.html#week-02-due-wednesday-0918-at-130-pm",
     "title": "Application Assignments",
     "section": "Week 02: Due Wednesday, 09/18 at 1:30 pm",
     "text": "Week 02: Due Wednesday, 09/18 at 1:30 pm\n\nshell\ndata\nkey: html; qmd",
@@ -290,8 +290,8 @@
     ]
   },
   {
-    "objectID": "application_assignments.html#week-03-due-wednesday-0925-at-130-pm",
-    "href": "application_assignments.html#week-03-due-wednesday-0925-at-130-pm",
+    "objectID": "web4_application_assignments.html#week-03-due-wednesday-0925-at-130-pm",
+    "href": "web4_application_assignments.html#week-03-due-wednesday-0925-at-130-pm",
     "title": "Application Assignments",
     "section": "Week 03: Due Wednesday, 09/25 at 1:30 pm",
     "text": "Week 03: Due Wednesday, 09/25 at 1:30 pm",
@@ -300,8 +300,8 @@
     ]
   },
   {
-    "objectID": "application_assignments.html#week-04-due-wednesday-1002-at-130-pm",
-    "href": "application_assignments.html#week-04-due-wednesday-1002-at-130-pm",
+    "objectID": "web4_application_assignments.html#week-04-due-wednesday-1002-at-130-pm",
+    "href": "web4_application_assignments.html#week-04-due-wednesday-1002-at-130-pm",
     "title": "Application Assignments",
     "section": "Week 04: Due Wednesday, 10/02 at 1:30 pm",
     "text": "Week 04: Due Wednesday, 10/02 at 1:30 pm",
@@ -310,8 +310,8 @@
     ]
   },
   {
-    "objectID": "application_assignments.html#week-05-no-application-assignment.-application-exam-week",
-    "href": "application_assignments.html#week-05-no-application-assignment.-application-exam-week",
+    "objectID": "web4_application_assignments.html#week-05-no-application-assignment.-application-exam-week",
+    "href": "web4_application_assignments.html#week-05-no-application-assignment.-application-exam-week",
     "title": "Application Assignments",
     "section": "Week 05: No application assignment. Application exam week!",
     "text": "Week 05: No application assignment. Application exam week!",
@@ -320,8 +320,8 @@
     ]
   },
   {
-    "objectID": "application_assignments.html#week-06-due-wednesday-1016-at-130-pm",
-    "href": "application_assignments.html#week-06-due-wednesday-1016-at-130-pm",
+    "objectID": "web4_application_assignments.html#week-06-due-wednesday-1016-at-130-pm",
+    "href": "web4_application_assignments.html#week-06-due-wednesday-1016-at-130-pm",
     "title": "Application Assignments",
     "section": "Week 06: Due Wednesday, 10/16 at 1:30 pm",
     "text": "Week 06: Due Wednesday, 10/16 at 1:30 pm",
@@ -330,8 +330,8 @@
     ]
   },
   {
-    "objectID": "application_assignments.html#week-07-due-wednesday-1023-at-130-pm",
-    "href": "application_assignments.html#week-07-due-wednesday-1023-at-130-pm",
+    "objectID": "web4_application_assignments.html#week-07-due-wednesday-1023-at-130-pm",
+    "href": "web4_application_assignments.html#week-07-due-wednesday-1023-at-130-pm",
     "title": "Application Assignments",
     "section": "Week 07: Due Wednesday, 10/23 at 1:30 pm",
     "text": "Week 07: Due Wednesday, 10/23 at 1:30 pm",
@@ -340,8 +340,8 @@
     ]
   },
   {
-    "objectID": "application_assignments.html#week-08-due-wednesday-1010-at-130-pm",
-    "href": "application_assignments.html#week-08-due-wednesday-1010-at-130-pm",
+    "objectID": "web4_application_assignments.html#week-08-due-wednesday-1010-at-130-pm",
+    "href": "web4_application_assignments.html#week-08-due-wednesday-1010-at-130-pm",
     "title": "Application Assignments",
     "section": "Week 08: Due Wednesday, 10/10 at 1:30 pm",
     "text": "Week 08: Due Wednesday, 10/10 at 1:30 pm",
@@ -350,8 +350,8 @@
     ]
   },
   {
-    "objectID": "application_assignments.html#week-09-due-wednesday-1106-at-130-pm",
-    "href": "application_assignments.html#week-09-due-wednesday-1106-at-130-pm",
+    "objectID": "web4_application_assignments.html#week-09-due-wednesday-1106-at-130-pm",
+    "href": "web4_application_assignments.html#week-09-due-wednesday-1106-at-130-pm",
     "title": "Application Assignments",
     "section": "Week 09: Due Wednesday, 11/06 at 1:30 pm",
     "text": "Week 09: Due Wednesday, 11/06 at 1:30 pm",
@@ -360,8 +360,8 @@
     ]
   },
   {
-    "objectID": "application_assignments.html#week-10-no-application-assignnment.-application-exam-week",
-    "href": "application_assignments.html#week-10-no-application-assignnment.-application-exam-week",
+    "objectID": "web4_application_assignments.html#week-10-no-application-assignnment.-application-exam-week",
+    "href": "web4_application_assignments.html#week-10-no-application-assignnment.-application-exam-week",
     "title": "Application Assignments",
     "section": "Week 10: No application assignnment. Application exam week!",
     "text": "Week 10: No application assignnment. Application exam week!",
@@ -370,8 +370,8 @@
     ]
   },
   {
-    "objectID": "application_assignments.html#week-11-due-wednesday-1120-at-130-pm",
-    "href": "application_assignments.html#week-11-due-wednesday-1120-at-130-pm",
+    "objectID": "web4_application_assignments.html#week-11-due-wednesday-1120-at-130-pm",
+    "href": "web4_application_assignments.html#week-11-due-wednesday-1120-at-130-pm",
     "title": "Application Assignments",
     "section": "Week 11: Due Wednesday, 11/20 at 1:30 pm",
     "text": "Week 11: Due Wednesday, 11/20 at 1:30 pm",
@@ -380,8 +380,8 @@
     ]
   },
   {
-    "objectID": "application_assignments.html#week-12-due-wednesday-1127-at-130-pm",
-    "href": "application_assignments.html#week-12-due-wednesday-1127-at-130-pm",
+    "objectID": "web4_application_assignments.html#week-12-due-wednesday-1127-at-130-pm",
+    "href": "web4_application_assignments.html#week-12-due-wednesday-1127-at-130-pm",
     "title": "Application Assignments",
     "section": "Week 12: Due Wednesday 11/27 at 1:30 pm",
     "text": "Week 12: Due Wednesday 11/27 at 1:30 pm",
@@ -390,8 +390,8 @@
     ]
   },
   {
-    "objectID": "application_assignments.html#week-13-no-application-assignment.-thanksgiving-break",
-    "href": "application_assignments.html#week-13-no-application-assignment.-thanksgiving-break",
+    "objectID": "web4_application_assignments.html#week-13-no-application-assignment.-thanksgiving-break",
+    "href": "web4_application_assignments.html#week-13-no-application-assignment.-thanksgiving-break",
     "title": "Application Assignments",
     "section": "Week 13: No application assignment. Thanksgiving Break",
     "text": "Week 13: No application assignment. Thanksgiving Break",
@@ -400,8 +400,8 @@
     ]
   },
   {
-    "objectID": "application_assignments.html#week-14-due-wednesday-1211-at-130-pm",
-    "href": "application_assignments.html#week-14-due-wednesday-1211-at-130-pm",
+    "objectID": "web4_application_assignments.html#week-14-due-wednesday-1211-at-130-pm",
+    "href": "web4_application_assignments.html#week-14-due-wednesday-1211-at-130-pm",
     "title": "Application Assignments",
     "section": "Week 14: Due Wednesday, 12/11 at 1:30 pm",
     "text": "Week 14: Due Wednesday, 12/11 at 1:30 pm",
@@ -410,8 +410,8 @@
     ]
   },
   {
-    "objectID": "application_assignments.html#week-15-no-application-assignment.-application-exam-week",
-    "href": "application_assignments.html#week-15-no-application-assignment.-application-exam-week",
+    "objectID": "web4_application_assignments.html#week-15-no-application-assignment.-application-exam-week",
+    "href": "web4_application_assignments.html#week-15-no-application-assignment.-application-exam-week",
     "title": "Application Assignments",
     "section": "Week 15: No application assignment. Application exam week!",
     "text": "Week 15: No application assignment. Application exam week!",
@@ -420,8 +420,8 @@
     ]
   },
   {
-    "objectID": "lab_materials.html",
-    "href": "lab_materials.html",
+    "objectID": "web5_labs.html",
+    "href": "web5_labs.html",
     "title": "Lab Materials",
     "section": "",
     "text": "Week 1: 09/06",
@@ -430,8 +430,8 @@
     ]
   },
   {
-    "objectID": "lab_materials.html#week-2-0913",
-    "href": "lab_materials.html#week-2-0913",
+    "objectID": "web5_labs.html#week-2-0913",
+    "href": "web5_labs.html#week-2-0913",
     "title": "Lab Materials",
     "section": "Week 2: 09/13",
     "text": "Week 2: 09/13",
@@ -440,8 +440,8 @@
     ]
   },
   {
-    "objectID": "lab_materials.html#week-3-0920",
-    "href": "lab_materials.html#week-3-0920",
+    "objectID": "web5_labs.html#week-3-0920",
+    "href": "web5_labs.html#week-3-0920",
     "title": "Lab Materials",
     "section": "Week 3: 09/20",
     "text": "Week 3: 09/20",
@@ -450,8 +450,8 @@
     ]
   },
   {
-    "objectID": "lab_materials.html#week-4-0927",
-    "href": "lab_materials.html#week-4-0927",
+    "objectID": "web5_labs.html#week-4-0927",
+    "href": "web5_labs.html#week-4-0927",
     "title": "Lab Materials",
     "section": "Week 4: 09/27",
     "text": "Week 4: 09/27",
@@ -460,8 +460,8 @@
     ]
   },
   {
-    "objectID": "exams.html",
-    "href": "exams.html",
+    "objectID": "web6_exams.html",
+    "href": "web6_exams.html",
     "title": "Exams",
     "section": "",
     "text": "Application Exam 1",
@@ -470,8 +470,8 @@
     ]
   },
   {
-    "objectID": "exams.html#application-exam-2",
-    "href": "exams.html#application-exam-2",
+    "objectID": "web6_exams.html#application-exam-2",
+    "href": "web6_exams.html#application-exam-2",
     "title": "Exams",
     "section": "Application Exam 2",
     "text": "Application Exam 2",
@@ -480,8 +480,8 @@
     ]
   },
   {
-    "objectID": "exams.html#application-exam-3",
-    "href": "exams.html#application-exam-3",
+    "objectID": "web6_exams.html#application-exam-3",
+    "href": "web6_exams.html#application-exam-3",
     "title": "Exams",
     "section": "Application Exam 3",
     "text": "Application Exam 3",
@@ -490,8 +490,8 @@
     ]
   },
   {
-    "objectID": "exams.html#concepts-exam-1",
-    "href": "exams.html#concepts-exam-1",
+    "objectID": "web6_exams.html#concepts-exam-1",
+    "href": "web6_exams.html#concepts-exam-1",
     "title": "Exams",
     "section": "Concepts Exam 1",
     "text": "Concepts Exam 1",
@@ -500,8 +500,8 @@
     ]
   },
   {
-    "objectID": "exams.html#concepts-exam-2",
-    "href": "exams.html#concepts-exam-2",
+    "objectID": "web6_exams.html#concepts-exam-2",
+    "href": "web6_exams.html#concepts-exam-2",
     "title": "Exams",
     "section": "Concepts Exam 2",
     "text": "Concepts Exam 2",
