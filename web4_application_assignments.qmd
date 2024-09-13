@@ -3,7 +3,7 @@
 ## Week 01: Due Wednesday, 9/11 at 1:30 pm
 
 - [instructions](/homework/week_01/hw_01.pdf) 
-- key: [html](https://dionysus.psych.wisc.edu/610/hw1_key.html); [qmd](https://dionysus.psych.wisc.edu/610/hw1_key.qmd)
+- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw1_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw1_key.qmd)
 
 ## Week 02: Due Wednesday, 09/18 at 1:30 pm
 
