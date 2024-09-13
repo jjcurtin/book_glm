@@ -4,60 +4,8 @@ format: revealjs
 ---
 
 
-## Separate Slides
 
-### Here is the question{style="color:red;"}
-
-## Separate Slides
-
-### Here is the question{style="color:red;"}
-
-[A new slide shows the answer, too.]{style="color:green;"}
-
-
-## Callout
-
-Alas, this wonderful feature does not work in revealJS
-
-::: {.callout-important collapse="true"}
-
-### This is the question you want displayed?
-
-Here's the answer! This can be as long as you want but only in HTML.
-
-:::
-
-## Code Folding
-
-Our previous final solution was code folding, BUT, this only works if you only displaying text. As soon as you try to include a graph in the callout, the graph itself is visible before you click:
-
-::: {.callout-important collapse="false"}
-## If the DGP for y is a cubic function of x, what do we know about the expected bias for our three candidate model configurations in this example?
-
-```{html}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show Answer"
-The simple linear model will underfit the true DGP and therefore it will be biased b/c 
-it can only represent y as a linear function of x.  
-
-The two polynomial models will be generally unbiased b/c they have x represented 
-with 20th order polynomials.  
-
-LASSO will be slightly biased due to regularization but more on that in a later unit
-
-```
-
-```{r}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show code"
-# A graph 
-plot(mtcars$disp, mtcars$qsec)
-```
-:::
-
-## Hello Fragments!!
+## Fragments!!
 
 This is a new revealJS feature does exactly what we want! A "fragment" only appears when you click, as if advancing the slide.
 
@@ -73,7 +21,7 @@ In this case I have hidden both the question and the answer. This forces people 
 You can also use the .fragment specification on an image without the triple-colon fences:
 :::
 
-![](https://quarto.org/quarto.png){.fragment}
+![](https://dionysus.psych.wisc.edu/Facebook/cover.png){.fragment}
 
 
 ## Nested Fragments
@@ -148,3 +96,62 @@ I've gone back and forth between using a simple red styling and applying the cal
 
 [I also tested fragments with printing. All fragments are revealed in the output when using ctrl-P from a browser!]{.fragment style="color:blue;"} 
 
+
+# Historical Record of Previous Styles
+
+For reference only, here are some older styles and the reasons we stopped using them
+
+## Separate Slides
+
+### Here is the question{style="color:red;"}
+
+## Separate Slides
+
+### Here is the question{style="color:red;"}
+
+[A new slide shows the answer, too.]{style="color:green;"}
+
+This is cumbersome, adding 2 slides for every question.
+
+
+## Callout
+
+Alas, this wonderful feature does not work in revealJS but works well for html web books
+
+::: {.callout-important collapse="true"}
+
+### This is the question you want displayed?
+
+Here's the answer! This can be as long as you want but only in HTML.
+
+:::
+
+## Code Folding
+
+Our previous final solution was code folding, BUT, this only works if you only displaying text. As soon as you try to include a graph in the callout, the graph itself is visible before you click:
+
+::: {.callout-important collapse="false"}
+## If the DGP for y is a cubic function of x, what do we know about the expected bias for our three candidate model configurations in this example?
+
+```{html}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+The simple linear model will underfit the true DGP and therefore it will be biased b/c 
+it can only represent y as a linear function of x.  
+
+The two polynomial models will be generally unbiased b/c they have x represented 
+with 20th order polynomials.  
+
+LASSO will be slightly biased due to regularization but more on that in a later unit
+
+```
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show code"
+# A graph 
+plot(mtcars$disp, mtcars$qsec)
+```
+:::
