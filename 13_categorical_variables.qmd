@@ -5,7 +5,7 @@ editor_options:
 --- 
  
 
-# Categorical Variables > 2 Levels
+# Categorical Variables > 2 Levels {.unnumbered}
 
 ```{r}
 #| echo: false

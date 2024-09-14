@@ -1,0 +1,256 @@
+---
+title: "hw2" 
+author: "" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+# Set up
+
+To keep in line with best practices, we ask you do the following things in a code chunk at the beginning of each quarto document. 
+
+1. **Set conflict policy**   
+
+    - This is important so that we know if we load two packages with conflicting functions (i.e., they have the same name). Using `options(conflicts.policy = "depends.ok")` at the top of your setup code chunk (i.e., before you load any packages) will produce an error if two conflicting packages are loaded. There are ways to set custom conflict policies and work around conflicts (e.g., only loading certain functions from a package). You can find more documentation [here](https://jjcurtin.github.io/book_dwvt/conflicts.html).  
+
+2. **Load packages**    
+
+    - You should load the **minimum** number of packages needed to execute your code. Often times this may just be `tidyverse`. Loading as few as possible packages also helps reduce the likelihood of conflicts.    
+
+    - To load packages use the `library()` function. If you have never installed the package you will need to do that using `install.packages()` before the first time you use the package.  
+    
+    - In this assignment, load tidyverse and skimr
+
+3. **Set path**   
+
+    - This should be a relative path from your R project pointing to your homework folder.   
+    
+
+4. A few other things to notice in the example setup code chunk below:   
+
+- You can customize code chunk settings. For example, in the chunk below we are using `#| message: false` to indicate that we do not want to print out messages associated with loading a library. **These settings will only take effect for when you render the document.**  
+
+- We are using the `here()` function in the `here` package (`here::here()`) to define the path when reading in our data. This approach (vs. `file.path()`) works well for relative paths when using R Projects.   
+
+- We are setting a `ggplot2` theme using `theme_set(theme_classic())`. This applies a specific theme to all plots in the quarto document. There are several themes you can choose. We like `theme_classic()` because it is pretty and close to APA format.  
+
+```{r}
+# suppress messages
+
+# setup code goes here
+
+```
+
+
+
+# Part I. Working with Data in R
+For this first assignment, we’re using fake data to practice your new skills.
+
+This hypothetical study is based on work in science and math learning (e.g., Schwartz, D. L., Chase, C. C., Oppezzo, M. A., & Chin, D. B. (2011). Practicing versus inventing with contrasting cases: The effects of telling first on learning and transfer. *Journal of Educational Psychology, 103(4)*, 759–775.).
+
+In this hypothetical study, suppose participants have been randomly assigned to one of two conditions, Explore or Teach, to learn about a new physics concept.
+
+All participants enrolled in the study completed a pretest, to assess their prior knowledge of the physics concept. Then, participants in the Explore condition attempted to solve related problems on their own to learn about the concept, while participants in the Teach condition received a lesson about the concept directly from an instructor instead.
+
+At the end of the study, participants’ learning was assessed using three posttest measures assessing conceptual understanding (knowledge about the physics concept), procedural competence (ability to work with the concept in laboratory), and perceptual problem encoding (meaningful mental representations of the concept). Thus, the data file includes the following 6 variables:
+
+
+* `sub_id` (Subject ID number) 
+
+* `science_aptitude` (pretest score on knowledge of the physics concept)
+
+* `condition` (0 = Teach; 1 = Explore)
+
+* `physics_con` (conceptual understanding score)
+
+* `physics_proc` (procedural competence score)
+
+* `physics_perc` (perceptual problem encoding score)
+
+The researchers hope to use these data to answer the following question: do participants’ pretest score and condition (Explore vs. Teach) predict posttest score?
+
+
+## 1. Read the data in and check them out.
+
+### a. 
+Read in `hw2_data.csv`, from the course webpage. Name the dataframe `d`.
+```{r}
+
+```
+
+### b. 
+Use one of the functions we learned in lab to inspect the data.
+```{r}
+
+```
+
+What object class does skim() return?
+
+```{r}
+
+```
+
+Glimpse results from skim()
+
+```{r}
+
+```
+
+
+Practice skimming a subset of the dataframe (from condition to physics_proc)
+
+```{r}
+
+```
+
+
+Next, show how you can get the same information using the summarise() function.
+
+```{r}
+
+```
+
+
+
+
+### c.
+Write out a list of all of the DV(s) and all of the IV(s)/predictor variables present in this dataset. When you are done, you should have 2 lists of variables.
+
+IVs:     
+DVs: 
+
+
+## 2. Obtain the following basic information about your data:
+
+Now try create your own code chunks.
+
+### a.
+
+You can also skim your dataframe without generating the histogram for numeric variables. Google which function in `skimr` package allows you to do that.
+
+`your response goes here`
+
+Generate descriptive stats (mean, median, standard deviation, etc.) without any charts for all variables in the `d` dataframe.
+
+
+### b.
+Get descriptive statistics for just the pretest knowledge variable (`science_aptitude`).
+
+
+
+### c.
+Generate a histogram for the pretest variable
+
+
+## 3. Centering pretest:
+
+### a.
+Create a new variable that is the mean-centered score for pretest knowledge. Give this variable a good name (following the class conventions covered in lab).
+
+
+### b.
+Check that your new variable is indeed mean-centered using code.
+
+
+
+## 4. Center condition 
+Recode `condition` into a new numeric variable where teach = -.5 and explore = -0.5 
+
+
+
+## 5. Create a single global measure of overall learning by averaging the posttest measures:
+
+### a.
+
+Create a variable that is the average of the three posttest variables (ignore missing data). Name this variable `posttest_m` 
+
+```{r}
+
+```
+
+Now see if you can achieve the same thing with `rowwise()` and `mutate()`
+
+```{r}
+
+```
+
+
+### b.
+What are the mean and standard deviation of `posttest_m`? Answer in .qmd as plain text.
+
+The mean is `YOUR RESPONSE GOES HERE` and the sd is `YOUR RESPONSE GOES HERE`
+
+`INSERT CODE CHUNK`
+
+### c.
+Generate descriptive statistics of `posttest_m` for each of the experimental conditions.
+
+
+## 6. Standardizing physics_con score:
+
+### a.
+Create a standardized variable for the conceptual understanding measure, with an appropriate name (following class conventions).
+
+
+
+### b.
+Using one line of code, check your work to make sure this is the standardized score.
+
+
+
+### c.
+You have now created several new variables. Write out a command that shows the names of all the variables (also known as “columns”) in the d data frame (it’s okay if the command shows you more information than just the column names, but finding a command that will give you only this information is a good opportunity to practice Googling!)
+
+
+
+
+## 7. Make a scatter plot with raw pretest score (`science_aptitude`) on the x-axis, mean posttest score on the y-axis.
+
+```{r}
+
+```
+
+These data look strange because there seems to be no relationship between participants' pretest score and mean posttest score (however we cannot say for sure just by eyeballing; we need to statistically test it). The mean posttest score is also divided into two extreme clusters with few individuals scoring in the 70-75 range. This is unusual, and may indicate that the data are fake!
+
+## 8. Use the command we learned in lab to generate the mean posttest score for each condition.
+
+```{r}
+
+```
+
+It seems that those in Explore condition scored higher on the mean posttest score than those in Teach condition, suggesting active exploration promotes learning compared to passive teaching.
+
+# Part II: Reading Questions (Chapters 1 and 2)
+Answer the following questions in a few sentences directly in your qmd file (not within a code chunk).
+
+## 10. When fitting a model to data, the data analyst faces two conflicting goals. What are those two goals and why are they conflicting?
+
+
+
+## 11. What are two consequences of using sum of squared errors rather than the sum of errors as a summary measure of model error?
+
+
+
+# Part III: Reflection
+Take a minute to reflect on the materials covered in this homework. 
+
+## 12. Which parts did you understand pretty well?
+
+## 13. Which parts appear to you the most unclear or difficult? 
+
+
+## 14. How long did it take you to complete this assignment? Write the number of hours.
+
+## 15. Render your quarto doc using the render button near the top of your RStudio window. 
+
+If rendering is successful, RStudio will also output a single HTML file of your homework. Please submit your .qmd file, your .html file in Canvas.
+
+If you have trouble rendering your file, please contact LiChen, Claire, or Coco.
+
+**Congrats on finishing your second application assignment!**

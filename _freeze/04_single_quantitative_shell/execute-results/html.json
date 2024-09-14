@@ -1,9 +1,11 @@
 {
-  "hash": "13368e087e6bc2e2ef6696b9de7d4166",
+  "hash": "07b2d73ac22686b45eae7d91cb1842f1",
   "result": {
     "engine": "knitr",
-    "markdown": "--- \noutput: html_document \neditor_options:  \n  chunk_output_type: console\n--- \n\n \n\n# Inferences About a Single Quantitative Predictor\n\n\n::: {.cell}\n\n:::\n\n\n\n## Assignments\n\nRead\n\n- TBD \n\nApplication assignment (due ??? @ 1:30 via Canvas)\n\n- [assignment]()\n- [data]()\n- [key]()\n",
-    "supporting": [],
+    "markdown": "--- \noutput: html_document \neditor_options:  \n  chunk_output_type: console\n--- \n\n \n\n# Inferences About a Single Quantitative Predictor {.unnumbered}\n\n\n::: {.cell}\n\n:::\n\n\n\n## Assignments\n\nRead\n\n- TBD \n\nApplication assignment (due ??? @ 1:30 via Canvas)\n\n- [assignment]()\n- [data]()\n- [key]()\n",
+    "supporting": [
+      "04_single_quantitative_shell_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

@@ -5,12 +5,12 @@ editor_options:
 ---
 
 
-# Unit 1: Overview
+# Unit 1: Overview {.unnumbered}
 
 
 ## Today's Outline
 
-- Quick introductions of TAs and me
+- Quick introductions of TAs and me (and you)
 
 - Syllabus and course outline
 
