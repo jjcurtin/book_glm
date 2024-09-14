@@ -65,17 +65,17 @@ Variables:
 
 
 
-**a. convert variable names to snake case.**
+#### a. convert variable names to snake case.
 
 
-**b. Create a composite score for political affiliation by combing `anes_rep`, `anes_dem`, and `anes_ind`. The resulting variable should a factor that includes the following levels and labels: 1 (Strong Republican), 2 (Weak Republican), 3 (Republican Leaning Independent), 4 (Independent), 5 (Democratic Leaning Independent), 6 (Weak Democrat), and 7 (Strong Democrat). You can remove the original variables: `anes_rep`, `anes_dem`, and `anes_ind`. You may need to use external sources like google and Chat GPT to complete this question.**
+#### b. Create a composite score for political affiliation by combing `anes_rep`, `anes_dem`, and `anes_ind`. The resulting variable should a factor that includes the following levels and labels: 1 (Strong Republican), 2 (Weak Republican), 3 (Republican Leaning Independent), 4 (Independent), 5 (Democratic Leaning Independent), 6 (Weak Democrat), and 7 (Strong Democrat). You can remove the original variables: `anes_rep`, `anes_dem`, and `anes_ind`. You may need to use external sources like google and Chat GPT to complete this question.
 
 
-**c. Convert any other ordinal variables to factors with descriptive labels.**   
+#### c. Convert any other ordinal variables to factors with descriptive labels.   
 
 
 
-**d. Get summary statistics for each of the variables in the data frame.** 
+#### d. Get summary statistics for each of the variables in the data frame. 
 
 
 ### 2.	Notice that there is a variable that we do not need for these analyses (labeled `annoying_variable`). Remove this variable. Run a command that shows the names of the variables that are left. 

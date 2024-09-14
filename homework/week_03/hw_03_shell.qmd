@@ -80,19 +80,19 @@ It contains the following variables:
 
 ### 8.	Create a quick and dirty plot that shows whether the number of stray dogs is related to the number of animal shelters in the state. This time, use the `plot()` function.
 
-a.	Create the plot.
+#### a.	Create the plot.
 
 ```{r}
 
 ```
 
-b.	Add a best fitting line.
+#### b.	Add a best fitting line.
 
 ```{r}
 
 ```
 
-c.	Does the relationship appear positive or negative? Strong, moderate, or weak?
+#### c.	Does the relationship appear positive or negative? Strong, moderate, or weak?
 
 
 
@@ -100,28 +100,28 @@ c.	Does the relationship appear positive or negative? Strong, moderate, or weak?
 
 ### 9.	Go through the following steps to create a composite score that reflects the overall numbers of stray animals, referred to as the `stray_index` in these questions:
 
-a.	Standardize the measures for stray dogs, stray cats, and other stray animals.
+#### a.	Standardize the measures for stray dogs, stray cats, and other stray animals.
 
 ```{r}
 
 ```
 
 
-b.	Check to make sure you standardized these variables correctly. 
+#### b.	Check to make sure you standardized these variables correctly. 
 
 ```{r}
 
 ```
 
 
-c.	Create a new variable (`strays_z_m`) representing the average of these standardized scores.
+#### c.	Create a new variable (`strays_z_m`) representing the average of these standardized scores.
 
 ```{r}
 
 ```
 
 
-d.	Comment on the researchers’ decision to standardize then average these scores. Does their decision make sense or not? How does this measure differ (in practical terms) from one in which the researchers average the scores without standardizing them? 
+#### d.	Comment on the researchers’ decision to standardize then average these scores. Does their decision make sense or not? How does this measure differ (in practical terms) from one in which the researchers average the scores without standardizing them? 
 
 
 
@@ -154,11 +154,11 @@ d.	Comment on the researchers’ decision to standardize then average these scor
 
 
 
-a.	Is estimating the mean worth the increased complexity of the model? Why? Interpret the result in plain English.
+#### a.	Is estimating the mean worth the increased complexity of the model? Why? Interpret the result in plain English.
 
 
 
-b.	Why is this model comparison not super informative (i.e., why are you not surprised 0 is a worse predictor for the number of stray cats per year? Why is the null model “stupid”?).
+#### b.	Why is this model comparison not super informative (i.e., why are you not surprised 0 is a worse predictor for the number of stray cats per year? Why is the null model “stupid”?).
 
 
 
