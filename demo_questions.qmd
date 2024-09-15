@@ -1,0 +1,63 @@
+---
+format: revealjs
+---
+
+There are four options displayed across these next four slides
+
+## Option 1: a fragment that appears with a click
+
+:::{.fragment}
+[Here's a question using a red fragment that includes math symbols like $b_0$]{style="color:red;"}
+:::
+
+## Option 2: A callout where the question is in the callout title
+
+Note that the heading level does NOT matter so we use level 1
+
+::: {.callout-important}
+# A level 1 callout that includes math symbols like $b_0$
+:::
+
+## Option 3: A plain text callout with a title where the question is in the text box
+
+::: {.callout-important}
+# Question
+
+A plain text callout that includes math symbols like $b_0$
+:::
+
+## Option 4: A callout with title in fragment
+
+:::{.fragment}
+:::: {.callout-important}
+# Question
+
+A plain text callout that includes math symbols like $b_0$
+::::
+:::
+
+## Our choice
+
+- We will use callout with title (with or without a fragment) for questions and fragments for answers.  
+
+- We will use fragments with text colored blue for answers
+
+
+::: {.callout-important}
+# Question
+
+A plain text callout that includes math symbols like $b_0$
+:::
+
+:::{.fragment}
+:::: {.callout-important}
+# Question
+
+A plain text callout that includes math symbols like $b_0$
+::::
+:::
+
+
+:::{.fragment}
+[And an answer including math symbols like $b_0$]{style="color:blue;"}
+:::
