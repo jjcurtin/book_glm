@@ -6,6 +6,12 @@ editor_options:
  
 # Unit 2: Sampling Distributions, Parameters, and Parameter Estimates {.unnumbered} 
 
+```{r}
+#| echo: false
+
+options(scipen = 999) # turns off scientfic notation
+```
+
 ## Inferential Statistics
 
 Inferential statistics are used to estimate **parameters** in the **population** from **parameter estimates** in a **sample** drawn from that population. 

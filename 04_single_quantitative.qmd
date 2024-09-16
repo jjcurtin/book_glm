@@ -7,6 +7,12 @@ editor_options:
 
 # Unit 4: Inferences About a Single Quantitative Predictor
 
+```{r}
+#| echo: false
+
+options(scipen = 999) # turns off scientfic notation
+```
+
 ## Two Parameter (One Predictor) Models
 
 We started with a very simple model of FPS:
