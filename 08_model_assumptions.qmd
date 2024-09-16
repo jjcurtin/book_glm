@@ -5,7 +5,7 @@ editor_options:
 --- 
  
 
-# Dealing with Messy Data II: Model Assumptions
+# Unit 8: Dealing with Messy Data II - Model Assumptions
 
 ```{r}
 #| echo: false

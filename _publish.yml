@@ -6,10 +6,6 @@
   quarto-pub:
     - id: fb4fe633-6af5-4a4b-af8a-4fab0169e799
       url: 'https://jjcurtin.quarto.pub/03_single_mean'
-- source: 04_single_quantitative.qmd
-  quarto-pub:
-    - id: 776c00af-79fa-4713-9ce0-58ca6900cf34
-      url: 'https://kendra-wyant.quarto.pub/04_single_quantitative'
 - source: 05_single_dichotomous.qmd
   quarto-pub:
     - id: 51548c9d-856c-452e-85d6-0ae548e73a33
@@ -26,3 +22,15 @@
   quarto-pub:
     - id: f9d9d347-9b1d-44be-844d-0ee0e64a2eaf
       url: 'https://jjcurtin.quarto.pub/610_syllabus'
+- source: demo_styling.qmd
+  quarto-pub:
+    - id: 14430348-4dba-43fc-8aee-f0bab3bc0c9d
+      url: 'https://jjcurtin.quarto.pub/slideset-qa-style-demo'
+- source: demo_questions.qmd
+  quarto-pub:
+    - id: 439fa2aa-c1fb-4f2e-bb28-67ea4cb56fc8
+      url: 'https://jjcurtin.quarto.pub/question-styling-options'
+- source: 04_single_quantitative.qmd
+  quarto-pub:
+    - id: 551ce082-beda-4a0b-b1a8-d62aa07f7351
+      url: 'https://jjcurtin.quarto.pub/04_single_quantitative'

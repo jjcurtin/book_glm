@@ -122,7 +122,7 @@ SSE = `r round(sum(residuals(lm(y4 ~ x4, data = Quartet))^2), 2)`
 
 -----
 
-## Case Analysis: Unusual and Influential Data
+## Unit 7: Case Analysis - Unusual and Influential Data
 
 ```{r}
 #| message: false

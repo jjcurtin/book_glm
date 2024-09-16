@@ -5,7 +5,7 @@ editor_options:
 --- 
  
 
-# Categorical Variables > 2 Levels {.unnumbered}
+# Unit 13: Categorical Variables > 2 Levels {.unnumbered}
 
 ```{r}
 #| echo: false
@@ -13,5 +13,599 @@ editor_options:
 options(scipen = 999) # turns off scientfic notation
 options(knitr.kable.NA = '')
 ```
+
+
+## Learning Objectives
+
+- Two categorical coding schemes to know:   
+  
+    1. Dummy coding (reference/control group).  
+    2. Contrast coding (whatever you can dream up!, POCs).   
+    
+- How best to test the comparisons coded by these methods if the comparisons are:   
+
+    1. Planned and orthogonal.   
+    2. planned and non-orthogonal.   
+    3. Unplanned.
+    
+- How to test simple effects when categorical variables have > 2 levels.   
+
+----
+
+<span style="color: red;">Question: How do we handle analysis of categorical variables in regression (a *linear model*)?</span>   
+
+----
+
+<span style="color: blue;">We will need to recode the categorical variable into $N_{\text{levels}}/\text{groups}-1$ regressors that represent comparisons/contrasts within the overall categorical variable.</span>   
+
+
+<span style="color: blue;">Testing the **set** of regressors will allow us to test the overall effect of the categorical variable but we will often not care about this test. We are generally much more focused on planned or unplanned comparisons between the groups/levels.</span>   
+
+-----
+
+## Example
+
+Examine the differences in overall health among patients with alcohol use disorder, patients with depression, and healthy controls.   
+
+```{r}
+#| code-fold: true
+#| message: false
+
+options(conflicts.policy = "depends.ok") 
+library(tidyverse)
+library(patchwork)
+
+theme_set(theme_classic()) 
+
+path_data <- "data_lecture"
+```
+
+```{r}
+data <- read_csv(here::here(path_data, "13_three_groups.csv"),
+                 show_col_types = FALSE) |> 
+  mutate(group = factor(group))
+
+slice_sample(data, n = 6)
+```
+
+----
+
+<span style="color: red;">Question: Why can we not handle multilevel categorical variables by simply coding each group with a different consecutive value (e.g., alcohol = 1, depress = 2 , healthy = 3)?</span>   
+
+----
+
+<span style="color: blue;">There is no meaningful way to order the multiple groups. The shape of the relationship will completely change based on arbitrary ordering of the groups (exception is when categorical variable is ordinal).</span>   
+
+<span style="color: blue;">Moreover, we are often interested in individual pair-wise group comparisons that would be lost by forcing linear relationship.</span>   
+
+```{r}
+#| code-fold: true
+
+order_1 <- data |> 
+  mutate(group = case_match(group,
+                            "alcohol" ~ 1,
+                            "depress" ~ 2,
+                            "healthy" ~ 3)) |> 
+  ggplot(aes(x = group, y = health)) +
+  geom_point() +
+  scale_y_continuous(breaks = c(2, 4, 6, 8, 10), limits = c(0, 10)) +
+  scale_x_continuous(name = NULL, breaks = c(1, 2, 3), 
+                     labels = c("alcohol", "depress", "healthy"))
+
+order_2 <- data |> 
+  mutate(group = case_match(group,
+                            "alcohol" ~ 2,
+                            "depress" ~ 3,
+                            "healthy" ~ 1)) |> 
+  ggplot(aes(x = group, y = health)) +
+  geom_point() +
+  scale_y_continuous(breaks = c(2, 4, 6, 8, 10), limits = c(0, 10)) +
+  scale_x_continuous(name = NULL, breaks = c(1, 2, 3), 
+                     labels = c("healthy", "alcohol", "depress"))
+
+order_3 <- data |> 
+  mutate(group = case_match(group,
+                            "alcohol" ~ 3,
+                            "depress" ~ 1,
+                            "healthy" ~ 2)) |> 
+  ggplot(aes(x = group, y = health)) +
+  geom_point() +
+  scale_y_continuous(breaks = c(2, 4, 6, 8, 10), limits = c(0, 10)) +
+  scale_x_continuous(name = NULL, breaks = c(1, 2, 3), 
+                     labels = c("depress", "healthy", "alcohol"))
+
+
+order_1 + order_2 + order_3
+```
+
+----
+
+## 3 Group Dummy Coding (Non-orthogonal)  
+
+```{r}
+#| echo: false
+
+(tibble_d <- tibble(Group = c("alcohol", "depress", "healthy"),
+       alcohol_d = c(1, 0, 0),
+       depress_d = c(0, 1, 0)))
+```
+
+- Need 2 regressors (`alcohol_d`, `depress_d`) to represent a 3 level categorical variable.   
+
+- Regressor 1 is coded 1 for membership in Group 1 (alcohol) and 0 for all other group membership.
+
+- Regressor 2 is coded 1 for membership in Group 2 (depress) and 0 for all other group membership.
+
+- Reference group (healthy) is coded 0 for all regressors.
+
+----
+
+
+```{r}
+data <- data |> 
+  mutate(alcohol_d = if_else(group == "alcohol", 1, 0),
+         depress_d = if_else(group == "depress", 1, 0))
+
+slice_sample(data, n = 6)
+```
+
+----
+
+```{r}
+m_d <- lm(health ~ alcohol_d + depress_d, data)
+
+broom::tidy(m_d)
+```
+
+----
+
+## 3 Group Dummy: What does $b_j$ test?  
+
+Each regression coefficient represents the contrast between its respective target group (the group that was coded 1 for that contrast) and the **reference** group. This is because each effect represents the effect of that specific IV holding constant the other IV.
+
+
+```{r}
+tibble_d
+```
+
+----
+
+For example, consider the effect of the first regressor (`alcohol_d`). Considered by itself, it is the contrast of patients with alcohol use disorder (1) vs. other groups (0). However, if you held the second regressor (`depress_d`) constant at zero you would be examining the effect of patients with alcohol use disorder vs. other groups when it is 0 on `depress_d` (i.e., the control group). 
+
+```{r}
+tibble_d
+```
+
+----
+
+```{r}
+broom::tidy(m_d)
+
+data |> 
+  group_by(group) |> 
+  summarise(mean = mean(health))
+```
+
+----
+
+```{r}
+#| echo: false
+
+knitr::include_graphics(path = here::here("figures/dummy_3d.png"))
+```
+
+----
+
+
+## Dummy Coding Group Mean Estimates
+
+**The Prediction equation:**   
+
+$\hat{Y} = 7.94+-3.36*\text{alcohol}_d+ - 1.50*\text{depress}_d$     
+
+
+Patients with alcohol use disorder:    
+
+$= 7.94 + -3.36*(1)+-1.50*(0)$   
+$= 4.58$   
+
+
+Patients with depression:    
+
+$= 7.94 + -3.36*(0)+-1.50*(1)$   
+$= 6.44$   
+
+
+Healthy controls:    
+
+$= 7.94 + -3.36*(0)+-1.50*(0)$   
+$= 7.94$
+
+<span style="color: red;">Question: What is $b_0$ when using dummy codes?</span>   
+
+----
+
+<span style="color: blue;">The predicted value (mean) for the reference group.</span>    
+
+----
+
+## Dummy Coding Decomposition
+
+**The Prediction equation:**   
+
+$\hat{Y} = 7.94+-3.36*\text{alcohol}_d+ - 1.50*\text{depress}_d$     
+
+alcohol vs. healthy contrast:   
+
+$= (b_0 + b_1*1 + b_2*0) - (b+0 + b_1*0 + b_2*0)$   
+$= (b_0 + b_1) - (b_0)$   
+$= b_1$   
+
+depress vs. healthy contrast:   
+
+$= (b_0 + b_1*0 + b_2*1) - (b+0 + b_1*0 + b_2*0)$   
+$= (b_0 + b_2) - (b_0)$   
+$= b_2$   
+ 
+alcohol vs. depress contrast:   
+
+$= (b_0 + b_1*1 + b_2*0) - (b+0 + b_1*0 + b_2*1)$   
+$= (b_0 + b_1) - (b_0 + b_2)$   
+$= b_1 - b_2$   
+
+----
+
+## Introducing Factors and Contrasts
+
+```{r}
+class(data$group)
+```
+
+```{r}
+levels(data$group)
+```
+
+Create contrast matrix
+```{r}
+matrix_contr <- contr.treatment(levels(data$group), base = 3) 
+col_names <- str_c(colnames(matrix_contr), "_v_healthy")
+colnames(matrix_contr) <- col_names
+
+matrix_contr
+```
+
+
+----
+
+Set contrasts for `group` factor variable
+```{r}
+contrasts(data$group) <- matrix_contr
+```
+
+Run model
+
+<!--Not sure why group is being appended to contrast names-->
+```{r}
+m_d_2 <- lm(health ~ group, data = data)
+broom::tidy(m_d_2)
+```
+
+----
+
+<span style="color: red;">Question: How are these t-tests of $b_j$ in GLM different from what you would get if you simply ran two separate between groups t-tests?</span>   
+
+----
+
+<span style="color: blue;">The GLM t-tests of $b_j$ use the full error term including all subjects (including the “ignored” group; see dfs below). This yields a more powerful test.</span>     
+
+GLM degrees of freedom
+```{r}
+m_d_2$df.residual
+```
+
+
+t-test 
+```{r}
+data_sub <- data |> 
+  filter(group != "depress")
+
+t.test(health ~ group, data = data_sub, var.equal = TRUE)
+```
+
+----
+
+
+<span style="color: red;">Question: What may be missing from our analysis of the `group` variable at this point?</span>   
+
+----
+
+<span style="color: blue;">We might want a test of the contrast between patients with alcohol use disorder vs. patients with depression.</span>     
+
+----
+
+<span style="color: red;">Question: How could we get this test?</span>   
+
+----
+
+<span style="color: blue;">Recode the group contrasts such that the patients with depression is the reference group. Then test and interpret the alcohol vs. depress parameter estimate.</span>   
+
+----
+
+
+```{r}
+matrix_contr <- contr.treatment(levels(data$group), base = 2) 
+col_names <- str_c(colnames(matrix_contr), "_v_depress")
+colnames(matrix_contr) <- col_names
+
+contrasts(data$group) <- matrix_contr
+```
+
+```{r}
+m_d_3 <- lm(health ~ group, data = data)
+broom::tidy(m_d_3)
+```
+
+----
+
+<span style="color: red;">Question: What does the 2 df F-test of $R^2$ test conceptually?</span>  
+
+```{r}
+anova(m_d_3)
+
+broom::glance(m_d_3)$r.squared
+```
+
+----
+
+<span style="color: blue;">In this special case (with only one IV/Predictor) it provides a test of the main effect of group.</span>     
+
+<span style="color: blue;">A significant main effect means that at least 1 contrast in one set of all possible sets of orthogonal contrasts is significant.</span>        
+
+<span style="color: blue;">Not generally very useful. Tradition is still to report it (unless using POCs) but likely for wrong reasons. (more in this later).</span>   
+
+----
+
+<span style="color: red;">Question: Why does model $R^2$ not test the main effect if there are other predictors in the model?</span>
+
+----
+
+<span style="color: blue;">Model $R^2$ is the variance in $Y$ explained by all the regressors in the model. Only tests the main effect of an IV if only regressors for that IV are in the model.</span>  
+
+----
+
+## Variance Based Effect Sizes
+
+```{r}
+matrix_contr <- contr.treatment(levels(data$group), base = 3) 
+col_names <- str_c(colnames(matrix_contr), "_v_healthy")
+colnames(matrix_contr) <- col_names
+
+contrasts(data$group) <- matrix_contr
+```
+
+
+$\eta_p^2$ for group
+```{r}
+sse_c <- sum(residuals(lm(health ~ 1, data = data))^2)
+sse_a <- sum(residuals(m_d_2)^2)
+
+(sse_c - sse_a)/sse_c
+```
+
+----
+
+Quarto handles regressors internally once you set contrasts for the factor. It is generally not necessary to add the regressors to the dataframe except for handful of special circumstances (e.g., some figures, variance effect sizes for contrasts).   
+
+```{r}
+tibble_reg <- model.matrix(~ group, data = data) |> 
+  as_tibble() |> 
+  select(-1, r_1 = 2, r_2 = 3)
+
+data <- data |> 
+  select(-c(ends_with("_d"))) |> 
+  bind_cols(tibble_reg)
+```
+
+```{r}
+slice_sample(data, n = 6)
+```
+
+----
+
+```{r}
+m_r <- lm(health ~ r_1 + r_2, data = data)
+
+broom::tidy(m_r)
+```
+
+$\eta_p^2$ for alcohol v. healthy (r_1)
+```{r}
+sse_c <- sum(residuals(lm(health ~ r_2, data = data))^2)
+sse_a <- sum(residuals(m_r)^2)
+
+(sse_c - sse_a)/sse_c
+```
+
+$\eta_p^2$ for depress v. healthy (r_2)
+```{r}
+sse_c <- sum(residuals(lm(health ~ r_1, data = data))^2)
+sse_a <- sum(residuals(m_r)^2)
+
+(sse_c - sse_a)/sse_c
+```
+
+----
+
+## Planned Orthogonal Contrasts
+
+
+The second coding option for regressors for categorical IVs yields planned orthogonal contrasts (POCs).   
+
+Planned orthogonal contrasts allow you to:    
+
+1. Parse IV variance into its components (more on this later).
+2. Test for contrasts other than pairwise.
+
+
+----
+
+<span style="color: red;">Question: You predict that psychopathology will reduce overall health. What contrast do you test? What is a second contrast that is orthogonal?</span>
+
+----
+
+<span style="color: blue;">For conceptual understanding:</span>     
+
+```{r}
+#| echo: false
+
+c_a <- tibble(` ` = c("c_1a", "c_2a"),
+              alcohol = c(0.5, 1),
+              depress = c(0.5, -1),
+              healthy = c(-1, 0))
+
+c_a
+```
+
+<span style="color: blue;">John's preference (unit weighted):</span>       
+
+
+```{r}
+#| echo: false
+
+c_b <- tibble(` ` = c("c_1b", "c_2b"),
+              alcohol = c(0.33, 0.5),
+              depress = c(0.33, -0.5),
+              healthy = c(-0.67, 0))
+
+c_b
+```
+
+----
+
+<span style="color: red;">Question: Both of these options represent two conceptual comparisons. What are these two comparisons?</span>
+
+```{r}
+#| echo: false
+
+c_a |> 
+  bind_rows(c_b)
+```
+
+----
+
+<span style="color: blue;">`c_1` compares a combined group of patients with alcohol use disorder and depression to healthy controls.</span>     
+ 
+<span style="color: blue;">`c_2` compares patients with alcohol use disorder to patients with depression.</span>  
+
+----
+
+<span style="color: red;">Question: How will the analyses in Quarto be similar and different?</span>
+
+----
+
+<span style="color: blue;">The parameter estimates for `c_1` and `c_2` will be different across the two models. However, the statistical test of the null for each parameter will be identical (t/F and p-value). This should not be surprising given that the contrasts in each `c_1` option are simply a linear transformation of the other. It is simply a change of scale similar to multiplying a quantitative variable by some constant.</span>     
+ 
+<span style="color: blue;">The model $R^2$ and the test of the null will be identical.</span>  
+
+----
+
+```{r}
+data <- data |> 
+  mutate(c_1a = case_match(group,
+                           "alcohol" ~ 0.5,
+                           "depress" ~ 0.5,
+                           "healthy" ~ -1),
+         c_2a = case_match(group,
+                           "alcohol" ~ 1,
+                           "depress" ~ -1,
+                           "healthy" ~ 0))
+```
+
+
+```{r}
+m_c_a <- lm(health ~ c_1a + c_2a, data = data)
+broom::tidy(m_c_a)
+```
+
+----
+
+
+```{r}
+data <- data |> 
+  mutate(c_1b = case_match(group,
+                           "alcohol" ~ 0.333,
+                           "depress" ~ 0.333,
+                           "healthy" ~ -.667),
+         c_2b = case_match(group,
+                           "alcohol" ~ .5,
+                           "depress" ~ -.5,
+                           "healthy" ~ 0))
+```
+
+
+```{r}
+m_c_b <- lm(health ~ c_1b + c_2b, data = data)
+broom::tidy(m_c_b)
+```
+
+----
+
+<span style="color: red;">Question: Why are the parameter estimates for `c_1` different and which is preferred?</span>
+
+```{r}
+#| echo: false
+
+c_a |> 
+  slice(1) |> 
+  bind_rows(c_b |> 
+              slice(1))
+```
+
+
+----
+
+<span style="color: blue;">In each instance $b_1$ represents change in health for a 1 unit change on the `c_1` regressor. For `c_1b` a 1 unit change moves fully from the alcohol/depress group to the healthy group. $b_1$ was 2/3 the size for `c_1a` because 1 unit only moves 2/3 of the way between the two sets in the contrast.</span>     
+ 
+<span style="color: blue;">Therefore, unit weights allow you to report $b_1$ and have it represent the difference in the means of the two groups/sets.</span
+
+----
+
+```{r}
+#| echo: false
+
+c_b
+```
+
+
+```{r}
+broom::tidy(m_c_b)
+```
+
+```{r}
+data |> 
+  group_by(group) |> 
+  summarise(mean = mean(health))
+```
+
+You can do the math to confirm that $b_1$ and $b_2$ match the mean differences associated with the `c_1` and c_2` comparisons.  
+
+----
+
+## How to Calculate Unit Weights
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

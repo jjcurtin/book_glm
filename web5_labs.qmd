@@ -1,0 +1,19 @@
+# Lab Materials {.unnumbered}
+
+
+## Week 1: 09/06
+
+- [Installing R, R Studio, & Quarto](https://dionysus.psych.wisc.edu/610/lab/install_notes.pdf)
+- [Student shell](https://dionysus.psych.wisc.edu/610/lab/lab_01_student.qmd)
+- TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_01_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_01_ta.html)
+
+## Week 2: 09/13
+
+- [Student shell](https://dionysus.psych.wisc.edu/610/lab/lab_02_student.qmd)
+- TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_02_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_02_ta.html)
+
+## Week 3: 09/20
+
+## Week 4: 09/27
+
+ 

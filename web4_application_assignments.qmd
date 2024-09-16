@@ -1,0 +1,40 @@
+# Application Assignments {.unnumbered}
+
+## Week 01: Due Wednesday, 9/11 at 1:30 pm
+
+- [instructions](/homework/week_01/hw_01.pdf) 
+- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw1_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw1_key.qmd)
+
+## Week 02: Due Wednesday, 09/18 at 1:30 pm
+
+- [shell](homework/week_02/hw2_shell.qmd)
+- [data](homework/week_02/hw2_data.csv)
+- key: [html](); [qmd]()
+
+## Week 03: Due Wednesday, 09/25 at 1:30 pm
+
+
+## Week 04: Due Wednesday, 10/02 at 1:30 pm
+
+## Week 05: No application assignment.  Application exam week!
+
+## Week 06: Due Wednesday, 10/16 at 1:30 pm
+
+## Week 07: Due Wednesday, 10/23 at 1:30 pm
+
+## Week 08: Due Wednesday, 10/10 at 1:30 pm
+
+## Week 09: Due Wednesday, 11/06 at 1:30 pm
+
+## Week 10: No application assignnment.  Application exam week!
+
+## Week 11: Due Wednesday, 11/20 at 1:30 pm
+
+## Week 12: Due Wednesday 11/27 at 1:30 pm
+
+## Week 13: No application assignment.  Thanksgiving Break
+
+## Week 14: Due Wednesday, 12/11 at 1:30 pm
+
+## Week 15: No application assignment.  Application exam week!
+

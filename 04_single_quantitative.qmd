@@ -5,36 +5,45 @@ editor_options:
 --- 
  
 
-# Inferences About a Single Quantitative Predictor
-
-```{r}
-#| echo: false
-
-options(scipen = 999) # turns off scientfic notation
-```
-
+# Unit 4: Inferences About a Single Quantitative Predictor
 
 ## Two Parameter (One Predictor) Models
 
-We started with a very simple model of FPS: $\hat{\text{FPS}}= \beta_0$     
+We started with a very simple model of FPS:
 
-What if some participants were drunk and we knew their blood alcohol concentrations (BAC)?    
+\
 
-<span style="color: red;">Question: Would it help?  What would the model look like?  What question(s) does this model allow us to test?
+$\hat{\text{FPS}}= \beta_0$     
+
+\
+
+- However we measured their FPS in the context of an experiment where some of the participants were sober and some were given alcohol.   
+- And although we standardized the alcoho dose, particpants given alcohol achieved varying blood alcohol concentrations (BAC)
+- Luckily, we measured their BAC as part of the experiment.
 
 -----
 
-**DATA = MODEL + ERROR**   
+::: {.callout-important}
+# Question
 
-$Y_i= \beta_0+\beta_1*X_1+\varepsilon_i$    
+How could we uses their BACs to build a better model of the FPS scores?  What would the model look like?  What question(s) does this model allow us to test?
+:::
 
-$\hat{Y}_i=\beta_0+\beta_1*X_1$    
+:::{.fragment}
+[**DATA = MODEL + ERROR**]{style="color:blue;"}
 
-$\varepsilon_i = Y_i - \hat{Y}_i$   
+$Y_i= \beta_0+\beta_1*X_1+\varepsilon_i$
+
+$\hat{Y}_i=\beta_0+\beta_1*X_1$
+
+$\varepsilon_i = Y_i - \hat{Y}_i$
 
 \
-<span style="color: blue;">$\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_1$</span>
 
+$\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_1$
+
+[We could use this model to test the relationship between BAC and FPS scores AND the typical FPS scors for participants with a specific value for BAC (default is BAC = 0)]{style="color:blue;"}
+:::
 
 -----
 
@@ -53,7 +62,6 @@ data <- read_csv(here::here(path_data, "4_single_quantitative_bac_fps.csv"),
                  show_col_types = FALSE)
 
 ```
-
 
 ```{r}
 #| echo: false
@@ -93,7 +101,6 @@ plot_mean + (plot_x + geom_abline(aes(intercept = coef(m_1),
                                   color = "blue", linewidth = 1))
 ```
 
-
 -----
 
 ## The Two Parameter Model
@@ -102,19 +109,22 @@ $\hat{Y}_i=\beta_0+\beta_1*X_1$
 
 As before, the population parameters in the model ($\beta_0, \beta_1$) are estimated by $b_0$ & $b_1$ calculated from sample data based on the least squares criterion such that they minimize SSE in the sample data.    
 
+\
+
 **Sample model:**   
 $\hat{Y}_i=b_0+b_1*X_1$    
 
-To derive these parameter estimates you must solve a series of simultaneous equations using linear algebra and matrices (see supplemental reading).    
+\
 
-Or use R!
+- To derive these parameter estimates you must solve a series of simultaneous equations using linear algebra and matrices (see supplemental reading).    
+
+- Or use R!
 
 ```{r}
 #| echo: false
 
 plot_x
 ```
-
 
 -----
 
@@ -133,17 +143,16 @@ $\text{SSE} = \sum e_i^2$
 plot_mean + plot_x
 ```
 
-
 -----
 
 ## Interpretation of $b_0$ in Two Parameter Model
 
-
 $\hat{Y}_i=b_0+b_1*X_1$    
+
+\
 
 $b_0$ is predicted value for $Y$ when $X_1$ = 0. Graphically, this is the $Y$ intercept for the regression line (value of $Y$ where regression line crosses Y-axis at $X_1$ = 0).  
 
-<span style="color: red;">Question: Approximately what is $b_0$ in this example?</span>
 
 ```{r}
 #| echo: false
@@ -153,9 +162,16 @@ plot_x
 
 -----
 
-<span style="color: blue;">42.5</span>    
+::: {.callout-important}
+# Question
 
-*IMPORTANT: Notice that $b_0$ is very different in the two parameter model (42.5) than in the previous one parameter model (32.2).*    
+Approximately what is $b_0$ in this example?
+:::
+
+:::{.fragment}
+[42.5]{style="color:blue;"}
+:::
+
 
 ```{r}
 #| echo: false
@@ -166,14 +182,26 @@ plot_x +
               color = "blue", linewidth = 1)
 ```
 
-
-<span style="color: red;">Question: Why?   
-
-
 -----
 
-<span style="color: blue;">In the one parameter model $b_0$ was our sample estimate of the mean FPS score in everyone. $b_0$ in the two parameter model is our sample estimate of the mean FPS score for people with BAC = 0, not everyone.</span>   
+```{r}
+#| echo: false
 
+plot_x + 
+  geom_abline(aes(intercept = coef(m_1),
+                  slope = 0),
+              color = "blue", linewidth = 1)
+```
+
+::: {.callout-important}
+# Question
+
+Notice that $b_0$ is very different in the two parameter model (42.5) than in the previous one parameter model (32.2).  Why?
+:::
+
+:::{.fragment}
+[In the one parameter model $b_0$ was our sample estimate of the mean FPS score in everyone. $b_0$ in the two parameter model is our sample estimate of the mean FPS score for people with BAC = 0, not everyone.]{style="color:blue;"}
+:::
 
 -----
 
@@ -184,11 +212,13 @@ $\hat{Y}_i=b_0+b_1*X_1$
 
 $b_1$ is the predicted change in $Y$ for every one unit change in $X_1$. Graphically it is represented by the slope of the regression line. If you understand the units of your predictor and DV, this is an attractive description of their relationship.   
 
+\
+
 $\hat{\text{FPS}}_i=42.5+ -184.1*\text{BAC}_i$    
 
-For every 1% increase in BAC, FPS decreases by 184.1 microvolts.    
+- For every 1% increase in BAC, FPS decreases by 184.1 microvolts.    
 
-For every .01% increase in BAC, FPS decreases by 1.841 microvolts.  
+- For every .01% increase in BAC, FPS decreases by 1.841 microvolts.  
 
 ```{r}
 #| echo: false
@@ -196,31 +226,38 @@ For every .01% increase in BAC, FPS decreases by 1.841 microvolts.
 plot_x
 ```
 
-
 -----
 
 ## Testing Inferences about $\beta_1$
 
-Does alcohol affect people’s anxiety?
+Does alcohol affect people’s fear/anxiety?
 
 $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_i$    
 
+::: {.callout-important}
+# Question
 
-<span style="color: red;">Question: What are your null and alternative hypotheses about a model parameter to evaluate this question?</span>   
+What are your null and alternative hypotheses about a model parameter to evaluate this question?
+:::
 
------
+:::{.fragment}
+$H_0: \beta_1=0$    
+$H_a: \beta_1 \neq 0$
 
-<span style="color: blue;">$H_0: \beta_1=0$</span>    
-<span style="color: blue;">$H_a: \beta_1 \neq 0$</span>   
+\
 
+[If $\beta_1 = 0$, this means that FPS does not change with changes in BAC. In other words, there is no effect of BAC on FPS. If $\beta_1 < 0$, this means that FPS decreases with increasing BAC (people are less anxious when drunk).]{style="color:blue;"}
 
-If $\beta_1 = 0$, this means that FPS does not change with changes in BAC. In other words, there is no effect of BAC on FPS. If $\beta_1 < 0$, this means that FPS decreases with increasing BAC (people are less anxious when drunk).    
-
-If $\beta_1 > 0$, this means FPS increases with increasing BAC (people are more anxious when drunk).    
+[If $\beta_1 > 0$, this means FPS increases with increasing BAC (people are more anxious when drunk).]{style="color:blue;"}
+:::
 
 -----
 
 ## Estimating a Two Parameter Model in R
+
+Set up our environment
+
+\
 
 ```{r}
 #| message: false
@@ -239,6 +276,8 @@ data <- read_csv(here::here(path_data, "4_single_quantitative_bac_fps.csv"),
 
 -----
 
+Skim the data
+
 ```{r}
 data |> 
   skimr::skim_without_charts()
@@ -246,6 +285,9 @@ data |>
 
 -----
 
+Fit the model (i.e., get our parameter estimates)
+
+\
 
 ```{r}
 m_2 <- lm(fps ~ bac, data = data)
@@ -254,25 +296,36 @@ m_2 |>
   broom::tidy()
 ```
 
-
-
-<span style="color: red;">Question: Does BAC affect FPS? Explain this conclusion in terms of the parameter estimate, $b_1$ and its standard error.</span>   
-
 -----
 
+```{r}
+m_2 |> 
+  broom::tidy()
+```
 
-<span style="color: blue;">Under the $H_0: \beta_1 = 0$, the sampling distribution for $\beta_1$ will have a mean of 0 with an estimated standard deviation `r round(subset(broom::tidy(m_2), term == "bac")$std.error, 2)`.</span>    
+::: {.callout-important}
+# Question
+
+Does BAC affect FPS? Explain this conclusion in terms of the parameter estimate, $b_1$ and its standard error.
+:::
+
+:::{.fragment}
+[Under the $H_0: \beta_1 = 0$, the sampling distribution for $\beta_1$ will have a mean of 0 with an estimated standard deviation `r round(subset(broom::tidy(m_2), term == "bac")$std.error, 2)`]{style="color:blue;"}
+
+\
 
 $t (`r nrow(data)` - 1) = \frac{`r round(subset(broom::tidy(m_2), term == "bac")$estimate, 2)` - 0}{`r round(subset(broom::tidy(m_2), term == "bac")$std.error, 2)` } = `r round(subset(broom::tidy(m_2), term == "bac")$estimate/subset(broom::tidy(m_2), term == "bac")$std.error, 2)`$     
 
-<span style="color: blue;">Our value of the parameter estimate, $b_1$, is `r abs(round(subset(broom::tidy(m_2), term == "bac")$estimate/subset(broom::tidy(m_2), term == "bac")$std.error, 2))` standard deviations below the expected mean of the sampling distribution for $H_0$.</span>
+[Our value of the parameter estimate, $b_1$, is `r abs(round(subset(broom::tidy(m_2), term == "bac")$estimate/subset(broom::tidy(m_2), term == "bac")$std.error, 2))` standard deviations below the expected mean of the sampling distribution for $H_0$.]{style="color:blue;"}
+
+\
 
 ```{r}
 pt(-1.92, 94, lower.tail = TRUE)*2
 ```
 
-
-A $b_1$ of this size is not unlikely under the null, therefore you fail to reject the null and conclude that BAC has no effect on FPS.
+[A $b_1$ of this size is not unlikely under the null, therefore you fail to reject the null and conclude that BAC has no effect on FPS.]{style="color:blue;"}
+:::
 
 -----
 
@@ -283,29 +336,26 @@ m_2 |>
   broom::tidy()
 ```
 
-**One tailed p-value**:   
-```{r}
-pt(-1.92, 94, lower.tail = TRUE)
-```
-
-$H_0: \beta_1 = 0$   
-$H_1: \beta_1 < 0$
-
------
+\
 
 **Two tailed p-value**:     
-```{r}
-pt(-1.92, 94, lower.tail = TRUE)*2
-```
-
 
 $H_0: \beta_1 = 0$   
 $H_1: \beta_1 \neq 0$
 
+```{r}
+pt(-1.92, 94, lower.tail = TRUE)*2
+```
+
+-----
+
+**Two tailed p-value**:     
+
+\
 
 ```{r}
 #| code-fold: true
-
+ 
 tibble(b1 = seq(-400,400,.01),
        probability = dt(b1/subset(broom::tidy(m_2), term == "bac")$std.error, m_2$df.residual)) |> 
   ggplot(aes(x = b1, y = probability)) +
@@ -317,6 +367,27 @@ tibble(b1 = seq(-400,400,.01),
   labs(title = "Sampling Distribution for b1")
 ```
 
+-----
+
+**One tailed p-value**:   
+
+$H_0: \beta_1 = 0$   
+$H_1: \beta_1 < 0$
+```{r}
+pt(-1.92, 94, lower.tail = TRUE)
+```
+
+```{r}
+#| code-fold: true
+
+tibble(b1 = seq(-400,400,.01),
+       probability = dt(b1/subset(broom::tidy(m_2), term == "bac")$std.error, m_2$df.residual)) |> 
+  ggplot(aes(x = b1, y = probability)) +
+  geom_line() +
+  geom_vline(xintercept = subset(broom::tidy(m_2), term == "bac")$estimate, 
+             color = "red") +
+  labs(title = "Sampling Distribution for b1")
+```
 
 -----
 
@@ -326,29 +397,39 @@ $H_0: \beta_1 = 0$
 $H_1: \beta_1 \neq 0$    
 
 
-<span style="color: red;">Question: What two models are you comparing when you test hypotheses about $\beta_1$? Describe the logic.</span>   
+::: {.callout-important}
+# Question
 
------
+What two models are you comparing when you test hypotheses about $\beta_1$? Describe the logic.
+:::
 
-<span style="color: blue;">Compact model: $\hat{\text{FPS}}_i = \beta_0+0*\text{BAC}_i$</span>    
-$P_c=1$     
-$\text{SSE}_c=`r round(sum(residuals(m_1)^2), 1)`$     
+:::{.fragment}
+[Compact model:]{style="color:blue;"}
 
+- $\hat{\text{FPS}}_i = \beta_0+0*\text{BAC}_i$
+- $P_c=1$     
+- $\text{SSE}_c=`r round(sum(residuals(m_1)^2), 1)`$     
 
-<span style="color: blue;">Augmented model: $\hat{\text{FPS}}_i = \beta_0+\beta_1*\text{BAC}_i$</span>    
-$P_a=2$   
-$\text{SSE}_a=`r round(sum(residuals(m_2)^2), 1)`$  
 \
+
+[Augmented model:]{style="color:blue;"} 
+
+- $\hat{\text{FPS}}_i = \beta_0+\beta_1*\text{BAC}_i$
+- $P_a=2$   
+- $\text{SSE}_a=`r round(sum(residuals(m_2)^2), 1)`$  
+
+\
+
 $F(P_a-P_c, N-P_a) = \frac{\text{SSE}_c-\text{SSE}_a/(P_a-P_c)}{\text{SSE}_a/(N-P_a)}$
 
 F(1,94) = 3.685, p = 0.058
+:::
 
 -----
 
-
 ```{r}
 m_1 <- lm(fps ~ 1, data = data)   
-m_2 <-  lm(fps ~ bac, data = data) 
+m_2 <- lm(fps ~ bac, data = data) 
 ```
 
 ```{r}
@@ -359,19 +440,27 @@ anova(m_1, m_2)
 
 ## Sum of Squared Errors
 
-<span style="color: red;">Question: If there is a perfect relationship between $X_1$ and $Y$ in your sample, what will the SSE be in the two parameter model (augmented) and why?</span>   
+::: {.callout-important}
+# Question
+
+If there is a perfect relationship between $X_1$ and $Y$ in your sample, what will the SSE be in the two parameter model (augmented) and why?
+:::
+
+:::{.fragment}
+[$\text{SSE}_a=0$. All data points will fall perfectly on the regression line. All errors will be 0.]{style="color:blue;"}
+:::
 
 -----
 
-<span style="color: blue;">$\text{SSE}_a=0$. All data points will fall perfectly on the regression line. All errors will be 0.</span>
+::: {.callout-important}
+# Question
 
------
+If there is no relationship at all between $X_1$ and $Y$ in your sample ($b_1$ = 0), what will the SSE be in the two parameter model (augmented) and why?
+:::
 
-<span style="color: red;">Question: If there is no relationship at all between $X_1$ and $Y$ in your sample ($b_1$ = 0), what will the SSE be in the two parameter model (augmented) and why?</span>   
-
------
-
-<span style="color: blue;">$\text{SSE}_a=\text{SSE}$ of the mean-only model. $X_1$ provides no additional information about the DV. Your best prediction will still be the mean of the DV.</span>
+:::{.fragment}
+[$\text{SSE}_a=\text{SSE}$ of the mean-only model. $X_1$ provides no additional information about the DV. Your best prediction will still be the mean of the DV.]{style="color:blue;"}
+:::
 
 -----
 
@@ -382,33 +471,47 @@ m_2 |>
   broom::tidy()
 ```
 
+::: {.callout-important}
+# Question
 
+What is the interpretation of $b_0$ in this two parameter model?
+:::
 
-<span style="color: red;">Question: What is the interpretation of $b_0$ in this two parameter model?</span>   
+:::{.fragment}
+[It is the predicted FPS for a person with BAC = 0 (sober).]{style="color:blue;"}
+
+\
+
+[The test of this parameter estimate could inform us if the shock procedure worked among our sober participants. This is probably a more appropriate manipulation check than testing if it worked in everyone including drunk people given that alcohol could have reduced FPS.]{style="color:blue;"}
+:::
 
 -----
 
-<span style="color: blue;">It is the predicted FPS for a person with BAC = 0 (sober).</span>   
+::: {.callout-important}
+# Question
 
+What two models are being compared?
+:::
 
-<span style="color: blue;">The test of this parameter estimate could inform us if the shock procedure worked among our sober participants. This is probably a more appropriate manipulation check than testing if it worked in everyone including drunk people given that alcohol could have reduced FPS.</span>    
+:::{.fragment}
+[Compact model:]{style="color:blue;"}
 
------
+- $\hat{\text{FPS}}_i= 0 + \beta_1* \text{BAC}_i$
 
-<span style="color: red;">Question: What two models are being compared?</span> 
+\
 
------
+[Augmented model:]{style="color:blue;"}
+
+- $\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i$
+:::
  
-<span style="color: blue;">Compact model: $\hat{\text{FPS}}_i= 0 + \beta_1* \text{BAC}_i$</span>    
-
-<span style="color: blue;">Augmented model: $\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i$</span>
-
 -----
 
 ## Mean Centering Predictor Variables
 
 In this example, I have been using raw BAC. In many instances, we will *mean center* our quantitative predictor variables.    
 
+\
 
 Mean centering simply involves subtracting the mean of the predictor variable from all scores for that predictor variable.    
 
@@ -440,14 +543,20 @@ data |>
 
 -----
 
-<span style="color: red;">Question: How would the parameter estimate values and interpretations change if I mean centered BAC?</span> 
-
 ```{r}
 m_2 |> 
   broom::tidy()
 ```
 
------
+\
+
+::: {.callout-important}
+# Question
+
+How would the parameter estimate values and interpretations change if I mean centered BAC?
+:::
+
+:::{.fragment}
 
 ```{r}
 m_2_c <- lm(fps ~ bac_c, data = data)  
@@ -456,19 +565,28 @@ m_2_c |>
   broom::tidy()
 ```
 
-<span style="color: blue;">The value and interpretation of $b_0$ will change because it is the predicted FPS score at 0 on $X$. $b_0$ is now the predicted value for someone with the mean BAC in the sample.</span>   
+\
 
-<span style="color: blue;">No change to interpretation of $b_1$. Why? Think about it...</span>
+[The value and interpretation of $b_0$ will change because it is the predicted FPS score at 0 on $X$. $b_0$ is now the predicted value for someone with the mean BAC in the sample.]{style="color:blue;"}
+
+[But there is no change to interpretation of $b_1$. Why? Think about it...]{style="color:blue;"}
+:::
 
 -----
 
 ## Raw vs. Centered BAC
 
-<span style="color: red;">Question: How would the graph look different? Where is $b_0$ and $b_1$ on the new figure? Would you center BAC in this example?</span> 
+::: {.callout-important}
+# Question
 
------
+How would the graphs look different when using raw vs. mean-centered BAC? Connect this to your understanding of how centering BAC affects the parameter estimates
+:::
+
+:::{.fragment}
 
 ```{r}
+#| code-fold: true
+
 plot_x <- data |> 
   ggplot(aes(x = bac, y = fps)) +
   geom_point(alpha = .6, size = 2) +
@@ -484,13 +602,12 @@ plot_x_c <- data |>
   geom_abline(aes(intercept = coef(m_2)[1],
                   slope = coef(m_2)[2]),
               color = "red", linewidth = 1)
-```
 
------
-
-```{r}
 plot_x + plot_x_c
 ```
+
+[The slope of the line is not changed and therefore $b_1$ has not changed.  The y-intercept has changed and therefore $b_0$ did change.]{style="color:blue;"}
+:::
 
 -----
 
@@ -502,51 +619,86 @@ You can provide confidence intervals for each parameter estimate in your model.
 confint(m_2)
 ```
 
+\
+
 The underlying logic from your understanding of sampling distributions remains the same.   
 
 $\text{CI}_b = b\pm t(\alpha; N-P)*\text{SE}_b$ where $P$ = total # of parameters.    
 
-
-<span style="color: red;">Question: How can we tell if a parameter is *significant* from the confidence interval?</span>    
-
 -----
 
-<span style="color: blue;">If a parameter $\neq 0$, at $\alpha$ = .05, then the 95% confidence interval should not include 0. True for any other non-zero value for $b$ as well.</span>  
+```{r}
+confint(m_2)
+```
+
+::: {.callout-important}
+# Question
+
+How can we tell if a parameter is **significant** from the confidence interval?
+:::
+
+:::{.fragment}
+[If a parameter $\neq 0$, at $\alpha$ = .05, then the 95% confidence interval should not include 0. 
+
+- This is true for any $b$ (e.g., $b_0$, $b_1$). 
+- You can also compare $b$ to any other non-zero value as well]{style="color:blue;"}
+:::
 
 -----
 
 ## Partial Eta Squared ($\eta_p^2$) or PRE for $\beta_1$
 
-<span style="color: red;">Question: How can you calculate the effect size estimate $\eta_p^2$ (PRE) for $\beta_1$? </span>    
 
------
+::: {.callout-important}
+# Question
 
-<span style="color: blue;">Compare the SSE across the two relevant models.</span>    
+How can you calculate the effect size estimate $\eta_p^2$ (PRE) for $\beta_1$?
+:::
 
-**Compact model:** $\hat{\text{FPS}}_i= \beta_0 + 0* \text{BAC}_i$     
+:::{.fragment}
+[Compare the SSE across the two relevant models.]{style="color:blue;"}
 
-$\text{SSE}_c =  `r round(sum(residuals(m_1)^2), 1)`$   
+\
 
-**Augmented model:** $\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i$  
+**Compact model:** 
 
-$\text{SSE}_a =  `r round(sum(residuals(m_2)^2), 1)`$    
+- $\hat{\text{FPS}}_i= \beta_0 + 0* \text{BAC}_i$     
+- $\text{SSE}_c =  `r round(sum(residuals(m_1)^2), 1)`$   
+
+**Augmented model:** 
+
+- $\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i$  
+
+- $\text{SSE}_a =  `r round(sum(residuals(m_2)^2), 1)`$    
+
+\
 
 $\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{`r round(sum(residuals(m_1)^2),1)`- `r round(sum(residuals(m_2)^2), 1)`}{`r round(sum(residuals(m_1)^2), 1)`}= `r round((sum(residuals(m_1)^2)- sum(residuals(m_2)^2))/sum(residuals(m_1)^2),3)`$ 
 
+\
+
 ```{r}
-(sum(residuals(m_1)^2)- sum(residuals(m_2)^2))/sum(residuals(m_1)^2) 
+(sum(residuals(m_1)^2) - sum(residuals(m_2)^2)) / sum(residuals(m_1)^2) 
 ```
 
-<span style="color: blue;">Our augmented model that includes a non-zero effect for BAC reduces prediction error (SSE) by only `r round((sum(residuals(m_1)^2)- sum(residuals(m_2)^2))/sum(residuals(m_1)^2),3)*100`% over the compact model that fixes this parameter at 0.</span>
+\
+
+[Our augmented model that includes a non-zero effect for BAC reduces prediction error (SSE) by only `r round((sum(residuals(m_1)^2)- sum(residuals(m_2)^2))/sum(residuals(m_1)^2),3)*100`% over the compact model that fixes this parameter at 0.]{style="color:blue;"}
+:::
 
 -----
 
 
-<span style="color: red;">Question: How can you calculate the effect size estimate $\eta_p^2$ (PRE) for $\beta_0$? </span>  
+::: {.callout-important}
+# Question
 
------
+How can you calculate the effect size estimate $\eta_p^2$ (PRE) for $\beta_0$?
+:::
 
-<span style="color: blue;">Compare the SSE across the two relevant models.</span>  
+:::{.fragment}
+[Compare the SSE across the two relevant models.]{style="color:blue;"}
+
+\
 
 ```{r}
 m_2_0 <- lm(fps ~ bac - 1, data = data) #<1>
@@ -554,22 +706,32 @@ m_2_0 <- lm(fps ~ bac - 1, data = data) #<1>
 
 1. We can use -1 to remove the intercept (i.e., set it equal to 0) from our new compact model.
 
-**Compact model: $\hat{\text{FPS}}_i= 0 + \beta_1* \text{BAC}_i$**   
+\
 
-$\text{SSE}_c =  `r round(sum(residuals(m_2_0)^2), 1)`$   
+**Compact model:** 
 
-**Augmented model: $\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i$**   
+- $\hat{\text{FPS}}_i= 0 + \beta_1* \text{BAC}_i$**   
+- $\text{SSE}_c =  `r round(sum(residuals(m_2_0)^2), 1)`$   
 
-$\text{SSE}_a =  `r round(sum(residuals(m_2)^2), 1)`$     
+**Augmented model:**
 
+- $\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i$
+- $\text{SSE}_a =  `r round(sum(residuals(m_2)^2), 1)`$     
+
+\
 
 $\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{`r round(sum(residuals(m_2_0)^2), 1)`- `r round(sum(residuals(m_2)^2), 1)`}{`r round(sum(residuals(m_2_0)^2), 1)`}= `r round((sum(residuals(m_2_0)^2)- sum(residuals(m_2)^2))/sum(residuals(m_2_0)^2),3)`$  
+
+\
 
 ```{r}
 (sum(residuals(m_2_0)^2)- sum(residuals(m_2)^2))/sum(residuals(m_2_0)^2) 
 ```
 
-<span style="color: blue;">Our augmented model that allows FPS to be non-zero for people with BAC=0 (sober people) reduces prediction error (SSE) by `r round((sum(residuals(m_2_0)^2)- sum(residuals(m_2)^2))/sum(residuals(m_2_0)^2),3)*100`% from the model that fixes FPS at 0 when BAC=0!</span>   
+\
+
+[Our augmented model that allows FPS to be non-zero for people with BAC=0 (sober people) reduces prediction error (SSE) by `r round((sum(residuals(m_2_0)^2)- sum(residuals(m_2)^2))/sum(residuals(m_2_0)^2),3)*100`% from the model that fixes FPS at 0 when BAC=0!]{style="color:blue;"}
+:::
 
 -----
 
