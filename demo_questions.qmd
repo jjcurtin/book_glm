@@ -50,6 +50,12 @@ A plain text callout that includes math symbols like $b_0$
 :::
 
 :::{.fragment}
+[And an answer including math symbols like $b_0$]{style="color:blue;"}
+:::
+
+OR
+
+:::{.fragment}
 :::: {.callout-important}
 # Question
 
