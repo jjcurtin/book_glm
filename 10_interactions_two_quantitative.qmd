@@ -5,7 +5,7 @@ editor_options:
 --- 
  
 
-# Inferences about Two Continuous Predictors and their Interaction
+# Unit 10: Inferences about Two Continuous Predictors and their Interaction
 
 ```{r}
 #| echo: false
