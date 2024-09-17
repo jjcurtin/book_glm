@@ -644,10 +644,10 @@ How can we tell if a parameter is **significant** from the confidence interval?
 :::
 
 :::{.fragment}
-[If a parameter $\neq 0$, at $\alpha$ = .05, then the 95% confidence interval should not include 0. 
+[If a parameter $\neq 0$, at $\alpha$ = .05, then the 95% confidence interval should not include 0]{style="color:blue;"}
 
-- This is true for any $b$ (e.g., $b_0$, $b_1$). 
-- You can also compare $b$ to any other non-zero value as well]{style="color:blue;"}
+- [This is true for any $b$ (e.g., $b_0$, $b_1$)]{style="color:blue;"}
+- [You can also compare $b$ to any other non-zero value as well]{style="color:blue;"}
 :::
 
 -----
@@ -709,7 +709,6 @@ How can you calculate the effect size estimate $\eta_p^2$ (PRE) for $\beta_0$?
 ```{r}
 m_2_0 <- lm(fps ~ bac - 1, data = data) #<1>
 ```
-
 1. We can use -1 to remove the intercept (i.e., set it equal to 0) from our new compact model.
 
 \
@@ -743,25 +742,33 @@ $\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{`r round(sum(residuals(m
 
 ## Coefficient of Determination ($R^2$)
 
-**Coefficient of Determination ($R^2$):**    
-Proportion of explained variance (i.e., proportion of variance in $Y$ accounted for by all $Xs$ in model).     
+**Coefficient of Determination ($R^2$):**  Proportion of explained variance (i.e., proportion of variance in $Y$ accounted for by all $Xs$ in model).     
+
+\
 
 DATA = MODEL + ERROR    
+
 
 For individuals:    
 
 $Y_i=Y_i+e_i$
 
+\
 
 With respect to variance:   
 
 $S_{Y_i}^2=S_{\hat{Y}_i}^2+S_{e_i}^2$    
+
+\
 
 $R^2=\frac{S_{\hat{Y}_i}^2}{S_{Y_i}^2}$   
 
 -----
 
 We can calculate $R^2$ manually by computing the ratio of the variance of the predicted values to the variance of the actual values.   
+
+\
+
 ```{r}
 var(predict(m_2))/ var(data$fps)
 ```
@@ -770,12 +777,19 @@ var(predict(m_2))/ var(data$fps)
 
 We can also use the `glance()` function in the `broom` package to return various model fit indices.   
 
+\
+
 ```{r}
 broom::glance(m_2) |>
   glimpse()
 ```
 
+\
+
 Since we are only interested in $R^2$ we can use the following code to pull out this single value.
+
+\
+
 ```{r}
 broom::glance(m_2)$r.squared
 ```
@@ -784,11 +798,16 @@ broom::glance(m_2)$r.squared
 
 ## $R^2$ and the Mean-Only Model
 
-<span style="color: red;">Question: Why did the mean-only model not have an $R^2$? </span>  
+::: {.callout-important}
+# Question?
 
------
+Why did the mean-only model not have an $R^2$?
+:::
 
-<span style="color: blue;">It did but it was just 0. It explained no variance in $Y_i$ because it predicted the same value (mean) for every person. The variance of the predicted values is 0 in the mean-only model.</span>  
+:::{.fragment}
+[It did but it was just 0. It explained no variance in $Y_i$ because it predicted the same value (mean) for every person. The variance of the predicted values is 0 in the mean-only model.]{style="color:blue;"}
+
+\
 
 $R^2=\frac{S_{\hat{Y}_i}^2}{S_{Y_i}^2}$  
 
@@ -798,11 +817,17 @@ m_1 <- lm(fps ~ 1, data = data)
 broom::glance(m_1)$r.squared
 ```
 
-In fact, the SSE for the mean-only model is the numerator of the formula for the variance for $Y_i$.     
+\
+
+[In fact, the SSE for the mean-only model is the numerator of the formula for the variance for $Y_i$.]{style="color:blue;"}
+
+\
 
 $\text{SSE}=\frac{\sum(Y_i-\hat{Y_i})^2}{}$   
 
+\
 $S^2 = \frac{\sum(Y_i-\overline{Y})^2}{N-1}$
+:::
 
 -----
 
@@ -810,15 +835,22 @@ This leads to an alternative formula for $R^2$ for an augmented model.
 
 $R^2=\frac{\text{SSE}_\text{mean-only}-\text{SSE}_a}{\text{SSE}_\text{mean-only}}$   
 
+\
+
 Mean-only model: $\hat{\text{FPS}}_i=\beta_0$    
 
 $\text{SSE}_{\text{mean-only}} = `r round(sum(residuals(m_1)^2), 1)`$    
+
+\
 
 Augmented model: $\hat{\text{FPS}}_i=\beta_0 + \beta_1*\text{BAC}_i$     
  
 $\text{SSE}_a = `r round(sum(residuals(m_2)^2), 1)`$   
 
+\
 $R^2= \frac{`r round(sum(residuals(m_1)^2), 1)` - `r round(sum(residuals(m_2)^2), 1)`}{`r round(sum(residuals(m_1)^2), 1)`} = `r round((sum(residuals(m_1)^2)-sum(residuals(m_2)^2))/sum(residuals(m_1)^2),5)`$    
+
+\
 
 In this augmented model, $R^2$ is fully accounted for by BAC. In more complex models, $R^2$ will be the aggregate of multiple predictors. $R^2$ is only defined for models that include $b_0$.   
 
@@ -826,19 +858,37 @@ In this augmented model, $R^2$ is fully accounted for by BAC. In more complex mo
 
 ## Test of $\beta_1$ in Two Parameter Model: Special Case
 
-<span style="color: red;">Question: When both the predictor variable and the dependent variable are quantitative, the test of $\beta_1$ = 0 is statistically equivalent to the what other common statistical test? </span> 
 
 -----
 
-<span style="color: blue;">The test of the Pearson’s correlation coefficient, r.</span>    
+
+::: {.callout-important}
+# Question
+
+When both the predictor variable and the dependent variable are quantitative, the test of $\beta_1$ = 0 is statistically equivalent to the what other common statistical test?  
+:::
+
+
+:::{.fragment}
+[The test of the Pearson’s correlation coefficient]{style="color:blue;"}
+
+-----
 
 ```{r}
-psych::corr.test(data$bac, data$fps)
+cor.test(data$bac, data$fps)
 ```
 
-**Furthermore, $r^2=R^2$ for this model only.**   
+**Furthermore, $r^2=R^2$ for this 2 parameter model only.**   
 
-$`r round(psych::corr.test(data$bac, data$fps)$r,3)`^2 = `r round((sum(residuals(m_1)^2)- sum(residuals(m_2)^2))/sum(residuals(m_1)^2),3)`$
+
+```{r}
+round(cor.test(data$bac, data$fps)$estimate)^2)
+```
+
+
+```{r}
+round((sum(residuals(m_1)^2)- sum(residuals(m_2)^2))/sum(residuals(m_1)^2), 3)
+```
 
 -----
 
@@ -854,12 +904,12 @@ preds <- predict(m_2, x, interval = "confidence", level = .95) |> #<1>
 
 1. We can use our model to generate predictions. We use the `interval = "confidence"` and `level = .95` arguments to return the upper and lower values of the 95% confidence interval.  
 
------
+\
 
 ```{r}
 preds
 ```
- 
+
 -----
 
 ```{r}
