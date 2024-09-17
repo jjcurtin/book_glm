@@ -515,7 +515,7 @@ What two models are being compared?
 
 ## Mean Centering Predictor Variables
 
-In this example, I have been using raw BAC. In many instances, we will *mean center* our quantitative predictor variables.    
+In this example, I have been using raw BAC. In many instances, we will **mean center** our quantitative predictor variables.    
 
 \
 
@@ -894,15 +894,35 @@ round((sum(residuals(m_1)^2)- sum(residuals(m_2)^2))/sum(residuals(m_1)^2), 3)
 
 ## Visualizing the Model
 
+You are predicting the mean $Y$ for any $X$. 
 
+- There is a sampling distribution around this mean. 
+- The true population mean $Y$ for any $X$ is uncertain. 
+- You can display this uncertainty by displaying information about the sampling distribution at any/every $X$.  
+- This is equivalent to error bars in ANOVA.  
+- There are several choices you have for how to display information about the sampling distribution for the mean (the uncertainty about the population mean)
+
+
+## Predicted means wih 95% Confidence Intervals
+
+The first option is to present the predicted means with a shaded region that represents the 95% CIs for each predicted mean
+
+- We need value for BAC for which to make predictions.  We can put them into an dataframe (see `x` below)
 ```{r}
 x <- tibble(bac = seq(from = min(data$bac), to = max(data$bac), by = .001))
+```
 
-preds <- predict(m_2, x, interval = "confidence", level = .95) |> #<1>
+\
+
+- We use the model object from `lm()`
+- We pass that model into the `predict()` function, along with the data
+- We set the `interval` to "confidence" and the appropriate `level`
+```{r}
+
+preds <- predict(m_2, x, interval = "confidence", level = .95) |> 
   as_tibble() 
 ```
 
-1. We can use our model to generate predictions. We use the `interval = "confidence"` and `level = .95` arguments to return the upper and lower values of the 95% confidence interval.  
 
 \
 
@@ -926,7 +946,7 @@ ggplot() +
 
 ## Error Band for $\hat{Y}_i$
 
-You are predicting the mean $Y$ for any $X$. There is a sampling distribution around this mean. The true population mean $Y$ for any $X$ is uncertain. You can display this uncertainty by displaying information about the sampling distribution at any/every $X$.  This is equivalent to error bars in ANOVA.   
+ 
 
 The `effect()` function calculates 95% CI for $\hat{Y}_i$. However, I prefer $\pm$ 1 SE for publications.   
 
