@@ -1,6 +1,6 @@
 ---
-title: "Homework #3" 
-author: "Your Name" 
+title: "Homework 3" 
+author: "[YOUR NAME HERE]" 
 date: "`r lubridate::today()`"
 format: 
   html:
@@ -11,7 +11,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-Due <!--Wednesday, September 27, 2023, 1:30pm--> on Canvas.   
+Due <!--Friday, September 27, 2023, 9:00pm--> on Canvas.   
 
 -	Select the Assignments menu and find HW Week 3
 -	Submit both an HTML file and a .qmd file
@@ -24,150 +24,220 @@ Due <!--Wednesday, September 27, 2023, 1:30pm--> on Canvas.
 ### 1.	Define Type I and Type II error. For each type, give an example of how a researcher could reduce the risk of committing the error.
 
 
+
+
 ### 2.	In practical terms, what does the numerator of the F statistic equation represent? The denominator?
+
 
 
 ### 3.	Statistical terms: What special name is given to the mean-squared-error from the mean-only model?
 
 
 
-## Part B. Practice with `ggplot2()`
 
-In ChatGPT, paste the following prompt: *Fifty students answer the questions: (1) How many Badger shirts do you own? and (2) How many Badger football games did you attend? The variables are named badger_shirts and games_attended, respectively. Badger_shirts has a minimum of 0 and a maximum of 20 and games_attended has a minimum of 0 and a maximum of 10. Generate a fake dataset for me in R so that as badger_shirts increases games_attended increases. Also, include 6 outliers.*
+## Part B. Data Analysis
 
-
-### 4. Set up your global options for your script. This includes loading any libraries you need.
-
-```{r}
-
-```
-
-
-### 5.	Copy the code that ChatGPT provides into your quarto doc and run it. You don’t necessarily need to know what this code is doing. 
-
-```{r}
-
-```
-
-
-### 6.	Now, use the ggplot2 cheat sheet to create a quick and dirty scatterplot with the two variables. The plot should have a white background, meaningful x- and y-axis labels, and a title. Don’t worry about adding a best-fit line or error bands.
-
-```{r}
-
-```
-
-
-## Part C. Data analysis
 
 For this homework, we will use the `stray_animals.csv` file. This data set contains (fictitious) statistics about the number of stray animals in each of the 50 US states. The data set also specifies whether the state participated in a nation-wide TNR (trap-neuter-return) program that was launched in an attempt to reduce the number of stray cats and the number of animal shelters in each state.   
 
-It contains the following variables:    
+**Codebook:**    
 
 - `state`: US state
 - `tnr`: whether the program adopted a trap-neuter-return program (0/no, 1/yes)   
 - `dogs`: Number of stray dogs in thousands
 - `cats`: Number of stray cats in thousands
 - `other`: Number of stray other animals in thousands
--`shelters`: Number of animal shelters per 10,000 people
+- `shelters`: Number of animal shelters per 10,000 people
 
 
-### 7.	Read in the data. Recode `tnr` to be a factor variable with clear labels (yes/no). Inspect your data (summaries, structure, descriptive stats).
+### 1. Set up your global options for your script. This includes setting the conflict policy, loading any libraries you need, selecting a theme to use for `ggplot`, and specifying the path to where you store your data files (i.e., `path_data`).
 
 ```{r}
+#| message: false
+
 
 ```
 
 
-### 8.	Create a quick and dirty plot that shows whether the number of stray dogs is related to the number of animal shelters in the state. This time, use the `plot()` function.
+### 2.	Read in and glimpse the data. In what variable classes are the `tnr`, `dogs`, `cats`, `other`, and `shelters` columns read into R? What are the appropriate variable classes for these variables, according to the data codebook? Do they match?
 
-#### a.	Create the plot.
+***Your Answer Here***
 
 ```{r}
+
+
 
 ```
 
-#### b.	Add a best fitting line.
+### 3. Use one function/command in R to pull up the help page for `factor()`. After you have read the help page, recode `tnr` to be a factor variable with clear labels (yes/no). Feel free to consult other sources, such as ChatGPT.
 
 ```{r}
 
-```
 
-#### c.	Does the relationship appear positive or negative? Strong, moderate, or weak?
-
-
-
-
-
-### 9.	Go through the following steps to create a composite score that reflects the overall numbers of stray animals, referred to as the `stray_index` in these questions:
-
-#### a.	Standardize the measures for stray dogs, stray cats, and other stray animals.
-
-```{r}
 
 ```
 
 
-#### b.	Check to make sure you standardized these variables correctly. 
+### 4. Obtain summary statistics for all numeric variables using `summarise()`.
 
 ```{r}
+
+
 
 ```
 
 
-#### c.	Create a new variable (`strays_z_m`) representing the average of these standardized scores.
+### 5. Obtain summary statistics by whether or not a trap-neuter-return program is adopted, using `group_by` and a function from `skimr`.
 
 ```{r}
+
+
 
 ```
 
 
-#### d.	Comment on the researchers’ decision to standardize then average these scores. Does their decision make sense or not? How does this measure differ (in practical terms) from one in which the researchers average the scores without standardizing them? 
+### 6.	Go through the following steps to create two additional variables:
 
-
-
-
-### 10.	Create two histograms of the number of stray cats. One for the states that took part in the program, and the other for the states that did not. Label your histograms properly. 
+#### a.	Compute the total number of stray animals (i.e., dogs, cats, and other animals combined) as `stray_total` in each state.
 
 ```{r}
+
+
+
+```
+
+#### b. Create a new variable `stray_z`, that is the standardized score of `stray_total`.
+
+```{r}
+
+
 
 ```
 
 
-### 11.	What is the formula for each of the two models you should compare if you want to know whether the number of stray cats is different from zero? 
-
-
-
-
-### 12.	Compute the SSE for each of the two models in the previous question. Do so by using a step-by-step brute force method, like we did in lab. Remember to label clearly (e.g., `sse_null`, `sse_mean`). 
+#### c.	Check to make sure `stray_z` is standardized. 
 
 ```{r}
+
+
 
 ```
 
 
-### 13.	Compare the two models by calculating the appropriate F statistic and p value. 
+### 7.	Use ggplot to create two histograms of the total number of stray animals: one for the states that took part in the TNR program, and the other for the states that did not. Label your histograms properly. 
 
+There are a few different ways to do this. Try multiple ways if you rock (hint: look into  using `filter()`, `subset()`, or `facet_wrap()`)!
 
 ```{r}
+
+
 
 ```
 
 
-
-#### a.	Is estimating the mean worth the increased complexity of the model? Why? Interpret the result in plain English.
-
-
-
-#### b.	Why is this model comparison not super informative (i.e., why are you not surprised 0 is a worse predictor for the number of stray cats per year? Why is the null model “stupid”?).
-
-
-
-### 14.	Sometimes learning stats or programming is difficult and you just need a little positive feedback. Figure out which package contains the `praise()` function, and complete all the steps you need in order to write a line of code using `praise()` to tell you something nice. 
-
+### 8.	Refer to the ggplot2 cheat-sheet [here](https://rstudio.github.io/cheatsheets/html/data-visualization.html) and other sources like ChatGPT. Use `ggplot`to create a *scatterplot* that shows the relationship between total number of stray animals and number of shelters. The plot should at least have a white background, data points, and meaningful x- and y-axis labels. 
 
 ```{r}
+
+
 
 ```
 
 
-### Part D. Tell us how long it took you to complete this assignment. 
+### 9.	What is the formula for each of the two models you should compare if you want to know whether the average number of stray animals is different from zero?   
+
+***Your Answer Here***
+
+
+### 10.	Compute the SSE for each of the two models in the previous question. Do so by using a step-by-step brute force method, like we did in lab. Remember to label clearly (e.g., `sse_null`, `sse_mean`).  
+
+Compact - NULL model
+```{r}
+
+
+
+```
+
+Augmented - Mean-only model
+```{r}
+
+
+
+```
+
+
+### 11.	Compare the two models by calculating the appropriate F statistic and p value. 
+
+```{r}
+
+
+
+```
+
+### 12. Now, fit the null model and the mean-only model using `lm()`. Then, use a function we learned to compare the two models.
+
+```{r}
+
+
+
+```
+
+
+### 13. Use a function from the `broom` package to obtain the parameter estimate, its standard error, and the corresponding t-value and p-value from the mean-only model.
+
+```{r}
+
+
+```
+
+
+### 14. Answer the following questions:
+
+#### a. Do you get the same conclusion and results from step-by-step brute-force model comparison, `lm()` model comparison, and the method using the augmented model only and the `broom` package? 
+
+***Your Answer Here***
+
+#### b.	Is estimating the mean worth the increased complexity of the model? Why? Interpret the result in plain English.     
+
+***Your Answer Here***
+
+#### c.	Why is this model comparison not super informative (i.e., why are you not surprised 0 is a worse predictor for the number of stray cats per year?).    
+
+***Your Answer Here***
+
+### 15. Think back to the standardized score `stray_z` which we created from `stray_total`. Would it make sense to estimate b_0 and test whether `stray_z`has a mean that is significantly different from zero? Why or why not?
+
+***Your Answer Here***
+
+### 16.	Sometimes learning stats or programming is difficult and you just need a little positive feedback. Figure out which package contains the `praise()` function, and complete all the steps you need in order to write a line of code using `praise()` to tell you something nice. 
+
+
+```{r}
+
+
+
+```
+
+
+### 17. Reflection
+
+#### a. How many hours did you spend on this homework?
+
+***Your Answer Here***
+
+
+#### b. What is one aspect of Friday labs that has been effective so far?
+
+***Your Answer Here***
+
+
+#### c. What is one way Friday labs can be improved to facilitate your learning?
+
+***Your Answer Here***
+
+
+#### d. What is one concept covered in lecture that you feel the most confusing/elusive?
+
+***Your Answer Here***
+
+
