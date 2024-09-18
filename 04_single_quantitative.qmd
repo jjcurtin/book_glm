@@ -1,5 +1,8 @@
 --- 
-output: html_document 
+format:
+  revealjs:
+    slide-number: true
+    show-slide-number: print
 editor_options:  
   chunk_output_type: console
 --- 
@@ -17,13 +20,11 @@ options(scipen = 999) # turns off scientfic notation
 
 We started with a very simple model of FPS:
 
-\
-
 $\hat{\text{FPS}}= \beta_0$     
 
 \
 
-- However we measured their FPS in the context of an experiment where some of the participants were sober and some were given alcohol.   
+- However, we measured their FPS in the context of an experiment where some of the participants were sober and some were given alcohol.   
 - And although we standardized the alcoho dose, particpants given alcohol achieved varying blood alcohol concentrations (BAC)
 - Luckily, we measured their BAC as part of the experiment.
 
@@ -316,13 +317,13 @@ Does BAC affect FPS? Explain this conclusion in terms of the parameter estimate,
 :::
 
 :::{.fragment}
-[Under the $H_0: \beta_1 = 0$, the sampling distribution for $\beta_1$ will have a mean of 0 with an estimated standard deviation `r round(subset(broom::tidy(m_2), term == "bac")$std.error, 2)`]{style="color:blue;"}
+[Under the $H_0: \beta_1 = 0$, the sampling distribution for $b_1$ will have a mean of 0 with an estimated standard deviation `r round(subset(broom::tidy(m_2), term == "bac")$std.error, 2)`]{style="color:blue;"}
 
 \
 
 $t (`r nrow(data)` - 1) = \frac{`r round(subset(broom::tidy(m_2), term == "bac")$estimate, 2)` - 0}{`r round(subset(broom::tidy(m_2), term == "bac")$std.error, 2)` } = `r round(subset(broom::tidy(m_2), term == "bac")$estimate/subset(broom::tidy(m_2), term == "bac")$std.error, 2)`$     
 
-[Our value of the parameter estimate, $b_1$, is `r abs(round(subset(broom::tidy(m_2), term == "bac")$estimate/subset(broom::tidy(m_2), term == "bac")$std.error, 2))` standard deviations below the expected mean of the sampling distribution for $H_0$.]{style="color:blue;"}
+[Our value of the parameter estimate, $b_1$, is `r abs(round(subset(broom::tidy(m_2), term == "bac")$estimate/subset(broom::tidy(m_2), term == "bac")$std.error, 2))` standard deviations below the expected mean of the sampling distribution for $b_0$ given $H_0$.]{style="color:blue;"}
 
 \
 
@@ -647,7 +648,7 @@ How can we tell if a parameter is **significant** from the confidence interval?
 [If a parameter $\neq 0$, at $\alpha$ = .05, then the 95% confidence interval should not include 0]{style="color:blue;"}
 
 - [This is true for any $b$ (e.g., $b_0$, $b_1$)]{style="color:blue;"}
-- [You can also compare $b$ to any other non-zero value as well]{style="color:blue;"}
+- [You can also compare $\beta$ to any other non-zero value as well]{style="color:blue;"}
 :::
 
 -----
@@ -770,7 +771,7 @@ We can calculate $R^2$ manually by computing the ratio of the variance of the pr
 \
 
 ```{r}
-var(predict(m_2))/ var(data$fps)
+var(predict(m_2)) / var(data$fps)
 ```
 
 -----
@@ -858,10 +859,6 @@ In this augmented model, $R^2$ is fully accounted for by BAC. In more complex mo
 
 ## Test of $\beta_1$ in Two Parameter Model: Special Case
 
-
------
-
-
 ::: {.callout-important}
 # Question
 
@@ -871,6 +868,7 @@ When both the predictor variable and the dependent variable are quantitative, th
 
 :::{.fragment}
 [The test of the Pearson’s correlation coefficient]{style="color:blue;"}
+:::
 
 -----
 
@@ -878,23 +876,27 @@ When both the predictor variable and the dependent variable are quantitative, th
 cor.test(data$bac, data$fps)
 ```
 
-**Furthermore, $r^2=R^2$ for this 2 parameter model only.**   
+-----
 
+Furthermore, $r^2=R^2$ for this 2 parameter model only
+
+\
 
 ```{r}
-round(cor.test(data$bac, data$fps)$estimate)^2)
+round(cor.test(data$bac, data$fps)$estimate^2, 3)
 ```
 
+\
 
 ```{r}
-round((sum(residuals(m_1)^2)- sum(residuals(m_2)^2))/sum(residuals(m_1)^2), 3)
+round((sum(residuals(m_1)^2) - sum(residuals(m_2)^2)) / sum(residuals(m_1)^2), 3)
 ```
 
 -----
 
 ## Visualizing the Model
 
-You are predicting the mean $Y$ for any $X$. 
+Your model is predicting the mean $Y$ for any $X$. 
 
 - There is a sampling distribution around this mean. 
 - The true population mean $Y$ for any $X$ is uncertain. 
@@ -907,48 +909,71 @@ You are predicting the mean $Y$ for any $X$.
 
 The first option is to present the predicted means with a shaded region that represents the 95% CIs for each predicted mean
 
-- We need value for BAC for which to make predictions.  We can put them into an dataframe (see `x` below)
+- 95% of these intervals would be expected to contain the true population mean $Y$ for a given $X$ 
+- First, we need values for BAC for which to make predictions.  We can put them into an dataframe 
+ 
+\
+
 ```{r}
 x <- tibble(bac = seq(from = min(data$bac), to = max(data$bac), by = .001))
 ```
 
-\
+-----
+
+To get predicted mean FPS for each of these BACs, we use the `predict()` function
 
 - We use the model object from `lm()`
 - We pass that model into the `predict()` function, along with the data
 - We set the `interval` to "confidence" and the appropriate `level`
-```{r}
-
-preds <- predict(m_2, x, interval = "confidence", level = .95) |> 
-  as_tibble() 
-```
-
-
+- We then put the BACs into this dataframe to keep everything together (this could all be done in one pipeline but kept separate here to make it clearer)
 \
 
 ```{r}
-preds
+preds <- predict(m_2, x, interval = "confidence", level = .95) |> 
+  as_tibble() 
+
+preds <- preds |> 
+  bind_cols(x)
 ```
 
 -----
 
 ```{r}
-ggplot() +
+preds  |> slice_head(n = 20)
+```
+
+-----
+
+- We can now plot the raw data from the `data` dataframe
+- We can plot the model line and confidence intervals using BACs and predicted Ys in `preds`
+
+\
+
+```{r}
+ci_plot <- ggplot() +
   geom_point(aes(x = data$bac, y = data$fps), alpha = .6, size = 2) +
-  geom_line(aes(x = x$bac, y = preds$fit),
+  geom_line(aes(x = preds$bac, y = preds$fit),
               color = "black", linewidth = 1) +
-  geom_ribbon(aes(x = x$bac, ymin = preds$lwr, ymax = preds$upr), alpha = 0.2) +
+  geom_ribbon(aes(x = preds$bac, ymin = preds$lwr, ymax = preds$upr), alpha = 0.2) +
   labs(x = "BAC",
        y = "FPS") 
 ```
 
 -----
 
-## Error Band for $\hat{Y}_i$
+```{r}
+ci_plot
+```
 
- 
+-----
 
-The `effect()` function calculates 95% CI for $\hat{Y}_i$. However, I prefer $\pm$ 1 SE for publications.   
+```{r}
+ci_plot
+```
+
+The confidence intervals for each predicted FPS score use the standard error for these predicted values.  This standard error is calculated as follows:
+
+\
 
 $\text{SEE} = \sqrt{\frac{\text{SSE}}{N-P}}$   
 
@@ -956,159 +981,119 @@ $\text{SE}_\hat{Y_i}=\text{SEE}\sqrt{\frac{1}{N}+\frac{(X_i-\overline{X})^2}{(N-
 
 $\text{CI}_\hat{Y_i}=\hat{Y_i}\pm t(\alpha; N-k-1)\text{SE}_\hat{Y_i}$
 
-
 -----
 
-<span style="color: red;">Question: Why are the error bands not linear? </span> 
+::: {.callout-important}
+# Question
 
-```{r}
-#| code-fold: true
+Why are the error bands not linear?
+:::
 
-ggplot() +
-  geom_point(aes(x = data$bac, y = data$fps), alpha = .6, size = 2) +
-  geom_line(aes(x = x$bac, y = preds$fit),
-              color = "black", linewidth = 1) +
-  geom_ribbon(aes(x = x$bac, ymin = preds$lwr, ymax = preds$upr), alpha = 0.2) +
-  labs(x = "BAC",
-       y = "FPS") 
-```
 
------
-
-<span style="color: blue;">Model predictions are better (less error) near the center of your data ($X_i$).  The regression line will always go through mean of $X$ and $Y$. Small changes in $b_1$ across samples will produce bigger variation in $\hat{Y}_i$ at the edge of the model (far from the mean $X$).</span>   
+:::{.fragment}
+[Model predictions are better (less error) near the center of your data ($X_i$).  The regression line will always go through mean of $X$ and $Y$. Small changes in $b_1$ across samples will produce bigger variation in $\hat{Y}_i$ at the edge of the model (far from the mean $X$).]{style="color:blue;"}
 
 $\hat{\text{FPS}_i}=42.5 + -184.1 * \text{BAC}_i$    
 
 $\text{SE}_\hat{Y_i}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(X_i-\overline{X})^2}{(N-1)s_x^2}}$  
 
-```{r}
-confint(m_2)
-```
+:::
 
 -----
 
-<span style="color: red;">Compare to the SE for $b_0$. </span> 
+Lets compare the SE for $b_1$ to $b_0$.
 
------
+\
 
 $\text{SE}_\hat{Y_i}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(X_i-\overline{X})^2}{(N-1)s_x^2}}$  
 
 $\text{SE}_{b_0}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overline{X})^2}{(N-1)s_x^2}}$   
 
-<span style="color: blue;">$b_0$ is simply the predicted value for $Y$ when $X$ = 0.</span>    
+- $b_0$ is simply the predicted value for $Y$ when $X$ = 0.
 
-<span style="color: blue;">We can use additive transformations of $X$ to make tests of the predicted value at  $X$ = 0. Most common in repeated measures designs but used elsewhere as well.</span>   
+-We can use additive transformations of $X$ to make tests of the predicted value at  $X$ = 0. Most common in repeated measures designs but used elsewhere as well.
 
 
 -----
 
-## Publication Quality Figure
+## A Second Option for Displaying Model
+
+
+In some disciplines, it is more common to display the uncertainty regarding predicted mean Y using +/- 1 SE rather than the full 95% CI (which is ~ +/- 2 SE)
+
+\
+
+We can get this out of `predict()` as well.
+
+\
 
 ```{r}
-preds_pub <- predict(m_2, x, se.fit = TRUE) |> #<1>
-  as_tibble() |> 
-  mutate(upper = fit + se.fit,  #<2>
-         lower= fit - se.fit)
+preds <- predict(m_2, x, se.fit = TRUE) |> 
+  as_tibble() 
+
+preds <- preds |> 
+  bind_cols(x) |> 
+  mutate(upr = fit + se.fit, 
+         lwr = fit - se.fit)
 ```
-
-1. We use the `se.fit = TRUE` argument to return the standard error for each prediction.  
-
-2. We use `mutate()` to calculate $\pm$ 1 standard error values for each prediction. 
 
 -----
 
 ```{r}
-preds_pub
+preds  |> slice_head(n = 20)
 ```
+
+-----
 
 
 ```{r}
-plot_pub <- ggplot() +
+se_plot <- ggplot() +
   geom_point(aes(x = data$bac, y = data$fps), alpha = .6, size = 2) +
-  geom_line(aes(x = x$bac, y = preds_pub$fit),
+  geom_line(aes(x = preds$bac, y = preds$fit),
               color = "black", linewidth = 1) +
-  geom_ribbon(aes(x = x$bac, ymin = preds_pub$lower, ymax = preds_pub$upper), alpha = 0.2) +
-  labs(x = "Blood alcohol concentration",
-       y = "Fear-potentiated startle") 
+  geom_ribbon(aes(x = preds$bac, ymin = preds$lwr, ymax = preds$upr), alpha = 0.2) +
+  labs(x = "BAC",
+       y = "FPS") 
 ```
 
+
+```{r}
+se_plot
+```
+
+-----
+
+There is a final plot that you will not see often but is worth understanding conceptually.  In this plot we represent uncertainty about the predictions for individuals rather than the mean Y.  
+
+- This is called a prediction interval, rather than a confidence interval
+- You can get this interval from `predict()` as well
+- This plot uses the approximately 2 SEE around the predicted means
+- 95% of these intervals will capture any raw Y in the population
+
+```{r}
+preds <- predict(m_2, x, interval = "prediction", level = 0.95) |> 
+  as_tibble() 
+
+preds <- preds |> 
+  bind_cols(x)
+```
 
 -----
 
 ```{r}
-plot_pub
+preds  |> slice_head(n = 20)
 ```
 
 -----
 
-## Review of Concepts
-
-- $b_0, b_1$
-- NHSTs
-- Effect sizes
-- CIs
-- Conclusions
-
------
-
 ```{r}
-m_2 <- lm(fps ~ bac + 1, data = data)
+pred_plot <- ggplot() +
+  geom_point(aes(x = data$bac, y = data$fps), alpha = .6, size = 2) +
+  geom_line(aes(x = preds$bac, y = preds$fit),
+              color = "black", linewidth = 1) +
+  geom_ribbon(aes(x = preds$bac, ymin = preds$lwr, ymax = preds$upr), alpha = 0.2) +
+  labs(x = "BAC",
+       y = "FPS")
+
+pred_plot 
 ```
-
-```{r}
-#| code-fold: true
-
-m_2 |> 
-  broom::tidy()
-
-data |> 
-  ggplot(aes(x = bac, y = fps)) +
-  geom_point(alpha = .6, size = 2) +
-  geom_abline(aes(intercept = coef(m_2)[1],
-                  slope = coef(m_2)[2]),
-              color = "red", linewidth = 1)
-```
-
-
------
-
-```{r}
-m_2_0 <- lm(fps ~ bac - 1, data = data)
-```
-
-```{r}
-#| code-fold: true
-
-m_2_0 |> 
-  broom::tidy()
-
-data |> 
-  ggplot(aes(x = bac, y = fps)) +
-  geom_point(alpha = .6, size = 2) +
-  geom_abline(aes(intercept = 0,
-                  slope = coef(m_2_0)),
-              color = "blue", linewidth = 1)
-```
-
-
------
-
-```{r}
-m_1 <- lm(fps ~ 1, data = data)
-```
-
-```{r}
-#| code-fold: true
-
-m_1 |> 
-  broom::tidy()
-
-data |> 
-  ggplot(aes(x = bac, y = fps)) +
-  geom_point(alpha = .6, size = 2) +
-  geom_abline(aes(intercept = coef(m_1),
-                  slope = 0),
-              color = "blue", linewidth = 1)
-```
-
-
