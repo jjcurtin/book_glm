@@ -264,7 +264,7 @@ library(tidyverse)
 theme_set(theme_classic()) 
 path_data <- "data_lecture"  
 
-data <- read_csv(here::here(path_data, "3_single_mean_fps.csv"), 
+data <- read_csv(here::here(path_data, "03_single_mean_fps.csv"), 
                  show_col_types = FALSE) |> 
   glimpse()
 ```

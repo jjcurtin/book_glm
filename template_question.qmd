@@ -1,11 +1,9 @@
-
 ::: {.callout-important}
 # Question
 
-A plain text callout that includes math symbols like $b_0$
 :::
 
 
 :::{.fragment}
-[here's a question using a red fragment that includes math symbols like $b_0$]{style="color:blue;"}
+[]{style="color:blue;"}
 :::

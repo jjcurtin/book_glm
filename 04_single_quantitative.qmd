@@ -65,7 +65,7 @@ theme_set(theme_classic())
 
 path_data <- "data_lecture" 
 
-data <- read_csv(here::here(path_data, "4_single_quantitative_bac_fps.csv"),
+data <- read_csv(here::here(path_data, "04_single_quantitative_bac_fps.csv"),
                  show_col_types = FALSE)
 
 ```
@@ -277,7 +277,7 @@ theme_set(theme_classic())
 
 path_data <- "data_lecture" 
 
-data <- read_csv(here::here(path_data, "4_single_quantitative_bac_fps.csv"),
+data <- read_csv(here::here(path_data, "04_single_quantitative_bac_fps.csv"),
                  show_col_types = FALSE)
 ```
 

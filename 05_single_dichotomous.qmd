@@ -1,9 +1,11 @@
 --- 
-output: html_document 
+format:
+  revealjs:
+    slide-number: true
+    show-slide-number: print
 editor_options:  
   chunk_output_type: console
 --- 
- 
 
 # Unit 5: Inferences about a Single Dichotomous Predictor
 
@@ -31,37 +33,58 @@ options(scipen = 999) # turns off scientfic notation
 
 ## Dichotomous Predictor
   
-<span style="color: red;">Question: Consider a regression model with one dichotomous predictor and the typical continuous DV. What other statistical test is this regression equivalent to?</span>
+::: {.callout-important}
+# Question
 
------
+Consider a regression model with one dichotomous predictor and the typical continuous DV. What other statistical test is this regression equivalent to?
+:::
 
-<span style="color: blue;">An independent samples (between subjects) t-test comparing the two groups that are represented by the two levels of the predictor on the mean of the DV.</span>
+:::{.fragment}
+[An independent samples (between subjects) t-test comparing the two groups that are represented by the two levels of the predictor on the mean of the DV.]{style="color:blue;"}
+:::
 
 
------
+::::{.fragment}
+::: {.callout-important}
+# Question
+
+Question: How do we handle analysis of dichotomous predictors in regression?
+:::
+::::
+
+:::{.fragment}
+[Very simple! We will assign two “arbitrary” values to a regressor $X$ to represent the two levels (groups) in the dichotomous predictor variable.{style="color:blue;"}
+:::
 
 ## Coding Dichotomous Predictors
-
-<span style="color: red;">Question: How do we handle analysis of dichotomous predictors in regression?</span>
-
------
-
-<span style="color: blue;">Very simple! We will assign two “arbitrary” values to a regressor $X$ to represent the two levels (groups) in the dichotomous predictor variable.</span>
 
 There are 2 coding schemes that we will need to learn:    
 
 1. Dummy coding (reference/control group)
 2. Contrast coding (for now, unit weighted, centered coefficients).   
 
-We also need to learn distinction between weighted vs. unweighted means (optional).   
+\
 
+We also need to learn distinction between weighted vs. unweighted means (optional).   
 
 -----
 
 ## Dummy Coding
 
-**Dummy coding with a dichotomous variable:**.  
-Dummy coding involves assigning 1’s and 0’s to the regressor in a specific pattern.  For the two level simple case, assign a 0 to the control/reference group and a 1 to the target or experimental group.  (Doesn’t *really* matter which is which; <span style="color: red;">but what would change?  What about -1 vs. 1</span>)
+Dummy coding involves assigning 1’s and 0’s to the regressor in a specific pattern.  
+
+- For the two level simple case, assign a 0 to the control/reference group and a 1 to the target or experimental group.  
+- The signficance of the statistical test isn't affected by which group you assign to be the reference.
+
+::: {.callout-important}
+# Question
+
+What would change if you reverse the 0/1 coding such that you assign 1 to the reference group?
+:::
+
+:::{.fragment}
+[The sign of the parameter estimate will reverse!  But its t statistic and p-value will NOT change.  What if we used -1 vs. 1?]{style="color:blue;"}
+:::
 
 -----
 
@@ -72,111 +95,182 @@ Dummy coding involves assigning 1’s and 0’s to the regressor in a specific p
 
 options(conflicts.policy = "depends.ok") 
 library(tidyverse)
+library(broom)  # for tidy() and glance()
 library(patchwork)
 
 theme_set(theme_classic()) 
 
 path_data <- "data_lecture" 
 
-data <- read_csv(here::here(path_data, "5_single_dichotomous_bg_fps.csv"),
+data <- read_csv(here::here(path_data, "05_single_dichotomous_bg_fps.csv"),
                  show_col_types = FALSE) |> 
   glimpse()
 ```
 
 -----
 
+::: {.callout-tip}
+# Coding Tip 
+
+You can customize your own function for skimming data using `skim_with()`.  
+- Remove stats you don't want by setting to NULL
+- Save this is a script that you source to have access to it without having to rewrite it each time (DRY!!)
+
 ```{r}
-data |> 
-  pivot_longer(where(is.numeric), names_to = "var") |> 
-  group_by(var) |> 
-  summarise(n = n(),
-            mean = mean(value),
-            sd = sd(value),
-            min = min(value),
-            max = max(value))
+skim_some <- skimr::skim_with(numeric = skimr::sfl(p25 = NULL, p75 = NULL, hist = NULL))
 ```
 
------
+:::
+
+Skim the data
+
+\
+
+```{r}
+data |> skim_some()
+```
+
+\
+
+Get counts for `bg`
+
+\
 
 ```{r}
 data |> 
-  group_by(bg_2) |> 
+  group_by(bg) |> 
   count()
 ```
 
+-----
+
+## Dummy Codes for Beverage Group
+
+::: {.callout-important}
+# Question
+
+Why can we use `bg` directly in our glm in `lm()`
+:::
+
+
+:::{.fragment}
+[It is not numeric.  What is a 1 unit change on `bg` when it is coded as "placebo" and "alcohol"]{style="color:blue;"}
+
+[We need to make a regressor (a `x` in our model) to represent `bg`]{style="color:blue;"}
+
+\
+
+```{r}
+data <- data |> 
+  mutate(bg_d = if_else(bg == "alcohol", 1, 0)) 
+
+data  |> slice_sample(n = 20)
+```
+
+:::
 
 -----
 
-## Dichotomous Beverage Group
+Now we can estimate $b_0$ and $b_1$
 
+\
 
 ```{r}
-m_d <- lm(fps ~ bg_2, data = data)
+m_d <- lm(fps ~ bg_d, data = data)
 
 m_d |> 
-  broom::tidy()
+  tidy()
 ```
 
-```{r}
-#| echo: false
+And lets compare this to our previous analysis using `bac` coded quantitatively
 
-data_q <- read_csv(here::here(path_data, "4_single_quantitative_bac_fps.csv"),
+\
+
+```{r}
+data_q <- read_csv(here::here(path_data, "04_single_quantitative_bac_fps.csv"),
                  show_col_types = FALSE) 
-```
 
-```{r}
 m_q <- lm(fps ~ bac, data = data_q)
 
 m_q |> 
-  broom::tidy()
+  tidy()
 ```
-
-
-<span style="color: red;">Question: What is different about the NHST of the *alcohol* effect with bg_2 vs BAC and why?</span>   
 
 -----
 
-## >SSE leads to >SEs and <Power
+```{r}
+m_d |> tidy()
+sum(residuals(m_d)^2)
+```
 
-<span style="color: blue;">p-value is worse (bigger) for bg_2 than BAC. Taking a quantitative variable and dichotomizing (or trichotomizing, etc.) throws away potentially valuable information in  your predictor variable. The dichotomous variable will generally be a worse predictor. This will produce a model with more error (> SSE) and less power (> p-values) to test hypotheses.</span>   
+```{r}
+m_q |> tidy()
+sum(residuals(m_q)^2)
+```
+
+\
+
+::: {.callout-important}
+# Question
+
+What is different about the NHST of the **alcohol** effect with `bg_d` vs `bac` and why?   
+:::
 
 
-<span style="color: blue;">Don’t dichotomize unless there is a **REALLY** good reason. GLM can accommodate quantitative variables anywhere you would have previously used a categorical variable.</span>  
+:::{.fragment}
+[here's a question using a red fragment that includes math symbols like $b_0$]{style="color:blue;"}
 
+[p-value is worse (bigger) for bg_d than BAC. Taking a quantitative variable and dichotomizing (or trichotomizing, etc.) throws away potentially valuable information in  your predictor variable. The dichotomous variable will generally be a worse predictor. This will produce a model with more error (> SSE) and less power (> p-values) to test hypotheses.]{style="color:blue;"}
+
+\
+
+[Don’t dichotomize unless there is a **REALLY** good reason. GLM can accommodate quantitative variables anywhere you would have previously used a categorical variable.]{style="color:blue;"}
+
+\
 
 $\text{SE}_{b_0}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overline{X})^2}{(N-1)*S_x^2}}$  
 
 $\text{SE}_{b_1}=\frac{s_y}{s_x}*\sqrt{\frac{1-R^2}{N-P}}$
 
+:::
 
 -----
 
-## Dichotomous Beverage Group (cont.)
+## Dummy Codes for Beverage Group (cont.)
 
 ```{r}
 #| code-fold: true
 
-m_d |> 
-  broom::tidy()
+m_d |> tidy()
 ```
 
-<span style="color: red;">Question: What is the interpretation of $b_1$ (bg_2) in this model?</span>
+\
+
+::: {.callout-important}
+# Question
+
+What is the interpretation of $b_1$ (parameter estimate for `bg_d`) in this model?
+:::
+
+:::{.fragment}
+[Still change in $Y$ for one unit change in $X$.]{style="color:blue;"}
+
+[However, a one unit change in $X$ moves from the placeob group (coded 0) to alcohol group (coded 1).  Therefore $b_1$ is now the predicted change in $Y$ between placebo and alcohol groups. This is simply the difference in the mean of the two groups!]{style="color:blue;"}
 
 -----
 
-<span style="color: blue;">Still change in $Y$ for one unit change in $X$.</span>   
+::: {.callout-important}
+# Question
 
-<span style="color: blue;">However, a one unit change in $X$ moves from the no-alcohol group (coded 0) to alcohol group (coded 1).  Therefore $b_1$ is now the predicted change in $Y$ between no-alcohol and alcohol groups. This is simply the difference in the mean of the two groups!</span>
+Where is $b_1$ (bg_d effect) on this graph?
 
------
-
-<span style="color: red;">Question: Where is $b_1$ (bg_2 effect) on this graph?</span>   
+\
 
 ```{r}
 #| code-fold: true
 
 plot_d <- data |> 
-  ggplot(aes(x = bg_2, y = fps)) +
+  ggplot(aes(x = bg_d, y = fps)) +
   geom_point(alpha = .6, size = 2) +
   geom_abline(aes(intercept = coef(m_d)[1],
                   slope = coef(m_d)[2]),
@@ -184,16 +278,19 @@ plot_d <- data |>
 
 plot_d
 ```
+:::
 
------
 
-<span style="color: blue;">It is the slope of the line (as before). The line goes through the mean of FPS scores for each of the two groups.</span>   
+:::{.fragment}
+[It is the slope of the line (as before). The line goes through the mean of FPS scores for each of the two groups.]{style="color:blue;"}
+
+\
 
 ```{r}
 #| code-fold: true
-labels <- tibble(means = c(round(mean(subset(data, bg_2 == 0)$fps), 2), 
-                           round(mean(subset(data, bg_2 == 1)$fps), 2)),
-                 vars = c("bg_1", "bg_2"))
+labels <- tibble(means = c(round(mean(subset(data, bg_d == 0)$fps), 2), 
+                           round(mean(subset(data, bg_d == 1)$fps), 2)),
+                 vars = c("bg_1", "bg_d"))
 plot_d +
   annotate("text", x = -.15, y = labels$means[1], label = labels$means[1], 
            size = 6, color = "blue") +
@@ -209,36 +306,55 @@ plot_d +
   theme(plot.margin = unit(c(0, .75, .5, .75), "inches"))
 ```
 
+:::
+
 -----
+
+::: {.callout-important}
+# Question
+
+What is the interpretation of $b_0$ in this model?
+
+\
 
 ```{r}
 #| code-fold: true
 
-m_d |> 
-  broom::tidy()
+m_d |> tidy()
 ```
+:::
 
-<span style="color: red;">Question: What is the interpretation of $b_0$ in this model?</span>
+:::{.fragment}
+
+[Still predicted value for $Y$ when $X$ = 0.]{style="color:blue;"}
+
+[In this context, that is the predicted FPS score for the no-alcohol group (coded 0).{style="color:blue;"}
+:::
 
 -----
 
-<span style="color: blue;">Still predicted value for $Y$ when $X$ = 0.</span>   
+::: {.callout-important}
+# Question
 
-<span style="color: blue;">In this context, that is the predicted FPS score for the no-alcohol group (coded 0).</span>
+Where is $b_0$ on this graph?
 
------
-
-<span style="color: red;">Question: Where is $b_0$ on this graph?</span>   
+\
 
 ```{r}
 #| code-fold: true
 
 plot_d
 ```
+:::
 
------
+:::{.fragment}
+{style="color:blue;"}
 
-<span style="color: blue;">It is the $Y$ intercept as before. The value of FPS when $X$ = 0.</span>
+
+
+[It is the $Y$ intercept as before. The value of FPS when $X$ = 0]{style="color:blue;"}
+
+[And clearly, this is still just the predicted value for the placebo group - which is just the mean of the placebo group in the sample]{style="color:blue;"}
 
 ```{r}
 #| code-fold: true
@@ -246,157 +362,200 @@ plot_d
 plot_d +
   annotate("text", x = -.15, y = labels$means[1], label = labels$means[1], 
            size = 6, color = "blue") +
-  annotate("text", x = 0, y = -140, label = "No Alcohol", 
+  annotate("text", x = 0, y = -140, label = "Placebo", 
            size = 5, color = "blue") +
   coord_cartesian(xlim = c(0, 1),
                   (ylim = c(-100, 175)),
                   clip = "off") +
   theme(plot.margin = unit(c(0, 0, .5, .75), "inches"))
 ```
+:::
 
 -----
 
-<span style="color: red;">Question: Does alcohol affect FPS?</span>
+::: {.callout-important}
+# Question
 
------
+Does alcohol affect FPS?
+:::
+
+
+:::{.fragment}
+
 
 ```{r}
 #| code-fold: true
 
 m_d |> 
-  broom::tidy()
+  tidy()
 ```
 
 
 $H_0: \beta_1 = 0$   
 $H_a: \beta_1 \neq 0$   
 
-<span style="color: blue;">No. The probability of getting a $b_1$ of `r round(coef(m_d)[2], 3)` or more extreme is `r round(broom::tidy(m_d)$p.value[2], 3)` if the null hypothesis is true.  This is not sufficient evidence to reject the null.</span>
+[No. The probability of getting a $b_1$ of `r round(coef(m_d)[2], 3)` or more extreme is `r round(tidy(m_d)$p.value[2], 3)` if the null hypothesis is true.  This is not sufficient evidence to reject the null.]{style="color:blue;"}
 
 -----
 
 ## Model Comparisons ($\beta_1$)
 
-<span style="color: red;">Question: What two models are you comparing to test your hypotheses about alcohol’s effect on FPS?</span>   
+::: {.callout-important}
+# Question
 
------
+What two models are you comparing to test your hypotheses about alcohol’s effect on FPS?
+:::
 
+:::{.fragment}
 $H_0: \beta_1 = 0$  
 $H_a: \beta_1 \neq 0$   
 
-<span style="color: blue;">Compact model:  $\hat{\text{FPS}}_i = \beta_0+0*\text{bg}\_2_i$</span>  
-$P_c = 1$  
-$\text{SSE}_c = `r round(sum((data$fps - mean(data$fps))^2),2)`$  
+[Compact model:]{style="color: blue;"}
+
+- $\hat{\text{FPS}}_i = \beta_0+0*\text{bg_d}\_2_i$
+- $P_c = 1$  
+- $\text{SSE}_c = `r round(sum((data$fps - mean(data$fps))^2),2)`$  
 
 
-<span style="color: blue;">Augmented model:  $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg}\_2_i$</span>   
-$P_a=2$  
-$\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
+[Augmented model:]{style="color: blue;"}
+- $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg_d}\_2_i$
+- $P_a=2$  
+- $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
+:::
 
 -----
 
-<span style="color: red;">Question: How do you use this information to calculate $\eta_p^2$ (PRE) for the bg_2 effect?</span> 
+::: {.callout-important}
+# Question
 
------
+How do you use this information to calculate $\eta_p^2$ (PRE) for the bg_d effect?
+:::
 
-Compact model:  $\hat{\text{FPS}}_i=\beta_0+0*\text{bg}\_2_i$  
-$P_c = 1$  
-$\text{SSE}_c = `r round(sum((data$fps - mean(data$fps))^2),2)`$   
+:::{.fragment}
 
+[PRE or $\eta_p^2$ is the proportional reduction in error due to the effect (the parameter). Use the same models that you would use to test the hypotheses about that parameter.]{style="color:blue;"}
 
-Augmented model:  $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg}\_2_i$   
-$P_a=2$  
-$\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
-
-<span style="color: blue;">PRE or $\eta_p^2$ is the proportion reduction in error due to the effect (the parameter). Use the same models that you would use to test the hypotheses about that parameter.</span>  
-
-<span style="color: blue;">$\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{`r round(sum((data$fps - mean(data$fps))^2),2)` - `r round(sum((data$fps - predict(m_d))^2),2)`}{`r round(sum((data$fps - mean(data$fps))^2),2)`} = `r round((sum((data$fps - mean(data$fps))^2)-sum((data$fps - predict(m_d))^2))/sum((data$fps - mean(data$fps))^2), 4)`$</span>
+$\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{`r round(sum((data$fps - mean(data$fps))^2),2)` - `r round(sum((data$fps - predict(m_d))^2),2)`}{`r round(sum((data$fps - mean(data$fps))^2),2)`} = `r round((sum((data$fps - mean(data$fps))^2)-sum((data$fps - predict(m_d))^2))/sum((data$fps - mean(data$fps))^2), 4)`$
 
 -----
 
 ## Testing $\beta_0$
 
-<span style="color: red;">Question: Does our task produce non-zero fear potentiated startle in sober people?</span> 
+::: {.callout-important}
+# Question
 
------
+Does our task produce non-zero fear potentiated startle in sober people?
+:::
+
+
+:::{.fragment}
 
 ```{r}
 #| code-fold: true
 
-m_d |> 
-  broom::tidy()
+m_d |> tidy()
 ```
 
 $H_0: \beta_0 = 0$  
 $H_a: \beta_0 \neq 0$   
 
-<span style="color: blue;">Yes. The probability of getting a $b_0$ of `r round(coef(m_d)[1], 3)` or more extreme is `r round(broom::tidy(m_d)$p.value[1], 8)` if the null hypothesis is true.  Very unlikely so reject null. Conclude $B_0 > 0$.</span>
+[Yes. The probability of getting a $b_0$ of `r round(coef(m_d)[1], 3)` or more extreme is `r round(tidy(m_d)$p.value[1], 8)` if the null hypothesis is true.  Very unlikely so reject null. Conclude $B_0 > 0$.]{style="color:blue;"}
 
 -----
 
 ## Model Comparisons ($\beta_0$)
 
-<span style="color: red;">Question: What two models are you comparing to test your hypotheses about mean FPS for sober people?</span>  
+::: {.callout-important}
+# Question
 
------
+What two models are you comparing to test your hypotheses about mean FPS for sober people?
+:::
+
+
+:::{.fragment}
+
 
 $H_0: \beta_0 = 0$  
 $H_a: \beta_0 \neq 0$   
 
-<span style="color: blue;">Compact model: $\hat{\text{FPS}}_i=0+\beta_1*\text{bg}\_2_i$</span>  
+[Compact model:]{style="color:blue;"}
 
-$P_c = 1$  
-$\text{SSE}_c = `r round(sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2),2)`$  
+- $\hat{\text{FPS}}_i=0+\beta_1*\text{bg}\_2_i$
+- $P_c = 1$  
+- $\text{SSE}_c = `r round(sum((data$fps - predict(lm(fps~bg_d - 1, data = data)))^2),2)`$  
 
 
-<span style="color: blue;">Augmented model: $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg}\_2_i$</span>   
-
-$P_a=2$  
-$\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
-
------
-
-<span style="color: red;">Question: How do you use this information to calculate $\eta_p^2$ (PRE) for $\beta_0$?</span>  
+[Augmented model:]{style="color:blue;"}
+- $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg}\_2_i$
+- $P_a=2$  
+- $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
 
 -----
 
-Compact model: $\hat{\text{FPS}}_i=0+\beta_1*\text{bg}\_2_i$  
+::: {.callout-important}
+# Question
 
-$P_c = 1$  
-$\text{SSE}_c = `r round(sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2),2)`$  
+How do you use this information to calculate $\eta_p^2$ (PRE) for $\beta_0$?
+:::
+
+:::{.fragment}
+[Compact model:]{style="color:blue;"}
+
+- $\hat{\text{FPS}}_i=0+\beta_1*\text{bg}\_2_i$  
+- $P_c = 1$  
+- $\text{SSE}_c = `r round(sum((data$fps - predict(lm(fps~bg_d - 1, data = data)))^2),2)`$  
 
 
-Augmented model: $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg}\_2_i$   
+[Augmented model:]{style="color:blue;"}
 
-$P_a=2$  
-$\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$  
+- $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg}\_2_i$   
+- $P_a=2$  
+- $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$  
 
-<span style="color: blue;">PRE or $\eta_p^2$ is the proportion reduction in error due to the effect (the parameter). Use the same models that you would use to test the hypotheses about that parameter.</span>  
+[PRE or $\eta_p^2$ is the proportion reduction in error due to the effect (the parameter). Use the same models that you would use to test the hypotheses about that parameter.]{style="color:blue;"}
 
-<span style="color: blue;">$\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}= \frac{`r round(sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2),2)` - `r round(sum((data$fps - predict(m_d))^2),2)`}{`r round(sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2),2)` } = `r round((sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2) -sum((data$fps - predict(m_d))^2))/sum((data$fps - predict(lm(fps~bg_2 -1, data = data)))^2), 4)`$</span>
+\
+
+$\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}= \frac{`r round(sum((data$fps - predict(lm(fps~bg_d -1, data = data)))^2),2)` - `r round(sum((data$fps - predict(m_d))^2),2)`}{`r round(sum((data$fps - predict(lm(fps~bg_d -1, data = data)))^2),2)` } = `r round((sum((data$fps - predict(lm(fps~bg_d -1, data = data)))^2) -sum((data$fps - predict(m_d))^2))/sum((data$fps - predict(lm(fps~bg_d -1, data = data)))^2), 4)`$
 
 -----
 
-<span style="color: red;">Question: How do you use this information to calculate $R^2$ for the augmented model?</span>  
+::: {.callout-important}
+# Question
 
------
+How do you use this information to calculate $R^2$ for the augmented model?
+:::
 
-Mean Only model: $\hat{\text{FPS}_i}=\beta_0$  
+:::{.fragment}
+[Mean Only model:]{style="color:blue;"}
+- $\hat{\text{FPS}_i}=\beta_0$  
+- $P_c = 1$  
+- $\text{SSE}_c = `r round(sum((data$fps - mean(data$fps))^2),2)`$  
 
-$P_c = 1$  
-$\text{SSE}_c = `r round(sum((data$fps - mean(data$fps))^2),2)`$  
 
+[Augmented model:]{style="color:blue;"}
+- $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg}\_2_i$
+- $P_a=2$  
+- $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$  j
 
-Augmented model: $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg}\_2_i$   
+[$R^2$ is the proportion of explained variance over total variance in $Y$. The total variance is equivalent to the SSE of the Mean Only model] {style="color:blue;"}
+:::
 
-$P_a=2$  
-$\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$  
+::::{.fraqment}
+::: {.callout-important}
+# Question
 
-<span style="color: blue;">$R^2$ is the proportion of explained variance over total variance in $Y$. The total variance is equivalent to the SSE of the Mean Only model (</span><span style="color: red;">WHY?</span><span style="color: blue;">).</span>   
+Why?
+:::
+::::
+
+:::{.fragment}
+
+[At this point it equals PRE b/c $\text{SSE}_c$ is the mean only model!{style="color:blue;"}
 
 $\frac{\text{SSE}_\text{mean}-\text{SSE}_a}{\text{SSE}_\text{mean}}=\frac{`r round(sum((data$fps - mean(data$fps))^2),2)` - `r round(sum((data$fps - predict(m_d))^2),2)`}{`r round(sum((data$fps - mean(data$fps))^2),2)`}$ = `r round((sum((data$fps - mean(data$fps))^2) - sum((data$fps - predict(m_d))^2))/sum((data$fps - mean(data$fps))^2),4)`$ 
 
-<span style="color: blue;">At this point it equals PRE b/c $\text{SSE}_c$ is the mean only model!</span>  
+:::
 
 -----
 
@@ -404,7 +563,7 @@ $\frac{\text{SSE}_\text{mean}-\text{SSE}_a}{\text{SSE}_\text{mean}}=\frac{`r rou
 
 ```{r}
 m_mean <- lm(fps ~ 1, data = data) 
-m_d <- lm(fps ~ bg_2, data = data)
+m_d <- lm(fps ~ bg_d, data = data)
 ```
 
 $\eta_p^2$
@@ -414,7 +573,7 @@ $\eta_p^2$
 
 $R^2$
 ```{r}
-broom::glance(m_d)$r.squared 
+glance(m_d)$r.squared 
 ```
 
 -----
@@ -430,7 +589,7 @@ data <- data |>
 m_c <- lm(fps ~ bg_2c, data = data)
 
 m_c |> 
-  broom::tidy()
+  tidy()
 ```
 
 -----
@@ -520,7 +679,7 @@ mean(data$bg_2mc)
 m_mc <- lm(fps ~ bg_2mc, data = data)
 
 m_mc |> 
-  broom::tidy()
+  tidy()
 ```
 
 -----
@@ -586,7 +745,7 @@ data <- data |>
 m_o <- lm(fps ~ bg_2o, data = data)
 
 m_o |> 
-  broom::tidy()
+  tidy()
 ```
 
 -----
