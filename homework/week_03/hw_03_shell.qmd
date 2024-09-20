@@ -1,0 +1,243 @@
+---
+title: "Homework 3" 
+author: "[YOUR NAME HERE]" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+Due <!--Friday, September 27, 2023, 9:00pm--> on Canvas.   
+
+-	Select the Assignments menu and find HW Week 3
+-	Submit both an HTML file and a .qmd file
+-	Make sure you can access this folder ahead of the homework due date
+
+
+## Part A. Reading Questions
+
+
+### 1.	Define Type I and Type II error. For each type, give an example of how a researcher could reduce the risk of committing the error.
+
+
+
+
+### 2.	In practical terms, what does the numerator of the F statistic equation represent? The denominator?
+
+
+
+### 3.	Statistical terms: What special name is given to the mean-squared-error from the mean-only model?
+
+
+
+
+## Part B. Data Analysis
+
+
+For this homework, we will use the `stray_animals.csv` file. This data set contains (fictitious) statistics about the number of stray animals in each of the 50 US states. The data set also specifies whether the state participated in a nation-wide TNR (trap-neuter-return) program that was launched in an attempt to reduce the number of stray cats and the number of animal shelters in each state.   
+
+**Codebook:**    
+
+- `state`: US state
+- `tnr`: whether the program adopted a trap-neuter-return program (0/no, 1/yes)   
+- `dogs`: Number of stray dogs in thousands
+- `cats`: Number of stray cats in thousands
+- `other`: Number of stray other animals in thousands
+- `shelters`: Number of animal shelters per 10,000 people
+
+
+### 1. Set up your global options for your script. This includes setting the conflict policy, loading any libraries you need, selecting a theme to use for `ggplot`, and specifying the path to where you store your data files (i.e., `path_data`).
+
+```{r}
+#| message: false
+
+
+```
+
+
+### 2.	Read in and glimpse the data. In what variable classes are the `tnr`, `dogs`, `cats`, `other`, and `shelters` columns read into R? What are the appropriate variable classes for these variables, according to the data codebook? Do they match?
+
+***Your Answer Here***
+
+```{r}
+
+
+
+```
+
+### 3. Use one function/command in R to pull up the help page for `factor()`. After you have read the help page, recode `tnr` to be a factor variable with clear labels (yes/no). Feel free to consult other sources, such as ChatGPT.
+
+```{r}
+
+
+
+```
+
+
+### 4. Obtain summary statistics for all numeric variables using `summarise()`.
+
+```{r}
+
+
+
+```
+
+
+### 5. Obtain summary statistics by whether or not a trap-neuter-return program is adopted, using `group_by` and a function from `skimr`.
+
+```{r}
+
+
+
+```
+
+
+### 6.	Go through the following steps to create two additional variables:
+
+#### a.	Compute the total number of stray animals (i.e., dogs, cats, and other animals combined) as `stray_total` in each state.
+
+```{r}
+
+
+
+```
+
+#### b. Create a new variable `stray_z`, that is the standardized score of `stray_total`.
+
+```{r}
+
+
+
+```
+
+
+#### c.	Check to make sure `stray_z` is standardized. 
+
+```{r}
+
+
+
+```
+
+
+### 7.	Use ggplot to create two histograms of the total number of stray animals: one for the states that took part in the TNR program, and the other for the states that did not. Label your histograms properly. 
+
+There are a few different ways to do this. Try multiple ways if you rock (hint: look into  using `filter()`, `subset()`, or `facet_wrap()`)!
+
+```{r}
+
+
+
+```
+
+
+### 8.	Refer to the ggplot2 cheat-sheet [here](https://rstudio.github.io/cheatsheets/html/data-visualization.html) and other sources like ChatGPT. Use `ggplot`to create a *scatterplot* that shows the relationship between total number of stray animals and number of shelters. The plot should at least have a white background, data points, and meaningful x- and y-axis labels. 
+
+```{r}
+
+
+
+```
+
+
+### 9.	What is the formula for each of the two models you should compare if you want to know whether the average number of stray animals is different from zero?   
+
+***Your Answer Here***
+
+
+### 10.	Compute the SSE for each of the two models in the previous question. Do so by using a step-by-step brute force method, like we did in lab. Remember to label clearly (e.g., `sse_null`, `sse_mean`).  
+
+Compact - NULL model
+```{r}
+
+
+
+```
+
+Augmented - Mean-only model
+```{r}
+
+
+
+```
+
+
+### 11.	Compare the two models by calculating the appropriate F statistic and p value. 
+
+```{r}
+
+
+
+```
+
+### 12. Now, fit the null model and the mean-only model using `lm()`. Then, use a function we learned to compare the two models.
+
+```{r}
+
+
+
+```
+
+
+### 13. Use a function from the `broom` package to obtain the parameter estimate, its standard error, and the corresponding t-value and p-value from the mean-only model.
+
+```{r}
+
+
+```
+
+
+### 14. Answer the following questions:
+
+#### a. Do you get the same conclusion and results from step-by-step brute-force model comparison, `lm()` model comparison, and the method using the augmented model only and the `broom` package? 
+
+***Your Answer Here***
+
+#### b.	Is estimating the mean worth the increased complexity of the model? Why? Interpret the result in plain English.     
+
+***Your Answer Here***
+
+#### c.	Why is this model comparison not super informative (i.e., why are you not surprised 0 is a worse predictor for the number of stray cats per year?).    
+
+***Your Answer Here***
+
+### 15. Think back to the standardized score `stray_z` which we created from `stray_total`. Would it make sense to estimate b_0 and test whether `stray_z`has a mean that is significantly different from zero? Why or why not?
+
+***Your Answer Here***
+
+### 16.	Sometimes learning stats or programming is difficult and you just need a little positive feedback. Figure out which package contains the `praise()` function, and complete all the steps you need in order to write a line of code using `praise()` to tell you something nice. 
+
+
+```{r}
+
+
+
+```
+
+
+### 17. Reflection
+
+#### a. How many hours did you spend on this homework?
+
+***Your Answer Here***
+
+
+#### b. What is one aspect of Friday labs that has been effective so far?
+
+***Your Answer Here***
+
+
+#### c. What is one way Friday labs can be improved to facilitate your learning?
+
+***Your Answer Here***
+
+
+#### d. What is one concept covered in lecture that you feel the most confusing/elusive?
+
+***Your Answer Here***
+
+
