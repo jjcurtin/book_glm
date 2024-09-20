@@ -2,7 +2,7 @@
 format:
   revealjs:
     slide-number: true
-    show-slide-number: print
+    show-slide-number: all 
 editor_options:  
   chunk_output_type: console
 --- 

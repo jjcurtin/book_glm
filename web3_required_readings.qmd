@@ -1,14 +1,147 @@
-# Required Reading {.unnumbered}
-
-## Unit 1
+# Readings {.unnumbered}
+## Unit 1: Overview
+### Required
 
 - Judd et a., Chapter 1, Introduction to Data Analysis
 
-## Unit 2
-  
+### Supplemental
+
+- None
+
+
+## Unit 2: Sampling Distributions
+### Required
+
 - Judd et al. Chapter 2, Definitions of Error and Parameter Estimates
 - Judd et al. Chapter 3, Models of Error and Sampling Distributions
 
-## Unit 3
+### Supplemental
+
+- [Toothacker, L. E., & Miller, L. (1986) Sampling Distributions. In Introductory Statistics for the Behavioral Sciences.](/readings/toothaker1986.pdf)
+
+
+## Unit 3: One Parameter Model
+### Required
 
 - Judd et al. Chapter 4. Simple Models: Statistical Inferences about Parameter Values
+
+### Supplemental
+
+- None
+
+
+## Unit 4: One Quantitative Predictor
+### Required
+
+- Judd, C. M., McClelland, G. H., & Ryan, C. S. (2017). Chapter 5. Simple regression: Estimating models with a single continuous predictor. In Data Analysis: A Model Comparison Approach
+
+### Supplemental
+
+- [Namboodiri, K. (1984). Matrix algebra: An introduction (Quantitative Applications in the Social Sciences). Sage Publications.](/readings/namboodiri1984.pdf)
+
+
+## Unit 5: One Dichotomous Predictor
+### Required
+
+- Judd, C. M., McClelland, G. H., & Ryan, C. S. (2017). Chapter 8. One-Way ANOVA (pp. 168-178). In Data Analysis: A Model Comparison Approach.
+
+### Supplemental
+
+- None
+
+
+## Unit 6: Two Predictors
+### Required
+- Judd, C. M., McClelland, G. H., & Ryan, C. S. (2017). Chapter 6. Multiple regression: Models with multiple continuous predictors. In Data Analysis: A Model Comparison Approach. pp. 103-116.
+
+### Supplemental
+
+- Fritz, C. O., Morris, P. E., & Richler, J. J. (2012). Effect size estimates: Current use, calculations, and interpretation. Journal of Exp. Psychology: General, 141, 2-18.
+
+## Unit 7: Case Analysis
+### Required
+
+- Judd, C. M., McClelland, G. H., & Ryan, C. S. (2017). Chapter 13. Outliers and Ill-Mannered Error. In Data Analysis: A Model Comparison Approach. pp. 314-327.
+
+### Supplemental
+
+- [Fox, J. (1991). Regression diagnostics. SAGE Series (#79): Quantitative Applications in the Social Science.](/readings/fox1991.pdf)
+- Tabachnick, B. G., & Fidel, L. S. (2018). Cleaning up your act: Screening data prior to analysis. In Using Multivariate Statistics.
+
+## Unit 8: Model Assumptions
+### Required
+
+- Judd, C. M., McClelland, G. H., & Ryan, C. S. (2017). Chapter 13. Outliers and Ill-Mannered Error. In Data Analysis: A Model Comparison Approach. pp. 327-338.
+
+### Supplemental
+
+- [Fox, J. (1991). Regression diagnostics. SAGE Series (#79): Quantitative Applications in the Social Science.](/readings/fox1991.pdf)
+
+
+## Unit 9: Transformations
+
+### Required
+
+- [Fox, J. (2008). Transforming Data (Chapter 4).](/readings/fox2008.pdf)
+
+### Supplemental
+
+
+# Unit 10: Interactions between Two Quantitative Predictors
+
+### Required
+
+- [Jaccard, J. & Turissi, R. (2003). Interaction effects in multiple regression (2nd Edition). SAGE Series (#72): Quantitative Applications in the Social Science. pp. 16-43.](/readings/jaccard2003.pdf)
+
+### Supplemental
+
+- None
+
+
+# Unit 11: Interactions between One Quantitative and One Dichotomous Predictor
+
+### Required
+
+- Judd, C. M., McClelland, G. H., & Ryan, C. S. (2017). Chapter 7. Moderated and Nonlinear Regression Models (pp. 135-158). In Data Analysis: A Model Comparison Approach.
+
+### Supplemental
+
+
+# Unit 12: Interactions between Two Dichotomous Predictors
+
+### Required
+
+- [MacCallum, R., Zhang, S., Preacher, K., & Rucker, D. (2002) On the practice of dichotomization of quantitative variables. Psychological Methods, 7, 19-40.](/readings/maccallum2002.pdf)
+
+### Supplemental
+
+- Rosnow, R. & Rosenthal, R. (1989) Definition and Interpretation of Interaction Effects.  Psychological Bulletin, 105, 143-146.
+- [Brauer, M. & Judd, C. M. (2000) Defining variables in relationship to other variables: When interactions suddenly turn out to be main effects. Journal of Experimental Social Psychology, 36, 410-423.](/readings/brauer2000.pdf)
+- Garcia-Marques, L., Garcia-Marques, T., & Brauer, M. (2014). Buy three but get only two: The smallest effect in a 2 x 2 ANOVA is always uninterpretable. Psychonomic
+Bulletin & Review, 21, 1415-1430.
+
+# Unit 13: Categorical Predictors with > 2 Levels
+
+### Required
+
+- UPDATE
+
+### Supplemental
+
+
+# Unit 14: Statistical Power
+
+### Required
+
+- UPDATE
+
+### Supplemental
+
+
+# Unit 15: The Generalized Linear Model
+
+### Required
+
+
+### Supplemental
+
