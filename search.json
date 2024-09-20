@@ -222,41 +222,101 @@
   {
     "objectID": "web3_required_readings.html",
     "href": "web3_required_readings.html",
-    "title": "Required Reading",
+    "title": "Readings",
     "section": "",
-    "text": "Unit 1",
+    "text": "Unit 1: Overview",
     "crumbs": [
-      "Required Reading"
+      "Readings"
     ]
   },
   {
-    "objectID": "web3_required_readings.html#unit-1",
-    "href": "web3_required_readings.html#unit-1",
-    "title": "Required Reading",
+    "objectID": "web3_required_readings.html#unit-1-overview",
+    "href": "web3_required_readings.html#unit-1-overview",
+    "title": "Readings",
     "section": "",
-    "text": "Judd et a., Chapter 1, Introduction to Data Analysis",
+    "text": "Required\n\nJudd et a., Chapter 1, Introduction to Data Analysis\n\n\n\nSupplemental\n\nNone",
     "crumbs": [
-      "Required Reading"
+      "Readings"
     ]
   },
   {
-    "objectID": "web3_required_readings.html#unit-2",
-    "href": "web3_required_readings.html#unit-2",
-    "title": "Required Reading",
-    "section": "Unit 2",
-    "text": "Unit 2\n\nJudd et al. Chapter 2, Definitions of Error and Parameter Estimates\nJudd et al. Chapter 3, Models of Error and Sampling Distributions",
+    "objectID": "web3_required_readings.html#unit-2-sampling-distributions",
+    "href": "web3_required_readings.html#unit-2-sampling-distributions",
+    "title": "Readings",
+    "section": "Unit 2: Sampling Distributions",
+    "text": "Unit 2: Sampling Distributions\n\nRequired\n\nJudd et al. Chapter 2, Definitions of Error and Parameter Estimates\nJudd et al. Chapter 3, Models of Error and Sampling Distributions\n\n\n\nSupplemental\n\nToothacker, L. E., & Miller, L. (1986) Sampling Distributions. In Introductory Statistics for the Behavioral Sciences.",
     "crumbs": [
-      "Required Reading"
+      "Readings"
     ]
   },
   {
-    "objectID": "web3_required_readings.html#unit-3",
-    "href": "web3_required_readings.html#unit-3",
-    "title": "Required Reading",
-    "section": "Unit 3",
-    "text": "Unit 3\n\nJudd et al. Chapter 4. Simple Models: Statistical Inferences about Parameter Values",
+    "objectID": "web3_required_readings.html#unit-3-one-parameter-model",
+    "href": "web3_required_readings.html#unit-3-one-parameter-model",
+    "title": "Readings",
+    "section": "Unit 3: One Parameter Model",
+    "text": "Unit 3: One Parameter Model\n\nRequired\n\nJudd et al. Chapter 4. Simple Models: Statistical Inferences about Parameter Values\n\n\n\nSupplemental\n\nNone",
     "crumbs": [
-      "Required Reading"
+      "Readings"
+    ]
+  },
+  {
+    "objectID": "web3_required_readings.html#unit-4-one-quantitative-predictor",
+    "href": "web3_required_readings.html#unit-4-one-quantitative-predictor",
+    "title": "Readings",
+    "section": "Unit 4: One Quantitative Predictor",
+    "text": "Unit 4: One Quantitative Predictor\n\nRequired\n\nJudd, C. M., McClelland, G. H., & Ryan, C. S. (2017). Chapter 5. Simple regression: Estimating models with a single continuous predictor. In Data Analysis: A Model Comparison Approach\n\n\n\nSupplemental\n\nNamboodiri, K. (1984). Matrix algebra: An introduction (Quantitative Applications in the Social Sciences). Sage Publications.",
+    "crumbs": [
+      "Readings"
+    ]
+  },
+  {
+    "objectID": "web3_required_readings.html#unit-5-one-dichotomous-predictor",
+    "href": "web3_required_readings.html#unit-5-one-dichotomous-predictor",
+    "title": "Readings",
+    "section": "Unit 5: One Dichotomous Predictor",
+    "text": "Unit 5: One Dichotomous Predictor\n\nRequired\n\nJudd, C. M., McClelland, G. H., & Ryan, C. S. (2017). Chapter 8. One-Way ANOVA (pp. 168-178). In Data Analysis: A Model Comparison Approach.\n\n\n\nSupplemental\n\nNone",
+    "crumbs": [
+      "Readings"
+    ]
+  },
+  {
+    "objectID": "web3_required_readings.html#unit-6-two-predictors",
+    "href": "web3_required_readings.html#unit-6-two-predictors",
+    "title": "Readings",
+    "section": "Unit 6: Two Predictors",
+    "text": "Unit 6: Two Predictors\n\nRequired\n\nJudd, C. M., McClelland, G. H., & Ryan, C. S. (2017). Chapter 6. Multiple regression: Models with multiple continuous predictors. In Data Analysis: A Model Comparison Approach. pp. 103-116.\n\n\n\nSupplemental\n\nFritz, C. O., Morris, P. E., & Richler, J. J. (2012). Effect size estimates: Current use, calculations, and interpretation. Journal of Exp. Psychology: General, 141, 2-18.",
+    "crumbs": [
+      "Readings"
+    ]
+  },
+  {
+    "objectID": "web3_required_readings.html#unit-7-case-analysis",
+    "href": "web3_required_readings.html#unit-7-case-analysis",
+    "title": "Readings",
+    "section": "Unit 7: Case Analysis",
+    "text": "Unit 7: Case Analysis\n\nRequired\n\nJudd, C. M., McClelland, G. H., & Ryan, C. S. (2017). Chapter 13. Outliers and Ill-Mannered Error. In Data Analysis: A Model Comparison Approach. pp. 314-327.\n\n\n\nSupplemental\n\nFox, J. (1991). Regression diagnostics. SAGE Series (#79): Quantitative Applications in the Social Science.\nTabachnick, B. G., & Fidel, L. S. (2018). Cleaning up your act: Screening data prior to analysis. In Using Multivariate Statistics.",
+    "crumbs": [
+      "Readings"
+    ]
+  },
+  {
+    "objectID": "web3_required_readings.html#unit-8-model-assumptions",
+    "href": "web3_required_readings.html#unit-8-model-assumptions",
+    "title": "Readings",
+    "section": "Unit 8: Model Assumptions",
+    "text": "Unit 8: Model Assumptions\n\nRequired\n\nJudd, C. M., McClelland, G. H., & Ryan, C. S. (2017). Chapter 13. Outliers and Ill-Mannered Error. In Data Analysis: A Model Comparison Approach. pp. 327-338.\n\n\n\nSupplemental\n\nFox, J. (1991). Regression diagnostics. SAGE Series (#79): Quantitative Applications in the Social Science.",
+    "crumbs": [
+      "Readings"
+    ]
+  },
+  {
+    "objectID": "web3_required_readings.html#unit-9-transformations",
+    "href": "web3_required_readings.html#unit-9-transformations",
+    "title": "Readings",
+    "section": "Unit 9: Transformations",
+    "text": "Unit 9: Transformations\n\nRequired\n\nFox, J. (2008). Transforming Data (Chapter 4).\n\n\n\nSupplemental",
+    "crumbs": [
+      "Readings"
     ]
   },
   {
@@ -444,7 +504,7 @@
     "href": "web5_labs.html#week-2-0913",
     "title": "Lab Materials",
     "section": "Week 2: 09/13",
-    "text": "Week 2: 09/13\n\nStudent shell\nTA notebook: qmd; html",
+    "text": "Week 2: 09/13\n\nLab 02 data\nStudent shell\nTA notebook: qmd; html",
     "crumbs": [
       "Lab Materials"
     ]
@@ -454,7 +514,7 @@
     "href": "web5_labs.html#week-3-0920",
     "title": "Lab Materials",
     "section": "Week 3: 09/20",
-    "text": "Week 3: 09/20\n\nStudent shell",
+    "text": "Week 3: 09/20\n\nLab 03 data\nStudent shell\nTA notebook: qmd; html",
     "crumbs": [
       "Lab Materials"
     ]
@@ -464,7 +524,7 @@
     "href": "web5_labs.html#week-4-0927",
     "title": "Lab Materials",
     "section": "Week 4: 09/27",
-    "text": "Week 4: 09/27",
+    "text": "Week 4: 09/27\n\nLab 04 data\nStudent shell\nTA notebook: qmd; html",
     "crumbs": [
       "Lab Materials"
     ]
