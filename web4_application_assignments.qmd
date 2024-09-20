@@ -7,34 +7,36 @@
 
 ## Week 02: Due Wednesday, 09/18 at 1:30 pm
 
-- [shell](homework/week_02/hw2_shell.qmd)
-- [data](homework/week_02/hw2_data.csv)
-- key: [html](); [qmd]()
+- [shell](homework/week_02/hw_02_shell.qmd)
+- [data](homework/week_02/hw_02_data.csv)
+- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw2_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw2_key.qmd)
 
-## Week 03: Due Wednesday, 09/25 at 1:30 pm
+## Week 03: Due Friday, 09/27 at 8:30 am
 
+- [ggplot cheatsheet](/homework/week_03/ggplot2_cheatsheet.pdf)
+- [shell](/homework/week_03/hw_03_shell.qmd)
+- [data](/homework/week_03/stray_animals.csv)
 
-## Week 04: Due Wednesday, 10/02 at 1:30 pm
+## Week 04: Due Friday, 10/04 at 8:30 am
 
 ## Week 05: No application assignment.  Application exam week!
 
-## Week 06: Due Wednesday, 10/16 at 1:30 pm
+## Week 06: Due Friday, 10/18 at 8:30 am
 
-## Week 07: Due Wednesday, 10/23 at 1:30 pm
+## Week 07: Due Friday, 10/25 at 8:30 am
 
-## Week 08: Due Wednesday, 10/10 at 1:30 pm
+## Week 08: Due Friday, 10/12 at 8:30 am
 
-## Week 09: Due Wednesday, 11/06 at 1:30 pm
+## Week 09: Due Friday, 11/08 at 8:30 am
 
 ## Week 10: No application assignnment.  Application exam week!
 
-## Week 11: Due Wednesday, 11/20 at 1:30 pm
+## Week 11: Due Friday, 11/22 at 8:30 am
 
-## Week 12: Due Wednesday 11/27 at 1:30 pm
+## Week 12: Due Friday 11/29 at 8:30 am
 
 ## Week 13: No application assignment.  Thanksgiving Break
 
-## Week 14: Due Wednesday, 12/11 at 1:30 pm
+## Week 14: Due Friday 12/13 at 8:30 am
 
 ## Week 15: No application assignment.  Application exam week!
-
