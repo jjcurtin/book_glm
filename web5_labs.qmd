@@ -3,19 +3,22 @@
 
 ## Week 1: 09/06
 
-- [Installing R, R Studio, & Quarto](https://dionysus.psych.wisc.edu/610/lab/install_notes.pdf)
-- [Student shell](https://dionysus.psych.wisc.edu/610/lab/lab_01_student.qmd)
+- [Installing R, R Studio, & Quarto](lab/install_notes.pdf)
+- [Student shell](lab/lab_01_shell.qmd)
 - TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_01_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_01_ta.html)
 
 ## Week 2: 09/13
 
-- [Student shell](https://dionysus.psych.wisc.edu/610/lab/lab_02_student.qmd)
+- [Student shell](lab/lab_02_shell.qmd)
 - TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_02_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_02_ta.html)
 
 ## Week 3: 09/20
 
-- [Student shell](https://dionysus.psych.wisc.edu/610/lab/lab_03_student.qmd)
+- [Student shell](lab/lab_03_shell.qmd)
+- TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_03_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_03_ta.html)
 
 ## Week 4: 09/27
 
+- [Student shell](lab/lab_04_shell.qmd)
+- TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_04_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_04_ta.html)
  
