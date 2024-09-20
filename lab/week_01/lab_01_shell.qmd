@@ -1,0 +1,383 @@
+---
+title: "Lab 1 TA Script" 
+author: "TAs" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+# Welcome to PSYCH 610
+
+TAs:
+
+- 2013: Chris Cox & Pooja Sidney
+- 2014: Xiaming Ma
+- 2015: Tammi Kral
+- 2016: Adrienne Wood
+- 2017: Mitchell Campbell
+- 2018: Mitchell Campbell
+- 2019: David Menendez and Katharine Scott
+- 2020: Michael Asher and Sasha Sommerfeldt
+- 2021: Ethan Harrod and Ben Douglas
+- 2022: Ivette Colón and Emma Cunningham
+- 2023: Ben Douglas, LiChen Dong, and Nick Vest
+- 2024: Coco Yu, Claire Punturieri, LiChen Dong
+
+:::{.callout-note}
+Note for future TA's: this script uses anonymous data collected via Google Forms from the students in the course prior to the first lab. Reach out to Coco, Claire, or LiChen so they can share the survey with you.
+:::
+
+# Quick Ice Breaker!
+
+Pair up with a classmate sitting next to you! Introduce yourselves, talk to each other for 5 minutes, and figure out one thing you share in common (e.g., both cat people?) and one thing that makes you different (e.g., pineapple on pizza versus no).
+
+# Preparation
+
+### Follow the instructions in install_r_quarto_2024.docx
+
+If you encounter any problems during installation, let the TAs know and they can debug for you. The TAs will also walk through R Project setup step-by-step. 
+
+Make sure that you have at least:
+
+- installed the latest version of R
+- installed RStudio
+- installed Quarto
+
+### Download lab materials from <https://jjcurtin.github.io/book_glm/>
+
+- Navigate to Labs -> Week 1 and find lab_1_student.qmd and psych610_survey_data files. 
+- Save the Quarto notebook (.qmd file) in the *lab* folder or its sub-folders separated by weeks.
+- Save the data files in the *data* folder inside the *lab* folder. 
+- Open your psych_610 R Project and open lab_1_student.qmd from the File menus (top left corner, above the tool bar) or the Files window (usually bottom right of RStudio). Your student script should look mostly the same as the script I am showing now on my screen.
+
+:::{.callout-note}
+You'll have access to the student script before lab. The TA version of lab script with complete code and practice problems key will be released over the weekend, so you can refer back to it and use it for review. ***This means you do not need to type down everything and take perfect notes in lab.*** It is more important that you follow the TAs and try to understand the code.
+:::
+
+### Adjust your R preferences. Here's what we recommend: 
+
+- Go to Tools -> Global Options (or RStudio -> Preferences)
+ * General : 
+   + Uncheck Restore .RData into workspace at startup
+   + Uncheck Restore most recently opened project at startup
+   + Uncheck Restore previously opened source documents at startup
+   + Uncheck Always save history (even when not saving .RData)
+   + Uncheck Set Save .RData to workspace on exit: Never
+ * Code: 
+   + Editing tab, Check use native pipe operator
+   + Display tab, Check show margin (80 characters)
+
+
+# Basics
+
+### Introducing R & RStudio
+R is an open source software environment that implements statistical computing and graphics. In other words, R is a basically language you can use to communicate with your computer. 
+
+RStudio is an integrated development environment (IDE) for R. IDE is a fancy word for any software application that helps programmers develop software code more efficiently.
+
+RStudio makes writing R code easier using a Graphical User Interface (GUI, pronounced "gooey"). A GUI is a form of user interface that allows users to interact with computers through clicking on buttons and icons or selecting from menus. 
+
+### User Interface
+
+In RStudio, there is a menu/tool bar at the top, as well as several panels. The top left panel typically shows your files and text/code you write in the files. There are several other frequently used panels.
+
+- The Console panel allows you to run code and shows the output and any warning/error messages. 
+- The Environment panel shows the R objects (we will talk about this more) temporarily stored in your R session. 
+- The Files panel allows you to navigate folders and open files saved on your computer. 
+- The Plots panel shows any graphics you generate using code. 
+
+These panels can all be moved around and rearranged to your liking.
+
+
+# Quarto Markdown
+There are many ways to write code using R or RStudio. The simple way to do that is to create a R Script. Next, the TAs will show you what an R script looks like.
+
+As you see, R scripts only support text and code in a very basic way... R scripts may be useful for sourcing custom functions (i.e., write a DIY R package for yourself). Yet, Quarto is preferred over R script for a variety of reasons.
+
+Quarto is an alternative tool to create readable and transparent documents. In Quarto notebooks, we can write text just like in a word document but also write and run code in "code chunks". Importantly, Quarto can render the same notebook into files of different styles and formats (pdf, html, slides, manuscripts, etc.) by only minimally changing the code.
+
+This feature makes it easier to: 1) annotate and explain the code you wrote using plain text, and 2) run code and show the output to support an argument you made in plain text. In this class, you will complete your homework in Quarto notebooks and submit your Quarto notebooks (.qmd files) as well as HTML files you rendered using Quarto.
+
+Additionally, Quarto is not limited to any coding language. You can create documents with embedded R, Python, Visual Studio, and other code in Quarto, making it very flexible.
+
+A Quarto notebook is usually consists of three components:
+
+- YAML header
+- Plain text
+- Code chunk
+
+### YAML header
+
+YAML header is located at the top of this notebook. We can set up a variety of formatting and rendering options in the YAML header. Scroll up to the top and take a look at the several options we will use for the purpose of this class!
+
+- title: title of the rendered document
+- author: author(s) of the rendered document
+- date: we use `lubridate::today()` to print the date when we rendered the document
+- format: options for formatting
+  - html: render to html format
+  - toc: whether or not to include a interactive table of contents
+  - toc_depth: how many levels to include in the table of contents
+  - embed-resources: whether to save plots as part of the html file or in a separate folder
+- editor_options: options for writing code in RStudio
+  - chunk_output_type: where to print the output if you run a line of code in RStudio
+
+
+### Plain text
+
+You can write your text in a Quarto notebook just like this. For the purpose of this class, you will often use this space to explain your code, interpret results, and answer homework questions. In real life, you can write anything you want here, just like in a word document. For example, you can even write and render your manuscript here.
+
+Text you type here will be recognized as plain text (i.e., without any formatting). To further format your text, you will need to use markdown syntax.
+
+For example:
+
+This is how you add *italics*, **bold**, ***bold italics***, superscript^2^, subscript~2~, and ~~strikethrough~~.
+
+There are various other markdown syntax for formatting (e.g., bullet point lists). Read more [here](https://bookdown.org/yihui/rmarkdown/markdown-syntax.html).
+
+
+# Headings can be a useful way to organize your rendered document. This is a 1st Level Heading
+
+## This is a 2nd Level Heading
+
+### This is a 3rd Level Heading
+
+#### This is a 4th level heading ...
+
+
+### Code chunk
+
+You would write and run your code in code chunks. Code chunks begin with three back ticks and `{r}` and end with three more back ticks. See below.
+
+```{r}
+print("Hello World!") 
+
+1 + 1 # What is one plus one? (Inside code chunks, you can type after hash-tags to add comments. However, only do so when you are commenting on a specific line of code.)
+```
+
+You can insert your own code chunks with a keyboard shortcut (`command` + `option` + `I` on Mac, `ctrl` + `alt` + `I` on PC).
+
+To run a single line of code in the code chunk, select the line of code (or put your cursor on the line) and hit `command` + `enter` (Mac) or `control` + `enter` (PC). To run an entire code chunk you can click the small green triangle at the top-left corner of the chunk.
+
+
+
+# Setup for data analysis
+We follow a set of best practices to ensure that our code is maximally replicable.
+
+### 1. Set Conflict Policies
+
+We will often use R functions created and shared by other people by loading R packages. Conflict policies are important so that we know if we load two packages with conflicting functions (i.e., different functions with same name). Using `options(conflicts.policy = "depends.ok")` at the top of your setup code chunk (i.e., before you load any packages) will produce an error if two conflicting packages are loaded. There are ways to set custom conflict policies and work around conflicts (e.g., only loading certain functions from a package). You can find more documentation [here](https://jjcurtin.github.io/book_dwvt/conflicts.html).  
+
+```{r}
+options(conflicts.policy = "depends.ok")
+```
+
+
+### 2. Load Packages
+
+You should load the **minimum** number of packages needed to execute your code. Oftentimes this may just be `tidyverse`. Loading as few packages as possible also helps reduce the likelihood of conflicts.   
+
+
+To load packages, use the `library()` function. If you have never installed the package, you will need to do that using `install.packages()` before using the package for the first time.
+
+```{r}
+library(tidyverse)
+```
+
+
+### 3. Set Path  
+
+You will often need to read in data from files saved on your computer. For this class, all data for labs will be stored under the *data* folder inside the *lab* folder in our *psych_610* directory. 
+
+People may place the *psych_610* folder at various locations in their computers, but the relative location of *data* in relation to *psych_610* will be the same for everyone regardless of where they put the *psych_610* folder. Thus, by using a ***relative path*** to specify file locations, the same code can be used to read in files without causing errors when run by different users or even on different computers (especially useful for Github repo!). In other words, relative paths allow for easier collaboration and code sharing!
+
+
+We can use the `getwd()` to check our current working directory, which should be the *psych_610* root folder if you started RStudio from your R project file. Next, we will type in the relative location of *data* folder to *psych_610* folder and save it as an R object.
+
+```{r}
+getwd() # use getwd instead of here::here
+path_data <- "lab/data"
+```
+
+### Example Setup Code Chunk
+```{r}
+#| output: false # This tells R not to print the output of this code chunk
+
+options(conflicts.policy = "depends.ok")
+library(tidyverse)
+
+path_data <- "lab/data"
+```
+
+
+# Let's run some R code!
+
+Next we will showcase some fancy (or not-fancy) things we can do with R. We will learn how to implement these using code throughout this semester.
+
+### Basic arithmetic
+
+```{r}
+# Addition
+# Subtraction
+# Multiplication
+# Division
+# Exponentiation
+
+# This is identical, but easier to read 
+```
+
+### Logical statements
+
+Equality and inequality return Boolean Logic values ("TRUE" or "FALSE"). Two equal signs together `==` asks R if a value is equal to another. One equal sign on its own `=` will set the value of something (assignment, which we will talk about next). 
+```{r}
+
+```
+
+### R objects
+
+R works by storing information by object names. To store something in an R object, use the assignment operator, `<-`. You may also see some scripts that use `=` for assignment, but `<-` is the best practice. 
+
+
+Let's try do some assignment. Store the value 1 in a, and the value 4 in b
+
+```{r}
+# Now "a" is an "object" that equals the value 1
+# One command per line is the typical (and good) style
+```
+
+Now check the environment window in your GUI (on the upper right in RStudio).You should be able to see a and b, along with their stored values. 
+
+
+You can also request the stored value of an R object by typing its name and running it as a line of code. Think of it this way: every time you run a command, you're asking R "what is [the something that you just typed]?". 
+
+```{r}
+
+
+```
+
+
+What if we request the value of `whatever`? Why do we get an error?
+
+```{r}
+whatever 
+```
+
+Errors are R's way of telling you it can't do something. If you don't know what an error means, it is useful to copy and paste the error into Google for help.
+
+We can also do many fancy things with R objects, including arithmetic, creating a new object with existing objects, etc.
+
+```{r}
+
+```
+
+
+You can also save text as objects. We can make words/sentences a *string* using quotes. Note that I can over-write my original object `b`. What would happen if we do not add the quotes?
+
+```{r}
+
+```
+
+
+R objects have different classes. Object classes tell R what kinds of things you can do with an object (e.g., you can't do arithmetic with strings or with character objects). We have seen the numeric class (i.e., numbers) and string class (i.e., text) above already.
+
+```{r}
+ 
+```
+
+
+There are also additional classes other than these two. 
+```{r}
+class(3L)
+class(TRUE)
+class(factor(c("R","RMarkdown","Quarto")))
+```
+
+
+Multiple data elements (e.g., numbers) can be combined into vectors (e.g., a sequence of numbers). In other words, a vector is a sequence of data elements of the same class.
+
+
+We use the concatenate function c() to link/combine data elements. 
+```{r}
+vec_1 <- c(1,3,5)
+```
+
+
+What if we concatenate elements of different data types?
+```{r}
+vec_2 <- c(1,"text",5)
+# What is the data type of vec_2?
+```
+
+Making elements of different types a vector forces its elements to the less stringent data type (i.e., character is less stringent than numeric because numbers can be seen as characters but not vice-versa).
+
+Vectors can also be used for arithmetic operations
+```{r}
+
+```
+
+
+### Finally, fancy things you can do with R
+
+We will take a closer look at this data the next lab, but now we are just going to run some code and see some fancy things R could do for us. You will learn how to do these in this class!
+
+```{r}
+d <- read_csv(here::here(path_data, "psych610_survey_data.csv"),
+              show_col_types = FALSE) |> 
+     janitor::clean_names() |> 
+     glimpse()
+
+d |> mutate(across(ends_with("exp")|ends_with("conf"), ~ factor(.x, 1:5))) |> 
+      ggplot(aes(x = stats_exp)) + 
+        geom_bar() +
+        theme_classic() +
+        scale_x_discrete(drop = FALSE) +
+        labs(x = "Prior Experience With Statistics",
+             y = "Count") + 
+        coord_cartesian(ylim = c(0,18))
+
+d |> mutate(across(ends_with("exp")|ends_with("conf"), ~ factor(.x, 1:5))) |> 
+      ggplot(aes(x = r_exp)) + 
+        geom_bar() +
+        theme_classic() +
+        scale_x_discrete(drop = FALSE) +
+        labs(x = "Prior Experience With R",
+             y = "Count") + 
+        coord_cartesian(ylim = c(0,18))
+
+d |> ggplot(aes(x = stats_course, y = stats_conf, 
+                color = pineapple_pizza, fill = pineapple_pizza)) + 
+        geom_smooth(method = "lm", alpha = .2) +
+        geom_point(position = position_jitter(width = .1, height = .1)) +
+        theme_classic() +
+        labs(x = "Stats Course Taken",
+             y = "Confidence in Ability to Learn Stats",
+             color = "Pineapple on Pizza?",
+             fill = "Pineapple on Pizza?") + 
+        coord_cartesian(ylim = c(0, 5))
+```
+
+
+# Final Words
+
+### Render .qmd
+
+Now that we are done with coding, let's have Quarto do the job and render the materials we have covered in this lab into a single .html file. For the purpose of this class, you can just click on the Render button (the blue rightward arrow). You will be expected to submit the Quarto notebook as well as the rendered .html file for future application assignments and take-home exams.
+
+### Best practices for writing code:
+
+- R doesn't read spaces, they're just there for easy reading. Use spaces to clarify code.
+- R DOES differentiate capitalized vs. lower case, so "A" and "a" are two separate letters in R language (this can cause problems in your code so watch out!). We will stick with snake_case when naming R objects. More on this in the future!
+- For consistency in coding, we also follow the tidyverse style guide, a well-documented style guide for R code! Check it out (here)[https://style.tidyverse.org/]
+
+### Chat GPT
+
+Coding is really hard. Large language models (LLMs) are meant to help. You are allowed to utilize Chat GPT or other LLMs in your assignments. However, these tools DO NOT always provide the code that does exactly what you want. It is IMPORTANT that you establish fundamental understanding of R coding, so you can at minimum spot errors in code generated by LLMs and debug accordingly. At times, we may ask you to explain the code you wrote in your homework assignments.
+
+### TAs are here to help!
+
+This was a lot of information, it's okay if you're lost on some points! Ask lots of questions, keep trying things, and feel free to slack/email your TAs (after trying something to resolve it yourself!). And drop by our office hours! See the syllabus for our contact info.
+
