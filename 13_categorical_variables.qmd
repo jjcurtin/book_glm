@@ -284,11 +284,15 @@ contrasts(data$group) <- matrix_contr
 
 Run model
 
-<!--Not sure why group is being appended to contrast names-->
 ```{r}
 m_d_2 <- lm(health ~ group, data = data)
-broom::tidy(m_d_2)
+tidy_m_d_2 <-broom::tidy(m_d_2) |> 
+  mutate(term = str_replace(term, "group", "")) # remove variable name from term
+
+tidy_m_d_2
 ```
+
+
 
 ----
 
@@ -342,7 +346,11 @@ contrasts(data$group) <- matrix_contr
 
 ```{r}
 m_d_3 <- lm(health ~ group, data = data)
-broom::tidy(m_d_3)
+
+tidy_m_d_3 <-broom::tidy(m_d_3) |> 
+  mutate(term = str_replace(term, "group", "")) 
+
+tidy_m_d_3
 ```
 
 ----
@@ -593,19 +601,483 @@ You can do the math to confirm that $b_1$ and $b_2$ match the mean differences a
 
 ## How to Calculate Unit Weights
 
+We can write any comparison in terms of coefficients multiplied by group means for all groups in the following form:    
+
+$C = \text{set U} - \text{set V}$   
+
+$C = (c_1*\text{group}_1 + c_2*\text{group}_2...)-(c_3*\text{group}_3+c_4*\text{group}_4)$   
+
+- You can think of this as a contrast between two sets of the groups.   
+- Call them set U (with u groups included) and set V (with v groups included).
+- A third set can be ignored by assigning coefficients of 0.
+
+----
+
+
+$C = \text{set U} - \text{set V}$   
+
+$C = (c_1*\text{group}_1 + c_2*\text{group}_2...)-(c_3*\text{group}_3+c_4*\text{group}_4)$   
+
+The coefficients in set U should all be: $\frac{v}{(u + v)}$.   
+
+The coefficients in set V should all be: $\frac{u}{(u + v)}$.   
+
+The coefficients in the ignored set should all be 0.
+
+----
+
+<span style="color: red;">Describe `c_1` (patient groups vs. healthy controls) and `c_2` (patients with alcohol use disorder vs. depression in terms of Set U and Set V.</span>    
+
+----
+
+
+<span style="color: blue;">$C_1 = (c_1*\text{alcohol} + c_2*\text{depress})-(c_3*\text{healthy})$</span>   
+
+Set U: `alcohol`, `depress`; Set V: `healthy`    
+
+
+<span style="color: blue;">$C_2 = (c_1*\text{alcohol})-(c_3*\text{depress})$</span>   
+
+Set U: `alcohol`; Set V: `depress`; Ignored: `healthy`
+
+----
+
+
+<span style="color: red;">Convert these to coefficients using $\frac{v}{(u + v)}$ & $\frac{u}{(u + v)}$.</span>   
+
+----
+
+```{r}
+#| echo: false
+
+tibble(` ` = c("c_1", "c_2"),
+       alcohol = c("1/3", "1/2"),
+       depress = c("1/3", "-1/2"),
+       healthy = c("-2/3", "0")) 
+```
 
 
 
+<span style="color: blue;">But you will never do this! R does this for you.</span>
+
+----
+
+```{r}
+matrix_contr <- matrix(c(.333, .333, -.667,
+                         .5,  -.5, 0), 
+                       ncol = 2,
+                       dimnames = list(c("alcohol", "depress", "healthy"),
+                                       c("patient_v_healthy", "alcohol_v_depress")))
+
+matrix_contr
+
+contrasts(data$group) <- matrix_contr
+```
 
 
+----
+
+```{r}
+m_poc <- lm(health ~ group, data = data)
+
+tidy_m_poc <- broom::tidy(m_poc) |> 
+  mutate(term = str_replace(term, "group", ""))
+
+tidy_m_poc
+```
+
+<span style="color: red;">Question: What does each of the $b_j$s test?</span>  
+
+----
+
+<span style="color: blue;">Each test whether the contrast that we specified is 0 or not. More specifically, how likely would it be to get our sample $b_j$ if $\beta_j = 0$ for each of these two contrasts.</span>
+
+----
+
+<span style="color: red;">Question: What does the 2 df F-test of $R^2$ test conceptually?</span>  
 
 
+----
+
+<span style="color: blue;">It provides a test of the main effect of `group`; same as before with dummy coded regressors. Any unique coding system using 2 regressors for three groups will work for the main effect.</span>    
+
+<span style="color: blue;">As before, you don’t want to use model $R^2$ for the main effect in any model other than one way ANOVA. Use `anova()` function for tests of main effects.</span>
+
+```{r}
+anova(m_poc)
+
+broom::glance(m_poc)$r.squared
+```
+
+----
+
+## Display: Group Means + SEM
+
+```{r}
+data |> 
+  group_by(group) |> 
+  summarise(mean = mean(health),
+            se = sd(health)/sqrt(n())) |> 
+  ggplot(aes(x = group, y = mean)) +
+  geom_col(color = "black", fill = "light grey") +
+  geom_errorbar(aes(ymin = mean - se, ymax = mean + se), width = 0.2) +
+  labs(y = "Health", x = NULL)
+```
 
 
+**<span style="color: red;">NOT RECOMMENDED!</span>**
+
+----
+
+## Dummy Coding Group Mean Estimates
 
 
+<span style="color: red;">Question: How can we get standard errors for the group mean point estimates using the linear model parameters?</span>  
+
+----
+
+<span style="color: blue;">Fit three separate models. Set a different group as the reference group in each model. $b_0$ will be the predicted mean for the reference group in each model. The standard error for $b_0$ is the standard error for this parameter.</span>
+
+----
+
+```{r}
+matrix_contr <- contr.treatment(levels(data$group), base = 1) 
+col_names <- str_c(colnames(matrix_contr), "_v_healthy")
+colnames(matrix_contr) <- col_names
+contrasts(data$group) <- matrix_contr
+
+m_alc <- lm(health ~ group, data = data)
+
+broom::tidy(m_alc) |> 
+  mutate(term = str_replace(term, "group", ""))
+```
+
+```{r}
+matrix_contr <- contr.treatment(levels(data$group), base = 2) 
+colnames(matrix_contr) <- col_names
+contrasts(data$group) <- matrix_contr
+
+m_dep <- lm(health ~ group, data = data)
+
+broom::tidy(m_dep) |> 
+  mutate(term = str_replace(term, "group", ""))
+```
+
+```{r}
+matrix_contr <- contr.treatment(levels(data$group), base = 3) 
+col_names <- str_c(colnames(matrix_contr), "_v_healthy")
+contrasts(data$group) <- matrix_contr
+
+m_health <- lm(health ~ group, data = data)
+
+broom::tidy(m_health) |> 
+  mutate(term = str_replace(term, "group", ""))
+```
 
 
+----
+
+<span style="color: blue;">This standard error is the standard error you should graph! But there is an easier way to get these.</span>    
 
 
+```{r}
+data_new <- tibble(group = levels(data$group))
 
+data_new
+```
+
+```{r}
+preds <- predict(m_poc, newdata = data_new, se.fit = TRUE) |> 
+  as_tibble() |> 
+  mutate(upper = fit + se.fit,
+         lower = fit - se.fit) |> 
+  bind_cols(data_new)
+
+preds
+```
+
+----
+
+## Display: Point Estimates + SE
+
+```{r}
+preds |> 
+  ggplot(aes(x = group, y = fit)) +
+  geom_col(color = "black", fill = "light grey") +
+  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.2) +
+  labs(y = "Health", x = NULL)
+```
+
+----
+
+## Parsing Variance: Dummy Codes
+
+`alcohol` dummy codes
+```{r}
+matrix_contr <- contr.treatment(levels(data$group), base = 1) 
+contrasts(data$group) <- matrix_contr
+
+data_alc <- model.matrix(~ group, data = data) |> 
+  as_tibble() |> 
+  select(-1, r_1 = 2, r_2 = 3) |> 
+  bind_cols(data)
+```
+
+Model $R^2$
+```{r}
+m_alc <- lm(health ~ r_1 + r_2, data = data_alc)
+broom::glance(m_alc)$r.squared
+```
+
+$\sum \Delta R^2$
+```{r}
+(delta_r1 <- (broom::glance(lm(health ~ r_1, data = data_alc))$r.squared) - 
+  (broom::glance(lm(health ~ 1, data = data_alc))$r.squared))
+
+(delta_r2 <- (broom::glance(m_alc)$r.squared) - 
+  (broom::glance(lm(health ~ r_1, data = data_alc))$r.squared))
+
+delta_r1 + delta_r2  
+```
+
+
+----
+
+`depress` dummy codes
+```{r}
+matrix_contr <- contr.treatment(levels(data$group), base = 2) 
+colnames(matrix_contr) <- col_names
+contrasts(data$group) <- matrix_contr
+
+data_dep <- model.matrix(~ group, data = data) |> 
+  as_tibble() |> 
+  select(-1, r_1 = 2, r_2 = 3) |> 
+  bind_cols(data)
+```
+
+Model $R^2$
+```{r}
+m_dep <- lm(health ~ r_1 + r_2, data = data_dep)
+broom::glance(m_dep)$r.squared
+```
+
+$\sum \Delta R^2$
+```{r}
+(delta_r1 <- (broom::glance(lm(health ~ r_1, data = data_dep))$r.squared) - 
+  (broom::glance(lm(health ~ 1, data = data_dep))$r.squared))
+
+(delta_r2 <- (broom::glance(m_dep)$r.squared) - 
+  (broom::glance(lm(health ~ r_1, data = data_dep))$r.squared))
+
+delta_r1 + delta_r2  
+```
+
+----
+
+`healthy` dummy codes
+```{r}
+matrix_contr <- contr.treatment(levels(data$group), base = 3) 
+colnames(matrix_contr) <- col_names
+contrasts(data$group) <- matrix_contr
+
+data_health <- model.matrix(~ group, data = data) |> 
+  as_tibble() |> 
+  select(-1, r_1 = 2, r_2 = 3) |> 
+  bind_cols(data)
+```
+
+Model $R^2$
+```{r}
+m_health <- lm(health ~ r_1 + r_2, data = data_health)
+broom::glance(m_health)$r.squared
+```
+
+$\sum \Delta R^2$
+```{r}
+(delta_r1 <- (broom::glance(lm(health ~ r_1, data = data_health))$r.squared) - 
+  (broom::glance(lm(health ~ 1, data = data_health))$r.squared))
+
+(delta_r2 <- (broom::glance(m_health)$r.squared) - 
+  (broom::glance(lm(health ~ r_1, data = data_health))$r.squared))
+
+delta_r1 + delta_r2  
+```
+
+----
+
+
+## Parsing Variance: POCs
+
+```{r}
+matrix_contr <- matrix(c(.333, .333, -.667,
+                         .5,  -.5, 0), 
+                       ncol = 2,
+                       dimnames = list(c("alcohol", "depress", "healthy"),
+                                       c("patient_v_healthy", "alcohol_v_depress")))
+
+contrasts(data$group) <- matrix_contr
+
+data_poc <- model.matrix(~ group, data = data) |> 
+  as_tibble() |> 
+  select(-1, poc_1 = 2, poc_2 = 3) |> 
+  bind_cols(data)
+```
+
+Model $R^2$
+```{r}
+m_poc<- lm(health ~ poc_1 + poc_2, data = data_poc)
+broom::glance(m_poc)$r.squared
+```
+
+$\sum \Delta R^2$
+```{r}
+(delta_poc_1 <- (broom::glance(lm(health ~ poc_1, data = data_poc))$r.squared) - 
+  (broom::glance(lm(health ~ 1, data = data_poc))$r.squared))
+
+(delta_poc_2 <- (broom::glance(m_poc)$r.squared) - 
+  (broom::glance(lm(health ~ poc_1, data = data_poc))$r.squared))
+
+delta_poc_1 + delta_poc_2  
+```
+
+
+----
+
+## POC Contrast Coding: Common Contrasts
+
+**3 group contrasts**   
+
+$C_1: \frac{(\text{group}_1 + \text{group}_2)}{2} \text{vs.} \text{group}_3$    
+
+```{r}
+#| echo: false
+
+tibble(group_1 = .333,
+       group_2 = .333,
+       group_3 = -.667)
+```
+
+
+$C_2: \text{group}_1 \text{vs.}  \text{group}_2$
+```{r}
+#| echo: false
+
+tibble(group_1 = .5,
+       group_2 = -.5,
+       group_3 = 0)
+```
+
+----
+
+**4 group contrasts**   
+
+$C_1: \frac{(\text{group}_1 + \text{group}_2 + \text{group}_3)}{3} \text{vs.} \text{group}_4$    
+
+```{r}
+#| echo: false
+
+tibble(group_1 = .25,
+       group_2 = .25,
+       group_3 = .25,
+       group_4 = -.75)
+```
+
+$C_2: \frac{(\text{group}_1 + \text{group}_2)}{2} \text{vs.} \text{group}_3$     
+```{r}
+#| echo: false
+
+tibble(group_1 = .333,
+       group_2 = .333,
+       group_3 = -.667,
+       group_4 = 0)
+```
+
+$C_3: \text{group}_1 \text{vs.}  \text{group}_2$
+
+```{r}
+#| echo: false
+
+tibble(group_1 = .5,
+       group_2 = -.5,
+       group_3 = 0,
+       group_4 = 0)
+```
+
+----
+
+**4 group contrasts**   
+
+$C_1: \frac{(\text{group}_1 + \text{group}_2)}{2} \text{vs.} + \frac{(\text{group}_3 + \text{group}_4)}{2}$    
+
+```{r}
+#| echo: false
+
+tibble(group_1 = .5,
+       group_2 = .5,
+       group_3 = -.5,
+       group_4 = -.5)
+```
+
+$C_2: \text{group}_1 \text{vs.}  \text{group}_2$
+
+```{r}
+#| echo: false
+
+tibble(group_1 = .5,
+       group_2 = -.5,
+       group_3 = 0,
+       group_4 = 0)
+```
+
+$C_3: \text{group}_3 \text{vs.}  \text{group}_4$
+
+```{r}
+#| echo: false
+
+tibble(group_1 = 0,
+       group_2 = 0,
+       group_3 = .5,
+       group_4 = -.5)
+```
+
+----
+
+**4 group contrasts (polynomials)**   
+
+Linear:  
+
+```{r}
+#| echo: false
+
+tibble(group_1 = -3,
+       group_2 = -1,
+       group_3 = 1,
+       group_4 = 3)
+```
+
+Quadratic:  
+
+```{r}
+#| echo: false
+
+tibble(group_1 = 1,
+       group_2 = -1,
+       group_3 = -1,
+       group_4 = 1)
+```
+
+
+Cubic:  
+
+```{r}
+#| echo: false
+
+tibble(group_1 = -1,
+       group_2 = 3,
+       group_3 = -3,
+       group_4 = 1)
+```
+
+**Note that range is not 1.**
+
+----
