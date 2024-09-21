@@ -912,7 +912,7 @@ delta_r1 + delta_r2
 matrix_contr <- matrix(c(.333, .333, -.667,
                          .5,  -.5, 0), 
                        ncol = 2,
-                       dimnames = list(c("alcohol", "depress", "healthy"),
+                       dimnames = list(levels(data$group),
                                        c("patient_v_healthy", "alcohol_v_depress")))
 
 contrasts(data$group) <- matrix_contr
@@ -1081,3 +1081,269 @@ tibble(group_1 = -1,
 **Note that range is not 1.**
 
 ----
+
+## Single and Multiple Comparisons 
+
+
+<span style="color: red;">Question: What do you gain from testing the main effect (or interaction) of a categorical variable that has more than 2 levels? What do you not gain?</span>    
+
+----
+
+<span style="color: blue;">You learn that some contrast across the groups/conditions in some set of orthogonal contrasts is significant. Does this really tell you something interesting?</span>    
+
+<span style="color: blue;">You do not learn which groups are different from each other. In almost all instances our question is about differences between groups (or combinations of groups; or patterns across groups). We need contrasts.</span>    
+
+<span style="color: blue;">The test of the main effect is not needed (with one exception) to reduce the probability of making any Type I errors. In many instances, it will increase the probability of Type 2 errors. This is a **big** misconception in our field.</span>
+
+----
+
+**Option 1: POCs**   
+
+```{r}
+tidy_m_poc
+```
+
+----
+
+**Option 2: Planned non-orthogonal pairwise comparisons**    
+
+```{r}
+matrix_contr <- matrix(c(.5, 0, -.5,
+                         0,  .5, -.5), 
+                       ncol = 2,
+                       dimnames = list(levels(data$group),
+                                       c("alcohol_v_healthy", "depress_v_healthy")))
+
+contrasts(data$group) <- matrix_contr
+
+lm(health ~ group, data = data) |> 
+  broom::tidy() |> 
+  mutate(term = str_replace(term, "group", ""))
+```
+
+```{r}
+#| echo: false
+
+# alternate way to set contrasts, gets same results as above
+
+# data <- data |> 
+#   mutate(c_1a = case_match(group,
+#                            "alcohol" ~ .5,
+#                            "depress" ~ 0,
+#                            "healthy" ~ -.5),
+#          c_2a = case_match(group,
+#                            "alcohol" ~ 0,
+#                            "depress" ~ .5,
+#                            "healthy" ~ -.5))
+# 
+# 
+# lm(health ~ c_1a + c_2a, data = data) |> 
+#   broom::tidy() 
+```
+
+
+```{r}
+matrix_contr <- matrix(c(-.5, .5, 0,
+                         -.5,  0, .5), 
+                       ncol = 2,
+                       dimnames = list(levels(data$group),
+                                       c("depress_v_alcohol", "healthy_v_alcohol")))
+
+contrasts(data$group) <- matrix_contr
+
+lm(health ~ group, data = data) |> 
+  broom::tidy() |> 
+  mutate(term = str_replace(term, "group", ""))
+```
+
+```{r}
+#| echo: false
+
+# alternate way to set contrasts, gets same results as above
+
+# data <- data |>
+#   mutate(c_1a = case_match(group,
+#                            "alcohol" ~ -.5,
+#                            "depress" ~ .5,
+#                            "healthy" ~ 0),
+#          c_2a = case_match(group,
+#                            "alcohol" ~ -.5,
+#                            "depress" ~ 0,
+#                            "healthy" ~ .5))
+# 
+# 
+# lm(health ~ c_1a + c_2a, data = data) |>
+#   broom::tidy()
+```
+
+----
+
+**Option 3: Unplanned; observed patterns of means dictate comparisons**   
+
+```{r}
+data |> 
+  group_by(group) |> 
+  summarise(mean = mean(health))
+```
+
+----
+
+<span style="color: red;">Question: What validity concerns do we need to evaluate for these various options?</span>  
+
+----
+
+<span style="color: blue;">Statistical/conclusion validity.</span>    
+
+1. <span style="color: blue;">Do results clearly support your theory (fundamental)?</span>
+2. <span style="color: blue;">Probability of Type 1 error.</span>
+3. <span style="color: blue;">Probability of Type 2 error.</span>
+
+<span style="color: blue;">We should wonder (and be concerned about) what happens to the probability of making an error across *all* of our tests.</span>
+
+----
+
+**Test-wise error rate:** The probability of making a type I (or II) error for any specific statistical test. <span style="color: red;">What is it for type I and type II?</span>   
+
+**Family-wise error rate:** The probability of making a type I (or II) error among a *family* of statistical tests reported (and performed).   
+
+**Experiment-wise error rate:** The probability of making a type I (or II) error among all statistical tests reported (and performed).   
+
+**Bonferroni Inequality:**   
+$\text{alpha}_{\text{set}} \le \text{set size}*\text{alpha}_{\text{test}}$
+
+----
+
+- In Psychology, we are generally concerned with test-wise and family-wise error rates (and most discussion is about Type I errors).  
+
+- Orthogonal effects in factorial ANOVA (e.g., two main effects and interaction in 2-way ANOVA) are typically considered to come from different families (different questions).
+
+- POCs within a multi-df effect (main effect or interaction) are typically considered to come from different families. This makes most sense if the contrasts are testing clearly different questions.
+
+- Non-orthogonal contrasts within multi-df effects are clearly related (in same family).
+
+----
+
+<span style="color: red;">Question: What do we now know about statistical validity for POC approaches?</span>  
+
+
+----
+
+<span style="color: blue;">Can only use POCs when your research questions map onto $n_{\text{levels}}-1$ orthogonal predictions.</span>    
+
+<span style="color: blue;">Need to proceed cautiously because statistical results may support predictions but patterns of means may undermine your conclusions (pharmacological and expectancy example - draw graphs for two scenarios).</span>    
+
+<span style="color: blue;">Must be comfortable with these contrasts testing *different* questions and therefore being in different families.</span>
+
+----
+
+<span style="color: red;">Question: What do we do with multiple planned, non-orthogonal contrasts, and worse still unplanned contrasts?</span>  
+
+----
+
+**Many** procedures exist. Kirk summarizes more but...
+
+<span style="color: blue;">For planned, non-orthogonal</span>     
+
+**Fischer LSD** is reasonable with planned, non-orthogonal contrasts for 3 level variables (family-wise alpha controlled and reasonable power).   
+
+**Holm-Bonferonni** is most flexible but need to keep planned contrasts to a minimum (family-wise type I is strictly controlled, but power drops with increasing number of contrasts). Fisher LSD may be more powerful in some instances with 3 level variables.    
+
+
+<span style="color: blue;">For post-hoc/unplanned</span>    
+
+**Scheffe** can be used when you can't limit yourself a priori. Power sucks!   
+
+----
+
+## Fischer LSD (Protected Testing)
+
+- First test omnibus (multi-df) effect (main effect or interaction). If non-significant, stop.    
+
+- If omnibus effect is significant, test pairwise comparisons among groups/conditions using dummy codes (other contrasts may be used if planned). No additional “protection” is needed.   
+
+
+<span style="color: red;">Question: How is family-wise alpha controlled?</span>  
+
+----
+
+<span style="color: blue;">Only proceed when omnibus test indicates some comparison is significant (monte carlo of null main effect).</span>
+
+<span style="color: blue;">Problems emerge if omnibus is significant but you do multiple tests, only some of which are significant). Not a problem, generally, with 3 level variable and 3 tests (e.g. pairwise comparisons). Inadequate with more levels (monte-carlo for three group with effect; thought experiment with 1 significant group difference in 4 level).</span>   
+
+
+----
+
+
+## Holm-Bonferroni Method
+
+1. Suppose there are $k$ null hypotheses to be tested and the overall type I error rate is $\alpha$. 
+
+2. Order the tests from smallest to largest p-value.
+
+3. Multiply the smallest p-value by $k$ and compare to $\alpha$. If reject, continue. 
+
+4. Multiply the next smallest p-value by $k-1$. Its new p-value is the max of this p-value and all preceding it.
+
+5. Continue doing this until a hypothesis cannot be rejected. At that point, stop and accept all remaining hypotheses.
+
+Note: Does **not** require significant omnibus test for type I protection.
+
+Holm, S. (1979). A simple sequentially rejective multiple test procedure. *Scandinavian Journal of Statistics*, 6 (2): 65–70.
+
+
+----
+
+```{r}
+p = c(.001, .009, .005, .100, .200, .040, .011)
+p
+```
+
+```{r}
+p.adjust(p, method= 'bonferroni')
+```
+
+```{r}
+p.adjust(p, method= 'holm')
+```
+
+Monte carlo example
+
+----
+
+## Scheffe Test
+
+- Can be used for complete exploratory comparisons.
+
+- Adjust the F-statistic for each comparison by dividing it by (number of groups - 1).
+
+- Get new p-value using: `pf(F, df1, df2, lower.tail = FALSE)`.
+
+- If you are working with t values, square them to convert to F before dividing.
+
+- Provides good alpha protection. Test of omnibus effect is **not** required. Very conservative with high Type II errors.
+
+----
+
+## Monte Carlo Examples
+
+1. Generic use of POCs.
+
+2. All pairwise contrasts.
+    
+    - No effect, no  protection
+    - No effect, Fisher 3 LSD
+    - No effect, Holm-Bonferroni
+    
+<span style="color: red;">Question: What would family-wise error rate be if we conducted only 2 dummy contrasts?</span>  
+
+----
+
+
+<span style="color: blue;">$\le .10$, but they would definitely be considered in the same family (related questions) and most people won't tolerate this.</span>
+
+
+
+
+
+
+
