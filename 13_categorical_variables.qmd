@@ -556,6 +556,14 @@ m_c_b <- lm(health ~ c_1b + c_2b, data = data)
 broom::tidy(m_c_b)
 ```
 
+```{r}
+#| echo: false
+
+data <- data |>
+  select(-c(r_1,r_2, starts_with("c_")))
+```
+
+
 ----
 
 <span style="color: red;">Question: Why are the parameter estimates for `c_1` different and which is preferred?</span>
@@ -574,7 +582,8 @@ c_a |>
 
 <span style="color: blue;">In each instance $b_1$ represents change in health for a 1 unit change on the `c_1` regressor. For `c_1b` a 1 unit change moves fully from the alcohol/depress group to the healthy group. $b_1$ was 2/3 the size for `c_1a` because 1 unit only moves 2/3 of the way between the two sets in the contrast.</span>     
  
-<span style="color: blue;">Therefore, unit weights allow you to report $b_1$ and have it represent the difference in the means of the two groups/sets.</span
+<span style="color: blue;">Therefore, unit weights allow you to report $b_1$ and have it represent the difference in the means of the two groups/sets.</span>
+
 
 ----
 
@@ -595,7 +604,7 @@ data |>
   summarise(mean = mean(health))
 ```
 
-You can do the math to confirm that $b_1$ and $b_2$ match the mean differences associated with the `c_1` and c_2` comparisons.  
+You can do the math to confirm that $b_1$ and $b_2$ match the mean differences associated with the `c_1` and `c_2` comparisons.  
 
 ----
 
@@ -1093,7 +1102,7 @@ tibble(group_1 = -1,
 
 <span style="color: blue;">You do not learn which groups are different from each other. In almost all instances our question is about differences between groups (or combinations of groups; or patterns across groups). We need contrasts.</span>    
 
-<span style="color: blue;">The test of the main effect is not needed (with one exception) to reduce the probability of making any Type I errors. In many instances, it will increase the probability of Type 2 errors. This is a **big** misconception in our field.</span>
+<span style="color: blue;">The test of the main effect is not needed (with one exception) to reduce the probability of making any Type I errors. In many instances, it will increase the probability of Type II errors. This is a **big** misconception in our field.</span>
 
 ----
 
@@ -1242,14 +1251,14 @@ $\text{alpha}_{\text{set}} \le \text{set size}*\text{alpha}_{\text{test}}$
 
 **Many** procedures exist. Kirk summarizes more but...
 
-<span style="color: blue;">For planned, non-orthogonal</span>     
+**<span style="color: blue;">For planned, non-orthogonal</span>**     
 
 **Fischer LSD** is reasonable with planned, non-orthogonal contrasts for 3 level variables (family-wise alpha controlled and reasonable power).   
 
 **Holm-Bonferonni** is most flexible but need to keep planned contrasts to a minimum (family-wise type I is strictly controlled, but power drops with increasing number of contrasts). Fisher LSD may be more powerful in some instances with 3 level variables.    
 
 
-<span style="color: blue;">For post-hoc/unplanned</span>    
+**<span style="color: blue;">For post-hoc/unplanned</span>**    
 
 **Scheffe** can be used when you can't limit yourself a priori. Power sucks!   
 
