@@ -1,0 +1,558 @@
+---
+title: "Lab 4 TA Script" 
+author: "TAs" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+
+## Set up
+
+Set up your script. You'll notice that we are now including all of our set up in one code chunk for simplicity.
+
+We will also need the `readxl()` to read in an excel data file -- install this package if you haven't already!
+```{r}
+#| message: false
+
+options(conflicts.policy = "depends.ok") 
+library(tidyverse)
+library(readxl)
+
+theme_set(theme_classic()) 
+
+path_data <- "lab/data"
+```
+
+## Continuous Variable
+
+Recall our study from last week...    
+
+> This study examines how well 5-year-old children can mentally visualize paper folding and how accurately they fold paper physically. Children were shown a fold and had to imagine how the paper would look after being folded. They did this 10 times. Each time their performance was recorded as 0 (incorrect) or 1 (correct) (variables `mpf_01` to `mpf_10`).
+For the physical paper folding task, children were given a piece of paper with a line and were asked to fold it as closely as possible to that line. The `distance` variable represents how far their actual fold was from the expected fold in millimeters. If they folded over the line, the number is positive, and if they folded under the line, the number is negative.   
+
+When we ended last week, our augmented model was a mean-only model - we predicted the mean of `distance` for all observations regardless of composite mental paper folding scores (`mpf_sum`).    
+
+Let's now see if a model that uses this quantitative predictor performs *better* than our mean-only model!
+
+### Data
+
+As a review, go ahead and take a few minutes to get a sense of the data (AKA confirm that the dataframe is how you expect it to appear).
+```{r}
+data <- read_csv(here::here(path_data, "lab_04_data_cont.csv"),
+                 show_col_types = FALSE) |> 
+  glimpse()
+```
+
+Now, re-create your sum composite score of mental paper folding (`mpf_sum`). Confirm that `mpf_sum` has been correctly added to your dataframe.
+
+```{r}
+data <- data |> 
+  rowwise() |> 
+  mutate(mpf_sum = sum(c(mpf_01,mpf_02,mpf_03,mpf_04,mpf_05,
+                        mpf_06,mpf_07,mpf_08,mpf_09,mpf_10))) |> 
+  ungroup() |> 
+  glimpse()
+```
+
+Note that we are simply using `sum()` to get a sum score of mental paper folding ability. It is important to note that though sometimes we want to create composite scores from standardized scales, questions on these scales might have different scoring rules. For example, one item could be reverse-coded, where a lower score is actually more consistent with the construct of interest (or vice versa).    
+
+What do we do when this happens? We can use a function called `var_score()` that John created to get the composite sum score of forward and reverse items! Let's take a moment to look at this function as it may be helpful for your homework this week. :^)    
+
+Let's first source the function `var_score()` - this code allows us to load the function directly from John's github. It works similar to loading a library.
+```{r}
+devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/var_score.R?raw=true")
+```
+
+If we print the function to our console, we can see that it takes several parameters: `d` (your data), `forward_items` (items that will be scored as-is), `reverse_items` (items that are reverse-coded), `item_range` (the min and max values for scoring), `prorate` (whether you want to adjust the sum to reflect only the provided data), and `max_miss` (the amount of missing data allowed: if someone has more missing data than this threshold, they will get an NA as their composite score).
+
+```{r}
+var_score
+```
+
+Let's now use this function to recalculate our composite sum mental paper folding score. *Note that in this case, where we have no missing data/need to prorate and no reverse scored items, it is less efficient to use this function.*
+```{r}
+f_items <- data |> 
+  select(mpf_01:mpf_10) |> 
+  names()
+```
+
+```{r}
+data <- data |> 
+  mutate(mpf_sum = var_score(data, forward_items = f_items)) |> 
+  glimpse()
+```
+
+**Notice we got a warning!**     
+Remember, we always treat warnings like errors until we determine the source of the warning and whether it would be expected.    
+
+1. Based on these messages where do you think the source of the warning is?       
+In the mutate function. We are not directly calling `if_else` or `c_across` so my hypothesis is that the warning is coming from the function `var_score`.     
+
+2. Let's check this hypothesis by only running the `var_score` function. *Note that the warning tells us it won't display the warning again for 8 hours*, so we need to restart R (session --> Restart R), use the "Run all chunks above" arrow on our previous code block, and then we can test the following code:   
+
+```{r}
+var_score(data, forward_items = f_items)
+```
+
+Okay now we see this function is in fact the source of the warning. If we look back at John's code from above, we can see that he is using `c_across()` and not specifying `cols`. This warning is telling us that is no longer the current way to use the function. This is what *deprecated* in our warning means -- there is a new/better way to use the `c_across()` function (i.e., supply `cols`), but the old version (i.e., not needing to supply `cols`) is still supported/tolerated (for now!).   
+
+3. How might you update this code? You could copy and paste your warning into Chat GPT. We did this and it told us that instead of using `c_across()` and by default letting it select all columns, you could use `c_across(cols = everything()))`. This would solve the warning.    
+
+4. Since we are not going to rewrite John's function right now, we are going to confirm the function is returning an appropriate/expected value (we already did this for you) and then move on to suppress the warning.   
+
+
+```{r}
+#| warning: false 
+
+data <- data |> 
+  mutate(mpf_sum = var_score(data, forward_items = f_items)) |> 
+  glimpse()
+```
+
+### Models
+
+Let's rerun our null and mean-only models
+```{r}
+m_null <- lm( )
+m_mean <- lm( )
+```
+
+
+Now we are going to regress `distance`, our outcome variable, on `mpf_sum`, our continuous predictor variable. This means our formula will now look like `distance ~ 1 + mpf_sum`. 
+
+Unlike last week where we *bought* 1 piece of information, the mean `distance` score, now we'll *buy* two pieces of information, the mean `distance` score and each participant's summed mental paper folding score (`mpf_sum`).   
+
+$distance = b_0 + b_1 * mpf\_sum$
+
+```{r}
+m_1_pred <- lm( )
+```
+
+**What does the 1 represent here?**    
+
+
+Let's look at our model results for the one predictor model.
+```{r}
+
+```
+
+**How do you interpret b_1 for `mpf_sum`?**    
+
+**How did we get this value for our degrees of freedom?**
+
+We can also explicitly compare the mean-only and one predictor models like we did last week.
+```{r}
+
+```
+
+**What do you notice?**    
+
+
+**How would we report the ANOVA results?**    
+
+
+**Where do these values for our degrees of freedom come from?**
+
+
+We can turn a $t$-statistic into an $F$-statistic by squaring it.
+```{r}
+
+```
+
+Calculate effect size (partial eta squared; $\eta_p^2$) for $b_1$ (`mpf_sum`).
+
+$\eta_p^2 = (SSE_c - SSE_a)/SSE_c$ 
+
+**What is our compact model?**   
+ 
+**What is our augmented model?**   
+
+
+```{r}
+(sse_c <- )
+(sse_a <- )
+
+(peta <- )
+```
+
+Calculate 95% confidence intervals
+```{r}
+confint( ))
+```
+
+**How could we summarize our results?**
+
+
+### Plotting results
+
+As a reminder, last week we plotted our model with the raw data using the following code. Our model was a mean-only model so it predicted the same value of distance for everyone (i.e., it was a straight line.). This is not a model we would ever probably need to plot in real life.
+```{r}
+data |> 
+  ggplot(aes(x = mpf_sum, y = distance)) +
+  geom_point(aes(x = mpf_sum, y = distance), 
+             alpha = .4) +
+  geom_abline(intercept = coef(m_mean), color = "blue")
+```
+
+Now we have a model that has variability in its predictions (i.e., it uses 1 predictor to estimate an outcome value). Let's now plot our 1 predictor model.   
+
+We will need to use our model to generate predictions on new data. This is necessary for generating confidence interval bands. To do this we will create a data frame that has a single column (`mpf_sum` - the name of our predictor variable). We will assign this column a sequence of 100 values ranging from the minimum `mpf_sum` value in our dataset to the maximum `mpf_sum` value. We can easily do this with the `seq()` function.
+
+```{r}
+data_new <- tibble(mpf_sum = seq(min(data$mpf_sum), max(data$mpf_sum), length.out = 100))
+```
+
+Next we will calculate our predictions. In other words, what our model will predict for `distance` given these new data. We also are going to get the standard error for our predictions to generate the confidence intervals (+/- 1 SE).
+
+```{r}
+preds <- predict(m_1_pred, data_new, se.fit = TRUE) |>
+  as_tibble() |> 
+  mutate(upper = fit + se.fit,
+         lower= fit - se.fit)
+```
+
+Lets look at our new data frame. Note that `fit` is the predicted value for `distance`.
+```{r}
+preds |> 
+  view()
+```
+
+Lastly, let's now make a new plot that has the **raw** data plotted (`geom_point()`) and the regression line from the model **predicted** values (`geom_line()`, `geom_ribbon()`).
+
+```{r}
+ggplot() +
+  geom_point(aes(x = data$mpf_sum, y = data$distance), 
+             alpha = .4) +
+  geom_line(aes(x = data_new$mpf_sum, y = preds$fit), 
+            linewidth = .75, color = "blue") +
+  geom_ribbon(aes(x = data_new$mpf_sum, ymin = preds$lower, ymax = preds$upper), alpha = .2)
+```
+
+
+## Dichotomous Variable
+
+Let's introduce our new (fictional) study:   
+
+Researchers aimed to determine whether a perspective-taking intervention could enhance children's attitudes towards inclusive behavior (i.e., the extent to which children think including others in a group is important). 
+
+The children were divided into two conditions (`condition`):   
+
+1. In the intervention condition, children engaged in a perspective-taking intervention where they watched a video depicting social exclusion (i.e., a child was excluded from a group of other children playing).    
+2. In the control condition, participants watched a video without any social exclusion (i.e., a child is playing alone in an otherwise empty classroom).   
+
+All participants answered a question designed to assess their attitude towards inclusive behavior (`inclusion`). Scores ranged from *Very unimportant* to *Very important* with a midpoint of *Neither important nor unimportant*.    
+
+**What is the independent variable?**    
+
+
+**What is the dependent variable?**   
+
+
+**What might be our prediction?**    
+
+
+
+### Data
+
+Read in the excel data file.    
+
+**Note**: You have to specify the sheet of the excel document if there are multiple sheets.
+```{r}
+data_dich <- read_excel(here::here(path_data, "lab_04_data_dich.xlsx")) |> 
+  glimpse()
+```
+
+Notice these variable names are not in snake case. They are in camel case. We can easily clean the names using `clean_names()` in the `janitor` package.
+
+```{r}
+data_dich <- data_dich |> 
+  janitor::clean_names() |> 
+  glimpse()
+```
+
+We will also want to change our character class variables to factors. Remember with ordinal variables, it is important to specify the factor levels to maintain that order if you convert them to numeric later on.
+```{r}
+data_dich <- data_dich |> 
+  mutate(inclusion = factor(inclusion, 
+                            levels = c("Very unimportant", "Somewhat unimportant",
+                                       "Unimportant",
+                                       "Neither important nor unimportant",
+                                       "Somewhat important", "Important",
+                                       "Very important")),
+         condition = factor(condition, levels = c("Control", "Intervention")))
+```
+
+
+Check out the dataframe using functions we learned in class
+```{r}
+data_dich |> 
+```
+
+
+**To test our prediction, which variables will we need from the dataframe?**     
+
+**Will we need to create or modify any variables?**   
+We will need to create a numeric version of both the DV and IV. No need to center anything.  
+Today we are only interested in the variables `condition` and `inclusion`. Lets use `select()` to subset our data frame down to just our variables of interest.
+```{r}
+data_dich <- data_dich |> 
+  
+```
+
+Check that this worked as expected.
+```{r}
+
+```
+
+Next, let's recode our outcome variable (`inclusion`) to numeric class.
+```{r}
+data_dich <- data_dich |> 
+
+```
+
+We are also going to make our dichotomous predictor (`condition`) numeric. If we were to use `as.numeric()` this would default the conditions to 1 and 2. Another common option is coding dichotomous variable as 0 and 1 (i.e., dummy coding). We are going to use -.5 and .5 as our codes. This not only makes our variable numeric, but also centers it. At the moment, any of these options would give us accurate interpretations of our model's results.   
+
+**What would change based on the coding method for the `condition` variable?**   
+
+
+**How would it change?**
+
+The differences in interpretation and how to select your coding scheme for dichotomous variables will become more clear with practice!
+
+For now, recode condition to -.5 and .5
+```{r}
+data_dich <- data_dich |> 
+  mutate(condition_c = )
+```
+
+
+Lets check that this looks correct.
+```{r}
+
+```
+
+
+Let's get some more descriptive statistics.   
+
+**Find the average inclusion score for each condition.**    
+```{r}
+data_dich |> 
+```
+
+### Models
+
+Let's see if the intervention effects children's inclusion scores.   
+
+**How do we do this?**     
+We regress `inclusion_num` on `condition_c`. Remember, we always regress the outcome variable on the predictor variable (or variables).
+
+```{r}
+m_dich <- lm( ) 
+```
+
+
+Even though "1" (the intercept) is not explicitly stated in our model, R will estimate it automatically.    
+
+Let's get a summary of the model.
+```{r}
+
+```
+ 
+
+Note: All of the inferential statistics associated with the `condition_c` predictor are the result of a model comparison between our model (`m_dich`) and a mean-only model.
+
+
+**How do you interpret b_1 for `condition_c`?**    
+
+
+We can also explicitly compare the mean-only and one predictor models like we did last week.
+```{r}
+m_dich_mean <- lm( )
+```
+
+**How would we report the ANOVA results?**    
+
+
+Calculate effect size (partial eta squared; $\eta_p^2$) for $b_1$ (`condition_c`).
+
+$\eta_p^2$ = $(SSE_c - SSE_a)/SSE_c  $ 
+
+**What is our compact model?**   
+ 
+**What is our augmented model?**   
+
+```{r}
+(sse_c <- )
+(sse_a <- )
+
+(peta <- )
+```
+
+Calculate 95% confidence intervals
+```{r}
+
+```
+
+
+**Does our CI for condition_c contain zero?**    
+   
+
+**How would you interpret b1 and b0? What conclusions can we draw?**
+```{r}
+m_dich
+```
+
+
+$b_1$:   
+
+$b_0$:   
+
+```{r}
+# calculate mean inclusion score for sample
+```
+
+
+**Real-world interpretation of b1?**   
+
+
+
+### Plotting Results
+
+Last week we started reviewing the basics of `ggplot2()`. We are going to continue that review in today's lab with an introduction to graphing bar charts, which are often used when depicting the results of studies with categorical predictors.
+
+
+As a reminder, let's look at our model.
+```{r}
+m_dich
+```
+
+
+Next, we'll create a dataframe with just our inputs for `condition_c`. For our earlier model (1 quantitative predictor), we created a sequence of predictor values.    
+
+**What might we do this week with a dichotomous predictor?**   
+Create two possible values - one for each level in our predictor variable (`condition_c`).
+```{r}
+data_new <- tibble(condition_c = c(-.5, .5))
+```
+
+Next we will calculate our predictions and standard error for error bars. 
+```{r}
+preds <- predict(m_dich, data_new, se.fit = TRUE) |>
+  as_tibble() |> 
+  mutate(upper = fit + se.fit,
+         lower= fit - se.fit)
+```
+
+Let's look at our new data frame.   
+
+**Do these predictions look familiar?**  
+The model is predicting the group mean for each condition!
+```{r}
+preds |> 
+  view()
+
+data_dich |> 
+  filter(condition == "Control") |> 
+  pull(inclusion_num) |> 
+  mean()
+
+data_dich |> 
+  filter(condition == "Intervention") |> 
+  pull(inclusion_num) |> 
+  mean()
+```
+
+
+For ease of plotting, let's now combine our `data_new` and `preds` tibbles. We also want a graph with meaningful labels for `condition_c`. So we will turn this variable into a factor with labels.
+
+```{r}
+data_plot <- data_new |> 
+  bind_cols(preds) |> 
+  mutate(condition = factor(condition_c, levels = c(-.5, .5),
+                              labels = c("Control", "Intervention")))
+```
+
+Lets see how that looks now.
+```{r}
+data_plot |> 
+  view()
+```
+
+
+Lets now create a bar plot of our X (`condition_c`) and Y (`fit`) values.   
+```{r}
+(plot <- data_plot |> 
+  ggplot(aes(x = condition, y = fit, fill = condition)) +
+  geom_bar(stat = "identity"))
+```
+
+Now let's add the error bars.
+
+**What will our error bars represent?**    
+This is the standard error at the point estimate (or the standard error at each value of our predictor). Error bars give us a sense of the variability of our point estimate and show us how "uncertain" we are about its value.
+
+```{r}
+(plot <- plot +
+  geom_errorbar(aes(ymin = lower, ymax = upper, width = .25)))
+```
+
+
+Now we are going to overlay the raw data onto the bars. Remember the raw data is in our `data_dich` data frame and not in our `data_plot` data frame. We are also going to use the `position` parameter to add horizontal jitter to our points. This will add random noise to X so that we can see more of the points. **Do not jitter vertically**. This will misrepresent your data. 
+```{r}
+(plot <- plot + 
+  geom_point(data = data_dich, aes(x = condition, y = inclusion_num),
+             position = position_jitter(width = .2, height = 0),
+             alpha = .4))
+```
+
+
+**Why show our raw data?**   
+
+1. So we can see the range of our data.
+2. So we can get a sense for effect sizes/within vs. between group differences.   
+3. To show if there are outliers.      
+4. Transparency in the sharing of our findings and data.      
+
+Let's add finishing touches now.    
+We will add labels and remove the legend because it's redundant. 
+
+```{r}
+(plot <- plot +
+  labs(title = "Perspective Taking and Inclusive Behavior", 
+       x = "Condition", y = "Attitudes Towards Inclusive Behavior") + 
+  theme(legend.position = "none"))
+```
+
+
+Lookin' Good!!
+
+In the future you probably would not want to write out each step of the code adding onto the plot. Here is what the code looks like all together to make the plot.
+
+
+```{r}
+data_plot |> 
+  ggplot(aes(x = condition, y = fit, fill = condition)) +
+  geom_bar(stat = "identity") +
+  geom_errorbar(aes(ymin = lower, ymax = upper, width = .25)) +
+  geom_point(data = data_dich, aes(x = condition, y = inclusion_num),
+             position = position_jitter(width = .2, height = 0),
+             alpha = .4) +
+  labs(title = "Perspective Taking and Inclusive Behavior", 
+       x = "Condition", y = "Attitudes Towards Inclusive Behavior") + 
+  theme(legend.position = "none")
+```
+
+
+You can add this code to your *plotting toolbox* which we started building in the last lab. In the future, if you are asked to create a bar graph for a model with a dichotomous predictor and a continuous outcome variable, you can edit this code.     
+
+
+**Begin ggplot exercise in small groups!**
+
+
+
