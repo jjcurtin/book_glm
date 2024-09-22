@@ -1253,7 +1253,7 @@ $\text{alpha}_{\text{set}} \le \text{set size}*\text{alpha}_{\text{test}}$
 
 **<span style="color: blue;">For planned, non-orthogonal</span>**     
 
-**Fischer LSD** is reasonable with planned, non-orthogonal contrasts for 3 level variables (family-wise alpha controlled and reasonable power).   
+**Fisher LSD** is reasonable with planned, non-orthogonal contrasts for 3 level variables (family-wise alpha controlled and reasonable power).   
 
 **Holm-Bonferonni** is most flexible but need to keep planned contrasts to a minimum (family-wise type I is strictly controlled, but power drops with increasing number of contrasts). Fisher LSD may be more powerful in some instances with 3 level variables.    
 
@@ -1264,7 +1264,7 @@ $\text{alpha}_{\text{set}} \le \text{set size}*\text{alpha}_{\text{test}}$
 
 ----
 
-## Fischer LSD (Protected Testing)
+## Fisher LSD (Protected Testing)
 
 - First test omnibus (multi-df) effect (main effect or interaction). If non-significant, stop.    
 
@@ -1315,7 +1315,6 @@ p.adjust(p, method= 'bonferroni')
 p.adjust(p, method= 'holm')
 ```
 
-Monte carlo example
 
 ----
 
@@ -1335,14 +1334,226 @@ Monte carlo example
 
 ## Monte Carlo Examples
 
-1. Generic use of POCs.
+### 3 Groups with No Group Differences (Type I Errors) 
 
-2. All pairwise contrasts.
+```{r}
+n_experiments <- 10000
+
+m_1 <- 10
+m_2 <- 10
+m_3 <- 10
+
+sd <- 20
+n <- 50
+
+x <-  factor(c(rep("a", n), rep("b", n), rep("c", n)))  
+```
+
+**1. POCs - all focal (separate research questions)**
+
+```{r}
+simulate_poc <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  m <- lm(y ~ x)
+  results <- broom::tidy(m)
+  
+  significant <- any(results$p.value[2:3] < 0.05)
+
+  return(if_else(significant, 1, 0))
+}
+```
+
+```{r}
+matrix_contr <- matrix(c(2, -1, -1,
+                         0,  1, -1), 
+                       ncol = 2,
+                       dimnames = list(levels(x),
+                                       c("a_v_bc", "b_v_c")))
+contrasts(x) <- matrix_contr
+
+type_1 <- map_int(1:n_experiments, simulate_poc)
+```
+
+Average type I error is `r mean(type_1)`
+
+----
+
+**2. All (3) pairwise contrasts (no protection).** 
+
+```{r}
+simulate_uncorrected <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  mod_1 <- lm(y ~ x)
+  results_1 <- broom::tidy(mod_1)
+  
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  mod_2 <- lm(y ~ x)
+  results_2 <- broom::tidy(mod_2)
+  
+  significant <- any(c(results_1$p.value[2:3], results_2$p.value[2]) < 0.05)
+
+  return(if_else(significant, 1, 0))
+}
+```
+
+```{r}
+type_1 <- map_int(1:n_experiments, simulate_uncorrected)
+```
+
+Average type I error is `r mean(type_1)`
+
+----
+
+**3. Fisher LSD with 3 pairwise comparisons**
+```{r}
+simulate_fisher <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  mod_1 <- lm(y ~ x)
+  results_1 <- broom::tidy(mod_1)
+  
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  mod_2 <- lm(y ~ x)
+  results_2 <- broom::tidy(mod_2)
+  
+  omnibus <- anova(mod_1)$`Pr(>F)`[1]
+  
+  significant <- omnibus < .05 & any(c(results_1$p.value[2:3], results_2$p.value[2]) < 0.05)
+
+  return(if_else(significant, 1, 0))
+}
+```
+
+```{r}
+type_1 <- map_int(1:n_experiments, simulate_fisher)
+```
+
+Average type I error is `r mean(type_1)`
+
+----
+
+**4. Holm-Bonferroni correction with 3 pairwise comparisons**
+```{r}
+simulate_hb <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  mod_1 <- lm(y ~ x)
+  results_1 <- broom::tidy(mod_1)
+  
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  mod_2 <- lm(y ~ x)
+  results_2 <- broom::tidy(mod_2)
+  
+  significant <- any(p.adjust(c(results_1$p.value[2:3], results_2$p.value[2]), method = "holm") < 0.05)
+
+  return(if_else(significant, 1, 0))
+}
+```
+
+```{r}
+type_1 <- map_int(1:n_experiments, simulate_hb)
+```
+
+Average type I error is `r mean(type_1)`
     
-    - No effect, no  protection
-    - No effect, Fisher 3 LSD
-    - No effect, Holm-Bonferroni
-    
+----
+
+### 3 Groups with One Group Difference (Type II Errors)
+
+```{r}
+m_1 <- 10
+m_2 <- 10
+m_3 <- 20
+```
+
+----
+
+**1. Fisher LSD with 3 pairwise comparisons**
+
+```{r}
+simulate_fisher <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  mod_1 <- lm(y ~ x)
+  results_1 <- broom::tidy(mod_1)
+  omnibus <- anova(mod_1)$`Pr(>F)`[1]
+  
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  mod_2 <- lm(y ~ x)
+  results_2 <- broom::tidy(mod_2)
+  
+  significant <- omnibus < .05 && ((results_1$p.value[2] < 0.05) || 
+                                     (results_1$p.value[3] || results_2$p.value[2] < 0.05))
+
+  return(if_else(significant, 0, 1))
+}
+```
+
+```{r}
+type_2 <- map_int(1:n_experiments, simulate_fisher)
+```
+
+Average type II error is `r mean(type_2)`
+
+----
+
+**2. Holm-Bonferroni correction with 3 pairwise comparisons**
+```{r}
+simulate_hb <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  mod_1 <- lm(y ~ x)
+  results_1 <- broom::tidy(mod_1)
+  
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  mod_2 <- lm(y ~ x)
+  results_2 <- broom::tidy(mod_2)
+
+  
+  significant <- any(p.adjust(c(results_1$p.value[2:3], results_2$p.value[2]), method = "holm") < 0.05)
+
+  return(if_else(significant, 0, 1))
+}
+```
+
+```{r}
+type_2 <- map_int(1:n_experiments, simulate_hb)
+```
+
+Average type II error is `r mean(type_2)`
+
+----
+
+### 3 Groups with All Groups Different (Type II Errors)
+
+```{r}
+m_1 <- 10
+m_2 <- 20
+m_3 <- 30
+```
+
+
+**1. Fisher LSD with 3 pairwise comparisons**
+
+```{r}
+type_2 <- map_int(1:n_experiments, simulate_fisher)
+```
+
+Average type II error is `r mean(type_2)`    
+
+
+**2. Holm-Bonferroni correction with 3 pairwise comparisons**
+
+```{r}
+type_2 <- map_int(1:n_experiments, simulate_hb)
+
+```
+
+Average type II error is `r mean(type_2)`
+  
+----
+
 <span style="color: red;">Question: What would family-wise error rate be if we conducted only 2 dummy contrasts?</span>  
 
 ----

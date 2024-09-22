@@ -64,7 +64,7 @@ theme_set(theme_classic())
 
 path_data <- "data_lecture" 
 
-data <- read_csv(here::here(path_data, "6_two_predictors_fps.csv"),
+data <- read_csv(here::here(path_data, "06_two_predictors_fps.csv"),
                  show_col_types = FALSE) 
 ```
 
@@ -222,7 +222,7 @@ theme_set(theme_classic())
 
 path_data <- "data_lecture" 
 
-data <- read_csv(here::here(path_data, "6_two_predictors_fps.csv"),
+data <- read_csv(here::here(path_data, "06_two_predictors_fps.csv"),
                  show_col_types = FALSE) |> 
   glimpse()
 ```
@@ -705,7 +705,7 @@ Solutions for Multicollinearity include:
 ```{r}
 #| code-fold: true
 
-data_exam <- read_csv(here::here(path_data, "6_two_predictors_exam.csv"), 
+data_exam <- read_csv(here::here(path_data, "06_two_predictors_exam.csv"), 
                  show_col_types = FALSE) 
 
 data_exam <- data_exam |> 
@@ -1398,7 +1398,7 @@ Measure depression with CES-D pre- (baseline) and post-intervention.
 -----
 
 ```{r}
-data_int <- read_csv(here::here(path_data, "6_two_predictors_intervention.csv"),
+data_int <- read_csv(here::here(path_data, "06_two_predictors_intervention.csv"),
                      show_col_types = FALSE)
 ```
 
