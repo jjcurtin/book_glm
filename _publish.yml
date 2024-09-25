@@ -26,3 +26,7 @@
   quarto-pub:
     - id: 439fa2aa-c1fb-4f2e-bb28-67ea4cb56fc8
       url: 'https://jjcurtin.quarto.pub/question-styling-options'
+- source: 05_single_dichotomous.qmd
+  quarto-pub:
+    - id: 560e2004-6f70-4329-843c-a18707edbf96
+      url: 'https://jjcurtin.quarto.pub/05_single_dichotomous'

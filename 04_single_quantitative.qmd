@@ -3,6 +3,7 @@ format:
   revealjs:
     slide-number: true
     show-slide-number: all 
+    html-math-method: mathjax
 editor_options:  
   chunk_output_type: console
 --- 
@@ -600,15 +601,16 @@ plot_x <- data |>
   geom_abline(aes(intercept = coef(m_2)[1],
                   slope = coef(m_2)[2]),
               color = "red", linewidth = 1) +
-  xlim(0, .15)
+  xlim(-.075, .15)
 
 
 plot_x_c <- data |> 
   ggplot(aes(x = bac_c, y = fps)) +
   geom_point(alpha = .6, size = 2) +
-  geom_abline(aes(intercept = coef(m_2)[1],
-                  slope = coef(m_2)[2]),
-              color = "red", linewidth = 1)
+  geom_abline(aes(intercept = coef(m_2_c)[1],
+                  slope = coef(m_2_c)[2]),
+              color = "red", linewidth = 1) +
+  xlim(-.075, .15)
 
 plot_x + plot_x_c
 ```
@@ -905,7 +907,7 @@ Your model is predicting the mean $Y$ for any $X$.
 - There are several choices you have for how to display information about the sampling distribution for the mean (the uncertainty about the population mean)
 
 
-## Predicted means wih 95% Confidence Intervals
+## Predicted means with 95% Confidence Intervals
 
 The first option is to present the predicted means with a shaded region that represents the 95% CIs for each predicted mean
 
@@ -971,15 +973,7 @@ ci_plot
 ci_plot
 ```
 
-The confidence intervals for each predicted FPS score use the standard error for these predicted values.  This standard error is calculated as follows:
-
-\
-
-$\text{SEE} = \sqrt{\frac{\text{SSE}}{N-P}}$   
-
-$\text{SE}_\hat{Y_i}=\text{SEE}\sqrt{\frac{1}{N}+\frac{(X_i-\overline{X})^2}{(N-1)s_x^2}}$  
-
-$\text{CI}_\hat{Y_i}=\hat{Y_i}\pm t(\alpha; N-k-1)\text{SE}_\hat{Y_i}$
+The confidence intervals for each predicted FPS score use the standard error for these predicted values.  
 
 -----
 
@@ -997,6 +991,7 @@ $\hat{\text{FPS}_i}=42.5 + -184.1 * \text{BAC}_i$
 
 $\text{SE}_\hat{Y_i}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(X_i-\overline{X})^2}{(N-1)s_x^2}}$  
 
+$\text{CI}_\hat{Y_i}=\hat{Y_i}\pm t(\alpha; N-k-1)\text{SE}_\hat{Y_i}$
 :::
 
 -----
@@ -1011,7 +1006,7 @@ $\text{SE}_{b_0}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overlin
 
 - $b_0$ is simply the predicted value for $Y$ when $X$ = 0.
 
--We can use additive transformations of $X$ to make tests of the predicted value at  $X$ = 0. Most common in repeated measures designs but used elsewhere as well.
+- We can use additive transformations of $X$ to make tests of the predicted value at  $X$ = 0. Most common in repeated measures designs but used elsewhere as well.
 
 
 -----

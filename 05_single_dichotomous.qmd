@@ -2,7 +2,8 @@
 format:
   revealjs:
     slide-number: true
-    show-slide-number: print
+    show-slide-number: all 
+    html-math-method: mathjax
 editor_options:  
   chunk_output_type: console
 --- 
@@ -53,7 +54,7 @@ Question: How do we handle analysis of dichotomous predictors in regression?
 ::::
 
 :::{.fragment}
-[Very simple! We will assign two “arbitrary” values to a regressor $X$ to represent the two levels (groups) in the dichotomous predictor variable.{style="color:blue;"}
+[Very simple! We will assign two “arbitrary” values to a regressor $X$ to represent the two levels (groups) in the dichotomous predictor variable.]{style="color:blue;"}
 :::
 
 ## Coding Dichotomous Predictors
@@ -65,7 +66,7 @@ There are 2 coding schemes that we will need to learn:
 
 \
 
-We also need to learn distinction between weighted vs. unweighted means (optional).   
+We also need to learn distinction between weighted vs. unweighted means (advanced topic).   
 
 -----
 
@@ -83,7 +84,7 @@ What would change if you reverse the 0/1 coding such that you assign 1 to the re
 :::
 
 :::{.fragment}
-[The sign of the parameter estimate will reverse!  But its t statistic and p-value will NOT change.  What if we used -1 vs. 1?]{style="color:blue;"}
+[The sign of the parameter estimate for $b_1$ will reverse!  But its t statistic and p-value will NOT change.  What if we used -1 vs. 1?]{style="color:blue;"}
 :::
 
 -----
@@ -91,20 +92,24 @@ What would change if you reverse the 0/1 coding such that you assign 1 to the re
 ## Our Running Example
 
 ```{r}
+#| code-fold: true
 #| message: false
 
 options(conflicts.policy = "depends.ok") 
 library(tidyverse)
 library(broom)  # for tidy() and glance()
 library(patchwork)
+library(skimr)
 
 theme_set(theme_classic()) 
 
 path_data <- "data_lecture" 
+```
 
+```{r}
 data <- read_csv(here::here(path_data, "05_single_dichotomous_bg_fps.csv"),
-                 show_col_types = FALSE) |> 
-  glimpse()
+                 show_col_types = FALSE)
+data |> head()
 ```
 
 -----
@@ -117,7 +122,7 @@ You can customize your own function for skimming data using `skim_with()`.
 - Save this is a script that you source to have access to it without having to rewrite it each time (DRY!!)
 
 ```{r}
-skim_some <- skimr::skim_with(numeric = skimr::sfl(p25 = NULL, p75 = NULL, hist = NULL))
+skim_some <- skim_with(numeric = sfl(p25 = NULL, p75 = NULL, hist = NULL))
 ```
 
 :::
@@ -130,7 +135,7 @@ Skim the data
 data |> skim_some()
 ```
 
-\
+-----
 
 Get counts for `bg`
 
@@ -149,7 +154,7 @@ data |>
 ::: {.callout-important}
 # Question
 
-Why can we use `bg` directly in our glm in `lm()`
+Why can't we use `bg` directly in our glm in `lm()`
 :::
 
 
@@ -157,8 +162,8 @@ Why can we use `bg` directly in our glm in `lm()`
 [It is not numeric.  What is a 1 unit change on `bg` when it is coded as "placebo" and "alcohol"]{style="color:blue;"}
 
 [We need to make a regressor (a `x` in our model) to represent `bg`]{style="color:blue;"}
-
-\
+:::
+-----
 
 ```{r}
 data <- data |> 
@@ -167,8 +172,6 @@ data <- data |>
 data  |> slice_sample(n = 20)
 ```
 
-:::
-
 -----
 
 Now we can estimate $b_0$ and $b_1$
@@ -176,39 +179,40 @@ Now we can estimate $b_0$ and $b_1$
 \
 
 ```{r}
-m_d <- lm(fps ~ bg_d, data = data)
+m_d <- lm(fps ~ 1 + bg_d, data = data)
 
 m_d |> 
   tidy()
 ```
 
+-----
+
 And lets compare this to our previous analysis using `bac` coded quantitatively
 
-\
 
 ```{r}
+#| code-fold: true
+
 data_q <- read_csv(here::here(path_data, "04_single_quantitative_bac_fps.csv"),
                  show_col_types = FALSE) 
 
-m_q <- lm(fps ~ bac, data = data_q)
-
-m_q |> 
-  tidy()
+m_q <- lm(fps ~ 1 + bac, data = data_q)
 ```
 
------
 
 ```{r}
 m_d |> tidy()
 sum(residuals(m_d)^2)
 ```
 
+\
+
 ```{r}
 m_q |> tidy()
 sum(residuals(m_q)^2)
 ```
 
-\
+-----
 
 ::: {.callout-important}
 # Question
@@ -216,10 +220,7 @@ sum(residuals(m_q)^2)
 What is different about the NHST of the **alcohol** effect with `bg_d` vs `bac` and why?   
 :::
 
-
 :::{.fragment}
-[here's a question using a red fragment that includes math symbols like $b_0$]{style="color:blue;"}
-
 [p-value is worse (bigger) for bg_d than BAC. Taking a quantitative variable and dichotomizing (or trichotomizing, etc.) throws away potentially valuable information in  your predictor variable. The dichotomous variable will generally be a worse predictor. This will produce a model with more error (> SSE) and less power (> p-values) to test hypotheses.]{style="color:blue;"}
 
 \
@@ -256,13 +257,14 @@ What is the interpretation of $b_1$ (parameter estimate for `bg_d`) in this mode
 [Still change in $Y$ for one unit change in $X$.]{style="color:blue;"}
 
 [However, a one unit change in $X$ moves from the placeob group (coded 0) to alcohol group (coded 1).  Therefore $b_1$ is now the predicted change in $Y$ between placebo and alcohol groups. This is simply the difference in the mean of the two groups!]{style="color:blue;"}
+:::
 
 -----
 
 ::: {.callout-important}
 # Question
 
-Where is $b_1$ (bg_d effect) on this graph?
+Where is $b_1$ ($bg_d$ effect) on this graph?
 
 \
 
@@ -280,8 +282,8 @@ plot_d
 ```
 :::
 
+-----
 
-:::{.fragment}
 [It is the slope of the line (as before). The line goes through the mean of FPS scores for each of the two groups.]{style="color:blue;"}
 
 \
@@ -306,8 +308,6 @@ plot_d +
   theme(plot.margin = unit(c(0, .75, .5, .75), "inches"))
 ```
 
-:::
-
 -----
 
 ::: {.callout-important}
@@ -328,7 +328,7 @@ m_d |> tidy()
 
 [Still predicted value for $Y$ when $X$ = 0.]{style="color:blue;"}
 
-[In this context, that is the predicted FPS score for the no-alcohol group (coded 0).{style="color:blue;"}
+[In this context, that is the predicted FPS score for the no-alcohol group (coded 0).]{style="color:blue;"}
 :::
 
 -----
@@ -347,10 +347,7 @@ plot_d
 ```
 :::
 
-:::{.fragment}
-{style="color:blue;"}
-
-
+-----
 
 [It is the $Y$ intercept as before. The value of FPS when $X$ = 0]{style="color:blue;"}
 
@@ -369,7 +366,6 @@ plot_d +
                   clip = "off") +
   theme(plot.margin = unit(c(0, 0, .5, .75), "inches"))
 ```
-:::
 
 -----
 
@@ -381,7 +377,6 @@ Does alcohol affect FPS?
 
 
 :::{.fragment}
-
 
 ```{r}
 #| code-fold: true
@@ -395,6 +390,7 @@ $H_0: \beta_1 = 0$
 $H_a: \beta_1 \neq 0$   
 
 [No. The probability of getting a $b_1$ of `r round(coef(m_d)[2], 3)` or more extreme is `r round(tidy(m_d)$p.value[2], 3)` if the null hypothesis is true.  This is not sufficient evidence to reject the null.]{style="color:blue;"}
+:::
 
 -----
 
@@ -412,15 +408,16 @@ $H_a: \beta_1 \neq 0$
 
 [Compact model:]{style="color: blue;"}
 
-- $\hat{\text{FPS}}_i = \beta_0+0*\text{bg_d}\_2_i$
+- $\hat{\text{FPS}}_i = \beta_0+0*\text{bg_d}_i$
 - $P_c = 1$  
-- $\text{SSE}_c = `r round(sum((data$fps - mean(data$fps))^2),2)`$  
+- $\text{SSE}_c =$ `r round(sum((data$fps - mean(data$fps))^2),2)`
 
 
 [Augmented model:]{style="color: blue;"}
-- $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg_d}\_2_i$
+
+- $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg_d}_i$
 - $P_a=2$  
-- $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
+- $\text{SSE}_a = $ `r round(sum((data$fps - predict(m_d))^2),2)`
 :::
 
 -----
@@ -436,6 +433,7 @@ How do you use this information to calculate $\eta_p^2$ (PRE) for the bg_d effec
 [PRE or $\eta_p^2$ is the proportional reduction in error due to the effect (the parameter). Use the same models that you would use to test the hypotheses about that parameter.]{style="color:blue;"}
 
 $\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{`r round(sum((data$fps - mean(data$fps))^2),2)` - `r round(sum((data$fps - predict(m_d))^2),2)`}{`r round(sum((data$fps - mean(data$fps))^2),2)`} = `r round((sum((data$fps - mean(data$fps))^2)-sum((data$fps - predict(m_d))^2))/sum((data$fps - mean(data$fps))^2), 4)`$
+:::
 
 -----
 
@@ -486,9 +484,11 @@ $H_a: \beta_0 \neq 0$
 
 
 [Augmented model:]{style="color:blue;"}
+
 - $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg}\_2_i$
 - $P_a=2$  
 - $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
+:::
 
 -----
 
@@ -541,17 +541,17 @@ How do you use this information to calculate $R^2$ for the augmented model?
 [$R^2$ is the proportion of explained variance over total variance in $Y$. The total variance is equivalent to the SSE of the Mean Only model] {style="color:blue;"}
 :::
 
-::::{.fraqment}
+-----
+
 ::: {.callout-important}
 # Question
 
 Why?
 :::
-::::
 
 :::{.fragment}
 
-[At this point it equals PRE b/c $\text{SSE}_c$ is the mean only model!{style="color:blue;"}
+[At this point it equals PRE b/c $\text{SSE}_c$ is the mean only model!]{style="color:blue;"}
 
 $\frac{\text{SSE}_\text{mean}-\text{SSE}_a}{\text{SSE}_\text{mean}}=\frac{`r round(sum((data$fps - mean(data$fps))^2),2)` - `r round(sum((data$fps - predict(m_d))^2),2)`}{`r round(sum((data$fps - mean(data$fps))^2),2)`}$ = `r round((sum((data$fps - mean(data$fps))^2) - sum((data$fps - predict(m_d))^2))/sum((data$fps - mean(data$fps))^2),4)`$ 
 
@@ -563,7 +563,7 @@ $\frac{\text{SSE}_\text{mean}-\text{SSE}_a}{\text{SSE}_\text{mean}}=\frac{`r rou
 
 ```{r}
 m_mean <- lm(fps ~ 1, data = data) 
-m_d <- lm(fps ~ bg_d, data = data)
+m_d <- lm(fps ~ 1 + bg_d, data = data)
 ```
 
 $\eta_p^2$
@@ -580,13 +580,25 @@ glance(m_d)$r.squared
 
 ## Unit Weighted, Centered Coefficients
 
+In some situations, we will prefer to use centered coefficients.
+
+- These coefficients are "centered" around zero
+- They are typcially unit weighted as well (i.e., the difference between the low value and high value is 1)
 ```{r}
 data <- data |> 
-  mutate(bg_2c = if_else(bg_2 == 0, -.5, .5))
+  mutate(bg_c = if_else(bg == "placebo", -.5, .5))
+
+data |> slice_sample(n = 20)
 ```
 
+-----
+
+Lets look at the model that we get using these centered coefficients
+
+\
+
 ```{r}
-m_c <- lm(fps ~ bg_2c, data = data)
+m_c <- lm(fps ~ 1 + bg_c, data = data)
 
 m_c |> 
   tidy()
@@ -603,7 +615,7 @@ plot_d <- plot_d +
   labs(title = "Dummy")
 
 plot_c <- data |> 
-  ggplot(aes(x = bg_2c, y = fps)) +
+  ggplot(aes(x = bg_c, y = fps)) +
   geom_point(alpha = .6, size = 2) +
   geom_abline(aes(intercept = coef(m_c)[1],
                   slope = coef(m_c)[2]),
@@ -615,19 +627,30 @@ plot_d + plot_c
 ```
 
 
-<span style="color: red;">Question: $b_0, b_1$ in each?</span>  
+
+::: {.callout-important}
+# Question
+
+$b_0, b_1$ in each?</spa
+:::
+
 
 -----
 
 ## $b_0$ with Zero-Centered Coefficients
 
-<span style="color: red;">Question: Is $b_0$ (`r round(coef(m_c)[1], 2)`) the mean of FPS in the sample?</span>    
+::: {.callout-important}
+# Question
+
+$Is $b_0$ (`r round(coef(m_c)[1], 2)`) the mean of FPS in the sample?
+:::
+
+:::{.fragment}
+[It is the unweighted mean.] {style="color:blue;"}
+
+[Weighted and unweighted means emerge as concepts with grouped data.   An unweighted mean is the mean of the group means, ignoring the $N$ in each group.]{style="color:blue;"}
 
 -----
-
-<span style="color: blue;">It is the unweighted mean.</span>    
-
-<span style="color: blue;">Weighted and unweighted means emerge as concepts with grouped data.   An unweighted mean is the mean of the group means, ignoring the $N$ in each group.</span>    
 
 ```{r}
 data |> 
@@ -637,7 +660,7 @@ data |>
 
 ```{r}
 data |> 
-  group_by(bg_2) |> 
+  group_by(bg) |> 
   summarise(mean = mean(fps),
             sd = sd(fps))
 ```
@@ -648,39 +671,52 @@ data |>
 
 A weighted mean is the mean of the groups *weighted* or proportional to their sample sizes. It is also equal to the grand mean of the DV ignoring group.  
 
-<span style="color: red;">Question: How can you get $b_0$ to reflect the weighted mean?</span>.  
+::: {.callout-important}
+# Question
+
+How can you get $b_0$ to reflect the weighted mean?
+:::
+
+
+:::{.fragment}
+[Mean center $X$. This is the same as we did with a quantitative variable to make $b_0$ equal the grand mean.] {style="color:blue;"}
+:::
 
 -----
 
-<span style="color: blue;">Mean center $X$. This is the same as we did with a quantitative variable to make $b_0$ equal the grand mean.</span>   
 
 ```{r}
 data <- data |> 
-  mutate(bg_2mc = bg_2 - mean(bg_2))
+  mutate(bg_mc = bg_d - mean(bg_d))
 ```
+
+\
 
 ```{r}
 data |> 
-  pull(bg_2mc)
+  pull(bg_mc)
 ```
 
------
+\
 
 ```{r}
-mean(data$bg_2mc)
+mean(data$bg_mc)
 ```
-
 
 -----
 
 ## $b_0$ as Weighted Mean
 
 ```{r}
-m_mc <- lm(fps ~ bg_2mc, data = data)
+m_mc <- lm(fps ~ 1 + bg_mc, data = data)
 
 m_mc |> 
   tidy()
 ```
+
+\
+
+NOTE:  Mean centered vs. centered coefficients are less commonly used with categorical variables.  But it is important to understand because it deepens your intuition about how these models work.   You can use transformations of your predictors (into regressors) in many different ways depending on your goals and questions in many different ways depending on your goals and questions.
 
 -----
 
@@ -696,28 +732,26 @@ plot_d <- plot_d +
   coord_cartesian(clip = "off") 
 
 plot_c <- data |> 
-  ggplot(aes(x = bg_2c, y = fps)) +
+  ggplot(aes(x = bg_c, y = fps)) +
   geom_point(alpha = .6, size = 2) +
   geom_abline(aes(intercept = coef(m_c)[1],
                   slope = coef(m_c)[2]),
                   linewidth = 1) +
   labs(title = "Zero-centered")  +
-  annotate("text", x = 0, y = round(coef(m_c)[1],2) + 10, label = round(coef(m_c)[1],2), 
+  annotate("text", x = -.1, y = round(coef(m_c)[1],2) + 10, label = round(coef(m_c)[1],2), 
            size = 5, color = "blue") +
   coord_cartesian(clip = "off") 
 
 plot_mc <- data |> 
-  ggplot(aes(x = bg_2mc, y = fps)) +
+  ggplot(aes(x = bg_mc, y = fps)) +
   geom_point(alpha = .6, size = 2) +
   geom_abline(aes(intercept = coef(m_mc)[1],
                   slope = coef(m_mc)[2]),
                   linewidth = 1) +
   labs(title = "Mean-centered") +
-  annotate("text", x = .9, y = round(coef(m_mc)[1],2) + 10, label = round(coef(m_mc)[1],2), 
+  annotate("text", x = -.1, y = round(coef(m_mc)[1],2) + 10, label = round(coef(m_mc)[1],2), 
            size = 5, color = "blue") +
   coord_cartesian(clip = "off") 
-
-  
   
 plot_d + plot_c + plot_mc
 ```
@@ -727,24 +761,29 @@ plot_d + plot_c + plot_mc
 
 ## Other (not useful) Coefficients
 
-<span style="color: red;">What would be the interpretation of $b_0$ and $b_1$ if I used coefficients of -1 and 1 for bg_2?</span>
+::: {.callout-important}
+# Question
+
+What would be the interpretation of $b_0$ and $b_1$ if I used coefficients of -1 and 1 for $bg$?
+:::
+
+:::{.fragment}
+[$b_0$ will be the unweighted mean of FPS because 0 is halfway between the two groups.]{style="color:blue;"}
+
+[$b_1$ will be half what it was in all previous models b/c a one unit change on $X$ will only go halfway between no-alcohol and alcohol groups.] {style="color:blue;"}
+:::
 
 -----
 
-<span style="color: blue;">$b_0$ will be the unweighted mean of FPS because 0 is halfway between the two groups.</span>    
-
-
-<span style="color: blue;">$b_1$ will be half what it was in all previous models b/c a one unit change on $X$ will only go halfway between no-alcohol and alcohol groups.</span>
-
 ```{r}
 data <- data |> 
-  mutate(bg_2o = if_else(bg_2==0, -1, 1))
+  mutate(bg_c2 = if_else(bg == "placebo", -1, 1))
 ```
 
 ```{r}
-m_o <- lm(fps ~ bg_2o, data = data)
+m_c2 <- lm(fps ~ 1 + bg_c2, data = data)
 
-m_o |> 
+m_c2 |> 
   tidy()
 ```
 
@@ -752,10 +791,10 @@ m_o |>
 
 ```{r}
 data |> 
-  ggplot(aes(x = bg_2o, y = fps)) +
+  ggplot(aes(x = bg_c2, y = fps)) +
   geom_point(alpha = .6, size = 2) +
-  geom_abline(aes(intercept = coef(m_o)[1],
-                  slope = coef(m_o)[2]),
+  geom_abline(aes(intercept = coef(m_c2)[1],
+                  slope = coef(m_c2)[2]),
                   linewidth = 1) 
 ```
 
@@ -763,29 +802,39 @@ data |>
 
 ## Publication Quality Figure
 
+Here is an example of a publication quality figure using +/- 1 SE
+
+- First we need predicted values and SEs
 ```{r}
-x <- tibble(bg_2 = c(0,1))
+x <- tibble(bg_d = c(0, 1))
 
 preds_pub <- x |> 
   bind_cols(predict(m_d, x, se.fit = TRUE) |> 
-  as_tibble())
+  as_tibble()) |> 
+  mutate(lwr = fit - se.fit,
+         upr = fit + se.fit) |>
+  select(-df, -residual.scale)  # removed unnecessary columns
+
+print(preds_pub)
 ```
 
+-----
+
+- Then we plot them using ggplot
 ```{r}
 plot_pub <- ggplot() +
-  geom_col(aes(x = as.factor(preds_pub$bg_2), y = preds_pub$fit, 
-               fill = as.factor(preds_pub$bg_2)),
+  geom_col(aes(x = preds_pub$bg_d, y = preds_pub$fit),
            alpha = .4, color = "black") +
-  geom_jitter(aes(x = as.factor(data$bg_2), y = data$fps), width = .02, height = NULL) +
-  geom_errorbar(aes(ymin = preds_pub$fit-preds_pub$se.fit, 
-                    ymax = preds_pub$fit+preds_pub$se.fit, 
-                    x = as.factor(preds_pub$bg_2)), width = .4) +
+  geom_jitter(aes(x = data$bg_d, y = data$fps), width = .02, height = NULL) +
+  geom_errorbar(aes(ymin = preds_pub$lwr, 
+                    ymax = preds_pub$upr, 
+                    x = preds_pub$bg_d), width = .4) +
   scale_fill_manual(values = c("black", "light grey")) +
   scale_x_discrete(breaks = c(0, 1),
-                   labels = c("No alcohol", "Alcohol")) +
+                   labels = c("Placebo", "Alcohol")) +
   theme(legend.position = "none") +
-  labs(x = "Group",
-       y = "Fear-potentiated startle") 
+  xlab("Group") +
+  ylab("Fear-potentiated startle") 
 ```
 
 -----
