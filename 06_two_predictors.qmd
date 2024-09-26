@@ -10,13 +10,26 @@ editor_options:
 ```{r}
 #| echo: false
 
-options(scipen = 999) # turns off scientfic notation
+options(scipen = 999) # turns off scientific notation
 options(knitr.kable.NA = '')
 ```
 
 
 
+
 ## Multiple Regression 2+ Predictors
+
+this is question
+
+
+...
+
+This is answer
+
+
+-----
+
+
 
 - Consider how the concepts we have discussed so far generalize to the 2 predictor (3 parameter) model.  
 - We will start with 2 quantitative predictors example. Will continue with 1 quantitative and 1 dichotomous predictor example.  
