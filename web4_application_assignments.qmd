@@ -19,7 +19,7 @@
 
 ## Week 04: Due Friday, 10/04 at 8:30 am
 
-- [shell](/homework/week_04/hw_03_shell.qmd)
+- [shell](/homework/week_04/hw_04_shell.qmd)
 - [data](/homework/data/hw_04_data.csv)
 
 ## Week 05: No application assignment.  Application exam week!
