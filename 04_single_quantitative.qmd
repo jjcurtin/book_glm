@@ -1,8 +1,4 @@
 --- 
-format:
-  revealjs:
-    slide-number: true
-    show-slide-number: print
 editor_options:  
   chunk_output_type: console
 --- 
@@ -14,13 +10,18 @@ editor_options:
 #| echo: false
 
 options(scipen = 999) # turns off scientfic notation
+
+
+sse <- function(model) {
+  sum(residuals(model)^2)
+}
 ```
 
 ## Two Parameter (One Predictor) Models
 
 We started with a very simple model of FPS:
 
-$\hat{\text{FPS}}= \beta_0$     
+$\hat{FPS}= \beta_0$     
 
 \
 
@@ -47,7 +48,7 @@ $\varepsilon_i = Y_i - \hat{Y}_i$
 
 \
 
-$\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_1$
+$\hat{FPS}_i=\beta_0+\beta_1*BAC_i$
 
 [We could use this model to test the relationship between BAC and FPS scores AND the typical FPS scors for participants with a specific value for BAC (default is BAC = 0)]{style="color:blue;"}
 :::
@@ -74,7 +75,7 @@ data <- read_csv(here::here(path_data, "04_single_quantitative_bac_fps.csv"),
 #| echo: false
 
 m_1 <- lm(fps ~ 1, data = data)   
-m_2 <- lm(fps ~ bac, data = data) 
+m_2 <- lm(fps ~ 1 + bac, data = data) 
 ```
 
 
@@ -127,19 +128,13 @@ $\hat{Y}_i=b_0+b_1*X_1$
 
 - Or use R!
 
-```{r}
-#| echo: false
-
-plot_x
-```
-
 -----
 
 ## Least Squares Criterion
 
 $e_i = Y_i- \hat{Y}_i$    
 
-$\text{SSE} = \sum e_i^2$   
+$SSE = \sum e_i^2$   
 
 
 ```{r}
@@ -221,7 +216,7 @@ $b_1$ is the predicted change in $Y$ for every one unit change in $X_1$. Graphic
 
 \
 
-$\hat{\text{FPS}}_i=42.5+ -184.1*\text{BAC}_i$    
+$\hat{FPS}_i=42.5+ -184.1*BAC_i$    
 
 - For every 1% increase in BAC, FPS decreases by 184.1 microvolts.    
 
@@ -239,7 +234,7 @@ plot_x
 
 Does alcohol affect people’s fear/anxiety?
 
-$\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_i$    
+$\hat{FPS}_i=\beta_0+\beta_1*BAC_i$    
 
 ::: {.callout-important}
 # Question
@@ -292,12 +287,14 @@ data |>
 
 -----
 
-Fit the model (i.e., get our parameter estimates)
+Fit the model (i.e., get our parameter estimates).  
+
+Note that the `1` is not needed but I include it for now to make it clear that we are fitting a model with an intercept.  We will remove it later.
 
 \
 
 ```{r}
-m_2 <- lm(fps ~ bac, data = data)
+m_2 <- lm(fps ~ 1 + bac, data = data)
 
 m_2 |> 
   broom::tidy()
@@ -413,21 +410,21 @@ What two models are you comparing when you test hypotheses about $\beta_1$? Desc
 :::{.fragment}
 [Compact model:]{style="color:blue;"}
 
-- $\hat{\text{FPS}}_i = \beta_0+0*\text{BAC}_i$
+- $\hat{FPS}_i = \beta_0+0*BAC_i$
 - $P_c=1$     
-- $\text{SSE}_c=`r round(sum(residuals(m_1)^2), 1)`$     
+- $SSE_c=`r round(sse(m_1), 1)`$     
 
 \
 
 [Augmented model:]{style="color:blue;"} 
 
-- $\hat{\text{FPS}}_i = \beta_0+\beta_1*\text{BAC}_i$
+- $\hat{FPS}_i = \beta_0+\beta_1*BAC_i$
 - $P_a=2$   
-- $\text{SSE}_a=`r round(sum(residuals(m_2)^2), 1)`$  
+- $SSE_a=`r round(sse(m_2), 1)`$  
 
 \
 
-$F(P_a-P_c, N-P_a) = \frac{\text{SSE}_c-\text{SSE}_a/(P_a-P_c)}{\text{SSE}_a/(N-P_a)}$
+$F(P_a-P_c, N-P_a) = \frac{SSE_c-SSE_a/(P_a-P_c)}{SSE_a/(N-P_a)}$
 
 F(1,94) = 3.685, p = 0.058
 :::
@@ -436,7 +433,7 @@ F(1,94) = 3.685, p = 0.058
 
 ```{r}
 m_1 <- lm(fps ~ 1, data = data)   
-m_2 <- lm(fps ~ bac, data = data) 
+m_2 <- lm(fps ~ 1 + bac, data = data) 
 ```
 
 ```{r}
@@ -454,7 +451,7 @@ If there is a perfect relationship between $X_1$ and $Y$ in your sample, what wi
 :::
 
 :::{.fragment}
-[$\text{SSE}_a=0$. All data points will fall perfectly on the regression line. All errors will be 0.]{style="color:blue;"}
+[$SSE_a=0$. All data points will fall perfectly on the regression line. All errors will be 0.]{style="color:blue;"}
 :::
 
 -----
@@ -466,7 +463,7 @@ If there is no relationship at all between $X_1$ and $Y$ in your sample ($b_1$ =
 :::
 
 :::{.fragment}
-[$\text{SSE}_a=\text{SSE}$ of the mean-only model. $X_1$ provides no additional information about the DV. Your best prediction will still be the mean of the DV.]{style="color:blue;"}
+[$SSE_a=SSE$ of the mean-only model. $X_1$ provides no additional information about the DV. Your best prediction will still be the mean of the DV.]{style="color:blue;"}
 :::
 
 -----
@@ -503,13 +500,13 @@ What two models are being compared?
 :::{.fragment}
 [Compact model:]{style="color:blue;"}
 
-- $\hat{\text{FPS}}_i= 0 + \beta_1* \text{BAC}_i$
+- $\hat{FPS}_i= 0 + \beta_1* BAC_i$
 
 \
 
 [Augmented model:]{style="color:blue;"}
 
-- $\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i$
+- $\hat{FPS}_i= \beta_0 + \beta_1* BAC_i$
 :::
  
 -----
@@ -566,7 +563,7 @@ How would the parameter estimate values and interpretations change if I mean cen
 :::{.fragment}
 
 ```{r}
-m_2_c <- lm(fps ~ bac_c, data = data)  
+m_2_c <- lm(fps ~ 1 + bac_c, data = data)  
 
 m_2_c |> 
   broom::tidy()
@@ -600,15 +597,16 @@ plot_x <- data |>
   geom_abline(aes(intercept = coef(m_2)[1],
                   slope = coef(m_2)[2]),
               color = "red", linewidth = 1) +
-  xlim(0, .15)
+  xlim(-.075, .15)
 
 
 plot_x_c <- data |> 
   ggplot(aes(x = bac_c, y = fps)) +
   geom_point(alpha = .6, size = 2) +
-  geom_abline(aes(intercept = coef(m_2)[1],
-                  slope = coef(m_2)[2]),
-              color = "red", linewidth = 1)
+  geom_abline(aes(intercept = coef(m_2_c)[1],
+                  slope = coef(m_2_c)[2]),
+              color = "red", linewidth = 1) +
+  xlim(-.075, .15)
 
 plot_x + plot_x_c
 ```
@@ -630,7 +628,7 @@ confint(m_2)
 
 The underlying logic from your understanding of sampling distributions remains the same.   
 
-$\text{CI}_b = b\pm t(\alpha; N-P)*\text{SE}_b$ where $P$ = total # of parameters.    
+$CI_b = b\pm t(\alpha; N-P)*SE_b$ where $P$ = total # of parameters.    
 
 -----
 
@@ -669,18 +667,18 @@ How can you calculate the effect size estimate $\eta_p^2$ (PRE) for $\beta_1$?
 
 **Compact model:** 
 
-- $\hat{\text{FPS}}_i= \beta_0 + 0* \text{BAC}_i$     
-- $\text{SSE}_c =  `r round(sum(residuals(m_1)^2), 1)`$   
+- $\hat{FPS}_i= \beta_0 + 0* BAC_i$     
+- $SSE_c =  `r round(sse(m_1), 1)`$   
 
 **Augmented model:** 
 
-- $\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i$  
+- $\hat{FPS}_i= \beta_0 + \beta_1* BAC_i$  
 
-- $\text{SSE}_a =  `r round(sum(residuals(m_2)^2), 1)`$    
+- $SSE_a =  `r round(sse(m_2), 1)`$    
 
 \
 
-$\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{`r round(sum(residuals(m_1)^2),1)`- `r round(sum(residuals(m_2)^2), 1)`}{`r round(sum(residuals(m_1)^2), 1)`}= `r round((sum(residuals(m_1)^2)- sum(residuals(m_2)^2))/sum(residuals(m_1)^2),3)`$ 
+$\frac{SSE_c - SSE_a}{SSE_c}=\frac{`r round(sse(m_1), 1)`- `r round(sse(m_2), 1)`}{`r round(sse(m_1), 1)`}= `r round((sse(m_1) -  sse(m_2)) / sse(m_1), 3)`$ 
 
 \
 
@@ -690,7 +688,7 @@ $\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{`r round(sum(residuals(m
 
 \
 
-[Our augmented model that includes a non-zero effect for BAC reduces prediction error (SSE) by only `r round((sum(residuals(m_1)^2)- sum(residuals(m_2)^2))/sum(residuals(m_1)^2),3)*100`% over the compact model that fixes this parameter at 0.]{style="color:blue;"}
+[Our augmented model that includes a non-zero effect for BAC reduces prediction error (SSE) by only `r round((sse(m_1) - sse(m_2)) / sse(m_1), 3) * 100`% over the compact model that fixes this parameter at 0.]{style="color:blue;"}
 :::
 
 -----
@@ -708,25 +706,25 @@ How can you calculate the effect size estimate $\eta_p^2$ (PRE) for $\beta_0$?
 \
 
 ```{r}
-m_2_0 <- lm(fps ~ bac - 1, data = data) #<1>
+m_2_0 <- lm(fps ~ 0 + bac, data = data) #<1>
 ```
-1. We can use -1 to remove the intercept (i.e., set it equal to 0) from our new compact model.
+1. We can use 0 to remove the intercept (i.e., set it equal to 0) from our new compact model.
 
 \
 
 **Compact model:** 
-
-- $\hat{\text{FPS}}_i= 0 + \beta_1* \text{BAC}_i$**   
-- $\text{SSE}_c =  `r round(sum(residuals(m_2_0)^2), 1)`$   
+ 
+- $\hat{FPS}_i= 0 + \beta_1* BAC_i$**   
+- $SSE_c =  `r round(sse(m_2_0), 1)`$   
 
 **Augmented model:**
 
-- $\hat{\text{FPS}}_i= \beta_0 + \beta_1* \text{BAC}_i$
-- $\text{SSE}_a =  `r round(sum(residuals(m_2)^2), 1)`$     
+- $\hat{FPS}_i= \beta_0 + \beta_1* BAC_i$
+- $SSE_a =  `r round(sse(m_2), 1)`$     
 
 \
 
-$\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{`r round(sum(residuals(m_2_0)^2), 1)`- `r round(sum(residuals(m_2)^2), 1)`}{`r round(sum(residuals(m_2_0)^2), 1)`}= `r round((sum(residuals(m_2_0)^2)- sum(residuals(m_2)^2))/sum(residuals(m_2_0)^2),3)`$  
+$\frac{SSE_c - SSE_a}{SSE_c}=\frac{`r round(sse(m_2_0), 1)`- `r round(sse(m_2), 1)`}{`r round(sse(m_2_0), 1)`}= `r round((sse(m_2_0) - sse(m_2)) / sse(m_2_0), 3)`$  
 
 \
 
@@ -736,7 +734,7 @@ $\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{`r round(sum(residuals(m
 
 \
 
-[Our augmented model that allows FPS to be non-zero for people with BAC=0 (sober people) reduces prediction error (SSE) by `r round((sum(residuals(m_2_0)^2)- sum(residuals(m_2)^2))/sum(residuals(m_2_0)^2),3)*100`% from the model that fixes FPS at 0 when BAC=0!]{style="color:blue;"}
+[Our augmented model that allows FPS to be non-zero for people with BAC=0 (sober people) reduces prediction error (SSE) by `r round((sse(m_2_0) - sse(m_2)) / sse(m_2_0), 3) * 100`% from the model that fixes FPS at 0 when BAC=0!]{style="color:blue;"}
 :::
 
 -----
@@ -824,7 +822,7 @@ broom::glance(m_1)$r.squared
 
 \
 
-$\text{SSE}=\frac{\sum(Y_i-\hat{Y_i})^2}{}$   
+$SSE=\frac{\sum(Y_i-\hat{Y_i})^2}{}$   
 
 \
 $S^2 = \frac{\sum(Y_i-\overline{Y})^2}{N-1}$
@@ -834,22 +832,22 @@ $S^2 = \frac{\sum(Y_i-\overline{Y})^2}{N-1}$
 
 This leads to an alternative formula for $R^2$ for an augmented model.   
 
-$R^2=\frac{\text{SSE}_\text{mean-only}-\text{SSE}_a}{\text{SSE}_\text{mean-only}}$   
+$R^2=\frac{SSE_{mean-only}-SSE_a}{SSE_{mean-only}}$   
 
 \
 
-Mean-only model: $\hat{\text{FPS}}_i=\beta_0$    
+Mean-only model: $\hat{FPS}_i=\beta_0$    
 
-$\text{SSE}_{\text{mean-only}} = `r round(sum(residuals(m_1)^2), 1)`$    
+$SSE_{mean-only} = `r round(sse(m_1), 1)`$    
 
 \
 
-Augmented model: $\hat{\text{FPS}}_i=\beta_0 + \beta_1*\text{BAC}_i$     
+Augmented model: $\hat{FPS}_i=\beta_0 + \beta_1*BAC_i$     
  
-$\text{SSE}_a = `r round(sum(residuals(m_2)^2), 1)`$   
+$SSE_a = `r round(sse(m_2), 1)`$   
 
 \
-$R^2= \frac{`r round(sum(residuals(m_1)^2), 1)` - `r round(sum(residuals(m_2)^2), 1)`}{`r round(sum(residuals(m_1)^2), 1)`} = `r round((sum(residuals(m_1)^2)-sum(residuals(m_2)^2))/sum(residuals(m_1)^2),5)`$    
+$R^2= \frac{`r round(sse(m_1), 1)` - `r round(sse(m_2), 1)`}{`r round(sse(m_1), 1)`} = `r round((sse(m_1) - sse(m_2)) / sse(m_1), 5)`$    
 
 \
 
@@ -905,7 +903,7 @@ Your model is predicting the mean $Y$ for any $X$.
 - There are several choices you have for how to display information about the sampling distribution for the mean (the uncertainty about the population mean)
 
 
-## Predicted means wih 95% Confidence Intervals
+## Predicted means with 95% Confidence Intervals
 
 The first option is to present the predicted means with a shaded region that represents the 95% CIs for each predicted mean
 
@@ -965,21 +963,7 @@ ci_plot <- ggplot() +
 ci_plot
 ```
 
------
-
-```{r}
-ci_plot
-```
-
-The confidence intervals for each predicted FPS score use the standard error for these predicted values.  This standard error is calculated as follows:
-
-\
-
-$\text{SEE} = \sqrt{\frac{\text{SSE}}{N-P}}$   
-
-$\text{SE}_\hat{Y_i}=\text{SEE}\sqrt{\frac{1}{N}+\frac{(X_i-\overline{X})^2}{(N-1)s_x^2}}$  
-
-$\text{CI}_\hat{Y_i}=\hat{Y_i}\pm t(\alpha; N-k-1)\text{SE}_\hat{Y_i}$
+The confidence intervals for each predicted FPS score use the standard error for these predicted values.  
 
 -----
 
@@ -993,10 +977,11 @@ Why are the error bands not linear?
 :::{.fragment}
 [Model predictions are better (less error) near the center of your data ($X_i$).  The regression line will always go through mean of $X$ and $Y$. Small changes in $b_1$ across samples will produce bigger variation in $\hat{Y}_i$ at the edge of the model (far from the mean $X$).]{style="color:blue;"}
 
-$\hat{\text{FPS}_i}=42.5 + -184.1 * \text{BAC}_i$    
+$\hat{FPS_i}=42.5 + -184.1 * BAC_i$    
 
-$\text{SE}_\hat{Y_i}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(X_i-\overline{X})^2}{(N-1)s_x^2}}$  
+$SE_\hat{Y_i}=\sqrt{\frac{SSE}{N-P}}*\sqrt{\frac{1}{N}+\frac{(X_i-\overline{X})^2}{(N-1)s_x^2}}$  
 
+$CI_\hat{Y_i}=\hat{Y_i}\pm t(\alpha; N-k-1)SE_\hat{Y_i}$
 :::
 
 -----
@@ -1005,13 +990,13 @@ Lets compare the SE for $b_1$ to $b_0$.
 
 \
 
-$\text{SE}_\hat{Y_i}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(X_i-\overline{X})^2}{(N-1)s_x^2}}$  
+$SE_\hat{Y_i}=\sqrt{\frac{SSE}{N-P}}*\sqrt{\frac{1}{N}+\frac{(X_i-\overline{X})^2}{(N-1)s_x^2}}$  
 
-$\text{SE}_{b_0}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overline{X})^2}{(N-1)s_x^2}}$   
+$SE_{b_0}=\sqrt{\frac{SSE}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overline{X})^2}{(N-1)s_x^2}}$   
 
 - $b_0$ is simply the predicted value for $Y$ when $X$ = 0.
 
--We can use additive transformations of $X$ to make tests of the predicted value at  $X$ = 0. Most common in repeated measures designs but used elsewhere as well.
+- We can use additive transformations of $X$ to make tests of the predicted value at  $X$ = 0. Most common in repeated measures designs but used elsewhere as well.
 
 
 -----

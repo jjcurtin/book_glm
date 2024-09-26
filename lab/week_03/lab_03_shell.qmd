@@ -1,0 +1,377 @@
+---
+title: "Lab 3 TA Script" 
+author: "TAs" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+
+## Set up your workspace
+
+Make sure your `psych_610` project is open!    
+
+Set conflict policy
+```{r}
+options(conflicts.policy = "depends.ok")
+```
+
+Load packages
+```{r}
+#| message: false 
+
+library(tidyverse)
+library(skimr)
+```
+
+Set `path_data` 
+```{r}
+path_data <- "lab/data"
+```
+
+
+## Paper Folding Study
+
+### Study Description:
+This study examines how well 5-year-old children can mentally visualize paper folding and how accurately they fold paper physically. Children were shown a fold and had to imagine how the paper would look after being folded. They did this for 10 trials. Each time, their performance was recorded as 0 (incorrect) or 1 (correct) (variables `mpf_01` to `mpf_10`).    
+
+For the physical paper folding task, children were given a piece of paper with a line and were asked to fold it as closely as possible to that line. The `distance` variable represents how far their actual fold was from the expected fold in millimeters. If they folded over the line, the number is positive, and if they folded under the line, the number is negative.   
+
+Research Question: Does mental paper folding accuracy predict actual paper folding?   
+
+**What is the predictor?**   
+
+
+**What is the outcome variable?**    
+
+
+Hypothesis: Children with higher mental paper folding accuracy will have lower distance scores (i.e., more accurate physical folding).       
+
+Or to restate the hypothesis, do mental paper folding scores predict (or explain variance in) actual paper folding ability?   
+
+For the purpose of today, we will not yet test this hypothesis. Instead, we will start by building some very basic models using these data.
+
+### Data
+
+Read in and glimpse the data.
+```{r}
+data <- read_csv(
+  
+                 )  |> 
+        janitor::clean_names() |> 
+        glimpse()
+```
+
+
+***Remember that in last week's lab, we said variable classing is important. What should be the correct variable classes of the columns in our data?***
+
+mpf_01 to mpf_10: 
+distance: 
+
+If we are super rigorous and stick with the best practices, we should probably re-class the variables appropriately, such that the columns with binary responses are correctly stored in R as factor variables. We will skip that today for the purpose of lab.
+
+
+Next we will look at missing data and univariate descriptives.
+```{r}
+skim(data)
+```
+
+
+### Data Processing for Analyses
+
+Create a composite variable called `mpf_sum` that is the total number of trials on which a child performed correct mental paper folding. This variable will represent children's mental folding accuracy on the mental paper folding tasks.    
+
+We learned one way to compute composite/average scores last week. Now we will see another way to do the same thing. Briefly, `rowwise()` creates groupings in the tibble by every single row, and since every row represents one observation, `mutate()` essentially creates the sum of `mpf_01` through `mpf_10` for each observation, which is the composite score. Lastly, we use `ungroup()` to remove the groupings created previously.
+
+*Remember we already checked that we have no missing data in this data set. If we did have missing data we would need to account for that, such as deciding how much missing data we want to allow and using `na.rm = TRUE` in descriptive functions like `sum()`.*
+```{r}
+data <- data |> 
+  rowwise() |> 
+  mutate(
+    
+         ) |> 
+  ungroup()
+```
+
+Now learn a little bit about your new variable.
+```{r}
+data |> 
+  summarise(
+    
+    
+            )
+```
+
+View the distribution of scores.
+```{r}
+
+```
+
+
+## Data Analysis
+Now that we have processed our data, we are ready for data analysis. Remember, linear regression models are models that can be used to describe/predict the outcome variable or to understand (test inferences about) relationships between predictors and the outcome variable in your data. 
+
+This can be written as:
+
+$DATA = MODEL + ERROR$
+
+And for the paper folding study specifically...
+
+$distance_i = b_0 + ... + e_i$
+
+
+### The null model
+In the null model, we assume an a priori value of 0 as the population mean of `distance`. In other words, we predict an arbitrary 0 for all children in our data, such that:
+
+$distance_i = b_0 + e_i$
+where $b_0 = 0$
+
+Because we are not estimating anything from the data, we are estimating no parameters ($P = 0$).
+
+```{r}
+data <- data |> 
+
+```
+
+
+Step 2: Compute the total prediction error     
+
+Calculate squared errors for each observation based on `predict_null`.
+
+Remember, $SSE = \sum e_i^2$ and $e_i = Y_i - b_0$
+```{r}
+data <- data |> 
+
+```
+
+Sum of squared errors (SSE)
+```{r}
+sse_null <- 
+sse_null
+```
+
+**Is this a good model?**   
+
+
+
+### The mean-only model
+
+Specification of the mean-only model:   
+We are *buying* one piece of information (the mean) so we're estimating one parameter ($P = 1$).   
+
+
+$distance_i = b_0 + e_i$
+where $b_0 = \bar{X}$, the sample mean
+
+Step 1: Make the best predictions, given the information you have.   
+
+Since we have the mean, we'll predict the mean of `distance` for everyone.
+```{r}
+data <- data |> 
+
+```
+
+
+Step 2: compute the total prediction error (SSE)
+
+```{r}
+data <- data |> 
+
+  
+(sse_mean <-       )
+```
+
+**Is this a good model?**    
+
+
+
+
+
+**So, is the mean-only model a better model than the null model?**   
+
+
+
+## Model comparison
+
+**Is the mean model significantly better than the null model?**    
+This question is answered using either the $F$ statistic or the $t$ statistic. 
+
+
+### Using the F value
+The $F$ statistic has a complicated formula. 
+
+
+However, the formula for $F$ is the numeric way to express the question, "Is estimating the additional parameter(s) worth it?". We can see this by looking at the numerator and the denominator of $F$ separately. 
+
+
+Numerator = $(SSE_c-SSE_a)/(P_a-P_c)$
+
+The numerator essentially means: the average reduction in error afforded per additional parameter estimated in the augmented model which was not in the compact model.
+
+
+Denominator = $(SSE_a)/(N - P_a)$
+
+Remember, the maximum number of parameters you can estimate is equal to the sample size $N$. This is because there are limited degrees of freedom and when you estimate $N$ parameters, your model becomes perfectly fit to the data. This means your model will have a total error, or SSE, of 0, even if the predictors are totally unrelated to the outcome variable.
+
+The denominator essentially asks: of the error left after we fit the augmented model, how much error might we expect to explain with the addition of any given new parameter? In other words, the denominator is the reduction in error per parameter you expect to see just by increasing model complexity, even if the predictors you add are not at all relevant to the outcome.
+
+
+In sum, $F$ is the amount of error reduction per additional parameter to the augmented model, divided by the average prediction error per additional parameter that can be added to the augmented model. 
+
+Generally (but not always), when $F$ is > 4 (i.e., when the error reduction is at least 4 times larger than the average prediction error) we conclude that it's worth it to add that additional parameter.    
+
+#### Calculate the F-value by hand
+
+In order to calculate F, we need to know how many observations (N) were in the data set. 
+```{r}
+
+```
+
+*F formula:*   
+$F = ((SSE_c - SSE_a) / (P_a - P_c)) / (SSE_a / (N - P_a))$ 
+
+The F statistic is a ratio comparing two quantities: 
+
+1. The numerator is $(SSE_c - SSE_a) / (P_a - P_c)$. So, we calculate the difference in SSE between the models and divide that by the difference in the number of parameters between models. 
+
+2. The denominator is $SSE_a / (N - P_a)$. So, we divide the SSE of the augmented model by the denominator degrees of freedom, which is the difference between sample size and the number of parameters estimated in the augmented model.  
+
+*See also, Judd et al., "Data Analysis" 3rd ed. pg 54*   
+
+Let's compute the F statistic:    
+augmented model = mean only model   
+compact model = null model
+```{r}
+p_a <- 
+p_c <- 
+
+(f_stat <- ((sse_null - sse_mean) / (p_a - p_c)) / (sse_mean / (n - p_a)))
+```
+
+Next we will calculate the p-value.   
+We are using the `pf()` function to calculate our p-value from `f_stat`. We are also passing in two degrees of freedom values: the difference in number of parameters between our two models (`p_a - p_c`) and the remaining available parameters (`n - p_a`). `lower.tail = FALSE` means you want the probability of getting an F-value **larger** than your `f_stat` value, under the assumption that the population mean is, in fact, zero. 
+```{r}
+pf(f_stat, (p_a - p_c), (n - p_a), lower.tail = FALSE)
+```
+
+Because $p = .002$, which is < .05, the additional precision was *worth* the addition of the parameter. The mean of the sample is a better predictor than 0.
+
+
+#### Models & model comparison the easy way
+
+Let's make a model where we use the sample mean to predict our variable of interest (`distance`) and compare it to a null model. Everyone's score is being predicted by a constant when using a mean-only or null model. This is something we need to keep in mind when we specify our model.    
+
+mean only model
+```{r}
+m_mean <- lm(distance ~ 1, data = data)
+```
+
+Above we are using the `lm()` function. This is used to fit a (general) linear model.   
+
+We are passing in a formula (`distance ~ 1`) and a data set (`data`). In the formula the outcome variable is on the left side of the ~ and the predictors are on the right. Right now our only predictor is the overall mean (represented as 1; a constant intercept).   
+
+null model
+```{r}
+m_null <- lm(distance ~ 0, data = data)
+```
+
+
+Model comparison using `anova()` to get F statistic
+```{r}
+anova(m_null, m_mean)
+```
+
+**Notice the F statistic and p-value are the same that we calculated above!**
+
+
+### Using the t value 
+The $t$ statistic closely follows the idea of null hypothesis significance testing. It concerns the sampling distribution of some parameter, say $b_0$.
+
+*t formula:*   
+$t = (b - \beta) / SE(b)$
+
+$t$ essentially represents how many standard deviations of the sampling distribution our estimated sample mean ($b_0$) sits away from the expected population mean, assuming the null hypothesis is true (i.e., $\beta_0$ = 0).
+
+`broom::tidy()` will provide you with the t-statistic and p-value corresponding to each parameter in your model. 
+```{r}
+m_mean |> 
+
+```
+
+To calculate $t$ by hand, we need the parameter estimate and its standard error from the augmented model. Next, we can obtain the p-value for $t$ using `pt()`. Note that you need to double the number you get if you wanted two-tailed p-value.
+
+```{r}
+t <- 
+pt(t, df = (n - p_a),lower.tail=FALSE) * 2
+```
+
+### F and t statistic are interchangeable
+
+Note that although we conceptually explained $F$ and $t$ in different ways, they are in fact interchangeable when comparing a compact model and an augmented model with exactly one additional parameter estimated, such that:
+
+$F = t^2$ if $P_a - P_c = 1$
+
+In our example, the null and the mean-only models can both be written as $distance_i = b_0 + e_i$. The only difference would be that $b_0$ is a parameter *fixed* to 0 in the null model but a *free* parameter estimated using OLS in the mean-only model.
+
+So at the bottom, the $t$ statistic is also implicitly comparing an augmented model ($b_0 \not= 0$) vs. a compact model ($b_0 = 0$). The $F$ statistic is, too, comparing some alternative hypothesis ($b_0$ freely estimated) against the null ($b_0 fixed to 0$).
+
+## Graphing our data and model
+
+You will encounter us using the terms *quick and dirty* plot and *publication quality* plot. Generally speaking, when we use the prior, we mean a plot that is unfinished and not ready for publication. It may not be labeled clearly or even include error bars. Quick and dirty plots are more for your understanding and ability to look at the data visually and you don't want to specify everything needed for `ggplot2()` in the moment (e.g., quickly in your console or in a meeting with your advisor).    
+
+We think it's important to know how to do both, so we will teach both methods in parallel!   
+
+### Quick & dirty   
+
+Plot a histogram for `distance`
+```{r}
+hist(data$distance)
+```
+
+Now, let's add a vertical line representing the mean
+```{r}
+hist(data$distance)
+abline(v = mean(data$distance), lwd = 2, col = "red")
+```
+
+
+### Publication quality
+
+`ggplot2()` will take some time to learn. There are seemingly infinite options for customizing your plots and adding layers. We will be gradually introducing you to several of these options.   
+
+*Tip*: Open a new (blank) file now to begin a "plotting toolbox" for yourself. Whenever we create a different type of plot in lab, add it with notes to your plotting toolbox, so you have a one-stop shop to copy and paste from for creating plots in the future. Use section headings to keep it organized.   
+
+
+Since we didn't set our `ggplot2()` theme during set up, let's do that now. `theme_classic()` is selected because it is closest to APA style.
+```{r}
+theme_set() 
+```
+
+We are now going to plot the distribution of `distance` using `geom_histogram()`. 
+```{r}
+data |> 
+
+
+```
+
+Now lets get a bit more advanced. We can combine a histogram and density plot. This is called a stacked density plot. Let's also add in our estimated sample mean. Note that we used `after_stat()` to adjust the y-axis of the histogram so it has the same unit as the density plot.
+```{r}
+data |> 
+
+
+
+```
+
+
+**If you were prepping this graph for publication, what else would you want to do?**      
+
+
+We will learn how to do all these things later!   
+
+**Why use ggplot instead of other graphing alternatives?**     
+`ggplot2()` allows you to graph model predictions, rather than just raw data. For simple models, like the one from today, there is very little difference. However, once you start working with more complex models (ones where we have several interactions and covariates), plotting model predictions will allow us to plot the relation between one (or more) variables and the outcome after taking into account the effects of the other variables in the model. The learning curve might be steep, but once you have mastered `ggplot2()`, you can easily graph any model you want without using any other packages or software. Very powerful, very customizable, extremely useful!

@@ -1,5 +1,5 @@
 ---
-title: "Homework #4" 
+title: "hw_04_shell" 
 author: "Your Name" 
 date: "`r lubridate::today()`"
 format: 
@@ -11,38 +11,27 @@ editor_options:
   chunk_output_type: console
 ---
 
-Due <!--Wednesday, October 4th, 2023, at 1:30 PM. --> on Canvas.   
-
--	Select the Assignments menu and find HW Week 4
--	Submit both an HTML file and a .qmd file
--	Make sure you can access this folder ahead of the homework due date
-
-
 ## Part A. Reading Questions
 
 
 ### 1.	Sampling procedures: What core assumption is required for the mean to be the most efficient estimator for a given sample? 
 
 
-
 ### 2.	F statistic: What are the two reasons for calculating F, according to Judd et al.’s Data Analysis? 
 
 
-
 ### 3.	Statistical terms: What special name is given to the square root of the mean-squared-error from the mean-only model? 
-
 
 
 ### 4.	Confidence Intervals: According to Judd and colleagues, what information does one need in order to calculate the 95% confidence intervals for the parameter of a simple linear regression that represents the slope?
 
 
 
-
 ## Part B. Data analysis
 
-A group of researchers is interested in determining why people believe conspiracy theories. Specifically, the researchers want to see if individuals who have high anxiety scores are more likely to also believe conspiracy theories. The researchers want to further test if individuals who use social media are more likely to believe conspiracy theories than individuals who do not use social media.   
+A group of researchers are interested in determining why people believe conspiracy theories. Specifically, the researchers want to see if individuals who have high anxiety scores are more likely to also believe conspiracy theories. The researchers want to further test if individuals who use social media are more likely to believe conspiracy theories than individuals who do not use social media.   
 
-The data file `conspiracy.csv` contains data from 1,974 (fake) participants who completed a survey assessing their (1) belief in conspiracy theories, (2) anxiety, (3) use of social media, and (4) demographic characteristics for age, gender, and political affiliation. Further information about each variable is written below.    
+The data file `hw_04_data.csv` contains data from 1,974 (fake) participants who completed a survey assessing their (1) belief in conspiracy theories, (2) anxiety, (3) use of social media, and (4) demographic characteristics for age, gender, and political affiliation. Further information about each variable is written below.    
 
 Variables:   
 
@@ -63,62 +52,114 @@ Variables:
 
 ### 1.	Set up your script and read in the data. You will notice our data is a little messy. 
 
+``` {r}
 
+```
 
-#### a. convert variable names to snake case.
+#### a. Convert variable names to snake case.
 
+``` {r}
 
-#### b. Create a composite score for political affiliation by combing `anes_rep`, `anes_dem`, and `anes_ind`. The resulting variable should a factor that includes the following levels and labels: 1 (Strong Republican), 2 (Weak Republican), 3 (Republican Leaning Independent), 4 (Independent), 5 (Democratic Leaning Independent), 6 (Weak Democrat), and 7 (Strong Democrat). You can remove the original variables: `anes_rep`, `anes_dem`, and `anes_ind`. You may need to use external sources like google and Chat GPT to complete this question.
+```
+
+Notice `clean_names()` doesn't always perfectly clean the variable names. We are going to do some more cleaning manually.
+```{r}
+data <- data |> 
+  rename_with(.fn = function(x) {
+    str_replace(x, "(\\p{L})(\\d)", "\\1_\\2")
+    }, 
+              .cols = c(cons1:cons15, anx1:anx5)) |> 
+  glimpse()
+```
+
+#### b. Create a composite score (`anes`) for political affiliation by combing `anes_rep`, `anes_dem`, and `anes_ind`. The resulting variable should a factor that includes the following levels and labels: 1 (Strong Republican), 2 (Weak Republican), 3 (Republican Leaning Independent), 4 (Independent), 5 (Democratic Leaning Independent), 6 (Weak Democrat), and 7 (Strong Democrat). You can remove the original variables: `anes_rep`, `anes_dem`, and `anes_ind`. You may need to use external sources like google and Chat GPT to complete this question.
+
+```{r}
+
+```
 
 
 #### c. Convert any other ordinal variables to factors with descriptive labels.   
 
+```{r}
 
+```
 
 #### d. Get summary statistics for each of the variables in the data frame. 
+
+```{r}
+
+```
 
 
 ### 2.	Notice that there is a variable that we do not need for these analyses (labeled `annoying_variable`). Remove this variable. Run a command that shows the names of the variables that are left. 
 
+```{r}
+
+```
 
 
-### 3.	Prepare your two predictor variables and your outcome variable for data analysis. To do so, create composite scores for participant’s belief in conspiracy theory scores and anxiety scores. Do not include any participant in a composite score if they have missed more than 1/3 of the response items for a variable. While it will not affect your interpretation of b1, later in the homework we will ask you to interpret b0. For the sake of easier interpretation of b0, recode social media use age -0.5 (does not use social media) and 0.5 (uses social media).
+### 3.	Prepare your two predictor variables and your outcome variable for data analysis. To do so, create composite MEAN scores for participant’s belief in conspiracy theory scores and anxiety scores. Do not include any participant in a composite score if they have missed more than 1/3 of the response items for a variable and make sure you are prorating missing data. While it will not affect your interpretation of b1, later in the homework we will ask you to interpret b0. For the sake of easier interpretation of b0, recode social media use age -0.5 (does not use social media) and 0.5 (uses social media).
 
+Load function `var_score()`
+```{r}
+devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/var_score.R?raw=true")
+```
 
+```{r}
+
+```
 
 ### 4.	Make two quick and dirty plots exploring our main questions (i.e., do anxiety or social media predict the belief in conspiracy theories?).
 
+```{r}
 
-### 5.	Fit a linear model to determine if anxiety predicts the belief in conspiracy theories. Report the corresponding (b1) parameter estimate, F-statistic, df, p-value, and PRE. Provide a 95% confidence interval for the (b1) parameter estimate. 
+```
 
+### 5.	Fit a linear model to determine if anxiety predicts the belief in conspiracy theories. Report the corresponding (b1) parameter estimate, F-statistic, df, p-value, and PRE (partial eta squared). Provide a 95% confidence interval for the (b1) parameter estimate. 
+
+```{r}
+
+```
 
 ### 6.	Create a publication-quality graph that depicts the model that you fit in Question 5. Make sure you label each axis and include the data points. 
 
+```{r}
+
+```
+
+### 7.	Fit a linear model to determine if social media use predicts the belief in conspiracy theories. Report the corresponding (b1) parameter estimate, F-statistic, df, and p-value. Provide a 95% confidence interval for the (b1) parameter estimate and PRE (partial eta squared). 
+
+```{r}
+
+```
+
+### 8.  Provide a one sentence interpretation of PRE for the effect of social media use on the belief in conspiracy theories. 
 
 
-### 7.	Fit a linear model to determine if social media use predicts the belief in conspiracy theories. Report the corresponding (b1) parameter estimate, F-statistic, df, and p-value. Provide a 95% confidence interval for the (b1) parameter estimate and PRE (partial eta squared).  
-
-
-
-### 8.	Provide a one sentence interpretation of PRE for the effect of social media use on the belief in conspiracy theories. 
-
-
-
-### 9.	From the output of the linear model from Question 7, interpret the “intercept” or b0 coefficient. What does it mean in this sample? What does its corresponding p value mean?
-
+### 9.	From the output of the linear model from Question 7, interpret the “intercept” or b0 coefficient. What does it mean in this sample? What does its corresponding p-value mean?
 
 
 ### 10.	Create a publication-quality graph that depicts the model you fit in Question 7. 
 
+```{r}
+
+```
 
 
 ### 11.	Write a concise (a few sentences) description of the tests you conducted in Questions 5 and 7. Include the statistical results of your tests, and the practical interpretation of the results. Write your response so that someone who does not know anything about these data could understand your results.
 
 
-
 ### 12.	Provide statistics for your demographic variables. For age, report a mean and standard deviation. For gender and political affiliation, identify the number and percentage of participants in each demographic category (i.e., the number of Strong Republicans, Weak Republicans, etc.). The table does not need to be publication quality.
 
+```{r}
 
+```
 
+### 13. Reflection
 
-## Part C. Tell us how long it took you to complete this assignment. 
+#### How many hours did it take you to complete this assignment?
+
+#### What is one topic we have covered (in lab or lecture) that is still unclear?
+
+#### If you have used ChatGPT or other online sources for this assignment, take a moment to reflect on the pros and cons of using them for this assignment. In what ways did they make the assignment easier? More difficult?

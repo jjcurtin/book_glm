@@ -201,7 +201,8 @@ library(psych, exclude = c("logit", "%+%", "alpha")) # needed for model_assumpti
 library(gvlma) # needed for model_assumptions
 
 path_data <- "data_lecture"
-data <- read_csv(here::here(path_data, "9_transformations_fps.csv"), 
+
+data <- read_csv(here::here(path_data, "09_transformations_fps.csv"), 
                  show_col_types = FALSE) |> 
    mutate(sex_c = if_else(sex == "female", -.5, .5)) |> 
    # remove outliers to fit same model as last two units 
@@ -490,7 +491,7 @@ data_nonlinear  |>
 
 
 ```{r}
-data_5k <- read_csv(here::here(path_data, "9_transformations_5k.csv"),
+data_5k <- read_csv(here::here(path_data, "09_transformations_5k.csv"),
                     show_col_types = FALSE) |> 
   glimpse()
 ```

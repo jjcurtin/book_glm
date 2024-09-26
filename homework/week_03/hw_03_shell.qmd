@@ -38,7 +38,7 @@ Due <!--Friday, September 27, 2023, 9:00pm--> on Canvas.
 ## Part B. Data Analysis
 
 
-For this homework, we will use the `stray_animals.csv` file. This data set contains (fictitious) statistics about the number of stray animals in each of the 50 US states. The data set also specifies whether the state participated in a nation-wide TNR (trap-neuter-return) program that was launched in an attempt to reduce the number of stray cats and the number of animal shelters in each state.   
+For this homework, we will use the `hw_03_data..csv` file. This data set contains (fictitious) statistics about the number of stray animals in each of the 50 US states. The data set also specifies whether the state participated in a nation-wide TNR (trap-neuter-return) program that was launched in an attempt to reduce the number of stray cats and the number of animal shelters in each state.   
 
 **Codebook:**    
 
