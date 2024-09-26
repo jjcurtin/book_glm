@@ -9,6 +9,7 @@ editor_options:
 #| echo: false
 
 options(scipen = 999) # turns off scientfic notation
+
 ```
 
 
@@ -184,6 +185,24 @@ m_d |>
 
 And lets compare this to our previous analysis using `bac` coded quantitatively
 
+... But first lets write a quick function to calculate SSE for any model since we will do this frequently.
+
+```{r}
+sse <- function(model) {
+  sum(residuals(model)^2)
+}
+```
+
+-----
+
+And now lets look at SSE for these models
+
+```{r}
+m_d |> tidy()
+sse(m_d)
+```
+
+\
 
 ```{r}
 #| code-fold: true
@@ -194,17 +213,9 @@ data_q <- read_csv(here::here(path_data, "04_single_quantitative_bac_fps.csv"),
 m_q <- lm(fps ~ 1 + bac, data = data_q)
 ```
 
-
-```{r}
-m_d |> tidy()
-sum(residuals(m_d)^2)
-```
-
-\
-
 ```{r}
 m_q |> tidy()
-sum(residuals(m_q)^2)
+sse(m_q)
 ```
 
 -----
@@ -224,10 +235,9 @@ What is different about the NHST of the **alcohol** effect with `bg_d` vs `bac` 
 
 \
 
-$\text{SE}_{b_0}=\sqrt{\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overline{X})^2}{(N-1)*S_x^2}}$  
+$SE_{b_0}=\sqrt{\frac{SSE}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overline{X})^2}{(N-1)*S_x^2}}$  
 
-$\text{SE}_{b_1}=\frac{s_y}{s_x}*\sqrt{\frac{1-R^2}{N-P}}$
-
+$SE_{b_1}=\frac{s_y}{s_x}*\sqrt{\frac{1-R^2}{N-P}}$
 :::
 
 -----
@@ -265,6 +275,7 @@ Where is $b_1$ ($bg_d$ effect) on this graph?
 
 ```{r}
 #| code-fold: true
+#| fig-height: 4
 
 plot_d <- data |> 
   ggplot(aes(x = bg_d, y = fps)) +
@@ -293,7 +304,7 @@ plot_d +
            size = 6, color = "blue") +
   annotate("text", x = 1.1, y = labels$means[2], label = labels$means[2], 
            size = 6, color = "blue") +
-  annotate("text", x = 0, y = -140, label = "No Alcohol", 
+  annotate("text", x = 0, y = -140, label = "Placebo", 
            size = 5, color = "blue") +
    annotate("text", x = 1, y = -140, label = "Alcohol", 
            size = 5, color = "blue") +
@@ -323,7 +334,7 @@ m_d |> tidy()
 
 [Still predicted value for $Y$ when $X$ = 0.]{style="color:blue;"}
 
-[In this context, that is the predicted FPS score for the no-alcohol group (coded 0).]{style="color:blue;"}
+[In this context, that is the predicted FPS score for the placebo group (coded 0).]{style="color:blue;"}
 :::
 
 -----
@@ -337,6 +348,7 @@ Where is $b_0$ on this graph?
 
 ```{r}
 #| code-fold: true
+#| fig-height: 4
 
 plot_d
 ```
@@ -370,7 +382,6 @@ plot_d +
 Does alcohol affect FPS?
 :::
 
-
 :::{.fragment}
 
 ```{r}
@@ -403,16 +414,25 @@ $H_a: \beta_1 \neq 0$
 
 [Compact model:]{style="color: blue;"}
 
-- $\hat{\text{FPS}}_i = \beta_0+0*\text{bg_d}_i$
-- $P_c = 1$  
-- $\text{SSE}_c =$ `r round(sum((data$fps - mean(data$fps))^2),2)`
+```{r}
+m_com <- lm(fps ~ 1, data = data) 
+```
 
+- $\hat{FPS}_i=\beta_0+0*bg\_d_i$
+- $P_c = 1$  
+- $SSE_c =$ `r round(sse(m_com), 2)`
+
+\
 
 [Augmented model:]{style="color: blue;"}
 
-- $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg_d}_i$
+```{r}
+m_aug <- lm(fps ~ 1 + bg_d, data = data)
+```
+
+- $\hat{FPS}_i=\beta_0+\beta_1*bg\_d_i$
 - $P_a=2$  
-- $\text{SSE}_a = $ `r round(sum((data$fps - predict(m_d))^2),2)`
+- $SSE_a = $ `r round(sse(m_aug), 2)`
 :::
 
 -----
@@ -420,14 +440,14 @@ $H_a: \beta_1 \neq 0$
 ::: {.callout-important}
 # Question
 
-How do you use this information to calculate $\eta_p^2$ (PRE) for the bg_d effect?
+How do you use this information to calculate $\eta_p^2$ (PRE) for the `bg_d` effect?
 :::
 
 :::{.fragment}
 
 [PRE or $\eta_p^2$ is the proportional reduction in error due to the effect (the parameter). Use the same models that you would use to test the hypotheses about that parameter.]{style="color:blue;"}
 
-$\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{`r round(sum((data$fps - mean(data$fps))^2),2)` - `r round(sum((data$fps - predict(m_d))^2),2)`}{`r round(sum((data$fps - mean(data$fps))^2),2)`} = `r round((sum((data$fps - mean(data$fps))^2)-sum((data$fps - predict(m_d))^2))/sum((data$fps - mean(data$fps))^2), 4)`$
+$\frac{SSE_c - SSE_a}{SSE_c}$ = $\frac{`r round(sse(m_com), 2)` - `r round(sse(m_aug), 2)`}{`r round(sse(m_com), 2)`}$ = `r round((sse(m_com) - sse(m_aug)) / sse(m_com), 4)`
 :::
 
 -----
@@ -439,7 +459,6 @@ $\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}=\frac{`r round(sum((data$fps -
 
 Does our task produce non-zero fear potentiated startle in sober people?
 :::
-
 
 :::{.fragment}
 
@@ -453,6 +472,7 @@ $H_0: \beta_0 = 0$
 $H_a: \beta_0 \neq 0$   
 
 [Yes. The probability of getting a $b_0$ of `r round(coef(m_d)[1], 3)` or more extreme is `r round(tidy(m_d)$p.value[1], 8)` if the null hypothesis is true.  Very unlikely so reject null. Conclude $B_0 > 0$.]{style="color:blue;"}
+:::
 
 -----
 
@@ -464,25 +484,31 @@ $H_a: \beta_0 \neq 0$
 What two models are you comparing to test your hypotheses about mean FPS for sober people?
 :::
 
-
 :::{.fragment}
-
 
 $H_0: \beta_0 = 0$  
 $H_a: \beta_0 \neq 0$   
 
 [Compact model:]{style="color:blue;"}
 
-- $\hat{\text{FPS}}_i=0+\beta_1*\text{bg}\_2_i$
+```{r}
+m_com <- lm(fps ~ 0 + bg_d, data = data) 
+```
+
+- $\hat{FPS}_i=0+\beta_1*bg\_d_i$
 - $P_c = 1$  
-- $\text{SSE}_c = `r round(sum((data$fps - predict(lm(fps~bg_d - 1, data = data)))^2),2)`$  
+- $SSE_c$ = `r round(sse(m_com), 2)`  
 
 
 [Augmented model:]{style="color:blue;"}
 
-- $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg}\_2_i$
+```{r}
+m_aug <- lm(fps ~ 1 + bg_d, data = data) 
+```
+
+- $\hat{FPS}_i=\beta_0+\beta_1*bg\_d_i$
 - $P_a=2$  
-- $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$
+- $SSE_a$ = `r round(sse(m_aug), 2)`
 :::
 
 -----
@@ -496,22 +522,31 @@ How do you use this information to calculate $\eta_p^2$ (PRE) for $\beta_0$?
 :::{.fragment}
 [Compact model:]{style="color:blue;"}
 
-- $\hat{\text{FPS}}_i=0+\beta_1*\text{bg}\_2_i$  
+```{r}
+m_com <- lm(fps ~ 0 + bg_d, data = data) 
+```
+
+- $\hat{FPS}_i=0+\beta_1*bg\_d_i$  
 - $P_c = 1$  
-- $\text{SSE}_c = `r round(sum((data$fps - predict(lm(fps~bg_d - 1, data = data)))^2),2)`$  
+- $SSE_c$ = `r round(sse(m_com), 2)`  
 
 
 [Augmented model:]{style="color:blue;"}
 
-- $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{bg}\_2_i$   
+```{r}
+m_aug <- lm(fps ~ 1 + bg_d, data = data) 
+```
+
+- $\hat{FPS}_i=\beta_0+\beta_1*bg\_d_i$   
 - $P_a=2$  
-- $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$  
+- $SSE_a$ = `r round(sse(m_aug), 2)`
 
 [PRE or $\eta_p^2$ is the proportion reduction in error due to the effect (the parameter). Use the same models that you would use to test the hypotheses about that parameter.]{style="color:blue;"}
 
 \
 
-$\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}= \frac{`r round(sum((data$fps - predict(lm(fps~bg_d -1, data = data)))^2),2)` - `r round(sum((data$fps - predict(m_d))^2),2)`}{`r round(sum((data$fps - predict(lm(fps~bg_d -1, data = data)))^2),2)` } = `r round((sum((data$fps - predict(lm(fps~bg_d -1, data = data)))^2) -sum((data$fps - predict(m_d))^2))/sum((data$fps - predict(lm(fps~bg_d -1, data = data)))^2), 4)`$
+$\frac{SSE_c - SSE_a}{SSE_c}$ = $\frac{`r round(sse(m_com), 2)` - `r round(sse(m_aug), 2)`}{`r round(sse(m_com), 2)`}$ = `r round((sse(m_com) - sse(m_aug)) / sse(m_com),  4)`
+:::
 
 -----
 
@@ -523,15 +558,17 @@ How do you use this information to calculate $R^2$ for the augmented model?
 
 :::{.fragment}
 [Mean Only model:]{style="color:blue;"}
-- $\hat{\text{FPS}_i}=\beta_0$  
+
+- $\hat{FPS_i}=\beta_0$  
 - $P_c = 1$  
-- $\text{SSE}_c = `r round(sum((data$fps - mean(data$fps))^2),2)`$  
+- $SSE_c =$ `r round(sse(m_com), 2)`  
 
 
 [Augmented model:]{style="color:blue;"}
-- $\hat{\text{FPS}}=\beta_0+\beta_1*\text{bg}\_2_i$
+
+- $\hat{FPS}=\beta_0+\beta_1*bg\_d_i$
 - $P_a=2$  
-- $\text{SSE}_a = `r round(sum((data$fps - predict(m_d))^2),2)`$  j
+- $SSE_a =$ `r round(sse(m_aug), 2)`  
 
 [$R^2$ is the proportion of explained variance over total variance in $Y$. The total variance is equivalent to the SSE of the Mean Only model] {style="color:blue;"}
 :::
@@ -545,14 +582,10 @@ Why?
 :::
 
 :::{.fragment}
+[At this point it equals PRE b/c $SSE_c$ is the mean only model!]{style="color:blue;"}
 
-[At this point it equals PRE b/c $\text{SSE}_c$ is the mean only model!]{style="color:blue;"}
-
-$\frac{\text{SSE}_\text{mean}-\text{SSE}_a}{\text{SSE}_\text{mean}}=\frac{`r round(sum((data$fps - mean(data$fps))^2),2)` - `r round(sum((data$fps - predict(m_d))^2),2)`}{`r round(sum((data$fps - mean(data$fps))^2),2)`}$ = `r round((sum((data$fps - mean(data$fps))^2) - sum((data$fps - predict(m_d))^2))/sum((data$fps - mean(data$fps))^2),4)`$ 
-
+$\frac{SSE_{mean}-SSE_a}{SSE_{mean}}$ = $\frac{`r round(sse(m_com), 2)` - `r round(sse(m_aug), 2)`}{`r round(sse(m_com), 2)`}$ = `r round((sse(m_com) - sse(m_aug)) / sse(m_com), 4)`
 :::
-
------
 
 ## Effect Sizes in R
 
@@ -563,8 +596,10 @@ m_d <- lm(fps ~ 1 + bg_d, data = data)
 
 $\eta_p^2$
 ```{r}
-(sum(residuals(m_mean)^2)- sum(residuals(m_d)^2))/sum(residuals(m_mean)^2) 
+(sse(m_mean) - sse(m_d)) / sse(m_mean) 
 ```
+
+\
 
 $R^2$
 ```{r}
@@ -579,6 +614,9 @@ In some situations, we will prefer to use centered coefficients.
 
 - These coefficients are "centered" around zero
 - They are typcially unit weighted as well (i.e., the difference between the low value and high value is 1)
+
+-----
+
 ```{r}
 data <- data |> 
   mutate(bg_c = if_else(bg == "placebo", -.5, .5))
@@ -599,8 +637,6 @@ m_c |>
   tidy()
 ```
 
------
-
 ## Visual Displays of Dummy vs. Centered
 
 ```{r}
@@ -617,33 +653,28 @@ plot_c <- data |>
                   linewidth = 1) +
   labs(title = "Zero-centered")
   
-  
 plot_d + plot_c
 ```
 
-
-
 ::: {.callout-important}
 # Question
 
-$b_0, b_1$ in each?</spa
+$b_0, b_1$ in each?
 :::
 
-
------
-
-## $b_0$ with Zero-Centered Coefficients
+## $b_0$ with (Zero-)Centered Coefficients
 
 ::: {.callout-important}
 # Question
 
-$Is $b_0$ (`r round(coef(m_c)[1], 2)`) the mean of FPS in the sample?
+Is $b_0$ (`r round(coef(m_c)[1], 2)`) the mean of FPS in the sample?
 :::
 
 :::{.fragment}
-[It is the unweighted mean.] {style="color:blue;"}
+[It is the unweighted mean.]{style="color:blue;"}
 
 [Weighted and unweighted means emerge as concepts with grouped data.   An unweighted mean is the mean of the group means, ignoring the $N$ in each group.]{style="color:blue;"}
+:::
 
 -----
 
@@ -672,13 +703,11 @@ A weighted mean is the mean of the groups *weighted* or proportional to their sa
 How can you get $b_0$ to reflect the weighted mean?
 :::
 
-
 :::{.fragment}
-[Mean center $X$. This is the same as we did with a quantitative variable to make $b_0$ equal the grand mean.] {style="color:blue;"}
+[Mean center $X$. This is the same as we did with a quantitative variable to make $b_0$ equal the grand mean.]{style="color:blue;"}
 :::
 
 -----
-
 
 ```{r}
 data <- data |> 
@@ -711,7 +740,9 @@ m_mc |>
 
 \
 
-NOTE:  Mean centered vs. centered coefficients are less commonly used with categorical variables.  But it is important to understand because it deepens your intuition about how these models work.   You can use transformations of your predictors (into regressors) in many different ways depending on your goals and questions in many different ways depending on your goals and questions.
+NOTE:  Mean centered vs. centered coefficients are less commonly used with categorical variables.  But it is important to understand because it deepens your intuition about how these models work.   
+
+You can use transformations of your predictors (into regressors) in many different ways depending on your goals and questions in many different ways depending on your goals and questions.
 
 -----
 
@@ -751,7 +782,6 @@ plot_mc <- data |>
 plot_d + plot_c + plot_mc
 ```
 
-
 -----
 
 ## Other (not useful) Coefficients
@@ -765,7 +795,7 @@ What would be the interpretation of $b_0$ and $b_1$ if I used coefficients of -1
 :::{.fragment}
 [$b_0$ will be the unweighted mean of FPS because 0 is halfway between the two groups.]{style="color:blue;"}
 
-[$b_1$ will be half what it was in all previous models b/c a one unit change on $X$ will only go halfway between no-alcohol and alcohol groups.] {style="color:blue;"}
+[$b_1$ will be half what it was in all previous models b/c a one unit change on $X$ will only go halfway between placebo and alcohol groups.]{style="color:blue;"}
 :::
 
 -----
@@ -816,29 +846,31 @@ print(preds_pub)
 -----
 
 - Then we plot them using ggplot
+
 ```{r}
 plot_pub <- ggplot() +
   geom_col(aes(x = preds_pub$bg_d, y = preds_pub$fit),
            alpha = .4, color = "black") +
-  geom_jitter(aes(x = data$bg_d, y = data$fps), width = .02, height = NULL) +
+  geom_jitter(aes(x = data$bg_d, y = data$fps), width = .02, height = NULL, 
+              color = "blue") +
   geom_errorbar(aes(ymin = preds_pub$lwr, 
                     ymax = preds_pub$upr, 
-                    x = preds_pub$bg_d), width = .4) +
-  scale_fill_manual(values = c("black", "light grey")) +
-  scale_x_discrete(breaks = c(0, 1),
+                    x = preds_pub$bg_d), width = .2) +
+  scale_x_continuous(breaks = c(0, 1),
                    labels = c("Placebo", "Alcohol")) +
-  theme(legend.position = "none") +
   xlab("Group") +
   ylab("Fear-potentiated startle") 
 ```
 
 -----
 
+- I like to display raw data though it often does require extending the Y-axis scale substantially which can diminish the visual impact of the group differences.  This is a trade-off you will need to consider in your own work.
+
 ```{r}
+#| echo: false
 #| fig-cap: "Bars display point estimates for fear potentiated startle by group from the general linear model. Confidence intervals display +/- 1 standard error for these point estimates."
 
 plot_pub
 ```
-
 
 

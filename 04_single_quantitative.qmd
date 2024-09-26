@@ -70,7 +70,7 @@ data <- read_csv(here::here(path_data, "04_single_quantitative_bac_fps.csv"),
 #| echo: false
 
 m_1 <- lm(fps ~ 1, data = data)   
-m_2 <- lm(fps ~ bac, data = data) 
+m_2 <- lm(fps ~ 1 + bac, data = data) 
 ```
 
 
@@ -288,12 +288,14 @@ data |>
 
 -----
 
-Fit the model (i.e., get our parameter estimates)
+Fit the model (i.e., get our parameter estimates).  
+
+Note that the `1` is not needed but I include it for now to make it clear that we are fitting a model with an intercept.  We will remove it later.
 
 \
 
 ```{r}
-m_2 <- lm(fps ~ bac, data = data)
+m_2 <- lm(fps ~ 1 + bac, data = data)
 
 m_2 |> 
   broom::tidy()
@@ -432,7 +434,7 @@ F(1,94) = 3.685, p = 0.058
 
 ```{r}
 m_1 <- lm(fps ~ 1, data = data)   
-m_2 <- lm(fps ~ bac, data = data) 
+m_2 <- lm(fps ~ 1 + bac, data = data) 
 ```
 
 ```{r}
@@ -562,7 +564,7 @@ How would the parameter estimate values and interpretations change if I mean cen
 :::{.fragment}
 
 ```{r}
-m_2_c <- lm(fps ~ bac_c, data = data)  
+m_2_c <- lm(fps ~ 1 + bac_c, data = data)  
 
 m_2_c |> 
   broom::tidy()
@@ -705,9 +707,9 @@ How can you calculate the effect size estimate $\eta_p^2$ (PRE) for $\beta_0$?
 \
 
 ```{r}
-m_2_0 <- lm(fps ~ bac - 1, data = data) #<1>
+m_2_0 <- lm(fps ~ 0 + bac, data = data) #<1>
 ```
-1. We can use -1 to remove the intercept (i.e., set it equal to 0) from our new compact model.
+1. We can use 0 to remove the intercept (i.e., set it equal to 0) from our new compact model.
 
 \
 
