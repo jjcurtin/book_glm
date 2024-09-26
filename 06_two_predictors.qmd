@@ -1,5 +1,4 @@
 --- 
-output: html_document 
 editor_options:  
   chunk_output_type: console
 --- 
@@ -11,7 +10,7 @@ editor_options:
 #| echo: false
 
 options(scipen = 999) # turns off scientific notation
-options(knitr.kable.NA = '')
+# options(knitr.kable.NA = '')
 ```
 
 
@@ -19,17 +18,7 @@ options(knitr.kable.NA = '')
 
 ## Multiple Regression 2+ Predictors
 
-this is question
-
-
-...
-
-This is answer
-
-
------
-
-
+In this unit, we will consider the case of multiple predictors.
 
 - Consider how the concepts we have discussed so far generalize to the 2 predictor (3 parameter) model.  
 - We will start with 2 quantitative predictors example. Will continue with 1 quantitative and 1 dichotomous predictor example.  
@@ -38,7 +27,7 @@ This is answer
     - $\Delta R^2, \eta_p^2$
 - Multicollinearity
 - Text, table and figure descriptions of results
-- Generalization to >2 predictors is straightforward (*Unit 7*).
+- Generalization to >2 predictors is straightforward.
 
 -----
 
@@ -51,6 +40,8 @@ This is answer
 3. **Efficiency**:  Can test focal effects of two predictors in one study (each benefiting from increased power per point 1).
 
 4. **Mediation**: We have identified a known cause of a DV.  We add a new focal predictor to test if the effect of our known causal IV on the DV is mediated by our focal predictor (i.e., identify “mechanism” of IV effect).
+
+5. **Better prediction**: If we are using the model to predict the DV for individuals, all real life DVs are the result of multiple causes.  Including them will improve prediction.
 
 -----
 
@@ -70,10 +61,11 @@ Measure Stress Response (Fear potentiated startle)
 
 ```{r}
 #| echo: false
-
-library(tidyverse) |> suppressMessages()
+#| warning: false
+#| message: false
+#| ccod
+library(tidyverse) 
 theme_set(theme_classic()) 
-
 
 path_data <- "data_lecture" 
 
