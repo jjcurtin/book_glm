@@ -1,9 +1,4 @@
 --- 
-format:
-  revealjs:
-    slide-number: true
-    show-slide-number: all 
-    html-math-method: mathjax
 editor_options:  
   chunk_output_type: console
 --- 
