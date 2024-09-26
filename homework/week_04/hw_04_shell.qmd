@@ -31,7 +31,7 @@ editor_options:
 
 A group of researchers are interested in determining why people believe conspiracy theories. Specifically, the researchers want to see if individuals who have high anxiety scores are more likely to also believe conspiracy theories. The researchers want to further test if individuals who use social media are more likely to believe conspiracy theories than individuals who do not use social media.   
 
-The data file `conspiracy.csv` contains data from 1,974 (fake) participants who completed a survey assessing their (1) belief in conspiracy theories, (2) anxiety, (3) use of social media, and (4) demographic characteristics for age, gender, and political affiliation. Further information about each variable is written below.    
+The data file `hw_04_data.csv` contains data from 1,974 (fake) participants who completed a survey assessing their (1) belief in conspiracy theories, (2) anxiety, (3) use of social media, and (4) demographic characteristics for age, gender, and political affiliation. Further information about each variable is written below.    
 
 Variables:   
 
