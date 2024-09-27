@@ -214,13 +214,13 @@ data |>
 
 Now we have a model that has variability in its predictions (i.e., it uses 1 predictor to estimate an outcome value). Let's now plot our 1 predictor model.   
 
-We will need to use our model to generate predictions on new data. This is necessary for generating confidence interval bands. To do this we will create a data frame that has a single column (`mpf_sum` - the name of our predictor variable). We will assign this column a sequence of 100 values ranging from the minimum `mpf_sum` value in our dataset to the maximum `mpf_sum` value. We can easily do this with the `seq()` function.
+We will need to use our model to generate predictions on new data. This is necessary for generating standard error bands. To do this we will create a data frame that has a single column (`mpf_sum` - the name of our predictor variable). We will assign this column a sequence of 100 values ranging from the minimum `mpf_sum` value in our dataset to the maximum `mpf_sum` value. We can easily do this with the `seq()` function.
 
 ```{r}
 data_new <- tibble(mpf_sum = seq(min(data$mpf_sum), max(data$mpf_sum), length.out = 100))
 ```
 
-Next we will calculate our predictions. In other words, what our model will predict for `distance` given these new data. We also are going to get the standard error for our predictions to generate the confidence intervals (+/- 1 SE).
+Next we will calculate our predictions. In other words, what our model will predict for `distance` given these new data. We also are going to get the standard error for our predictions to generate intervals for our figure (+/- 1 SE).
 
 ```{r}
 preds <- predict(m_1_pred, data_new, se.fit = TRUE) |>
