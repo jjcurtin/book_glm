@@ -209,7 +209,7 @@ data |>
   ggplot(aes(x = mpf_sum, y = distance)) +
   geom_point(aes(x = mpf_sum, y = distance), 
              alpha = .4) +
-  geom_abline(intercept = coef(m_mean), color = "blue")
+  geom_abline(intercept = coef(m_mean), slope = 0, color = "blue")
 ```
 
 Now we have a model that has variability in its predictions (i.e., it uses 1 predictor to estimate an outcome value). Let's now plot our 1 predictor model.   
