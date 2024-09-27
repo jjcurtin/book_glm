@@ -1,5 +1,5 @@
 ---
-title: "Lab 4 TA Script" 
+title: "Lab 4 Student Script" 
 author: "TAs" 
 date: "`r lubridate::today()`"
 format: 
@@ -44,30 +44,68 @@ Let's now see if a model that uses this quantitative predictor performs *better*
 
 As a review, go ahead and take a few minutes to get a sense of the data (AKA confirm that the dataframe is how you expect it to appear).
 ```{r}
-data <- read_csv(here::here(path_data, "lab_04_data_cont.csv"),
-                 show_col_types = FALSE) |> 
-  glimpse()
+
 ```
 
 Now, re-create your sum composite score of mental paper folding (`mpf_sum`). Confirm that `mpf_sum` has been correctly added to your dataframe.
 
 ```{r}
+
+```
+
+**Hold on! What would happen if we had missing values in this file?**
+
+Let's add an extra row to data that includes missing values.
+
+Subject 201 is a hypothetical child who had a tantrum and did not complete the task. They only completed the first two mental paper folding exercises, but nothing else.
+```{r}
+data[nrow(data) + 1,] <- list(201, 1, 1, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)
+```
+
+Let's try to use `sum()`.
+```{r}
+
+```
+
+**How can we fix this? Does this get us what we want?**
+```{r}
+
+```
+
+**Introduction to the concept of prorating!**
+
+Prorating is a strategy to *impute* missing data. It is done by using the mean of the completed items for an observation to fill in any missing items.
+```{r}
+
+```
+
+Hmm... this seems useful if we had a subject who had completed most of the mpf task except for the last item, but 10 seems too high of a score to assign to a child who refused to do the task! We probably want to have some sort of tolerance threshold for when we want to prorate (e.g., the participant must have completed 3/4ths of the task).
+
+These are three different ways that missing data can be handled. It's important to know your data well so you can make informed decisions about handling NAs.
+
+Now, let's remove that extra observation. This removes the last row from our tibble.
+```{r}
 data <- data |> 
-  rowwise() |> 
-  mutate(mpf_sum = sum(c(mpf_01,mpf_02,mpf_03,mpf_04,mpf_05,
-                        mpf_06,mpf_07,mpf_08,mpf_09,mpf_10))) |> 
-  ungroup() |> 
-  glimpse()
+  filter(row_number() <= n() - 1)
 ```
 
 Note that we are simply using `sum()` to get a sum score of mental paper folding ability. It is important to note that though sometimes we want to create composite scores from standardized scales, questions on these scales might have different scoring rules. For example, one item could be reverse-coded, where a lower score is actually more consistent with the construct of interest (or vice versa).    
 
 What do we do when this happens? We can use a function called `var_score()` that John created to get the composite sum score of forward and reverse items! Let's take a moment to look at this function as it may be helpful for your homework this week. :^)    
 
-Let's first source the function `var_score()` - this code allows us to load the function directly from John's github. It works similar to loading a library.
+Let's first source the function `var_score()` - this code allows us to load the function directly from John's Github. It works similar to loading a library.
 ```{r}
 devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/var_score.R?raw=true")
 ```
+
+**What is Github?**
+Github is a platform that allows researchers, developers, etc. to store, manage, and share code. One benefit of Github is that it does *version control*. Github stores all "committed" renditions of a file so you can easily go back to earlier versions of a file (helpful if you accidentally break something in your code). You can create local copies of different "repositories" (kind of like a directory) on Github, make changes, and then "push" those changes back up. These benefits might seem abstract right now, but it is very helpful when you are collaborating on projects.
+
+Let's take a look at where this function lives on John's Github account.
+
+You can create your own functions and source them in using these same methods. For example, you might want to create your own custom plotting functions that utilize `ggplot2()` to make all of your figures automatically print in your favorite color scheme!
+
+Now, let's take a closer look at the `var_score()` function.
 
 If we print the function to our console, we can see that it takes several parameters: `d` (your data), `forward_items` (items that will be scored as-is), `reverse_items` (items that are reverse-coded), `item_range` (the min and max values for scoring), `prorate` (whether you want to adjust the sum to reflect only the provided data), and `max_miss` (the amount of missing data allowed: if someone has more missing data than this threshold, they will get an NA as their composite score).
 
@@ -88,32 +126,6 @@ data <- data |>
   glimpse()
 ```
 
-**Notice we got a warning!**     
-Remember, we always treat warnings like errors until we determine the source of the warning and whether it would be expected.    
-
-1. Based on these messages where do you think the source of the warning is?       
-In the mutate function. We are not directly calling `if_else` or `c_across` so my hypothesis is that the warning is coming from the function `var_score`.     
-
-2. Let's check this hypothesis by only running the `var_score` function. *Note that the warning tells us it won't display the warning again for 8 hours*, so we need to restart R (session --> Restart R), use the "Run all chunks above" arrow on our previous code block, and then we can test the following code:   
-
-```{r}
-var_score(data, forward_items = f_items)
-```
-
-Okay now we see this function is in fact the source of the warning. If we look back at John's code from above, we can see that he is using `c_across()` and not specifying `cols`. This warning is telling us that is no longer the current way to use the function. This is what *deprecated* in our warning means -- there is a new/better way to use the `c_across()` function (i.e., supply `cols`), but the old version (i.e., not needing to supply `cols`) is still supported/tolerated (for now!).   
-
-3. How might you update this code? You could copy and paste your warning into Chat GPT. We did this and it told us that instead of using `c_across()` and by default letting it select all columns, you could use `c_across(cols = everything()))`. This would solve the warning.    
-
-4. Since we are not going to rewrite John's function right now, we are going to confirm the function is returning an appropriate/expected value (we already did this for you) and then move on to suppress the warning.   
-
-
-```{r}
-#| warning: false 
-
-data <- data |> 
-  mutate(mpf_sum = var_score(data, forward_items = f_items)) |> 
-  glimpse()
-```
 
 ### Models
 
@@ -197,18 +209,18 @@ data |>
   ggplot(aes(x = mpf_sum, y = distance)) +
   geom_point(aes(x = mpf_sum, y = distance), 
              alpha = .4) +
-  geom_abline(intercept = coef(m_mean), color = "blue")
+  geom_abline(intercept = coef(m_mean), slope = 0, color = "blue")
 ```
 
 Now we have a model that has variability in its predictions (i.e., it uses 1 predictor to estimate an outcome value). Let's now plot our 1 predictor model.   
 
-We will need to use our model to generate predictions on new data. This is necessary for generating confidence interval bands. To do this we will create a data frame that has a single column (`mpf_sum` - the name of our predictor variable). We will assign this column a sequence of 100 values ranging from the minimum `mpf_sum` value in our dataset to the maximum `mpf_sum` value. We can easily do this with the `seq()` function.
+We will need to use our model to generate predictions on new data. This is necessary for generating standard error bands. To do this we will create a data frame that has a single column (`mpf_sum` - the name of our predictor variable). We will assign this column a sequence of 100 values ranging from the minimum `mpf_sum` value in our dataset to the maximum `mpf_sum` value. We can easily do this with the `seq()` function.
 
 ```{r}
 data_new <- tibble(mpf_sum = seq(min(data$mpf_sum), max(data$mpf_sum), length.out = 100))
 ```
 
-Next we will calculate our predictions. In other words, what our model will predict for `distance` given these new data. We also are going to get the standard error for our predictions to generate the confidence intervals (+/- 1 SE).
+Next we will calculate our predictions. In other words, what our model will predict for `distance` given these new data. We also are going to get the standard error for our predictions to generate intervals for our figure (+/- 1 SE).
 
 ```{r}
 preds <- predict(m_1_pred, data_new, se.fit = TRUE) |>
