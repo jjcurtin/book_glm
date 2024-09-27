@@ -61,10 +61,11 @@ Measure Stress Response (Fear potentiated startle)
 
 ```{r}
 #| echo: false
-#| warning: false
 #| message: false
-#| ccod
+#| code-fold: true
+
 library(tidyverse) 
+library(broom)
 theme_set(theme_classic()) 
 
 path_data <- "data_lecture" 
@@ -73,22 +74,40 @@ data <- read_csv(here::here(path_data, "06_two_predictors_fps.csv"),
                  show_col_types = FALSE) 
 ```
 
-
 ```{r}
-m_2 <- lm(fps ~ bac, data = data)
+#| echo: false
+#| code-fold: true
 
-m_2 |> 
-  broom::tidy()
+# calculate sum of squared errors for a model
+sse <- function(model) {
+  sum(residuals(model)^2)
+}
+
+# calculate pre for a model comparison
+pre <- function(compact, augmented) {
+  (sse(compact) - sse(augmented)) / sse(compact)
+}
+
+my_skim <- skimr::skim_with(numeric = list(hist = NULL, p25 = NULL, p100 = NULL))
 ```
 
-<span style="color: red;">Describe the interpretation of $b_1$ (coefficient for BAC) and its significance test.</span> 
+```{rlout .callout-info}
+m_2 <- lm(1 + fps ~ bac, data = data)
 
+m_2 |> tidy()
+```
 
------
+:::{.callout-important}
+# Question
 
-<span style="color: blue;">$b_1$ *describes* the relationship between BAC and FPS in the units of each measure. FPS will decrease by 184 µV for every 1% increase in BAC (It will decrease by 1.84µV for every .01 increase in BAC).</span>  
+Describe the interpretation of $b_1$ (coefficient for BAC) and its significance test.
+:::
 
-<span style="color: blue;">The significance test for $\beta_1$ tests the null hypothesis that the population relationship between BAC and FPS is 0 (i.e., $\beta_1$ = 0, no relationship). We fail to reject this $H_0$. Conclude that alcohol does not affect FPS.</span>
+:::{.fragment}
+[$b_1$ *describes* the relationship between BAC and FPS in the units of each measure. FPS will decrease by 184 µV for every 1% increase in BAC (It will decrease by 1.84µV for every .01 increase in BAC).]{style="color:blue;"}
+
+[The significance test for $\beta_1$ tests the null hypothesis that the population relationship between BAC and FPS is 0 (i.e., $\beta_1$ = 0, no relationship). We fail to reject this $H_0$. Conclude that alcohol does not affect FPS.]{style="color:blue;"}
+:::
 
 -----
 
@@ -97,18 +116,19 @@ m_2 |>
 ```{r}
 #| code-fold: true
 
-m_2 |> 
-  broom::tidy()
+m_2 |> tidy()
 ```
 
 $H_0: \beta_1 = 0$  
 $H_a: \beta_1 \neq 0$  
 
-<span style="color: red;">Question: What could we change about the sampling distribution that would make this $b_1$ be less probable given $H_0$ so that we reject the Null?</span> 
+:::{.callout-important}
+# Question
 
------
+What could we change about the sampling distribution that would make this $b_1$ be less probable given $H_0$ so that we reject the Null?</span> 
+:::
 
-
+:::{.fragment}
 ```{r}
 #| code-fold: true
 
@@ -121,31 +141,32 @@ tibble(b1 = seq(-400,400,.01),
   labs(title = "Sampling Distribution for b1")
 ```
 
-
-<span style="color: blue;">If the standard deviation of the sampling distribution (its standard error) was smaller so that the distribution was narrower, $b_1$ would be less probable given $H_0$.</span>
-
------
-
+[If the standard deviation of the sampling distribution (its standard error) was smaller so that the distribution was narrower, $b_1$ would be less probable given $H_0$.]{style="color:blue;"}`
+:::
 
 ## Standard Errors of GLM Coefficients
 
-The formula for the standard error for a coefficient $b_j$ in **multiple** (more than one predictor) regression is:  
+The formula for the standard error for a coefficient $b_j$ in **multiple** regression (i.e., GLM with more than one regressor) is:  
 
-$\text{SE}_{bj} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R^2_y)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{(1-R^2_j)}}$  
+$\SE_{bj} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R^2_y)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{(1-R^2_j)}}$  
 
-$R^2_j$ = variance in $X_j$ accounted for by all other predictors in the model (i.e., how redundant is $X_{a_j}$ in model?). Literally, predict $X_j$ as DV with all other predictors as IVs.  
+\
 
-**Note: Formula for the standard error for $b_0$ is different.**   
+$R^2_j$ = variance in $X_j$ accounted for by all other regressors in the model (i.e., how redundant is $X_{a_j}$ in model?). Literally, predict $X_j$ as $Y$ with all other regressors as $X$s.  
 
-For the one predictor model it is (need matrix notation for $k>1$):  
+\
 
-$\sqrt {\frac{\text{SSE}}{N-P}}*\sqrt{\frac{1}{N}+\frac{X^2}{(N-1)s_x^2}}$
+**Note: Formula for the standard error for $b_0$ is different.** For the two parameter model it is (need matrix notation for $P > 2$):  
+
+$\sqrt {\frac{SSE}{N-P}}*\sqrt{\frac{1}{N}+\frac{X^2}{(N-1)s_x^2}}$
 
 -----
 
 ## SE for $b_j$ and $R^2$
 
-$\text{SE}_{b_j}= \frac{s_y}{s_j}*\frac{\sqrt{(1-R_y^2)}}{(N-P)}*\frac{1}{\sqrt{(1-R_j^2)}}$  
+$SE_{b_j}= \frac{s_y}{s_j}*\frac{\sqrt{(1-R_y^2)}}{(N-P)}*\frac{1}{\sqrt{(1-R_j^2)}}$  
+
+\
 
 If we increase $R_y^2$, we would decrease the SE for our regression coefficient.  
 
@@ -153,64 +174,81 @@ If we increase $R_y^2$, we would decrease the SE for our regression coefficient.
 
 ## Model Comparison: Testing Inferences about $\beta_1$
 
-$H_0: \beta_1 = 0; H_a: \beta_1 \neq 0$  
+$H_0: \beta_1 = 0$
+$H_a: \beta_1 \neq 0$  
 
+:::{.callout-important}
+# Question
+What two models are you comparing when you test hypotheses about $\beta_1$ for BAC? Describe the logic.
+:::
 
-<span style="color: red;">Question: What two models are you comparing when you test hypotheses about $\beta_1$ for BAC? Describe the logic.</span>
+:::{.fragment}
+[Compact model:]{style="color:blue;"}
 
------
+```{r}
+m_c <- lm(fps ~ 1, data = data)
+```
 
-<span style="color: blue;">Compact model: $\hat{\text{FPS}}_i = \beta_0+0*\text{BAC}_i$</span>    
-$P_c=1$     
-$\text{SSE}_c=`r round(sum(residuals(lm(fps~1, data = data))^2), 1)`$     
+- $\hat{FPS}_i = \beta_0+0*BAC_i$
+- $P_c=1$     
+- $SSE_c=$ `r round(sse(m_c), 1)`
 
-
-<span style="color: blue;">Augmented model: $\hat{\text{FPS}}_i = \beta_0+\beta_1*\text{BAC}_i$</span>    
-$P_a=2$   
-$\text{SSE}_a=`r round(sum(residuals(m_2)^2), 1)`$  
 \
-$F(P_a-P_c, N-P_a) = \frac{\text{SSE}_c-\text{SSE}_a/(P_a-P_c)}{\text{SSE}_a/(N-P_a)}$
 
-F(1,94) = 3.685, p = 0.058
+[Augmented model:]{style="color:blue;"}
+```{r}
+m_a <- lm(fps ~ 1 + bac, data = data)
+```
 
------
+- $\hat{FPS}_i = \beta_0+\beta_1*BAC_i$    
+- $P_a=2$   
+- $SSE_a=$`r round(sse(m_a), 1)`
 
+\
 
-$F(P_a-P_c, N-P_a) = \frac{\text{SSE}_c-\text{SSE}_a/(P_a-P_c)}{\text{SSE}_a/(N-P_a)}$  
+$F(P_a-P_c, N-P_a) = \frac{SSE_c-SSE_a/(P_a-P_c)}{SSE_a/(N-P_a)}$
 
-
-<span style="color: red;">Question: What could you change from this model comparison perspective to increase $F$ and probability to reject the $H_0$ about $\beta_1$?</span>
-
------
-
-<span style="color: blue;">Make $\text{SSE}_a$ smaller by explaining more variance in $Y_i$.</span>  
-
-
-<span style="color: blue;">Of course, $R^2 = \frac{\text{SSE}_\text{mean-only} - \text{SSE}_a}{\text{SSE}_\text{mean-only} }$</span>  
-
-
-<span style="color: blue;">If you decrease $\text{SSE}_a$ or increase model $R^2$, you will have more power to reject $H_0$ regarding parameter estimates.</span>
+```{r}
+anova(m_c, m_a)
+```
 
 -----
 
-## Two Parameter (1 Predictor) Model (Continued)
+$F(P_a-P_c, N-P_a) = \frac{SSE_c-SSE_a/(P_a-P_c)}{SSE_a/(N-P_a)}$  
+
+:::{.callout-important}
+# Question
+What could you change from this model comparison perspective to increase $F$ and probability to reject the $H_0$ about $\beta_1$?
+:::
+
+:::{.fragment}
+[Make $SSE_a$ smaller by explaining more variance in $Y_i$.}{style="color:blue;"}
+
+[Of course, $R^2 = \frac{SSE_{mean-only} - SSE_a}{SSE_{mean-only}}$]{style="color:blue;"}
+
+[If you decrease $SSE_a$ or increase model $R^2$, you will have more power to reject $H_0$ regarding parameter estimates.]{style="color:blue;"}
+
+-----
+
+## Two Parameter (1 Regressor) Model (Continued)
 
 ```{r}
 #| code-fold: true
 
-m_2 |> 
-  broom::tidy()
+m_2 |> tidy()
 ```
 
-<span style="color: red;">Question: What can we do analytically to decrease SSE (increase model $R^2$)?</span>
+:::{.callout-info}
+# Question
+What can we do analytically to decrease SSE (increase model $R^2$)?
+:::
 
------
+:::{.fragment}
+[Include another predictor (*covariate*) in the model that accounts for additional variance in $Y$ (reduces SSE).]{style="color:blue;"}
 
-<span style="color: blue;">Include another predictor (*covariate*) in the model that accounts for additional variance in $Y$ (reduces SSE).</span>  
+[Ideally, this covariate should be orthogonal (uncorrelated) with the other predictor (BAC).]{style="color:blue;"}
 
-<span style="color: blue;">Ideally, this covariate should be orthogonal (uncorrelated) with the other predictor (BAC).</span>  
-
-<span style="color: blue;">In this experiment, I could have measured another predictor of stress response, Trait Anxiety (TA). TA might be expected to be a robust predictor of FPS. It also should be uncorrelated with BAC because I manipulated BAC.</span>
+[In this experiment, I could have measured another predictor of stress response, Trait Anxiety (TA). TA might be expected to be a robust predictor of FPS. It also should be uncorrelated with BAC because I manipulated BAC.]{style="color:blue;"}
 
 -----
 
@@ -235,7 +273,8 @@ data <- read_csv(here::here(path_data, "06_two_predictors_fps.csv"),
 -----
 
 ```{r}
-skimr::skim_without_charts(data)
+
+s <- skimr::skim_without_charts(data)
 ```
 
 -----
