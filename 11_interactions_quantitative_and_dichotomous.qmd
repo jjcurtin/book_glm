@@ -37,6 +37,20 @@ data <- read_csv(here::here(path_data, "11_interactions_jurors.csv"),
   glimpse()
 ```
 
+```{r}
+#| code-fold: true
+
+sse <- function(model) {
+  sum(residuals(model)^2)
+}
+
+pre <- function(compact, augmented) {
+  sse_c <- sse(compact)
+  sse_a <- sse(augmented)
+  (sse_c - sse_a)/sse_c
+}
+```
+
 -----
 
 ```{r}
@@ -70,7 +84,7 @@ confint(m_add)
 
 $\eta_p^2$ for bias
 ```{r}
-(sum(residuals(lm(guilt ~ black_defend, data))^2)- sum(residuals(m_add)^2))/sum(residuals(lm(guilt ~ black_defend, data))^2) 
+pre(lm(guilt ~ black_defend, data), m_add)
 ```
 
 <span style="color: red;">Question: What do we conclude? What do we report?</span>
@@ -140,17 +154,17 @@ confint(m_int)
 
 $\eta_p^2$ for interaction between bias and defendent race (centered)
 ```{r}
-(sum(residuals(lm(guilt ~ black_defend_c + bias_c, data))^2)- sum(residuals(m_int)^2))/sum(residuals(lm(guilt ~ black_defend_c + bias_c, data))^2) 
+pre(lm(guilt ~ black_defend_c + bias_c, data), m_int)
 ```
 
 $\eta_p^2$ for bias (centered)
 ```{r}
-(sum(residuals(lm(guilt ~ black_defend_c + bias_c:black_defend_c, data))^2)- sum(residuals(m_int)^2))/sum(residuals(lm(guilt ~ black_defend_c + bias_c:black_defend_c, data))^2) 
+pre(lm(guilt ~ black_defend_c + bias_c:black_defend_c, data), m_int)
 ```
 
 $\eta_p^2$ for defendant race (centered)
 ```{r}
-(sum(residuals(lm(guilt ~ bias_c + bias_c:black_defend_c, data))^2)- sum(residuals(m_int)^2))/sum(residuals(lm(guilt ~ bias_c + bias_c:black_defend_c, data))^2) 
+pre(lm(guilt ~ bias_c + bias_c:black_defend_c, data), m_int)
 ```
 
 -----

@@ -32,14 +32,19 @@ options(knitr.kable.NA = '')
 
 ----
 
-<span style="color: red;">Question: How do we handle analysis of categorical variables in regression (a *linear model*)?</span>   
+::: {.callout-important}
+# Question 
 
-----
+How do we handle analysis of categorical variables in regression (a *linear model*)?
+:::
 
-<span style="color: blue;">We will need to recode the categorical variable into $N_{\text{levels}}/\text{groups}-1$ regressors that represent comparisons/contrasts within the overall categorical variable.</span>   
 
+:::{.fragment}
+[We will need to recode the categorical variable into $N_{\text{levels}}/\text{groups}-1$ regressors that represent comparisons/contrasts within the overall categorical variable.]{style="color:blue;"}   
 
-<span style="color: blue;">Testing the **set** of regressors will allow us to test the overall effect of the categorical variable but we will often not care about this test. We are generally much more focused on planned or unplanned comparisons between the groups/levels.</span>   
+[Testing the **set** of regressors will allow us to test the overall effect of the categorical variable but we will often not care about this test. We are generally much more focused on planned or unplanned comparisons between the groups/levels.]{style="color:blue;"}
+:::
+
 
 -----
 
@@ -68,15 +73,44 @@ data <- read_csv(here::here(path_data, "13_three_groups.csv"),
 slice_sample(data, n = 6)
 ```
 
+```{r}
+#| code-fold: true
+
+sse <- function(model) {
+  sum(residuals(model)^2)
+}
+
+pre <- function(compact, augmented) {
+  sse_c <- sse(compact)
+  sse_a <- sse(augmented)
+  (sse_c - sse_a)/sse_c
+}
+
+delta_r2 <- function(mean, compact, augmented) {
+  sse_m <- sse(mean)
+  sse_c <- sse(compact)
+  sse_a <- sse(augmented)
+  
+  (sse_c - sse_a)/sse_m
+}
+```
+
+
 ----
 
-<span style="color: red;">Question: Why can we not handle multilevel categorical variables by simply coding each group with a different consecutive value (e.g., alcohol = 1, depress = 2 , healthy = 3)?</span>   
+::: {.callout-important}
+# Question  
+
+Why can we not handle multilevel categorical variables by simply coding each group with a different consecutive value (e.g., alcohol = 1, depress = 2 , healthy = 3)?
+:::
+
+:::{.fragment}
+[There is no meaningful way to order the multiple groups. The shape of the relationship will completely change based on arbitrary ordering of the groups (exception is when categorical variable is ordinal).]{style="color:blue;"}    
+
+[Moreover, we are often interested in individual pair-wise group comparisons that would be lost by forcing linear relationship.] {style="color:blue;"}    
+:::
 
 ----
-
-<span style="color: blue;">There is no meaningful way to order the multiple groups. The shape of the relationship will completely change based on arbitrary ordering of the groups (exception is when categorical variable is ordinal).</span>   
-
-<span style="color: blue;">Moreover, we are often interested in individual pair-wise group comparisons that would be lost by forcing linear relationship.</span>   
 
 ```{r}
 #| code-fold: true
@@ -201,7 +235,7 @@ knitr::include_graphics(path = here::here("figures/dummy_3d.png"))
 
 **The Prediction equation:**   
 
-$\hat{Y} = 7.94+-3.36*\text{alcohol}_d+ - 1.50*\text{depress}_d$     
+$\hat{Y} = 7.94+-3.36*alcohol_d+ - 1.50*depress_d$     
 
 
 Patients with alcohol use disorder:    
@@ -233,7 +267,7 @@ $= 7.94$
 
 **The Prediction equation:**   
 
-$\hat{Y} = 7.94+-3.36*\text{alcohol}_d+ - 1.50*\text{depress}_d$     
+$\hat{Y} = 7.94+-3.36*alcohol_d+ - 1.50*depress_d$     
 
 alcohol vs. healthy contrast:   
 
@@ -394,10 +428,7 @@ contrasts(data$group) <- matrix_contr
 
 $\eta_p^2$ for group
 ```{r}
-sse_c <- sum(residuals(lm(health ~ 1, data = data))^2)
-sse_a <- sum(residuals(m_d_2)^2)
-
-(sse_c - sse_a)/sse_c
+pre(lm(health ~ 1, data = data), m_d_2)
 ```
 
 ----
@@ -428,18 +459,12 @@ broom::tidy(m_r)
 
 $\eta_p^2$ for alcohol v. healthy (r_1)
 ```{r}
-sse_c <- sum(residuals(lm(health ~ r_2, data = data))^2)
-sse_a <- sum(residuals(m_r)^2)
-
-(sse_c - sse_a)/sse_c
+pre(lm(health ~ r_2, data = data), m_r)
 ```
 
 $\eta_p^2$ for depress v. healthy (r_2)
 ```{r}
-sse_c <- sum(residuals(lm(health ~ r_1, data = data))^2)
-sse_a <- sum(residuals(m_r)^2)
-
-(sse_c - sse_a)/sse_c
+pre(lm(health ~ r_1, data = data), m_r)
 ```
 
 ----
@@ -838,16 +863,33 @@ m_alc <- lm(health ~ r_1 + r_2, data = data_alc)
 broom::glance(m_alc)$r.squared
 ```
 
-$\sum \Delta R^2$
+$\Delta R^2$
 ```{r}
-(delta_r1 <- (broom::glance(lm(health ~ r_1, data = data_alc))$r.squared) - 
-  (broom::glance(lm(health ~ 1, data = data_alc))$r.squared))
+(r_1 <- delta_r2(mean = lm(health ~ 1, data = data_alc), 
+         compact = lm(health ~ r_2, data = data_alc),
+         augmented = m_alc))
 
-(delta_r2 <- (broom::glance(m_alc)$r.squared) - 
-  (broom::glance(lm(health ~ r_1, data = data_alc))$r.squared))
-
-delta_r1 + delta_r2  
+(r_2 <- delta_r2(mean = lm(health ~ 1, data = data_alc), 
+         compact = lm(health ~ r_1, data = data_alc),
+         augmented = m_alc))
 ```
+
+----
+
+::: {.callout-important}
+# Question
+
+What do you notice about model $R^2$ vs. $\sum \Delta R^2?$
+:::
+
+
+```{r}
+broom::glance(m_alc)$r.squared
+
+r_1 + r_2
+```
+
+
 
 
 ----
@@ -864,21 +906,28 @@ data_dep <- model.matrix(~ group, data = data) |>
   bind_cols(data)
 ```
 
+----
+
 Model $R^2$
 ```{r}
 m_dep <- lm(health ~ r_1 + r_2, data = data_dep)
 broom::glance(m_dep)$r.squared
 ```
 
+$\Delta R^2$
+```{r}
+(r_1 <- delta_r2(mean = lm(health ~ 1, data = data_dep), 
+         compact = lm(health ~ r_2, data = data_dep),
+         augmented = m_alc))
+
+(r_2 <- delta_r2(mean = lm(health ~ 1, data = data_dep), 
+         compact = lm(health ~ r_1, data = data_dep),
+         augmented = m_alc))
+```
+
 $\sum \Delta R^2$
 ```{r}
-(delta_r1 <- (broom::glance(lm(health ~ r_1, data = data_dep))$r.squared) - 
-  (broom::glance(lm(health ~ 1, data = data_dep))$r.squared))
-
-(delta_r2 <- (broom::glance(m_dep)$r.squared) - 
-  (broom::glance(lm(health ~ r_1, data = data_dep))$r.squared))
-
-delta_r1 + delta_r2  
+r_1 + r_2
 ```
 
 ----
@@ -895,21 +944,28 @@ data_health <- model.matrix(~ group, data = data) |>
   bind_cols(data)
 ```
 
+----
+
 Model $R^2$
 ```{r}
 m_health <- lm(health ~ r_1 + r_2, data = data_health)
 broom::glance(m_health)$r.squared
 ```
 
+$\Delta R^2$
+```{r}
+(r_1 <- delta_r2(mean = lm(health ~ 1, data = data_health), 
+         compact = lm(health ~ r_2, data = data_health),
+         augmented = m_alc))
+
+(r_2 <- delta_r2(mean = lm(health ~ 1, data = data_health), 
+         compact = lm(health ~ r_1, data = data_health),
+         augmented = m_alc))
+```
+
 $\sum \Delta R^2$
 ```{r}
-(delta_r1 <- (broom::glance(lm(health ~ r_1, data = data_health))$r.squared) - 
-  (broom::glance(lm(health ~ 1, data = data_health))$r.squared))
-
-(delta_r2 <- (broom::glance(m_health)$r.squared) - 
-  (broom::glance(lm(health ~ r_1, data = data_health))$r.squared))
-
-delta_r1 + delta_r2  
+r_1 + r_2
 ```
 
 ----
@@ -932,22 +988,40 @@ data_poc <- model.matrix(~ group, data = data) |>
   bind_cols(data)
 ```
 
+----
+
 Model $R^2$
 ```{r}
 m_poc<- lm(health ~ poc_1 + poc_2, data = data_poc)
 broom::glance(m_poc)$r.squared
 ```
 
-$\sum \Delta R^2$
+$\Delta R^2$
 ```{r}
-(delta_poc_1 <- (broom::glance(lm(health ~ poc_1, data = data_poc))$r.squared) - 
-  (broom::glance(lm(health ~ 1, data = data_poc))$r.squared))
+(poc_1 <- delta_r2(mean = lm(health ~ 1, data = data_poc), 
+         compact = lm(health ~ poc_2, data = data_poc),
+         augmented = m_alc))
 
-(delta_poc_2 <- (broom::glance(m_poc)$r.squared) - 
-  (broom::glance(lm(health ~ poc_1, data = data_poc))$r.squared))
-
-delta_poc_1 + delta_poc_2  
+(poc_2 <- delta_r2(mean = lm(health ~ 1, data = data_poc), 
+         compact = lm(health ~ poc_1, data = data_poc),
+         augmented = m_alc))
 ```
+
+----
+
+::: {.callout-important}
+# Question
+
+What do you notice about model $R^2$ vs. $\sum \Delta R^2?$
+:::
+
+
+```{r}
+broom::glance(m_poc)$r.squared
+
+poc_1 + poc_2
+```
+
 
 
 ----
@@ -1130,26 +1204,6 @@ lm(health ~ group, data = data) |>
   mutate(term = str_replace(term, "group", ""))
 ```
 
-```{r}
-#| echo: false
-
-# alternate way to set contrasts, gets same results as above
-
-# data <- data |> 
-#   mutate(c_1a = case_match(group,
-#                            "alcohol" ~ .5,
-#                            "depress" ~ 0,
-#                            "healthy" ~ -.5),
-#          c_2a = case_match(group,
-#                            "alcohol" ~ 0,
-#                            "depress" ~ .5,
-#                            "healthy" ~ -.5))
-# 
-# 
-# lm(health ~ c_1a + c_2a, data = data) |> 
-#   broom::tidy() 
-```
-
 
 ```{r}
 matrix_contr <- matrix(c(-.5, .5, 0,
@@ -1165,25 +1219,7 @@ lm(health ~ group, data = data) |>
   mutate(term = str_replace(term, "group", ""))
 ```
 
-```{r}
-#| echo: false
 
-# alternate way to set contrasts, gets same results as above
-
-# data <- data |>
-#   mutate(c_1a = case_match(group,
-#                            "alcohol" ~ -.5,
-#                            "depress" ~ .5,
-#                            "healthy" ~ 0),
-#          c_2a = case_match(group,
-#                            "alcohol" ~ -.5,
-#                            "depress" ~ 0,
-#                            "healthy" ~ .5))
-# 
-# 
-# lm(health ~ c_1a + c_2a, data = data) |>
-#   broom::tidy()
-```
 
 ----
 
