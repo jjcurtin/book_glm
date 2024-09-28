@@ -3,5 +3,7 @@
 
 - [Unit 1: Overview](https://jjcurtin.quarto.pub/01_overview/)
 - [Unit 2: Sampling Distributions, Parameters, and Parameter Estimates](https://jjcurtin.quarto.pub/02_sampling_distributions/)
-- [Unit 3: Inferences About a Single Mean (1 Parameter Models)](https://jjcurtin.quarto.pub/03_single_mean/)
-- [Unit 4: Inferences About a Single Quantitative Predictor](https://jjcurtin.quarto.pub/04_single_quantitative/)
+- [Unit 3: Inferences about a Single Mean (1 Parameter Models)](https://jjcurtin.quarto.pub/03_single_mean/)
+- [Unit 4: Inferences about a Single Quantitative Predictor](https://jjcurtin.quarto.pub/04_single_quantitative/)
+- [Unit 5: Inferences about a Single Dichotomous Predictor](https://jjcurtin.quarto.pub/05_single_dichotomous/)
+- [Unit 5: Inferences about Two Predictors](https://jjcurtin.quarto.pub/06_two_predictors/)
