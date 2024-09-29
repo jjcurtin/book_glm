@@ -14,11 +14,12 @@ options(scipen = 999) # turns off scientific notation
 ```
 
 
-
-
 ## Multiple Regression 2+ Predictors
 
+<<<<<<< Updated upstream
 In this unit, we will consider the case of multiple predictors.
+=======
+>>>>>>> Stashed changes
 
 - Consider how the concepts we have discussed so far generalize to the 2 predictor (3 parameter) model.  
 - We will start with 2 quantitative predictors example. Will continue with 1 quantitative and 1 dichotomous predictor example.  

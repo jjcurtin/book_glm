@@ -30,3 +30,7 @@
   quarto-pub:
     - id: 560e2004-6f70-4329-843c-a18707edbf96
       url: 'https://jjcurtin.quarto.pub/05_single_dichotomous'
+- source: 06_two_predictors.qmd
+  quarto-pub:
+    - id: 00a506ca-a83b-4402-8a7d-1953fb3d629c
+      url: 'https://jjcurtin.quarto.pub/06_two_predictors'
