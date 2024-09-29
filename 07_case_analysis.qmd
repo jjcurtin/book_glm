@@ -5,7 +5,7 @@ editor_options:
 --- 
  
 
-# Dealing with Messy Data I: Case Analysis
+# Unit 7: Dealing with Messy Data I - Case Analysis
 
 ```{r}
 #| echo: false
@@ -130,6 +130,7 @@ SSE = `r round(sum(residuals(lm(y4 ~ x4, data = Quartet))^2), 2)`
 options(conflicts.policy = "depends.ok") 
 library(tidyverse)
 library(patchwork)
+library(skimr)
 library(car, exclude = c("recode", "some")) #<1>
 
 theme_set(theme_classic()) 
@@ -173,15 +174,9 @@ broom::tidy(m_1)
 
 ```{r}
 data |> 
-  select(-subid, -sex) |> 
-  pivot_longer(everything(), names_to = "var") |>
-  group_by(var) |> 
-  summarize( n = n(),
-             mean = mean(value), 
-             sd = sd(value), 
-             min = min(value), 
-             max = max(value)) |> 
-  mutate(across(mean:max, ~round(.x, 2)))
+  skim(-subid, -sex) |> 
+  focus(n_missing, numeric.mean, numeric.sd, min = numeric.p0, max = numeric.p100) |> 
+  yank("numeric") 
 ```
 
 -----
@@ -190,43 +185,26 @@ data |>
 
 Histograms are a useful/common visualization for numeric variables.   
 
-Here we have histograms with density as y-axis overlayed with density and rug plots (which you have seen earlier in the course!).
+Here we show an example function to create histograms with density as y-axis overlayed with density and rug plots.
 
 ```{r}
-#| code-fold: true
+plot_univariate <- function(data, var_name) {
+  data |> 
+    ggplot(aes(x = !!sym(var_name))) +
+    geom_histogram(aes(y = after_stat(density)),
+                   color = "black", fill = "light grey", bins = 10) +
+    geom_density() +
+    geom_rug(color = "red")
 
-plot_fps <- data |> 
-  ggplot(aes(x = fps)) +
-  geom_histogram(aes(y = after_stat(density)),
-                 color = "black", fill = "light grey", bins = 10) +
-  geom_density() +
-  scale_x_continuous(breaks = c(-100, -50, 0, 50, 100, 150, 200)) +
-  geom_rug(color = "red")
-
-plot_bac <- data |> 
-  ggplot(aes(x = bac)) +
-  geom_histogram(aes(y = after_stat(density)), boundary = 0,
-                 color = "black", fill = "light grey", bins = 10) +
-  geom_density() +
-  geom_rug(color = "red")
-
-plot_ta <- data |> 
-  ggplot(aes(x = ta)) +
-  geom_histogram(aes(y = after_stat(density)), boundary = 0, 
-                 color = "black", fill = "light grey", bins = 10) +
-  geom_density() +
-  geom_rug(color = "red") 
-
-plot_sex <- data |> 
-  ggplot(aes(x = sex_c)) +
-  geom_histogram(aes(y = after_stat(density)), boundary = 0, 
-                 color = "black", fill = "light grey", bins = 10) +
-  geom_density() +
-  geom_rug(color = "red") 
-
-
-(plot_fps + plot_bac) / (plot_ta + plot_sex)
+}
 ```
+
+
+```{r}
+(plot_univariate(data, "fps") + plot_univariate(data, "bac")) / 
+  (plot_univariate(data, "ta") + plot_univariate(data, "sex_c"))
+```
+
 
 -----
 
@@ -239,34 +217,18 @@ Boxplots display:
 3. Highest and lowest points within 1.5 * IQR (interquartile-range: difference between scores at 25th %ile and 75th %ile)
 4. Outliers outside of 1.5 * IQR
 
-
 ```{r}
-box_fps <-  data |>
-    ggplot(aes(x = fps)) +
+#| code-fold: true
+
+plot_box <- function(data, var_name) {
+  data |> 
+    ggplot(aes(x = 1, y = !!sym(var_name))) +
     geom_boxplot() +
-    theme(axis.text.y = element_blank(),
-          axis.ticks.y = element_blank(),
-          axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+    theme(axis.text.x = element_blank(),
+          axis.ticks.x = element_blank())
+}
 
-box_bac <-  data |>
-    ggplot(aes(x = bac)) +
-    geom_boxplot() +
-    theme(axis.text.y = element_blank(),
-          axis.ticks.y = element_blank(),
-          axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
-
-box_ta <-  data |>
-    ggplot(aes(x = ta)) +
-    geom_boxplot() +
-    theme(axis.text.y = element_blank(),
-          axis.ticks.y = element_blank(),
-          axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
-```
-
------
-
-```{r}
-box_fps + box_bac + box_ta
+plot_box(data, "fps") + plot_box(data, "bac") + plot_box(data, "ta")
 ```
 
 -----
@@ -274,18 +236,19 @@ box_fps + box_bac + box_ta
 We could also overlay a violin plot over the box plot to clearly see the shape of the distribution and tails.
 
 ```{r}
-(box_fps +
-  geom_violin(aes(y = 0), fill = "green", color = NA, alpha = .4)  +
-  ylab(NULL)) +
+#| code-fold: true
 
-(box_bac +
-  geom_violin(aes(y = 0), fill = "green", color = NA, alpha = .4)  +
-  ylab(NULL)) +
-
-(box_ta +
-  geom_violin(aes(y = 0), fill = "green", color = NA, alpha = .4)  +
-  ylab(NULL)) 
+(plot_box(data, "fps") + 
+geom_violin(aes(x = 1), fill = "green", color = NA, alpha = .4) +
+  xlab(NULL)) +
+  (plot_box(data, "bac") + 
+geom_violin(aes(x = 1), fill = "green", color = NA, alpha = .4) +
+  xlab(NULL)) +
+  (plot_box(data, "ta") + 
+geom_violin(aes(x = 1), fill = "green", color = NA, alpha = .4) +
+  xlab(NULL))
 ```
+
 
 
 -----
@@ -309,34 +272,30 @@ Scatterplots are the preferred visualization when both variables (i.e., the pred
 We also can add a simple line and a LOWESS line (Locally Weighted Scatterplot Smoothing) to help us consider the shape of the relationship.
 
 ```{r}
-bivar_bac <- data |>
-    ggplot(aes(x = bac, y = fps)) +
-    geom_point() +
-    geom_smooth(method = "lm", formula = y ~ x, col = "red") +
-    geom_smooth(method = "loess", formula = y ~ x, col = "green") +
-    theme(axis.text.x = element_text(size = 11),
-          axis.text.y = element_text(size = 11))
+#| code-fold: true
 
-bivar_ta <- data |>
-    ggplot(aes(x = ta, y = fps)) +
-    geom_point() +
-    geom_smooth(method = "lm", formula = y ~ x, col = "red") +
-    geom_smooth(method = "loess", formula = y ~ x, col = "green") +
-    theme(axis.text.x = element_text(size = 11),
-          axis.text.y = element_text(size = 11))
-
-bivar_sex <- data |>
-    ggplot(aes(x = sex_c, y = fps)) +
+plot_bivariate <- function(data, x_var, y_var, loess = TRUE) {
+  plot <- data |> 
+    ggplot(aes(x = !!sym(x_var), y = !!sym(y_var))) +
     geom_point() +
     geom_smooth(method = "lm", formula = y ~ x, col = "red") +
     theme(axis.text.x = element_text(size = 11),
           axis.text.y = element_text(size = 11))
+  
+  if(loess) {
+    plot <- plot + geom_smooth(method = "loess", formula = y ~ x, col = "green")
+  }
+  
+  return(plot)
+}
 ```
 
------
 
 ```{r}
-bivar_bac + bivar_ta + bivar_sex
+#| code-fold: true
+
+plot_bivariate(data, "bac", "fps") + plot_bivariate(data, "ta", "fps") + 
+  plot_bivariate(data, "sex_c", "fps", loess = FALSE)
 ```
 
 
@@ -404,8 +363,12 @@ plot_cartoon
 ```
 
 
+::: {.callout-important}
+# Question
 
-<span style="color: red;">Question: Which colored points have the most leverage in the 1 predictor example above?</span> 
+Which colored points have the most leverage in the 1 predictor example above?
+:::
+
 
 -----
 
@@ -438,45 +401,138 @@ SPSS reports centered leverage ($h - \frac{1}{N}$).
 
 High leverage values are not always bad. In fact, in some cases they are good. Must also consider if they are regression outliers.  
 
-<span style="color: red;">Question: Why?</span> 
+::: {.callout-important}
+# Question
 
------
+Why?
+:::
+
+
+:::{.fragment}
 
 $R^2 = \frac{\text{SSE}_{\text{mean-only}}- \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}$  
 
 $\text{SE}_{bi} = \frac{s_y}{s_i} = \frac{\sqrt{(1-R^2_y)}}{\sqrt{(N - k - 1)}}*\frac{1}{\sqrt{(1-R^2_i)}}$
 
+[High leverage points that are fit well by the model increase the difference between $\text{SSE}_{\text{mean-only}}$ and $\text{SSE}_a$, which increases $R^2$.]{style="color:blue;"}   
 
-- <span style="color: blue;">High leverage points that are fit well by the model increase the difference between $\text{SSE}_{\text{mean-only}}$ and $\text{SSE}_a$, which increases $R^2$.</span>
+[High leverage points that are fit well also increase variance for predictor. This reduces the SE for predictors and yields more power.]{style="color:blue;"}   
 
-- <span style="color: blue;">High leverage points that are fit well also increase variance for predictor. This reduces the SE for predictors and yields more power.</span>
+[Well fit, high leverage points do **not** alter $b$s.]{style="color:blue;"}    
+:::
 
-- <span style="color: blue;">Well fit, high leverage points do **not** alter $b$s.</span>
-
-```{r}
-#| echo: false
-#| warning: false
-
-plot_cartoon
-```
 
 -----
 
 ## Leverage (Real Data)
 
-There is a function written by John called `case_analysis()`. It is available to help you identify observations with high leverage.    
+We are going to use the following function (`case_analysis()`) to help us identify observations with high leverage.    
 
-Source the function with the following code
 ```{r}
-#| message: false
-
-devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/case_analysis.R?raw=true")
+case_analysis <- function(model, type) {
+  # type can be hat_values, residuals, cooks_d, df_betas, influence_plot, cov_ratio
+  
+  model_formula <- as.character(model$call$formula)
+  
+  plot_hist <- function(data) {
+    data |> 
+      ggplot(aes(x = x)) +
+      geom_histogram(fill = "light grey", color = "black", bins = 10) +
+      geom_rug(color = "blue") +
+      labs(x = str_to_sentence(str_replace(type, "_", " ")),
+           y = "Frequency",
+          title = str_c("Model:", model_formula[2], model_formula[1], model_formula[3],
+                     sep = " "))
+  }
+  
+  if(type == "hat_values") {
+    p <- data |> 
+      mutate(x = hatvalues(model)) |> 
+      plot_hist() +
+      geom_vline(xintercept = 2*mean(hatvalues(model)), color = "red", linewidth = .75) +
+      labs(subtitle = "Cut point: 2 * mean(hat)")
+    print(p)
+  }
+  
+  if(type == "residuals") {
+    t_cut_point <- qt(p = .025/nrow(data), 
+                       df = nrow(data) - length(coef(model)) - 1 - 2, 
+                       lower.tail = FALSE)
+      
+    p <- data |> 
+      mutate(x = rstudent(model)) |> 
+      plot_hist() +
+      geom_vline(xintercept = c(-1, 1) * t_cut_point, color = "red", linewidth = .75) +
+      labs(subtitle = "Bonferroni corrected p-value < 0.05 in red")
+    print(p)
+  }
+  
+  if(type == "cooks_d") {
+    p <- data |> 
+      mutate(x = cooks.distance(model)) |> 
+      plot_hist() +
+      geom_vline(xintercept = 4/(nrow(data) - length(coef(model)) - 1 - 1),
+                 color = c("red"), linewidth = .75) +
+      labs(subtitle = "4/(N-P) cut-off in red")
+    print(p)
+  }
+  
+  if(type == "df_betas") {
+    m_1_coefs <- names(as_tibble(dfbetas(m_1)))
+    i <- 0
+    for (term in m_1_coefs) {
+      i <- i + 1
+      p <- dfbetas(m_1) |>
+        as_tibble() |>
+        select(x = !!sym(term)) |>
+        plot_hist() +
+        labs(x = str_c("DFBETAS: ", term),
+             subtitle = str_c("B = ", round(coef(m_1)[i], 6)))
+      print(p)
+    }
+  }
+    
+  if(type == "cov_ratio") {
+    p <- data |> 
+      mutate(x = covratio(model)) |>
+      plot_hist() +
+      geom_vline(xintercept = abs((3 * (length(coef(model)))/nrow(data)) - 1), 
+                 color = "red", linewidth = .75) +
+      labs(subtitle = "3*(P/N) - 1 cut-off in red")
+    print(p)
+  }
+  
+  if(type == "influence_plot") {
+    t_cut_point <- qt(p = .025/nrow(data), 
+                       df = nrow(data) - length(coef(model)) - 1 - 2, 
+                       lower.tail = FALSE)
+    p <- data |> 
+      mutate(residuals = rstudent(model),
+             hat_values = hatvalues(model)) |>
+      ggplot(aes(x = hat_values, y = residuals)) +
+      geom_point(size = 10 * sqrt(cooks.distance(model))/max(cooks.distance(model)),
+                 shape = 1) +
+      geom_hline(yintercept = c(-1, 0, 1) * t_cut_point, color = "red", 
+                 linetype = c("solid", "dashed", "solid"), linewidth = .75) +
+      geom_vline(xintercept = c(1, 2, 3) * mean(hatvalues(model)), color = "red", 
+                 linetype = c("dashed", "solid", "solid"), linewidth = .75) +
+      labs(title = "Influence Bubble Plot",
+           subtitle = str_c("Model:", model_formula[2], model_formula[1], model_formula[3],
+                     sep = " "),
+           x = "Hat Values",
+           y = "Studentized Residuals")
+    print(p)
+  }
+  
+}
+  
 ```
 
------
+
+----
 
 ```{r}
-case_analysis(m_1, Type = "hatvalues")
+case_analysis(m_1, type = "hat_values")
 ```
 
 -----
@@ -497,8 +553,11 @@ In essence, a regression outlier is a discrepant score with a large residual ($e
 plot_cartoon
 ```
 
+::: {.callout-important}
+# Question
 
-<span style="color: red;">Question: Which point(s) are regression outliers?</span> 
+Which point(s) are regression outliers?
+:::
 
 -----
 
@@ -506,9 +565,9 @@ plot_cartoon
 
 There are multiple quantitative indicators to identify regression outliers, including raw residuals ($e_i$), standardized residuals  ($e'_i$), and studentized residuals ($t'_i$). The preferred index is the **studentized residual**.   
 
-$t'_i = \frac{e_i}{(\text{SE}_{e(-i)}*\sqrt{(1-h_i)})}$    
+$t'_i = \frac{e_i}{(SE_{e(-i)}*\sqrt{(1-h_i)})}$    
 
-$t'_i$ follows a t-distribution with n-P-1 degrees of freedom.   
+$t'_i$ follows a t-distribution with $n-P-1$ degrees of freedom.   
 
 
 NOTE: SPSS calls these Studentized Deleted Residuals. Cohen calls these Externally Studentized Residual
@@ -520,37 +579,32 @@ NOTE: SPSS calls these Studentized Deleted Residuals. Cohen calls these External
 
 Regression outliers are always bad but they can have two different types of bad effects.   
 
-<span style="color: red;">Question: Why?</span> 
+::: {.callout-important}
+# Question
 
------
+Why?
+:::
+
+:::{.fragment}
 
 $R^2 = \frac{\text{SSE}_{\text{mean-only}}- \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}$  
 
 $\text{SE}_{bi} = \frac{s_y}{s_i} = \frac{\sqrt{(1-R^2_y)}}{\sqrt{(N - k - 1)}}*\frac{1}{\sqrt{(1-R^2_i)}}$
 
+[Regression outliers increase $\text{SSE}_a$ which decreases $R^2$. Decreased $R^2$ leads to increased SEs for $b$s.]{style="color:blue;"}   
 
-- <span style="color: blue;">Regression outliers increase $\text{SSE}_a$ which decreases $R^2$. Decreased $R^2$ leads to increased SEs for $b$s.</span>
+[If outlier also has leverage can alter (increase or decrease) $b$s.]{style="color:blue;"}
+:::
 
-- <span style="color: blue;">If outlier also has leverage can alter (increase or decrease) $b$s.</span>
-
-
-
-```{r}
-#| echo: false
-#| warning: false
-
-plot_cartoon
-```
 
 -----
 
 ## Regression Outlier (Real data)
 
 ```{r}
-case_analysis(m_1, Type = "residuals")
+case_analysis(m_1, type = "residuals")
 ```
 
------
 
 ```{r}
 car::outlierTest(m_1, cutoff = .05, labels = data$subid)
@@ -574,7 +628,11 @@ plot_cartoon
 ```
 
 
-<span style="color: red;">Question: Which point(s) have the most influence?</span> 
+::: {.callout-important}
+# Question
+
+Which point(s) have the most influence?
+::: 
 
 
 ## Cook's Distance
@@ -596,16 +654,20 @@ Identification of problematic scores should be considered in the context of the 
 ## Cook's Distance (Real data)
 
 ```{r}
-case_analysis(m_1, Type = "cooksd")
+case_analysis(m_1, type = "cooks_d")
 ```
 
 ## Influence Bubble Plot (Real data)
 
 ```{r}
-case_analysis(m_1, Type = "influenceplot")
+case_analysis(m_1, type = "influence_plot")
 ```
 
-<span style="color: red;">Question: What are the expected effects of each of these points on the model?</span> 
+::: {.callout-important}
+# Question
+
+What are the expected effects of each of these points on the model?</span> 
+:::
 
 ## dfBetas
 
@@ -631,57 +693,7 @@ Problem is there can be many dfBetas (a set for each predictor and intercept). M
 ## dfBetas (Real data)
 
 ```{r}
-#| eval: false
-
-case_analysis(m_1, Type = "dfbetas")
-```
-
-```{r}
-#| echo: false
-
-dfbetas_int <- dfbetas(m_1) |> 
-  ggplot() +
-  geom_histogram(aes(x = `(Intercept)`),color = "black", 
-                 fill = "light grey", bins = 10) +
-  geom_rug(aes(x = `sex_c`), color = "blue") +
-  labs(x = "DFBETAS: (Intercept)",
-       y = "Frequency",
-       title = "Model: fps ~ bac + ta + sex",
-       subtitle = str_c("B = ", coef(m_1)[1]))
-
-dfbetas_bac <- dfbetas(m_1) |> 
-  ggplot() +
-  geom_histogram(aes(x = `bac`),color = "black", 
-                 fill = "light grey", bins = 10) +
-  geom_rug(aes(x = `sex_c`), color = "blue") +
-  labs(x = "DFBETAS: BAC",
-       y = "Frequency",
-       title = "Model: fps ~ bac + ta + sex",
-       subtitle = str_c("B = ", coef(m_1)[2]))
-
-dfbetas_ta <- dfbetas(m_1) |> 
-  ggplot() +
-  geom_histogram(aes(x = `ta`),color = "black", 
-                 fill = "light grey", bins = 10) +
-  geom_rug(aes(x = `sex_c`), color = "blue") +
-  labs(x = "DFBETAS: TA",
-       y = "Frequency",
-       title = "Model: fps ~ bac + ta + sex",
-       subtitle = str_c("B = ", coef(m_1)[3]))
-
-
-dfbetas_sex <- dfbetas(m_1) |> 
-  ggplot() +
-  geom_histogram(aes(x = `sex_c`),color = "black", 
-                 fill = "light grey", bins = 10) +
-  geom_rug(aes(x = `sex_c`), color = "blue") +
-  labs(x = "DFBETAS: Sex",
-       y = "Frequency",
-       title = "Model: fps ~ bac + ta + sex",
-       subtitle = str_c("B = ", coef(m_1)[4]))
-
-
-(dfbetas_int + dfbetas_bac) / (dfbetas_ta + dfbetas_sex)
+case_analysis(m_1, type = "df_betas")
 ```
 
 
@@ -690,7 +702,6 @@ dfbetas_sex <- dfbetas(m_1) |>
 ## Added Variable Plot (Real data)
 
 ```{r}
-#| echo: false
 data <- as.data.frame(data)
 rownames(data) <- data$subid
 m_1 <- lm(fps ~ bac + ta + sex_c, data = data)
@@ -719,7 +730,7 @@ $\text{COVRATIO}_i < |3* \frac{P}{N} - 1|$
 ## Impact on SEs (Real data)
 
 ```{r}
-case_analysis(m_1, Type = "covratio")
+case_analysis(m_1, type = "cov_ratio")
 ```
 
 -----
@@ -794,7 +805,12 @@ plot_lev_outlier <- tibble(x = c(1, 2, 3, 4, 5, 5),
 
 ## Enter the Real World
 
-<span style="color: red;">Question: So what do you do?</span> 
+::: {.callout-important}
+# Question
+
+So what do you do?
+
+:::
 
 
 -----
