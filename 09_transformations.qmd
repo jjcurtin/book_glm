@@ -215,7 +215,7 @@ m <- lm(fps ~ bac + ta + sex_c, data = data)
 ```{r}
 #| code-fold: true
 
-car::qqPlot(m_2, id = FALSE, simulate = TRUE,
+car::qqPlot(m, id = FALSE, simulate = TRUE,
             main = "Quantile-Comparison Plot to Assess Normality", 
             ylab = "Studentized Residuals")
 ```
@@ -224,12 +224,12 @@ car::qqPlot(m_2, id = FALSE, simulate = TRUE,
 #| code-fold: true
 
 ggplot() +
-  geom_density(aes(x = value), data = enframe(rstudent(m_2), name = NULL)) +
+  geom_density(aes(x = value), data = enframe(rstudent(m), name = NULL)) +
   labs(title = "Density Plot to Assess Normality of Residuals",
        x = "Studentized Residual") +
   geom_line(aes(x = x, y = y), data = tibble(x = seq(-4, 4, length.out = 100),
                                       y = dnorm(seq(-4, 4, length.out = 100), 
-                                      mean=0, sd=sd(rstudent(m_2)))), 
+                                      mean=0, sd=sd(rstudent(m)))), 
             linetype = "dashed", color = "blue")
 ```
 
@@ -386,7 +386,7 @@ m_3 |>
 White (1980) Heteroscedasticity-corrected SEs and Tests
 
 ```{r}
-corrected_ses <- sqrt(diag(hccm(m)))
+corrected_ses <- sqrt(diag(car::hccm(m)))
 
 broom::tidy(m) |> 
   select(term, estimate) |> 

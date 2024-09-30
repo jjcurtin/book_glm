@@ -28,6 +28,7 @@ Effect of positive attitudes (1-5) about birth control and peer pressure to not 
 options(conflicts.policy = "depends.ok") 
 library(tidyverse)
 library(patchwork)
+library(skimr)
 
 theme_set(theme_classic()) 
 
@@ -42,18 +43,20 @@ data <- read_csv(here::here(path_data, "10_interactions_birth_control.csv"),
 
 ```{r}
 data |> 
-  pivot_longer(att:bc, names_to = "var") |> 
-  group_by(var) |> 
-  summarise(mean = mean(value), 
-            sd = sd(value), 
-            min = min(value), 
-            max = max(value))
+  select(att:bc) |> 
+  skim() |> 
+  focus(n_missing, numeric.mean, numeric.sd, min = numeric.p0, max = numeric.p100) |> 
+  yank("numeric")
 ```
 
 
 -----
 
-<span style="color: red;">Question: If you regressed BC on Att and PP in two separate linear models, what can you tell me about these two models based on the correlations below?</span>
+::: {.callout-important}
+# Question
+
+If you regressed BC on Att and PP in two separate linear models, what can you tell me about these two models based on the correlations below?
+:::
 
 ```{r}
 data |> 
@@ -62,11 +65,11 @@ data |>
 ```
 
 
------
+:::{.fragment}
+[Regression coefficient for Att will be positive. Regression coefficient for PP will be negative. $R^2$ will be bigger for Att model ($R^2$ = .56) than for PP model ($R^2$ = .25).]{style="color:blue;"}
+:::
 
-<span style="color: blue;">Regression coefficient for Att will be positive. Regression coefficient for PP will be negative. $R^2$ will be bigger for Att model ($R^2$ = .56) than for PP model ($R^2$ = .25)</span>
-
------
+----
 
 ```{r}
 m_att <- lm (bc ~ att, data = data)
@@ -87,7 +90,12 @@ broom::glance(m_pp)$r.squared
 
 -----
 
-<span style="color: red;">Question: Based on the correlations, what can you tell me about the model including both Att and PP as regressors?</span>
+::: {.callout-important}
+# Question
+
+Based on the correlations, what can you tell me about the model including both Att and PP as regressors?
+:::
+
 
 ```{r}
 data |> 
@@ -95,60 +103,66 @@ data |>
   cor()
 ```
 
------
 
-<span style="color: blue;">The regression coefficients for Att and PP will match the coefficients from their respective bivariate models b/c Att and PP are fully orthogonal (uncorrelated). PP and Att each predict fully unique variance in BC.</span>   
+:::{.fragment}
+[The regression coefficients for Att and PP will match the coefficients from their respective bivariate models b/c Att and PP are fully orthogonal (uncorrelated). PP and Att each predict fully unique variance in BC.]{style="color:blue;"}   
 
-<span style="color: blue;">The $R^2$ for the additive model will be equal to the sum of the $R^2$s from the two bivariate models, again b/c Att and PP are orthogonal.</span>
+[The $R^2$ for the additive model will be equal to the sum of the $R^2$s from the two bivariate models, again b/c Att and PP are orthogonal.]{style="color:blue;"}
+:::
 
------
-
-<span style="color: red;">Question: What about $\eta_p^2$ for Att (or PP) in the 1 predictor model vs. the 2 predictor model? Specify the augmented and compact models to test Att for 1 and 2 predictor approaches. Specify the formula for $\eta_p^2$.</span>
-
------
-
-<span style="color: blue;">**Test for Att in 1 predictor model:**</span>   
-
-<span style="color: blue;">$\text{BC}_a = b_0 + b_1*\text{Att}$</span>    
-<span style="color: blue;">$\text{BC}_c = b_0 + 0*\text{Att}$</span>    
-
-
-<span style="color: blue;">**Test for Att in 2 predictor model:**</span>   
-
-<span style="color: blue;">$\text{BC}_a = b_0 + b_1*\text{Att} + b_2*\text{PP}$</span>  
-<span style="color: blue;">$\text{BC}_c = b_0 + 0*\text{Att}+ b_2*\text{PP}$</span>   
-
-
-<span style="color: blue;">$\eta_p^2 = \frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}$</span>   
-
-- <span style="color: blue;">Numerator is same for the both 1 and 2 predictor tests of Att.</span>   
-- <span style="color: blue;">Denominator is smaller for 2 predictor test.</span>   
-- <span style="color: blue;">Therefore, $\eta_p^2$ for Att is bigger in 2 predictor model. Att produces a bigger proportional reduction in error.</span>
 
 -----
 
+::: {.callout-important}
+# Question
 
-<span style="color: red;">Question: What about $\Delta R^2$ for Att (or PP) in the 1 predictor model vs. the 2 predictor model? Specify the augmented and compact models to test Att for 1 and 2 predictor approaches. Specify the formula for $\Delta R^2$.</span>
+What about $\eta_p^2$ for Att (or PP) in the 1 predictor model vs. the 2 predictor model? Specify the augmented and compact models to test Att for 1 and 2 predictor approaches. Specify the formula for $\eta_p^2$.
+:::
+
+
+
+:::{.fragment}
+[**Test for Att in 1 predictor model:**]{style="color:blue;"}    
+[$BC_a = b_0 + b_1*Att$]{style="color:blue;"}    
+[$BC_c = b_0 + 0*Att$]{style="color:blue;"}    
+
+[**Test for Att in 2 predictor model:**]{style="color:blue;"}    
+[$BC_a = b_0 + b_1*Att + b_2*PP$]{style="color:blue;"}    
+[$BC_c = b_0 + 0*Att + b_2*PP$]{style="color:blue;"}    
+
+[$\eta_p^2 = \frac{SSE_c - SSE_a}{SSE_c}$]{style="color:blue;"}   
+
+
+[Numerator is same for the both 1 and 2 predictor tests of Att.]{style="color:blue;"}   
+[Denominator is smaller for 2 predictor test.]{style="color:blue;"}   
+[Therefore, $\eta_p^2$ for Att is bigger in 2 predictor model. Att produces a bigger proportional reduction in error.]{style="color:blue;"}  
+:::
+
 
 -----
 
-<span style="color: blue;">**Test for Att in 1 predictor model:**</span>   
 
-<span style="color: blue;">$\text{BC}_a = b_0 + b_1*\text{Att}$</span>    
-<span style="color: blue;">$\text{BC}_c = b_0 + 0*\text{Att}$</span>    
+::: {.callout-important}
+# Question
 
+What about $\Delta R^2$ for Att (or PP) in the 1 predictor model vs. the 2 predictor model? Specify the augmented and compact models to test Att for 1 and 2 predictor approaches. Specify the formula for $\Delta R^2$.
+:::
 
-<span style="color: blue;">**Test for Att in 2 predictor model:**</span>   
+:::{.fragment}
+[**Test for Att in 1 predictor model:**]{style="color:blue;"}    
+[$BC_a = b_0 + b_1*Att$]{style="color:blue;"}    
+[$BC_c = b_0 + 0*Att$]{style="color:blue;"}    
 
-<span style="color: blue;">$\text{BC}_a = b_0 + b_1*\text{Att} + b_2*\text{PP}$</span>  
-<span style="color: blue;">$\text{BC}_c = b_0 + 0*\text{Att}+ b_2*\text{PP}$</span>   
+[**Test for Att in 2 predictor model:**]{style="color:blue;"}    
+[$BC_a = b_0 + b_1*Att + b_2*PP$]{style="color:blue;"}    
+[$BC_c = b_0 + 0*Att + b_2*PP$]{style="color:blue;"}    
 
+[$\Delta R^2 = \frac{SSE_c - SSE_a}{SSE_{mean-only}}$]{style="color:blue;"}    
 
-<span style="color: blue;">$\Delta R^2 = \frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_\text{mean only}}$</span>   
-
-- <span style="color: blue;">Numerator is same for the both 1 and 2 predictor tests of Att.</span>   
-- <span style="color: blue;">Denominator is same for both 1 and 2 predictor tests.</span>   
-- <span style="color: blue;">Therefore, $\Delta R^2$ for Att does not change. Att explains the same proportion of **total** variance (error) in both models.</span>
+[Numerator is same for the both 1 and 2 predictor tests of Att.]{style="color:blue;"}   
+[Denominator is same for both 1 and 2 predictor tests.]{style="color:blue;"}    
+[Therefore, $\Delta R^2$ for Att does not change. Att explains the same proportion of **total** variance (error) in both models.]{style="color:blue;"}     
+:::
 
 -----
 
@@ -161,17 +175,26 @@ broom::tidy(m_add)
 $\text{BC} = 8.0 + 3.0 * \text{Att} + -2.0*\text{PP}$   
 
 
-<span style="color: red;">Question: What has this model required (or what havent we tested for)?</span>
+::: {.callout-important}
+# Question
+
+What has this model required (or what havent we tested for)?
+:::
+
+:::{.fragment}
+
+[It requires that the effect of each IV on the DV is constant across all levels/scores of the other IV.]{style="color:blue;"}   
+
+[We have not tested for an interaction.]{style="color:blue;"}
+:::
 
 -----
 
-<span style="color: blue;">It requires that the effect of each IV on the DV is constant across all levels/scores of the other IV.</span>   
+::: {.callout-important}
+# Question
 
-<span style="color: blue;">We have not tested for an interaction.</span>
-
------
-
-<span style="color: red;">Question: Where are $b_\text{Att}, b_\text{PP},$ and $b_0$ in the figure below?</span>
+Where are $b_{Att}, b_{PP},$ and $b_0$ in the figure below?
+:::
 
 ```{r}
 #| code-fold: true
@@ -189,25 +212,30 @@ plot_m_add <- ggplot() +
 plot_m_add
 ```
 
------
+:::{.fragment}
 
-<span style="color: blue;">$b_\text{Att}$ = slope of lines. Constant for all three lines.</span>    
-
-<span style="color: blue;">$b_\text{PP}$ = separation of lines. Lines are separated by $2*b_\text{PP}$. Constant across Att.</span>    
-
-<span style="color: blue;">$b_0$ = predicted value at Att = 0 and PP= 0. Not displayed in figure.</span> 
-
------
-
-<span style="color: red;">Question: How might we benefit from including a third regressor in the model to represent the interaction between Att and PP? Hint, there are two benefits.</span>
+[$b_{Att}$ = slope of lines. Constant for all three lines.]{style="color:blue;"}    
+[$b_{PP}$ = separation of lines. Lines are separated by $2*b_{PP}$. Constant across Att.]{style="color:blue;"}    
+[$b_0$ = predicted value at Att = 0 and PP= 0. Not displayed in figure.]{style="color:blue;"}
+:::
 
 -----
 
-1. <span style="color: blue;">If Att X PP effect is significant, it will increase $R^2$, decrease SEs, and therefore increase power to test all effects.</span>   
+::: {.callout-important}
+# Question
 
-2. <span style="color: blue;">If Att X PP is significant, it will provide us with a more complex, nuanced perspective on the nature of the Att and PP effects on BC.</span>  
+How might we benefit from including a third regressor in the model to represent the interaction between Att and PP? Hint, there are two benefits.
+:::
+
+:::{.fragment}
+
+[1. If Att X PP effect is significant, it will increase $R^2$, decrease SEs, and therefore increase power to test all effects.]{style="color:blue;"}    
+
+[2. If Att X PP is significant, it will provide us with a more complex, nuanced perspective on the nature of the Att and PP effects on BC.]{style="color:blue;"}    
 
 **Definition: An interaction exists when the effect of 1 predictor on the DV differs across levels/values of the other predictor.**  
+
+:::
 
 <!-- John, you also had this note on your slide "LINK to additive results in this example…" I wasn't sure what it meant-->
 
@@ -225,15 +253,18 @@ plot_m_add
 
 -----
 
-<span style="color: red;">Question: What will change in the two predictor model if we center both IVs?</span>
+::: {.callout-important}
+# Question
 
------
+What will change in the two predictor model if we center both IVs?
+:::
 
-1. <span style="color: blue;">$b_0$ and its SE will change. $b_0$ is the predicted value at 0 on all regressors in the model.</span> <span style="color: red;">Will SE be bigger or smaller in centered model?</span>    
+:::{.fragment}
+[1. $b_0$ and its SE will change. $b_0$ is the predicted value at 0 on all regressors in the model.]{style="color:blue;"} <span style="color: red;">Will SE be bigger or smaller in centered model?</span>      
 
-2. <span style="color: blue;">$b_\text{Att}$ and $b_\text{PP}$ (and their SEs) will remain the same. The additive model forces the effect for each IV to be same across all values of other regressors. Therefore, the effect of ATT is the same if PP = 0 or PP= 1, or PP=3, etc. Given this, centering PP does not change $b$ for ATT.</span>    
+[2. $b_{Att}$ and $b_{PP}$ (and their SEs) will remain the same. The additive model forces the effect for each IV to be same across all values of other regressors. Therefore, the effect of ATT is the same if PP = 0 or PP= 1, or PP=3, etc. Given this, centering PP does not change $b$ for ATT.]{style="color:blue;"}         
 
-3. <span style="color: blue;">Of course, $R^2$ also remains the same.</span>
+[3. Of course, $R^2$ also remains the same.]{style="color:blue;"}
 
 -----
 
@@ -255,19 +286,25 @@ broom::glance(m_add_c)$r.squared
 
 -----
 
-<span style="color: red;">Question: What will change when we add the interaction term (with centered IVs) relative to the centered two predictor model?</span>
+::: {.callout-important}
+# Question
 
------
+What will change when we add the interaction term (with centered IVs) relative to the centered two predictor model?
+:::
 
-1. <span style="color: blue;">An additional regressor will be included for Att x PP.</span>  
+:::{.fragment}
 
-2. <span style="color: blue;">If Att x PP accounts for DV variance, $R^2$ will increase and SEs for coefficients (and intercept) will be reduced.</span>  
+[1. An additional regressor will be included for Att x PP.]{style="color:blue;"}    
 
-3. <span style="color: blue;">$b_0$ will remain the predicted value at 0 for all regressors. No change from centered two predictor model.</span>  
+[2. If Att x PP accounts for DV variance, $R^2$ will increase and SEs for coefficients (and intercept) will be reduced.]{style="color:blue;"}    
 
-4. <span style="color: blue;">$b_\text{Att}$ and $b_\text{PP}$ are respective effects at 0 on all other regressors. Including an interaction now allows for each IV effect to vary across levels/values of other IVs.</span>    
+[3. $b_0$ will remain the predicted value at 0 for all regressors. No change from centered two predictor model.]{style="color:blue;"}    
 
-    <span style="color: blue;">Thus, $b_\text{Att}$ is now the (*simple*) effect of Att at PP (centered) = 0 and the $b_\text{PP}$ is now the (*simple*) effect of PP at Att (centered) = 0.</span>  
+[4. $b_{Att}$ and $b_{PP}$ are respective effects at 0 on all other regressors. Including an interaction now allows for each IV effect to vary across levels/values of other IVs.]{style="color:blue;"}    
+
+[Thus, $b_{Att}$ is now the (*simple*) effect of Att at PP (centered) = 0 and the $b_{PP}$ is now the (*simple*) effect of PP at Att (centered) = 0.]{style="color:blue;"} 
+    
+:::
 
 -----
 
@@ -296,9 +333,9 @@ broom::glance(m_add_c)$r.squared
 
 -----
 
-$\text{BC} = 11.0 + 3.0 * \text{Att}_c + -2.0*\text{PP}_c$    
+$BC = 11.0 + 3.0 * Att_c + -2.0*PP_c$    
 
-$\text{BC} = 11.0 + 3.0 * \text{Att}_c + -2.0*\text{PP}_c + -1.0*\text{Att}_c*\text{PP}_c$     
+$BC = 11.0 + 3.0 * Att_c + -2.0*PP_c + -1.0*Att_c*PP_c$     
 
 
 <span style="color: red;">Link intercepts and coefficients from each model to their respective figures.</span>    
@@ -308,6 +345,7 @@ $\text{BC} = 11.0 + 3.0 * \text{Att}_c + -2.0*\text{PP}_c + -1.0*\text{Att}_c*\t
 
 ```{r}
 #| code-fold: true
+
 m_int <- lm(bc ~ att * pp, data = data)
 
 preds_int_y <- predict(m_int, newdata = preds)
@@ -325,11 +363,15 @@ plot_m_add + plot_m_int
 
 -----
 
-$\text{BC} = 11.0 + 3.0 * \text{Att}_c + -2.0*\text{PP}_c + -1.0*\text{Att}_c*\text{PP}_c$     
+$BC = 11.0 + 3.0 * Att_c + -2.0*PP_c + -1.0*Att_c*PP_c$     
 
-<span style="color: red;">Question: What would the interactive model look like if we hadn’t centered each IV?</span>   
+::: {.callout-important}
+# Question
 
------
+Question: What would the interactive model look like if we hadn’t centered each IV?
+:::
+
+:::{.fragment}
 
 ```{r}
 m_int <- lm(bc ~ att * pp, data = data) 
@@ -339,11 +381,13 @@ broom::tidy(m_int)
 broom::glance(m_int)$r.squared
 ```
 
+:::
+
 -----
 
-$\text{BC} = 11.0 + 3.0 * \text{Att}_c + -2.0*\text{PP}_c + -1.0*\text{Att}_c*\text{PP}_c$ 
+$BC = 11.0 + 3.0 * Att_c + -2.0*PP_c + -1.0*Att_c*PP_c$ 
 
-$\text{BC} = -1.0 + 6.0 * \text{Att} + 1.0*\text{PP} + -1.0*\text{Att}*\text{PP}$   
+$BC = -1.0 + 6.0 * Att + 1.0*PP + -1.0*Att*PP$   
 
 <span style="color: red;">Link intercept and coefficients from the raw model to the expanded figure below on right.</span>   
 
@@ -366,16 +410,20 @@ plot_m_int + plot_m_int_expanded
 
 -----
 
-$\text{BC} = 11.0 + 3.0 * \text{Att}_c + -2.0*\text{PP}_c + -1.0*\text{Att}_c*\text{PP}_c$ 
+$BC = 11.0 + 3.0 * Att_c + -2.0*PP_c + -1.0*Att_c*PP_c$ 
 
-$\text{BC} = -1.0 + 6.0 * \text{Att} + 1.0*\text{PP} + -1.0*\text{Att}*\text{PP}$    
+$BC = -1.0 + 6.0 * Att + 1.0*PP + -1.0*Att*PP$    
 
 
-<span style="color: red;">Question: So what does $b_{\text{Att}*\text{PP}}$ indicate?</span>   
+::: {.callout-important}
+# Question
 
------
+So what does $b_{Att*PP}$ indicate?
+:::
 
-<span style="color: blue;">The coefficient for the interaction indicates how the simple effect of each IV changes for a one unit increase on the other IV.</span>    
+:::{.fragment}
+
+[The coefficient for the interaction indicates how the simple effect of each IV changes for a one unit increase on the other IV.]{style="color:blue;"}    
 
 
 **The interaction coefficient applies symmetrically to both IV effects.**
@@ -437,21 +485,38 @@ broom::tidy(m_int)
 
 ## Interactive Models: Simple Effect Magnitudes
 
-Magnitude of *simple* effects of either IV can be calculated directly from the raw or centered model (I prefer the raw model for ease of thinking in raw units). <span style="color: red;">How?</span>   
+Magnitude of *simple* effects of either IV can be calculated directly from the raw or centered model (I prefer the raw model for ease of thinking in raw units). 
 
-$\text{BC} = -1.0 + 6.0 * \text{Att} + 1.0*\text{PP} + -1.0*\text{Att}*\text{PP}$   
+::: {.callout-important}
+# Question
 
-<span style="color: blue;">Effect of Att = 6.0 + -1.0 * PP</span>    
-<span style="color: blue;">Effect of PP = 1.0 + -1.0 * Att</span>     
+How?
+:::
 
-<span style="color: red;">Question: How could you obtain formal significance tests for any specific simple effects (e.g., effect of Att at PP = 1, 3, & 5)?</span>
+$BC = -1.0 + 6.0 * Att + 1.0*PP + -1.0*Att*PP$   
 
------
+:::{.fragment}
 
-$\text{BC} = -1.0 + 6.0 * \text{Att} + 1.0*\text{PP} + -1.0*\text{Att}*\text{PP}$   
+[Effect of Att = 6.0 + -1.0 * PP]{style="color:blue;"}    
 
-<span style="color: blue;">Effect of Att = 6.0 + -1.0 * PP</span>    
-<span style="color: blue;">Effect of Att = 6.0 + -1.0 * (1) = 5</span>    
+[Effect of PP = 1.0 + -1.0 * Att]{style="color:blue;"}    
+:::
+
+----
+
+::: {.callout-important}
+# Question
+
+How could you obtain formal significance tests for any specific simple effects (e.g., effect of Att at PP = 1, 3, & 5)?
+:::
+
+:::{.fragment}
+
+$BC = -1.0 + 6.0 * Att + 1.0*PP + -1.0*Att*PP$    
+
+[Effect of Att = 6.0 + -1.0 * PP]{style="color:blue;"}   
+
+[Effect of Att = 6.0 + -1.0 * (1) = 5]{style="color:blue;"}
 
 ```{r}
 data <- data |> 
@@ -461,14 +526,16 @@ m_pp_1 <- lm(bc ~ att * pp_1, data = data)
 broom::tidy(m_pp_1)
 ```
 
+:::
 
 -----
 
 
-$\text{BC} = -1.0 + 6.0 * \text{Att} + 1.0*\text{PP} + -1.0*\text{Att}*\text{PP}$   
+$BC = -1.0 + 6.0 * Att + 1.0*PP + -1.0*Att*PP$   
 
-<span style="color: blue;">Effect of Att = 6.0 + -1.0 * PP</span>    
-<span style="color: blue;">Effect of Att = 6.0 + -1.0 * (5) = 1</span>    
+[Effect of Att = 6.0 + -1.0 * PP]{style="color:blue;"}       
+
+[Effect of Att = 6.0 + -1.0 * (5) = 1]{style="color:blue;"}    
 
 ```{r}
 data <- data |> 
@@ -482,15 +549,20 @@ broom::tidy(m_pp_5)
 
 ## Interactive Models: Reporting Considerations
 
-<span style="color: red;">Question: So what do you report and in what order?</span>
+::: {.callout-important}
+# Question
 
------
+So what do you report and in what order?
+:::
 
-<span style="color: blue;">There is no one answer here.  Some say you never report main effects when there are significant interactions.  This camp would say, report only interaction and possibly simple effects.</span>    
 
-<span style="color: blue;">Others (including me) believe that main effects are sometimes useful to report even when interaction is significant. *Main* effects (effect at “mean” of other IV) provides an anchor for effect. The interaction then indicates how this effect changes across values of the other IV. *Simple* effects can sometimes allow you to describe further how this effect changes at various values of other IV.</span>    
+:::{.fragment}
+[There is no one answer here. Some say you never report main effects when there are significant interactions. This camp would say, report only interaction and possibly simple effects.]{style="color:blue;"}   
 
-<span style="color: blue;">The other complexity surrounds the nature of the two IVs.  Sometimes, often, one is focal and one is moderator. However, sometimes neither/both are focal...</span>
+[Others (including me) believe that main effects are sometimes useful to report even when interaction is significant. *Main* effects (effect at “mean” of other IV) provides an anchor for effect. The interaction then indicates how this effect changes across values of the other IV. *Simple* effects can sometimes allow you to describe further how this effect changes at various values of other IV.]{style="color:blue;"}    
+
+[The other complexity surrounds the nature of the two IVs.  Sometimes, often, one is focal and one is moderator. However, sometimes neither/both are focal…]{style="color:blue;"}    
+:::
 
 -----
 

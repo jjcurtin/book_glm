@@ -133,7 +133,7 @@ What are the implications of unreliable $X$ for the use of covariates to *contro
 :::{.fragment}
 [Covariates only *control* from the construct they measure to the degree that they are reliable (and valid) measures of that construct.]{style="color:blue;"}   
 
-[Analysis that rely on unreliable covariates are not controlling the variance for the construct well.] {style="color:blue;"}   
+[Analysis that rely on unreliable covariates are not controlling the variance for the construct well.]{style="color:blue;"}   
 :::
 
 -----
@@ -316,18 +316,18 @@ rstudent(m_2) |>
 set.seed(102030)
 n1 <- tibble(x = rnorm(100*1, mean=0, sd=1))
 
-qqPlot(n1$x, id = FALSE, 
+car::qqPlot(n1$x, id = FALSE, 
        main = "Quantile-Comparison Plot for Random Normal (N = 100)", 
        ylab = "n1") 
 
 n2 <- tibble(x = rnorm(100*1, mean=0, sd=1))
 
-qqPlot(n2$x, id = FALSE, 
+car::qqPlot(n2$x, id = FALSE, 
        main = "Quantile-Comparison Plot for Random Normal (N = 100)",  
        ylab = "n2") 
 
 n3 <- tibble(x = rnorm(100*1, mean=0, sd=1))
-qqPlot(n3$x, id = FALSE, 
+car::qqPlot(n3$x, id = FALSE, 
        main = "Quantile-Comparison Plot for Random Normal (N = 100)", 
        ylab = "n3") 
 ```
@@ -338,12 +338,12 @@ qqPlot(n3$x, id = FALSE,
 #| echo: false
 
 c1 <- tibble(x = rchisq(100, 3))
-qqPlot(c1$x, id = FALSE, 
+car::qqPlot(c1$x, id = FALSE, 
        main = "Quantile-Comparison Plot + Skew (Chi-sq w/DF = 3; N = 100)",
        ylab = "c1") 
 
 t1 <- tibble(x = rt(100, 3))
-qqPlot(t1$x, id = FALSE, main = "Quantile-Comparison Plot for Heavy Tailed (t w/DF = 3; N = 100)",
+car::qqPlot(t1$x, id = FALSE, main = "Quantile-Comparison Plot for Heavy Tailed (t w/DF = 3; N = 100)",
        ylab = "t1") 
 ```
 
@@ -419,7 +419,7 @@ tibble(x = log(fitted.values(m_2)),
 
 Alternative way to get plot using `car` package.
 ```{r}
-#| echo: false
+#| warning: false
 
 car::spreadLevelPlot(m_2)
 ```
@@ -455,7 +455,7 @@ broom::tidy(m_2)
 White (1980) Heteroscedasticity-corrected SEs and Tests
 
 ```{r}
-corrected_ses <- sqrt(diag(hccm(m_2)))
+corrected_ses <- sqrt(diag(car::hccm(m_2)))
 
 broom::tidy(m_2) |> 
   select(term, estimate) |> 
