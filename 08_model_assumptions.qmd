@@ -46,13 +46,6 @@ All GLM procedures commonly make the **5 assumptions below**. When these assumpt
 
 ## Exact X
 
-Violations of the Exact X assumption lead to biased (i.e., inaccurate) estimates of regression coefficients.  
-
-Violations are caused by problems with reliability of measurement of your predictors.
-
-<span style="color: red;">Question: In simple, bivariate regression, how will reducing reliability affect the regression model?</span> 
-
------
 ```{r}
 #| echo: false
 #| message: false
@@ -103,26 +96,45 @@ plot_x_noise <- tibble(x = seq(0,100),
   labs(title = "Random Noise in X")
 ```
 
+Violations of the Exact X assumption lead to biased (i.e., inaccurate) estimates of regression coefficients.  
+
+Violations are caused by problems with reliability of measurement of your predictors.
+
+
+::: {.callout-important}
+# Question
+
+In simple, bivariate regression, how will reducing reliability affect the regression model?
+:::
+
+
+:::{.fragment}
+[It will reduce $b_1$. We will underestimate the strength of relationship between $X$ and $Y$.]{style="color:blue;"}    
+
+[In multiple predictor models, the bias can be either positive or negative based on the nature of the correlations among the predictors. **Use reliable variables!**.]{style="color:blue;"}
+
 ```{r}
 #| echo: false
 #| warning: false
 
 plot_exact + plot_y_noise + plot_x_noise
 ```
+:::
+
+----
+
+::: {.callout-important}
+# Question
+
+What are the implications of unreliable $X$ for the use of covariates to *control* variables?
+:::
 
 
+:::{.fragment}
+[Covariates only *control* from the construct they measure to the degree that they are reliable (and valid) measures of that construct.]{style="color:blue;"}   
 
-<span style="color: blue;">It will reduce $b_1$. We will underestimate the strength of relationship between $X$ and $Y$.</span>   
-
-<span style="color: blue;">In multiple predictor models, the bias can be either positive or negative based on the nature of the correlations among the predictors. **Use reliable variables!**.</span>
-
-<span style="color: red;">Question: What are the implications of unreliable $X$ for the use of covariates to *control* variables?</span> 
-
------
-
-<span style="color: blue;">Covariates only *control* from the construct they measure to the degree that they are reliable (and valid) measures of that construct.</span>
-
-<span style="color: blue;">Analysis that rely on unreliable covariates are not controlling the variance for the construct well.</span>
+[Analysis that rely on unreliable covariates are not controlling the variance for the construct well.] {style="color:blue;"}   
+:::
 
 -----
 
@@ -231,31 +243,24 @@ Transformations may correct shape of residuals (*Unit 9*).
 ## Normality: Quantile Comparison & Density Plots
 
 ```{r}
+#| code-fold: true
 #| message: false
 #| warning: false
 
 options(conflicts.policy = "depends.ok") 
 library(tidyverse)
 library(patchwork)
-library(car, exclude = c("recode", "some")) # needed for model_assumptions
-library(psych, exclude = c("logit", "%+%", "alpha")) # needed for model_assumptions
-library(gvlma) # needed for model_assumptions
+library(skimr)
 
 theme_set(theme_classic()) 
 
 path_data <- "data_lecture"
 
-data <- read_csv(here::here(path_data, "7_three_predictors_fps.csv"), 
+data <- read_csv(here::here(path_data, "07_three_predictors_fps.csv"), 
                  show_col_types = FALSE) |> 
    mutate(sex_c = if_else(sex == "female", -.5, .5))
 ```
 
-We have a second function written by John called `model_assumptions()` that you can source to help test model assumptions.
-```{r}
-#| message: false
-
-devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/model_assumptions.R?raw=true")
-```
 
 -----
 
@@ -267,26 +272,19 @@ data_rm_outliers <- data |>
 m_2 <- lm(fps ~ bac + ta + sex_c, data = data_rm_outliers) 
 ```
 
------
 
+We can use `qqplot()` from the `car` package to assess normality of residuals.
 ```{r}
-#| eval: false
-
-model_assumptions(m_2, Type = "normal")
-```
-
-```{r}
-#| echo: false
-
-car::qqPlot(m_2, id=FALSE, sim=TRUE, main='Quantile-Comparison Plot to Assess Normality', xlab='t Quantiles', ylab ='Studentized Residuals')
+car::qqPlot(m_2, id = FALSE, simulate = TRUE,
+            main = "Quantile-Comparison Plot to Assess Normality", 
+            ylab = "Studentized Residuals")
 ```
 
 
 -----
 
+We can also use a density plot to plot the model's residuals against a normal distribution.   
 ```{r}
-#| echo: false
-
 ggplot() +
   geom_density(aes(x = value), data = enframe(rstudent(m_2), name = NULL)) +
   labs(title = "Density Plot to Assess Normality of Residuals",
@@ -302,7 +300,10 @@ ggplot() +
 ```{r}
 #| code-fold: true
 
-psych::describe(rstudent(m_2))  
+rstudent(m_2) |> 
+  skim() |> 
+  focus(n_missing, numeric.mean, numeric.sd, min = numeric.p0, max = numeric.p100) |> 
+  yank("numeric")
 ```
 
 -----
@@ -315,14 +316,20 @@ psych::describe(rstudent(m_2))
 set.seed(102030)
 n1 <- tibble(x = rnorm(100*1, mean=0, sd=1))
 
-qqPlot(n1$x, id = FALSE, main='Quantile-Comparison Plot for Random Normal (N = 100)', xlab='t Quantiles', ylab ='n1') 
+qqPlot(n1$x, id = FALSE, 
+       main = "Quantile-Comparison Plot for Random Normal (N = 100)", 
+       ylab = "n1") 
 
 n2 <- tibble(x = rnorm(100*1, mean=0, sd=1))
 
-qqPlot(n2$x, id = FALSE, main='Quantile-Comparison Plot for Random Normal (N = 100)', xlab='t Quantiles', ylab ='n2') 
+qqPlot(n2$x, id = FALSE, 
+       main = "Quantile-Comparison Plot for Random Normal (N = 100)",  
+       ylab = "n2") 
 
 n3 <- tibble(x = rnorm(100*1, mean=0, sd=1))
-qqPlot(n3$x, id = FALSE, main='Quantile-Comparison Plot for Random Normal (N = 100)', xlab='t Quantiles', ylab ='n3') 
+qqPlot(n3$x, id = FALSE, 
+       main = "Quantile-Comparison Plot for Random Normal (N = 100)", 
+       ylab = "n3") 
 ```
 
 -----
@@ -331,10 +338,13 @@ qqPlot(n3$x, id = FALSE, main='Quantile-Comparison Plot for Random Normal (N = 1
 #| echo: false
 
 c1 <- tibble(x = rchisq(100, 3))
-qqPlot(c1$x, id = FALSE, main='Quantile-Comparison Plot + Skew (Chi-sq w/DF = 3; N = 100)', xlab='t Quantiles', ylab ='c1') 
+qqPlot(c1$x, id = FALSE, 
+       main = "Quantile-Comparison Plot + Skew (Chi-sq w/DF = 3; N = 100)",
+       ylab = "c1") 
 
 t1 <- tibble(x = rt(100, 3))
-qqPlot(t1$x, id = FALSE, main='Quantile-Comparison Plot for Heavy Tailed (t w/DF = 3; N = 100)', xlab='t Quantiles', ylab ='t1') 
+qqPlot(t1$x, id = FALSE, main = "Quantile-Comparison Plot for Heavy Tailed (t w/DF = 3; N = 100)",
+       ylab = "t1") 
 ```
 
 
@@ -359,11 +369,6 @@ Rough rule is that estimation is seriously degraded if the ratio of largest to s
 
 ## Constant Variance: Residual and Spread-Level Plots
 
-```{r}
-#| eval: false
-
-model_assumptions(m_2, Type = "constant")
-```
 
 ```{r}
 #| echo: false
@@ -383,10 +388,39 @@ tibble(x = fitted.values(m_2),
 
 A spread level plot is a plot of the log(abs(studentized residuals) vs. log(fitted values). $1-b$ (from the regression line below) is the suggested power transformation for $Y$ to stabilize variance.  
 
+<!--Warning being returned due to 2 negative fitted values - can't get log. Not sure how you prefer to handle this so suppressed warning for now.-->
+```{r}
+#| warning: false
+
+tibble(x = log(fitted.values(m_2)),
+       y = log(abs(rstudent(m_2)))) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_point(alpha = .6) +
+  geom_smooth(formula = y ~ x, method = "lm", se = FALSE, 
+              color = "blue", linetype = "dashed") +
+  labs(title = "Spread-Level Plot for m_2",
+       x = "Fitted Values",
+       y = "Absolute Studentized Residuals") +
+  scale_x_continuous(trans = "exp", 
+                     breaks = scales::trans_breaks("exp", function(x) log(x)),
+                     labels = scales::trans_format("exp", scales::math_format(.x))) +
+  scale_y_continuous(trans = "exp", 
+                     breaks = scales::trans_breaks("exp", function(y) log(y)),
+                     labels = scales::trans_format("exp", scales::math_format(.x)))
+```
+
+
+```{r}
+#| warning: false
+
+1 - lm(log(abs(rstudent(m_2))) ~ log(fitted.values(m_2)))$coefficients[2]
+```
+
+
+Alternative way to get plot using `car` package.
 ```{r}
 #| echo: false
-#| warning: false
-#| 
+
 car::spreadLevelPlot(m_2)
 ```
 
@@ -397,7 +431,7 @@ car::spreadLevelPlot(m_2)
 
 Breusch & Pagan (1979)^[Breusch,T. S. and Pagan,A. R. (1979) A simple test for heteroscedasticity and random coefficient variation. *Econometrica*, 47,  1287-1294.] and Cook & Weisberg (1983)^[Cook,R. D. and Weisberg,S. (1983) Diagnostics for heteroscedasticity in regression. *Biometrika*, 70, 1-10.] independently developed test for constant variance.
 
-`ncvTest()` in `car` package. Also provided by `model_assumptions()` as well.  
+`ncvTest()` in `car` package. 
 
 Do not use it blindly. All statistical tests are designed to be sensitive to specific types of violations. May miss other types of violations.May also provide false positive due to other aspects of the distribution.
 
@@ -442,14 +476,6 @@ Plot partial residual ($e_{i(j)} = e_i + b_jX_{ij}$) by each predictor.
 Can include factors but can not include interactions with factors. Code regressors manually. 
 
 ```{r}
-#| eval: false
-model_assumptions(m_2, Type='linear')
-```
-
-
-```{r}
-#| echo: false
-
 car::crPlots(m_2, ask = FALSE)
 ```
 
@@ -462,10 +488,10 @@ car::crPlots(m_2, ask = FALSE)
 
 Pena and Slate (2006) validated a global test of linear model assumptions.^[Pena,E.A. and Slate,E.H. (2006). Global validation of linear model assumptions, *Journal of the American Statistical Association*, 101, 341-354.]
 
-Provided by `model_assumptions()` using `gvlma` package
+Provided by `gvlma()` using `gvlma` package
 
 ```{r}
-gvlma(m_2)
+gvlma::gvlma(m_2)
 ```
 
 
@@ -478,9 +504,6 @@ gvlma(m_2)
 - Polynomial regression (*PSY 710*) is useful when you have quadratic, cubic, etc. effects of $X$s on $Y$.
 
 - Generalized linear models (e.g., Logistic regression; *PSY 710*) are also available.
-
-
------
 
 
 
