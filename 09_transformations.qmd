@@ -196,9 +196,8 @@ plot_0 <- y |>
 
 options(conflicts.policy = "depends.ok") 
 library(tidyverse)
-library(car, exclude = c("recode", "some")) # needed for model_assumptions
-library(psych, exclude = c("logit", "%+%", "alpha")) # needed for model_assumptions
-library(gvlma) # needed for model_assumptions
+library(skimr)
+
 
 path_data <- "data_lecture"
 
@@ -207,8 +206,6 @@ data <- read_csv(here::here(path_data, "09_transformations_fps.csv"),
    mutate(sex_c = if_else(sex == "female", -.5, .5)) |> 
    # remove outliers to fit same model as last two units 
    filter(!subid %in% c("0125", "2112"))
-
-devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/model_assumptions.R?raw=true")
 ```
 
 ```{r}
@@ -216,43 +213,30 @@ m <- lm(fps ~ bac + ta + sex_c, data = data)
 ```
 
 ```{r}
-#| eval: false
+#| code-fold: true
 
-model_assumptions(m, Type = "normal")
+car::qqPlot(m_2, id = FALSE, simulate = TRUE,
+            main = "Quantile-Comparison Plot to Assess Normality", 
+            ylab = "Studentized Residuals")
 ```
 
 ```{r}
-#| echo: false
-
-car::qqPlot(m, id=FALSE, sim=TRUE, main='Quantile-Comparison Plot to Assess Normality', xlab='t Quantiles', ylab ='Studentized Residuals')
-```
-
------
-
-```{r}
-#| echo: false
+#| code-fold: true
 
 ggplot() +
-  geom_density(aes(x = value), data = enframe(rstudent(m), name = NULL)) +
+  geom_density(aes(x = value), data = enframe(rstudent(m_2), name = NULL)) +
   labs(title = "Density Plot to Assess Normality of Residuals",
        x = "Studentized Residual") +
   geom_line(aes(x = x, y = y), data = tibble(x = seq(-4, 4, length.out = 100),
                                       y = dnorm(seq(-4, 4, length.out = 100), 
-                                      mean=0, sd=sd(rstudent(m)))), 
+                                      mean=0, sd=sd(rstudent(m_2)))), 
             linetype = "dashed", color = "blue")
 ```
 
------
+----
 
 ```{r}
-#| eval: false
-
-model_assumptions(m, Type = "constant")
-```
-
-
-```{r}
-#| echo: false
+#| code-fold: true
 
 tibble(x = fitted.values(m),
        y = rstudent(m)) |> 
@@ -269,7 +253,8 @@ tibble(x = fitted.values(m),
 ```{r}
 #| echo: false
 #| warning: false
-#| 
+#| code-fold: true
+
 car::spreadLevelPlot(m)
 ```
 
@@ -281,7 +266,7 @@ car::ncvTest(m)
 
 
 ```{r}
-gvlma(m)
+gvlma::gvlma(m)
 ```
 
 -----
@@ -292,8 +277,9 @@ gvlma(m)
 ```{r}
 data |> 
   select(bac, ta, sex_c, fps) |> 
-  psych::describe() |> 
-  select(-c(trimmed, mad, se))
+  skim() |> 
+  focus(n_missing, numeric.mean, numeric.sd, min = numeric.p0, max = numeric.p100) |> 
+  yank("numeric")
 ```
 
 We are going to first add a constant so all response values are > 0
@@ -328,14 +314,16 @@ m_3 <- lm(fps_bc ~ bac + ta + sex_c, data = data)
 -----
 
 ```{r}
-#| echo: false
+#| code-fold: true
 
-car::qqPlot(m_3, id=FALSE, sim=TRUE, main='Quantile-Comparison Plot to Assess Normality', xlab='t Quantiles', ylab ='Studentized Residuals')
+car::qqPlot(m_3, id = FALSE, simulate = TRUE, 
+            main = "Quantile-Comparison Plot to Assess Normality",  
+            ylab = "Studentized Residuals")
 ```
 
 
 ```{r}
-#| echo: false
+#| code-fold: true
 
 ggplot() +
   geom_density(aes(x = value), data = enframe(rstudent(m_3), name = NULL)) +
@@ -350,7 +338,7 @@ ggplot() +
 -----
 
 ```{r}
-#| echo: false
+#| code-fold: true
 
 tibble(x = fitted.values(m_3),
        y = rstudent(m_3)) |> 
@@ -364,7 +352,6 @@ tibble(x = fitted.values(m_3),
 
 
 ```{r}
-#| echo: false
 #| warning: false
 
 car::spreadLevelPlot(m_3)
@@ -382,7 +369,7 @@ car::ncvTest(m_3)
 ```{r}
 #| code-fold: true
 
-gvlma(m_3)
+gvlma::gvlma(m_3)
 ```
 
 **Transformations often don't help!**
@@ -442,7 +429,12 @@ knitr::include_graphics(path = here::here("figures/mosteller_tukey.png"))
 
 -----
 
-<span style="color: red;">Question: What 2 transformations would make this relationship linear?</span> 
+::: {.callout-important}
+# Question
+
+What 2 transformations would make this relationship linear?
+:::
+
 
 ```{r}
 #| echo: false
@@ -454,9 +446,8 @@ data_nonlinear  |>
   geom_point(alpha = .4)
 ```
 
------
-
-<span style="color: blue;">Move $X$ down the ladder (e.g., $X^.5$)</span>  
+:::{.fragment}
+[Move $X$ down the ladder (e.g., $X^.5$).]{style="color:blue;"}    
 
 ```{r}
 data_nonlinear  |> 
@@ -464,14 +455,19 @@ data_nonlinear  |>
   geom_point(alpha = .4)
 ```
 
+:::
 
-<span style="color: blue;">Move $Y$ up the ladder (e.g., $Y^2$)</span>  
+
+:::{.fragment}
+[Move $Y$ up the ladder (e.g., $Y^2$).]{style="color:blue;"}  
 
 ```{r}
 data_nonlinear  |> 
   ggplot(aes(x = X, y = Y^2)) +
   geom_point(alpha = .4)
 ```
+
+:::
 
 -----
 
@@ -505,21 +501,16 @@ broom::tidy(m_5k)
 -----
 
 ```{r}
-#| eval: false
+#| code-fold: true
 
-model_assumptions(m_5k, Type = "normal")
+car::qqPlot(m_5k, id = FALSE, simulate = TRUE,
+            main = "Quantile-Comparison Plot to Assess Normality", 
+            ylab = "Studentized Residuals")
 ```
 
-```{r}
-#| echo: false
-
-car::qqPlot(m_5k, id=FALSE, sim=TRUE, main='Quantile-Comparison Plot to Assess Normality', xlab='t Quantiles', ylab ='Studentized Residuals')
-```
-
------
 
 ```{r}
-#| echo: false
+#| code-fold: true
 
 ggplot() +
   geom_density(aes(x = value), data = enframe(rstudent(m_5k), name = NULL)) +
@@ -534,14 +525,7 @@ ggplot() +
 -----
 
 ```{r}
-#| eval: false
-
-model_assumptions(m_5k, Type = "constant")
-```
-
-
-```{r}
-#| echo: false
+#| code-fold: true
 
 tibble(x = fitted.values(m_5k),
        y = rstudent(m_5k)) |> 
@@ -556,8 +540,6 @@ tibble(x = fitted.values(m_5k),
 -----
 
 ```{r}
-#| echo: false
-
 car::spreadLevelPlot(m_5k)
 ```
 
@@ -568,14 +550,6 @@ car::ncvTest(m_5k)
 -----
 
 ```{r}
-#| eval: false
-model_assumptions(m_5k, Type='linear')
-```
-
-
-```{r}
-#| echo: false
-
 car::crPlots(m_5k, ask = FALSE)
 ```
 
@@ -584,7 +558,7 @@ car::crPlots(m_5k, ask = FALSE)
 
 
 ```{r}
-gvlma(m_5k)
+gvlma::gvlma(m_5k)
 ```
 
 -----
@@ -604,21 +578,13 @@ broom::tidy(m_5k_tran)
 
 
 ```{r}
-#| eval: false
-model_assumptions(m_5k_tran, Type='linear')
-```
-
-
-```{r}
-#| echo: false
-
 car::crPlots(m_5k_tran, ask = FALSE)
 ```
 
 -----
 
 ```{r}
-gvlma(m_5k_tran)
+gvlma::gvlma(m_5k_tran)
 ```
 
 -----
