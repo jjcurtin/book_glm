@@ -338,7 +338,11 @@ $BC = 11.0 + 3.0 * Att_c + -2.0*PP_c$
 $BC = 11.0 + 3.0 * Att_c + -2.0*PP_c + -1.0*Att_c*PP_c$     
 
 
-<span style="color: red;">Link intercepts and coefficients from each model to their respective figures.</span>    
+::: {.callout-important}
+# Exercise
+
+Link intercepts and coefficients from each model to their respective figures.
+:::
 
 *Note:* figures use raw (not centered) predictors. Means for both predictors are 3.
 
@@ -389,7 +393,11 @@ $BC = 11.0 + 3.0 * Att_c + -2.0*PP_c + -1.0*Att_c*PP_c$
 
 $BC = -1.0 + 6.0 * Att + 1.0*PP + -1.0*Att*PP$   
 
-<span style="color: red;">Link intercept and coefficients from the raw model to the expanded figure below on right.</span>   
+::: {.callout-important}
+# Exercise
+
+Link intercept and coefficients from the raw model to the expanded figure below on right.
+:::
 
 ```{r}
 #| code-fold: true
