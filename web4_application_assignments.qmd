@@ -16,6 +16,7 @@
 - [ggplot cheatsheet](/homework/week_03/ggplot2_cheatsheet.pdf)
 - [shell](/homework/week_03/hw_03_shell.qmd)
 - [data](/homework/data/hw_03_data.csv)
+- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw3_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw3_key.qmd)
 
 ## Week 04: Due Friday, 10/04 at 8:30 am
 
