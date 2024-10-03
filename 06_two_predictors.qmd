@@ -74,7 +74,7 @@ data <- read_csv(here::here(path_data, "06_two_predictors_fps.csv"),
                  show_col_types = FALSE) 
 ```
 
-
+Define `my_skim()` function
 ```{r}
 #| code-fold: true
 
@@ -116,7 +116,7 @@ pre <- function(compact, augmented) {
 Now, we fit the two parameter model to our data again (same as previous unit)
 
 ```{r}
-m_2 <- lm(1 + fps ~ bac, data = data)
+m_2 <- lm(fps ~ 1 + bac, data = data)
 
 m_2 |> tidy()
 ```
