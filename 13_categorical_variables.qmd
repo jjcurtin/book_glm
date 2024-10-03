@@ -107,7 +107,7 @@ Why can we not handle multilevel categorical variables by simply coding each gro
 :::{.fragment}
 [There is no meaningful way to order the multiple groups. The shape of the relationship will completely change based on arbitrary ordering of the groups (exception is when categorical variable is ordinal).]{style="color:blue;"}    
 
-[Moreover, we are often interested in individual pair-wise group comparisons that would be lost by forcing linear relationship.] {style="color:blue;"}    
+[Moreover, we are often interested in individual pair-wise group comparisons that would be lost by forcing linear relationship.]{style="color:blue;"}    
 :::
 
 ----
@@ -255,11 +255,15 @@ Healthy controls:
 $= 7.94 + -3.36*(0)+-1.50*(0)$   
 $= 7.94$
 
-<span style="color: red;">Question: What is $b_0$ when using dummy codes?</span>   
+::: {.callout-important}
+# Question 
 
-----
+What is $b_0$ when using dummy codes?
+:::
 
-<span style="color: blue;">The predicted value (mean) for the reference group.</span>    
+:::{.fragment}
+[The predicted value (mean) for the reference group.]{style="color:blue;"}  
+:::
 
 ----
 
@@ -330,11 +334,15 @@ tidy_m_d_2
 
 ----
 
-<span style="color: red;">Question: How are these t-tests of $b_j$ in GLM different from what you would get if you simply ran two separate between groups t-tests?</span>   
+::: {.callout-important}
+# Question 
 
-----
+How are these t-tests of $b_j$ in GLM different from what you would get if you simply ran two separate between groups t-tests?
+:::
 
-<span style="color: blue;">The GLM t-tests of $b_j$ use the full error term including all subjects (including the “ignored” group; see dfs below). This yields a more powerful test.</span>     
+:::{.fragment}
+[The GLM t-tests of $b_j$ use the full error term including all subjects (including the “ignored” group; see dfs below). This yields a more powerful test.]{style="color:blue;"}     
+
 
 GLM degrees of freedom
 ```{r}
@@ -349,23 +357,32 @@ data_sub <- data |>
 
 t.test(health ~ group, data = data_sub, var.equal = TRUE)
 ```
+:::
 
 ----
 
+::: {.callout-important}
+# Question 
 
-<span style="color: red;">Question: What may be missing from our analysis of the `group` variable at this point?</span>   
+What may be missing from our analysis of the `group` variable at this point?
+:::
 
-----
+:::{.fragment}
+[We might want a test of the contrast between patients with alcohol use disorder vs. patients with depression.]{style="color:blue;"}    
+:::
 
-<span style="color: blue;">We might want a test of the contrast between patients with alcohol use disorder vs. patients with depression.</span>     
+:::{.fragment}
+::: {.callout-important}
+# Question 
 
-----
+How could we get this test?
+:::
+:::
 
-<span style="color: red;">Question: How could we get this test?</span>   
 
-----
-
-<span style="color: blue;">Recode the group contrasts such that the patients with depression is the reference group. Then test and interpret the alcohol vs. depress parameter estimate.</span>   
+:::{.fragment}
+[Recode the group contrasts such that the patients with depression is the reference group. Then test and interpret the alcohol vs. depress parameter estimate.]{style="color:blue;"}    
+:::
 
 ----
 
@@ -389,7 +406,11 @@ tidy_m_d_3
 
 ----
 
-<span style="color: red;">Question: What does the 2 df F-test of $R^2$ test conceptually?</span>  
+::: {.callout-important}
+# Question 
+
+What does the 2 df F-test of $R^2$ test conceptually?
+:::
 
 ```{r}
 anova(m_d_3)
@@ -397,21 +418,25 @@ anova(m_d_3)
 broom::glance(m_d_3)$r.squared
 ```
 
-----
+:::{.fragment}
+[In this special case (with only one IV/Predictor) it provides a test of the main effect of group.]{style="color:blue;"}          
 
-<span style="color: blue;">In this special case (with only one IV/Predictor) it provides a test of the main effect of group.</span>     
+[A significant main effect means that at least 1 contrast in one set of all possible sets of orthogonal contrasts is significant.]{style="color:blue;"}         
 
-<span style="color: blue;">A significant main effect means that at least 1 contrast in one set of all possible sets of orthogonal contrasts is significant.</span>        
-
-<span style="color: blue;">Not generally very useful. Tradition is still to report it (unless using POCs) but likely for wrong reasons. (more in this later).</span>   
-
-----
-
-<span style="color: red;">Question: Why does model $R^2$ not test the main effect if there are other predictors in the model?</span>
+[Not generally very useful. Tradition is still to report it (unless using POCs) but likely for wrong reasons. (more in this later).]{style="color:blue;"}
+:::
 
 ----
 
-<span style="color: blue;">Model $R^2$ is the variance in $Y$ explained by all the regressors in the model. Only tests the main effect of an IV if only regressors for that IV are in the model.</span>  
+::: {.callout-important}
+# Question 
+
+Why does model $R^2$ not test the main effect if there are other predictors in the model?
+:::
+
+:::{.fragment}
+[Model $R^2$ is the variance in $Y$ explained by all the regressors in the model. Only tests the main effect of an IV if only regressors for that IV are in the model.]{style="color:blue;"}
+:::
 
 ----
 
@@ -482,11 +507,14 @@ Planned orthogonal contrasts allow you to:
 
 ----
 
-<span style="color: red;">Question: You predict that psychopathology will reduce overall health. What contrast do you test? What is a second contrast that is orthogonal?</span>
+::: {.callout-important}
+# Question 
 
-----
+You predict that psychopathology will reduce overall health. What contrast do you test? What is a second contrast that is orthogonal?
+:::
 
-<span style="color: blue;">For conceptual understanding:</span>     
+:::{.fragment}
+[For conceptual understanding:]{style="color:blue;"}       
 
 ```{r}
 #| echo: false
@@ -499,7 +527,7 @@ c_a <- tibble(` ` = c("c_1a", "c_2a"),
 c_a
 ```
 
-<span style="color: blue;">John's preference (unit weighted):</span>       
+[John's preference (unit weighted):]{style="color:blue;"}       
 
 
 ```{r}
@@ -512,10 +540,15 @@ c_b <- tibble(` ` = c("c_1b", "c_2b"),
 
 c_b
 ```
+:::
 
 ----
 
-<span style="color: red;">Question: Both of these options represent two conceptual comparisons. What are these two comparisons?</span>
+::: {.callout-important}
+# Question 
+
+Both of these options represent two conceptual comparisons. What are these two comparisons?
+:::
 
 ```{r}
 #| echo: false
@@ -524,21 +557,25 @@ c_a |>
   bind_rows(c_b)
 ```
 
-----
+:::{.fragment}
+[`c_1` compares a combined group of patients with alcohol use disorder and depression to healthy controls.]{style="color:blue;"}       
 
-<span style="color: blue;">`c_1` compares a combined group of patients with alcohol use disorder and depression to healthy controls.</span>     
+[`c_2` compares patients with alcohol use disorder to patients with depression.]{style="color:blue;"}
+:::
+
+:::{.fragment}
+::: {.callout-important}
+# Question
+
+How will the analyses in Quarto be similar and different?
+:::
+:::
+
+:::{.fragment}
+[The parameter estimates for `c_1` and `c_2` will be different across the two models. However, the statistical test of the null for each parameter will be identical (t/F and p-value). This should not be surprising given that the contrasts in each `c_1` option are simply a linear transformation of the other. It is simply a change of scale similar to multiplying a quantitative variable by some constant.]{style="color:blue;"}       
  
-<span style="color: blue;">`c_2` compares patients with alcohol use disorder to patients with depression.</span>  
-
-----
-
-<span style="color: red;">Question: How will the analyses in Quarto be similar and different?</span>
-
-----
-
-<span style="color: blue;">The parameter estimates for `c_1` and `c_2` will be different across the two models. However, the statistical test of the null for each parameter will be identical (t/F and p-value). This should not be surprising given that the contrasts in each `c_1` option are simply a linear transformation of the other. It is simply a change of scale similar to multiplying a quantitative variable by some constant.</span>     
- 
-<span style="color: blue;">The model $R^2$ and the test of the null will be identical.</span>  
+[The model $R^2$ and the test of the null will be identical.]{style="color:blue;"} 
+:::
 
 ----
 
@@ -591,7 +628,11 @@ data <- data |>
 
 ----
 
-<span style="color: red;">Question: Why are the parameter estimates for `c_1` different and which is preferred?</span>
+::: {.callout-important}
+# Question
+
+Why are the parameter estimates for `c_1` different and which is preferred?
+:::
 
 ```{r}
 #| echo: false
@@ -603,12 +644,11 @@ c_a |>
 ```
 
 
-----
-
-<span style="color: blue;">In each instance $b_1$ represents change in health for a 1 unit change on the `c_1` regressor. For `c_1b` a 1 unit change moves fully from the alcohol/depress group to the healthy group. $b_1$ was 2/3 the size for `c_1a` because 1 unit only moves 2/3 of the way between the two sets in the contrast.</span>     
+:::{.fragment}
+[In each instance $b_1$ represents change in health for a 1 unit change on the `c_1` regressor. For `c_1b` a 1 unit change moves fully from the alcohol/depress group to the healthy group. $b_1$ was 2/3 the size for `c_1a` because 1 unit only moves 2/3 of the way between the two sets in the contrast.]{style="color:blue;"}        
  
-<span style="color: blue;">Therefore, unit weights allow you to report $b_1$ and have it represent the difference in the means of the two groups/sets.</span>
-
+[Therefore, unit weights allow you to report $b_1$ and have it represent the difference in the means of the two groups/sets.]{style="color:blue;"}    
+:::
 
 ----
 
@@ -660,27 +700,34 @@ The coefficients in the ignored set should all be 0.
 
 ----
 
-<span style="color: red;">Describe `c_1` (patient groups vs. healthy controls) and `c_2` (patients with alcohol use disorder vs. depression in terms of Set U and Set V.</span>    
+::: {.callout-important}
+# Question
 
-----
+How would you describe `c_1` (patient groups vs. healthy controls) and `c_2` (patients with alcohol use disorder vs. depression) in terms of Set U and Set V?
+:::
 
+:::{.fragment}
+$C_1 = (c_1*\text{alcohol} + c_2*\text{depress})-(c_3*\text{healthy})$    
 
-<span style="color: blue;">$C_1 = (c_1*\text{alcohol} + c_2*\text{depress})-(c_3*\text{healthy})$</span>   
-
-Set U: `alcohol`, `depress`; Set V: `healthy`    
-
-
-<span style="color: blue;">$C_2 = (c_1*\text{alcohol})-(c_3*\text{depress})$</span>   
-
-Set U: `alcohol`; Set V: `depress`; Ignored: `healthy`
-
-----
+[Set U: `alcohol`, `depress`; Set V: `healthy`]{style="color:blue;"}         
 
 
-<span style="color: red;">Convert these to coefficients using $\frac{v}{(u + v)}$ & $\frac{u}{(u + v)}$.</span>   
+$C_2 = (c_1*\text{alcohol})-(c_3*\text{depress})$     
 
-----
+[Set U: `alcohol`; Set V: `depress`; Ignored: `healthy`]{style="color:blue;"}
+:::
 
+
+:::{.fragment}
+::: {.callout-important}
+# Exercise
+
+Convert these to coefficients using $\frac{v}{(u + v)}$ & $\frac{u}{(u + v)}$.
+:::
+:::
+
+
+:::{.fragment}
 ```{r}
 #| echo: false
 
@@ -691,8 +738,8 @@ tibble(` ` = c("c_1", "c_2"),
 ```
 
 
-
-<span style="color: blue;">But you will never do this! R does this for you.</span>
+[But you will never do this! R does this for you.]{style="color:blue;"}
+:::
 
 ----
 
@@ -720,28 +767,38 @@ tidy_m_poc <- broom::tidy(m_poc) |>
 tidy_m_poc
 ```
 
-<span style="color: red;">Question: What does each of the $b_j$s test?</span>  
 
-----
+::: {.callout-important}
+# Question 
 
-<span style="color: blue;">Each test whether the contrast that we specified is 0 or not. More specifically, how likely would it be to get our sample $b_j$ if $\beta_j = 0$ for each of these two contrasts.</span>
-
-----
-
-<span style="color: red;">Question: What does the 2 df F-test of $R^2$ test conceptually?</span>  
+What does each of the $b_j$s test?
+:::
 
 
-----
+:::{.fragment}
+[Each test whether the contrast that we specified is 0 or not. More specifically, how likely would it be to get our sample $b_j$ if $\beta_j = 0$ for each of these two contrasts.]{style="color:blue;"}
+:::
 
-<span style="color: blue;">It provides a test of the main effect of `group`; same as before with dummy coded regressors. Any unique coding system using 2 regressors for three groups will work for the main effect.</span>    
+:::{.fragment}
+::: {.callout-important}
+# Question
 
-<span style="color: blue;">As before, you don’t want to use model $R^2$ for the main effect in any model other than one way ANOVA. Use `anova()` function for tests of main effects.</span>
+What does the 2 df F-test of $R^2$ test conceptually?
+:::
+:::
+
+
+:::{.fragment}
+[It provides a test of the main effect of `group`; same as before with dummy coded regressors. Any unique coding system using 2 regressors for three groups will work for the main effect.]{style="color:blue;"}        
+
+[As before, you don’t want to use model $R^2$ for the main effect in any model other than one way ANOVA. Use `anova()` function for tests of main effects.]{style="color:blue;"}    
 
 ```{r}
 anova(m_poc)
 
 broom::glance(m_poc)$r.squared
 ```
+:::
 
 ----
 
@@ -765,12 +822,15 @@ data |>
 
 ## Dummy Coding Group Mean Estimates
 
+::: {.callout-important}
+# Question
 
-<span style="color: red;">Question: How can we get standard errors for the group mean point estimates using the linear model parameters?</span>  
+How can we get standard errors for the group mean point estimates using the linear model parameters?
+:::
 
-----
-
-<span style="color: blue;">Fit three separate models. Set a different group as the reference group in each model. $b_0$ will be the predicted mean for the reference group in each model. The standard error for $b_0$ is the standard error for this parameter.</span>
+:::{.fragment}
+[Fit three separate models. Set a different group as the reference group in each model. $b_0$ will be the predicted mean for the reference group in each model. The standard error for $b_0$ is the standard error for this parameter.]{style="color:blue;"}    
+:::
 
 ----
 
@@ -808,11 +868,9 @@ broom::tidy(m_health) |>
   mutate(term = str_replace(term, "group", ""))
 ```
 
+[This standard error is the standard error you should graph! But there is an easier way to get these.]{style="color:blue;"}   
 
 ----
-
-<span style="color: blue;">This standard error is the standard error you should graph! But there is an easier way to get these.</span>    
-
 
 ```{r}
 data_new <- tibble(group = levels(data$group))
@@ -1167,16 +1225,19 @@ tibble(group_1 = -1,
 
 ## Single and Multiple Comparisons 
 
+::: {.callout-important}
+# Question
 
-<span style="color: red;">Question: What do you gain from testing the main effect (or interaction) of a categorical variable that has more than 2 levels? What do you not gain?</span>    
+What do you gain from testing the main effect (or interaction) of a categorical variable that has more than 2 levels? What do you not gain?
+:::
 
-----
+:::{.fragment}
+[You learn that some contrast across the groups/conditions in some set of orthogonal contrasts is significant. Does this really tell you something interesting?]{style="color:blue;"}        
 
-<span style="color: blue;">You learn that some contrast across the groups/conditions in some set of orthogonal contrasts is significant. Does this really tell you something interesting?</span>    
+[You do not learn which groups are different from each other. In almost all instances our question is about differences between groups (or combinations of groups; or patterns across groups). We need contrasts.]{style="color:blue;"}        
 
-<span style="color: blue;">You do not learn which groups are different from each other. In almost all instances our question is about differences between groups (or combinations of groups; or patterns across groups). We need contrasts.</span>    
-
-<span style="color: blue;">The test of the main effect is not needed (with one exception) to reduce the probability of making any Type I errors. In many instances, it will increase the probability of Type II errors. This is a **big** misconception in our field.</span>
+[The test of the main effect is not needed (with one exception) to reduce the probability of making any Type I errors. In many instances, it will increase the probability of Type II errors. This is a **big** misconception in our field.]{style="color:blue;"}    
+:::
 
 ----
 
@@ -1233,17 +1294,21 @@ data |>
 
 ----
 
-<span style="color: red;">Question: What validity concerns do we need to evaluate for these various options?</span>  
+::: {.callout-important}
+# Question
 
-----
+What validity concerns do we need to evaluate for these various options?
+:::
 
-<span style="color: blue;">Statistical/conclusion validity.</span>    
+:::{.fragment}
+Statistical/conclusion validity.{style="color:blue;"}     
 
-1. <span style="color: blue;">Do results clearly support your theory (fundamental)?</span>
-2. <span style="color: blue;">Probability of Type 1 error.</span>
-3. <span style="color: blue;">Probability of Type 2 error.</span>
+[1. Do results clearly support your theory (fundamental)?]{style="color:blue;"}    
+[2. Probability of Type 1 error.]{style="color:blue;"}     
+[3. Probability of Type 2 error.]{style="color:blue;"}     
 
-<span style="color: blue;">We should wonder (and be concerned about) what happens to the probability of making an error across *all* of our tests.</span>
+[We should wonder (and be concerned about) what happens to the probability of making an error across *all* of our tests.]{style="color:blue;"} 
+:::
 
 ----
 
@@ -1268,35 +1333,43 @@ $\text{alpha}_{\text{set}} \le \text{set size}*\text{alpha}_{\text{test}}$
 
 ----
 
-<span style="color: red;">Question: What do we now know about statistical validity for POC approaches?</span>  
+::: {.callout-important}
+# Question
 
+What do we now know about statistical validity for POC approaches?
+:::
+
+
+:::{.fragment}
+[Can only use POCs when your research questions map onto $n_{\text{levels}}-1$ orthogonal predictions.]{style="color:blue;"}    
+
+[Need to proceed cautiously because statistical results may support predictions but patterns of means may undermine your conclusions (pharmacological and expectancy example - draw graphs for two scenarios).]{style="color:blue;"}     
+
+[Must be comfortable with these contrasts testing *different* questions and therefore being in different families.]{style="color:blue;"}
+:::
 
 ----
 
-<span style="color: blue;">Can only use POCs when your research questions map onto $n_{\text{levels}}-1$ orthogonal predictions.</span>    
+::: {.callout-important}
+# Question
 
-<span style="color: blue;">Need to proceed cautiously because statistical results may support predictions but patterns of means may undermine your conclusions (pharmacological and expectancy example - draw graphs for two scenarios).</span>    
+What do we do with multiple planned, non-orthogonal contrasts, and worse still unplanned contrasts?
+:::
 
-<span style="color: blue;">Must be comfortable with these contrasts testing *different* questions and therefore being in different families.</span>
-
-----
-
-<span style="color: red;">Question: What do we do with multiple planned, non-orthogonal contrasts, and worse still unplanned contrasts?</span>  
-
-----
-
+:::{.fragment}
 **Many** procedures exist. Kirk summarizes more but...
 
-**<span style="color: blue;">For planned, non-orthogonal</span>**     
+[**For planned, non-orthogonal**]{style="color:blue;"}         
 
 **Fisher LSD** is reasonable with planned, non-orthogonal contrasts for 3 level variables (family-wise alpha controlled and reasonable power).   
 
 **Holm-Bonferonni** is most flexible but need to keep planned contrasts to a minimum (family-wise type I is strictly controlled, but power drops with increasing number of contrasts). Fisher LSD may be more powerful in some instances with 3 level variables.    
 
 
-**<span style="color: blue;">For post-hoc/unplanned</span>**    
+[**For post-hoc/unplanned**]{style="color:blue;"}        
 
 **Scheffe** can be used when you can't limit yourself a priori. Power sucks!   
+:::
 
 ----
 
@@ -1306,14 +1379,17 @@ $\text{alpha}_{\text{set}} \le \text{set size}*\text{alpha}_{\text{test}}$
 
 - If omnibus effect is significant, test pairwise comparisons among groups/conditions using dummy codes (other contrasts may be used if planned). No additional “protection” is needed.   
 
+::: {.callout-important}
+# Question
 
-<span style="color: red;">Question: How is family-wise alpha controlled?</span>  
+How is family-wise alpha controlled?
+:::
 
-----
+:::{.fragment}
+[Only proceed when omnibus test indicates some comparison is significant (monte carlo of null main effect).]{style="color:blue;"}     
 
-<span style="color: blue;">Only proceed when omnibus test indicates some comparison is significant (monte carlo of null main effect).</span>
-
-<span style="color: blue;">Problems emerge if omnibus is significant but you do multiple tests, only some of which are significant). Not a problem, generally, with 3 level variable and 3 tests (e.g. pairwise comparisons). Inadequate with more levels (monte-carlo for three group with effect; thought experiment with 1 significant group difference in 4 level).</span>   
+[Problems emerge if omnibus is significant but you do multiple tests, only some of which are significant). Not a problem, generally, with 3 level variable and 3 tests (e.g. pairwise comparisons). Inadequate with more levels (monte-carlo for three group with effect; thought experiment with 1 significant group difference in 4 level).]{style="color:blue;"}    
+:::
 
 
 ----
@@ -1588,14 +1664,17 @@ type_2 <- map_int(1:n_experiments, simulate_hb)
 
 Average type II error is `r mean(type_2)`
   
-----
+:::{.fragment}
+::: {.callout-important}
+# Question
 
-<span style="color: red;">Question: What would family-wise error rate be if we conducted only 2 dummy contrasts?</span>  
+What would family-wise error rate be if we conducted only 2 dummy contrasts?
+:::
+:::
 
-----
-
-
-<span style="color: blue;">$\le .10$, but they would definitely be considered in the same family (related questions) and most people won't tolerate this.</span>
+:::{.fragment}
+[$\le .10$, but they would definitely be considered in the same family (related questions) and most people won't tolerate this.]{style="color:blue;"}
+:::
 
 
 
