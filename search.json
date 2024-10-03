@@ -214,7 +214,7 @@
     "href": "web2_slide_decks.html",
     "title": "Slide Decks",
     "section": "",
-    "text": "Unit 1: Overview\nUnit 2: Sampling Distributions, Parameters, and Parameter Estimates\nUnit 3: Inferences about a Single Mean (1 Parameter Models)\nUnit 4: Inferences about a Single Quantitative Predictor\nUnit 5: Inferences about a Single Dichotomous Predictor\nUnit 5: Inferences about Two Predictors",
+    "text": "Unit 1: Overview\nUnit 2: Sampling Distributions, Parameters, and Parameter Estimates\nUnit 3: Inferences about a Single Mean (1 Parameter Models)\nUnit 4: Inferences about a Single Quantitative Predictor\nUnit 5: Inferences about a Single Dichotomous Predictor\nUnit 6: Inferences about Two Predictors",
     "crumbs": [
       "Slide Decks"
     ]
@@ -524,7 +524,7 @@
     "href": "web5_labs.html#week-4-0927",
     "title": "Lab Materials",
     "section": "Week 4: 09/27",
-    "text": "Week 4: 09/27\n\nLab 04 quantitative data\nLab 04 dichotomous data\nStudent shell\nTA notebook: qmd; html",
+    "text": "Week 4: 09/27\n\nLab 04 quantitative data\nLab 04 dichotomous data\nStudent shell\nTA notebook: qmd; html\nVideo recording of lab",
     "crumbs": [
       "Lab Materials"
     ]
