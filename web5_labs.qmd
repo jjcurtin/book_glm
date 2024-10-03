@@ -26,3 +26,9 @@
 - [Student shell](/lab/week_04/lab_04_shell.qmd)
 - TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_04_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_04_ta.html)
 - [Video recording of lab](https://mediaspace.wisc.edu/media/lab_04_claire/1_l1mfwvlq)
+
+## Week 5: 10/04
+- No data file (using build in data from R)
+- [Student shell](/lab/week_05/lab_05_shell.qmd)
+- TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_05_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_05_ta.html)
+- [Video recording of lab]()
