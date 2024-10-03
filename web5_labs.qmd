@@ -25,4 +25,4 @@
 - [Lab 04 dichotomous data](/lab/data/lab_04_data_dich.xlsx)
 - [Student shell](/lab/week_04/lab_04_shell.qmd)
 - TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_04_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_04_ta.html)
- 
+- [Video recording of lab](https://mediaspace.wisc.edu/media/lab_04_claire/1_l1mfwvlq)

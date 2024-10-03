@@ -12,6 +12,18 @@ options(scipen = 999) # turns off scientfic notation
 
 ```
 
+## Announcements
+
+- Application Exam assigned this Friday (10/04).  Due at 8:30 am on Friday, 10/11
+- Concepts exam on Wednesday, 10/23 in class
+- Progress on video recordings
+  - Lab recorded this week
+  - Captioning in progress
+  - Trying to record lecture today!
+- Class notetaker needed
+
+
+
 
 ## Categorical Variables in GLM
 
@@ -95,7 +107,6 @@ options(conflicts.policy = "depends.ok")
 library(tidyverse)
 library(broom)  # for tidy() and glance()
 library(patchwork)
-library(skimr)
 
 theme_set(theme_classic()) 
 
@@ -110,25 +121,34 @@ data |> head()
 
 -----
 
-::: {.callout-tip}
-# Coding Tip 
+:::{.callout-tip}
+# Coding Tip
+We can customize skimr output to exclude certain statistics. 
 
-You can customize your own function for skimming data using `skim_with()`.  
-- Remove stats you don't want by setting to NULL
+- For example, we can exclude the histogram, 25th percentile, and 100th percentile for numeric variables. 
+- Below is an example of how to customize skimr output.
 - Save this is a script that you source to have access to it without having to rewrite it each time (DRY!!)
 
 ```{r}
-skim_some <- skim_with(numeric = sfl(p25 = NULL, p75 = NULL, hist = NULL))
+library(skimr)
+my_skim <- skim_with(base = sfl(n_complete = ~ sum(!is.na(.), na.rm = TRUE),
+                                n_missing = ~sum(is.na(.), na.rm = TRUE)),
+                     numeric = sfl(p25 = NULL,
+                                   p75 = NULL,
+                                   hist = NULL),
+                     character = sfl(min = NULL, max = NULL),
+                     factor = sfl(ordered = NULL))
 ```
-
 :::
+
+-----
 
 Skim the data
 
 \
 
 ```{r}
-data |> skim_some()
+data |> my_skim()
 ```
 
 -----
@@ -155,9 +175,9 @@ Why can't we use `bg` directly in our glm in `lm()`
 
 
 :::{.fragment}
-[It is not numeric.  What is a 1 unit change on `bg` when it is coded as "placebo" and "alcohol"]{style="color:blue;"}
+[It is not numeric.  What is a 1 unit change on `bg` when it is coded as "placebo" and "alcohol?"]{style="color:blue;"}
 
-[We need to make a regressor (a `x` in our model) to represent `bg`]{style="color:blue;"}
+[We need to make a regressor (an `X` in our model) to represent `bg`]{style="color:blue;"}
 :::
 -----
 
@@ -261,7 +281,7 @@ What is the interpretation of $b_1$ (parameter estimate for `bg_d`) in this mode
 :::{.fragment}
 [Still change in $Y$ for one unit change in $X$.]{style="color:blue;"}
 
-[However, a one unit change in $X$ moves from the placeob group (coded 0) to alcohol group (coded 1).  Therefore $b_1$ is now the predicted change in $Y$ between placebo and alcohol groups. This is simply the difference in the mean of the two groups!]{style="color:blue;"}
+[However, a one unit change in $X$ moves from the placebo group (coded 0) to alcohol group (coded 1).  Therefore $b_1$ is now the predicted change in $Y$ between placebo and alcohol groups. This is simply the difference in the mean of the two groups!]{style="color:blue;"}
 :::
 
 -----
@@ -570,7 +590,7 @@ How do you use this information to calculate $R^2$ for the augmented model?
 - $P_a=2$  
 - $SSE_a =$ `r round(sse(m_aug), 2)`  
 
-[$R^2$ is the proportion of explained variance over total variance in $Y$. The total variance is equivalent to the SSE of the Mean Only model] {style="color:blue;"}
+[$R^2$ is the proportion of explained variance over total variance in $Y$. The total variance is equivalent to the SSE of the Mean Only model]{style="color:blue;"}
 :::
 
 -----
@@ -584,7 +604,12 @@ Why?
 :::{.fragment}
 [At this point it equals PRE b/c $SSE_c$ is the mean only model!]{style="color:blue;"}
 
-$\frac{SSE_{mean}-SSE_a}{SSE_{mean}}$ = $\frac{`r round(sse(m_com), 2)` - `r round(sse(m_aug), 2)`}{`r round(sse(m_com), 2)`}$ = `r round((sse(m_com) - sse(m_aug)) / sse(m_com), 4)`
+```{r}
+#| echo: false
+m_mo <- lm(fps ~ 0 + bg_d, data = data) 
+```
+
+$\frac{SSE_{mean}-SSE_a}{SSE_{mean}}$ = $\frac{`r round(sse(m_mo), 2)` - `r round(sse(m_aug), 2)`}{`r round(sse(m_mo), 2)`}$ = `r round((sse(m_mo) - sse(m_aug)) / sse(m_mo), 4)`
 :::
 
 ## Effect Sizes in R
