@@ -534,7 +534,7 @@
     "href": "web5_labs.html#week-5-1004",
     "title": "Lab Materials",
     "section": "Week 5: 10/04",
-    "text": "Week 5: 10/04\n\nNo data file (using build in data from R)\nStudent shell\nTA notebook: qmd; html\nVideo recording of lab",
+    "text": "Week 5: 10/04\n\nNo data file (using built-in data from R)\nStudent shell\nTA notebook: qmd; html\nVideo recording of lab",
     "crumbs": [
       "Lab Materials"
     ]
@@ -545,6 +545,16 @@
     "title": "Exams",
     "section": "",
     "text": "Application Exam 1",
+    "crumbs": [
+      "Exams"
+    ]
+  },
+  {
+    "objectID": "web6_exams.html#application-exam-1",
+    "href": "web6_exams.html#application-exam-1",
+    "title": "Exams",
+    "section": "",
+    "text": "data\nexam shell",
     "crumbs": [
       "Exams"
     ]
