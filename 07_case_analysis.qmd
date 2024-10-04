@@ -426,8 +426,10 @@ $\text{SE}_{bi} = \frac{s_y}{s_i} = \frac{\sqrt{(1-R^2_y)}}{\sqrt{(N - k - 1)}}*
 We are going to use the following function (`case_analysis()`) to help us identify observations with high leverage.    
 
 ```{r}
-case_analysis <- function(model, type) {
+case_analysis <- function(model, type, term = NULL, id = TRUE) {
   # type can be hat_values, residuals, cooks_d, df_betas, influence_plot, cov_ratio
+  # term can be used to pass in a single parameter for the df_betas plot
+  # Influence plot will label points with row id by default. Can turn off by setting id to FALSE
   
   model_formula <- as.character(model$call$formula)
   
@@ -472,7 +474,7 @@ case_analysis <- function(model, type) {
   }
   
   if(type == "df_betas") {
-    m_1_coefs <- names(as_tibble(dfbetas(m_1)))
+    m_1_coefs <- if(!is.null(term))term else names(as_tibble(dfbetas(m_1)))
     i <- 0
     for (term in m_1_coefs) {
       i <- i + 1
@@ -513,11 +515,15 @@ case_analysis <- function(model, type) {
                             sep = " "),
            x = "Hat Values",
            y = "Studentized Residuals")
+    
+    if(id) {
+      p <- p +
+        geom_text(aes(label = names(cooks.distance(model))), vjust = 0, hjust = 1)
+    }
     print(p)
   }
   
 }
-  
 ```
 
 
