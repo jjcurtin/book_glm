@@ -131,14 +131,11 @@ options(conflicts.policy = "depends.ok")
 library(tidyverse)
 library(patchwork)
 library(skimr)
-library(car, exclude = c("recode", "some")) #<1>
 
 theme_set(theme_classic()) 
 
 path_data <- "data_lecture"
 ```
-
-1. We are handling conflicts with two functions in the `car` package by excluding them upon loading. As a reminder you can see more about handling conflicts [here](https://jjcurtin.github.io/book_dwvt/conflicts.html).   
 
 
 ```{r}
@@ -532,10 +529,10 @@ case_analysis(m_1, type = "hat_values")
 
 `hatvalues()` returns a vector of named numbers (name = row id). This makes it easy to pull out rows corresponding to certain hat values.
 ```{r}
-cutoff <- 2*mean(hatvalues(m_1))
+cut_hat <- 2*mean(hatvalues(m_1))
 
 data |> 
-    filter(hatvalues(m_1) > cutoff)
+    filter(hatvalues(m_1) > cut_hat)
 ```
 
 -----
@@ -608,7 +605,7 @@ $\text{SE}_{bi} = \frac{s_y}{s_i} = \frac{\sqrt{(1-R^2_y)}}{\sqrt{(N - k - 1)}}*
 case_analysis(m_1, type = "residuals")
 ```
 
-
+The `car` package has a function `outlierTest()` that can be used to quickly identify regression outliers (residuals with a Bonferroni p-value < .05).
 ```{r}
 car::outlierTest(m_1, cutoff = .05, labels = data$subid)
 ```
@@ -659,6 +656,20 @@ Identification of problematic scores should be considered in the context of the 
 ```{r}
 case_analysis(m_1, type = "cooks_d")
 ```
+
+```{r}
+cut_cook <- 4/(nrow(data) - length(coef(m_1)) - 1 - 1)
+
+data |> 
+  filter(cooks.distance(m_1) > cut_cook)
+```
+
+```{r}
+data |> 
+  filter(cooks.distance(m_1) > .15)
+```
+
+
 
 ## Influence Bubble Plot (Real data)
 
