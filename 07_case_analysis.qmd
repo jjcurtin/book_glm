@@ -683,6 +683,12 @@ data |>
 case_analysis(m_1, type = "influence_plot")
 ```
 
+```{r}
+data |> 
+  slice(c(23, 62))
+```
+
+
 ::: {.callout-important}
 # Question
 
