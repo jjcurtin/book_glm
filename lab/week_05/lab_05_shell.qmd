@@ -1,0 +1,450 @@
+---
+title: "Lab 5 TA Script" 
+author: "TAs" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Questions about the application exam or other material?
+
+## Conventions for decimals ("sig. Figs") when reporting statistics
+b and F values: 
+
+- Always include the digit(s) preceding the decimal
+- If the number is less than one, report 0.xxx (e.g., 0.852)
+- Otherwise, report two decimal places after the decimal (e.g., 2.85)
+
+
+p values:
+
+- Because p values are bounded by 0 and 1, *do not* report the digit before the decimal place
+- Report 3 digits after the decimal
+- Although you can just report the most stringent level of significance which the p value falls under (e.g., p = .003 --> p < .005), it is good practice to report exact p values to the 3rd decimal place, for transparency of your results...
+- ...Except for p values smaller than .001, just report p < .001!
+
+
+## Set up    
+
+Today we are going to use a few new packages. The first is called `GGally`. Since we are only interested in one function from `GGally` we are only going to load that function (`ggpairs()`).    
+
+We are also going to use the `corr.test()` function in the `psych` package. We will also load only this one function to avoid increasing the chance of package conflicts.   
+
+We are also going to be using a dataset that is part of the `car` package. To use these data we do not need to load the library, but you will need to have the package installed in Quarto. Note that because of this, we won't be assigning our `path_data` object today!
+
+```{r}
+#| message: false
+#| warning: false
+
+options(conflicts.policy = "depends.ok") 
+library(tidyverse)
+library(GGally, include.only = "ggpairs")
+library(psych, include.only = "corr.test")
+
+theme_set(theme_classic()) 
+```
+
+
+## Prestige dataset
+
+Today we're going to use a dataset called `Prestige` that is part of the car package.    
+
+**How do we get the documentation for the Prestige dataset?**
+```{r}
+#| eval: false
+
+
+```
+
+**How do we load data that are included in an R package?** 
+```{r}
+
+
+```
+
+
+We'll drop one of the three categories in the `type` variable so we have a dichotomous predictor. We'll learn how to deal with categorical predictors with three or more levels later in the class. After the `filter` statement, our type variable should only have blue and white collar jobs.    
+
+Remember our Boolean logical operators: ! is for "not," so != is "not equal to" 
+```{r}
+d <- d_raw |> 
+  filter(type != "prof")
+```
+
+**How can we check that we do in fact have only two levels?**
+```{r}
+
+
+
+```
+
+
+**Wait... Why is 'prof' still in the output of `table()` `skim()` functions?**    
+
+**What is the data type of the "type" variable?**
+```{r}
+
+
+```
+
+Factor! A factor variable stores the possible levels of the categorical variable. Because "type" is a factor, Quarto assumes that 'prof' is still a possible response, although no observation in the dataframe `d` belongs to that group.    
+
+**How do we fix this?**   
+The `forcats` function `fct_drop()` will drop any unused factor levels. We will be using a few other `forcats` functions today. Here is a handy cheatsheet - [https://rstudio.github.io/cheatsheets/factors.pdf](https://rstudio.github.io/cheatsheets/factors.pdf).
+```{r}
+d <- d |> 
+  mutate(
+    
+  )
+
+table(d$type) 
+```
+
+## Descriptive statistics 
+
+Take a quick look at the data using several of the functions we learned.
+```{r}
+glimpse(d) 
+
+```
+
+
+**What does each row in our data represent?**
+
+```{r}
+
+```
+
+
+**Here is a new function - `ggpairs()`, from the package `GGally`. What does it do? **
+
+```{r}
+#| eval: false
+
+
+```
+
+Use it on our data. 
+```{r}
+#| message: false
+
+
+```
+
+
+Recode the `type` variable to a centered numeric variable (-0.5 and 0.5).   
+```{r}
+d <- d |> 
+  mutate(
+    
+  )
+```
+
+
+Use `mutate()` and `fct_recode()` to make `type` factor labels more descriptive (e.g., what do bc and wc each stand for?).
+```{r}
+d <- d |> 
+  mutate(
+    
+  )
+
+table(d$type)
+```
+
+## Correlation matrix for focal variables: `education`, `income`, `women`, `type_c` 
+```{r}
+d |> 
+  select(education:women, type_c) |> 
+
+```
+
+
+**Advanced question: How can we compute the $\eta_p^2$ for a simple linear relationship between a pair of variables, using only the information from the correlation table? **
+
+```{r}
+(d |> 
+  select(education:women, type_c) |> 
+
+```
+
+
+**What if we also want p values for these correlations? (Is the correlation between two variables significantly different from 0?)**   
+```{r}
+#| eval: false
+
+?corr.test
+```
+
+Well that's kind of annoying to not have them next to each other, especially if we had more variables. 
+```{r}
+corr_results <- d |> 
+  select(education:women, type_c) |> 
+
+  
+corr_results
+```
+
+If we want to see just the correlation magnitudes (r) 
+```{r}
+corr_results$
+```
+ 
+If we want to see just the p-values 
+```{r}
+corr_results$
+```
+
+**Click on your `corr_results` object in your environment. What other things can we pull out?**
+
+```{r}
+
+
+
+```
+
+
+You can make it look nicer (or more APA) using functions from the kableExtra package.
+```{r}
+corr_results$stars |>  
+  kableExtra::kbl(caption = "Table 1") |>  
+  kableExtra::kable_classic(full_width = F, html_font = "Cambria") 
+```
+
+----
+
+## Group Exercise
+Group up with 1-2 of your lab-mates!
+
+### Part 1: Models with a single continuous predictor
+
+Suppose we are interested in whether jobs that require more years of education are also the ones in which people earn, on average, a higher income.
+
+### Fit the model to test our hypothesis and save it as `m_1`. Explain how this model answers our research question above.
+```{r}
+
+```
+
+
+### Obtain and report a t-statistic and p-value for each parameter.
+```{r}
+
+```
+
+### What are your degrees of freedom?
+```{r}
+
+
+
+```
+
+
+### How do we convert the t-statistic to the F-statistic?
+```{r}
+
+
+
+```
+
+
+### Interpret the intercept 
+
+
+### Is the intercept meaningful?
+
+
+### Interpret the regression coefficient for education 
+
+
+### Is the association between education and income statistically significant? 
+
+
+### How large is the effect? Obtain the effect size for education.
+
+```{r}
+
+
+
+```
+
+
+### How much variance of `income` is explained by `education`?
+
+
+### Let's graph! First, make a dataframe for plotting that contains the predictor.  
+```{r}
+
+
+
+```
+
+### Generate predictions for `d_graph_1` based on `m_1` using `predict()`. Remember to use `se.fit = TRUE` to return the standard error for error bars and to coerce your list into a `tibble`.
+```{r}
+
+```
+
+### Calculate `upper` and `lower` values for error bars and add your predictor back in.
+```{r}
+
+
+
+```
+
+
+### Make the plot in `ggplot2()`. Add raw data points.
+```{r}
+ggplot() + 
+  
+  
+  
+  
+  
+```
+
+
+
+## Part 2: Models with a single dichotomous predictor
+
+Suppose we are interested in whether white collar jobs on average require more years of education than blue collar jobs.
+
+### Fit the model and save it as `m_2`. Explain how this model answers our research question above.
+```{r}
+
+```
+
+### Obtain and report the t-statistic and p-value for each parameter.
+```{r}
+
+```
+
+### Interpret the intercept 
+
+
+### Interpret the regression coefficient for type_c
+
+
+### Let's graph! First, make a dataframe for plotting that contains the predictor.  
+```{r}
+
+```
+
+### Generate predictions for `d_graph_2` based on `m_2` using `predict()`. Remember to use `se.fit = TRUE` to return the standard error for error bars and to coerce your list into a `tibble`.
+```{r}
+
+
+```
+
+### Calculate `upper` and `lower` values for error bars and add your predictor back in. Create a new factor variable called `type` that provides meaningful labels for your dichotomous predictor.
+```{r}
+
+
+
+
+```
+
+
+### Make the plot in `ggplot2()`. Add raw data points.
+```{r}
+ggplot() + 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+```
+
+
+**End of exercise!**
+
+----
+
+## Models with 2 Predictors
+
+Representation of women in a job is measured by `women`, a variable in the `Prestige` dataset that records the percentage of a job's incumbents who are women.    
+
+Consider adding the representation of women as a covariate to model 1 (i.e., use both the `education` variable and the `women` variable to predict income.    
+
+**In general, why might it make sense to add a covariate?** 
+
+
+Now we will fit a model, `m_3`, to predict `income` from `education` and `women`.    
+Note that education is still the focal predictor.
+```{r}
+m_3 <- lm(income ~ education + women, data = d) 
+
+broom::tidy(m_3)
+```
+
+**How does adding women representation as a covariate influence the sampling distribution for the effect of education?**    
+
+```{r}
+tibble(b1 = seq(-400,400,.01),
+       probability_m_1 = dt(b1/subset(broom::tidy(m_1), term == "education")$std.error, m_1$df.residual),
+       probability_m_3 = dt(b1/subset(broom::tidy(m_3), term == "education")$std.error, m_3$df.residual)) |> 
+  ggplot() +
+  geom_line(aes(x = b1, y = probability_m_1, color = "red")) +
+  geom_line(aes(x = b1, y = probability_m_3, color = "blue")) +
+  geom_vline(xintercept = subset(broom::tidy(m_1), term == "education")$estimate, 
+             color = "red") +
+  geom_vline(xintercept = subset(broom::tidy(m_3), term == "education")$estimate, 
+             color = "blue") +
+  scale_color_manual(values = c("red", "blue"), breaks = c("red", "blue") , labels = c("1 predictor", "2 predictor")) +
+  labs(title = "Sampling Distribution for the Effect of Education",
+       x = "Regression Coefficient (Income/Education)",
+       y = "Probability")
+```
+
+
+**How does adding women representation as a covariate influence the (variance-based) effect size of education?**    
+
+Compare $\eta_p^2$ in the models with and without the covariate. 
+
+Without covariate
+```{r}
+sse_c <- sum(residuals(lm(income ~ 1, data = d))^2)
+sse_a <- sum(residuals(m_1)^2)
+
+(peta <- (sse_c - sse_a)/sse_c)
+```
+
+With covariate 
+```{r}
+sse_c <- sum(residuals(lm(income ~ women, data = d))^2)
+sse_a <- sum(residuals(m_3)^2)
+
+(peta <- (sse_c - sse_a)/sse_c)
+```
+
+**Describe that comparison**    
+
+
+**What does the $\eta_p^2$ for education represent?**    
+
+
+
+Now let's calculate **$\Delta R^2$**.    
+We can do this by calculating $R^2$ for the augmented model (`m_3`) and the compact model (i.e., with the focal variable [education] removed) and then getting the difference.
+```{r}
+r_sq_c <- broom::glance(lm(income ~ women, data = d)) |> 
+  pull(r.squared)
+r_sq_a <- broom::glance(m_3) |> 
+  pull(r.squared)
+
+r_sq_a - r_sq_c
+```
+
+**What does the $\Delta R^2$ for education represent?**    
+
+
+
+
+## We will stop here today and answer any questions you have so to prepare you all for the application exam. We will pick up from this 2 predictor example next time.
