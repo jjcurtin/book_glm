@@ -441,13 +441,12 @@ case_analysis <- function(model, type) {
       geom_rug(color = "blue") +
       labs(x = str_to_sentence(str_replace(type, "_", " ")),
            y = "Frequency",
-          title = str_c("Model:", model_formula[2], model_formula[1], model_formula[3],
-                     sep = " "))
+           title = str_c("Model:", model_formula[2], model_formula[1], model_formula[3],
+                         sep = " "))
   }
   
   if(type == "hat_values") {
-    p <- data |> 
-      mutate(x = hatvalues(model)) |> 
+    p <- tibble(x = hatvalues(model)) |> 
       plot_hist() +
       geom_vline(xintercept = 2*mean(hatvalues(model)), color = "red", linewidth = .75) +
       labs(subtitle = "Cut point: 2 * mean(hat)")
@@ -456,11 +455,10 @@ case_analysis <- function(model, type) {
   
   if(type == "residuals") {
     t_cut_point <- qt(p = .025/nrow(data), 
-                       df = nrow(data) - length(coef(model)) - 1 - 2, 
-                       lower.tail = FALSE)
-      
-    p <- data |> 
-      mutate(x = rstudent(model)) |> 
+                      df = nrow(data) - length(coef(model)) - 1 - 2, 
+                      lower.tail = FALSE)
+    
+    p <- tibble(x = rstudent(model)) |> 
       plot_hist() +
       geom_vline(xintercept = c(-1, 1) * t_cut_point, color = "red", linewidth = .75) +
       labs(subtitle = "Bonferroni corrected p-value < 0.05 in red")
@@ -468,8 +466,7 @@ case_analysis <- function(model, type) {
   }
   
   if(type == "cooks_d") {
-    p <- data |> 
-      mutate(x = cooks.distance(model)) |> 
+    p <- tibble(x = cooks.distance(model)) |> 
       plot_hist() +
       geom_vline(xintercept = 4/(nrow(data) - length(coef(model)) - 1 - 1),
                  color = c("red"), linewidth = .75) +
@@ -491,10 +488,9 @@ case_analysis <- function(model, type) {
       print(p)
     }
   }
-    
+  
   if(type == "cov_ratio") {
-    p <- data |> 
-      mutate(x = covratio(model)) |>
+    p <- tibble(x = covratio(model)) |>
       plot_hist() +
       geom_vline(xintercept = abs((3 * (length(coef(model)))/nrow(data)) - 1), 
                  color = "red", linewidth = .75) +
@@ -504,10 +500,9 @@ case_analysis <- function(model, type) {
   
   if(type == "influence_plot") {
     t_cut_point <- qt(p = .025/nrow(data), 
-                       df = nrow(data) - length(coef(model)) - 1 - 2, 
-                       lower.tail = FALSE)
-    p <- data |> 
-      mutate(residuals = rstudent(model),
+                      df = nrow(data) - length(coef(model)) - 1 - 2, 
+                      lower.tail = FALSE)
+    p <- tibble(residuals = rstudent(model),
              hat_values = hatvalues(model)) |>
       ggplot(aes(x = hat_values, y = residuals)) +
       geom_point(size = 10 * sqrt(cooks.distance(model))/max(cooks.distance(model)),
@@ -518,7 +513,7 @@ case_analysis <- function(model, type) {
                  linetype = c("dashed", "solid", "solid"), linewidth = .75) +
       labs(title = "Influence Bubble Plot",
            subtitle = str_c("Model:", model_formula[2], model_formula[1], model_formula[3],
-                     sep = " "),
+                            sep = " "),
            x = "Hat Values",
            y = "Studentized Residuals")
     print(p)
@@ -533,6 +528,14 @@ case_analysis <- function(model, type) {
 
 ```{r}
 case_analysis(m_1, type = "hat_values")
+```
+
+`hatvalues()` returns a vector of named numbers (name = row id). This makes it easy to pull out rows corresponding to certain hat values.
+```{r}
+cutoff <- 2*mean(hatvalues(m_1))
+
+data |> 
+    filter(hatvalues(m_1) > cutoff)
 ```
 
 -----
