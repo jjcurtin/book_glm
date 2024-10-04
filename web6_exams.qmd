@@ -4,6 +4,8 @@
 
 ## Application Exam 1
 
+- [data](https://dionysus.psych.wisc.edu/610/exams/aggression_data.csv)
+- [exam shell](https://dionysus.psych.wisc.edu/610/exams/app_exam_1_shell.qmd)
 
 ## Application Exam 2
 
