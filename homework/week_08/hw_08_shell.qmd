@@ -1,0 +1,130 @@
+---
+title: "hw_08_key" 
+author: "TAs" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+
+## Part A: Reading Questions
+
+### 1. What does it mean to have "redundancy between predictors" in multiple regression? What is the consequence of having redundant predictors? Answer in 2-3 sentences.
+
+
+
+
+### 2. Read the scenario below and answer the prompts that follow.  
+A psychologist wants to examine how workers' capacity to concentrate is affected by auditory nuisances in a factory. She decided to run an experiment with 6 different experimental “noise” conditions (e.g., banging a hammer on a table, having a research confederate yell and scream outside the testing room) and one control condition (“silence”). She randomly assigned the participants to the 7 conditions. The psychologist then asked the participants to remember a list of words. After a 10-minute delay, participants were asked to recall the list of words. Recall performance (percentage of correctly recalled words) was the DV. 
+
+After collecting the data, she individually tested whether the recall performance of the participants in each experimental condition was different from the participants in the control condition. Each of the 6 tests yield a p value > .05, suggesting no significant effect of noise on the capacity to concentrate. She then decided that she could try adding sex at birth as a covariate, since she had read studies in other areas of psychology that statistically controlled for sex at birth in their analyses. After adding sex at birth to each of her 6 models, she found that one of her experimental conditions (the one where a confederate yells outside the room) differed from her control condition at a significance level of p < .05 (after controlling for sex). Overjoyed, the psychologist wrote up her results for submission to a scientific journal, reporting that she manipulated noise by introducing a screaming confederate, and that this experimental manipulation led to worse memory as compared to a silent control condition (including relevant test statistics). She did not report the 5 other experimental conditions.
+
+#### a. Describe two critical problems in the psychologist’s research practices.
+
+
+  
+
+#### b. How do these problems affect the psychologist’s Type I error rate?
+
+
+
+
+#### c.	What are the two requirements proposed by Simmons et al. (2011) that would aid peer-reviewers in assessing the psychologist’s work?
+
+
+
+
+
+## Part B: Data Analysis
+
+Does childhood cognitive ability predict the size of developing brains? A team of neuroscientists recruited a longitudinal sample of 40 participants to answer this question. When the participants reached age 12, the researchers administered the fifth edition of Wechsler Intelligence Scale for Children (WISC-V) to assess childhood cognitive ability. When the participants aged 21, the researchers obtained structural MRI scans of the participants’ brains and calculated total MRI voxel count as a measure of brain size. Because body size and sex are known to relate to brain size, the neuroscientist also asked the participants to report their height and weight at age 21, as well as their sex assigned at birth. 
+
+You were asked to conduct the statistical analyses to test the hypothesis that childhood cognitive ability is positively associated with brain size in adulthood.
+
+Tragically, the data files came in a total mess. They do not have proper file extensions, so you do not know their exact file type, apart from the fact that they are regular delimited files. The data files also do not have proper variable names labeled. Luckily, your colleague was able to provide you with the codebooks of the two datafiles: `iq` and `brain`.
+
+**Codebook for `iq`**
+
+- `subject_id`:	Subject ID number	(range 1 - 40)
+- `simi`:	WISC-V subtest score: Similarities (range 5 - 20)
+- `voca`:	WISC-V subtest score: Vocabulary	(range 5 - 20)
+- `bloc`:	WISC-V subtest score: Block Design	(range 5 - 20)
+- `matr`:	WISC-V subtest score: Matrix Reasoning	(range 5 - 20)
+- `figr`:	WISC-V subtest score: Figure Weights	(range 5 - 20)
+- `digi`:	WISC-V subtest score: Digit Span	(range 5 - 20)
+- `code`:	WISC-V subtest score: Coding	(range 5 - 20)
+
+**Codebook for `brain`**
+
+- `subject_id`:	Subject ID number	(range 1 - 40)
+-	`sex`: Sex assigned at birth. (0 = female, 1  = male)
+-	`weight`:	Weight in pounds	(range 106 - 192)
+-	`height`:	Height in inches	(range 62 - 77)
+-	`mri_count`: Total voxel count from 18 slices, in thousands (range 790.62 – 1079.55)
+-	`openness`:	Big-five inventory: Openness (in adulthood)	(range -1.65 - 2.17)
+
+
+
+### 1. Read in both data files (iq and brain) using a new function `data.table::fread()` that automatically detects file format and type. 
+
+
+
+
+### 2. For both dataframes, rename the columns according to the codebook so that the column names are meaningful variable names.
+
+
+
+
+
+### 3. Use a function we learned in lab to combine the two dataframes, so that you end up with one dataframe that contains all subjects and all variables needed for the analyses.
+
+
+
+
+### 4. The raw data contain 7 subtest scores from WISC-V, measuring different domains of cognitive functioning. These subtest scores are meant to be added up into a Full-Scale Intelligence Quotient (FSIQ) that measures overall cognitive ability. Use `var_score()` to compute `fsiq`. If done correctly, `fisq` would have a mean of around 100 and a standard deviation of roughly 15.
+
+
+
+
+
+### 5.	Make a correlation/scatterplot matrix of the following variables: `mri_count`, `sex`, `weight`, `height` and `fsiq` (Hint: consider using the `GGally` package).
+
+
+
+
+
+
+### 6.	Report the three strongest correlations among these variables.
+
+
+
+### 7.	Fit a 2-parameter model, where `fsiq` alone predicts total voxel count (`mri_count`). Report the statistical test and interpret the parameter estimate for `fsiq`. Also compute $\eta^2$.
+
+
+
+
+### 8. Now fit a 5-parameter model predicting total voxel count (`mri_count`) from `fsiq`, `sex`, `height`, and `weight`. Report the statistical test and interpret the parameter estimate corresponding to the focal predictor. Also compute its $\eta_p^2$. How did the $\eta_p^2$ of `fsiq` change from the $\eta^2$ in the 2-parameter model? Why?
+
+
+
+
+
+
+### 9. Use a function we learned in lab to check for multicollinearity between your predictors in the 5-parameter model. Is multicollinearity a problem? How do you know?
+
+
+
+
+### 10.	Create a publication-quality graph that represents total voxel count (in thousands) as a function of FSIQ, when holding height and weight constant at their means and sex constant at the center of its coding scheme. Your plot should include standard error bands around the point estimates, raw data points, and informative axis labels.
+
+
+
+
+
+
+### 11. Indicate the number of hours spent on this assignment.

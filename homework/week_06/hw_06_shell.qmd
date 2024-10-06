@@ -30,7 +30,6 @@ editor_options:
 
 
 
-<!--KW: Consider adding 4th reading question. I had to remove 2 questions because they were on mediation-->
 
 ## Part B: Data Analysis
 
