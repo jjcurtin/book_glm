@@ -31,4 +31,4 @@
 - No data file (using built-in data from R)
 - [Student shell](/lab/week_05/lab_05_shell.qmd)
 - TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_05_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_05_ta.html)
-- [Video recording of lab]()
+- [Video recording of lab](https://mediaspace.wisc.edu/media/lab_05_claire/1_i06aljoy)

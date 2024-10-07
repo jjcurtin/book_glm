@@ -677,7 +677,7 @@ Augmented Model:
 
 \
 
-$F(P_a - P_c, N - P_a) = \frac{(SSE_c = SSE_a) / (P_a-P_c)}{SSE_a/(N-P_a)}$ 
+$F(P_a - P_c, N - P_a) = \frac{(SSE_c - SSE_a) / (P_a-P_c)}{SSE_a/(N-P_a)}$ 
 
 -----
 
@@ -706,7 +706,7 @@ How can you see the increase in power from the model comparison perspective (loo
 - $F (1, 93) = `r round((sum(residuals(lm(fps ~ ta, data=data))^2) - sum(residuals(m_3)^2))/(sum(residuals(m_3)^2)/93), 2)`, p = `r round(pt(-2.04, 93, lower.tail = TRUE)*2, 4)`$
 
 
-Decreased $SSE_a$ in three parameter model. Flip side of increased model $R^2$.](style="color:blue;")
+Decreased $SSE_a$ in three parameter model. Flip side of increased model $R^2$.]{style="color:blue;"}
 :::
 
 -----
@@ -734,7 +734,7 @@ This decrease in **power and precision** for model parameter estimates (regressi
 
 -----
 
-When there are more than `X`s in the model, it is **not** sufficient to examine only bivariate correlations among $X$s. To determine if a problem exists, calculate Variance Inflation Factors (VIF) for each $X$.  
+When there are more than two `X`s in the model, it is **not** sufficient to examine only bivariate correlations among $X$s. To determine if a problem exists, calculate Variance Inflation Factors (VIF) for each $X$.  
 
 $VIF_j = \frac{1}{(1-R^2_j)}$   
 
@@ -905,6 +905,7 @@ How could you assess the unique effect of `study_hours`, controlling for `iq`?
 ```{r}
 m_exam_3 <- lm(exam ~ 1 + study_hours_c + iq_c, data = data_exam)
 ```
+:::
 
 -----
 
@@ -940,11 +941,15 @@ What is the interpretation of $b_0$ in this model?
 
 :::{.callout-important}
 # Question
-What would change in this model? if we did not center `study_hours` and `iq`?
+What would change in this model if we did not center `study_hours` and `iq`?
 :::
 
 :::{.fragment}
-[The intercept would be the expected exam score for a student who studies 0 hours per week and has an IQ of 0.  There would be no change in either `b_1` or `b_2`.  These are still the unique effects of each of their associated `X`s, holding the other `X` constant in the model.]{style="color:blue;"}
+[The intercept would be the expected exam score for a student who studies 0 hours per week and has an IQ of 0.]{style="color:blue;"}
+
+\
+
+[There would be no change in either `b_1` or `b_2`.  These are still the unique effects of each of their associated `X`s, holding the other `X` constant in the model.]{style="color:blue;"}
 :::
 
 -----
@@ -957,13 +962,18 @@ tidy(m_exam_2)
 tidy(m_exam_3)
 ```
 
+\
+
+Look at the effect of `study_hours` across the two models
+
+-----
+
 :::{.callout-important}
 # Question
-Why did the effect of `study_hours` get smaller after controlling for IQ?
+Why did the effect of `study_hours` get smaller after controlling for IQ (see last slide and think about pattern of correlations among predictors)?
 :::
 
 :::{.fragment}
-
 ```{r}
 data_exam |> 
   select(study_hours, iq, exam) |> 
@@ -973,7 +983,7 @@ data_exam |>
 
 [1. When study_hours increases, IQ increases.]{style="color:blue;"}
 
-[2. When IQ increases, exam scores increase.] {style="color:blue;"}
+[2. When IQ increases, exam scores increase.]{style="color:blue;"}
 
 [3. The partial effect of study_hours on exam scores is smaller if IQ is not allowed to increase.]{style="color:blue;"}
 :::
@@ -987,17 +997,20 @@ Lets think about a causal model for the relationship between study hours and exa
 
 :::{.callout-important}
 # Question
-How do we get the total (overall) effect of study hours on exam scores, not controlling for any other variables>
+How do we get the total (overall) effect of study hours on exam scores, not controlling for any other variables?
 :::
 
 :::{.fragment}
-[Predict exam scores from study hours, without controlling for any other variables.  This is just the two parameter model we fit earlier]{style="color:blue;"}
+[To get the total effect of study_hours on exam score, predict exam scores from study hours, without controlling for any other variables.  This is just the two parameter model we fit earlier.]{style="color:blue;"}
 ```{r}
 lm(exam ~ 1 + study_hours_c, data = data_exam) |> 
   tidy()
 ```
+:::
 
-**Total effect of study_hours**
+-----
+
+This is our causal model at this point
 
 ```{r}
 #| code-fold: true
@@ -1015,8 +1028,25 @@ digraph{
 
 ------
 
+:::{.callout-important}
+# Question
+But what if we had a more complicated model that acknowledged that IQ may also affect exam scores.  How do we get the direct (partial, unique) effect of study hours on exam scores, controlling for IQ?  And how do we get the direct effect of IQ on exam scores, controlling for study hours?
+:::
 
-**Direct and indirect/spurious effects on study_hours**
+:::{.fragment}
+```{r}
+lm(exam ~ 1 + study_hours_c + iq_c, data = data_exam) |> 
+  tidy()
+```
+
+[These are the parameter estimates for these two `X`s, from the three parameter model]{style="color:blue;"}
+:::
+
+-----
+
+And here is our updated causal model
+
+\
 
 ```{r}
 #| code-fold: true
@@ -1030,39 +1060,125 @@ digraph{
     Y [label = 'exam']
     A->Y [label = '1.04', fontsize = 5]
     B->Y [label = '.35', fontsize = 5]
-    A->B [dir = both, label = '3.75', fontsize = 5]
+    A->B [label = '???', fontsize = 5]
 { rank = same; A; B }
 }
 ")
 ```
 
-**Direct + Indirect/Spurious = Total**
+-----
 
-`r round(coef(m_exam_3)[2],2)` +  (`r round(coef(lm(iq ~ study_hours_c, data = data_exam))[2],2)` * `r round(coef(m_exam_3)[3],2)`) = `r round(coef(m_exam_2)[2],2)`
+The total effect of study hours on exam scores is the sum of the direct effect of study hours on exam scores and the indirect or spurious* effect of study hours on exam scores through IQ.  That is currently missing from our model
+
+- This would be considered an indirect effect if we believe that study hours causes IQ
+- This would be a spurious effect if we believe that IQ causes study hours or a third variable (not displayed) causes both study hours and IQ
+- The decision about which is the most plausible explanation is a theoretical one and/or a function of your research design
+```{r}
+#| code-fold: true
+
+DiagrammeR::grViz("
+digraph{
+  graph[rankdir=LR]
+  node [shape = box, fontsize = 5, width = .5, height = .2]
+    A [label = 'study_hours']
+    B [label = 'iq']
+    Y [label = 'exam']
+    A->Y [label = '1.04', fontsize = 5]
+    B->Y [label = '.35', fontsize = 5]
+    A->B [label = '???', fontsize = 5]
+{ rank = same; A; B }
+}
+")
+```
+
+-----
+
+To calculate this indirect/spurious effect, we first need to calculate the direct effect of study hours on IQ.
+
+```{r}
+m_iq <- lm(iq_c ~ 1 + study_hours_c, data = data_exam)
+
+m_iq |> tidy()
+```
+
+```{r}
+#| code-fold: true
+
+DiagrammeR::grViz("
+digraph{
+  graph[rankdir=LR]
+  node [shape = box, fontsize = 5, width = .5, height = .2]
+    A [label = 'study_hours']
+    B [label = 'iq']
+    Y [label = 'exam']
+    A->Y [label = '1.04', fontsize = 5]
+    B->Y [label = '.35', fontsize = 5]
+    A->B [label = '3.75', fontsize = 5]
+{ rank = same; A; B }
+}
+")
+```
+
+-----
+
+And now:  **Direct + Indirect/Spurious = Total**
+`r round(coef(m_exam_3)[2], 2)` +  (`r round(coef(m_iq)[2], 2)` * `r round(coef(m_exam_3)[3], 2)`) = `r round(coef(m_exam_2)[2], 2)`
+
+```{r}
+#| code-fold: true
+
+DiagrammeR::grViz("
+digraph{
+  graph[rankdir=LR]
+  node [shape = box, fontsize = 5, width = .5, height = .2]
+    A [label = 'study_hours']
+    Y [label = 'exam']
+    A->Y [label = '2.34', fontsize = 5]
+}
+")
+```
+
+```{r}
+#| code-fold: true
+
+DiagrammeR::grViz("
+digraph{
+  graph[rankdir=LR]
+  node [shape = box, fontsize = 5, width = .5, height = .2]
+    A [label = 'study_hours']
+    B [label = 'iq']
+    Y [label = 'exam']
+    A->Y [label = '1.04', fontsize = 5]
+    B->Y [label = '.35', fontsize = 5]
+    A->B [label = '3.75', fontsize = 5]
+{ rank = same; A; B }
+}
+")
+```
 
 -----
 
 ## Interpretation of Multiple Regression Coefficients (Continued)
 
-Lets return to our running example.
+Lets return to our running example of BAC effects on FPS.
 
 
 ```{r}
-#| code-fold: true
-
-m_2 |> 
-  broom::tidy()
+m_2 |> tidy()
 ```
 
 
 ```{r}
-#| code-fold: true
-
-m_3 |> 
-  broom::tidy()
+m_3 |> tidy()
 ```
 
-<span style="color: red;">Question: Why did $b$ for BAC get smaller (less negative) when TA was controlled? Hint: consider the bivariate relationships between all variables.</span> 
+Look at the parameter estimate for `bac` across these two models
+
+-----
+
+:::{.callout-important}
+# Question
+Why did $b$ for BAC get smaller (less negative) when TA was controlled? Hint: consider the bivariate relationships between all variables.
 
 ```{r}
 #| code-fold: true
@@ -1072,26 +1188,30 @@ data |>
   cor() |> 
   round(2)
 ```
+:::
+
+:::{.fragment}
+[1. When BAC increases, TA decreases.]{style="color:blue;"}
+
+[2. When TA decreases FPS decreases.  This negative *indirect/spurious effect* contributes to the total effect of BAC (negative $b$ for BAC in 1 predictor model).]{style="color:blue;"}
+
+[3. The partial effect of BAC on FPS, if TA was not allowed to decrease (i.e., is controlled or held constant), is less negative than when it is allowed to naturally decrease as BAC increases.]{style="color:blue;"}
+:::
 
 -----
 
-<span style="color: blue;">1. When BAC increases, TA decreases.</span>  
+:::{.callout-important}
+# Question
+In what situation would $b_j$ for a focal predictor not change when you added an additional predictor (covariate)? </span> 
+:::
 
-<span style="color: blue;">2. When TA decreases FPS decreases. This negative *indirect/spurious effect* contributes to the total effect of BAC (negative $b$ for BAC in 1 predictor model).</span>  
+:::{.fragment}
+[1. If the new predictor was completely uncorrelated (orthogonal) with the focal predictor in those sample data, there would be no change in the parameter estimate when you added this new predictor.]{style="color:blue;"}
 
-<span style="color: blue;">3. The partial effect of BAC on FPS, if TA was not allowed to decrease (i.e., is controlled or held constant), is less negative than when it is allowed to naturally decrease as BAC increases.</span>  
+[2. This is why uncorrelated predictors/covariates are considered easier to interpret when trying to increase power. If they are related to the DV, they will increase power (< SE) to test your focal variable but they will not change your estimate of the magnitude of the focal variables parameter estimate.]{style="color:blue;"}
 
------
-
-<span style="color: red;">Question: In what situation would $b_j$ for a focal predictor not change when you added an additional predictor (covariate)? </span> 
-
------
-
-<span style="color: blue;">1. If the new predictor was completely uncorrelated (orthogonal) with the focal predictor in those sample data, there would be no change in the parameter estimate when you added this new predictor.</span>  
-
-<span style="color: blue;">2. This is why uncorrelated predictors/covariates are considered easier to interpret when trying to increase power. If they are related to the DV, they will increase power (< SE) to test your focal variable but they will not change your estimate of the magnitude of the focal variables parameter estimate.</span>  
-
-<span style="color: blue;">3. Completely orthogonal variables are typically only observed in experimental designs. However, small/trivial, nonsystematic sample $r$ will occur when population $r=0$.</span>
+[3. Completely orthogonal variables are typically only observed in experimental designs. However, small/trivial, nonsystematic sample $r$ will occur when population $r=0$.]{style="color:blue;"}
+:::
 
 -----
 
