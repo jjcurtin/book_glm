@@ -10,7 +10,6 @@ editor_options:
 #| echo: false
 
 options(scipen = 999) # turns off scientific notation
-# options(knitr.kable.NA = '')
 ```
 
 
@@ -138,7 +137,6 @@ Describe the interpretation of $b_1$ (coefficient for BAC) and its significance 
 ## Testing Inferences about $\beta_1$
 
 ```{r}
-
 m_2 |> tidy()
 ```
 
@@ -709,6 +707,7 @@ How can you see the increase in power from the model comparison perspective (loo
 
 
 Decreased $SSE_a$ in three parameter model. Flip side of increased model $R^2$.](style="color:blue;")
+:::
 
 -----
 
@@ -735,9 +734,11 @@ This decrease in **power and precision** for model parameter estimates (regressi
 
 -----
 
-It is **not** sufficient to examine only bivariate correlations among $X$s. To determine if a problem exists, calculate Variance Inflation Factors (VIF) for each $X$.  
+When there are more than `X`s in the model, it is **not** sufficient to examine only bivariate correlations among $X$s. To determine if a problem exists, calculate Variance Inflation Factors (VIF) for each $X$.  
 
 $VIF_j = \frac{1}{(1-R^2_j)}$   
+
+\
 
 VIF tells you how much $SE_{b_j}$ is increased because of redundancy. VIFs $\ge$ 5 are considered problematic (SE increased by factor of 2.2).  
 
@@ -748,6 +749,9 @@ We can use `car::vif()` to calculate VIFs in R.
 ```{r}
 car::vif(m_3)
 ```
+
+\
+\
 
 A related concept is **tolerance** ($X_i= 1- R^2_j$). 
 
@@ -761,7 +765,7 @@ Solutions for Multicollinearity include:
 
 2. Factor analysis (e.g., PCA) to produce factors that reflect major sources of variance among the redundant predictors.
 
-3. This is only a problem for the variables in the model with high VIFs. If you don't care about testing them, this is not a problem. Generally, you only care about VIFs for your focal variable(s).
+3. This is only a problem for the `X`s in the model with high VIFs. If you don't care about testing them, this is not a problem. Generally, you only care about VIFs for your focal `X`(s).
 
 ## Interpretation of Multiple Regression Coefficients
 
@@ -792,50 +796,173 @@ What about $b_j$ with multiple (e.g., 2) $X$s?
 
 ## A Second Example
 
-
 Now lets switch gears to a new example with new data.
 
 - Do hours of studying per week affect exam performance in 610?
 - How might we test this question if we also knew students IQs?
 
-\
+-----
 
 Here are some data to test our question
+
+- Lets make centered `X`s for both of our quantitative predictors
 ```{r}
 data_exam <- read_csv(here::here(path_data, "06_two_predictors_exam.csv"), 
-                 show_col_types = FALSE) 
-
-data_exam <- data_exam |> 
-  mutate(study_hours_c = study_hours - mean(study_hours)) |> 
-  glimpse()
+                 show_col_types = FALSE) |> 
+  mutate(study_hours_c = study_hours - mean(study_hours),
+         iq_c = iq - mean(iq))
 ```
 
+- And take a quick look at the dataframe
 ```{r}
-m_exam_1 <- lm(exam ~ study_hours_c, data = data_exam)
-
-broom::tidy(m_exam_1)
+data_exam |> head()
 ```
 
 -----
 
-<span style="color: blue;">Yes, for every one hour of studying per week, students' exam scores increase by 2.3 points.</span>  
-
-
+- And descriptives
 ```{r}
-#| code-fold: true
-
-broom::tidy(m_exam_1)
+data_exam |> my_skim()
 ```
-
-
-<span style="color: red;">Interpretation of $b_0$?</span>   
 
 -----
 
-Maybe study hours are related to exam scores only because intelligent students study more (learned early good study habits) and intelligent students do better on exams.   
+Start by fitting the two parameter model (testing just `study_hours`) 
+
+\
+
+```{r}
+m_exam_2 <- lm(exam ~ 1 + study_hours_c, data = data_exam)
+
+tidy(m_exam_2)
+```
+
+-----
+
+```{r}
+tidy(m_exam_2)
+```
+
+:::{.callout-important}
+# Question
+What is the interpretation of $b_1$ in this model?
+:::
+
+:::{.fragment}
+[There is a significant effect of study hours on exam scores.  For every one hour of studying per week, students' exam scores increase by 2.3 points]{style="color:blue;"}
+:::
 
 
-<span style="color: red;">Question: How could you assess the unique effect of study_hours, controlling for IQ?</span>   
+-----
+
+```{r}
+tidy(m_exam_2)
+```
+
+\
+
+:::{.callout-important}
+# Question
+What is the interpretation of $b_0$?
+:::
+
+:::{.fragment}
+[The expected exam score for a student who studies the mean number of hours per week (from the sample) is 62.1.  This is significantly different from zero, but that test is probably not that meaningful.]{style="color:blue;"}
+:::
+
+-----
+
+Maybe study hours are related to exam scores only because intelligent students study more (learned early good study habits) and intelligent students do better on exams.  
+
+\
+
+:::{.callout-important}
+# Question
+What would you expect about the relationships (i.e., correlations) among study hours, iq, and exam scores if this were true?
+:::
+
+:::{.fragment}
+[They would all be positively correlated with each other.  This is, in fact, what we see in these data (because they are fake!)]{style="color:blue;"}
+
+```{r}
+data_exam |> 
+  select(study_hours, iq, exam) |> 
+  cor() |> 
+  round(2)
+```
+:::
+
+-----
+
+:::{.callout-important}
+# Question
+How could you assess the unique effect of `study_hours`, controlling for `iq`?
+:::
+
+:::{.fragment}
+[Model exam scores as a function of both `study_hours` and `iq`. $b_1$ (effect of study hours) in this model is the unique effect of study_hours, controlling for IQ.]{style="color:blue;"}
+
+```{r}
+m_exam_3 <- lm(exam ~ 1 + study_hours_c + iq_c, data = data_exam)
+```
+
+-----
+
+```{r}
+tidy(m_exam_3)
+```
+
+:::{.callout-important}
+# Question
+Do hours of studying per week affect performance in 610 after controlling for student IQ?</span>   
+:::
+
+:::{.fragment}
+[Yes, for every one hour of studying per week, students' exam scores increase by 1 point, controlling for IQ.]{style="color:blue;"}
+:::
+
+-----
+
+```{r}
+tidy(m_exam_3)
+```
+
+:::{.callout-important}
+# Question
+What is the interpretation of $b_0$ in this model?
+:::
+
+:::{.fragment}
+[It is the predicted value for exam scores for someone of mean IQ who studies the mean number of hours per week.  This is descriptively useful but the statistical test against 0 is not very meaningful.]{style="color:blue;"}
+:::
+
+-----
+
+:::{.callout-important}
+# Question
+What would change in this model? if we did not center `study_hours` and `iq`?
+:::
+
+:::{.fragment}
+[The intercept would be the expected exam score for a student who studies 0 hours per week and has an IQ of 0.  There would be no change in either `b_1` or `b_2`.  These are still the unique effects of each of their associated `X`s, holding the other `X` constant in the model.]{style="color:blue;"}
+:::
+
+-----
+
+```{r}
+tidy(m_exam_2)
+```
+
+```{r}
+tidy(m_exam_3)
+```
+
+:::{.callout-important}
+# Question
+Why did the effect of `study_hours` get smaller after controlling for IQ?
+:::
+
+:::{.fragment}
 
 ```{r}
 data_exam |> 
@@ -844,80 +971,31 @@ data_exam |>
   round(2)
 ```
 
------
+[1. When study_hours increases, IQ increases.]{style="color:blue;"}
 
-<span style="color: blue;">Model exam scores as a function of both study_hours and IQ. $b_1$ (effect of study hours) in this model is the unique effect of study_hours, controlling for IQ.</span>   
+[2. When IQ increases, exam scores increase.] {style="color:blue;"}
 
-
-```{r}
-m_exam_2 <- lm(exam ~ study_hours_c + iq, data = data_exam)
-
-broom::tidy(m_exam_2)
-```
-
-<span style="color: red;">Question: Do hours of studying per week affect performance in 610 after controlling for student IQ?</span>   
+[3. The partial effect of study_hours on exam scores is smaller if IQ is not allowed to increase.]{style="color:blue;"}
+:::
 
 -----
 
-<span style="color: blue;">Yes, for every one hour of studying per week, students' exam scores increase by 1 point, controlling for IQ.</span>  
-
-
-```{r}
-#| code-fold: true
-
-broom::tidy(m_exam_2)
-```
-
-
-<span style="color: red;">Interpretation of $b_0$?</span>   
-
------
-
-<span style="color: red;">Question: Why did the effect of study_hours get smaller after controlling for IQ?</span> 
-
-```{r}
-#| code-fold: true
-
-broom::tidy(m_exam_1)
-```
-
-```{r}
-#| code-fold: true
-
-broom::tidy(m_exam_2)
-```
-
------
-
-<span style="color: blue;">1. When study_hours increases, IQ increases.</span>  
-
-<span style="color: blue;">2. When IQ increases, exam scores increase.</span>  
-
-<span style="color: blue;">3. The partial effect of study_hours on exam scores is smaller if IQ is not allowed to increase.</span>  
-
------
-
-```{r}
-broom::tidy(m_exam_1)
-```
-
-<span style="color: blue;">$b_1= `r round(coef(m_exam_1)[2],2)`$</span>
-
-```{r}
-broom::tidy(m_exam_2)
-```
-
-<span style="color: blue;">$b_1= `r round(coef(m_exam_2)[2],2)`$</span>
-
-```{r}
-broom::tidy(lm(iq ~ study_hours_c, data = data_exam))
-```
-
-<span style="color: blue;">$b_1= `r round(coef(lm(iq ~ study_hours_c, data = data_exam))[2],2)`$</span>
-
------
 
 ## Causal Models?
+
+Lets think about a causal model for the relationship between study hours and exam scores
+
+:::{.callout-important}
+# Question
+How do we get the total (overall) effect of study hours on exam scores, not controlling for any other variables>
+:::
+
+:::{.fragment}
+[Predict exam scores from study hours, without controlling for any other variables.  This is just the two parameter model we fit earlier]{style="color:blue;"}
+```{r}
+lm(exam ~ 1 + study_hours_c, data = data_exam) |> 
+  tidy()
+```
 
 **Total effect of study_hours**
 
@@ -936,6 +1014,7 @@ digraph{
 ```
 
 ------
+
 
 **Direct and indirect/spurious effects on study_hours**
 
@@ -959,7 +1038,7 @@ digraph{
 
 **Direct + Indirect/Spurious = Total**
 
-`r round(coef(m_exam_2)[2],2)` +  (`r round(coef(lm(iq ~ study_hours_c, data = data_exam))[2],2)` * `r round(coef(m_exam_2)[3],2)`) = `r round(coef(m_exam_1)[2],2)`
+`r round(coef(m_exam_3)[2],2)` +  (`r round(coef(lm(iq ~ study_hours_c, data = data_exam))[2],2)` * `r round(coef(m_exam_3)[3],2)`) = `r round(coef(m_exam_2)[2],2)`
 
 -----
 
