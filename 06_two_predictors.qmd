@@ -1013,7 +1013,7 @@ lm(exam ~ 1 + study_hours_c, data = data_exam) |>
 This is our causal model at this point
 
 ```{r}
-#| code-fold: true
+#| echo: false 
 
 DiagrammeR::grViz("
 digraph{
@@ -1066,6 +1066,11 @@ digraph{
 ")
 ```
 
+:::{.callout-tip}
+# Programming Tip
+We left the code for this figure above (folded). You can unfold to see how we used the `Diagrammer` package to create this figure.
+:::
+
 -----
 
 The total effect of study hours on exam scores is the sum of the direct effect of study hours on exam scores and the indirect or spurious* effect of study hours on exam scores through IQ.  That is currently missing from our model
@@ -1074,7 +1079,7 @@ The total effect of study hours on exam scores is the sum of the direct effect o
 - This would be a spurious effect if we believe that IQ causes study hours or a third variable (not displayed) causes both study hours and IQ
 - The decision about which is the most plausible explanation is a theoretical one and/or a function of your research design
 ```{r}
-#| code-fold: true
+#| echo: false
 
 DiagrammeR::grViz("
 digraph{
@@ -1102,7 +1107,7 @@ m_iq |> tidy()
 ```
 
 ```{r}
-#| code-fold: true
+#| echo: false
 
 DiagrammeR::grViz("
 digraph{
@@ -1121,11 +1126,15 @@ digraph{
 
 -----
 
-And now:  **Direct + Indirect/Spurious = Total**
-`r round(coef(m_exam_3)[2], 2)` +  (`r round(coef(m_iq)[2], 2)` * `r round(coef(m_exam_3)[3], 2)`) = `r round(coef(m_exam_2)[2], 2)`
+And now:  **Total effect = Direct + Indirect/Spurious**
+`r round(coef(m_exam_2)[2], 2)` = `r round(coef(m_exam_3)[2], 2)` +  (`r round(coef(m_iq)[2], 2)` * `r round(coef(m_exam_3)[3], 2)`) 
+
+\
+
+`r round(coef(m_exam_2)[2], 2)` = `r round(coef(m_exam_3)[2], 2)` +  (`r round(coef(m_iq)[2] * coef(m_exam_3)[3], 2`) 
 
 ```{r}
-#| code-fold: true
+#| echo: false
 
 DiagrammeR::grViz("
 digraph{
@@ -1139,7 +1148,7 @@ digraph{
 ```
 
 ```{r}
-#| code-fold: true
+#| echo: false
 
 DiagrammeR::grViz("
 digraph{
@@ -1158,208 +1167,496 @@ digraph{
 
 -----
 
-## Interpretation of Multiple Regression Coefficients (Continued)
-
-Lets return to our running example of BAC effects on FPS.
-
-
-```{r}
-m_2 |> tidy()
-```
-
-
-```{r}
-m_3 |> tidy()
-```
-
-Look at the parameter estimate for `bac` across these two models
-
------
-
 :::{.callout-important}
 # Question
-Why did $b$ for BAC get smaller (less negative) when TA was controlled? Hint: consider the bivariate relationships between all variables.
+In what situation would $b_j$ for a focal predictor (e.g., `X1 below) not change when you added an additional `X` (e.g., `X2`)? 
 
 ```{r}
-#| code-fold: true
+#| echo: false
 
-data |> 
-  select(bac, ta, fps) |> 
-  cor() |> 
-  round(2)
+DiagrammeR::grViz("
+digraph{
+  graph[rankdir=LR]
+  node [shape = box, fontsize = 5, width = .5, height = .2]
+    A [label = 'X1']
+    Y [label = 'Y']
+    A->Y [label = 'b1', fontsize = 5]
+}
+")
 ```
-:::
 
-:::{.fragment}
-[1. When BAC increases, TA decreases.]{style="color:blue;"}
+```{r}
+#| echo: false
 
-[2. When TA decreases FPS decreases.  This negative *indirect/spurious effect* contributes to the total effect of BAC (negative $b$ for BAC in 1 predictor model).]{style="color:blue;"}
-
-[3. The partial effect of BAC on FPS, if TA was not allowed to decrease (i.e., is controlled or held constant), is less negative than when it is allowed to naturally decrease as BAC increases.]{style="color:blue;"}
+DiagrammeR::grViz("
+digraph{
+  graph[rankdir=LR]
+  node [shape = box, fontsize = 5, width = .5, height = .2]
+    A [label = 'X1']
+    B [label = 'X2']
+    Y [label = 'Y']
+    A->Y [label = 'b1', fontsize = 5]
+    B->Y [label = 'b2', fontsize = 5]
+    A->B [label = '?', fontsize = 5]
+{ rank = same; A; B }
+}
+")
+```
 :::
 
 -----
 
-:::{.callout-important}
-# Question
-In what situation would $b_j$ for a focal predictor not change when you added an additional predictor (covariate)? </span> 
-:::
-
-:::{.fragment}
-[1. If the new predictor was completely uncorrelated (orthogonal) with the focal predictor in those sample data, there would be no change in the parameter estimate when you added this new predictor.]{style="color:blue;"}
+[1. If X2 was completely uncorrelated (orthogonal) with the focal predictor (X1) in those sample data, there would be no change in the parameter estimate when you added X2. The direct effect of X1 would equal its total effect because the indirect/suprious effect through X2 would be zero.]{style="color:blue;"}
 
 [2. This is why uncorrelated predictors/covariates are considered easier to interpret when trying to increase power. If they are related to the DV, they will increase power (< SE) to test your focal variable but they will not change your estimate of the magnitude of the focal variables parameter estimate.]{style="color:blue;"}
 
 [3. Completely orthogonal variables are typically only observed in experimental designs. However, small/trivial, nonsystematic sample $r$ will occur when population $r=0$.]{style="color:blue;"}
-:::
+
+```{r}
+#| echo: false
+
+DiagrammeR::grViz("
+digraph{
+  graph[rankdir=LR]
+  node [shape = box, fontsize = 5, width = .5, height = .2]
+    A [label = 'X1']
+    Y [label = 'Y']
+    A->Y [label = 'b1', fontsize = 5]
+}
+")
+```
+
+```{r}
+#| echo: false
+
+DiagrammeR::grViz("
+digraph{
+  graph[rankdir=LR]
+  node [shape = box, fontsize = 5, width = .5, height = .2]
+    A [label = 'X1']
+    B [label = 'X2']
+    Y [label = 'Y']
+    A->Y [label = 'b1', fontsize = 5]
+    B->Y [label = 'b2', fontsize = 5]
+    A->B [label = '0', fontsize = 5]
+{ rank = same; A; B }
+}
+")
+```
 
 -----
 
-**$\text{SSR}=\text{SSE}_c - \text{SSE}_a$**
+## Effect Sizes for Overall Model and Individual Predictors (`X`s)
 
+Once you have more than one `X` in your model, you have more than one effect size to consider.
 
-**Two parameter model test of BAC** 
+All of these effect sizes can be defined in terms of differences in SSE between various models.  Lets fit all the relevant models here
 
-$F(2-1, 96-2) = \frac{(`r round(sum(residuals(lm(fps~1, data = data))^2),1)` - `r round(sum(residuals(m_2)^2),1)`)/(2-1)}{`r round(sum(residuals(m_2)^2),1)` / (96-2)}$
+- Mean only model
+```{r}
+m_mo <- lm(exam ~ 1, data = data_exam)
+sse(m_mo)
+```
 
-$F(1, 94) = \frac{(`r round(sum(residuals(lm(fps~1, data = data))^2) -  sum(residuals(m_2)^2),1)`)/(1)}{`r round(sum(residuals(m_2)^2)/94, 1)`}$
+- Study hours two parameter model
+```{r}
+m_sh <- lm(exam ~ 1 + study_hours_c, data = data_exam)
+sse(m_sh)
+```
 
-$F (1, 94) = `r round((sum(residuals(lm(fps ~ 1, data=data))^2) - sum(residuals(m_2)^2))/(sum(residuals(m_2)^2)/94), 2)`, p = `r round(pt(-1.92, 94, lower.tail = TRUE)*2, 4)`$    
+- IQ two parameter model
+```{r}
+m_iq <- lm(exam ~ 1 + iq_c, data = data_exam)
+sse(m_iq)
+```
 
-**$\text{SSR} = `r round(sum(residuals(lm(fps~1, data = data))^2) -  sum(residuals(m_2)^2),1)`$**
-
-
-**Three parameter model test of BAC** 
-
-$F(3-2, 96-3) = \frac{(`r round(sum(residuals(lm(fps~ta, data = data))^2),1)` - `r round(sum(residuals(m_3)^2),1)`)/(3-2)}{`r round(sum(residuals(m_3)^2),1)` / (99-3)}$
-
-$F(1, 93) = \frac{(`r round(sum(residuals(lm(fps~ta, data = data))^2) -  sum(residuals(m_3)^2),1)`)/(1)}{`r round(sum(residuals(m_3)^2)/93, 1)`}$
-
-$F (1, 93) = `r round((sum(residuals(lm(fps ~ ta, data=data))^2) - sum(residuals(m_3)^2))/(sum(residuals(m_3)^2)/93), 2)`, p = `r round(pt(-2.04, 93, lower.tail = TRUE)*2, 4)`$  
-
-**$\text{SSR} = `r round(sum(residuals(lm(fps~ta, data = data))^2) -  sum(residuals(m_3)^2),1)`$**
+- Full three parameter model
+```{r}
+m_full <- lm(exam ~ 1 + study_hours_c + iq_c, data = data_exam)
+sse(m_full)
+```
 
 -----
+
+The SSE of the mean only model informs us about the total variability in Y (numerator of variance)
+
+- $SSE_{mean-only} = \Sigma((Y_i - \hat{Y}_i)^2)$
+
+
+This is equivalent to the numerator of the variance in $Y$ because $\hat{Y}_i = \bar{Y}$ in the mean only model.
+
+- $SSE_{mean-only} = \frac{\Sigma((Y_i - \bar{Y}_i)^2)}{N-1}$
+
+-----
+
+We can represent this total (currently unexplained) variability (SSE) of $Y$ with a pie chart.  
+
+- We will use this visualization to show how the various effect size estimate partition variance in $Y$ to unique and shared variance among the predictors.
+- More on this in a moment
+
+```{r}
+#| echo: false
+
+sses <- tibble(
+  source = c("unexplained"),
+  value = c(round(sse(m_mo))))
+
+sses |> 
+  ggplot(aes(x = "", y=value, fill = source)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values = c("red")) +
+  theme_void() # remove background, grid, numeric labels
+```
 
 ## Model Effect Size: Coefficient of Determination ($R^2$)
 
-**Coefficient of Determination ($R^2$):**     
-Proportion of variance in $Y$ explained by the set of all model predictors (i.e., proportion of variance in $Y$ predicted by all $X$s in model).    
+You can quantify and test the overall performance of the model (with all $X$s) using the coefficient of determination ($R^2$).
+
+\
+
+$R^$ is the proportion of variance in $Y$ explained by the set of all model predictors (i.e., proportion of variance in $Y$ predicted by all $X$s in model).    
+
+- In our example, $R^2$ describes the combined effect of `study_hours` and `iq`. 
+- In more complex models, $R^2$ will always be predictive strength of the set of all $X$s derived from the predictors. 
+
+\
+
+There are several ways to calculate $R^2$ in R that can give you different insights into what it quantifies
+
+-----
+
+## $R^2$: Option 1
+
+The easiest way to get $R^2$ for any model is the `glance()` function from the `broom` package.  
+
+- Pass in the full model
+- `glance()` provides a variety of full model statistics
+- You can either `pull()` or `select()` `r.squared` to get the numeric value or a tibble with the value, respectively
 
 ```{r}
-broom::glance(m_3) |> 
-  select(r.squared)
+glance(m_full) |> pull(r.squared)
+```
+
+```{r}
+glance(m_full) |> select(r.squared)
 ```
 
 -----
 
-$R^2$ for any augmented model is:  
+## $R^2$: Option 2
 
-$R^2 = \frac{\text{SSE}_\text{mean-only} - \text{SSE}_a}{\text{SSE}_\text{mean-only} }$   
+$R^2$ is the proportion of explained (predicted) variance in $Y$ to the total variance in $Y$.
 
+\
 
-**Mean-Only Model: $\hat{\text{FPS}}_i=\beta_0$**   
+$variance(Y_i) = variance(\hat{Y_i}) + variance(e_i)$  
 
-$\text{SSE}_{\text{mean-only}} = `r  round(sum(residuals(lm(fps~1, data = data))^2),1)`$
+- $variance(Y_i) is total variance in $Y$
+- $variance(\hat{Y_i})$ is variance in predicted values
+- $variance(e_i)$ is variance in residuals
 
-**Augmented Model: $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_i+ \beta_2*\text{TA}_i$**   
+Therefore, we can get $R^2$ by dividing the variance of the predicted values by the variance of the observed values
 
-$\text{SSE}_a = `r  round(sum(residuals(m_3)^2),1)`$
+```{r}
+var(predict(m_full)) / var(data_exam$exam)
+```
 
-$R^2 = \frac{`r  round(sum(residuals(lm(fps~1, data = data))^2),1)` - `r  round(sum(residuals(m_3)^2),1)`}{`r  round(sum(residuals(lm(fps~1, data = data))^2),1)`} = `r round((sum(residuals(lm(fps~1, data = data))^2) - sum(residuals(m_3)^2))/ sum(residuals(lm(fps~1, data = data))^2),4)`$
+\
 
-In this augmented model, $R^2$ describes the combined effect of BAC and TA. In more complex models, R2 will always be predictive strength of the set of all predictors. 
+Or we can get $R^2$ by dividing the difference between the variance of the observed values and the variance of the residuals (i.e., still just how much variance in $Y$ our model explains) by the variance of the observed values
+
+```{r}
+(var(data_exam$exam) - var(residuals(m_full))) / var(data_exam$exam)
+```
 
 -----
 
-```{r}
-m_3 |> 
-  broom::tidy()
-```
+## $R^2$: Option 3
+
+And that last formula can be re-written focusing on SSE rather than variance.  This is attractive because we can define all of our effect sizes in terms of differences in SSE between various models.
+
+$R^2 = \frac{SSE_{mean-only} - SSE_full}{SSE_{mean-only} }$   
 
 ```{r}
-m_3 |> 
-  broom::glance() |> 
-  select(r.squared)
+(sse(m_mo) - sse(m_full)) / sse(m_mo)
+```
+
+-----
+
+## $R^2$: Pie Chart
+
+Visually, we can represent this with a pie chart
+
+- Green area is explained variance 
+- Red areas is unexplained variance
+- $R^2 = \text{green} / \text{full pie (green + red)}$
+
+\
+
+- Explained SSE
+
+```{r}
+sse(m_mo) - sse(m_full)
+```
+
+- Unexplained SSE
+```{r}
+sse(m_full)
+```
+
+
+- Total SSE in $Y$
+  - Explained + Unexplained
+  - SSE in mean-only model 
+```{r}
+(sse(m_mo) - sse(m_full)) + sse(m_full)
+
+sse(m_mo)
+```
+
+
+```{r}
+#| echo: false
+
+sses <- tibble(
+  source = fct(c("unexplained", "explained"), levels = c("unexplained", "explained")),
+  value = c(sse(m_full), sse(m_mo) - sse(m_full)))
+
+sses |> 
+  ggplot(aes(x = "", y=value, fill = source)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values = c("red", "green")) +
+  theme_void() # remove background, grid, numeric labels
 ```
 
 -----
 
 ## Predictor Effect Size Options
 
-- As in the one predictor model, the parameter estimates in the two predictor model (and the $k$ predictor model) are attractive effect size estimates.   
+- As in the one predictor model, the parameter estimates in the two predictor model (and the $k$ (or $P-1$) predictor model) are attractive effect size estimates.   
 
 - In addition, there are variance based effect size estimates that are also attractive.
 
-- You have already learned about Partial eta-squared ($\eta_p^2$), which Judd et al refer to as PRE.
+- You have already learned about Partial eta-squared ($\eta_p^2$), which Judd et al refer to as PRE.  We will return to this in a moment
 
-- You will now also learn about Delta $R^2$ ($\Delta R^2$).
+- You will first learn about Delta $R^2$ ($\Delta R^2$).
 
 -----
+
+## $\Delta R^2$
+
+$\Delta R^2$ is the increase in model $R^2$ for the augmented model where we estimated a specific parameter vs. the associated compact model where we fixed that parameter to 0.
+
+\
+
+$\Delta R^2 = R^2_a - R^2_c$
+
+- We can calculate $\Delta R^2$ for each $X$ (or later set of $X$s) in the model
+- We need to specify the appropriate compact and augmented model
+
+-----
+
+## $\Delta R^2$: Option 1
+
+We need: $\Delta R^2 = R^2_a - R^2_c$
+
+We can get it using `glance()` across two models
+
+\
+
+For `study_hours`
+
+- Compact Model: $\hat{Y}_i=\beta_0+0*study\_hours_i+ \beta_2*iq_i$
+- Augmented Model: $\hat{Y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
+
+```{r}
+(glance(m_full) |> pull(r.squared)) - (glance(m_iq) |> pull(r.squared))
+```
+
+\
+
+For `iq`
+
+- Compact Model: $\hat{Y}_i=\beta_0+*\beta_1*study\_hours_i+ 0*iq_i$
+- Augmented Model: $\hat{Y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
+
+```{r}
+(glance(m_full) |> pull(r.squared)) - (glance(m_sh) |> pull(r.squared))
+```
+
+-----
+
+
+
+## $\Delta R^2$: Option 1
+
+We need: $\Delta R^2 = R^2_a - R^2_c$
+
+- We can get it using `glance()`
+
+\
+
+For `study_hours`
+
+- Compact Model: $\hat{Y}_i=\beta_0+0*study\_hours_i+ \beta_2*iq_i$
+- Augmented Model: $\hat{Y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
+
+```{r}
+(glance(m_full) |> pull(r.squared)) - (glance(m_iq) |> pull(r.squared))
+```
+
+\
+
+For `iq`
+
+- Compact Model: $\hat{Y}_i=\beta_0+*\beta_1*study\_hours_i+ 0*iq_i$
+- Augmented Model: $\hat{Y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
+
+```{r}
+(glance(m_full) |> pull(r.squared)) - (glance(m_sh) |> pull(r.squared))
+```
+
+-----
+
+## $\Delta R^2$: Option 2
+
+$\Delta R^2$ can also be defined with respect to SSE
+
+- $\Delta R^2 = \frac{SSE_c - SSE_a}{SSE_{\text{mean-only}}}$
+
+\
+
+For `study_hours`
+
+- Compact Model: $\hat{Y}_i=\beta_0+0*study\_hours_i+ \beta_2*iq_i$
+- Augmented Model: $\hat{Y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
+
+```{r}
+(sse(m_iq) - sse(m_full)) / sse(m_mo)
+```
+
+\
+
+For `iq`
+
+- Compact Model: $\hat{Y}_i=\beta_0+*\beta_1*study\_hours_i+ 0*iq_i$
+- Augmented Model: $\hat{Y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
+
+```{r}
+(sse(m_sh) - sse(m_full)) / sse(m_mo)
+```
+
+-----
+
+## $R^2$: Pie Chart
+
+Visually, we can represent these $\Delta R^2$s with a pie chart
+
+- Green area is unique variance explained by `study_hours`
+- Blue area is unique variance explained by `iq`
+- Yellow area is shared variance explained by both `study_hours` and `iq`
+- Red areas is unexplained variance
+
+
+```{r}
+#| echo: false
+
+unexplained <- sse(m_full)
+sh <- sse(m_iq) - sse(m_full)
+iq <- sse(m_sh) - sse(m_full)
+shared <- (sse(m_mo) - sse(m_full)) - sh - iq
+
+sses <- tibble(
+  source = fct(c("unexplained", "study_hours", "shared", "iq"), levels = c("unexplained", "study_hours", "shared", "iq")),
+  value = c(unexplained, sh, shared, iq))
+
+sses |> 
+  ggplot(aes(x = "", y=value, fill = source)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values = c("red", "green", "blue", "yellow")) +
+  theme_void() # remove background, grid, numeric labels
+```
+
+-----
+
+## $R^2$: Pie Chart
+
+
+```{r}
+#| echo: false
+
+unexplained <- sse(m_full)
+sh <- sse(m_iq) - sse(m_full)
+iq <- sse(m_sh) - sse(m_full)
+shared <- (sse(m_mo) - sse(m_full)) - sh - iq
+
+sses <- tibble(
+  source = fct(c("unexplained", "study_hours", "shared", "iq"), levels = c("unexplained", "study_hours", "shared", "iq")),
+  value = c(unexplained, sh, shared, iq))
+
+sses |> 
+  ggplot(aes(x = "", y=value, fill = source)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y", start = 0) +
+  scale_fill_manual(values = c("red", "green", "blue", "yellow")) +
+  theme_void() # remove background, grid, numeric labels
+```
+
+:::{.callout-important}
+# Question
+What is the 
+:::
+
+:::{.fragment}
+Green / Full Pie
+
+
 
 ## Variance Based Effect Sizes: $\eta_p^2$ or PRE
 
 $\eta_p^2$ or PRE describes how much SSE was reduced (proportionally) in the augmented model where we estimated a specific parameter vs. the associated compact model where we fixed that parameter to 0.  
+\
 
-**Compact Model: $\hat{\text{FPS}}_i=\beta_0+0*\text{BAC}_i+ \beta_2*\text{TA}_i$**   
+$PRE = \frac{SSE_c - SSE_a}{SSE_c}$
 
-$\text{SSE}_c = `r  round(sum(residuals(lm(fps~ta, data = data))^2),1)`$
+\
 
-**Augmented Model: $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_i+ \beta_2*\text{TA}_i$**   
-
-$\text{SSE}_a = `r  round(sum(residuals(m_3)^2),1)`$  
-
-
-<span style="color: red;">Question: How much was the error reduced by estimating $\beta_1$ for BAC?</span> 
+- We can calculate PRE for each $X$ (or later set of $X$s) in the model
+- We need to specify the appropriate compact and augmented model
 
 -----
 
-<span style="color: blue;">$\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c} = \frac{`r  round(sum(residuals(lm(fps~ta, data = data))^2),1)` - `r  round(sum(residuals(m_3)^2),1)`}{`r  round(sum(residuals(lm(fps~ta, data = data))^2),1)`} = `r round((sum(residuals(lm(fps~ta, data = data))^2)-sum(residuals(m_3)^2)) /sum(residuals(lm(fps~ta, data = data))^2), 4)`$</span>
+## PRE for `study_hours` and `iq`
+
+$PRE = \frac{SSE_c - SSE_a}{SSE_c}$
+
+\
+
+For `study_hours`
+
+- Compact Model: $\hat{Y}_i=\beta_0+0*study\_hours_i+ \beta_2*iq_i$
+- Augmented Model: $\hat{Y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
+
+```{r}
+(sse(m_iq) - sse(m_full)) / sse(m_iq)
+```
+
+\
+
+For `iq`
+
+- Compact Model: $\hat{Y}_i=\beta_0+*\beta_1*study\_hours_i+ 0*iq_i$
+- Augmented Model: $\hat{Y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
 
 
------
-
-## Variance Based Effect Sizes: $\Delta R^2$
-
-$\Delta R^2$ is the increase in model $R^2$ for the augmented model where we estimated a specific parameter vs. the associated compact model where we fixed that parameter to 0.
-
-
-**$\hat{\text{FPS}}_i=\beta_0+0*\text{BAC}_i+ \beta_2*\text{TA}_i$**   
-
-$\text{SSE}_c = `r  round(sum(residuals(lm(fps~ta, data = data))^2),1)`$
-
-$R^2 = `r round(broom::glance(lm(fps~ta, data = data))$r.squared, 4)`$
-
-
-**$\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_i+ \beta_2*\text{TA}_i$**   
-
-$\text{SSE}_a = `r  round(sum(residuals(m_3)^2),1)`$  
-
-$R^2 = `r round(broom::glance(m_3)$r.squared, 4)`$
-
-
-$\Delta R^2= `r round(broom::glance(m_3)$r.squared, 4)` -  `r round(broom::glance(lm(fps~ta, data = data))$r.squared, 4)` = `r round(broom::glance(m_3)$r.squared, 4) - round(broom::glance(lm(fps~ta, data = data))$r.squared, 4)`$
-
-
------
-
-$\Delta R^2$ can also be defined with respect to SSE.  
-
-**Compact Model: $\hat{\text{FPS}}_i=\beta_0+0*\text{BAC}_i+ \beta_2*\text{TA}_i$**   
-
-$\text{SSE}_c = `r  round(sum(residuals(lm(fps~ta, data = data))^2),1)`$
-
-**Augmented Model: $\hat{\text{FPS}}_i=\beta_0+\beta_1*\text{BAC}_i+ \beta_2*\text{TA}_i$**   
-
-$\text{SSE}_a = `r  round(sum(residuals(m_3)^2),1)`$  
-
-
-<span style="color: red;">Question: How much was the error reduced by estimating $\beta_1$ for BAC?</span> 
+```{r}
+(sse(m_sh) - sse(m_full)) / sse(m_sh)
+```
 
 -----
-
-<span style="color: blue;">$\frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}=\frac{`r round(sum(residuals(lm(fps~ta, data = data))^2),1)` - `r  round(sum(residuals(m_3)^2),1)`}{`r  round(sum(residuals(lm(fps~1, data = data))^2),1)`} = `r round((sum(residuals(lm(fps~ta, data = data))^2) - sum(residuals(m_3)^2))/(sum(residuals(lm(fps~1, data = data))^2)), 4)`$</span>
-
 
 -----
 
