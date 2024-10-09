@@ -1,9 +1,3 @@
---- 
-editor_options:  
-  chunk_output_type: console
---- 
- 
-
 # Unit 6: Inferences about two predictors (multiple regression without interaction)
 
 ```{r}
@@ -990,7 +984,6 @@ data_exam |>
 
 -----
 
-
 ## Causal Models?
 
 Lets think about a causal model for the relationship between study hours and exam scores
@@ -1126,12 +1119,13 @@ digraph{
 
 -----
 
-And now:  **Total effect = Direct + Indirect/Spurious**
-`r round(coef(m_exam_2)[2], 2)` = `r round(coef(m_exam_3)[2], 2)` +  (`r round(coef(m_iq)[2], 2)` * `r round(coef(m_exam_3)[3], 2)`) 
+**Total effect = Direct + Indirect/Spurious**
+
+`r round(coef(m_exam_2)[2], 2)` = `r round(coef(m_exam_3)[2], 2)` +  (`r round(coef(m_iq)[2], 2)` * `r round(coef(m_exam_3)[3], 2)`)
 
 \
 
-`r round(coef(m_exam_2)[2], 2)` = `r round(coef(m_exam_3)[2], 2)` +  (`r round(coef(m_iq)[2] * coef(m_exam_3)[3], 2`) 
+`r round(coef(m_exam_2)[2], 2)` = `r round(coef(m_exam_3)[2], 2)` +  `r round(coef(m_iq)[2] * coef(m_exam_3)[3], 2)`
 
 ```{r}
 #| echo: false
@@ -1332,14 +1326,24 @@ The easiest way to get $R^2$ for any model is the `glance()` function from the `
 
 - Pass in the full model
 - `glance()` provides a variety of full model statistics
-- You can either `pull()` or `select()` `r.squared` to get the numeric value or a tibble with the value, respectively
+- You can either `pull()`, `select()` or use `$r.squared` to get the numeric value or a tibble with the value
+
+\
 
 ```{r}
 glance(m_full) |> pull(r.squared)
 ```
 
+\
+
 ```{r}
 glance(m_full) |> select(r.squared)
+```
+
+\
+
+```{r}
+glance(m_full)$r.squared
 ```
 
 -----
@@ -1378,6 +1382,8 @@ And that last formula can be re-written focusing on SSE rather than variance.  T
 
 $R^2 = \frac{SSE_{mean-only} - SSE_full}{SSE_{mean-only} }$   
 
+\
+
 ```{r}
 (sse(m_mo) - sse(m_full)) / sse(m_mo)
 ```
@@ -1391,30 +1397,6 @@ Visually, we can represent this with a pie chart
 - Green area is explained variance 
 - Red areas is unexplained variance
 - $R^2 = \text{green} / \text{full pie (green + red)}$
-
-\
-
-- Explained SSE
-
-```{r}
-sse(m_mo) - sse(m_full)
-```
-
-- Unexplained SSE
-```{r}
-sse(m_full)
-```
-
-
-- Total SSE in $Y$
-  - Explained + Unexplained
-  - SSE in mean-only model 
-```{r}
-(sse(m_mo) - sse(m_full)) + sse(m_full)
-
-sse(m_mo)
-```
-
 
 ```{r}
 #| echo: false
@@ -1475,7 +1457,9 @@ For `study_hours`
 (glance(m_full) |> pull(r.squared)) - (glance(m_iq) |> pull(r.squared))
 ```
 
-\
+-----
+
+## $\Delta R^2$: Option 1
 
 For `iq`
 
@@ -1487,8 +1471,6 @@ For `iq`
 ```
 
 -----
-
-
 
 ## $\Delta R^2$: Option 1
 
@@ -1507,7 +1489,9 @@ For `study_hours`
 (glance(m_full) |> pull(r.squared)) - (glance(m_iq) |> pull(r.squared))
 ```
 
-\
+-----
+
+## $\Delta R^2$: Option 1
 
 For `iq`
 
@@ -1537,7 +1521,9 @@ For `study_hours`
 (sse(m_iq) - sse(m_full)) / sse(m_mo)
 ```
 
-\
+-----
+
+## $\Delta R^2$: Option 2
 
 For `iq`
 
@@ -1572,50 +1558,206 @@ sses <- tibble(
   source = fct(c("unexplained", "study_hours", "shared", "iq"), levels = c("unexplained", "study_hours", "shared", "iq")),
   value = c(unexplained, sh, shared, iq))
 
-sses |> 
+pie_4 <- sses |> 
   ggplot(aes(x = "", y=value, fill = source)) +
   geom_bar(stat = "identity", width = 1) +
   coord_polar("y", start = 0) +
   scale_fill_manual(values = c("red", "green", "blue", "yellow")) +
   theme_void() # remove background, grid, numeric labels
+
+pie_4
 ```
 
 -----
 
 ## $R^2$: Pie Chart
 
-
 ```{r}
 #| echo: false
 
-unexplained <- sse(m_full)
-sh <- sse(m_iq) - sse(m_full)
-iq <- sse(m_sh) - sse(m_full)
-shared <- (sse(m_mo) - sse(m_full)) - sh - iq
-
-sses <- tibble(
-  source = fct(c("unexplained", "study_hours", "shared", "iq"), levels = c("unexplained", "study_hours", "shared", "iq")),
-  value = c(unexplained, sh, shared, iq))
-
-sses |> 
-  ggplot(aes(x = "", y=value, fill = source)) +
-  geom_bar(stat = "identity", width = 1) +
-  coord_polar("y", start = 0) +
-  scale_fill_manual(values = c("red", "green", "blue", "yellow")) +
-  theme_void() # remove background, grid, numeric labels
+pie_4
 ```
 
 :::{.callout-important}
 # Question
-What is the 
+How is the $R^2$ for the study hours only model represented in this pie chart?
 :::
 
 :::{.fragment}
-Green / Full Pie
+[(Green + Blue) / Full Pie]{style="color:blue;"}
 
+```{r}
+glance(m_sh) |> pull(r.squared)
+```
 
+[This is the total/overall effect of `study_hours` on exam scores]{style="color:blue;"}
+:::
 
-## Variance Based Effect Sizes: $\eta_p^2$ or PRE
+-----
+
+## $R^2$: Pie Chart
+
+```{r}
+#| echo: false
+
+pie_4
+```
+
+:::{.callout-important}
+# Question
+How is the $R^2$ for the iq only model represented in this pie chart?
+:::
+
+:::{.fragment}
+[(Yellow + Blue) / Full Pie]{style="color:blue;"}
+
+```{r}
+glance(m_iq) |> pull(r.squared)
+```
+
+[This is the total/overall effect of `iq` on exam scores]{style="color:blue;"}
+:::
+
+-----
+
+## $R^2$: Pie Chart
+
+```{r}
+#| echo: false
+
+pie_4
+```
+
+:::{.callout-important}
+# Question
+Do the individual $R^2$ for the study hours only and iq only models add up to the $R^2$ for the two predictor model?
+:::
+
+:::{.fragment}
+[No, that would count the shared variance (blue) twice.]{style="color:blue;"}
+```{r}
+glance(m_sh) |> pull(r.squared) + glance(m_iq) |> pull(r.squared)
+```
+
+```{r}
+glance(m_full) |> pull(r.squared)
+```
+:::
+
+-----
+
+## $R^2$: Pie Chart
+
+```{r}
+#| echo: false
+
+pie_4
+```
+
+:::{.callout-important}
+# Question
+How is the $\Delta R^2$ for the study hours only model represented in this pie chart?
+:::
+
+:::{.fragment}
+[(Green) / Full Pie]{style="color:blue;"}
+
+[This is the unique effect of `study_hours` on exam scores, controlling for`iq`.  This unique variancce is relative to total variance in $Y$ ]{style="color:blue;"}
+```{r}
+(glance(m_full) |> pull(r.squared)) - (glance(m_iq) |> pull(r.squared))
+```
+
+```{r}
+(sse(m_iq) - sse(m_full)) / sse(m_mo)
+```
+:::
+
+-----
+
+## $R^2$: Pie Chart
+
+```{r}
+#| echo: false
+
+pie_4
+```
+
+:::{.callout-important}
+# Question
+How is the $\Delta R^2$ for the iq only model represented in this pie chart?
+:::
+
+:::{.fragment}
+[Yellow / Full Pie]{style="color:blue;"}
+
+[This is the unique effect of `iq` on exam scores, controlling for`study hours`.  This unique variance is relative to total variance in $Y$ ]{style="color:blue;"}
+```{r}
+(glance(m_full) |> pull(r.squared)) - (glance(m_sh) |> pull(r.squared))
+```
+
+```{r}
+(sse(m_sh) - sse(m_full)) / sse(m_mo)
+```
+:::
+
+-----
+
+## $R^2$: Pie Chart
+
+```{r}
+#| echo: false
+
+pie_4
+```
+
+:::{.callout-important}
+# Question
+Do the $\Delta R^2$ values for `study_hours` and `iq` sum to the $R^2$ value for the full model?
+:::
+
+:::{.fragment}
+[No, they do not.  The $\Delta R^2$ values are the unique variance explained by each predictor.  They do not include the shared variance in $Y$ that is explained by both predictors.]{style="color:blue;"}
+
+```{r}
+(glance(m_full)$r.squared - glance(m_iq)$r.squared) + (glance(m_full)$r.squared - glance(m_sh)$r.squared)
+```
+
+```{r}
+glance(m_full)$r.squared
+```
+:::
+
+-----
+
+## $R^2$: Pie Chart
+
+:::{.callout-important}
+# Question
+Is there any situation where the $\Delta R^2$ for the individual $X$s **will**  sum to the $R^2$ of the full model?
+:::
+
+:::{.fragment}
+[yes, if the $x$s do not predict shared variance in $y$.  this will happen if the $x$s are uncorrelated in the sample, which typically only occurs in balanced experimental designs.]{style="color:blue;"}
+
+[In this situation the overall effect of each predictor (i.e., its $R^2$ from its respective one predictor model) will also equal the unique effect for each predictor (its $\Delta R^2$)]{style="color:blue;"}
+
+```{r}
+#| echo: false
+
+tibble(source = fct(c("unexplained", "X1", "X2"), 
+                    levels = c("unexplained", "X1", "X2")),
+       value = c(50, 20, 10)) |> 
+  ggplot(aes(x = "", y=value, fill = source)) +
+    geom_bar(stat = "identity", width = 1) +
+    coord_polar("y", start = 0) +
+    scale_fill_manual(values = c("red", "green", "yellow")) +
+    theme_void() # remove background, grid, numeric labels
+```
+:::
+
+-----
+
+## $\eta_p^2$ or PRE
 
 $\eta_p^2$ or PRE describes how much SSE was reduced (proportionally) in the augmented model where we estimated a specific parameter vs. the associated compact model where we fixed that parameter to 0.  
 \
@@ -1690,8 +1832,6 @@ $\Delta R^2$
 $\eta_p^2$  
 
 - Describes proportion of reduction of unexplained variance (SSE) by adding $X_j$.  
-- $\ge \Delta R^2$ (stupid!).
-- SPSS reports it (stupid!).
 - Stable in experimental designs when additional IVs are added.  
 
 
