@@ -32,3 +32,8 @@
 - [Student shell](/lab/week_05/lab_05_shell.qmd)
 - TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_05_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_05_ta.html)
 - [Video recording of lab](https://mediaspace.wisc.edu/media/lab_05_claire/1_i06aljoy)
+
+## Week 6: 10/11
+- [data](/lab/data/lab_06_graphing.csv)
+- [Student shell](/lab/week_06/lab_06_shell.qmd)
+- TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_06_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_06_ta.html)

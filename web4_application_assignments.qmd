@@ -28,6 +28,10 @@
 
 ## Week 06: Due Friday, 10/18 at 8:30 am
 
+- [shell](/homework/week_06/hw_06_shell.qmd)
+- [data](/homework/data/hw_06_data.csv)
+- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw6_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw6_key.qmd)
+
 ## Week 07: Due Friday, 10/25 at 8:30 am
 
 ## Week 08: Due Friday, 10/12 at 8:30 am
