@@ -1,0 +1,43 @@
+---
+title: "Demo of venn"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(ggvenn)
+```
+
+
+
+```{r}
+sh <- 100
+iq <- 200
+shared <- 300
+unexplained <- 400
+colors = c("blue", "green")
+a <- list(`SH` = c(sh + shared),
+          `Exam Scores` = c(sh + shared, iq + unexplained))
+
+ggvenn(a, c("SH", "Exam Scores"),
+       show_percentage = FALSE,
+       show_elements = TRUE)
+```
+
+```{r}
+sh <- 100
+iq <- 200
+shared <- 300
+unexplained <- 400
+colors = c("blue", "yellow", "green")
+a <- list(`SH` = c(sh, shared),
+          `IQ` = c(iq, shared),
+          `Exam Scores` = c(sh, iq, shared, unexplained))
+
+ggvenn(a, c("SH", "IQ", "Exam Scores"),
+       show_percentage = FALSE,
+       show_elements = TRUE)
+```
+

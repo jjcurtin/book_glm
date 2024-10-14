@@ -9,5 +9,6 @@ format:
     show-slide-number: all 
     html-math-method: mathjax
 callout-icon: false
+callout-appearance: simple
 execute:
   echo: true

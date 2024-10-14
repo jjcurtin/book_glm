@@ -1003,7 +1003,11 @@ lm(exam ~ 1 + study_hours_c, data = data_exam) |>
 
 -----
 
-This is our causal model at this point
+This is a "path diagram" of our causal model at this point
+
+\
+
+We can show this total effect of `study_hours` on `exam` using the parameter estimate from the one predictor model.
 
 ```{r}
 #| echo: false 
@@ -1019,11 +1023,16 @@ digraph{
 ")
 ```
 
-------
+:::{.callout-note}
+# Note
+It is common to use standardized parameter estimates in path diagrams, but for instructive purposes, we will use raw parameter estimates
+:::
+
+-----
 
 :::{.callout-important}
 # Question
-But what if we had a more complicated model that acknowledged that IQ may also affect exam scores.  How do we get the direct (partial, unique) effect of study hours on exam scores, controlling for IQ?  And how do we get the direct effect of IQ on exam scores, controlling for study hours?
+But what if we had a more complicated model that acknowledged that IQ may also affect exam scores.  How do we get the direct (unique, partial) effect of study hours on exam scores, controlling for IQ?  And how do we get the direct effect of IQ on exam scores, controlling for study hours?
 :::
 
 :::{.fragment}
@@ -1032,12 +1041,12 @@ lm(exam ~ 1 + study_hours_c + iq_c, data = data_exam) |>
   tidy()
 ```
 
-[These are the parameter estimates for these two `X`s, from the three parameter model]{style="color:blue;"}
+[These are the parameter estimates for these two `X`s, from the three parameter model.  Each of these parameter estimates is the effect of that $X$, controlling for the other $X$ in the model]{style="color:blue;"}
 :::
 
 -----
 
-And here is our updated causal model
+And here is the path diagram for our updated causal model
 
 \
 
@@ -1091,7 +1100,7 @@ digraph{
 
 -----
 
-To calculate this indirect/spurious effect, we first need to calculate the direct effect of study hours on IQ.
+To calculate this indirect/spurious effect, we first need to calculate the direct effect of study hours on IQ and add it to the path diagram.
 
 ```{r}
 m_iq <- lm(iq_c ~ 1 + study_hours_c, data = data_exam)
@@ -1238,89 +1247,556 @@ digraph{
 ")
 ```
 
------
+## Visualizing Total and Direct/Unique Effects
 
-## Effect Sizes for Overall Model and Individual Predictors (`X`s)
+In the previous slides, we displayed the relationships between correlated predictors and $Y$ in a path model
 
-Once you have more than one `X` in your model, you have more than one effect size to consider.
+\
 
-All of these effect sizes can be defined in terms of differences in SSE between various models.  Lets fit all the relevant models here
+We can also visualize these relationships between correlated predictors and $Y$ using Venn diagrams
 
-- Mean only model
-```{r}
-m_mo <- lm(exam ~ 1, data = data_exam)
-sse(m_mo)
-```
-
-- Study hours two parameter model
-```{r}
-m_sh <- lm(exam ~ 1 + study_hours_c, data = data_exam)
-sse(m_sh)
-```
-
-- IQ two parameter model
-```{r}
-m_iq <- lm(exam ~ 1 + iq_c, data = data_exam)
-sse(m_iq)
-```
-
-- Full three parameter model
-```{r}
-m_full <- lm(exam ~ 1 + study_hours_c + iq_c, data = data_exam)
-sse(m_full)
-```
-
------
-
-The SSE of the mean only model informs us about the total variability in Y (numerator of variance)
-
-- $SSE_{mean-only} = \Sigma((Y_i - \hat{Y}_i)^2)$
-
-
-This is equivalent to the numerator of the variance in $Y$ because $\hat{Y}_i = \bar{Y}$ in the mean only model.
-
-- $SSE_{mean-only} = \frac{\Sigma((Y_i - \bar{Y}_i)^2)}{N-1}$
-
------
-
-We can represent this total (currently unexplained) variability (SSE) of $Y$ with a pie chart.  
-
-- We will use this visualization to show how the various effect size estimate partition variance in $Y$ to unique and shared variance among the predictors.
-- More on this in a moment
+\
 
 ```{r}
 #| echo: false
 
-sses <- tibble(
-  source = c("unexplained"),
-  value = c(round(sse(m_mo))))
+# models
+m_mo <- lm(exam ~ 1, data = data_exam)
+m_sh <- lm(exam ~ 1 + study_hours_c, data = data_exam)
+m_iq <- lm(exam ~ 1 + iq_c, data = data_exam)
+m_full <- lm(exam ~ 1 + study_hours_c + iq_c, data = data_exam)
 
-sses |> 
-  ggplot(aes(x = "", y=value, fill = source)) +
-  geom_bar(stat = "identity", width = 1) +
+# SSE of Exam scores parsed
+unexplained <- sse(m_full) |> 
+  round()
+sh <- (sse(m_iq) - sse(m_full)) |> 
+  round()
+iq <- (sse(m_sh) - sse(m_full)) |> 
+  round()
+shared <- ((sse(m_mo) - sse(m_full)) - sh - iq) |> 
+  round()
+total <- sh + iq + shared + unexplained
+
+# mean-only model
+venn_exam_only <- tibble(total) |> 
+  ggplot(aes(x = "", y = total)) +
+  geom_bar(stat = "identity", width = 1, fill = "green") +
   coord_polar("y", start = 0) +
-  scale_fill_manual(values = c("red")) +
+  annotate("text", x= 1, y = 1, label = total, size = 5) +
   theme_void() # remove background, grid, numeric labels
+
+# SH one predictor
+venn_sh_only <- list(`SH` = c(sh + shared),
+     `Exam Scores` = c(sh + shared, iq + unexplained)) |> 
+  ggvenn::ggvenn(c("SH", "Exam Scores"),
+         show_percentage = FALSE,
+         show_elements = TRUE,
+         fill_color = c("blue", "green"))
+  
+#  IQ one predictor
+venn_iq_only <- list(`IQ` = c(iq + shared),
+     `Exam Scores` = c(iq + shared, sh + unexplained)) |> 
+  ggvenn::ggvenn(c("IQ", "Exam Scores"),
+         show_percentage = FALSE,
+         show_elements = TRUE,
+         fill_color = c("blue", "green"))
+
+# Two predictor model
+venn_full <- list(`SH` = c(sh, shared),
+     `IQ` = c(iq, shared),
+     `Exam Scores` = c(sh, iq, shared, unexplained)) |> 
+  ggvenn::ggvenn(c("SH", "IQ", "Exam Scores"),
+         show_percentage = FALSE,
+         show_elements = TRUE,
+         fill_color = c("blue", "yellow", "green"))
+
+venn_full
 ```
 
-## Model Effect Size: Coefficient of Determination ($R^2$)
+## Visualizing Total and Direct/Unique Effects
+
+- The overlap among the circles represent the correlations among the variables
+- The numbers represent variability in $Y$ attributed to the $X$s.  
+- This variability can be partitioned into unique and shared variance among the predictors
+- And there will also be unexplained variability in $Y$ that cannot be explained by either predictor
+- We will build up to understanding this display conceptually over the next several (many) slides!
+
+
+```{r}
+#| echo: false
+
+venn_full
+```
+
+## The Relevant Models
+
+
+All of these variabilities can be defined in terms of differences in SSE or $var(\hat{Y_i})$ between various models.  Lets fit all the relevant models here
+
+- Mean only model
+```{r}
+m_mo <- lm(exam ~ 1, data = data_exam)
+```
+
+- Study hours one predictor (two parameter) model
+```{r}
+m_sh <- lm(exam ~ 1 + study_hours_c, data = data_exam)
+```
+
+- IQ one predictor (two parameter) model
+```{r}
+m_iq <- lm(exam ~ 1 + iq_c, data = data_exam)
+```
+
+- Full two predictor (three parameter) model
+```{r}
+m_full <- lm(exam ~ 1 + study_hours_c + iq_c, data = data_exam)
+```
+
+
+## Total Variability in Y 
+
+The formula for the variance of $Y$ is
+
+- $s^2 = \frac{\Sigma{(Y_i - \bar{Y})^2}}{N - 1}$
+
+The numerator of this term is the SSE of the mean-only model for $Y$
+
+- $SSE_{mean-only} = \Sigma{(Y_i - \hat{Y})^2}$
+- because $\hat{Y} = \bar{Y}$ in the mean-only model
+
+So we can think of SSE from the mean only model as an index of the total variability in $Y$ (just without the $N-1$)
+
+\
+
+```{r}
+(var(data_exam$exam) * (200 - 1)) |> round() 
+```
+
+\
+
+```{r}
+sse(m_mo) |> round()
+```
+
+## Total Variability in Y 
+
+We can represent our understanding of `exam` from the mean-only model as a single circle of a Venn diagram.  
+
+- There are no circles other than for `exam` because there are no predictors in the mean-only model
+- The full variability of `exam` is currently unexplained.  The mean-only model predicts a single value for all observations so it cannot explain why the scores on `exam` differ.
+
+```{r}
+#| echo: false
+
+venn_exam_only
+```
+
+## The One Predictor Study Hours Model 
+
+Now we can add the variability in `exam` explained by `study_hours` to the Venn diagram
+```{r}
+#| echo: false
+#| fig-height: 4
+
+venn_sh_only
+```
+
+:::{.callout-important}
+# Question
+How do we get the unexplained variability in `exam` from this one predictor model?
+:::
+
+:::{.fragment}
+This is just the SSE from this one predictor `study_hours` model
+```{r}
+sse(m_sh) |> round()
+```
+
+And, of course, this is just the numerator of the variance of the errors in the one predictor model
+
+```{r}
+(var(residuals(m_sh)) * (200 -1)) |> round()
+```
+:::
+
+## The One Predictor Study Hours Model 
+
+:::{.callout-important}
+# Question
+There are two ways to get the variability in `exam` explained by `study_hours` in this one predictor model.  What are they?
+:::
+
+:::{.fragment}
+1.  A model comparison between the mean-only model and the one predictor study hours model.  Error is reduced in the study hours model because study hours explained variability that was previously unexplained in the mean-only model.
+
+- $SSE_{m_mo} - SSE_{m_sh}$
+
+\
+
+```{r}
+(sse(m_mo) - sse(m_sh)) |> round()
+```
+
+\
+
+2. The variability in `exam` explained by `study_hours` is also contained in the variance of that model's predicted values.
+
+- $Data = Model + Error$
+- $Var(Y_i) = Var(\hat{Y_i}) + Var(\epsilon_i)$
+
+\
+
+```{r}
+(var(predict(m_sh)) * (200 -1)) |> round()
+```
+:::
+
+## The One Predictor IQ Model 
+
+We can do the same thing for the one predictor model with IQ
+
+```{r}
+#| echo: false
+
+venn_iq_only
+```
+
+:::{.callout-important}
+# Question
+How do we get the unexplained variability in `exam` in the one predictor model `iq` model?
+:::
+
+:::{.fragment}
+The SSE from the one predictor `iq` model
+
+\
+
+```{r}
+sse(m_iq) |> round()
+```
+
+\
+
+Or the numerator of the variance of the errors in this one predictor model
+
+\
+
+```{r}
+(var(residuals(m_iq)) * (200 -1)) |> round()
+```
+:::
+
+## The One Predictor IQ Model 
+
+:::{.callout-important}
+# Question
+There are two ways to get the variability in `exam` explained by `iq` in this one predictor model.  What are they?
+:::
+
+:::{.fragment}
+1.  A model comparison between the mean only model and the one predictor study hours model. Error is reduced in the iq model because iq explains variability that was previously unexplained in the mean-only model.
+
+- $SSE_{m_mo} - SSE_{m_sh}$
+
+\
+
+```{r}
+(sse(m_mo) - sse(m_sh)) |> round()
+```
+
+\
+
+2. The variability in `exam` explained by `iq` is also contained in the variance of that model's predicted values.
+
+```{r}
+(var(predict(m_iq)) * (200 -1)) |> round()
+```
+:::
+
+
+## The Two Predictor Model
+
+We can represent how `study_hours` and `iq` combine to explain variability in `exam`
+
+- `study_hours` and `iq` each explain some variance in `exam` that can not be explained by the other  (their unique, partial, direct effects)
+- But given the correlation between them, they also both predict some of the same variability in `exam`.  This shared variance in `exam` can be predicted by either of these predictors.
+
+```{r}
+#| echo: false
+
+venn_full
+```
+
+## The Two Predictor Model
+
+```{r}
+#| echo: false
+
+venn_full
+```
+
+\
+
+:::{.callout-important}
+# Question
+How do we get the unexplained variability in `exam` in the two predictor model?
+:::
+
+:::{.fragment}
+The SSE from the two predictor model
+
+\
+
+```{r}
+sse(m_full) |> round()
+```
+:::
+
+## The Two Predictor Model: Unique Effect of Study Hours
+
+```{r}
+#| echo: false
+
+venn_full
+```
+
+:::{.callout-important}
+# Question
+How do we get the unique variability in `exam` explained by `study_hours`, controlling for `iq` by comparing SSE across two models?
+:::
+
+:::{.fragment}
+The SSE from the one predictor model with `iq` minus SSE from the two predictor model. This indexs how much new (unique) variability can be explained by `study_hours` above and beyond what was already explained by `iq` (i.e., the incremental variability explained by `study_hours`)
+
+- $SSE_{m\_iq} - SSE_{m\_full}$
+- This is also the model comparison that is used to test the significance of the effect of `study_hours` in the two predictor model.
+
+\
+
+```{r}
+(sse(m_iq) - sse(m_full)) |> round()
+```
+:::
+
+## The Two Predictor Model: Unique Effect of Study Hours
+
+```{r}
+#| echo: false
+
+venn_full
+```
+
+:::{.callout-important}
+# Question
+What is a second way to get the unique variability in `exam` explained by `study_hours` controlling for `iq`?
+:::
+
+:::{.fragment}
+Using the variability of predicted scores from the two predictor model minus the variability of the predicted scores from the one predictor model with `iq`.
+
+- $(Var(\hat{Y}_{m\_full}) - Var(\hat{Y}_{m\_iq})) * (N - 1)$
+- Same model comparison but in terms of the variance of the predicted values (corrected for N-1 put in units of sums of squares)
+- We simply focus on the explained vs. unexplained variability.  The variability in the predicted values is sometimes called $SS_{regression}$ or if $X$ is categorical, $SS_{between}$ in ANOVA.
+
+\
+
+```{r}
+((var(predict(m_full)) - var(predict(m_iq))) * (200 - 1))  |> round()
+```
+:::
+
+## The Two Predictor Model: Unique Effect of IQ
+
+```{r}
+#| echo: false
+
+venn_full
+```
+
+:::{.callout-important}
+# Question
+How do we get the unique variability in `exam` explained by `iq`, controlling for `study_hours` using SSEs from a model comparison?
+:::
+
+:::{.fragment}
+The SSE from the one predictor model with `study_hours` minus the SSE from the two predictor model.
+
+- $SSE_{m\_sh} - SSE_{m\_full}$
+- This is also the model comparison that is used to test the significance of the effect of `iq` in the two predictor model.
+- Of course, we could also get this value focusing on the variability of the predicted scores from the two models.
+
+\
+
+```{r}
+(sse(m_sh) - sse(m_full)) |> round()
+```
+:::
+
+## The Two Predictor Model: Shared effects
+
+```{r}
+#| echo: false
+
+venn_full
+```
+
+:::{.callout-important}
+# Question
+How do we get the shared variability in `exam` explained by both `study_hours` and `iq` using SSEs?
+:::
+
+:::{.fragment}
+There are many different ways to get this value. The most straightforward (IMO) is to subtract down this area.
+
+- Start with SSE of the mean-only model (the total variability in `exam`)
+- Subtract the SSE of the two predictor model (the unexplained variability in `exam` from that model)
+- Then subtract the unique variances for `study_hours` and `iq` that we calculated on the previous slides
+:::
+
+
+## Effect Sizes: Raw Parameter Estimates
+
+You can describe the effects of your predictors in raw units of change or as proportions of explained variability in $Y$
+
+\
+
+
+The raw parameter estimates describe the effects of the predictors in the original units of $X$ and $Y$
+
+- The parameter estimates from the one predictor models describe the overall/total effects of each predictor
+- The parameter estimates from the full model describe the unique/partial/direct effects of each predictor
+
+\
+
+```{r}
+m_sh |> tidy()
+```
+
+```{r}
+m_iq |> tidy()
+```
+
+```{r}
+m_full |> tidy()
+```
+
+
+## Effect Sizes: Proportions of Explained Variability (or Reductions of Error)
+
+There are several options to consider for proportions of explained variability in $Y$ 
+
+- These options differ on whether the focus on the total variability explained by the full model vs. unique variability explained by each predictor
+- When focusing on unique predictor variability, they differ on the denominator of the proportion (total variability in $Y$ vs. previously unexplained variability in $Y$)
+
+
+## Effect Sizes: Model R-Squared
 
 You can quantify and test the overall performance of the model (with all $X$s) using the coefficient of determination ($R^2$).
 
-\
-
-$R^$ is the proportion of variance in $Y$ explained by the set of all model predictors (i.e., proportion of variance in $Y$ predicted by all $X$s in model).    
-
+- $R^2 = \frac{\text{Explained Variability in Y}}{\text{Total Variability in Y}}$
+- $R^$ is the proportion of variability in $Y$ explained by the set of all model predictors (all $X$s) relative to the total variability in $Y$
 - In our example, $R^2$ describes the combined effect of `study_hours` and `iq`. 
 - In more complex models, $R^2$ will always be predictive strength of the set of all $X$s derived from the predictors. 
 
+
+## Effect Sizes: Model R-Squared
+
+```{r}
+#| echo: false
+
+venn_full
+```
+
+$R^2 = \frac{\text{Total Explained Variability in Y}}{\text{Total Variability in Y}}$
+
+:::{.callout-important}
+# Question
+Use SS in the Venn diagram to calculate $R^2$
+:::
+
+:::{.fraqment}
+$\frac{643 + 4066 + 3726}{18609}
+:::
+
+
+## Effect Sizes: Model R-Squared
+
+$R^2 = \frac{\text{Total Explained Variability in Y}}{\text{Total Variability in Y}}$
+
 \
 
-There are several ways to calculate $R^2$ in R that can give you different insights into what it quantifies
+The numerator of this formula can be calculated as a model comparison of SSEs
+
+- $SSE_{mean-only} - SSE_{full}$   
+
+\
+
+The denominator can be obtained directly from the SSE of mean-only model.  This yields another definition of the $R^2$ in terms of SSEs
+
+- $R^2 = \frac{SSE_{mean-only} - SSE_full}{SSE_{mean-only} }$   
+
+
+
+## Effect Sizes: Model R-Squared
+
+Given that the numerator of $R^2$ can be defined as a model comparison, we can use the model comparison approach to test hypotheses about it
+
+- $H_0: R^2 = 0$
+- $H_a: R^2 > 0$
+
+\
+
+[Compact model: Mean-only model]{style="color:blue;"}
+
+- $\hat{Exam}_i = \beta_0+0*StudyHours_i + 0*IQ_i$
+- $P_c=1$     
+
+\
+
+[Augmented model: Full model]{style="color:blue;"} 
+
+- $\hat{Exam}_i = \beta_0+\beta_1*StudyHours_i + \beta_2*IQ_i$
+- $P_a=3$     
+
+\
+
+$F(P_a-P_c, N-P_a) = \frac{SSE_c-SSE_a/(P_a-P_c)}{SSE_a/(N-P_a)}$
+
+\
+
+```{r}
+anova(m_mo, m_full)
+```
+
+
+## Effect Sizes: Model R-Squared
+
+$R^2 = \frac{\text{Total Explained Variability in Y}}{\text{Total Variability in Y}}$
+
+\
+
+Remember: $var(Y_i) = var(\hat{Y_i}) + var(e_i))$
+
+- $var(Y_i)$ is total variance in $Y$
+- $variance(\hat{Y_i})$ is variance in predicted values
+- $variance(e_i)$ is variance in residuals
+
+\
+
+Therefore, we can get $R^2$ by dividing the variance of the predicted values by the variance of the observed values
+
+$R^2 = \frac{var(\hat{Y_i})}{var(Y_i)}$
+
+\
+
+```{r}
+var(predict(m_full)) / var(data_exam$exam)
+```
 
 -----
 
-## $R^2$: Option 1
+## Effect Sizes: Model R-Squared
 
 The easiest way to get $R^2$ for any model is the `glance()` function from the `broom` package.  
 
@@ -1346,80 +1822,53 @@ glance(m_full) |> select(r.squared)
 glance(m_full)$r.squared
 ```
 
------
-
-## $R^2$: Option 2
-
-$R^2$ is the proportion of explained (predicted) variance in $Y$ to the total variance in $Y$.
-
-\
-
-$variance(Y_i) = variance(\hat{Y_i}) + variance(e_i)$  
-
-- $variance(Y_i) is total variance in $Y$
-- $variance(\hat{Y_i})$ is variance in predicted values
-- $variance(e_i)$ is variance in residuals
-
-Therefore, we can get $R^2$ by dividing the variance of the predicted values by the variance of the observed values
-
-```{r}
-var(predict(m_full)) / var(data_exam$exam)
-```
-
-\
-
-Or we can get $R^2$ by dividing the difference between the variance of the observed values and the variance of the residuals (i.e., still just how much variance in $Y$ our model explains) by the variance of the observed values
-
-```{r}
-(var(data_exam$exam) - var(residuals(m_full))) / var(data_exam$exam)
-```
-
------
-
-## $R^2$: Option 3
-
-And that last formula can be re-written focusing on SSE rather than variance.  This is attractive because we can define all of our effect sizes in terms of differences in SSE between various models.
-
-$R^2 = \frac{SSE_{mean-only} - SSE_full}{SSE_{mean-only} }$   
-
-\
-
-```{r}
-(sse(m_mo) - sse(m_full)) / sse(m_mo)
-```
-
------
-
-## $R^2$: Pie Chart
-
-Visually, we can represent this with a pie chart
-
-- Green area is explained variance 
-- Red areas is unexplained variance
-- $R^2 = \text{green} / \text{full pie (green + red)}$
+## Effect Sizes: Model R-Squared
 
 ```{r}
 #| echo: false
 
-sses <- tibble(
-  source = fct(c("unexplained", "explained"), levels = c("unexplained", "explained")),
-  value = c(sse(m_full), sse(m_mo) - sse(m_full)))
-
-sses |> 
-  ggplot(aes(x = "", y=value, fill = source)) +
-  geom_bar(stat = "identity", width = 1) +
-  coord_polar("y", start = 0) +
-  scale_fill_manual(values = c("red", "green")) +
-  theme_void() # remove background, grid, numeric labels
+venn_full
 ```
 
------
 
-## Predictor Effect Size Options
+:::{.callout-important}
+# Question
+Do the $R^2$ from the two one predictor models (`study_hours` & `iq`) models add up to the $R^2$ of the two predictor model?
+:::
 
-- As in the one predictor model, the parameter estimates in the two predictor model (and the $k$ (or $P-1$) predictor model) are attractive effect size estimates.   
+:::{.fraqment}
+No, if you add the 2 one predictor model $R^2$s, it will overestimate the full model $R^2$ because you will double count the shared variance!
 
-- In addition, there are variance based effect size estimates that are also attractive.
+$R^2_{sh} = \frac{643 + 3726}{643 + 3726 + 4066 + 18609}$
+
+$R^2_{iq} = \frac{4066 + 3726}{643 + 3726 + 4066 + 18609}$
+
+$R^2_{full} = \frac{643 + 4066 + 3726}{643 + 3726 + 4066 + 18609}$
+:::
+
+
+## Effect Sizes: Model R-Squared
+
+```{r}
+#| echo: false
+
+venn_full
+```
+
+
+:::{.callout-important}
+# Question
+Is there any situation where the $R^2$ from 2 one predictor models will add up to the $R^2$ of the two predictor model including both predictors?
+:::
+
+:::{.fraqment}
+Yes, if the two $X$s are uncorrelated so that there is no shared variance in $Y$ predicted by both.
+:::
+
+
+## Effect Size: Predictor Effects
+
+There are two proportion of variance effect sizes for the specific $X$s in your model
 
 - You have already learned about Partial eta-squared ($\eta_p^2$), which Judd et al refer to as PRE.  We will return to this in a moment
 
@@ -1427,339 +1876,152 @@ sses |>
 
 -----
 
-## $\Delta R^2$
+## Effect Size: Delta R-Squared
 
-$\Delta R^2$ is the increase in model $R^2$ for the augmented model where we estimated a specific parameter vs. the associated compact model where we fixed that parameter to 0.
+As the name implies, $\Delta R^2$ is the change (increase) in model $R^2$ for the augmented model where we estimated a specific parameter vs. the associated compact model where we fixed that parameter to 0.
 
 \
-
-$\Delta R^2 = R^2_a - R^2_c$
 
 - We can calculate $\Delta R^2$ for each $X$ (or later set of $X$s) in the model
 - We need to specify the appropriate compact and augmented model
-
------
-
-## $\Delta R^2$: Option 1
-
-We need: $\Delta R^2 = R^2_a - R^2_c$
-
-We can get it using `glance()` across two models
+- Then: $\Delta R^2 = R^2_a - R^2_c$
 
 \
 
-For `study_hours`
 
-- Compact Model: $\hat{Y}_i=\beta_0+0*study\_hours_i+ \beta_2*iq_i$
-- Augmented Model: $\hat{Y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
+for `study_hours`
 
-```{r}
-(glance(m_full) |> pull(r.squared)) - (glance(m_iq) |> pull(r.squared))
-```
+- compact model: $\hat{y}_i=\beta_0+0*study\_hours_i+ \beta_2*iq_i$
+- augmented model: $\hat{y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
 
------
-
-## $\Delta R^2$: Option 1
+\
 
 For `iq`
 
 - Compact Model: $\hat{Y}_i=\beta_0+*\beta_1*study\_hours_i+ 0*iq_i$
 - Augmented Model: $\hat{Y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
 
+
+
+## Effect Size: Delta R-Squared
+
+Conceptually, $\Delta R^2$ for an $X$ is the unique (incremental) variability in $Y$ explained by $X$ relative to the total variability in $Y$
+
+- $R^2 = \frac{\text{Unique Variability in Y Explained by X}}{\text{Total Variability in Y}}$
+
 ```{r}
-(glance(m_full) |> pull(r.squared)) - (glance(m_sh) |> pull(r.squared))
+#| echo: false
+
+venn_full
 ```
 
------
+:::{.callout-important}
+Use SS in the Venn diagram to calculate $\Delta R^2$ for `study_hours` and `iq`
+:::
 
-## $\Delta R^2$: Option 1
+:::{.fragment}
+for `study_hours`
 
-We need: $\Delta R^2 = R^2_a - R^2_c$
-
-- We can get it using `glance()`
+- $\frac{643}{643 + 3726 + 4066 + 18609}$
 
 \
 
-For `study_hours`
+for `iq`
 
-- Compact Model: $\hat{Y}_i=\beta_0+0*study\_hours_i+ \beta_2*iq_i$
-- Augmented Model: $\hat{Y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
+- $\frac{4066}{643 + 3726 + 4066 + 18609}$
 
-```{r}
-(glance(m_full) |> pull(r.squared)) - (glance(m_iq) |> pull(r.squared))
-```
 
------
-
-## $\Delta R^2$: Option 1
-
-For `iq`
-
-- Compact Model: $\hat{Y}_i=\beta_0+*\beta_1*study\_hours_i+ 0*iq_i$
-- Augmented Model: $\hat{Y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
+## Effect Size: Delta R-Squared
 
 ```{r}
-(glance(m_full) |> pull(r.squared)) - (glance(m_sh) |> pull(r.squared))
+#| echo: false
+
+venn_full
 ```
 
------
-
-## $\Delta R^2$: Option 2
-
-$\Delta R^2$ can also be defined with respect to SSE
+Following this conceptual understanding of $\Delta R^2$, we can use SSEs from model comparisons to get $\Delta R^2$ for `study_hours` and `iq`
 
 - $\Delta R^2 = \frac{SSE_c - SSE_a}{SSE_{\text{mean-only}}}$
+- Use the compact and augmented model associated with the test of the parameter estimate
 
-\
 
-For `study_hours`
+## Effect Size: Delta R-Squared
+```{r}
+#| echo: false
+```
 
-- Compact Model: $\hat{Y}_i=\beta_0+0*study\_hours_i+ \beta_2*iq_i$
-- Augmented Model: $\hat{Y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
+for `study_hours`
+
+- compact model: $\hat{y}_i=\beta_0+0*study\_hours_i+ \beta_2*iq_i$
+- augmented model: $\hat{y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
 
 ```{r}
 (sse(m_iq) - sse(m_full)) / sse(m_mo)
 ```
 
------
+## Effect Size: Delta R-Squared
+```{r}
+#| echo: false
+```
 
-## $\Delta R^2$: Option 2
+for `iq`
 
-For `iq`
-
-- Compact Model: $\hat{Y}_i=\beta_0+*\beta_1*study\_hours_i+ 0*iq_i$
-- Augmented Model: $\hat{Y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
+- compact model: $\hat{y}_i=\beta_0+\beta_1*study\_hours_i+ 0*iq_i$
+- augmented model: $\hat{y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
 
 ```{r}
 (sse(m_sh) - sse(m_full)) / sse(m_mo)
 ```
 
------
 
-## $R^2$: Pie Chart
-
-Visually, we can represent these $\Delta R^2$s with a pie chart
-
-- Green area is unique variance explained by `study_hours`
-- Blue area is unique variance explained by `iq`
-- Yellow area is shared variance explained by both `study_hours` and `iq`
-- Red areas is unexplained variance
-
+## Effect Size: Delta R-Squared
 
 ```{r}
 #| echo: false
 
-unexplained <- sse(m_full)
-sh <- sse(m_iq) - sse(m_full)
-iq <- sse(m_sh) - sse(m_full)
-shared <- (sse(m_mo) - sse(m_full)) - sh - iq
-
-sses <- tibble(
-  source = fct(c("unexplained", "study_hours", "shared", "iq"), levels = c("unexplained", "study_hours", "shared", "iq")),
-  value = c(unexplained, sh, shared, iq))
-
-pie_4 <- sses |> 
-  ggplot(aes(x = "", y=value, fill = source)) +
-  geom_bar(stat = "identity", width = 1) +
-  coord_polar("y", start = 0) +
-  scale_fill_manual(values = c("red", "green", "blue", "yellow")) +
-  theme_void() # remove background, grid, numeric labels
-
-pie_4
+venn_full
 ```
 
------
-
-## $R^2$: Pie Chart
-
-```{r}
-#| echo: false
-
-pie_4
-```
 
 :::{.callout-important}
 # Question
-How is the $R^2$ for the study hours only model represented in this pie chart?
+Do the $\Delta R^2$ each of the predictors (`study_hours` & `iq`) add up to the $R^2$ of the two predictor model?
 :::
 
-:::{.fragment}
-[(Green + Blue) / Full Pie]{style="color:blue;"}
+:::{.fraqment}
+No, if you add $\Delta R^2$s for the two predictors, it will underestimate the full model $R^2$ because you will miss counting the shared variance!
 
-```{r}
-glance(m_sh) |> pull(r.squared)
-```
+$\Delta R^2_{sh} = \frac{643}{643 + 3726 + 4066 + 18609}$
 
-[This is the total/overall effect of `study_hours` on exam scores]{style="color:blue;"}
+$\Delta R^2_{iq} = \frac{4066}{643 + 3726 + 4066 + 18609}$
+
+$R^2_{full} = \frac{643 + 4066 + 3726}{643 + 3726 + 4066 + 18609}$
 :::
 
------
 
-## $R^2$: Pie Chart
+## Effect Size: Delta R-Squared
 
 ```{r}
 #| echo: false
 
-pie_4
+venn_full
 ```
+
 
 :::{.callout-important}
 # Question
-How is the $R^2$ for the iq only model represented in this pie chart?
+Is there any situation where the $\Delta R^2$ for each of the two predictors will add up to the $R^2$ of the two predictor model including both predictors?
 :::
 
-:::{.fragment}
-[(Yellow + Blue) / Full Pie]{style="color:blue;"}
-
-```{r}
-glance(m_iq) |> pull(r.squared)
-```
-
-[This is the total/overall effect of `iq` on exam scores]{style="color:blue;"}
+:::{.fraqment}
+Yes, if the two $X$s are uncorrelated so that there is no shared variance in $Y$ predicted by both.
 :::
 
------
 
-## $R^2$: Pie Chart
-
-```{r}
-#| echo: false
-
-pie_4
-```
-
-:::{.callout-important}
-# Question
-Do the individual $R^2$ for the study hours only and iq only models add up to the $R^2$ for the two predictor model?
-:::
-
-:::{.fragment}
-[No, that would count the shared variance (blue) twice.]{style="color:blue;"}
-```{r}
-glance(m_sh) |> pull(r.squared) + glance(m_iq) |> pull(r.squared)
-```
-
-```{r}
-glance(m_full) |> pull(r.squared)
-```
-:::
-
------
-
-## $R^2$: Pie Chart
-
-```{r}
-#| echo: false
-
-pie_4
-```
-
-:::{.callout-important}
-# Question
-How is the $\Delta R^2$ for the study hours only model represented in this pie chart?
-:::
-
-:::{.fragment}
-[(Green) / Full Pie]{style="color:blue;"}
-
-[This is the unique effect of `study_hours` on exam scores, controlling for`iq`.  This unique variancce is relative to total variance in $Y$ ]{style="color:blue;"}
-```{r}
-(glance(m_full) |> pull(r.squared)) - (glance(m_iq) |> pull(r.squared))
-```
-
-```{r}
-(sse(m_iq) - sse(m_full)) / sse(m_mo)
-```
-:::
-
------
-
-## $R^2$: Pie Chart
-
-```{r}
-#| echo: false
-
-pie_4
-```
-
-:::{.callout-important}
-# Question
-How is the $\Delta R^2$ for the iq only model represented in this pie chart?
-:::
-
-:::{.fragment}
-[Yellow / Full Pie]{style="color:blue;"}
-
-[This is the unique effect of `iq` on exam scores, controlling for`study hours`.  This unique variance is relative to total variance in $Y$ ]{style="color:blue;"}
-```{r}
-(glance(m_full) |> pull(r.squared)) - (glance(m_sh) |> pull(r.squared))
-```
-
-```{r}
-(sse(m_sh) - sse(m_full)) / sse(m_mo)
-```
-:::
-
------
-
-## $R^2$: Pie Chart
-
-```{r}
-#| echo: false
-
-pie_4
-```
-
-:::{.callout-important}
-# Question
-Do the $\Delta R^2$ values for `study_hours` and `iq` sum to the $R^2$ value for the full model?
-:::
-
-:::{.fragment}
-[No, they do not.  The $\Delta R^2$ values are the unique variance explained by each predictor.  They do not include the shared variance in $Y$ that is explained by both predictors.]{style="color:blue;"}
-
-```{r}
-(glance(m_full)$r.squared - glance(m_iq)$r.squared) + (glance(m_full)$r.squared - glance(m_sh)$r.squared)
-```
-
-```{r}
-glance(m_full)$r.squared
-```
-:::
-
------
-
-## $R^2$: Pie Chart
-
-:::{.callout-important}
-# Question
-Is there any situation where the $\Delta R^2$ for the individual $X$s **will**  sum to the $R^2$ of the full model?
-:::
-
-:::{.fragment}
-[yes, if the $x$s do not predict shared variance in $y$.  this will happen if the $x$s are uncorrelated in the sample, which typically only occurs in balanced experimental designs.]{style="color:blue;"}
-
-[In this situation the overall effect of each predictor (i.e., its $R^2$ from its respective one predictor model) will also equal the unique effect for each predictor (its $\Delta R^2$)]{style="color:blue;"}
-
-```{r}
-#| echo: false
-
-tibble(source = fct(c("unexplained", "X1", "X2"), 
-                    levels = c("unexplained", "X1", "X2")),
-       value = c(50, 20, 10)) |> 
-  ggplot(aes(x = "", y=value, fill = source)) +
-    geom_bar(stat = "identity", width = 1) +
-    coord_polar("y", start = 0) +
-    scale_fill_manual(values = c("red", "green", "yellow")) +
-    theme_void() # remove background, grid, numeric labels
-```
-:::
-
------
-
-## $\eta_p^2$ or PRE
+## Effect Size: Partial Eta-Squared or PRE
 
 $\eta_p^2$ or PRE describes how much SSE was reduced (proportionally) in the augmented model where we estimated a specific parameter vs. the associated compact model where we fixed that parameter to 0.  
+
 \
 
 $PRE = \frac{SSE_c - SSE_a}{SSE_c}$
@@ -1771,7 +2033,7 @@ $PRE = \frac{SSE_c - SSE_a}{SSE_c}$
 
 -----
 
-## PRE for `study_hours` and `iq`
+## Effect Size: Partial Eta-Squared or PRE
 
 $PRE = \frac{SSE_c - SSE_a}{SSE_c}$
 
@@ -1786,7 +2048,7 @@ For `study_hours`
 (sse(m_iq) - sse(m_full)) / sse(m_iq)
 ```
 
-\
+## Effect Size: Partial Eta-Squared or PRE
 
 For `iq`
 
@@ -1798,9 +2060,45 @@ For `iq`
 (sse(m_sh) - sse(m_full)) / sse(m_sh)
 ```
 
------
+## Comparing Delta R-Squared and PRE
 
------
+```{r}
+#| echo: false
+
+venn_full
+```
+
+:::{.callout-important}
+Define $\Delta R^2$ and $PRE$ for `study_hours` in the two predictor model
+:::
+
+:::{.fragment}
+The numerator is the same.  The denominator is different!
+
+- $\Delta R^2_{sh} = \frac{643}{643 + 3726 + 4066 + 18609}$
+- $PRE_{sh} = \frac{643}{643 + 18609}$
+:::
+
+
+## Comparing Delta R-Squared and PRE
+
+```{r}
+#| echo: false
+
+venn_full
+```
+
+:::{.callout-important}
+Define $\Delta R^2$ and $PRE$ for `iq` in the two predictor model
+:::
+
+:::{.fragment}
+The numerator is the same.  The denominator is different!
+
+- $\Delta R^2_{iq} = \frac{4066}{643 + 3726 + 4066 + 18609}$
+- $PRE_{iq} = \frac{4066}{4066 + 18609}$
+:::
+
 
 ## Comparing Variance Based Effect Sizes
 
@@ -1812,12 +2110,14 @@ $\Delta R^2 = \frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}$
 
 $\eta_p^2 = \frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}$
 
------
+
+## Comparing Variance Based Effect Sizes
 
 $R^2$  
 
 - Describes proportion of explained variance in $Y$ explained by full model relative to total variance in $Y$.   
-- Can **not** be used for a specific predictor.   
+- **Not** used for a specific predictor but instead for the full model
+- Can use F test with model comparison (full vs. mean-only) to test if the model as a whole predicts variance in $Y$ (multi-df test)
 - Not used frequently in Psychology but useful in other fields.   
 
 
@@ -1827,20 +2127,20 @@ $\Delta R^2$
 - If $X$s are orthogonal $\Delta R^2$ will sum to $R^2$.   
 - Anchored to total $Y$ variance.  
 - Same denominator for all $X$s.  
+- Test is statistically equivalent to test of parameter estimate
 
 
 $\eta_p^2$  
 
 - Describes proportion of reduction of unexplained variance (SSE) by adding $X_j$.  
-- Stable in experimental designs when additional IVs are added.  
-
-
------
+- Anchored to unexplained variance from compact model.
+- Stable in experimental designs when additional IVs are added.
+- Test is statistically equivalent to test of parameter estimate
 
 
 ## Visualizing the Model
 
-$\hat{\text{FPS}}= `r round(coef(m_3)[1],1)` + `r round(coef(m_3)[2],1)` *\text{BAC} + `r round(coef(m_3)[3],1)` *\text{TA}$ 
+$\hat{FPS}= `r round(coef(m_3)[1],1)` + `r round(coef(m_3)[2],1)` *BAC + `r round(coef(m_3)[3],1)` *TA$ 
 
 
 ```{r}
@@ -2114,79 +2414,109 @@ tibble(` ` = c("Trait Anxiety", "Blood Alcohol Concentration", "Mean", "SD"),
 
 **Example:** Evaluate the effects of a new intervention for depression.   
 
-$N=200$ participants, randomly assigned to receive new invervention vs. standard of care control.  
+- $N=200$ participants, randomly assigned to receive new intervention vs. standard of care control.  
 
-Measure depression with CES-D pre- (baseline) and post-intervention.    
-
-<span style="color: red;">Question: How do you evaluate the effect of the new intervention in a one predictor model?</span>   
-
------
-
-<span style="color: blue;">1. Code one regressor for intervention group using dummy or zero-centered coefficients. How different?</span>
-
-<span style="color: blue;">2. Regress depression scores from post-intervention on intervention group.</span>   
-
-<span style="color: blue;">3. Test if $b_1$ for Intervention group is non-zero.</span>   
-
------
+- Measure depression with CES-D pre- (baseline) and post-intervention.    
 
 ```{r}
 data_int <- read_csv(here::here(path_data, "06_two_predictors_intervention.csv"),
                      show_col_types = FALSE)
 ```
 
-```{r}
-m_depress_1 <- lm(depress_post ~ intervention_group, data = data_int)
-
-m_depress_1 |> 
-  broom::tidy()
-```
-
-<span style="color: red;">Question: What do you conclude? What do you report?</span>   
-
 -----
-
-<span style="color: blue;">The new intervention reduced CES-D depressions scores by approximately `r abs(round(coef(m_depress_1)[2], 1))` units relative to the standard of care control group, $b = -3.6, t(198) = -2.40, p= .0175.$</span>
-
------
-
-<span style="color: red;">Question: What else do you report?</span>   
-
-
------
-
-<span style="color: blue;">PRE or $\Delta R^2$. Means/SD of two groups or better - figure with means, standard error and raw (or residual) data points.</span>
-
 
 ```{r}
-broom::glance(m_depress_1)$r.squared - broom::glance(lm(depress_post ~ 1, data = data_int))$r.squared
+data_int |> my_skim()
 ```
 
-*Note: In this case $\Delta R^2$ is the same as model $R^2$ because there is only one predictor (i.e., $R^2$ in our compact/mean-only model is 0).*
+-----
 
+:::::{.callout-important}
+# Question
+How do you evaluate the effect of the new intervention in a one predictor model?
+:::
+
+:::{.fragment}
+1. Code one regressor for intervention group using dummy or zero-centered coefficients. How different?{style="color:blue;"}
+
+2. Regress depression scores from post-intervention on intervention group.{style="color:blue;"}
+
+3. Test if $b_1$ for Intervention group is non-zero.{style="color:blue;"}
+:::
 
 -----
 
-<span style="color: red;">Question: What is a *better* analysis to address this question about the effect of the intervention and why is it better?</span>   
-
------
-
-<span style="color: blue;">Control for baseline depressions scores to increase power.</span>  
-
-<span style="color: blue;">Baseline depression should be uncorrelated (in the population) with intervention group because participants were randomly assigned to group. Therefore, including baseline depression should not systematically change $b_1$.</span>  
-
-<span style="color: blue;">However, baseline scores are likely strong predictors of post-intervention scores. This will increase model $R^2$, reduce SSE, and therefore reduce the SE for intervention group. More power!</span>
-
------
-
-**Previous one predictor model**
 ```{r}
 #| code-fold: true
 
-m_depress_1 |> 
-  broom::tidy()
+m_ig <- lm(depress_post ~ intervention_group, data = data_int)
+m_ig |> tidy()
 ```
 
+:::{.callout-important}
+# Question 
+What do you conclude? What do you report?
+:::
+
+:::{.fraqment}
+The new intervention reduced CES-D depressions scores by approximately `r abs(round(coef(m_ig)[2], 1))` units relative to the standard of care control group, $b = -3.6, t(198) = -2.40, p= .0175.${style="color:blue;"}
+:::
+
+-----
+
+:::{.callout-important}
+# Question
+What else do you report?
+:::
+
+:::{.fragment}
+- PRE or $\Delta R^2$ (they are the same in the one predictor model!){style="color:blue;"} 
+- Means/SD of two groups{style="color:blue;"}
+- figure with means, standard error, and raw (or residual) data points{style="color:blue;"}
+
+
+```{r}
+#| code-fold: true
+
+m_mo <- lm(depress_post ~ 1, data = data_int)
+glance(m_ig)$r.squared - glance(m_mo)$r.squared
+```
+
+:::{.callout-note}
+# Note
+In this case $\Delta R^2$ is the same as model $R^2$ because there is only one predictor (i.e., $R^2$ in our compact/mean-only model is 0).
+
+-----
+
+:::{.callout-important}
+# Question
+What is a **better** analysis to address this question about the effect of the intervention and why is it better?</span>   
+
+:::{.fragment}
+Control for baseline depressions scores to increase power{style="color:blue;"}
+
+\
+
+Baseline depression should be uncorrelated (in the population) with intervention group because participants were randomly assigned to group. Therefore, including baseline depression should not systematically change $b_1$.{style="color:blue;"}
+
+\
+
+However, baseline scores are likely a strong predictor of post-intervention scores. This will increase model $R^2$, reduce SSE, and therefore reduce the SE for intervention group. More power!{style="color:blue;"}
+
+-----
+
+Review parameter estimates and their tests.  Does this make sense to you?
+
+\
+
+**Previous one predictor model for IG**
+```{r}
+#| code-fold: true
+
+m_ig |> tidy()
+```
+
+\
 
 **Two predictor model**
 ```{r}
@@ -2195,70 +2525,100 @@ m_depress_1 |>
 data_int <- data_int |> 
   mutate(depress_base_c = depress_base - mean(depress_base))
 
-m_depress_2 <- lm(depress_post ~ intervention_group + depress_base_c, data = data_int)
+m_full <- lm(depress_post ~ intervention_group + depress_base_c, data = data_int)
 
-m_depress_2 |> 
-  broom::tidy()
+m_full |> tidy()
 ```
 
 -----
 
-$\eta_p^2$ effect size for intercept
-```{r}
-sse_c_int <- sum(residuals(lm(depress_post ~ intervention_group + depress_base_c - 1,
-                              data = data_int))^2)
-sse_a <- sum(residuals(m_depress_2)^2)
+Review $R^2$s.  Does this make sense to you?
 
-(p_eta_int <- (sse_c_int - sse_a)/sse_c_int)
+**Previous one predictor model for IG**
+```{r}
+#| code-fold: true
+
+glance(m_ig)$r.squared 
 ```
 
-$\eta_p^2$ effect size for intervention group
-```{r}
-sse_c_group <- sum(residuals(lm(depress_post ~ depress_base_c,
-                              data = data_int))^2)
+\
 
-(p_eta_group <- (sse_c_group - sse_a)/sse_c_group)
+**Two predictor model**
+```{r}
+#| code-fold: true
+
+glance(m_full)$r.squared
 ```
 
-$\eta_p^2$ effect size for baseline depression
-```{r}
-sse_c_base <- sum(residuals(lm(depress_post ~ intervention_group, data = data_int))^2)
+-----
 
-(p_eta_base <- (sse_c_base - sse_a)/sse_c_base)
+Review $\Delta R^2$ for `intervention_grouup` across two models.  Do they make sense to you?
+
+
+**One predictor IG model**
+```{r}
+#| cold-fold: true
+
+(sse(m_mo) - sse(m_ig)) / sse(m_mo)
 ```
 
-Model $R^2$
+**Two predictor model**
 ```{r}
-m_depress_2 |> 
-  broom::glance() |> 
-  select(r.squared)
+#| cold-fold: true
+
+m_base <- lm(depress_post ~ depress_base_c, data = data_int)
+(sse(m_base) - sse(m_full)) / sse(m_mo)
+```
+
+-----
+
+Review $PRE$ for `intervention_group` across two models.  Do they make sense to you? What about the differences between $\Delta R^2$ and $PRE$ for the two predictor model?
+
+
+** One predictor IG model**
+```{r}
+#| cold-fold: true
+
+(sse(m_mo) - sse(m_ig)) / sse(m_mo)
+```
+
+** Two predictor model**
+```{r}
+#| cold-fold: true
+
+m_base <- lm(depress_post ~ depress_base_c, data = data_int)
+(sse(m_base) - sse(m_full)) / sse(m_base)
 ```
 
 -----
 
 ## Plot Option 1: Raw Data
 
+Get predicted values for mean baseline depression
 ```{r}
-preds_int <- tibble(intervention_group = c(0,1),
+preds <- tibble(intervention_group = c(0,1),
                 depress_base_c = 0) 
 
-preds_int <- preds_int|> 
-  bind_cols(predict(m_depress_2, preds_int, se.fit = TRUE) |>
+preds <- preds|> 
+  bind_cols(predict(m_full, preds, se.fit = TRUE) |>
   as_tibble() |>
   mutate(upper = fit + se.fit,
          lower= fit - se.fit))
 ```
 
 ```{r}
-plot_raw <- ggplot() +
-  geom_col(aes(x = as.factor(preds_int$intervention_group), y = preds_int$fit, 
-               fill = as.factor(preds_int$intervention_group)),
+#| code-fold: true
+
+ggplot() +
+  geom_col(aes(x = as.factor(preds$intervention_group), y = preds$fit, 
+               fill = as.factor(preds$intervention_group)),
            alpha = .4, color = "black") +
-  geom_jitter(aes(x = as.factor(data_int$intervention_group), y = data_int$depress_post), 
+  geom_jitter(aes(x = as.factor(data_int$intervention_group), 
+              y = data_int$depress_post), 
               width = .02, height = NULL) +
-  geom_errorbar(aes(ymin = preds_int$fit-preds_int$se.fit, 
-                    ymax = preds_int$fit+preds_int$se.fit, 
-                    x = as.factor(preds_int$intervention_group)), width = .4) +
+  geom_errorbar(aes(ymin = preds$lower, 
+                    ymax = preds$upper, 
+                    x = as.factor(preds$intervention_group)), width = .4) +
   scale_fill_manual(values = c("black", "light grey")) +
   scale_x_discrete(breaks = c(0, 1),
                    labels = c("Standard of Care", "New Intervention")) +
@@ -2266,34 +2626,41 @@ plot_raw <- ggplot() +
   labs(x = "Intervention Group",
        y = "CES-D Score") 
 ```
-
------
-
-```{r}
-plot_raw
-```
-
 
 
 ## Plot Option 2: Residuals
 
+Instead of the raw scores, we can plot depression scores after removing the variance due to baseline individual differences
+
+\
+
 ```{r}
-preds_res <- data_int |> 
-  bind_cols(tibble(resids = residuals(m_depress_2))) |> 
-  mutate(depress_post_res = depress_post + resids)
+res <- tibble(intervention_group = data_int$intervention_group,
+              depress_post_res = mean(data_int$depress_post) + residuals(m_full))
 ```
 
+The variance of the residualized depression scores is lower than for the raw scores because variability from baseline scores has been removed.
+
+\
 
 ```{r}
-plot_res <- ggplot() +
-  geom_col(aes(x = as.factor(preds_int$intervention_group), y = preds_int$fit, 
-               fill = as.factor(preds_int$intervention_group)),
+var(data_int$depress_post)
+var(res$depress_post_res)
+```
+
+-----
+
+```{r}
+ggplot() +
+  geom_col(aes(x = as.factor(preds$intervention_group), y = preds$fit, 
+               fill = as.factor(preds$intervention_group)),
            alpha = .4, color = "black") +
-  geom_jitter(aes(x = as.factor(preds_res$intervention_group), y = preds_res$depress_post_res), 
+  geom_jitter(aes(x = as.factor(res$intervention_group), 
+                  y = res$depress_post_res), 
               width = .02, height = NULL) +
-  geom_errorbar(aes(ymin = preds_int$fit-preds_int$se.fit, 
-                    ymax = preds_int$fit+preds_int$se.fit, 
-                    x = as.factor(preds_int$intervention_group)), width = .4) +
+  geom_errorbar(aes(ymin = preds$lower, 
+                    ymax = preds$upper, 
+                    x = as.factor(preds$intervention_group)), width = .4) +
   scale_fill_manual(values = c("black", "light grey")) +
   scale_x_discrete(breaks = c(0, 1),
                    labels = c("Standard of Care", "New Intervention")) +
@@ -2301,13 +2668,6 @@ plot_res <- ggplot() +
   labs(x = "Intervention Group",
        y = "CES-D Score") 
 ```
-
------
-
-```{r}
-plot_res
-```
-
 
 
 ## Adding a Third Predictor
