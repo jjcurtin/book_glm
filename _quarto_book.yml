@@ -31,6 +31,7 @@ book:
     - web4_application_assignments.qmd
     - web5_labs.qmd
     - web6_exams.qmd
+    - web7_videos.qmd
     - part: Appendices
       chapters:
         - app1_terminology.qmd
