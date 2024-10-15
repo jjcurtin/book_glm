@@ -1,5 +1,4 @@
 .reveal-viewport {
-
 }
 
 .reveal .slides {
@@ -89,12 +88,13 @@ width: 95% !important;
     padding-inline-start: 30px;
 }
 
-.reveal ol {
-    padding-inline-start: 30px;
-}
-
 .reveal ul ul {
     list-style-type: square !important;
+}
+
+
+.reveal ol {
+    padding-inline-start: 30px;
 }
 
 

@@ -1,6 +1,6 @@
 toc: false
 bibliography: refs.bib
-css: slides_wide.css
+css: slides_wide_teaching.css
 format: 
   revealjs:
     scrollable: true
