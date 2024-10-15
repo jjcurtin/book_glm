@@ -31,6 +31,17 @@ time, mark, audio, video {
   font-size: 20px !important;
 }
 
+/* Control spacing between paragraphs */
+p {
+    margin-bottom: 1.3em !important;
+}
+
+/* Control spacing of list after paragraph by reducing the top margin when that occurs */
+p + ul, p + ol {
+    margin-top: -25px !important;
+}
+
+
 .reveal strong, .reveal b {
     font-weight: 900 !important;
 }
