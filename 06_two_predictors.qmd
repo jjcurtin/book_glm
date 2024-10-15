@@ -234,6 +234,8 @@ anova(m_c, m_a)
 
 --------------------------------------------------------------------------------
 
+## Test slide
+
 This is a line
 
 this is a very very very long line that wraps around to a new line so that we can see what it looks like (single return).  We needed some more text to continue to make sure it wrapped to a  new line.  Hopefully this is enough.   I think it is enough.
@@ -256,7 +258,8 @@ This is a single return after a list (above)
 
 This is a line after a backslash following list (above)
 
-
+1. ordered 1
+2. ordered 2
 
 --------------------------------------------------------------------------------
 
