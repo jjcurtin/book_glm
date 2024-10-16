@@ -166,13 +166,9 @@ The formula for the standard error for a coefficient $b_j$ in **multiple** regre
 
 $SE_{bj} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R^2_y)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{(1-R^2_j)}}$  
 
-\
-
 - $R^2_j$ = variance in $X_j$ accounted for by all other regressors ($X$s) in the model (i.e., how redundant is $X_{a_j}$ in model?).
 
 - This is literally: predict $X_j$ as $Y$ with all other regressors as $X$s.  
-
-\
 
 :::{.callout-note}
 # Note 
@@ -186,8 +182,6 @@ $\sqrt {\frac{SSE}{N-P}}*\sqrt{\frac{1}{N}+\frac{X^2}{(N-1)s_x^2}}$
 ## SE for $b_j$ and $R^2$
 
 $SE_{b_j}= \frac{s_y}{s_j}*\frac{\sqrt{(1-R_y^2)}}{(N-P)}*\frac{1}{\sqrt{(1-R_j^2)}}$  
-
-\
 
 If we increase $R_y^2$, we would decrease the SE for our regression coefficient.  
 
@@ -213,8 +207,6 @@ m_c <- lm(fps ~ 1, data = data)
 - $\hat{FPS}_i = \beta_0+0*BAC_i$
 - $SSE_c=$ `r round(sse(m_c), 1)`, $P_c=1$     
 
-\
-
 [Augmented model:]{style="color:blue;"}
 ```{r}
 m_a <- lm(fps ~ 1 + bac, data = data)
@@ -223,43 +215,12 @@ m_a <- lm(fps ~ 1 + bac, data = data)
 - $\hat{FPS}_i = \beta_0+\beta_1*BAC_i$    
 - $SSE_a=$`r round(sse(m_a), 1)`, $P_a=2$   
 
-\
-
 $F(P_a-P_c, N-P_a) = \frac{SSE_c-SSE_a/(P_a-P_c)}{SSE_a/(N-P_a)}$
 
 ```{r}
 anova(m_c, m_a)
 ```
 :::
-
---------------------------------------------------------------------------------
-
-## Test slide
-
-This is a line
-
-this is a very very very long line that wraps around to a new line so that we can see what it looks like (single return).  We needed some more text to continue to make sure it wrapped to a  new line.  Hopefully this is enough.   I think it is enough.
-
-This is a single return (above)
-
-\
-
-This is a single backslash (above) 
-
-- list 1
-- list 2
-
-This is a single return after a list (above)
-
-- list 1
-- list 2
-
-\
-
-This is a line after a backslash following list (above)
-
-1. ordered 1
-2. ordered 2
 
 --------------------------------------------------------------------------------
 
@@ -339,8 +300,6 @@ plot_fps + plot_bac + plot_ta
 
 We can look at correlations among these variables using `corr.test()` from the `psych` package (you may need to install that package)
 
-\
-
 ```{r}
 r <- data |> 
   select(where(is.numeric)) |> 
@@ -384,8 +343,6 @@ The two (and $k$) are simple generalizations of the models you have already lear
 - Simply add more $X$s to the model 
 - Estimate parameters for these $X$s
 
-\
-
 DATA = MODEL + ERROR
 
 **Two Predictor Model for Sample Data**  
@@ -393,8 +350,6 @@ DATA = MODEL + ERROR
 $Y_i=b_0+b_1X_1+b_2X_2+e_i$  
 
 $\hat{Y_i}=b_0+b_1X_1+b_2X_2$  
-
-\
 
 **$k$ Predictor Model for Sample Data**   
 
@@ -479,8 +434,6 @@ m_c <- lm (fps ~ 1 + ta, data = data)
 - $\hat{FPS}=\beta_0 + 0*BAC+\beta_2*TA$    
 - $SSE_c =$ `r round(sse(m_c), 1)`, $P_c = 2$   
 
-\
-
 [**Augmented Model:**]{style="color:blue;"}
 
 ```{r}
@@ -489,8 +442,6 @@ m_a <- lm(fps ~ 1 + bac + ta, data = data)
 
 - $\hat{FPS}=\beta_0 + \beta_1*BAC+\beta_2*TA$    
 - $SSE_a =$ `r round(sse(m_a), 1)`, $P_a = 3$ 
-
-\
 
 $F(P_a - P_c, N - P_a) = \frac{(SSE_c - SSE_a)/(P_a-P_c)}{SSE_a/(N-P_a)}$   
 $F (1, 93) = $ `r round((sse(m_c) - sse(m_a)) / (sse(m_a) / 93), 2)`, $p =$ `r round(pt(-2.04, 93, lower.tail = TRUE)*2, 4)`
@@ -508,8 +459,6 @@ tidy(m_2)
 ```
 
 $SSE =$ `r round(sse(m_2), 1)`
-
-\
 
 **Three parameter model test of BAC**   
 
@@ -531,8 +480,6 @@ What changed about test of $\beta_1$ (BAC effect) and why?
 ```{r}
 glance(m_2) |> pull(r.squared)
 ```
-
-\
 
 **Three parameter model test of BAC**   
 ```{r}
@@ -588,9 +535,6 @@ $t(N-P) = \frac{b_j - 0}{SE_{b_j}}$
 #| code-fold: true
 tidy(m_2)
 ```
-
-\
-
 
 **Three parameter model test of BAC**   
 
@@ -652,7 +596,6 @@ $SE_{b_j} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R_Y^2)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt
 
 $R^2_j$ = variance in $X_j$ accounted for by all other predictors in model (i.e., how redundant is $X_j$ in model?).  
 
-
 --------------------------------------------------------------------------------
 
 $SE_{b_j} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R_Y^2)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{(1-R_j^2)}}$  
@@ -684,8 +627,6 @@ Augmented Model:
 - $\hat{FPS}= `r round(coef(m_2)[1],1)` + `r round(coef(m_2)[2],1)` *BAC$   
 - $SSE_a =$ `r round(sum(residuals(m_2)^2), 1)`, $P_a$ = 2  
 
-\
-
 **Three parameter model test of BAC**   
 
 Compact Model: 
@@ -697,8 +638,6 @@ Augmented Model:
 
 - $\hat{FPS}= `r round(coef(m_3)[1],1)` + `r round(coef(m_3)[2],1)` *BAC + `r round(coef(m_3)[3], 1)` *TA$   
 - $SSE_a =$ `r round(sum(residuals(m_3)^2), 1)`, $P_a$ = 3  
-
-\
 
 $F(P_a - P_c, N - P_a) = \frac{(SSE_c - SSE_a) / (P_a-P_c)}{SSE_a/(N-P_a)}$ 
 
@@ -718,8 +657,6 @@ How can you see the increase in power from the model comparison perspective (loo
 
 - $F (1, 94) = `r round((sum(residuals(lm(fps ~ 1, data=data))^2) - sum(residuals(m_2)^2))/(sum(residuals(m_2)^2)/94), 2)`, p = `r round(pt(-1.92, 94, lower.tail = TRUE)*2, 4)`$
 
-\
-
 **Three parameter model test of BAC** 
 
 - $F(3-2, 96-3) = \frac{(`r round(sum(residuals(lm(fps~ta, data = data))^2),1)` - `r round(sum(residuals(m_3)^2),1)`)/(3-2)}{`r round(sum(residuals(m_3)^2),1)` / (99-3)}$
@@ -727,7 +664,6 @@ How can you see the increase in power from the model comparison perspective (loo
 - $F(1, 93) = \frac{(`r round(sum(residuals(lm(fps~ta, data = data))^2) -  sum(residuals(m_3)^2),1)`)/(1)}{`r round(sum(residuals(m_3)^2)/93, 1)`}$
 
 - $F (1, 93) = `r round((sum(residuals(lm(fps ~ ta, data=data))^2) - sum(residuals(m_3)^2))/(sum(residuals(m_3)^2)/93), 2)`, p = `r round(pt(-2.04, 93, lower.tail = TRUE)*2, 4)`$
-
 
 Decreased $SSE_a$ in three parameter model. Flip side of increased model $R^2$.]{style="color:blue;"}
 :::
@@ -751,8 +687,6 @@ $SE_{b_j} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R_Y^2)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt
 - $t(N-P) = \frac{b-0}{SE_b}$   
 - $CI_b= b \pm t(\alpha; N-P)*SE_b$   
 
-\
-
 This decrease in **power and precision** for model parameter estimates (regression coefficients) associated with redundancy among the predictors is called the **problem of Multicollinearity**.  
 
 --------------------------------------------------------------------------------
@@ -760,8 +694,6 @@ This decrease in **power and precision** for model parameter estimates (regressi
 When there are more than two `X`s in the model, it is **not** sufficient to examine only bivariate correlations among $X$s. To determine if a problem exists, calculate Variance Inflation Factors (VIF) for each $X$.  
 
 $VIF_j = \frac{1}{(1-R^2_j)}$   
-
-\
 
 VIF tells you how much $SE_{b_j}$ is increased because of redundancy. VIFs $\ge$ 5 are considered problematic (SE increased by factor of 2.2).  
 
@@ -772,9 +704,6 @@ We can use `car::vif()` to calculate VIFs in R.
 ```{r}
 car::vif(m_3)
 ```
-
-\
-\
 
 A related concept is **tolerance** ($X_i= 1- R^2_j$). 
 
@@ -816,7 +745,6 @@ What about $b_j$ with multiple (e.g., 2) $X$s?
 [For every 1 unit increase in $X_j$, there will be a $b_j$ unit increase in $Y$ holding all other $X$s in the model constant.]{style="color:blue;"}
 :::
 
-
 ## A Second Example
 
 Now lets switch gears to a new example with new data.
@@ -852,8 +780,6 @@ data_exam |> my_skim()
 
 Start by fitting the two parameter model (testing just `study_hours`) 
 
-\
-
 ```{r}
 m_exam_2 <- lm(exam ~ 1 + study_hours_c, data = data_exam)
 
@@ -882,8 +808,6 @@ What is the interpretation of $b_1$ in this model?
 tidy(m_exam_2)
 ```
 
-\
-
 :::{.callout-important}
 # Question
 What is the interpretation of $b_0$?
@@ -896,8 +820,6 @@ What is the interpretation of $b_0$?
 --------------------------------------------------------------------------------
 
 Maybe study hours are related to exam scores only because intelligent students study more (learned early good study habits) and intelligent students do better on exams.  
-
-\
 
 :::{.callout-important}
 # Question
@@ -970,8 +892,6 @@ What would change in this model if we did not center `study_hours` and `iq`?
 :::{.fragment}
 [The intercept would be the expected exam score for a student who studies 0 hours per week and has an IQ of 0.]{style="color:blue;"}
 
-\
-
 [There would be no change in either `b_1` or `b_2`.  These are still the unique effects of each of their associated `X`s, holding the other `X` constant in the model.]{style="color:blue;"}
 :::
 
@@ -984,8 +904,6 @@ tidy(m_exam_2)
 ```{r}
 tidy(m_exam_3)
 ```
-
-\
 
 Look at the effect of `study_hours` across the two models
 
@@ -1034,8 +952,6 @@ lm(exam ~ 1 + study_hours_c, data = data_exam) |>
 
 This is a "path diagram" of our causal model at this point
 
-\
-
 We can show this total effect of `study_hours` on `exam` using the parameter estimate from the one predictor model.
 
 ```{r}
@@ -1076,8 +992,6 @@ lm(exam ~ 1 + study_hours_c + iq_c, data = data_exam) |>
 --------------------------------------------------------------------------------
 
 And here is the path diagram for our updated causal model
-
-\
 
 ```{r}
 #| code-fold: true
@@ -1160,8 +1074,6 @@ digraph{
 **Total effect = Direct + Indirect/Spurious**
 
 `r round(coef(m_exam_2)[2], 2)` = `r round(coef(m_exam_3)[2], 2)` +  (`r round(coef(m_iq)[2], 2)` * `r round(coef(m_exam_3)[3], 2)`)
-
-\
 
 `r round(coef(m_exam_2)[2], 2)` = `r round(coef(m_exam_3)[2], 2)` +  `r round(coef(m_iq)[2] * coef(m_exam_3)[3], 2)`
 
@@ -1280,11 +1192,7 @@ digraph{
 
 In the previous slides, we displayed the relationships between correlated predictors and $Y$ in a path model
 
-\
-
 We can also visualize these relationships between correlated predictors and $Y$ using Venn diagrams
-
-\
 
 ```{r}
 #| echo: false
@@ -1350,7 +1258,6 @@ venn_full
 - And there will also be unexplained variability in $Y$ that cannot be explained by either predictor
 - We will build up to understanding this display conceptually over the next several (many) slides!
 
-
 ```{r}
 #| echo: false
 
@@ -1359,7 +1266,6 @@ venn_full
 
 ## The Relevant Models
 
-
 All of these variabilities can be defined in terms of differences in SSE or $var(\hat{Y_i})$ between various models.  Lets fit all the relevant models here
 
 - Mean only model
@@ -1367,27 +1273,20 @@ All of these variabilities can be defined in terms of differences in SSE or $var
 m_mo <- lm(exam ~ 1, data = data_exam)
 ```
 
-\
-
 - Study hours one predictor (two parameter) model
 ```{r}
 m_sh <- lm(exam ~ 1 + study_hours_c, data = data_exam)
 ```
-
-\
 
 - IQ one predictor (two parameter) model
 ```{r}
 m_iq <- lm(exam ~ 1 + iq_c, data = data_exam)
 ```
 
-\
-
 - Full two predictor (three parameter) model
 ```{r}
 m_full <- lm(exam ~ 1 + study_hours_c + iq_c, data = data_exam)
 ```
-
 
 ## Total Variability in Y 
 
@@ -1402,13 +1301,9 @@ The numerator of this term is the SSE of the mean-only model for $Y$
 
 So we can think of SSE from the mean only model as an index of the total variability in $Y$ (just without the $N-1$)
 
-\
-
 ```{r}
 (var(data_exam$exam) * (200 - 1)) |> round() 
 ```
-
-\
 
 ```{r}
 sse(m_mo) |> round()
@@ -1452,8 +1347,6 @@ How do we get the unexplained variability in `exam` from this one predictor mode
 sse(m_sh) |> round()
 ```
 
-\
-
 [And, of course, this is just the numerator of the variance of the errors in the one predictor model]{style="color:blue;"}
 
 ```{r}
@@ -1483,21 +1376,15 @@ There are two ways to get the variability in `exam` explained by `study_hours` i
 
 - $SSE_{m\_mo} - SSE_{m\_sh}$
 
-\
-
 ```{r}
 (sse(m_mo) - sse(m_sh)) |> round()
 ```
-
-\
 
 [2. The variability in `exam` explained by `study_hours` is also contained in the variance of that model's predicted values.]{style="color:blue;"}
 
 
 - $Data = Model + Error$
 - $Var(Y_i) = Var(\hat{Y_i}) + Var(\epsilon_i)$
-
-\
 
 ```{r}
 (var(predict(m_sh)) * (200 -1)) |> round()
@@ -1526,17 +1413,11 @@ How do we get the unexplained variability in `exam` in the one predictor model `
 :::{.fragment}
 [The SSE from the one predictor `iq` model]{style="color:blue;"}
 
-\
-
 ```{r}
 sse(m_iq) |> round()
 ```
 
-\
-
 [Or the numerator of the variance of the errors in this one predictor model]{style="color:blue;"}
-
-\
 
 ```{r}
 (var(residuals(m_iq)) * (200 -1)) |> round()
@@ -1565,13 +1446,9 @@ There are two ways to get the variability in `exam` explained by `iq` in this on
 
 - $SSE_{m\_mo} - SSE_{m\_sh}$
 
-\
-
 ```{r}
 (sse(m_mo) - sse(m_sh)) |> round()
 ```
-
-\
 
 [2. The variability in `exam` explained by `iq` is also contained in the variance of that model's predicted values.]{style="color:blue;"}
 
@@ -1610,8 +1487,6 @@ venn_full
 venn_full
 ```
 
-\
-
 :::{.callout-important}
 # Question
 How do we get the unexplained variability in `exam` in the two predictor model?
@@ -1619,8 +1494,6 @@ How do we get the unexplained variability in `exam` in the two predictor model?
 
 :::{.fragment}
 [The SSE from the two predictor model]{style="color:blue;"}
-
-\
 
 ```{r}
 sse(m_full) |> round()
@@ -1649,8 +1522,6 @@ How do we get the unique variability in `exam` explained by `study_hours`, contr
 
 - $SSE_{m\_iq} - SSE_{m\_full}$
 - [This is also the model comparison that is used to test the significance of the effect of `study_hours` in the two predictor model.]{style="color:blue;"}
-
-\
 
 ```{r}
 (sse(m_iq) - sse(m_full)) |> round()
@@ -1681,8 +1552,6 @@ What is a second way to get the unique variability in `exam` explained by `study
 - [Same model comparison but in terms of the variance of the predicted values (corrected for N-1 put in units of sums of squares)]{style="color:blue;"}
 - [We simply focus on the explained vs. unexplained variability.  The variability in the predicted values is sometimes called $SS_{regression}$ or if $X$ is categorical, $SS_{between}$ in ANOVA.]{style="color:blue;"}
 
-\
-
 ```{r}
 ((var(predict(m_full)) - var(predict(m_iq))) * (200 - 1))  |> round()
 ```
@@ -1711,8 +1580,6 @@ The SSE from the one predictor model with `study_hours` minus the SSE from the t
 - $SSE_{m\_sh} - SSE_{m\_full}$
 - This is also the model comparison that is used to test the significance of the effect of `iq` in the two predictor model.
 - Of course, we could also get this value focusing on the variability of the predicted scores from the two models.
-
-\
 
 ```{r}
 (sse(m_sh) - sse(m_full)) |> round()
@@ -1744,37 +1611,26 @@ There are many different ways to get this value. The most straightforward (IMO) 
 - Then subtract the unique variances for `study_hours` and `iq` that we calculated on the previous slides
 :::
 
-
 ## Effect Sizes: Raw Parameter Estimates
 
 You can describe the effects of your predictors in raw units of change or as proportions of explained variability in $Y$
-
-\
-
 
 The raw parameter estimates describe the effects of the predictors in the original units of $X$ and $Y$
 
 - The parameter estimates from the one predictor models describe the overall/total effects of each predictor
 - The parameter estimates from the full model describe the unique/partial/direct effects of each predictor
 
-\
-
 ```{r}
 m_sh |> tidy()
 ```
-
-\
 
 ```{r}
 m_iq |> tidy()
 ```
 
-\
-
 ```{r}
 m_full |> tidy()
 ```
-
 
 ## Effect Sizes: Proportions of Explained Variability
 
@@ -1782,7 +1638,6 @@ There are several options to consider for proportions of explained variability i
 
 - These options differ on whether they focus on the total variability explained by the full model vs. unique variability explained by each predictor
 - When focusing on unique predictor variability, they differ on the denominator of the proportion (total variability in $Y$ vs. previously unexplained variability in $Y$)
-
 
 ## Effect Sizes: Model R-Squared
 
@@ -1792,7 +1647,6 @@ You can quantify and test the overall performance of the model (with all $X$s) u
 - $R^2$ is the proportion of variability in $Y$ explained by the set of all model predictors (all $X$s) relative to the total variability in $Y$
 - In our example, $R^2$ describes the combined effect of `study_hours` and `iq`. 
 - In more complex models, $R^2$ will always be predictive strength of the set of all $X$s derived from the predictors. 
-
 
 --------------------------------------------------------------------------------
 
@@ -1817,24 +1671,17 @@ Use SS in the Venn diagram to calculate $R^2$
 $\frac{643 + 4066 + 3726}{643 + 4066 + 3726 + 18609}$
 :::
 
-
 --------------------------------------------------------------------------------
 
 $R^2 = \frac{\text{Total Explained Variability in Y}}{\text{Total Variability in Y}}$
-
-\
 
 The numerator of this formula can be calculated as a model comparison of SSEs
 
 - $SSE_{mean-only} - SSE_{full}$   
 
-\
-
 The denominator can be obtained directly from the SSE of mean-only model.  This yields another definition of the $R^2$ in terms of SSEs
 
 - $R^2 = \frac{SSE_{mean-only} - SSE_{full}}{SSE_{mean-only} }$   
-
-
 
 --------------------------------------------------------------------------------
 
@@ -1843,25 +1690,17 @@ Given that the numerator of $R^2$ can be defined as a model comparison, we can u
 - $H_0: R^2 = 0$
 - $H_a: R^2 > 0$
 
-\
-
 [Compact model: Mean-only model]{style="color:blue;"}
 
 - $\hat{Exam}_i = \beta_0+0*StudyHours_i + 0*IQ_i$
 - $P_c=1$     
-
-\
 
 [Augmented model: Full model]{style="color:blue;"} 
 
 - $\hat{Exam}_i = \beta_0+\beta_1*StudyHours_i + \beta_2*IQ_i$
 - $P_a=3$     
 
-\
-
 $F(P_a-P_c, N-P_a) = \frac{SSE_c-SSE_a/(P_a-P_c)}{SSE_a/(N-P_a)}$
-
-\
 
 ```{r}
 anova(m_mo, m_full)
@@ -1871,21 +1710,15 @@ anova(m_mo, m_full)
 
 $R^2 = \frac{\text{Total Explained Variability in Y}}{\text{Total Variability in Y}}$
 
-\
-
 Remember: $var(Y_i) = var(\hat{Y_i}) + var(e_i)$
 
 - $var(Y_i)$ is total variance in $Y$
 - $variance(\hat{Y_i})$ is variance in predicted values
 - $variance(e_i)$ is variance in residuals
 
-\
-
 Therefore, we can get $R^2$ by dividing the variance of the predicted values by the variance of the observed values
 
 $R^2 = \frac{var(\hat{Y_i})}{var(Y_i)}$
-
-\
 
 ```{r}
 var(predict(m_full)) / var(data_exam$exam)
@@ -1899,19 +1732,13 @@ The easiest way to get $R^2$ for any model is the `glance()` function from the `
 - `glance()` provides a variety of full model statistics
 - You can either `pull()`, `select()` or use `$r.squared` to get the numeric value or a tibble with the value
 
-\
-
 ```{r}
 glance(m_full) |> pull(r.squared)
 ```
 
-\
-
 ```{r}
 glance(m_full) |> select(r.squared)
 ```
-
-\
 
 ```{r}
 glance(m_full)$r.squared
@@ -1944,7 +1771,6 @@ $R^2_{iq} = \frac{4066 + 3726}{643 + 3726 + 4066 + 18609}$
 $R^2_{full} = \frac{643 + 4066 + 3726}{643 + 3726 + 4066 + 18609}$
 :::
 
-
 --------------------------------------------------------------------------------
 
 ```{r}
@@ -1956,7 +1782,6 @@ $R^2_{full} = \frac{643 + 4066 + 3726}{643 + 3726 + 4066 + 18609}$
 
 venn_full
 ```
-
 
 :::{.callout-important}
 # Question
@@ -1976,32 +1801,23 @@ There are two proportion of variance effect sizes for the specific $X$s in your 
 
 - You will first learn about Delta $R^2$ ($\Delta R^2$).
 
-
 ## Effect Size: Delta R-Squared
 
 As the name implies, $\Delta R^2$ is the change (increase) in model $R^2$ for the augmented model where we estimated a specific parameter vs. the associated compact model where we fixed that parameter to 0.
 
-\
-
 - We can calculate $\Delta R^2$ for each $X$ (or later set of $X$s) in the model
 - We need to specify the appropriate compact and augmented model
 - Then: $\Delta R^2 = R^2_a - R^2_c$
-
-\
-
 
 for `study_hours`
 
 - compact model: $\hat{y}_i=\beta_0+0*study\_hours_i+ \beta_2*iq_i$
 - augmented model: $\hat{y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
 
-\
-
 For `iq`
 
 - compact Model: $\hat{Y}_i=\beta_0+*\beta_1*study\_hours_i+ 0*iq_i$
 - augmented Model: $\hat{Y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
-
 
 --------------------------------------------------------------------------------
 
@@ -2028,8 +1844,6 @@ for `study_hours`
 
 - $\frac{643}{643 + 3726 + 4066 + 18609}$
 
-\
-
 for `iq`
 
 - $\frac{4066}{643 + 3726 + 4066 + 18609}$
@@ -2052,7 +1866,6 @@ Following this conceptual understanding of $\Delta R^2$, we can use SSEs from mo
 - $\Delta R^2 = \frac{SSE_c - SSE_a}{SSE_{\text{mean-only}}}$
 - Use the compact and augmented model associated with the test of the parameter estimate
 :::
-
 
 --------------------------------------------------------------------------------
 
@@ -2096,7 +1909,6 @@ for `iq`
 (sse(m_sh) - sse(m_full)) / sse(m_mo)
 ```
 
-
 --------------------------------------------------------------------------------
 
 ```{r}
@@ -2124,7 +1936,6 @@ $\Delta R^2_{iq} = \frac{4066}{643 + 3726 + 4066 + 18609}$
 $R^2_{full} = \frac{643 + 4066 + 3726}{643 + 3726 + 4066 + 18609}$
 :::
 
-
 --------------------------------------------------------------------------------
 
 ```{r}
@@ -2146,16 +1957,11 @@ Is there any situation where the $\Delta R^2$ for each of the two predictors wil
 Yes, if the two $X$s are uncorrelated so that there is no shared variance in $Y$ predicted by both.
 :::
 
-
 ## Effect Size: Partial Eta-Squared or PRE
 
 $\eta_p^2$ or PRE describes how much SSE was reduced (proportionally) in the augmented model where we estimated a specific parameter vs. the associated compact model where we fixed that parameter to 0.  
 
-\
-
 $PRE = \frac{SSE_c - SSE_a}{SSE_c}$
-
-\
 
 - We can calculate PRE for each $X$ (or later set of $X$s) in the model
 - We need to specify the appropriate compact and augmented model
@@ -2163,8 +1969,6 @@ $PRE = \frac{SSE_c - SSE_a}{SSE_c}$
 --------------------------------------------------------------------------------
 
 $PRE = \frac{SSE_c - SSE_a}{SSE_c}$
-
-\
 
 For `study_hours`
 
@@ -2181,7 +1985,6 @@ For `iq`
 
 - Compact Model: $\hat{Y}_i=\beta_0+*\beta_1*study\_hours_i+ 0*iq_i$
 - Augmented Model: $\hat{Y}_i=\beta_0+\beta_1*study\_hours_i+ \beta_2*iq_i$
-
 
 ```{r}
 (sse(m_sh) - sse(m_full)) / sse(m_sh)
@@ -2210,7 +2013,6 @@ The numerator is the same.  The denominator is different!
 - $PRE_{sh} = \frac{643}{643 + 18609}$
 :::
 
-
 --------------------------------------------------------------------------------
 
 ```{r}
@@ -2234,17 +2036,13 @@ The numerator is the same.  The denominator is different!
 - $PRE_{iq} = \frac{4066}{4066 + 18609}$
 :::
 
-
 ## Comparing Variance Based Effect Sizes
 
 $R^2 = \frac{\text{SSE}_{\text{mean-only}} - \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}$
 
-
 $\Delta R^2 = \frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}$
 
-
 $\eta_p^2 = \frac{\text{SSE}_c - \text{SSE}_a}{\text{SSE}_c}$
-
 
 --------------------------------------------------------------------------------
 
@@ -2255,7 +2053,6 @@ $R^2$
 - Can use F test with model comparison (full vs. mean-only) to test if the model as a whole predicts variance in $Y$ (multi-df test)
 - Not used frequently in Psychology but useful in other fields.   
 
-
 $\Delta R^2$  
 
 - Describes proportion of unique variance in $Y$ explained by $X_j$ relative to total variance in $Y$.  
@@ -2264,7 +2061,6 @@ $\Delta R^2$
 - Same denominator for all $X$s.  
 - Test is statistically equivalent to test of parameter estimate
 
-
 $\eta_p^2$  
 
 - Describes proportion of reduction of unexplained variance (SSE) by adding $X_j$.  
@@ -2272,13 +2068,11 @@ $\eta_p^2$
 - Stable in experimental designs when additional IVs are added.
 - Test is statistically equivalent to test of parameter estimate
 
-
 ## Multiple Predictors: Dichotomous Predictor
 
 **Example:** Evaluate the effects of a new intervention for depression.   
 
 - $N=200$ participants, randomly assigned to receive new intervention vs. standard of care control.  
-
 - Measure depression with CES-D pre- (baseline) and post-intervention.    
 
 ```{r}
@@ -2337,7 +2131,6 @@ What else do you report?
 - Means/SD of two groups{style="color:blue;"}
 - figure with means, standard error, and raw (or residual) data points{style="color:blue;"}
 
-
 ```{r}
 #| code-fold: true
 
@@ -2351,7 +2144,6 @@ In this case $\Delta R^2$ is the same as model $R^2$ because there is only one p
 ::::
 :::
 
-
 --------------------------------------------------------------------------------
 
 :::{.callout-important}
@@ -2362,11 +2154,7 @@ What is a **better** analysis to address this question about the effect of the i
 :::{.fragment}
 [Control for baseline depressions scores to increase power]{style="color:blue;"}
 
-\
-
 [Baseline depression should be uncorrelated (in the population) with intervention group because participants were randomly assigned to group. Therefore, including baseline depression should not systematically change $b_1$.]{style="color:blue;"}
-
-\
 
 [However, baseline scores are likely a strong predictor of post-intervention scores. This will increase model $R^2$, reduce SSE, and therefore reduce the SE for intervention group. More power!]{style="color:blue;"}
 :::
@@ -2375,18 +2163,16 @@ What is a **better** analysis to address this question about the effect of the i
 
 Review parameter estimates and their tests.  Does this make sense to you?
 
-\
-
 **Previous one predictor model for IG**
+
 ```{r}
 #| code-fold: true
 
 m_ig |> tidy()
 ```
 
-\
-
 **Two predictor model**
+
 ```{r}
 #| code-fold: true
 
@@ -2403,15 +2189,15 @@ m_full |> tidy()
 Review $R^2$s.  Does this make sense to you?
 
 **Previous one predictor model for IG**
+
 ```{r}
 #| code-fold: true
 
 glance(m_ig)$r.squared 
 ```
 
-\
-
 **Two predictor model**
+
 ```{r}
 #| code-fold: true
 
@@ -2422,17 +2208,16 @@ glance(m_full)$r.squared
 
 Review $\Delta R^2$ for `intervention_grouup` across two models.  Do they make sense to you?
 
-
 **One predictor IG model**
+
 ```{r}
 #| cold-fold: true
 
 (sse(m_mo) - sse(m_ig)) / sse(m_mo)
 ```
 
-\
-
 **Two predictor model**
+
 ```{r}
 #| cold-fold: true
 
@@ -2444,17 +2229,16 @@ m_base <- lm(depress_post ~ depress_base_c, data = data_int)
 
 Review $PRE$ for `intervention_group` across two models.  Do they make sense to you? What about the differences between $\Delta R^2$ and $PRE$ for the two predictor model?
 
-
 **One predictor IG model**
+
 ```{r}
 #| cold-fold: true
 
 (sse(m_mo) - sse(m_ig)) / sse(m_mo)
 ```
 
-\
-
 **Two predictor model**
+
 ```{r}
 #| cold-fold: true
 
@@ -2467,7 +2251,6 @@ m_base <- lm(depress_post ~ depress_base_c, data = data_int)
 ## Visualizing the Model
 
 $\hat{FPS}= `r round(coef(m_3)[1],1)` + `r round(coef(m_3)[2],1)` *BAC + `r round(coef(m_3)[3],1)` *TA$ 
-
 
 ```{r}
 #| code-fold: true
@@ -2489,8 +2272,6 @@ scatter3D(data$bac, data$ta, data$fps, pch = 19, col = "black", ticktype = "deta
           surf = list(x = preds_bac, y = preds_ta, z = preds_y, alpha = .9, border = "light grey"))
 ```
 
-
-
 --------------------------------------------------------------------------------
 
 ```{r}
@@ -2511,7 +2292,6 @@ ggplot() +
   labs(x = "BAC",
        y = "FPS") 
 ```
-
 
 --------------------------------------------------------------------------------
 
@@ -2535,11 +2315,7 @@ ggplot() +
        color = "TA") 
 ```
 
-
-
-
 --------------------------------------------------------------------------------
-
 
 <span style="color: red;">Question: What would change if TA was mean centered?</span>   
 
@@ -2585,7 +2361,6 @@ m_3_c |>
 <span style="color: red;">Question: What do you report and why?</span>   
 
 --------------------------------------------------------------------------------
-
 
 ```{r}
 #| code-fold: true
@@ -2637,7 +2412,6 @@ As predicted, the effect of BAC was significant and reduced error variance by ap
 
 --------------------------------------------------------------------------------
 
-
 ```{r}
 coef <- m_3_c |> 
   broom::tidy() |> 
@@ -2665,7 +2439,6 @@ table <- coef |>
   knitr::kable(digits = 2, align = c("l", "c", "c", "c", "c", "c"))
 ```
 
-
 --------------------------------------------------------------------------------
 
 **Table 1**
@@ -2679,9 +2452,7 @@ Notes:
 $R^2 = `r round(broom::glance(m_3_c)$r.squared, 3)`, F(2,93) = 13.44, p < .001$***    
 Trait anxiety was mean-centered   
 
-
 --------------------------------------------------------------------------------
-
 
 ```{r}
 preds_x <- expand.grid(bac = seq(min(data$bac), max(data$bac), length.out = 100), 
@@ -2692,7 +2463,6 @@ preds_pub <- predict(m_3_c, preds_x, se.fit = TRUE) |>
   mutate(upper = fit + se.fit,
          lower= fit - se.fit)
 ```
-
 
 ```{r}
 plot_pub <- ggplot() +
@@ -2706,7 +2476,6 @@ plot_pub <- ggplot() +
   ylim(c(-100, 200))
 ```
 
-
 --------------------------------------------------------------------------------
 
 ```{r}
@@ -2715,11 +2484,9 @@ plot_pub
 
 --------------------------------------------------------------------------------
 
-
 <span style="color: red;">Question: What other table should you consider in your results?</span>  
 
 --------------------------------------------------------------------------------
-
 
 <span style="color: blue;">Table of simple correlations between variables. Can summarize with other important info fairly concisely. Could also include reliability, skewness, kurtosis, etc.</span>
 
@@ -2735,7 +2502,6 @@ tibble(` ` = c("Trait Anxiety", "Blood Alcohol Concentration", "Mean", "SD"),
 ```
 
 --------------------------------------------------------------------------------
-
 
 ## Plot Option 1: Raw Data
 
@@ -2772,12 +2538,9 @@ ggplot() +
        y = "CES-D Score") 
 ```
 
-
 ## Plot Option 2: Residuals
 
 Instead of the raw scores, we can plot depression scores after removing the variance due to baseline individual differences
-
-\
 
 ```{r}
 res <- tibble(intervention_group = data_int$intervention_group,
@@ -2785,8 +2548,6 @@ res <- tibble(intervention_group = data_int$intervention_group,
 ```
 
 The variance of the residualized depression scores is lower than for the raw scores because variability from baseline scores has been removed.
-
-\
 
 ```{r}
 var(data_int$depress_post)
@@ -2814,7 +2575,6 @@ ggplot() +
        y = "CES-D Score") 
 ```
 
-
 ## Adding a Third Predictor
 
 ```{r}
@@ -2826,27 +2586,14 @@ m_full |>
 
 <span style="color: red;">Question: What would you do and why if you had also measured sex (unbalanced or balanced) across intervention groups? What would change?</span>   
 
-
 --------------------------------------------------------------------------------
 
 ## Summary: New and Familiar Concepts
 
 - Interpretation of $b_0$, $b_1$, and $b_2$, in 2+ predictor model with continuous and dichotomous focal predictor.  
-
 - Impact of centering $X_1$ or $X_2$ on $b_0$, $b_1$, and $b_2$.  
-
 - What affects standard errors of $b_j$.  
-
 - What is Multicollinearity, how to detect, what are implications if high, and what are solutions.  
-
 - Model effect size ($R^2$).  
-
 - Effect sizes for $X$s ($b_j$s, $\Delta R^2$, $\eta_p^2$).  
-
 - Text, table, and figure descriptions of results.  
-
-
-
-
-
-
