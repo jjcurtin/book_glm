@@ -116,7 +116,6 @@ m_2 |> tidy()
 
 :::{.callout-important}
 # Question
-
 Describe the interpretation of $b_1$ (coefficient for BAC) and its significance test.
 :::
 
@@ -145,8 +144,12 @@ What could we change about the sampling distribution that would make this $b_1$ 
 :::
 
 :::{.fragment}
+[If the standard deviation of the sampling distribution (its standard error) was smaller so that the distribution was narrower, $b_1$ would be less probable given $H_0$.]{style="color:blue;"}`
+
 ```{r}
 #| code-fold: true
+#| fig-height: 4
+#| fig-width: 8
 
 tibble(b1 = seq(-400,400,.01),
        probability = dt(b1/subset(broom::tidy(m_2), term == "bac")$std.error, m_2$df.residual)) |> 
@@ -156,8 +159,6 @@ tibble(b1 = seq(-400,400,.01),
              color = "red") +
   labs(title = "Sampling Distribution for b1")
 ```
-
-[If the standard deviation of the sampling distribution (its standard error) was smaller so that the distribution was narrower, $b_1$ would be less probable given $H_0$.]{style="color:blue;"}`
 :::
 
 ## Standard Errors of GLM Coefficients
@@ -179,7 +180,7 @@ $\sqrt {\frac{SSE}{N-P}}*\sqrt{\frac{1}{N}+\frac{X^2}{(N-1)s_x^2}}$
 
 --------------------------------------------------------------------------------
 
-## SE for $b_j$ and $R^2$
+## SE for b_j and R-Squared
 
 $SE_{b_j}= \frac{s_y}{s_j}*\frac{\sqrt{(1-R_y^2)}}{(N-P)}*\frac{1}{\sqrt{(1-R_j^2)}}$  
 
@@ -187,7 +188,7 @@ If we increase $R_y^2$, we would decrease the SE for our regression coefficient.
 
 --------------------------------------------------------------------------------
 
-## Model Comparison: Testing Inferences about $\beta_1$
+## Model Comparison: Testing Inferences about Beta_1
 
 $H_0: \beta_1 = 0$
 $H_a: \beta_1 \neq 0$  
@@ -205,7 +206,7 @@ m_c <- lm(fps ~ 1, data = data)
 ```
 
 - $\hat{FPS}_i = \beta_0+0*BAC_i$
-- $SSE_c=$ `r round(sse(m_c), 1)`, $P_c=1$     
+- $SSE_c=$ `r round(sse(m_c))`, $P_c=1$     
 
 [Augmented model:]{style="color:blue;"}
 ```{r}
@@ -213,7 +214,7 @@ m_a <- lm(fps ~ 1 + bac, data = data)
 ```
 
 - $\hat{FPS}_i = \beta_0+\beta_1*BAC_i$    
-- $SSE_a=$`r round(sse(m_a), 1)`, $P_a=2$   
+- $SSE_a=$ `r round(sse(m_a))`, $P_a=2$   
 
 $F(P_a-P_c, N-P_a) = \frac{SSE_c-SSE_a/(P_a-P_c)}{SSE_a/(N-P_a)}$
 
@@ -347,15 +348,16 @@ DATA = MODEL + ERROR
 
 **Two Predictor Model for Sample Data**  
 
-$Y_i=b_0+b_1X_1+b_2X_2+e_i$  
+- $Y_i=b_0+b_1X_1+b_2X_2+e_i$  
 
-$\hat{Y_i}=b_0+b_1X_1+b_2X_2$  
+- $\hat{Y_i}=b_0+b_1X_1+b_2X_2$  
+
 
 **$k$ Predictor Model for Sample Data**   
 
-$Y_i=b_0+b_1X_1+...+b_kX_k+e_i$  
+- $Y_i=b_0+b_1X_1+...+b_kX_k+e_i$  
 
-$\hat{Y_i}=b_0+b_1X_1+...+b_kX_k$  
+- $\hat{Y_i}=b_0+b_1X_1+...+b_kX_k$  
 
 --------------------------------------------------------------------------------
 
@@ -396,6 +398,9 @@ Describe conclusion and logic of the test of $H_0:\beta_1=0$ from sampling distr
 :::{.fragment}
 [If $H_0$ is true, we expect a sampling distribution for $b_1$ to have a mean of 0 and an SE of 86.6 (red curve below).]{style="color:blue;"}
 
+[A sample $b_1$ = -177.0 is unlikely (about 2 standard deviations below mean; p = .0437). Therefore, we reject our $H_0$ and conclude that $\beta_1 \neq 0$.]{style="color:blue;"}
+
+[Conclusion is that BAC affects FPS.]{style="color:blue;"}
 
 ```{r}
 #| code-fold: true
@@ -409,10 +414,6 @@ tibble(b1 = seq(-400,400,.01),
   geom_vline(xintercept = -1 * subset(tidy(m_3), term == "bac")$estimate, 
              color = "green") 
 ```
-
-[A sample $b_1$ = -177.0 is unlikely (about 2 standard deviations below mean; p = .0437). Therefore, we reject our $H_0$ and conclude that $\beta_1 \neq 0$.]{style="color:blue;"}
-
-[Conclusion is that BAC affects FPS.]{style="color:blue;"}
 :::
 
 --------------------------------------------------------------------------------
@@ -444,7 +445,7 @@ m_a <- lm(fps ~ 1 + bac + ta, data = data)
 - $SSE_a =$ `r round(sse(m_a), 1)`, $P_a = 3$ 
 
 $F(P_a - P_c, N - P_a) = \frac{(SSE_c - SSE_a)/(P_a-P_c)}{SSE_a/(N-P_a)}$   
-$F (1, 93) = $ `r round((sse(m_c) - sse(m_a)) / (sse(m_a) / 93), 2)`, $p =$ `r round(pt(-2.04, 93, lower.tail = TRUE)*2, 4)`
+$F(1, 93) =$ `r round((sse(m_c) - sse(m_a)) / (sse(m_a) / 93), 2)`, $p =$ `r round(pt(-2.04, 93, lower.tail = TRUE)*2, 4)`
 :::
 
 --------------------------------------------------------------------------------
@@ -476,12 +477,14 @@ What changed about test of $\beta_1$ (BAC effect) and why?
 :::
 
 :::{.fragment}
-**Two parameter model test of BAC**    
+[**Two parameter model test of BAC**]{style="color:blue;"}    
+
 ```{r}
 glance(m_2) |> pull(r.squared)
 ```
 
-**Three parameter model test of BAC**   
+[**Three parameter model test of BAC**]{style="color:blue;"}   
+
 ```{r}
 glance(m_3) |> pull(r.squared)
 ```
@@ -516,7 +519,7 @@ What happens to significance test of $b_j$ as $\text{SE}_{b_j}$ decreases (holdi
 :::
 
 :::{.fragment}
-[$t$ increases and associated p-value deceases (More Power!).]{style="color:blue;"}
+[$t$ increases and associated p-value decreases (More Power!).]{style="color:blue;"}
 :::
 
 --------------------------------------------------------------------------------
@@ -540,7 +543,7 @@ tidy(m_2)
 
 - $t(96-3) = \frac{-177 - 0}{86.6}$    
 - $t(93) = -2.04$  
--$p = .0437$
+- $p = .0437$
 ```{r}
 #| code-fold: true
 tidy(m_3)
@@ -607,9 +610,13 @@ What other factors affect SE for regression coefficients and how?
 
 :::{.fragment}
 - [Increasing $N$ decreases SE (increases power).]{style="color:blue;"}
+
 - [Increasing $P$ increases SE (decreases power)]{style="color:blue;"}
+
 - [Increasing $s_y$ increases SE (decreases power).]{style="color:blue;"}
+
 - [Increasing $s_j$ decreases SE (increases power).]{style="color:blue;"}
+
 - [Increasing $R_j^2$ increases SE (decreases power).]{style="color:blue;"}
 :::
 
@@ -617,27 +624,25 @@ What other factors affect SE for regression coefficients and how?
 
 **Two parameter model test of BAC**   
 
-Compact Model: 
+- Compact Model: 
+  - $\hat{FPS}= `r round(coef(lm(fps~1, data = data)), 1)` + 0*{BAC}$   
+  - $SSE_c =$ `r round(sum(residuals(lm(fps~1, data = data))^2), 1)`, $P_c$ = 1  
 
-- $\hat{FPS}= `r round(coef(lm(fps~1, data = data)), 1)` + 0*{BAC}$   
-- $SSE_c =$ `r round(sum(residuals(lm(fps~1, data = data))^2), 1)`, $P_c$ = 1  
+- Augmented Model: 
+  - $\hat{FPS}= `r round(coef(m_2)[1],1)` + `r round(coef(m_2)[2],1)` *BAC$   
+  - $SSE_a =$ `r round(sum(residuals(m_2)^2), 1)`, $P_a$ = 2  
 
-Augmented Model: 
-
-- $\hat{FPS}= `r round(coef(m_2)[1],1)` + `r round(coef(m_2)[2],1)` *BAC$   
-- $SSE_a =$ `r round(sum(residuals(m_2)^2), 1)`, $P_a$ = 2  
 
 **Three parameter model test of BAC**   
 
-Compact Model: 
+- Compact Model: 
+  - $\hat{FPS}= `r round(coef(lm(fps~ta, data = data))[1],1)` + 0*BAC + `r round(coef(lm(fps~ta, data = data))[2],1)` * TA$   
+  - $SSE_c =$ `r round(sum(residuals(lm(fps~ta, data = data))^2),1)`, $P_c$ = 2  
 
-- $\hat{FPS}= `r round(coef(lm(fps~ta, data = data))[1],1)` + 0*BAC + `r round(coef(lm(fps~ta, data = data))[2],1)` * TA$   
-- $SSE_c =$ `r round(sum(residuals(lm(fps~ta, data = data))^2),1)`, $P_c$ = 2  
+- Augmented Model: 
+  - $\hat{FPS}= `r round(coef(m_3)[1],1)` + `r round(coef(m_3)[2],1)` *BAC + `r round(coef(m_3)[3], 1)` *TA$   
+  - $SSE_a =$ `r round(sum(residuals(m_3)^2), 1)`, $P_a$ = 3  
 
-Augmented Model: 
-
-- $\hat{FPS}= `r round(coef(m_3)[1],1)` + `r round(coef(m_3)[2],1)` *BAC + `r round(coef(m_3)[3], 1)` *TA$   
-- $SSE_a =$ `r round(sum(residuals(m_3)^2), 1)`, $P_a$ = 3  
 
 $F(P_a - P_c, N - P_a) = \frac{(SSE_c - SSE_a) / (P_a-P_c)}{SSE_a/(N-P_a)}$ 
 
@@ -665,7 +670,7 @@ How can you see the increase in power from the model comparison perspective (loo
 
 - $F (1, 93) = `r round((sum(residuals(lm(fps ~ ta, data=data))^2) - sum(residuals(m_3)^2))/(sum(residuals(m_3)^2)/93), 2)`, p = `r round(pt(-2.04, 93, lower.tail = TRUE)*2, 4)`$
 
-Decreased $SSE_a$ in three parameter model. Flip side of increased model $R^2$.]{style="color:blue;"}
+[Decreased $SSE_a$ in three parameter model. Flip side of increased model $R^2$.]{style="color:blue;"}
 :::
 
 --------------------------------------------------------------------------------
@@ -680,7 +685,7 @@ $F(P_a - P_c, N - P_a) = \frac{(SSE_c = SSE_a) / (P_a-P_c)}{SSE_a/(N-P_a)}$
 
 --------------------------------------------------------------------------------
 
-## $R^2_j$ and Multicollinearity
+## R-Squared_j and Multicollinearity
 
 $SE_{b_j} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R_Y^2)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{(1-R_j^2)}}$  
 
@@ -691,11 +696,13 @@ This decrease in **power and precision** for model parameter estimates (regressi
 
 --------------------------------------------------------------------------------
 
-When there are more than two `X`s in the model, it is **not** sufficient to examine only bivariate correlations among $X$s. To determine if a problem exists, calculate Variance Inflation Factors (VIF) for each $X$.  
+When there are more than two `X`s in the model, it is **not** sufficient to examine only bivariate correlations among $X$s. 
 
-$VIF_j = \frac{1}{(1-R^2_j)}$   
+To determine if a problem exists, calculate Variance Inflation Factors (VIF) for each $X$.  
 
-VIF tells you how much $SE_{b_j}$ is increased because of redundancy. VIFs $\ge$ 5 are considered problematic (SE increased by factor of 2.2).  
+- $VIF_j = \frac{1}{(1-R^2_j)}$   
+
+- VIF tells you how much $SE_{b_j}$ is increased because of redundancy. VIFs $\ge$ 5 are considered problematic (SE increased by factor of 2.2).  
 
 --------------------------------------------------------------------------------
 
@@ -705,19 +712,22 @@ We can use `car::vif()` to calculate VIFs in R.
 car::vif(m_3)
 ```
 
-A related concept is **tolerance** ($X_i= 1- R^2_j$). 
+\
 
-Tolerance decreases toward 0 as multicollinearity increases.
+A related concept is **tolerance** 
+
+- $X_i= 1- R^2_j$ 
+- Tolerance decreases toward 0 as multicollinearity increases.
 
 --------------------------------------------------------------------------------
 
 Solutions for Multicollinearity include:  
 
-1. Drop redundant variable.
+- Drop redundant variable.
 
-2. Factor analysis (e.g., PCA) to produce factors that reflect major sources of variance among the redundant predictors.
+- Factor analysis (e.g., PCA) to produce factors that reflect major sources of variance among the redundant predictors.
 
-3. This is only a problem for the `X`s in the model with high VIFs. If you don't care about testing them, this is not a problem. Generally, you only care about VIFs for your focal `X`(s).
+- This is only a problem for the `X`s in the model with high VIFs. If you don't care about testing them, this is not a problem. Generally, you only care about VIFs for your focal `X`(s).
 
 ## Interpretation of Multiple Regression Coefficients
 
@@ -892,7 +902,7 @@ What would change in this model if we did not center `study_hours` and `iq`?
 :::{.fragment}
 [The intercept would be the expected exam score for a student who studies 0 hours per week and has an IQ of 0.]{style="color:blue;"}
 
-[There would be no change in either `b_1` or `b_2`.  These are still the unique effects of each of their associated `X`s, holding the other `X` constant in the model.]{style="color:blue;"}
+[There would be no change in either $b_1$ or $b_2$.  These are still the unique effects of each of their associated $X$s, holding the other $X$ constant in the model.]{style="color:blue;"}
 :::
 
 --------------------------------------------------------------------------------
@@ -904,6 +914,8 @@ tidy(m_exam_2)
 ```{r}
 tidy(m_exam_3)
 ```
+
+\
 
 Look at the effect of `study_hours` across the two models
 
@@ -926,7 +938,7 @@ data_exam |>
 
 [2. When IQ increases, exam scores increase.]{style="color:blue;"}
 
-[3. The partial effect of study_hours on exam scores is smaller if IQ is not allowed to increase.]{style="color:blue;"}
+[3. The partial effect of `study_hours` on exam scores is smaller if IQ is not allowed to increase.]{style="color:blue;"}
 :::
 
 --------------------------------------------------------------------------------
@@ -956,6 +968,8 @@ We can show this total effect of `study_hours` on `exam` using the parameter est
 
 ```{r}
 #| echo: false 
+#| fig-height: 4
+#| fig-width: 6
 
 DiagrammeR::grViz("
 digraph{
@@ -995,6 +1009,8 @@ And here is the path diagram for our updated causal model
 
 ```{r}
 #| code-fold: true
+#| fig-height: 4
+#| fig-width: 6
 
 DiagrammeR::grViz("
 digraph{
@@ -1025,6 +1041,8 @@ The total effect of study hours on exam scores is the sum of the direct effect o
 - The decision about which is the most plausible explanation is a theoretical one and/or a function of your research design
 ```{r}
 #| echo: false
+#| fig-height: 4
+#| fig-width: 6
 
 DiagrammeR::grViz("
 digraph{
@@ -1053,6 +1071,8 @@ m_iq |> tidy()
 
 ```{r}
 #| echo: false
+#| fig-height: 4
+#| fig-width: 6
 
 DiagrammeR::grViz("
 digraph{
@@ -1079,6 +1099,8 @@ digraph{
 
 ```{r}
 #| echo: false
+#| fig-height: 4
+#| fig-width: 6
 
 DiagrammeR::grViz("
 digraph{
@@ -1093,6 +1115,8 @@ digraph{
 
 ```{r}
 #| echo: false
+#| fig-height: 4
+#| fig-width: 6
 
 DiagrammeR::grViz("
 digraph{
@@ -1113,10 +1137,12 @@ digraph{
 
 :::{.callout-important}
 # Question
-In what situation would $b_j$ for a focal predictor (e.g., `X1 below) not change when you added an additional `X` (e.g., `X2`)? 
+In what situation would $b_j$ for a focal predictor (e.g., $X1$ below) not change when you added an additional $X$ (e.g., $X2$)? 
 
 ```{r}
 #| echo: false
+#| fig-height: 4
+#| fig-width: 6
 
 DiagrammeR::grViz("
 digraph{
@@ -1131,6 +1157,8 @@ digraph{
 
 ```{r}
 #| echo: false
+#| fig-height: 4
+#| fig-width: 6
 
 DiagrammeR::grViz("
 digraph{
