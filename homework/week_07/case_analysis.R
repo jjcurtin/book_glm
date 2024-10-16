@@ -47,16 +47,16 @@ case_analysis <- function(model, type, term = NULL, id = TRUE) {
   }
   
   if(type == "df_betas") {
-    m_1_coefs <- if(!is.null(term))term else names(as_tibble(dfbetas(m_1)))
+    m_1_coefs <- if(!is.null(term))term else names(as_tibble(dfbetas(model)))
     i <- 0
     for (term in m_1_coefs) {
       i <- i + 1
-      p <- dfbetas(m_1) |>
+      p <- dfbetas(model) |>
         as_tibble() |>
         select(x = !!sym(term)) |>
         plot_hist() +
         labs(x = str_c("DFBETAS: ", term),
-             subtitle = str_c("B = ", round(coef(m_1)[i], 6)))
+             subtitle = str_c("B = ", round(coef(model)[i], 6)))
       print(p)
     }
   }

@@ -42,3 +42,7 @@
   quarto-pub:
     - id: afc40bc0-1928-419c-b5da-3cd0bcd6239b
       url: 'https://kendra-wyant.quarto.pub/14_power-4a3d'
+- source: 15_the_generalized_linear_model.qmd
+  quarto-pub:
+    - id: eedae972-7c79-41c6-bd53-b7c55b261718
+      url: 'https://kendra-wyant.quarto.pub/15_the_generalized_linear_model-94da'
