@@ -5,11 +5,180 @@ editor_options:
 --- 
  
 
-# The Generalized Linear Model
+# Unit 15: The Generalized Linear Model
+
+::: {.callout-important}
+# Question
+
+What are the assumptions of **general** linear models?
+:::
+
+
+:::{.fragment}
+The general linear model makes the 5 assumptions below. When these assumptions are met, OLS regression coefficients are MVUE (Minimum Variance Unbiased Estimators) and BLUE (Best Linear Unbiased Estimators). 
+
+
+1. **Exact X**: The IVs are assumed to be known exactly (i.e., without measurement error).
+2. **Independence**: Residuals are independently distributed (prob. of obtaining a specific observation does not depend on other observations).
+3. **Normality**: All residual distributions are normally distributed.
+4. **Constant variance**: All residual distributions have a constant variance, $SEE^2$.
+5. **Linearity**: All residual distributions (i.e., for each $Y'$) are assumed to have means equal to zero.
+:::
+
+----
+
+::: {.callout-important}
+# Question
+
+What are the consequences of violating each of these assumptions? What options exist when these assumptions are violated?
+:::
+
+
+:::{.fragment}
+1. **Exact X**: Biased parameters (to the degree that measurement error exists). Use reliable measures.
+2. **Independence**: Inaccurate standard errors, degrees of freedom and significance tests. Use repeated measures or linear mixed effects models or ANCOVA.
+3. **Normality**: Inefficient (with large N). Use power transformations, **generalized linear models**.
+4. **Constant variance**: Inefficient and inaccurate standard errors. Use power transformations, SE corrections, weighted least squares, **generalized linear models**.
+5. **Linearity**: Biased parameter estimates. Use power transformations, polynomial regression, **generalized linear models**.
+:::
+
+----
+
+## Generalized Linear Models
+
+```{r}
+#| echo: false
+#| message: false
+
+library(tidyverse)
+library(skimr)
+theme_set(theme_classic()) 
+```
+
+
+```{r}
+#| eval: false
+
+glm(formula, family = familytype(link = linkfunction), data = data)
+```
 
 ```{r}
 #| echo: false
 
-options(scipen = 999) # turns off scientfic notation
-options(knitr.kable.NA = '')
+
+tibble(Family = c("binomial", "gaussian", "Gamma", "inverse.gaussian", 
+                  "poisson", "quasi", "quasibinomial", "quasipoisson"),
+       `Default Link Function` = c('(link = "logit")', '(link = "identity")', 
+                                   '(link = "inverse")', '(link = "1/mu^2")', 
+                                   '(link = "log")', 
+                                   '(link = "indentity", variance = "constant")', 
+                                   '(link = "logit")', '(link = "log")')) |> 
+  kableExtra::kable() |> 
+  kableExtra::kable_styling()
 ```
+
+----
+
+## An Example
+
+Predicting admission to a grad program in engineering based on quantitative GRE, GPA, and Undergraduate Institution Rank.   
+
+```{r}
+#| echo: false
+
+data <- read_csv(here::here("data_lecture/15_glm_admit.csv"),
+                 show_col_types = FALSE)
+```
+
+```{r}
+data |> 
+  skim() |> 
+  focus(n_missing, numeric.mean, numeric.sd, min = numeric.p0, max = numeric.p100) |> 
+  yank("numeric")
+```
+
+----
+
+```{r}
+m_lm <- lm(admit ~ gpa, data = data)
+
+broom::tidy(m_lm)
+```
+
+
+::: {.callout-important}
+# Question
+
+What is the effect of GPA on admission to grad school?
+:::
+
+----
+
+::: {.callout-important}
+# Question
+
+What are the problems with using a general linear model to assess the effects of these predictors on admission outcomes?
+:::
+
+:::{.fragment}
+
+1. Residuals will not be normal (not efficient).
+
+2. Residual variance often will not be constant (not efficient, SEs are inaccurate).
+
+3. Relationship will not be linear (parameter estimates biased).
+
+4. Y is not constrained between 0 – 1 (model may make nonsensical predictions).
+:::
+
+----
+
+```{r}
+data |> 
+  ggplot(aes(x = gpa, y = admit)) +
+  geom_point() +
+  scale_x_continuous(limits = c(0, 4))
+```
+
+----
+
+```{r}
+data |> 
+  ggplot(aes(x = gpa, y = admit)) +
+  geom_jitter(width = 0, height = .05) +
+  scale_x_continuous(limits = c(0, 4))
+```
+
+----
+
+```{r}
+data |> 
+  ggplot(aes(x = gpa, y = admit)) +
+  geom_jitter(width = 0, height = .05) +
+  scale_x_continuous(limits = c(0, 4)) +
+  geom_smooth(formula = y ~ x, method = "lm", color = "red", se = FALSE)
+```
+
+----
+
+```{r}
+data |> 
+  ggplot(aes(x = gpa, y = admit)) +
+  geom_jitter(width = 0, height = .05) +
+  scale_x_continuous(limits = c(0, 4)) +
+  scale_y_continuous(limits = c(-2, 1.2)) +
+  geom_smooth(formula = y ~ x, method = "lm", color = "red", se = FALSE)
+```
+
+
+----
+
+
+```{r}
+gvlma::gvlma(m_lm)
+```
+
+
+
+
+
