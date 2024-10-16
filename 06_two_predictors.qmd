@@ -2031,11 +2031,12 @@ venn_full
 ```
 
 :::{.callout-important}
+# Question
 Define $\Delta R^2$ and $PRE$ for `study_hours` in the two predictor model
 :::
 
 :::{.fragment}
-The numerator is the same.  The denominator is different!
+[The numerator is the same.  The denominator is different!]{style="color:blue;"}
 
 - $\Delta R^2_{sh} = \frac{643}{643 + 3726 + 4066 + 18609}$
 - $PRE_{sh} = \frac{643}{643 + 18609}$
@@ -2103,6 +2104,8 @@ $\eta_p^2$
 - $N=200$ participants, randomly assigned to receive new intervention vs. standard of care control.  
 - Measure depression with CES-D pre- (baseline) and post-intervention.    
 
+\
+
 ```{r}
 data_int <- read_csv(here::here(path_data, "06_two_predictors_intervention.csv"),
                      show_col_types = FALSE)
@@ -2112,6 +2115,12 @@ data_int <- read_csv(here::here(path_data, "06_two_predictors_intervention.csv")
 
 ```{r}
 data_int |> my_skim()
+```
+
+--------------------------------------------------------------------------------
+
+```{r}
+data_int |> head(30)
 ```
 
 --------------------------------------------------------------------------------
@@ -2155,9 +2164,9 @@ What else do you report?
 :::
 
 :::{.fragment}
-- PRE or $\Delta R^2$ (they are the same in the one predictor model!){style="color:blue;"} 
-- Means/SD of two groups{style="color:blue;"}
-- figure with means, standard error, and raw (or residual) data points{style="color:blue;"}
+- [PRE or $\Delta R^2$ (they are the same in the one predictor model and also equal to $R^2$!)]{style="color:blue;"} 
+- [Means/SD of two groups]{style="color:blue;"}
+- [Figure with means, standard error, and raw (or residual) data points]{style="color:blue;"}
 
 ```{r}
 #| code-fold: true
@@ -2165,11 +2174,6 @@ What else do you report?
 m_mo <- lm(depress_post ~ 1, data = data_int)
 glance(m_ig)$r.squared - glance(m_mo)$r.squared
 ```
-
-::::{.callout-note}
-# Note
-In this case $\Delta R^2$ is the same as model $R^2$ because there is only one predictor (i.e., $R^2$ in our compact/mean-only model is 0).
-::::
 :::
 
 --------------------------------------------------------------------------------
@@ -2180,7 +2184,7 @@ What is a **better** analysis to address this question about the effect of the i
 :::
 
 :::{.fragment}
-[Control for baseline depressions scores to increase power]{style="color:blue;"}
+[Control for baseline depression scores to increase power]{style="color:blue;"}
 
 [Baseline depression should be uncorrelated (in the population) with intervention group because participants were randomly assigned to group. Therefore, including baseline depression should not systematically change $b_1$.]{style="color:blue;"}
 
@@ -2278,6 +2282,146 @@ m_base <- lm(depress_post ~ depress_base_c, data = data_int)
 
 ## Visualizing the Model
 
+This is NOT how we would present this in a paper but it is a useful way to understand the model
+
+```{r}
+#| code-fold: true
+
+preds_ig <- c(0,1) 
+preds_depress_base <- seq(min(data_int$depress_base_c), max(data_int$depress_base_c), length.out = 100)
+
+preds <- expand.grid(intervention_group = preds_ig, depress_base_c = preds_depress_base) |> 
+  as_tibble()
+
+preds <- preds |> 
+  mutate(depress_post = predict(m_full, newdata = preds))
+
+preds |> 
+  ggplot(aes(x = depress_base_c, y = depress_post, group = as.factor(intervention_group), color = as.factor(intervention_group))) +
+  geom_line()
+```
+
+## Plot Option 1: Raw Data
+
+Get predicted values for the two groups controlling for baseline depression
+
+We want predictions setting `depress_base_c = 0` for everyone
+
+```{r}
+preds <- tibble(intervention_group = c(0,1),
+                depress_base_c = 0) 
+
+preds <- preds|> 
+  bind_cols(predict(m_full, preds, se.fit = TRUE) |>
+  as_tibble() |>
+  mutate(upper = fit + se.fit,
+         lower= fit - se.fit)) |> 
+  select(-df, - residual.scale) # remove unnecessary columns
+
+preds
+```
+
+--------------------------------------------------------------------------------
+
+We want 
+
+- Bar plot of means
+- Some display of uncertainty/sampling error (e.g. the standard error)
+- Individual data points? (raw or rawish?)
+```{r}
+#| code-fold: true
+#| fig-height: 4
+#| fig-width: 6
+
+ggplot() +
+  geom_col(aes(x = as.factor(preds$intervention_group), y = preds$fit),
+           alpha = .4, color = "black") +
+  geom_jitter(aes(x = as.factor(data_int$intervention_group), 
+              y = data_int$depress_post), 
+              width = .02, height = NULL) +
+  geom_errorbar(aes(ymin = preds$lower, 
+                    ymax = preds$upper, 
+                    x = as.factor(preds$intervention_group)), width = .4) +
+  scale_fill_manual(values = c("black", "light grey")) +
+  scale_x_discrete(breaks = c(0, 1),
+                   labels = c("Standard of Care", "New Intervention")) +
+  theme(legend.position = "none") +
+  labs(x = "Intervention Group",
+       y = "CES-D Score") 
+```
+
+## Plot Option 2: Residuals
+
+Instead of the raw scores, we can plot depression scores after removing the variance due to baseline individual differences
+
+- start with original scores for `intervention_group`
+- add a variable for baseline depression set to mean for everyone
+```{r}
+res <- tibble(intervention_group = data_int$intervention_group, 
+              depress_base_c = 0)
+res |> slice_sample(n = 25)
+```
+
+--------------------------------------------------------------------------------
+
+- get predicted values for each person based on their group but with baseline depression set to the mean
+- add in the residuals (errors) from each model
+
+```{r}
+res <- res |>
+  mutate(depress_post_res = predict(m_full, res),
+         depress_post_res = depress_post_res + residuals(m_full))
+res |> slice_sample(n = 25)
+```
+
+--------------------------------------------------------------------------------
+
+:::{.callout-important}
+# Question
+How are these residualized `depress_post` scores different from the raw scores?
+:::
+
+:::{.fragment}
+[These scores contain the variance from being in different `intervention_groups` and the unexplained variance from the full model (the residuals)]{style="color:blue;"}
+
+[However, the variance associated with individual differences on baseline depression have been removed because everyone has predicted scores assuming they were at mean baseline depression]{style="color:blue;"}
+
+```{r}
+var(data_int$depress_post)
+var(res$depress_post_res)
+```
+:::
+
+--------------------------------------------------------------------------------
+
+```{r}
+#| code-fold: true
+#| fig-height: 4
+#| fig-width: 6
+
+ggplot() +
+  geom_col(aes(x = as.factor(preds$intervention_group), y = preds$fit),
+           alpha = .4, color = "black") +
+  geom_jitter(aes(x = as.factor(res$intervention_group), 
+                  y = res$depress_post_res), 
+              width = .02, height = NULL) +
+  geom_errorbar(aes(ymin = preds$lower, 
+                    ymax = preds$upper, 
+                    x = as.factor(preds$intervention_group)), width = .4) +
+  scale_fill_manual(values = c("black", "light grey")) +
+  scale_x_discrete(breaks = c(0, 1),
+                   labels = c("Standard of Care", "New Intervention")) +
+  theme(legend.position = "none") +
+  labs(x = "Intervention Group",
+       y = "CES-D Score") 
+```
+
+--------------------------------------------------------------------------------
+
+## Visualizing the Model
+
+Lets return to the BAC and Trait Anxiety data
+
 $\hat{FPS}= `r round(coef(m_3)[1],1)` + `r round(coef(m_3)[2],1)` *BAC + `r round(coef(m_3)[3],1)` *TA$ 
 
 ```{r}
@@ -2300,18 +2444,27 @@ scatter3D(data$bac, data$ta, data$fps, pch = 19, col = "black", ticktype = "deta
           surf = list(x = preds_bac, y = preds_ta, z = preds_y, alpha = .9, border = "light grey"))
 ```
 
+## Plot Option 1
+
+```{r}
+preds <- expand.grid(bac = seq(min(data$bac), max(data$bac), length.out = 100), 
+                       ta = mean(preds_ta)) 
+
+preds <- preds |> 
+  bind_cols(predict(m_3, preds, interval = "confidence", level = .95) |>
+  as_tibble()) 
+
+
+preds |> head()
+```
+
 --------------------------------------------------------------------------------
 
 ```{r}
-preds_x <- expand.grid(bac = seq(min(data$bac), max(data$bac), length.out = 100), 
-                       ta = mean(preds_ta)) 
+#| code-fold: true
+#| fig-height: 4
+#| fig-width: 6
 
-preds<- preds_x |> 
-  bind_cols(predict(m_3, preds_x, interval = "confidence", level = .95) |>
-  as_tibble()) 
-```
-
-```{r}
 ggplot() +
   geom_point(aes(x = data$bac, y = data$fps), alpha = .6, size = 2) +
   geom_line(aes(x = preds$bac, y = preds$fit),
@@ -2323,13 +2476,35 @@ ggplot() +
 
 --------------------------------------------------------------------------------
 
+:::{.callout-important}
+# Question    
+How could I modify the previous plot to still focus on only BAC but have the raw data also control for TA
+:::
+
+:::{.fragment}
+I could residualize fps for TA and then plot the residuals instead of the raw data.  This would retain variance in FPS due to BAC and to unexplained error but remove TA variance.   I prefer this method.
+:::
+
+--------------------------------------------------------------------------------
+
+:::{.callout-important}
+# Question
+How might I modify the plot if TA was also a focal variable?
+:::
+
+:::{.fragment}
+I could plot separate lines for selected values of TA.
+:::
+
+--------------------------------------------------------------------------------
+
 ```{r}
-preds_x <- expand.grid(bac = seq(min(data$bac), max(data$bac), length.out = 100), 
+preds <- expand.grid(bac = seq(min(data$bac), max(data$bac), length.out = 100), 
                        ta = c(round(mean(preds_ta)), round(mean(preds_ta)-(sd(preds_ta)*1.5)), 
                               round(mean(preds_ta)+(sd(preds_ta)*1.5))))
 
-preds <- preds_x |> 
-  bind_cols(predict(m_3, preds_x) |>
+preds <- preds |> 
+  bind_cols(predict(m_3, preds) |>
   as_tibble()) 
 ```
 
@@ -2345,57 +2520,24 @@ ggplot() +
 
 --------------------------------------------------------------------------------
 
-<span style="color: red;">Question: What would change if TA was mean centered?</span>   
-
-```{r}
-#| code-fold: true
-
-m_3 |> 
-  broom::tidy()
-```
-
-```{r}
-#| code-fold: true
-
-m_3 |> 
-  broom::glance() |> 
-  select(r.squared)
-```
+:::{.callout-important}
+# Question
+What do you report and why?
+:::
 
 --------------------------------------------------------------------------------
 
+Lets mean-center TA and fit a final full model
 ```{r}
 #| code-fold: true
 
-data <- data |> 
+data <-  data |> 
   mutate(ta_c = ta - mean(ta))
-
-m_3_c <- lm(fps ~ bac + ta_c, data = data) 
-
-m_3_c |> 
-  broom::tidy()
+m_3_c <- lm(fps ~ 1 + bac + ta_c, data = data)
+m_3_c |> tidy()
 ```
 
-```{r}
-#| code-fold: true
-
-m_3_c |> 
-  broom::glance() |> 
-  select(r.squared)
-```
-
---------------------------------------------------------------------------------
-
-<span style="color: red;">Question: What do you report and why?</span>   
-
---------------------------------------------------------------------------------
-
-```{r}
-#| code-fold: true
-
-m_3_c |> 
-  broom::tidy()
-```
+What would have changed from previous model with uncentered TA?
 
 --------------------------------------------------------------------------------
 
@@ -2482,41 +2624,13 @@ Trait anxiety was mean-centered
 
 --------------------------------------------------------------------------------
 
-```{r}
-preds_x <- expand.grid(bac = seq(min(data$bac), max(data$bac), length.out = 100), 
-                       ta_c = mean(data$ta_c))
+:::{.callout-important}
+# Question
+What other table should you consider in your results?
+:::
 
-preds_pub <- predict(m_3_c, preds_x, se.fit = TRUE) |>
-  as_tibble() |>
-  mutate(upper = fit + se.fit,
-         lower= fit - se.fit)
-```
-
-```{r}
-plot_pub <- ggplot() +
-  geom_point(aes(x = data$bac, y = data$fps), alpha = .6, size = 2) +
-  geom_line(aes(x = preds_x$bac, y = preds_pub$fit),
-              color = "black", linewidth = 1) +
-  geom_ribbon(aes(x = preds_x$bac, ymin = preds_pub$lower, ymax = preds_pub$upper), alpha = 0.2) +
-  labs(x = "Blood alcohol concentration",
-       y = "Fear-potentiated startle") +
-  xlim(c(0, .15)) +
-  ylim(c(-100, 200))
-```
-
---------------------------------------------------------------------------------
-
-```{r}
-plot_pub
-```
-
---------------------------------------------------------------------------------
-
-<span style="color: red;">Question: What other table should you consider in your results?</span>  
-
---------------------------------------------------------------------------------
-
-<span style="color: blue;">Table of simple correlations between variables. Can summarize with other important info fairly concisely. Could also include reliability, skewness, kurtosis, etc.</span>
+:::{.fragment}
+[Table of simple correlations between variables. Can summarize with other important info fairly concisely. Could also include reliability, skewness, kurtosis, etc.}{style="color:blue;"}
 
 ```{r}
 #| code-fold: true
@@ -2529,79 +2643,6 @@ tibble(` ` = c("Trait Anxiety", "Blood Alcohol Concentration", "Mean", "SD"),
   knitr::kable(digits = 2, align = c("l", "c", "c", "c"))
 ```
 
---------------------------------------------------------------------------------
-
-## Plot Option 1: Raw Data
-
-Get predicted values for mean baseline depression
-```{r}
-preds <- tibble(intervention_group = c(0,1),
-                depress_base_c = 0) 
-
-preds <- preds|> 
-  bind_cols(predict(m_full, preds, se.fit = TRUE) |>
-  as_tibble() |>
-  mutate(upper = fit + se.fit,
-         lower= fit - se.fit))
-```
-
-```{r}
-#| code-fold: true
-
-ggplot() +
-  geom_col(aes(x = as.factor(preds$intervention_group), y = preds$fit, 
-               fill = as.factor(preds$intervention_group)),
-           alpha = .4, color = "black") +
-  geom_jitter(aes(x = as.factor(data_int$intervention_group), 
-              y = data_int$depress_post), 
-              width = .02, height = NULL) +
-  geom_errorbar(aes(ymin = preds$lower, 
-                    ymax = preds$upper, 
-                    x = as.factor(preds$intervention_group)), width = .4) +
-  scale_fill_manual(values = c("black", "light grey")) +
-  scale_x_discrete(breaks = c(0, 1),
-                   labels = c("Standard of Care", "New Intervention")) +
-  theme(legend.position = "none") +
-  labs(x = "Intervention Group",
-       y = "CES-D Score") 
-```
-
-## Plot Option 2: Residuals
-
-Instead of the raw scores, we can plot depression scores after removing the variance due to baseline individual differences
-
-```{r}
-res <- tibble(intervention_group = data_int$intervention_group,
-              depress_post_res = mean(data_int$depress_post) + residuals(m_full))
-```
-
-The variance of the residualized depression scores is lower than for the raw scores because variability from baseline scores has been removed.
-
-```{r}
-var(data_int$depress_post)
-var(res$depress_post_res)
-```
-
---------------------------------------------------------------------------------
-
-```{r}
-ggplot() +
-  geom_col(aes(x = as.factor(preds$intervention_group), y = preds$fit, 
-               fill = as.factor(preds$intervention_group)),
-           alpha = .4, color = "black") +
-  geom_jitter(aes(x = as.factor(res$intervention_group), 
-                  y = res$depress_post_res), 
-              width = .02, height = NULL) +
-  geom_errorbar(aes(ymin = preds$lower, 
-                    ymax = preds$upper, 
-                    x = as.factor(preds$intervention_group)), width = .4) +
-  scale_fill_manual(values = c("black", "light grey")) +
-  scale_x_discrete(breaks = c(0, 1),
-                   labels = c("Standard of Care", "New Intervention")) +
-  theme(legend.position = "none") +
-  labs(x = "Intervention Group",
-       y = "CES-D Score") 
-```
 
 ## Adding a Third Predictor
 
@@ -2612,7 +2653,10 @@ m_full |>
   broom::tidy()
 ```
 
-<span style="color: red;">Question: What would you do and why if you had also measured sex (unbalanced or balanced) across intervention groups? What would change?</span>   
+:::{.callout-important}
+# Question
+What would you do and why if you had also measured sex at birth in any of these examples? What would change?
+:::
 
 --------------------------------------------------------------------------------
 
