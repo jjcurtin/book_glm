@@ -1,30 +1,31 @@
---- 
-output: html_document 
-editor_options:  
-  chunk_output_type: console
---- 
- 
-
 # Unit 7: Dealing with Messy Data I - Case Analysis
 
 ```{r}
 #| echo: false
 
-options(scipen = 999) # turns off scientfic notation
-options(knitr.kable.NA = '')
+options(conflicts.policy = "depends.ok") 
+library(car)
+library(tidyverse)
+library(patchwork)
+library(broom) 
+library(skimr)
+
+path_data <- "data_lecture"
+theme_set(theme_classic()) 
+options(scipen = 999) # turns off scientific notation
+
+sse <- function(model){
+  sum(residuals(model)^2)
+}
 ```
 
 ## Anscombe's Quartet
 
+Anscombe, Francis J. (1973) Graphs in statistical analysis. *American Statistician*, 27, 17–21. 
+
 ```{r}
-#| echo: false
-#| message: false
+#| include: false
 
-library(car)
-library(tidyverse)
-library(patchwork)
-
-theme_set(theme_classic()) 
 
 plot_y1 <- Quartet |> 
   ggplot(aes(x = x, y = y1)) +
@@ -61,57 +62,55 @@ plot_y4 <- Quartet |>
   geom_point() +
   ylim(0, 14) +
   xlim(0, 20) 
-```
-
-```{r}
-#| echo: false
 
 plot_y1 + plot_y2 + plot_y3 + plot_y4
 ```
 
-Anscombe, Francis J. (1973) Graphs in statistical analysis. *American Statistician*, 27, 17–21. 
+--------------------------------------------------------------------------------
 
------
+See Quartet dataframe in `car` package.
 
+**Set 1**
 ```{r}
-broom::tidy(lm(y1 ~ x, data = Quartet)) #<1>
+ex_1 <- lm(y1 ~ x, data = Quartet)
+ex_1 |> tidy()
+ex_1 |> sse()
 ```
 
-1. See Quartet dataframe in `car` package.
-
-
-SSE = `r round(sum(residuals(lm(y1 ~ x, data = Quartet))^2), 2)`
-
-
+**Set 2**
 ```{r}
 #| code-fold: true
 
-broom::tidy(lm(y2 ~ x, data = Quartet))
+ex_2 <- lm(y2 ~ x, data = Quartet)
+ex_2 |> tidy()
+ex_2 |> sse()
 ```
 
-SSE = `r round(sum(residuals(lm(y2 ~ x, data = Quartet))^2), 2)`
-
+**Set 3**
 ```{r}
 #| code-fold: true
 
-broom::tidy(lm(y3 ~ x, data = Quartet))
+ex_3 <- lm(y3 ~ x, data = Quartet)
+ex_3 |> tidy()
+ex_3 |> sse()
 ```
 
-SSE = `r round(sum(residuals(lm(y3 ~ x, data = Quartet))^2), 2)`
-
+**Set 4**
 ```{r}
 #| code-fold: true
 
-broom::tidy(lm(y4 ~ x4, data = Quartet))
+ex_4 <- lm(y4 ~ x4, data = Quartet)
+ex_4 |> tidy()
+ex_4 |> sse()
 ```
 
-SSE = `r round(sum(residuals(lm(y4 ~ x4, data = Quartet))^2), 2)`
-
------
+--------------------------------------------------------------------------------
 
 ## Case Analysis
 
-- Goal is to identify any unusual or excessively influential data. These data points may either bias results and/or reduce power to detect effects (inflate standard errors and/or decrease $R^2$).   
+- Goal is to identify any unusual or excessively influential data. 
+
+- These data points may either bias results and/or reduce power to detect effects (inflate standard errors and/or decrease $R^2$).   
 
 - Three aspects of individual observations we attend to:
   1. Leverage
@@ -120,23 +119,7 @@ SSE = `r round(sum(residuals(lm(y4 ~ x4, data = Quartet))^2), 2)`
 
 - Case Analysis also provides an important first step as you get to *know* your data.  
 
------
-
-## Unit 7: Case Analysis - Unusual and Influential Data
-
-```{r}
-#| message: false
-
-options(conflicts.policy = "depends.ok") 
-library(tidyverse)
-library(patchwork)
-library(skimr)
-
-theme_set(theme_classic()) 
-
-path_data <- "data_lecture"
-```
-
+--------------------------------------------------------------------------------
 
 ```{r}
 data <- read_csv(here::here(path_data, "07_three_predictors_fps.csv"), 
@@ -144,66 +127,93 @@ data <- read_csv(here::here(path_data, "07_three_predictors_fps.csv"),
   glimpse()
 ```
 
+```{r}
+data |> head()
+```
 
-Notice sex is of character class type. We can't use character stings in most of our analyes so we will want to handle character predictors immediately. For example, with our sex variable we could turn it into a factor, dummy code it, center it, or use any other contrast/combination of the above.  
+--------------------------------------------------------------------------------
 
------
+We prefer to use text labels for our categorical variables (e.g., male/female vs. 0/1)
 
+It is often easier to work with categorical variables if they are converted to factors
+
+We can also create a regressor for `sex` that is unit-weighted and centered and a mean-centered regressor for `ta`, but leave `bac` as is.     
 ```{r}
 data <- data |> 
-  mutate(sex_c = if_else(sex == "female", -.5, .5),
-         sex = factor(sex, 
-                      levels = c("female", "male"))) |>
-  glimpse()
+  mutate(sex = fct(sex, levels = c("female", "male")), 
+         sex_c = if_else(sex == "female", -.5, .5),
+         ta_c = ta - mean(ta)) 
+
+levels(data$sex)
+
+data |> head()
 ```
 
------
+---------------------------------------------------------------------------
+
+Lets fit our new three predictor model
 
 ```{r}
-m_1 <- lm(fps ~ bac + ta + sex_c, data = data)
-
-broom::tidy(m_1)
+m <- lm(fps ~ bac + ta_c + sex_c, data = data)
+m |> broom::tidy()
 ```
 
------
+---------------------------------------------------------------------------
 
 ## Univariate Statistics
 
+The first step of case analysis is to review the univariate statistics
+
+As before, we can use the `skim()` function from the `skimr` package to get a quick overview of our data, but we like to customize the function a bit.
+
 ```{r}
-data |> 
-  skim(-subid, -sex) |> 
-  focus(n_missing, numeric.mean, numeric.sd, min = numeric.p0, max = numeric.p100) |> 
-  yank("numeric") 
+library(skimr)
+my_skim <- skim_with(base = sfl(n_complete = ~ sum(!is.na(.), na.rm = TRUE),
+                                n_missing = ~sum(is.na(.), na.rm = TRUE)),
+                     numeric = sfl(p25 = NULL,
+                                   p75 = NULL,
+                                   hist = NULL),
+                     character = sfl(min = NULL, max = NULL),
+                     factor = sfl(ordered = NULL))
 ```
 
------
+---------------------------------------------------------------------------
+
+```{r}
+data |> my_skim(-subid)
+```
+
+---------------------------------------------------------------------------
 
 ## Univariate Plots
 
-Histograms are a useful/common visualization for numeric variables.   
+Histograms, density plots, and rug plots are all useful/common visualization for numeric variables.   
 
-Here we show an example function to create histograms with density as y-axis overlayed with density and rug plots.
+Let's create a function to help us create and combine these plots.
 
 ```{r}
-plot_univariate <- function(data, var_name) {
+plot_univariate <- function(data, var_name, n_bins = 10) {
   data |> 
     ggplot(aes(x = !!sym(var_name))) +
     geom_histogram(aes(y = after_stat(density)),
-                   color = "black", fill = "light grey", bins = 10) +
+                   color = "black", fill = "light grey", bins = n_bins) +
     geom_density() +
     geom_rug(color = "red")
-
 }
 ```
 
+---------------------------------------------------------------------------
 
+And now use it (making four plots together with `patchwork`)
 ```{r}
+fig-height: 8
+fig-width: 10
+
 (plot_univariate(data, "fps") + plot_univariate(data, "bac")) / 
   (plot_univariate(data, "ta") + plot_univariate(data, "sex_c"))
 ```
 
-
------
+----------------------------------------------------------------------
 
 Box plots can also be a useful visualization tool for numeric variables.   
 
@@ -214,60 +224,62 @@ Boxplots display:
 3. Highest and lowest points within 1.5 * IQR (interquartile-range: difference between scores at 25th %ile and 75th %ile)
 4. Outliers outside of 1.5 * IQR
 
+As always, lets by DRY!
 ```{r}
-#| code-fold: true
-
 plot_box <- function(data, var_name) {
   data |> 
     ggplot(aes(x = 1, y = !!sym(var_name))) +
     geom_boxplot() +
     theme(axis.text.x = element_blank(),
-          axis.ticks.x = element_blank())
+          axis.ticks.x = element_blank(),
+          axis.title.x = element_blank())
 }
+```
 
+---------------------------------------------------------------------------
+
+```{r}
+fig-height: 6
+fig-width: 10
 plot_box(data, "fps") + plot_box(data, "bac") + plot_box(data, "ta")
 ```
 
------
+--------------------------------------------------------------------------
 
-We could also overlay a violin plot over the box plot to clearly see the shape of the distribution and tails.
+We could also overlay a violin plot over the box plot to clearly see the shape of the distribution and tails.  Here is an example for `fps`
 
 ```{r}
 #| code-fold: true
 
-(plot_box(data, "fps") + 
-geom_violin(aes(x = 1), fill = "green", color = NA, alpha = .4) +
-  xlab(NULL)) +
-  (plot_box(data, "bac") + 
-geom_violin(aes(x = 1), fill = "green", color = NA, alpha = .4) +
-  xlab(NULL)) +
-  (plot_box(data, "ta") + 
-geom_violin(aes(x = 1), fill = "green", color = NA, alpha = .4) +
-  xlab(NULL))
+plot_box(data, "fps") + 
+  geom_violin(aes(x = 1), fill = "green", color = NA, alpha = .4)
 ```
 
-
-
------
+---------------------------------------------------------------------------
 
 
 ## Bivariate Correlations
 
+The next step in case analysis is to review the bivariate correlations among the predictors and the outcome.  
+
+This should be limited to the numeric variables (an only one of the `ta` variables)
+
 ```{r}
 data |> 
-  select(-subid, -sex) |> 
+  select(where(is.numeric), -ta) |>
   cor() |> 
   round(2)
 ```
 
------
+--------------------------------------------------------------------------
 
-## Bivariate Plots (Numeric Predictor)
+## Bivariate Plots between Outcome and Numeric Predictors
 
 Scatterplots are the preferred visualization when both variables (i.e., the predictor and outcome) are numeric.     
 
 We also can add a simple line and a LOWESS line (Locally Weighted Scatterplot Smoothing) to help us consider the shape of the relationship.
 
+How about another function
 ```{r}
 #| code-fold: true
 
