@@ -1,0 +1,37 @@
+# Test slides 
+
+## First slide
+A line of text
+
+Another line of text
+
+A very very very very very long wrapped line of text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+
+A line of text with bullets
+
+- item 1
+- item 2
+
+A second set of bullets
+
+- item 1
+- item 2
+
+
+text right above a code chunk
+```{r}
+1 + 1
+```
+Text right after the code chunk (no blank line)
+
+```{r}
+2 + 2
+```
+
+and continuing with more text (blank line above but would always do that)
+
+-------------------------------------------------------------------------------
+
+## Next Slide
+
+With a blank line between slide title and text

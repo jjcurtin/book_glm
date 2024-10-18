@@ -48,3 +48,7 @@
   quarto-pub:
     - id: eedae972-7c79-41c6-bd53-b7c55b261718
       url: 'https://kendra-wyant.quarto.pub/15_the_generalized_linear_model-94da'
+- source: test_slide.qmd
+  quarto-pub:
+    - id: 28d1e6c4-2ba6-43a0-84b2-a35119c6e6d9
+      url: 'https://jjcurtin.quarto.pub/test_slide'
