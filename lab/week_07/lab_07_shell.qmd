@@ -1,5 +1,5 @@
 ---
-title: "Lab 7 TA Script" 
+title: "Lab 7 Student Shell" 
 author: "TAs" 
 date: "`r lubridate::today()`"
 format: 
@@ -130,7 +130,7 @@ pre <- function(compact, augmented) {
 
 }
 
-delta_r2 <- function(mean, compact, augmented) {
+delta_r2 <- function(compact, augmented) {
 
 }
 ```
@@ -160,15 +160,15 @@ Imagine a hypothetical study by a local newspaper. Earlier this year, 79 communi
 
 The survey included many items, including the followings:    
 
-`celebrate_wear_costume`: In the past, you have often celebrated Halloween by wearing a costume.    
+`costume`: In the past, you have often celebrated Halloween by wearing a costume.    
 
-`celebrate_decorate_house`: In the past, you have often celebrated Halloween by decorating your home.       
+`decorate`: In the past, you have often celebrated Halloween by decorating your home.       
 
-`plan_to_buy_costume`: For Halloween this year, it is likely that you will buy some costumes.    
+`plan_buy_costume`: For Halloween this year, it is likely that you will buy some costumes.    
 
-`go_shopping_before_september`: For Halloween this year, it is likely that you will go shopping before September.    
+`shop_early`: For Halloween this year, it is likely that you will go shopping before September.    
 
-The participants responded using a Likert scale: -2 = strongly disagree, -1 = mildly agree, 0 = neither agree nor disagree, 1 = mildly agree, and 2 = strongly agree.
+The participants responded using a Likert scale: -2 = strongly disagree, -1 = mildly disagree, 0 = neither agree nor disagree, 1 = mildly agree, and 2 = strongly agree.
 
 ## Analyses
 
@@ -236,11 +236,8 @@ sse <- function(model) {
   sum(residuals(model)^2)
 }
 
-delta_r2 <- function(mean, compact, augmented) {
-  sse_m <- sse(mean)
-  sse_c <- sse(compact)
-  sse_a <- sse(augmented)
-  (sse_c - sse_a)/sse_m
+delta_r2 <- function(compact, augmented) {
+  glance(augmented)$r.squared - glance(compact)$r.squared
 }
 ```
 
