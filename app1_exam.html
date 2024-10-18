@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Key Terminology and Concepts – Introduction to the General Linear Model</title>
+<title>1&nbsp; Exam Concepts – Introduction to the General Linear Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./app2_terminology.html" rel="next">
 <link href="./web7_videos.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -68,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="book.css">
 </head>
@@ -81,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app1_terminology.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app1_terminology.html">Key Terminology and Concepts</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app1_exam.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app1_exam.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exam Concepts</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -184,7 +214,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app1_terminology.html" class="sidebar-item-text sidebar-link active">
+  <a href="./app1_exam.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exam Concepts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app2_terminology.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Key Terminology and Concepts</span></a>
   </div>
 </li>
@@ -195,15 +231,26 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#unit-1---overview" id="toc-unit-1---overview" class="nav-link active" data-scroll-target="#unit-1---overview"><span class="header-section-number">1.1</span> Unit 1 - Overview</a></li>
+  <li><a href="#unit-2---sampling-distributions" id="toc-unit-2---sampling-distributions" class="nav-link" data-scroll-target="#unit-2---sampling-distributions"><span class="header-section-number">1.2</span> Unit 2 - Sampling Distributions</a></li>
+  <li><a href="#unit-3---one-parameter-models" id="toc-unit-3---one-parameter-models" class="nav-link" data-scroll-target="#unit-3---one-parameter-models"><span class="header-section-number">1.3</span> Unit 3 - One parameter models</a></li>
+  <li><a href="#unit-4---two-parameter-models" id="toc-unit-4---two-parameter-models" class="nav-link" data-scroll-target="#unit-4---two-parameter-models"><span class="header-section-number">1.4</span> Unit 4 - Two parameter models</a></li>
+  <li><a href="#unit-5---one-dichotomous-predictor" id="toc-unit-5---one-dichotomous-predictor" class="nav-link" data-scroll-target="#unit-5---one-dichotomous-predictor"><span class="header-section-number">1.5</span> Unit 5 - One Dichotomous Predictor</a></li>
+  <li><a href="#unit-6---models-with-two-or-more-predictors" id="toc-unit-6---models-with-two-or-more-predictors" class="nav-link" data-scroll-target="#unit-6---models-with-two-or-more-predictors"><span class="header-section-number">1.6</span> Unit 6 - Models with Two or More Predictors</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/app1_exam.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app1_terminology.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app1_terminology.html">Key Terminology and Concepts</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app1_exam.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app1_exam.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exam Concepts</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Key Terminology and Concepts</h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exam Concepts</span></h1>
 </div>
 
 
@@ -220,8 +267,110 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="unit-1---overview" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="unit-1---overview"><span class="header-section-number">1.1</span> Unit 1 - Overview</h2>
+<ul>
+<li>What are the four levels of the General Linear model</li>
+<li>How do the number of <span class="math inline">\(X\)</span> variables differ across these levels?</li>
+<li>Number of <span class="math inline">\(Y\)</span> variables differ across these levels?</li>
+<li>Examples of special case analyses across these levels?</li>
+</ul>
+</section>
+<section id="unit-2---sampling-distributions" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="unit-2---sampling-distributions"><span class="header-section-number">1.2</span> Unit 2 - Sampling Distributions</h2>
+<ul>
+<li>populations vs.&nbsp;samples</li>
+<li>parameters vs.&nbsp;parameter estimates</li>
+<li>What is sampling error?</li>
+<li>The logic and procedure for null hypothesis signficance testing</li>
+<li>Connecting NHST to sampling distributions</li>
+<li>Raw score distribitions vs.&nbsp;sampling distributions</li>
+<li>The Central Limit Theorem</li>
+<li>What is an unbiased estimator?</li>
+<li>What is the standard error for a parameter estimate and how does that connect to sampling distributions</li>
+<li>What factors affect the standard error of the mean</li>
+<li>How does the one-sample z-test connect sampling distributions and standard errors.</li>
+<li>What is the difference between the one-sample z-test and the one sample t-test</li>
+</ul>
+</section>
+<section id="unit-3---one-parameter-models" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="unit-3---one-parameter-models"><span class="header-section-number">1.3</span> Unit 3 - One parameter models</h2>
+<ul>
+<li>What are the three uses of models</li>
+<li>What is the equation for a one parameter model for <span class="math inline">\(Y_i\)</span> and for <span class="math inline">\(\hat{Y}_i\)</span></li>
+<li>What is an error or residual in the context of a model. Define it in terms of <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(\hat{Y}_i\)</span></li>
+<li>What are two reasonable methods for estimating total model error</li>
+<li>What are three important properties of parameter estimates? Define each</li>
+<li>Why do we prefer the sum of squared errors over the sum of absolute errors?</li>
+<li>What is the interpretation of <span class="math inline">\(b_0\)</span> if we estimate it by minimizing the sum of squared errors vs.&nbsp;the sum of absolute errors?</li>
+<li>Parameter estimates in our models miminize what?</li>
+<li>How do we use a t-test the null hypothesis that <span class="math inline">\(b_0\)</span> is zero in a one parameter model? Connect this to the sampling distribution of <span class="math inline">\(b_0\)</span></li>
+<li>How do we use an F-test and model comparison to test the null hypothesis that <span class="math inline">\(b_0\)</span> is zero in a one parameter model? How do we use sum of squared errors in this comparison? What is the compact and augmented model used to test the null about <span class="math inline">\(b_0\)</span> = 0. How would you change these models if you had a null hypothesis about some value other than 0?</li>
+<li>What is a confidence interval for a parameter estimate? Connect the confidence interval to the standard error of that parameter estimate</li>
+<li>How can we use a confidence interval to test the null hypothesis that <span class="math inline">\(b_0\)</span> (or any parameter estimate) is zero?</li>
+<li>The test of <span class="math inline">\(b_0\)</span> in a one parameter model is equivalent to what special case analysis?</li>
+<li>What is the formula for the t-test to test the null hypothesis that <span class="math inline">\(b_0\)</span> (or any parameter estimate) is zero? How would you modify this formula to test a null hypothesis about a value other than 0.</li>
+</ul>
+</section>
+<section id="unit-4---two-parameter-models" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="unit-4---two-parameter-models"><span class="header-section-number">1.4</span> Unit 4 - Two parameter models</h2>
+<ul>
+<li>What is the equation for a two parameter model for <span class="math inline">\(Y_i\)</span> and for <span class="math inline">\(\hat{Y}_i\)</span></li>
+<li>What is the interpretation of <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> in a two parameter model?</li>
+<li>Identify <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> on a line plot of the data</li>
+<li>How are <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> estimated in a two parameter model?</li>
+<li>Compare the interpretation of <span class="math inline">\(b_0\)</span> in a one vs.&nbsp;two parameter model</li>
+<li>How do we test null hypotheses about <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> in a two parameter model using a t-test? Connect this to the sampling distribution of <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span>A</li>
+<li>How do we test null hypotheses about <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> in a two parameter model using an F-test and model comparison? What are the associated compact and augmented models for each test?</li>
+<li>What are the degrees of freedom equal to for the t-test and F-test</li>
+<li>What would the SSE be for two parameter model that perfectly predicts <span class="math inline">\(Y\)</span>. What would it be if there was no relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>?</li>
+<li>What is the impact of mean-centering <span class="math inline">\(X\)</span> on the interpretation of <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> in a two parameter model?</li>
+<li>What is the formula for the confidence interval for a parameter estimate in a two parameter model? Connect the confidence interval to the standard error of that parameter estimate</li>
+<li>What is <span class="math inline">\(R^2\)</span> and how is it calculated in a two parameter model using SSE or using variances of <span class="math inline">\(Y_i\)</span>, <span class="math inline">\(\hat{Y}_i\)</span>, and <span class="math inline">\(e_i\)</span>?</li>
+<li>What this the relationship between <span class="math inline">\(R^2\)</span> and <span class="math inline">\(r_xy\)</span> in the two parameter model?</li>
+</ul>
+</section>
+<section id="unit-5---one-dichotomous-predictor" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="unit-5---one-dichotomous-predictor"><span class="header-section-number">1.5</span> Unit 5 - One Dichotomous Predictor</h2>
+<ul>
+<li>How do we handle dichotomous categorical variables in linear models?</li>
+<li>What are the two coding schemes we learned for coding regressors (<span class="math inline">\(X\)</span>s) for dichtomous categorical predictors</li>
+<li>How do we interpret the parameter estimates for each coding scheme?</li>
+<li>How would values or interpretations of <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> change if we used other coding schemes (e.g., -1 vs.&nbsp;1, 2 vs.&nbsp;0)?</li>
+<li>What are the typical consequences of dichotomizing a quantitative predictor? Should we generally do this or avoid it?</li>
+<li>How does the t-test or model comparison approach work for testing parameter estimates in a model with a dichotomous predictor?</li>
+<li>Identify <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> on a line plot of the data</li>
+</ul>
+</section>
+<section id="unit-6---models-with-two-or-more-predictors" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="unit-6---models-with-two-or-more-predictors"><span class="header-section-number">1.6</span> Unit 6 - Models with Two or More Predictors</h2>
+<ul>
+<li>What is the equation for a model with two predictors for <span class="math inline">\(Y_i\)</span> and for <span class="math inline">\(\hat{Y}_i\)</span>? What is the general form for <span class="math inline">\(k\)</span> predictors?</li>
+<li>What is the interpretation of <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span>, and <span class="math inline">\(b_2\)</span> in a model with two predictors?</li>
+<li>What are the five benefits of using multiple predictors in a model?</li>
+<li>What factors affect the standard error of a parameter estimate in a model with multiple predictors? (You do not need to know the exact formula for this but you do need to know all the components and the direction of their impact on the SE)</li>
+<li>What is <span class="math inline">\(R^2_j\)</span>?</li>
+<li>What is the problem of multicolinearity?</li>
+<li>How do you identify if multicolinarity is a problem in a model?</li>
+<li>What are the appropriate compact and augmented models for testing any parameter estimate in a model with multiple predictors?</li>
+<li>What is the relationship between the SE for a parameter estimate and power to test the null hypothesis about that parameter estimate? Connect this to your understanding of the sampling distribution for a parameter estimate</li>
+<li>What is the relationship between the SE for a parameter estimate and the precision of the parameter estimate? Connect this to your understanding of the confidence interval and the sampling distribution for a parameter estimate.</li>
+<li>What are the total, direct, and indirect/spurious effects of <span class="math inline">\(X\)</span>s in a two predictor model? How do you calculate each? What models do you use to calculate each?</li>
+<li>What are the three variance based effect size estimates for models with two or more predictors?
+<ul>
+<li>Define them in terms of the variances of <span class="math inline">\(Y_i\)</span>, <span class="math inline">\(\hat{Y}_i\)</span>, and <span class="math inline">\(e_i\)</span></li>
+<li>Define them in terms of sums of squares and models/model comparisons</li>
+<li>What is the interpreation of each?</li>
+<li>Link them to the areas of the Venn diagrams</li>
+<li>Calculate them from sums of squares in Venn diagrams</li>
+<li>How are they similar and different from each other?</li>
+<li>When are each generally used?</li>
+</ul></li>
+<li>Identify <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span>, and <span class="math inline">\(b_2\)</span> on a line plot of the data from a two predictor model with a dichotomous and quantitative predictor</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -651,6 +800,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./app2_terminology.html" class="pagination-link" aria-label="Key Terminology and Concepts">
+        <span class="nav-page-text">Key Terminology and Concepts</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -658,4 +810,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/app1_terminology.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/app1_exam.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
