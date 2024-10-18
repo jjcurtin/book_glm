@@ -1,0 +1,94 @@
+# Exam Concepts {.unnumbered}
+
+## Unit 1 - Overview
+
+- What are the four levels of the General Linear model
+- How do the number of $X$ variables differ across these levels?
+- Number of $Y$ variables differ across these levels?
+- Examples of special case analyses across these levels?
+
+
+## Unit 2 - Sampling Distributions
+
+- populations vs. samples
+- parameters vs. parameter estimates
+- What is sampling error?
+- The logic and procedure for null hypothesis signficance testing
+- Connecting NHST to sampling distributions
+- Raw score distribitions vs. sampling distributions
+- The Central Limit Theorem
+- What is an unbiased estimator?
+- What is the standard error for a parameter estimate and how does that connect to sampling distributions
+- What factors affect the standard error of the mean
+- How does the one-sample z-test connect sampling distributions and standard errors.
+- What is the difference between the one-sample z-test and the one sample t-test
+
+
+## Unit 3 - One parameter models
+
+- What are the three uses of models
+- What is the equation for a one parameter model for $Y_i$ and for $\hat{Y}_i$
+- What is an error or residual in the context of a model. Define it in terms of $Y_i$ and $\hat{Y}_i$
+- What are two reasonable methods for estimating total model error
+- What are three important properties of parameter estimates?  Define each
+- Why do we prefer the sum of squared errors over the sum of absolute errors?
+- What is the  interpretation of $b_0$ if we estimate it by minimizing the sum of squared errors vs. the sum of absolute errors?
+- Parameter estimates in our models miminize what?
+- How do we use a t-test the null hypothesis that $b_0$ is zero in a one parameter model?  Connect this to the sampling distribution of $b_0$
+- How do we use an F-test and model comparison to test the null hypothesis that $b_0$ is zero in a one parameter model?  How do we use sum of squared errors in this comparison? What is the compact and augmented model used to test the null about $b_0$ = 0.  How would you change these models if you had a null hypothesis about some value other than 0?
+- What is a confidence interval for a parameter estimate?  Connect the confidence interval to the standard error of that parameter estimate
+- How can we use a confidence interval to test the null hypothesis that $b_0$ (or any parameter estimate) is zero?
+- The test of $b_0$ in a one parameter model is equivalent to what special case analysis?
+- What is the formula for the t-test to test the null hypothesis that $b_0$ (or any parameter estimate) is zero? How would you modify this formula to test a null hypothesis about a value other than 0.
+
+
+## Unit 4 - Two parameter models
+
+- What is the equation for a two parameter model for $Y_i$ and for $\hat{Y}_i$
+- What is the interpretation of $b_0$ and $b_1$ in a two parameter model?
+- Identify $b_0$ and $b_1$ on a line plot of the data
+- How are $b_0$ and $b_1$ estimated in a two parameter model?
+- Compare the interpretation of $b_0$ in a one vs. two parameter model
+- How do we test null hypotheses about $b_0$ and $b_1$ in a two parameter model using a t-test?  Connect this to the sampling distribution of $b_0$ and $b_1$A
+- How do we test null hypotheses about $b_0$ and $b_1$ in a two parameter model using an F-test and model comparison?  What are the associated compact and augmented models for each test?
+- What are the degrees of freedom equal to for the t-test and F-test
+- What would the SSE be for two parameter model that perfectly predicts $Y$.  What would it be if there was no relationship between $X$ and $Y$?
+- What is the impact of mean-centering $X$ on the interpretation of $b_0$ and $b_1$ in a two parameter model?
+- What is the formula for the confidence interval for a parameter estimate in a two parameter model?  Connect the confidence interval to the standard error of that parameter estimate
+- What is $R^2$ and how is it calculated in a two parameter model using SSE or using variances of $Y_i$, $\hat{Y}_i$, and $e_i$?
+- What this the relationship between $R^2$ and $r_xy$ in the two parameter model?
+
+
+## Unit 5 - One Dichotomous Predictor
+
+- How do we handle dichotomous categorical variables in linear models?
+- What are the two coding schemes we learned for coding regressors ($X$s) for dichtomous categorical predictors
+- How do we interpret the parameter estimates for each coding scheme?
+- How would values or interpretations of $b_0$ and $b_1$ change if we used other coding schemes (e.g., -1 vs. 1, 2 vs. 0)?
+- What are the typical consequences of dichotomizing a quantitative predictor?  Should we generally do this or avoid it?
+- How does the t-test or model comparison approach work for testing parameter estimates in a model with a dichotomous predictor?
+- Identify $b_0$ and $b_1$ on a line plot of the data
+
+
+## Unit 6 - Models with Two or More Predictors
+
+- What is the equation for a model with two predictors for $Y_i$ and for $\hat{Y}_i$?  What is the general form for $k$ predictors?
+- What is the interpretation of $b_0$, $b_1$, and $b_2$ in a model with two predictors?
+- What are the five benefits of using multiple predictors in a model?
+- What factors affect the standard error of a parameter estimate in a model with multiple predictors? (You do not need to know the exact formula for this but you do need to know all the components and the direction of their impact on the SE)
+- What is $R^2_j$?
+- What is the problem of multicolinearity?
+- How do you identify if multicolinarity is a problem in a model?
+- What are the appropriate compact and augmented models for testing any parameter estimate in a model with multiple predictors?
+- What is the relationship between the SE for a parameter estimate and power to test the null hypothesis about that parameter estimate?  Connect this to your understanding of the sampling distribution for a parameter estimate
+- What is the relationship between the SE for a parameter estimate and the precision of the parameter estimate?  Connect this to your understanding of the confidence interval and the sampling distribution for a parameter estimate. 
+- What are the total, direct, and indirect/spurious effects of $X$s in a two predictor model?  How do you calculate each?  What models do you use to calculate each?
+- What are the three variance based effect size estimates for models with two or more predictors?
+  - Define them in terms of the variances of $Y_i$, $\hat{Y}_i$, and $e_i$
+  - Define them in terms of sums of squares and models/model comparisons
+  - What is the interpreation of each?
+  - Link them to the areas of the Venn diagrams
+  - Calculate them from sums of squares in Venn diagrams
+  - How are they similar and different from each other?
+  - When are each generally used?
+- Identify $b_0$, $b_1$, and $b_2$ on a line plot of the data from a two predictor model with a dichotomous and quantitative predictor

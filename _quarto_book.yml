@@ -34,4 +34,5 @@ book:
     - web7_videos.qmd
     - part: Appendices
       chapters:
-        - app1_terminology.qmd
+        - app1_exam.qmd
+        - app2_terminology.qmd
