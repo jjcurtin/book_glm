@@ -12,35 +12,13 @@ editor_options:
 ---
 
 
-## Part A: Reading Questions
+# Reading Questions
 
-### 1. What does it mean to have "redundancy between predictors" in multiple regression? What is the consequence of having redundant predictors? Answer in 2-3 sentences.
-
-
-
-
-### 2. Read the scenario below and answer the prompts that follow.  
-A psychologist wants to examine how workers' capacity to concentrate is affected by auditory nuisances in a factory. She decided to run an experiment with 6 different experimental “noise” conditions (e.g., banging a hammer on a table, having a research confederate yell and scream outside the testing room) and one control condition (“silence”). She randomly assigned the participants to the 7 conditions. The psychologist then asked the participants to remember a list of words. After a 10-minute delay, participants were asked to recall the list of words. Recall performance (percentage of correctly recalled words) was the DV. 
-
-After collecting the data, she individually tested whether the recall performance of the participants in each experimental condition was different from the participants in the control condition. Each of the 6 tests yield a p value > .05, suggesting no significant effect of noise on the capacity to concentrate. She then decided that she could try adding sex at birth as a covariate, since she had read studies in other areas of psychology that statistically controlled for sex at birth in their analyses. After adding sex at birth to each of her 6 models, she found that one of her experimental conditions (the one where a confederate yells outside the room) differed from her control condition at a significance level of p < .05 (after controlling for sex). Overjoyed, the psychologist wrote up her results for submission to a scientific journal, reporting that she manipulated noise by introducing a screaming confederate, and that this experimental manipulation led to worse memory as compared to a silent control condition (including relevant test statistics). She did not report the 5 other experimental conditions.
-
-#### a. Describe two critical problems in the psychologist’s research practices.
-
-
-  
-
-#### b. How do these problems affect the psychologist’s Type I error rate?
+## 1. What does it mean to have "redundancy between predictors" in multiple regression? What is the consequence of having redundant predictors? Answer in 2-3 sentences.
 
 
 
-
-#### c.	What are the two requirements proposed by Simmons et al. (2011) that would aid peer-reviewers in assessing the psychologist’s work?
-
-
-
-
-
-## Part B: Data Analysis
+# Data Analysis
 
 Does childhood cognitive ability predict the size of developing brains? A team of neuroscientists recruited a longitudinal sample of 40 participants to answer this question. When the participants reached age 12, the researchers administered the fifth edition of Wechsler Intelligence Scale for Children (WISC-V) to assess childhood cognitive ability. When the participants aged 21, the researchers obtained structural MRI scans of the participants’ brains and calculated total MRI voxel count as a measure of brain size. Because body size and sex are known to relate to brain size, the neuroscientist also asked the participants to report their height and weight at age 21, as well as their sex assigned at birth. 
 

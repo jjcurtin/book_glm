@@ -5,111 +5,112 @@ date: "`r lubridate::today()`"
 format: 
   html:
     toc: true 
-    toc_depth: 4
+    toc_depth: 2
     embed-resources: true
 editor_options: 
   chunk_output_type: console
 ---
 
+# Reading Questions
 
-## Part A: Reading Questions
+## 1. 
+What does it mean to have "redundancy between predictors" in multiple regression? What is the consequence of having redundant predictors? Answer in 2-3 sentences.
 
-### 1.	Simmons, Nelson, and Simonsohn (2011) propose six requirements for authors. What are the six requirements? Pick three that you think are the most important/effective and explain why those three are particularly important.
 
 
+# Data Analysis
 
+Does childhood cognitive ability predict the size of developing brains? A team of neuroscientists recruited a longitudinal sample of 40 participants to answer this question. When the participants reached age 12, the researchers administered the fifth edition of Wechsler Intelligence Scale for Children (WISC-V) to assess childhood cognitive ability. When the participants aged 21, the researchers obtained structural MRI scans of the participants’ brains and calculated total MRI voxel count as a measure of brain size. Because body size and sex are known to relate to brain size, the neuroscientist also asked the participants to report their height and weight at age 21, as well as their sex assigned at birth. 
 
-### 2.	What is *statistical influence* in the context of case analysis? What measures do we use to assess influence? What is the key difference between these measures?
+You were asked to conduct the statistical analyses to test the hypothesis that childhood cognitive ability is positively associated with brain size in adulthood.
 
+Tragically, the data files came in a total mess. They do not have proper file extensions, so you do not know their exact file type, apart from the fact that they are regular delimited text files. The data files also do not have proper variable names labeled. Luckily, your colleague was able to provide you with the codebooks of the two datafiles: `hw_07_iq` and `hw_07_brain`.
 
+**Codebook for `iq`**
 
+- `subject_id`:	Subject ID number	(range 1 - 40)
+- `simi`:	WISC-V subtest score: Similarities (range 5 - 20)
+- `voca`:	WISC-V subtest score: Vocabulary	(range 5 - 20)
+- `bloc`:	WISC-V subtest score: Block Design	(range 5 - 20)
+- `matr`:	WISC-V subtest score: Matrix Reasoning	(range 5 - 20)
+- `figr`:	WISC-V subtest score: Figure Weights	(range 5 - 20)
+- `digi`:	WISC-V subtest score: Digit Span	(range 5 - 20)
+- `code`:	WISC-V subtest score: Coding	(range 5 - 20)
 
+**Codebook for `brain`**
 
-## Part B: Data Analysis
+- `subject_id`:	Subject ID number	(range 1 - 40)
+-	`sex`: Sex assigned at birth. (0 = female, 1  = male)
+-	`weight`:	Weight in pounds	(range 106 - 192)
+-	`height`:	Height in inches	(range 62 - 77)
+-	`mri_count`: Total voxel count from 18 slices, in thousands (range 790.62 – 1079.55)
+-	`openness`:	Big-five inventory: Openness (in adulthood)	(range -1.65 - 2.17)
 
-A public health organization wants to test the importance of staying active and healthy in the winter by examining links between cross-country skiing, vegetable consumption, and health, as measured by an independent doctor at the end of winter. Participants were 53 residents of the Madison, WI area who were recruited at the beginning of the winter and asked to record the number of times they went cross-country skiing over the course of the winter and their average daily vegetable consumption (in servings). At the end of the winter (i.e., the last week of March), a doctor conducted a health assessment of each participant and reported their health on a 0-10 scale, with 0 representing very poor health and 10 representing excellent health.    
 
-The researchers in the public health organization predict that cross-country skiing and vegetable consumption both contribute to overall health. They also expect to see little to no relationship between vegetable consumption and skiing behavior.   
 
-The following variables can be found in the `hw_07_ski_veg_data.csv` dataset.    
+## 1. 
+Read in both data files (hw_07_iq and hw_07_brain) using a function within the `readr` pacakge (this is one of the packages in the tidyverse that is loaded with `library(tidyverse)`.  You might need to view the text file directly (in a text editor) and then read a bit to figure out what function to use.   [This cheatsheet](https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_data-import.pdf) might help some! 
 
-- `sub_id`: Unique subject identification number (range 1 - 53).
-- `skiing`:	Number of times participant went cross-country skiing over the course of the winter (range 0 - 93).
-- `veggies`: Number of servings of vegetables participant consumes on an average day (range 0 - 16).
-- `fitness`: Level of health, as assessed by doctor, at the end of March (range 0-10).
 
 
-### 1. Read in and inspect the data.
 
+## 2. 
+For both dataframes, rename the columns according to the codebook so that the column names are meaningful variable names.
 
 
 
 
-### 2. Fit a model testing the researchers’ hypothesis. Specifically, run a model testing whether skiing and vegetable consumption both uniquely explain variance in people’s health scores at the end of March (when included in the same model). Report your results (F stats, p-values, and model $R^2$) in a sentence.
 
+## 3. 
+Use the `full_join()` function from the dplyr package to combine the two dataframes, so that you end up with one dataframe that contains all subjects and all variables needed for the analyses.  You may need to read the help on this function to understand how it works.  Make sure to check that the join worked correctly.
 
 
+## 4. 
+The raw data contain 7 subtest scores from WISC-V, measuring different domains of cognitive functioning. These subtest scores are meant to be added up into a Full-Scale Intelligence Quotient (FSIQ) that measures overall cognitive ability. Use `var_score()` to compute `fsiq`. If done correctly, `fisq` would have a mean of around 100 and a standard deviation of roughly 15.
 
 
-### 3. You suspect there may be outliers present in the dataset. First, identify which participants have high leverage. For each of these participants, note the variable on which the participant is extreme (i.e., why it has a large hat value). 
 
 
 
+## 5.	
+Make a correlation/scatterplot matrix of the following variables: `mri_count`, `sex`, `weight`, `height` and `fsiq` (Hint: consider using the `GGally` package).
 
 
-### 4. Next, test for regression outliers. For each participant you determine to be a regression outlier, report why this participant is a regression outlier (in terms of the variables present in the dataframe). 
 
 
 
- 
 
-### 5. Now examine the Cook’s D scores of the participants. Are the participants who have extreme Cook’s D scores surprising to you or not?
+## 6.	
+Report the three strongest correlations among these variables.
 
 
 
+## 7.	
+Fit a 2-parameter model, where `fsiq` alone predicts total voxel count (`mri_count`). Report the parameter estimate for `fsiq`.  Also report an appropriate variance based effect size estimate for `fsiq`. Test the null hypothesis that this parameter estimate is 0 using both of the methods you know (t-test of parameter estimate AND model comparison of appropriate compact and augmented models).  Report the appropriate information for each of these statistical tests (NOTE: Of course, in real life you would choose only one of these two statistical tests because they are statistically equivalent!  This is just for practice).  
 
-### 6. Produce the influence plot for this model. Which participants have high influence as identified in this plot?
 
 
 
+## 8. 
+Now fit a 5-parameter model predicting total voxel count (`mri_count`) from `fsiq`, `sex`, `height`, and `weight`. Report the statistical test and interpret the parameter estimate corresponding to the focal predictor. Also compute its PRE. How did PRE for `fsiq` change from PRE in the 2-parameter model? Why?
 
 
-### 7. One participant has a relatively small Cook’s D value, but a relatively large hat value on one of the predictors. Who is this person, and why is their influence small despite their large leverage?
 
 
 
 
+## 9. 
+Use a function we learned in lab to check for multicollinearity between your predictors in the 5-parameter model. Is multicollinearity a problem? How do you know?
 
-### 8. If you had to give the researchers advice about whether to remove any of the participants, what would you say?
 
 
 
+## 10.	
+Create a publication-quality graph that represents total voxel count (in thousands) as a function of FSIQ, when holding height and weight constant at their means and sex constant at the center of its coding scheme. Your plot should include 95% confidence interval bands around the point estimates, raw data points, and informative axis labels.
 
 
 
-### 9. Give an example of some rule you could have made regarding recruitment for the study that could have prevented the researchers from obtaining the kinds of outliers present in the data.
 
 
-
-
-
-
-### 10.	Regardless of your advice in question 8, remove all problematic participants (in terms of influence) and run your focal model again. What has changed? Why?
-
-
-
-
-### 11.	Write a 3-4 sentence results section explaining what you found in your case analysis (assuming you are presenting the analyses in which you decide to remove the problematic participants).
-
-
-
-
-
-
-### 12.	Make a publication-quality graph displaying the relationship between vegetables and health. Include two regression lines: one should show the relationship when controlling for skiing and one without skiing factored in. Does the line change much? Why or why not?
-
-
-
-
-
-### 13.	How many hours did this homework take you?
+## 11. 
+Indicate the number of hours spent on this assignment.
