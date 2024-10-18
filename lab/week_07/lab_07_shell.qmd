@@ -1,0 +1,339 @@
+---
+title: "Lab 7 TA Script" 
+author: "TAs" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Housekeeping!
+
+Welcome to Week 7! We are halfway through the semester!
+
+**Let's take a moment to pause and review any questions from lecture this past week.**
+
+## Conceptual Questions
+
+**Let's talk about counting parameters.**
+
+Parameters are coefficients that we are estimating in our model. Parameters include our intercept and any predictors (variables) we choose to add into our model. It's important to be able to count how many parameters we are estimating because these values get used in formulas like the F-statistic.
+
+**How are the numerator and denominator degrees of freedom calculated for the F-statistic?**
+
+**How will our numerator and denominator degrees of freedom change as we add more predictors to our model?**
+
+## Set up for the week!
+
+First, let's set-up our script. We will also set up our path object because we will need that later on!
+If you have created your own functions script, this is a great place to source that in.
+```{r}
+#| message: false
+#| warning: false
+
+options(conflicts.policy = "depends.ok") 
+library(tidyverse)
+library(skimr)
+
+path_data <- "lab/data"
+
+theme_set(theme_classic()) 
+```
+
+## PART 1: Finishing up Week 6 exercises (Model Predictions)
+
+For this exercise, we will be working some more with the Prestige dataset.
+
+Now, let's load in the Prestige dataset...
+```{r}
+d <- carData::Prestige |>
+  filter(type != "prof") |> # remember, we dropped these observations
+  mutate(type = fct_drop(type)) |> # and then we made sure to drop that level of our factor
+  glimpse()
+```
+
+
+### a. Recode `type` and mean-center `prestige` to prepare our dataset for analysis.
+
+
+Recode `type` so that `bc` is 0 and `wc` is 1. Call this variable `type_bc`.
+```{r}
+
+```
+
+Recode `type` so that `bc` is 1 and `wc` is 0. Call this variable `type_wc`.
+```{r}
+
+```
+
+Recode `type` so that `bc` is -.5 and `wc` is .5. Call this variable `type_c`.
+```{r}
+
+```
+
+Mean center `prestige`. Call this variable `prestige_c`.
+```{r}
+
+```
+
+### b. Fit a linear model in which `income` is regressed on `type_bc` while statistically controlling for `prestige` (uncentered). What do the estimates for $b_0$, $b_1$, and $b_2$ represent? Provide a conceptual interpretation for each parameter estimate.
+```{r}
+
+```
+
+$b_0$:
+
+$b_1$:  
+
+$b_2$:
+
+#### Fit a linear model in which income is regressed on `type_wc` while statistically controlling for `prestige` (uncentered). What do the estimates for $b_0$, $b_1$, and $b_2$ represent? Provide a conceptual interpretation for each parameter estimate.   
+```{r}
+
+```
+
+$b_0$:   
+
+$b_1$:    
+
+$b_2$:
+
+
+#### Fit a linear model in which income is regressed on `type_c` while statistically controlling for `prestige_c`. What do the estimates for $b_0$, $b_1$, and $b_2$ represent? Provide a conceptual interpretation for each parameter estimate.
+```{r}
+
+```
+
+$b_0$:   
+
+$b_1$:    
+
+$b_2$:   
+
+`CHECKPOINT`
+
+### c. If you wanted $b_0$ to reflect the predicted average income for a white-collar job that has an average level of prestige, what model would you fit? Run that model. Using code, calculate and interpret $\eta_p^2$ and $\Delta R^2$ for each parameter. Which parameter estimate(s) change across all four of these models?
+
+1) We have replicated our SSE function from last week so that we can use it again here!
+2) Define a function called "pre()" that takes the value of "compact" and "augmented" to calculates the pre.
+3) Define a function called "delta_r2" that takes the value of "mean", "compact", "augmented" to calculate delta r2.
+```{r}
+sse <- function(model) {
+  sum(residuals(model)^2)
+}
+
+pre <- function(compact, augmented) {
+
+}
+
+delta_r2 <- function(mean, compact, augmented) {
+
+}
+```
+
+```{r}
+
+```
+
+$\eta_p^2$ and $\Delta R^2$ for `type_wc`
+```{r}
+
+```
+
+
+$\eta_p^2$ and $\Delta R^2$ for `prestige_c`
+```{r}
+
+```
+
+`CHECKPOINT`
+
+## PART 2: Spooky three predictor models & VIF
+
+We're going to use some spectacularly sPoOkY data this lab, it's on Halloween consumer behavior.   
+
+Imagine a hypothetical study by a local newspaper. Earlier this year, 79 community members responded to a survey about how they have celebrated Halloween in the past and how they plan to celebrate Halloween this (coming) October.   
+
+The survey included many items, including the followings:    
+
+`celebrate_wear_costume`: In the past, you have often celebrated Halloween by wearing a costume.    
+
+`celebrate_decorate_house`: In the past, you have often celebrated Halloween by decorating your home.       
+
+`plan_to_buy_costume`: For Halloween this year, it is likely that you will buy some costumes.    
+
+`go_shopping_before_september`: For Halloween this year, it is likely that you will go shopping before September.    
+
+The participants responded using a Likert scale: -2 = strongly disagree, -1 = mildly agree, 0 = neither agree nor disagree, 1 = mildly agree, and 2 = strongly agree.
+
+## Analyses
+
+You are a small-scale Halloween retailer. To prepare for the early Halloween market (pre-september), you hope to gain some insights on what the market will look like using these data.
+
+Let's load in these data. We've already cleaned this dataset for you, but we will come back to these data later on for an in-depth overview of data wrangling and cleaning.
+```{r}
+d <- read_csv(here::here(path_data, "lab_07_data.csv"),
+              show_col_types = FALSE) |> 
+  glimpse()
+```
+
+Let's view correlations, distributions, and scatterplots all in one step using `GGally::ggpairs()`.
+
+```{r}
+
+```
+
+**Which 2 variables are most weakly correlated?**    
+
+**Most strongly correlated?**   
+
+### Exercise Time!
+
+#### Regression with 1 predictor   
+
+Note: We do not encourage progressively adding predictors when analyzing data (think about researcher degrees of freedom!). We're doing it for pedagogical purposes in lab so you can see what adding predictors can do to results.     
+
+You wonder if people who often celebrate by wearing a costume tend to shop early for Halloween. Run a model to see if costume predicts shopping before September (`shop_early`). 
+```{r}
+
+```
+
+**1a. What's the result?**   
+
+**1b. What is the interpretation of the coefficient for `costume`?**    
+
+`CHECKPOINT`
+
+#### Regression with 2 predictors
+
+**Why might we add another predictor(s)?**   
+
+New question: You wonder if celebrating by wearing a costume predicts shopping before September when statistically controlling for celebrating by decorating one's home.    
+
+i.e., Do people who often celebrate by wearing a costume tend to shop early for Halloween, after accounting for how often they celebrate by decorating their home.     
+ 
+**Run a model to see if `costume` predicts shopping before September (`shop_early`).**
+```{r}
+
+```
+
+**2a. How did the regression coefficient, its standard error, F statistic, and p value associated with `costume` change?**    
+
+
+**2b. What's the interpretation of the coefficient for `costume`?**    
+
+**2c. What's the interpretation of the coefficient for `decorate`?**    
+
+**2d. How much of the variance in `shop_early` is uniquely explained by each of the two predictors?**
+
+If you didn't source in your functions elsewhere, remember to run this!
+```{r}
+sse <- function(model) {
+  sum(residuals(model)^2)
+}
+
+delta_r2 <- function(mean, compact, augmented) {
+  sse_m <- sse(mean)
+  sse_c <- sse(compact)
+  sse_a <- sse(augmented)
+  (sse_c - sse_a)/sse_m
+}
+```
+
+$\Delta R^2$ for `costume`
+```{r}
+
+```
+
+$\Delta R^2$ for `decorate`
+```{r}
+
+```
+
+
+**2e. How does the $\Delta R^2$ of `costume` in `m_2` compare to the $R^2$ of `costume` in `m_1`?**   
+```{r}
+
+```
+
+
+**End of exercise!**
+
+`CHECKPOINT`
+
+### VIF
+
+There is an increase in the SE for `costume` from `m_1` to `m_2`. The coefficient also decreased. **Why?**
+```{r}
+
+```
+
+We can find a partial answer by revisiting the correlation between the variables.
+```{r}
+
+```
+
+`costume` and `decorate` are strongly correlated (r = .866)! **Why might that be?**    
+People who tend to celebrate Halloween with costumes also tend to be into decorating their house.
+```{r}
+
+```
+
+In fact, `decorate` accounts for 75% of the variance in `costume`!   
+
+Because of the strong correlation between `costume` and `decorate`, it's likely that a lot of the variance in `shop_early` explained by `costume` overlaps with the variance explained by `decorate`.    
+
+When variables in the model are very highly correlated, this is called *multicollinearity*. When multicollinearity occurs, it inflates standard errors and changes the magnitude of regression coefficients.    
+
+We can directly test the multicollinearity of each predictor in our model using the `vif()` function in the `car` package.
+```{r}
+car::vif(m_2)
+```
+
+vif stands for **variance inflation factor**. A conventional cutoff for vif is 5, such that if you have a vif value >= 5 for your focal predictor, then multicollinearity is a problem.    
+
+Good-to-know knowledge:   
+$VIF_j = 1 / (1–R_j^2)$     
+$R_j^2$: percent variance in predictor j that is explained by all other predictors.    
+
+**What level of $R_j^2$ is problematic, given the conventional cutoff for vif = 5?**    
+
+
+### Regression with 3 Predictors
+
+As a Halloween retailer, you want to know if people who actually plan to purchase costumes are more likely to shop for Halloween early on (before September), when controlling for the degree to which they celebrate Halloween by wearing costumes and by decorating their home.   
+
+**What is the focal predictor?**     
+
+**Fit the new model.**
+```{r}
+
+```
+
+
+**What is the interpretation of the intercept for `m_3`?**    
+  
+
+**What is the interpretation of the coefficient for `plan_buy_costume` and what does the coefficient tell us?**   
+   
+
+**After removing the variance explained by `costume` and `decorate`, how much of the residual variance in `shop_early` does `plan_buy_costume` account for?**   
+
+
+```{r}
+
+```
+
+### Plotting
+
+Create a plot showing the effect of `plan_buy_costume` on `shop_early` when controlling for `costume` and `decorate` (i.e., `m_3`).    
+
+Since `plan_buy_costume` is the focal predictor, we will just set the other covariates to their mean for our predictions.   
+```{r}
+
+```
+
