@@ -194,20 +194,26 @@ data |> my_skim(-subid)
 
 Histograms, density plots, and rug plots are all useful/common visualization for numeric variables.   
 
-Let's create a function to help us create and combine these plots.
+As always, lets by DRY by writing functions (and add to your personal function library?)
 
 ```{r}
 #| code-fold: true
 
-plot_univariate <- function(data, var_name, n_bins = 10) {
+plot_univariate <- function(data, x_name, n_bins = 10) {
   data |> 
-    ggplot(aes(x = !!sym(var_name))) +
+    ggplot(aes(x = !!sym(x_name))) +
     geom_histogram(aes(y = after_stat(density)),
                    color = "black", fill = "light grey", bins = n_bins) +
     geom_density() +
     geom_rug(color = "red")
 }
 ```
+
+:::{.callout-tip}
+# Programming Tip
+All of the case analysis functions can be sourced at once from a script in my lab_support repository.
+`devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/case_analysis.R?raw=true")`
+:::
 
 ---------------------------------------------------------------------------
 
@@ -232,13 +238,13 @@ Boxplots display:
 3. Highest and lowest points within 1.5 * IQR (interquartile-range: difference between scores at 25th %ile and 75th %ile)
 4. Outliers outside of 1.5 * IQR
 
-As always, lets by DRY by writing functions!
+Here is a simple boxplot function
 ```{r}
 #| code-fold: true
 
-plot_box <- function(data, var_name) {
+plot_box <- function(data, x_name) {
   data |> 
-    ggplot(aes(x = 1, y = !!sym(var_name))) +
+    ggplot(aes(x = 1, y = !!sym(x_name))) +
     geom_boxplot() +
     theme(axis.text.x = element_blank(),
           axis.ticks.x = element_blank(),
@@ -295,9 +301,9 @@ How about another function?
 ```{r}
 #| code-fold: true
 
-plot_bivariate <- function(data, x_var, y_var, loess = TRUE) {
+plot_bivariate <- function(data, x_name, y_name, loess = TRUE) {
   plot <- data |> 
-    ggplot(aes(x = !!sym(x_var), y = !!sym(y_var))) +
+    ggplot(aes(x = !!sym(x_name), y = !!sym(y_name))) +
     geom_point() +
     geom_smooth(method = "lm", formula = y ~ x, col = "red") +
     theme(axis.text.x = element_text(size = 11),
@@ -709,9 +715,9 @@ Problem is there can be many dfBetas (a set for each predictor and intercept). M
 ```{r}
 #| code-fold: true
  
-plot_dfbetas <- function(model, parameter){
-   dfb <-as_tibble(dfbetas(model)) |> 
-     select(contains(parameter))
+plot_dfbetas <- function(model, x_name){
+   dfb <- as_tibble(dfbetas(model)) |> 
+     select(matches(x_name))
    colnames(dfb) <- "x" 
   
   dfb |> 
@@ -722,7 +728,7 @@ plot_dfbetas <- function(model, parameter){
            y = "Frequency") +
       geom_vline(xintercept = c(-2, 2),
                  color = c("red"), linewidth = .75) +
-      labs(subtitle = "Cut at |2|")
+      labs(title = x_name, subtitle = "Cut at |2|")
 }
 ```
 
@@ -749,13 +755,26 @@ The steps to create an added variable plot typically involve:
 
 The `avPlots() function in the `car` package can be used to create added variable plots. 
 
-```{r}
-d <- as.data.frame(data)
-rownames(d) <- data$subid
+But we have preferences for how we set all the function parameters so we will write our own function to wrap around it.
 
-car::avPlots(m, intercept = TRUE,
-             id = list(method = list(abs(residuals(m, type = "pearson"))), 
-                     n = 5, cex = 1, col='red', location = "lr"))
+```{r}
+#| code-fold: true
+
+plot_av <- function(data, model, label_name = "subid"){
+ 
+  # avPlots() wants a traditional dataframe with rownames set to subid or 
+  # other label for points
+  data <- as.data.frame(data)
+  rownames(data) <- pull(data, matches(label_name))
+
+  car::avPlots(model, intercept = TRUE,
+              id = list(method = list(abs(residuals(model, type = "pearson"))), 
+              n = 5, cex = 1, col = 'red', location = "lr"))
+}
+```
+
+```{r}
+data |> plot_av(model = m, label_name = "subid")
 ```
 
 ## Impact on SEs
