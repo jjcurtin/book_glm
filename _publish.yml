@@ -36,8 +36,6 @@
       url: 'https://jjcurtin.quarto.pub/06_two_predictors'
 - source: 07_case_analysis.qmd
   quarto-pub:
-    - id: 61b24895-84aa-4995-939f-a46e1a5b0492
-      url: 'https://kendra-wyant.quarto.pub/07_case_analysis'
     - id: 3fc4f1f5-aeec-4ce6-907a-125d07df0ada
       url: 'https://jjcurtin.quarto.pub/07_case_analysis'
 - source: 14_power.qmd

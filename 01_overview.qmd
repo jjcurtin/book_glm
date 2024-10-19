@@ -15,7 +15,7 @@ editor_options:
 
 - General Linear Model framework
 
------
+-------------------------------------------------------------------------------
 
 ## My Research 
 
@@ -27,7 +27,7 @@ editor_options:
 
 - I also teach an introductory course on Applied Machine Learning each spring (Psychohology 752).
 
------
+-------------------------------------------------------------------------------
 
 ## My Personal Life
 
@@ -127,19 +127,16 @@ I was born on a small island...
 
 $\widehat{Y} = \beta_0$  
 
-\
 
 **Basic Question**  
 
 What is the mean of an outcome/dependent variable in a sample? Is that mean different from some specified value?   
 
-\
 
 **Example**    
 
 What is the mean IQ of Psych 610 students? Is it different from the average IQ of 100?   
 
-\
 
 <span style="color: red;">Question: What is this GLM special case analysis often called?</span>  
 

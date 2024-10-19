@@ -4,11 +4,9 @@
 #| echo: false
 
 options(conflicts.policy = "depends.ok") 
-library(car)
 library(tidyverse)
 library(patchwork)
 library(broom) 
-library(skimr)
 
 path_data <- "data_lecture"
 theme_set(theme_classic()) 
@@ -24,8 +22,9 @@ sse <- function(model){
 Anscombe, Francis J. (1973) Graphs in statistical analysis. *American Statistician*, 27, 17–21. 
 
 ```{r}
-#| include: false
+#| echo: false
 
+data("Quartet", package = "carData")
 
 plot_y1 <- Quartet |> 
   ggplot(aes(x = x, y = y1)) +
@@ -68,13 +67,11 @@ plot_y1 + plot_y2 + plot_y3 + plot_y4
 
 --------------------------------------------------------------------------------
 
-See Quartet dataframe in `car` package.
-
 **Set 1**
 ```{r}
 ex_1 <- lm(y1 ~ x, data = Quartet)
 ex_1 |> tidy()
-ex_1 |> sse()
+ex_1 |> sse() |> round(1)
 ```
 
 **Set 2**
@@ -83,7 +80,7 @@ ex_1 |> sse()
 
 ex_2 <- lm(y2 ~ x, data = Quartet)
 ex_2 |> tidy()
-ex_2 |> sse()
+ex_2 |> sse() |> round(1)
 ```
 
 **Set 3**
@@ -92,7 +89,7 @@ ex_2 |> sse()
 
 ex_3 <- lm(y3 ~ x, data = Quartet)
 ex_3 |> tidy()
-ex_3 |> sse()
+ex_3 |> sse() |> round(1)
 ```
 
 **Set 4**
@@ -101,8 +98,12 @@ ex_3 |> sse()
 
 ex_4 <- lm(y4 ~ x4, data = Quartet)
 ex_4 |> tidy()
-ex_4 |> sse()
+ex_4 |> sse() |> round(1)
 ```
+
+:::{.callout-note}
+See the Quartet dataset in the `carData` package
+:::
 
 --------------------------------------------------------------------------------
 
@@ -143,9 +144,13 @@ data <- data |>
   mutate(sex = fct(sex, levels = c("female", "male")), 
          sex_c = if_else(sex == "female", -.5, .5),
          ta_c = ta - mean(ta)) 
+```
 
+```{r}
 levels(data$sex)
+```
 
+```{r}
 data |> head()
 ```
 
@@ -155,7 +160,7 @@ Lets fit our new three predictor model
 
 ```{r}
 m <- lm(fps ~ bac + ta_c + sex_c, data = data)
-m |> broom::tidy()
+m |> tidy()
 ```
 
 ---------------------------------------------------------------------------
@@ -192,6 +197,8 @@ Histograms, density plots, and rug plots are all useful/common visualization for
 Let's create a function to help us create and combine these plots.
 
 ```{r}
+#| code-fold: true
+
 plot_univariate <- function(data, var_name, n_bins = 10) {
   data |> 
     ggplot(aes(x = !!sym(var_name))) +
@@ -206,8 +213,9 @@ plot_univariate <- function(data, var_name, n_bins = 10) {
 
 And now use it (making four plots together with `patchwork`)
 ```{r}
-fig-height: 8
-fig-width: 10
+#| code-fold: true
+#| fig-height: 8
+#| fig-width: 10
 
 (plot_univariate(data, "fps") + plot_univariate(data, "bac")) / 
   (plot_univariate(data, "ta") + plot_univariate(data, "sex_c"))
@@ -224,8 +232,10 @@ Boxplots display:
 3. Highest and lowest points within 1.5 * IQR (interquartile-range: difference between scores at 25th %ile and 75th %ile)
 4. Outliers outside of 1.5 * IQR
 
-As always, lets by DRY!
+As always, lets by DRY by writing functions!
 ```{r}
+#| code-fold: true
+
 plot_box <- function(data, var_name) {
   data |> 
     ggplot(aes(x = 1, y = !!sym(var_name))) +
@@ -239,8 +249,10 @@ plot_box <- function(data, var_name) {
 ---------------------------------------------------------------------------
 
 ```{r}
-fig-height: 6
-fig-width: 10
+#| code-fold: true
+#| fig-height: 6
+#| fig-width: 10
+
 plot_box(data, "fps") + plot_box(data, "bac") + plot_box(data, "ta")
 ```
 
@@ -262,7 +274,7 @@ plot_box(data, "fps") +
 
 The next step in case analysis is to review the bivariate correlations among the predictors and the outcome.  
 
-This should be limited to the numeric variables (an only one of the `ta` variables)
+This should be limited to the numeric variables (and only one of the `ta` variables)
 
 ```{r}
 data |> 
@@ -279,7 +291,7 @@ Scatterplots are the preferred visualization when both variables (i.e., the pred
 
 We also can add a simple line and a LOWESS line (Locally Weighted Scatterplot Smoothing) to help us consider the shape of the relationship.
 
-How about another function
+How about another function?
 ```{r}
 #| code-fold: true
 
@@ -303,12 +315,17 @@ plot_bivariate <- function(data, x_var, y_var, loess = TRUE) {
 ```{r}
 #| code-fold: true
 
-plot_bivariate(data, "bac", "fps") + plot_bivariate(data, "ta", "fps") + 
+plot_bivariate(data, "bac", "fps") + plot_bivariate(data, "ta_c", "fps") + 
   plot_bivariate(data, "sex_c", "fps", loess = FALSE)
 ```
 
+---------------------------------------------------------------------------
 
------
+GGally is a great package for creating a matrix of bivariate plots
+
+```{r}
+GGally::ggpairs(data, columns = c("fps", "bac", "ta_c", "sex_c"))
+```
 
 ## Bivariate Plots (Categorical Predictor)
 
@@ -316,6 +333,8 @@ A grouped version of the combined box and violin plot is our preferred visualiza
 
 Lets look at an example of this with sex.
 ```{r}
+#| code-fold: true
+
  data |>
     ggplot(aes(x = sex, y = fps)) +
     geom_violin(fill = "green", color = NA) +
@@ -325,16 +344,9 @@ Lets look at an example of this with sex.
           axis.text.y = element_text(size = 11))
 ```
 
-
------
-
-
-## Leverage (Cartoon Data)
-
-**Check for high Leverage points**   
+## Leverage
 
 Leverage is a property of the predictors (DV is not considered for leverage analysis). An observation will have increased *leverage* on the results as its distance from the mean of all predictors increases. 
-
 
 ```{r}
 #| echo: false
@@ -367,55 +379,63 @@ plot_cartoon <- data_cartoon |>
 ```{r}
 #| echo: false
 #| warning: false
+#| fig-height: 6
+#| fig-width: 8
 
 plot_cartoon
 ```
 
-
 ::: {.callout-important}
 # Question
-
-Which colored points have the most leverage in the 1 predictor example above?
+Which colored points have the most leverage in the 1 predictor cartoon data example above?
 :::
 
+:::{.fragment}
+[Blue, Yellow AND Green]{style="color:blue;"}
+:::
 
------
-
-## Leverage
+---------------------------------------------------------------------------
 
 Hat values ($h_i$) provide an index of leverage.   
 
 In the one predictor case:  
-$h_i = \frac{1}{N} + \frac{(X_i- \overline X)^2}{\sum(X_j- \overline X)^2}$ (for $j=1$ to $N$ in summation)  
+
+- $h_i = \frac{1}{N} + \frac{(X_i- \overline X)^2}{\sum(X_j- \overline X)^2}$ (for $j=1$ to $N$ in summation)  
 
 With multiple predictors, $h_i$ measures the distance from the centroid (point of means) of the $X$s. Hat values are bounded between $\frac{1}{N}$ and 1. 
 
-**Mean Hat value = $\frac{P}{N}$.**  
+---------------------------------------------------------------------------
 
-Rules of thumb:  
+The mean Hat value in a sample is a function of $P$ and $N$
+
+- Mean Hat value = $\frac{P}{N}$
+
+There are coarse rules of thumb for identifying high leverage points
 
 - $h_i > 3* \overline h$ for small samples ($N < 100$)
 - $h_i > 2* \overline h$ for large samples   
 
 
-**Do not blindly apply rules of thumb. Hat values should be separated from distribution of $h_i$. View a histogram of $h_i$.**
+BUT... 
 
-Note: Mahalanobis (Maha) distance = $(N - 1)(h_i - \frac{1}{N})$.   
+- Do not blindly apply rules of thumb. 
+- Hat values should be separated from distribution of $h_i$. 
+- View a histogram of $h_i$.
+
+:::{.callout-note}
+# Note
+Mahalanobis (Maha) distance = $(N - 1)(h_i - \frac{1}{N})$.   
 SPSS reports centered leverage ($h - \frac{1}{N}$).
+:::
 
------
-
-## Leverage (Cartoon Data; Continued)
-
+---------------------------------------------------------------------------
 
 High leverage values are not always bad. In fact, in some cases they are good. Must also consider if they are regression outliers.  
 
 ::: {.callout-important}
 # Question
-
 Why?
 :::
-
 
 :::{.fragment}
 
@@ -430,135 +450,49 @@ $\text{SE}_{bi} = \frac{s_y}{s_i} = \frac{\sqrt{(1-R^2_y)}}{\sqrt{(N - k - 1)}}*
 [Well fit, high leverage points do **not** alter $b$s.]{style="color:blue;"}    
 :::
 
+---------------------------------------------------------------------------
 
------
+To identify high leverage points, we can add `hatvalues()` to the dataframe to see which observations have the most leverage
 
-## Leverage (Real Data)
-
-We are going to use the following function (`case_analysis()`) to help us identify observations with high leverage.    
+You could also filter to values with high hats
 
 ```{r}
-case_analysis <- function(model, type, term = NULL, id = TRUE) {
-  # type can be hat_values, residuals, cooks_d, df_betas, influence_plot, cov_ratio
-  # term can be used to pass in a single parameter for the df_betas plot
-  # Influence plot will label points with row id by default. Can turn off by setting id to FALSE
-  
-  model_formula <- as.character(model$call$formula)
-  
-  plot_hist <- function(data) {
-    data |> 
-      ggplot(aes(x = x)) +
+cut_hat <- 2 * mean(hatvalues(m))
+
+data |> 
+  mutate(hat = hatvalues(m)) |> 
+  arrange(desc(hat)) |> 
+  filter(hat > cut_hat) |> 
+  print() 
+```
+
+---------------------------------------------------------------------------
+
+BUT we should view these values within the distribution of all the hats for the dataset
+
+Here is a function to do this (add to your library?)
+```{r}
+#| code-fold: true
+
+plot_leverage <- function(model) {
+  tibble(x = hatvalues(model)) |> 
+    ggplot(aes(x = x)) +
       geom_histogram(fill = "light grey", color = "black", bins = 10) +
       geom_rug(color = "blue") +
-      labs(x = str_to_sentence(str_replace(type, "_", " ")),
-           y = "Frequency",
-           title = str_c("Model:", model_formula[2], model_formula[1], model_formula[3],
-                         sep = " "))
-  }
-  
-  if(type == "hat_values") {
-    p <- tibble(x = hatvalues(model)) |> 
-      plot_hist() +
-      geom_vline(xintercept = 2*mean(hatvalues(model)), color = "red", linewidth = .75) +
-      labs(subtitle = "Cut point: 2 * mean(hat)")
-    print(p)
-  }
-  
-  if(type == "residuals") {
-    t_cut_point <- qt(p = .025/nrow(data), 
-                      df = nrow(data) - length(coef(model)) - 1 - 2, 
-                      lower.tail = FALSE)
-    
-    p <- tibble(x = rstudent(model)) |> 
-      plot_hist() +
-      geom_vline(xintercept = c(-1, 1) * t_cut_point, color = "red", linewidth = .75) +
-      labs(subtitle = "Bonferroni corrected p-value < 0.05 in red")
-    print(p)
-  }
-  
-  if(type == "cooks_d") {
-    p <- tibble(x = cooks.distance(model)) |> 
-      plot_hist() +
-      geom_vline(xintercept = 4/(nrow(data) - length(coef(model)) - 1 - 1),
-                 color = c("red"), linewidth = .75) +
-      labs(subtitle = "4/(N-P) cut-off in red")
-    print(p)
-  }
-  
-  if(type == "df_betas") {
-    m_1_coefs <- if(!is.null(term))term else names(as_tibble(dfbetas(m_1)))
-    i <- 0
-    for (term in m_1_coefs) {
-      i <- i + 1
-      p <- dfbetas(m_1) |>
-        as_tibble() |>
-        select(x = !!sym(term)) |>
-        plot_hist() +
-        labs(x = str_c("DFBETAS: ", term),
-             subtitle = str_c("B = ", round(coef(m_1)[i], 6)))
-      print(p)
-    }
-  }
-  
-  if(type == "cov_ratio") {
-    p <- tibble(x = covratio(model)) |>
-      plot_hist() +
-      geom_vline(xintercept = abs((3 * (length(coef(model)))/nrow(data)) - 1), 
-                 color = "red", linewidth = .75) +
-      labs(subtitle = "3*(P/N) - 1 cut-off in red")
-    print(p)
-  }
-  
-  if(type == "influence_plot") {
-    t_cut_point <- qt(p = .025/nrow(data), 
-                      df = nrow(data) - length(coef(model)) - 1 - 2, 
-                      lower.tail = FALSE)
-    p <- tibble(residuals = rstudent(model),
-             hat_values = hatvalues(model)) |>
-      ggplot(aes(x = hat_values, y = residuals)) +
-      geom_point(size = 10 * sqrt(cooks.distance(model))/max(cooks.distance(model)),
-                 shape = 1) +
-      geom_hline(yintercept = c(-1, 0, 1) * t_cut_point, color = "red", 
-                 linetype = c("solid", "dashed", "solid"), linewidth = .75) +
-      geom_vline(xintercept = c(1, 2, 3) * mean(hatvalues(model)), color = "red", 
-                 linetype = c("dashed", "solid", "solid"), linewidth = .75) +
-      labs(title = "Influence Bubble Plot",
-           subtitle = str_c("Model:", model_formula[2], model_formula[1], model_formula[3],
-                            sep = " "),
-           x = "Hat Values",
-           y = "Studentized Residuals")
-    
-    if(id) {
-      p <- p +
-        geom_text(aes(label = names(cooks.distance(model))), vjust = 0, hjust = 1)
-    }
-    print(p)
-  }
-  
+      labs(x = "hat values",
+           y = "Frequency") +
+      geom_vline(xintercept = 2 * mean(hatvalues(model)), color = "yellow", linewidth = .75) +
+      geom_vline(xintercept = 3 * mean(hatvalues(model)), color = "red", linewidth = .75) +
+      labs(subtitle = "") +
+      labs(subtitle = "Red: 3 * mean(hat) for N < 100;  Yellow: 2 * mean(hat) for N >= 100")
 }
 ```
 
-
-----
-
 ```{r}
-case_analysis(m_1, type = "hat_values")
+plot_leverage(m)
 ```
 
-`hatvalues()` returns a vector of named numbers (name = row id). This makes it easy to pull out rows corresponding to certain hat values.
-```{r}
-cut_hat <- 2*mean(hatvalues(m_1))
-
-data |> 
-    filter(hatvalues(m_1) > cut_hat)
-```
-
------
-
-
-## Regression Outlier (Cartoon data)
-
-**Check for regression outliers**
+## Regression Outliers
 
 An observation that is not adequately fit by the regression model (i.e., falls very far from the prediction line).  
 
@@ -567,44 +501,51 @@ In essence, a regression outlier is a discrepant score with a large residual ($e
 ```{r}
 #| echo: false
 #| warning: false
+#| fig-height: 6
+#| fig-width: 8
 
 plot_cartoon
 ```
 
 ::: {.callout-important}
 # Question
-
 Which point(s) are regression outliers?
 :::
 
------
+:::{.fragment}
+[Yellow, Red, and Blue in descending order of magnitude]{style="color:blue;"}
+:::
 
-## Regression Outlier
+---------------------------------------------------------------------------
 
-There are multiple quantitative indicators to identify regression outliers, including raw residuals ($e_i$), standardized residuals  ($e'_i$), and studentized residuals ($t'_i$). The preferred index is the **studentized residual**.   
+There are multiple quantitative indicators to identify regression outliers
 
-$t'_i = \frac{e_i}{(SE_{e(-i)}*\sqrt{(1-h_i)})}$    
+- raw residuals ($e_i$) 
+- standardized residuals ($e'_i$) 
+- studentized residuals ($t'_i$) 
 
-$t'_i$ follows a t-distribution with $n-P-1$ degrees of freedom.   
+The preferred index is the **studentized residual**.   
 
+- $t'_i = \frac{e_i}{(SE_{e(-i)}*\sqrt{(1-h_i)})}$    
+- $t'_i$ follows a t-distribution with $n-P-1$ degrees of freedom.   
 
-NOTE: SPSS calls these Studentized Deleted Residuals. Cohen calls these Externally Studentized Residual
+:::{.callout-note}
+# NOTE 
+SPSS calls these Studentized Deleted Residuals. 
 
------
+Cohen calls these Externally Studentized Residual
+:::
+
+---------------------------------------------------------------------------
     
-
-## Regression Outlier (Cartoon data; Continued)
-
 Regression outliers are always bad but they can have two different types of bad effects.   
 
 ::: {.callout-important}
 # Question
-
-Why?
+What are these two bad effects and why?
 :::
 
 :::{.fragment}
-
 $R^2 = \frac{\text{SSE}_{\text{mean-only}}- \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}$  
 
 $\text{SE}_{bi} = \frac{s_y}{s_i} = \frac{\sqrt{(1-R^2_y)}}{\sqrt{(N - k - 1)}}*\frac{1}{\sqrt{(1-R^2_i)}}$
@@ -614,24 +555,52 @@ $\text{SE}_{bi} = \frac{s_y}{s_i} = \frac{\sqrt{(1-R^2_y)}}{\sqrt{(N - k - 1)}}*
 [If outlier also has leverage can alter (increase or decrease) $b$s.]{style="color:blue;"}
 :::
 
+---------------------------------------------------------------------------
 
------
-
-## Regression Outlier (Real data)
-
+You can add the studentized residuals to the dataframe to see which observations are regression outliers
 ```{r}
-case_analysis(m_1, type = "residuals")
+data |> 
+  mutate(residuals = rstudent(m)) |> 
+  arrange(desc(abs(residuals))) |> 
+  head()
 ```
+
+\
 
 The `car` package has a function `outlierTest()` that can be used to quickly identify regression outliers (residuals with a Bonferroni p-value < .05).
 ```{r}
-car::outlierTest(m_1, cutoff = .05, labels = data$subid)
+car::outlierTest(m, cutoff = .05, labels = data$subid)
 ```
 
------
+---------------------------------------------------------------------------
 
+But as with Leverage, we should view these values within the distribution of all the residuals for the dataset
 
-## Influence (Cartoon data)
+Here is a function to do this (add to your library?)
+```{r}
+#| code-fold: true
+
+plot_residuals <- function(model){
+  res <-tibble(x = rstudent(model))
+  t_cut_point <- qt(p = .025/nrow(res), 
+                    df = nrow(res) - length(coef(model)) - 1 - 2, 
+                    lower.tail = FALSE)
+  res |> 
+      ggplot(aes(x = x)) +
+        geom_histogram(fill = "light grey", color = "black", bins = 10) +
+        geom_rug(color = "blue") +
+        labs(x = "Studentized Residuals",
+           y = "Frequency") +
+        geom_vline(xintercept = c(-1, 1) * t_cut_point, color = "red", linewidth = .75) +
+        labs(subtitle = "Red cut: Bonferroni corrected p-value < 0.05")
+}
+```
+
+```{r}
+plot_residuals(m)
+```
+
+## Influence
 
 An observation is *influential* if it substantially alters the fitted regression model (i.e., the coefficients and/or intercept). Two commonly used assessment methods:    
 
@@ -641,17 +610,21 @@ An observation is *influential* if it substantially alters the fitted regression
 ```{r}
 #| echo: false
 #| warning: false
-
+#| fig-height: 6
+#| fig-width: 8
+ 
 plot_cartoon
 ```
 
 
 ::: {.callout-important}
 # Question
-
 Which point(s) have the most influence?
 ::: 
 
+:::{.fragment}
+[Yellow and Blue because they will alter $b_1$ due to their combined leverage and influence.]{style="color:blue;"}
+:::
 
 ## Cook's Distance
 
@@ -659,97 +632,131 @@ Cook’s distance ($\text{D}_i$) provides a single summary statistic to index ho
 
 Cooks distance is based on both the *outlierness* (standardized residual) and leverage characteristics of the observation.   
 
-$\text{D}_i = \frac{e'^2_i}{P} * \frac{h_i}{1-h_i}$   
+- $\text{D}_i = \frac{e'^2_i}{P} * \frac{h_i}{1-h_i}$   
 
-$\text{D}_i > \frac{4}{N-P}$ has been proposed as a very liberal cutoff (identifies a lot of influential points). 
+- $\text{D}_i > \frac{4}{N-P}$ has been proposed as a very liberal cutoff (identifies a lot of influential points). 
 
-$\text{D}_i > \text{qf}(.5, P, N-P)$ has also been employed as very conservative.   
-
-
-Identification of problematic scores should be considered in the context of the overall distribution of $\text{D}_i$.
+- $\text{D}_i > \text{qf}(.5, P, N-P)$ has also been employed as very conservative.   
 
 
-## Cook's Distance (Real data)
+As with the other case analysis metrics, identification of problematic scores should be considered in the context of the overall distribution of $\text{D}_i$.
+
+---------------------------------------------------------------------------
+
+We can add Cook's distance to the dataframe to see which observations have the most influence on the overall model.
+
+You might also want to see the leverage and residuals for these points
 
 ```{r}
-case_analysis(m_1, type = "cooks_d")
-```
-
-```{r}
-cut_cook <- 4/(nrow(data) - length(coef(m_1)) - 1 - 1)
+cut_cooks <- 4/(nrow(data) - length(coef(m)))
 
 data |> 
-  filter(cooks.distance(m_1) > cut_cook)
+  mutate(hats = hatvalues(m),
+         residuals = rstudent(m),
+         cooks = cooks.distance(m)) |> 
+  arrange(desc(cooks)) |> 
+  filter(cooks > cut_cooks)
+```
+
+---------------------------------------------------------------------------
+
+Here is a function to view the distribution of cooks distance (add to your library?)
+```{r}
+#| code-fold: true
+
+plot_cooks <- function(model){
+  cooks <-tibble(x = cooks.distance(model))
+  cut_cooks <- 4/(nrow(cooks) - length(coef(model)))
+  
+  cooks |> 
+    ggplot(aes(x = x)) +
+      geom_histogram(fill = "light grey", color = "black", bins = 10) +
+      geom_rug(color = "blue") +
+      labs(x = "Cooks Distances",
+           y = "Frequency") +
+      geom_vline(xintercept = 4/(nrow(data) - length(coef(model)) - 1 - 1),
+                 color = c("red"), linewidth = .75) +
+      labs(subtitle = "Cut: 4/(N-P)")
+}
 ```
 
 ```{r}
-data |> 
-  filter(cooks.distance(m_1) > .15)
+plot_cooks(m)
 ```
 
 
+## dfBeta and dfBetas
 
-## Influence Bubble Plot (Real data)
+$dfBeta_{ij}$ is an index of how much each regression coefficient ($j= 0 – k$) would change if the $i^{th}$ score was deleted.   
 
-```{r}
-case_analysis(m_1, type = "influence_plot")
-```
-
-```{r}
-data |> 
-  slice(c(23, 62))
-```
-
-
-::: {.callout-important}
-# Question
-
-What are the expected effects of each of these points on the model?</span> 
-:::
-
-## dfBetas
-
-$\text{dfBeta}_{ij}$ is an index of how much each regression coefficient ($j= 0 – k$) would change if the $i^{\text{th}}$ score was deleted.   
-
-$\text{dfBeta}_{ij} = b_j - b_{j(-i)}$
+- $\text{dfBeta}_{ij} = b_j - b_{j(-i)}$
 
 dfBetas (preferred) is the standardized form of the index.   
 
-$\text{dfBetas} = \frac{\text{dfBeta}}{\text{SE}_{b_{j(-i)}}}$ 
+- $dfBetas = \frac{dfBeta}{SE_{b_{j(-i)}}}$ 
 
-$|{\text{dfBetas}}|>2$ may be problematic.   
+- $|dfBetas|>2$ may be problematic.   
 
-$|{\text{dfBetas}}|> \frac{2}{\sqrt{N}}$ in larger samples (Belsley et al., 1980).   
+- $|dfBetas|> \frac{2}{\sqrt{N}}$ in larger samples (Belsley et al., 1980).   
 
-Consider distribution with histogram! Also can visualize with added variable plot.
+
+As always, consider distribution with histogram! Also can visualize with added variable plot.
 
 Problem is there can be many dfBetas (a set for each predictor and intercept). Most helpful when there is one *critical/focal effect.*
 
------
-
-
-## dfBetas (Real data)
+---------------------------------------------------------------------------
 
 ```{r}
-case_analysis(m_1, type = "df_betas")
+#| code-fold: true
+ 
+plot_dfbetas <- function(model, parameter){
+   dfb <-as_tibble(dfbetas(model)) |> 
+     select(contains(parameter))
+   colnames(dfb) <- "x" 
+  
+  dfb |> 
+    ggplot(aes(x = x)) +
+      geom_histogram(fill = "light grey", color = "black", bins = 10) +
+      geom_rug(color = "blue") +
+      labs(x = "dfBetas",
+           y = "Frequency") +
+      geom_vline(xintercept = c(-2, 2),
+                 color = c("red"), linewidth = .75) +
+      labs(subtitle = "Cut at |2|")
+}
+```
+
+```{r}
+plot_dfbetas(m, "bac")
 ```
 
 
------
+## Added Variable Plot
 
-## Added Variable Plot (Real data)
+An added variable plot (AKA partial regression plot), can be used to detect observations that are influencing the relationship between a specific $X$ and $Y$ 
+
+- Residuals for $Y$ are plotted against the residuals of a focal $X$ after regressing out the other independent variables. 
+- This helps to isolate the effect of that specific variable, making it easier to see its unique contribution to the model.
+- It is also easier to see observations that impact that effect.
+
+The steps to create an added variable plot typically involve:
+
+1. Regressing $Y$ on all $X$ except for the focal $X$ to obtain the residuals for $Y$
+2. Regressing the focal $X$ on all other $X$ to obtain the residuals for that focal $X$
+3. Plotting the residuals of $Y$ against the residuals of $X$
+
+---------------------------------------------------------------------------
+
+The `avPlots() function in the `car` package can be used to create added variable plots. 
 
 ```{r}
-data <- as.data.frame(data)
-rownames(data) <- data$subid
-m_1 <- lm(fps ~ bac + ta + sex_c, data = data)
+d <- as.data.frame(data)
+rownames(d) <- data$subid
 
-car::avPlots(m_1,intercept=TRUE,
-             id=list(method=list(abs(residuals(m_1, type="pearson"))), 
-                     n=5, cex=1, col='red', location="lr"))
+car::avPlots(m, intercept = TRUE,
+             id = list(method = list(abs(residuals(m, type = "pearson"))), 
+                     n = 5, cex = 1, col='red', location = "lr"))
 ```
-
------
 
 ## Impact on SEs
 
@@ -763,15 +770,30 @@ Belsley et al., (1980) proposed a cut off of:
 
 $\text{COVRATIO}_i < |3* \frac{P}{N} - 1|$
 
------
-
-## Impact on SEs (Real data)
+---------------------------------------------------------------------------
 
 ```{r}
-case_analysis(m_1, type = "cov_ratio")
+#| code-fold: true
+ 
+plot_covratio <- function(model){
+   cr <-tibble(x = covratio(model)) 
+  
+  cr |> 
+    ggplot(aes(x = x)) +
+      geom_histogram(fill = "light grey", color = "black", bins = 10) +
+      geom_rug(color = "blue") +
+      labs(x = "Cov Ratio",
+           y = "Frequency") +
+      geom_vline(xintercept = abs((3 * (length(coef(model)))/nrow(cr) - 1)),
+                 color = "red", linewidth = .75) +
+      labs(subtitle = "Cut: 3*(P/N) - 1")
+}
 ```
 
------
+```{r}
+plot_covratio(m)
+```
+
 
 ## Four Examples with Fake Data
 
@@ -799,8 +821,7 @@ plot_lev_wellfit <- tibble(x = c(1, 2, 3, 4, 5, 8),
   geom_point(aes(x = 8, y = 8), color = "red") +
   ylim(0, 8) +
   xlim(0, 8) +
-  labs(title = "High Leverage/Well-Fit",
-       subtitle = "Test Data")
+  labs(title = "High Leverage/Well-Fit")
 
 plot_outlier <- tibble(x = c(1, 2, 3, 4, 5, 3),
        y = c(1, 2, 3, 4, 5, 0)) |> 
@@ -812,8 +833,7 @@ plot_outlier <- tibble(x = c(1, 2, 3, 4, 5, 3),
   geom_point(aes(x = 3, y = 0), color = "red") +
   ylim(0, 8) +
   xlim(0, 8) +
-  labs(title = "Low Leverage/Regression Outlier",
-       subtitle = "Test Data")
+  labs(title = "Low Leverage/Regression Outlier")
 
 plot_lev_outlier <- tibble(x = c(1, 2, 3, 4, 5, 5),
        y = c(1, 2, 3, 4, 5, 0)) |> 
@@ -825,8 +845,7 @@ plot_lev_outlier <- tibble(x = c(1, 2, 3, 4, 5, 5),
   geom_point(aes(x = 5, y = 0), color = "red") +
   ylim(0, 8) +
   xlim(0, 8) +
-  labs(title = "High Leverage/Regression Outlier",
-       subtitle = "Test Data")
+  labs(title = "High Leverage/Regression Outlier")
 ```
 
 ```{r}
@@ -837,17 +856,11 @@ plot_lev_outlier <- tibble(x = c(1, 2, 3, 4, 5, 5),
 ```
 
 
-
------
-
-
 ## Enter the Real World
 
 ::: {.callout-important}
 # Question
-
 So what do you do?
-
 :::
 
 
@@ -856,10 +869,10 @@ So what do you do?
 ## Overall Impact of Problem Scores: Real Data
 
 ```{r}
-broom::tidy(m_1)
+tidy(m)
 ```
 
-**SSE = `r round(sum(residuals(m_1)^2),2)`**
+SSE = `r round(sum(residuals(m)^2))`
 
 -----
 
@@ -867,29 +880,27 @@ broom::tidy(m_1)
 data_rm_outliers <- data |> 
   filter(!subid %in% c("0125", "2112"))
 
-m_2 <- lm(fps ~ bac + ta + sex_c, data = data_rm_outliers) 
+m_2 <- lm(fps ~ bac + ta_c + sex_c, data = data_rm_outliers) 
 
-broom::tidy(m_2)
+tidy(m_2)
 ```
 
-**SSE = `r round(sum(residuals(m_2)^2),2)`**
+SSE = `r round(sum(residuals(m_2)^2))`
 
 -----
 
 ## What to Do
 
-- <span style="color: blue;">Don’t worry about leverage alone.</span>
+What to worry about
 
-- <span style="color: blue;">Worry about model outliers always.</span>
-
-- <span style="color: blue;">Worry about influence (overall model or predictors by field).</span>
-
-- <span style="color: blue;">Drop, retain, or bring model outliers to the fence.</span>
-
-- <span style="color: blue;">Drop or retain influential participants.</span>
-
-- <span style="color: blue;">Report both ways (in olden day…).</span>
-
-- <span style="color: blue;">Get with the program and pre-register instead (what you worry about, how you define it, and what you do)!</span>
+- Don’t worry about leverage alone
+- Worry about model outliers always
+- Worry about influence (overall model or predictors by field)
 
 
+What to do
+
+- Drop, retain, or bring model outliers to the fence?
+- Drop or retain influential participants?
+  - Report both ways (in olden day…)
+  - Get with the program and pre-register instead (what you worry about, how you define it, and what you do)!

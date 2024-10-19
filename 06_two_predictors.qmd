@@ -2238,7 +2238,7 @@ glance(m_full)$r.squared
 
 --------------------------------------------------------------------------------
 
-Review $\Delta R^2$ for `intervention_grouup` across two models.  Do they make sense to you?
+Review $\Delta R^2$ for `intervention_group` across two models.  Do they make sense to you?
 
 **One predictor IG model**
 
