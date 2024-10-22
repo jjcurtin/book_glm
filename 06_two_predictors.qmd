@@ -2642,7 +2642,7 @@ tibble(` ` = c("Trait Anxiety", "Blood Alcohol Concentration", "Mean", "SD"),
        `Blood Alcohol Concentration` = c(NA, NA, mean(data$bac), sd(data$bac))) |> 
   knitr::kable(digits = 2, align = c("l", "c", "c", "c"))
 ```
-
+:::
 
 ## Adding a Third Predictor
 
