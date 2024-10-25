@@ -1,5 +1,5 @@
 ---
-title: "hw_08_shell" 
+title: "hw_08_key" 
 author: "TAs" 
 date: "`r lubridate::today()`"
 format: 
@@ -12,97 +12,151 @@ editor_options:
 ---
 
 
-# Reading Questions
+## Part A: Reading Questions
 
-## 1. What does it mean to have "redundancy between predictors" in multiple regression? What is the consequence of having redundant predictors? Answer in 2-3 sentences.
+### 1. Judd, McClelland, & Ryan talk of a “paradox” in using standardized residuals to detect outliers. Describe this paradox, present what the authors recommend using to solve it, and list the three reasons they recommend this solution. 
 
-
-
-# Data Analysis
-
-Does childhood cognitive ability predict the size of developing brains? A team of neuroscientists recruited a longitudinal sample of 40 participants to answer this question. When the participants reached age 12, the researchers administered the fifth edition of Wechsler Intelligence Scale for Children (WISC-V) to assess childhood cognitive ability. When the participants aged 21, the researchers obtained structural MRI scans of the participants’ brains and calculated total MRI voxel count as a measure of brain size. Because body size and sex are known to relate to brain size, the neuroscientist also asked the participants to report their height and weight at age 21, as well as their sex assigned at birth. 
-
-You were asked to conduct the statistical analyses to test the hypothesis that childhood cognitive ability is positively associated with brain size in adulthood.
-
-Tragically, the data files came in a total mess. They do not have proper file extensions, so you do not know their exact file type, apart from the fact that they are regular delimited files. The data files also do not have proper variable names labeled. Luckily, your colleague was able to provide you with the codebooks of the two datafiles: `iq` and `brain`.
-
-**Codebook for `iq`**
-
-- `subject_id`:	Subject ID number	(range 1 - 40)
-- `simi`:	WISC-V subtest score: Similarities (range 5 - 20)
-- `voca`:	WISC-V subtest score: Vocabulary	(range 5 - 20)
-- `bloc`:	WISC-V subtest score: Block Design	(range 5 - 20)
-- `matr`:	WISC-V subtest score: Matrix Reasoning	(range 5 - 20)
-- `figr`:	WISC-V subtest score: Figure Weights	(range 5 - 20)
-- `digi`:	WISC-V subtest score: Digit Span	(range 5 - 20)
-- `code`:	WISC-V subtest score: Coding	(range 5 - 20)
-
-**Codebook for `brain`**
-
-- `subject_id`:	Subject ID number	(range 1 - 40)
--	`sex`: Sex assigned at birth. (0 = female, 1  = male)
--	`weight`:	Weight in pounds	(range 106 - 192)
--	`height`:	Height in inches	(range 62 - 77)
--	`mri_count`: Total voxel count from 18 slices, in thousands (range 790.62 – 1079.55)
--	`openness`:	Big-five inventory: Openness (in adulthood)	(range -1.65 - 2.17)
+> Your answer here.
 
 
+## Part B: Data Analysis
 
-### 1. Read in both data files (iq and brain) using a new function `data.table::fread()` that automatically detects file format and type. 
+The data for this homework were adapted from a dataframe in the `car` package. You will be using the `hw_08_data.csv` data file provided to you.   
 
+Each row in the data represents a country in the United Nations (`Country`). Infant mortality (`infantMortality`) is the rate of death in infancy among live births. Per capita GDP (`ppgdp`) is a measure of a country’s wealth that takes gross domestic product (GDP) and divides it by the number of people in the country. Both GDP and per capita GDP should be positive numbers. 
 
-
-
-### 2. For both dataframes, rename the columns according to the codebook so that the column names are meaningful variable names.
-
-
-
-
-
-### 3. Use a function we learned in lab to combine the two dataframes, so that you end up with one dataframe that contains all subjects and all variables needed for the analyses.
+- `Country`: Name of the country (unique string variable)    
+- `infantMortality`: Log-transformed Infant deaths/1000 live births	(range 0.94 – 6.96)   
+- `ppgdp`: Log-transformed GDP per capita, in US dollars (range 6.84 – 16.68)   
 
 
+### 1. Explore the data! 
+
+#### a. Read in the raw data and change the variable names to snake case.
+
+```{r}
+#| message: false
+
+# set conflict policy and load packages
+
+# set theme to classic
+
+# set data path
+
+# source John's case analysis package
+
+```
+
+```{r}
+# Read in data and clean up variable names
+
+```
 
 
-### 4. The raw data contain 7 subtest scores from WISC-V, measuring different domains of cognitive functioning. These subtest scores are meant to be added up into a Full-Scale Intelligence Quotient (FSIQ) that measures overall cognitive ability. Use `var_score()` to compute `fsiq`. If done correctly, `fisq` would have a mean of around 100 and a standard deviation of roughly 15.
+#### b. Remove unrelated variables, keep only `infant_mortality`, `ppgdp`, and `country`.
+```{r}
+
+```
+
+#### c. Obtain descriptive statistics for numeric variables using `skim()` and `yank()`.
+```{r}
+
+```
+
+#### d. Create quick-and-dirty histograms of `infant_mortality` and `ppgdp`. 
+```{r}
+
+```
+
+#### e. There are two obvious outliers with implausible values on variable `infant_mortality` and `ppgdp`. Find them and assign NA to replace the implausible values.
+
+```{r}
+
+```
 
 
+### 2. Conduct the following analysis **without** case analysis.
+
+#### a.	Fit a model to predict `infant_mortality` from `ppgdp`. 
+```{r}
+
+```
+
+#### b.	Report the results in one sentence, including relevant statistics. 
+
+> Your answer here.
+
+### 3. Using the model you fit to answer question 2a, conduct a full case analysis. Specify which countried you would consider to have high leverage, to be model/regression outliers, to have excessive influence on the model as a whole, and to have excessive influence on the parameter estimate for log-transformed per capita GDP specifically.
+
+Which country has high leverage?
+
+> Your answer here.
+
+```{r}
+
+```
+
+Which country is a regression outlier?
+
+> Your answer here.
+
+```{r}
+
+```
+
+Which country has excessive influence on the model as a whole?
+
+> Your answer here.
+
+```{r}
+
+```
+
+Which country has excessive influence on the parameter estimate for log-transformed per capita GDP specifically?
+
+> Your answer here.
+
+```{r}
+
+```
 
 
+### 9. Remove outlier(s).
 
-### 5.	Make a correlation/scatterplot matrix of the following variables: `mri_count`, `sex`, `weight`, `height` and `fsiq` (Hint: consider using the `GGally` package).
+#### a.	Remove any observations of countries which you think are outliers. 
+```{r}
 
+```
 
+#### b.	Justify why you removed the observation(s). How would it/they impact your conclusion regarding the relationship between infant mortality rate and per capita GDP, should it/they be kept in your model?
 
-
-
-
-### 6.	Report the three strongest correlations among these variables.
-
-
-
-### 7.	Fit a 2-parameter model, where `fsiq` alone predicts total voxel count (`mri_count`). Report the statistical test and interpret the parameter estimate for `fsiq`. Also compute $\eta^2$.
+> Your answer here.
 
 
+### 10. Refit the model you fit in 2a but with the outlier(s) removed. What changed in your results?
+
+```{r}
+
+```
+
+> Your answer here.
 
 
-### 8. Now fit a 5-parameter model predicting total voxel count (`mri_count`) from `fsiq`, `sex`, `height`, and `weight`. Report the statistical test and interpret the parameter estimate corresponding to the focal predictor. Also compute its $\eta_p^2$. How did the $\eta_p^2$ of `fsiq` change from the $\eta^2$ in the 2-parameter model? Why?
+### 11.	Make a publication-quality graph that show the effect of GDP on infant mortality, using the model you fit in question 2a.
+
+```{r}
+
+```
 
 
+### 12.	Write a short paragraph reporting these results. Explain your case analysis, and why you chose to exclude the data that you did. Finally, interpret your model using all stats in APA format (i.e., report the effect of GDP on infant mortality, the F value, degrees of freedom, a variance-based effect size, and the p value).
 
+> Your answer here.
 
+### 13. How long did this week’s homework take you? 
 
+> Your answer here.
+ 
+### 14. In prevous labs, we've completed a few group exercises. How do you feel about the group exercises? Do you feel like you're learning more or less from them? Is there anything you'd like to change about them?
 
-### 9. Use a function we learned in lab to check for multicollinearity between your predictors in the 5-parameter model. Is multicollinearity a problem? How do you know?
-
-
-
-
-### 10.	Create a publication-quality graph that represents total voxel count (in thousands) as a function of FSIQ, when holding height and weight constant at their means and sex constant at the center of its coding scheme. Your plot should include standard error bands around the point estimates, raw data points, and informative axis labels.
-
-
-
-
-
-
-### 11. Indicate the number of hours spent on this assignment.
+> Your answer here.
