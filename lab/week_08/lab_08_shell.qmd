@@ -322,7 +322,7 @@ The next step is to look the other variables for these regression outliers. Both
 
 #### Influence: Cook's D
 
-An observation is “influential if it substantially alters the fitted regression model (i.e., the coefficients and/or intercept). Two commonly used assessment methods include Cook's D and df betas.
+An observation is “influential" if it substantially alters the fitted regression model (i.e., the coefficients and/or intercept). Two commonly used assessment methods include Cook's D and df betas.
 
 **What two characteristics does Cook's D take into account?**    
 Leverage and studentized residuals. Observations with a large Cook's D are often extreme on both of these.    
