@@ -1,0 +1,446 @@
+---
+title: "Lab 8 TA Script" 
+author: "TAs" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Housekeeping!
+
+Welcome to Week 8!
+
+**Let's take a moment to pause and review any questions from lecture this past week.**
+
+## Conceptual Question
+
+### What does it mean to have "redundancy between predictors" in multiple regression? What is the consequence of having redundant predictors? Answer in 2-3 sentences.
+
+> Your answer here.
+
+## Case Analysis 
+
+We're going to work with the `Prestige` data set again, but we've modified it, so download the file from the course website.    
+
+Set up your script and import the data. 
+```{r}
+#| message: false
+
+options(conflicts.policy = "depends.ok") 
+library(tidyverse)
+library(skimr)
+
+theme_set(theme_classic()) 
+
+path_data <- "lab/data"
+```
+
+```{r}
+d <- read_csv(here::here(path_data, "lab_08_data.csv"),
+              show_col_types = FALSE) |> 
+  glimpse()
+```
+
+
+When you import these data, you'll see a column name called `sub_id`. Rename this to something more sensible (`job_id`), given that the observations aren't subjects, but rather occupations. 
+```{r}
+d <- d |> 
+  
+```
+
+
+### Univariate Statistics
+
+Let's start with some basic data exploration. This should be the first step in any analysis.
+```{r}
+
+```
+
+**Do the means look appropriate?**    
+
+> Your answer here.
+
+**Do the SDs make sense?**    
+
+> Your answer here.
+
+**Is this the range we would expect for these variables?**     
+ 
+> Your answer here.
+
+We can create a scatterplot with `education` on the y-axis and `job_id` on the x-axis. We see that one case is far away from all others.
+```{r}
+
+```
+
+**Identify which case has this anomalous value (-10.7)**
+```{r}
+
+```
+
+**What do you think we should do with this case?**    
+There may not be a single correct option. We could:
+
+> Your answer here.
+
+Let's first check the code book to confirm that -10.7 is not a valid value for `education`. 
+```{r}
+#| eval: false
+
+```
+
+This tells us that `education` represents average years of education. Therefore, the minimum possible value cannot be below 0.   
+
+**Change this value to `NA`**   
+```{r}
+
+```
+
+**Get descriptives again for just `education`**
+```{r}
+
+```
+
+### More Quick-and-Dirty Plots
+
+Let's say that we're interested in predicting income from years of education and percent women in that occupation, with education as our focal predictor.    
+
+Let's plot education, income, and percent women, the variables we'll be working with, one at a time with each of the variables on the y-axis and `job_id` on the x-axis.
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+**Should we remove the "outliers" here?**   
+
+> Your answer here.
+
+
+`CHECKPOINT`
+
+**Practice creating a few exploratory histogram and density plots from the lecture.**
+
+First, we're going to create another function together. You can add this to your collection of functions (base R script) so that you can source it in for future assignments (or in your own work!).
+```{r}
+plot_density <- function(data, var_name) {
+  data |> 
+  ggplot(aes(x = !!sym(var_name))) +
+  geom_histogram(aes(y = after_stat(density)),
+                 color = "black", fill = "light grey", bins = 10) +
+  geom_density() +
+  geom_rug(color = "red")
+}
+```
+
+Let's unpack a few of the things we are doing in this plotting function that you might not have seen before.
+
+`!!sym(var_name)` takes in the string we are passing in as our column name and converts it to a symbol. A symbol is something that points to or represents other data. Specifically, R object names when you call the objects are good examples of symbols. An when tidyverse functions deal with dataframes, columns are treated as R objects. In this case, the "other data" is the column represented by `var_name`. The `!!` operator removes the quotes from the string we are passing in, then `sym()` evaluates the string as a column. `sym()` tells R that the string we are passing in to this function is not just any string, but actually *symbolizes* something in our dataset.
+
+`after_stat()` specifies how we want our data to be scaled. In this case, we are saying that we want the data to be scaled to the density plot that we will be overlaying on the histogram, and not the histogram. Remember that a histogram shows us count data (frequency of data), whereas a density plot shows us probability densities (proportion of data). Specifying this scale forces our histogram bars to also display the proportion (instead of the frequency) of data. It's a neat little trick so we can overlay these two types of plots!
+
+`geom_rug()` is another geom that helps us visualize the distribution of our data. Each vertical line represents one observation.
+
+Let's try out this new function across our income, education, and percentage of women variables.
+```{r}
+
+```
+
+
+**Which of these variables seems like it might have some outliers? How do you know? Create a box plot for income to look at our potential outliers a bit more closely.**
+```{r}
+
+```
+
+These black dots are considered outliers because they are above the "maximum" value in our data *excluding* potential outliers. This is determined by adding the 75th percentile of our inter-quartile range (IQR) to 1.5*IQR. It's not important that you memorize all of these details, but just know that the black dots are values identified as being above the vast majority of all points. You can check out this nifty "anatomy of a boxplot" here: https://www.data-to-viz.com/caveat/boxplot.html.
+
+
+### Multi-Variate Statistics
+
+Let's determine how our variables `education`, `income`, and `women` are correlated.
+```{r}
+
+```
+
+Next, let's plot the relationship between our two predictor variables (`education` and `women`) and our outcome variable (`income`). We are going to label the points with `job_id` as we look for highly influential points.    
+
+These graphs shows us that we have some high leverage points and regression outliers.
+
+First, let's plot the relationship between education and income. Let's filter out the missing value we introduced, and also add in a line displaying the mean to this plot for our own reference when trying to determine if any points have leverage!
+```{r}
+
+```
+
+`geom_text()` is the geom here that is labeling each individual observation with its corresponding job_id!
+
+**Which appear to be both high leverage and regression outliers?**    
+
+> Your answer here.
+
+**Which occupations appear to be high leverage but not regression outliers?**    
+
+> Your answer here.
+
+**Which appear to be regression outliers but not high leverage?**     
+
+> Your answer here.
+
+
+Now, let's look at the relationship between percentage of women and income.
+```{r}
+
+```
+
+**Which appear to be both high leverage and regression outliers?**    
+
+> Your answer here.
+
+**Which occupations appear to be high leverage but not regression outliers?**    
+
+> Your answer here.
+
+**Which appear to be regression outliers but not high leverage?**     
+
+> Your answer here.
+
+**Get the occupation types for `job_id` 2, 17, 24, 26**   
+```{r}
+
+```
+
+
+It's always important to visually inspect your data, but before taking action we must look at some diagnostic functions. We will do this next.   
+
+
+### Diagnostic Functions
+
+Remember, we're interested in predicting `income` from `education` and `women`. Let's fit our model:
+```{r}
+
+```
+
+**What did we find?**   
+
+> Your answer here.
+
+Next, let's read in the `case_analysis` package introduced in lecture. Go ahead and source this package from John's github.
+```{r}
+devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/case_analysis.R?raw=true")
+```
+
+#### Leverage
+
+Leverage is indicated by hat values.   
+
+**What is the hat value an index of?**    
+It's how far a given value on a predictor variable is from the centroid of the predictor variables.   
+
+
+**Create a histogram of Hat values for our model using `plot_leverage()`.**    
+```{r}
+
+```
+
+The yellow line also marks a potential cutoff for high leverage points (`r 2*mean(hatvalues(m_1))`). We can easily identify which rows are above this cutoff using the following code. However, a good rule of thumb in identifying high leverage point is to look for observations on the graph that are separated by a gap in the histogram buckets. 
+```{r}
+cutoff <- 
+
+```
+
+
+**What occupation does this row correspond to?**   
+
+> Your answer here.
+
+```{r}
+
+```
+
+**Why might this job have high leverage?**    
+They may have low education and a high percentage of women.    
+
+**So, are we ready to remove this occupation from our data?**    
+
+> Your answer here.
+
+
+#### Regression Outliers
+
+Regression outliers have large residuals. A regression outlier is an observation that is not adequately fit by the regression model (i.e., falls very far from the prediction line)  
+
+**What is the residual an index of?**   
+It indicates how much a given observation deviates from the model's prediction.   
+
+NOTE: There are multiple quantitative indicators to identify regression outliers including raw residuals (e.g., studentized residuals). We will use studentized residuals in this case.
+
+**Create a histogram of residuals for our model using `plot_residuals()`.**    
+```{r}
+
+```
+
+**Visually looking at this plot. What points do you think are regression outliers?**    
+> Your answer here.  
+
+**What type of occupations do these points correspond to?**    
+
+> Your answer here.
+
+```{r}
+
+```
+
+We can also get regression outliers using the following code.   
+```{r}
+
+```
+
+**What does it mean for these studentized residuals to be large? How could they affect our model estimates?**  
+It means the observation differs significantly from the predictions made by our model. Regression outliers can (but don't always) change our parameter estimates, but they nearly always inflate the standard error of our parameter estimates.    
+
+The next step is to look the other variables for these regression outliers. Both occupations appear to have very high incomes as compared to the rest of the occupations. 
+```{r}
+
+```
+ 
+
+**Should we remove these observations from our data?**     
+
+> Your answer here.
+
+
+#### Influence: Cook's D
+
+An observation is “influential if it substantially alters the fitted regression model (i.e., the coefficients and/or intercept). Two commonly used assessment methods include Cook's D and df betas.
+
+**What two characteristics does Cook's D take into account?**    
+Leverage and studentized residuals. Observations with a large Cook's D are often extreme on both of these.    
+
+**Is it necessary for an influential point to have high leverage and a large studentized residual?**   
+Not necessarily, but it will have to be high on at least one of these dimensions. Remember, Cook's D is basically indicating how much our parameter estimates would change if we removed a given observation.
+
+**Create a histogram of Cook's D values for our model using `plot_cooks()`.**    
+```{r}
+
+```
+
+
+**Which points visually appear to have problematic Cook's D values?**    
+What's most important is whether or not points are part of our distribution of Cook's distance. There is a gap in the histogram buckets after about 0.1.   
+
+**Pull out these observations**    
+```{r}
+
+```
+
+Again, we are seeing general managers and physicians coming up as potentially problematic observations.     
+
+
+
+**But what are we missing here?**    
+
+> Your answer here.
+
+
+#### Influence: df betas
+
+DF Betas calculate influence on a given parameter. It helps us sort out which points affect which parameters.    
+
+**Use `plot_dfbetas()` to create a histogram of df beta values for the intercept (`(Intercept)`).**
+```{r}
+
+```
+
+**What do you notice?**   
+We have one point that is disconnected from the rest of the distribution.
+```{r}
+
+```
+
+> Your answer here. 
+
+
+**Use `plot_dfbeta()` to create a histogram of df beta values for our focal predictor (`education`).**
+
+```{r}
+
+```
+
+```{r}
+
+```
+ 
+
+Next, let's look at our covariate (`women`).
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
+
+### So Now What?
+
+Through our analyses, we found physicians and general managers are ill-fit by our model, have extreme values on the outcome variable (income), and have a large influence on our parameter estimates. Furthermore, including them inflates the standard error of our parameter estimates. We also identified one case that has high leverage (sewing operators) but is well-fit by our model.
+
+
+### Key Questions
+
+**1. Can we explain this result from some kind of error in coding? Can we correct the error(s)?**    
+
+> Your answer here.
+
+**2. What is the impact of removing the cases?**    
+```{r}
+
+```
+
+> Your answer here.
+
+**3. What changes? Conclusions? Precision?**     
+
+> Your answer here.  
+ 
+----
+
+Here are a couple questions you might ask before you start checking for outliers: 
+
+- What would we consider too extreme of an observation on a predictor variable? 
+You should try to answer this question in terms of practical raw values as opposed to hat values (e.g., if someone reports they are over 150 years old on an online survey, they should be removed from our data). 
+
+- Can we identify some other variable that might contribute to outliers? 
+One example is recording a subject's time spent completing a questionnaire and setting cutoff points for what 'acceptable' times are based on pilot-testing (e.g., throwing out anyone who completes the survey in under 2 mins). 
+
+- What is the process we'll use to identify outliers, and what will we do with them when we find them? 
+It's very difficult to accuse you of p-hacking if you can point to your pre-registration and show that all of the actions you took to deal with outliers are wholly consistent with what you said you were going to do. 
+
+Once you have collected your data and identified outliers, there are a few more questions you might ask about these observations that can help give justification to your decision to exclude them: 
+
+- Was there human error in entering this value? 
+In certain cases, you can go back to the source and see whether this observation is simply due to data entry error. We love situations like this (because they're pretty easy to fix)!!! 
+
+- Was anything about that participant's experimental session weird? 
+Maybe the power went out, they got a phone call, or they fell asleep. If this is a relevant concern, someone should keep a notebook where they jot down observations of strange occurrences when running a given participant. 
+
+- Does it make sense that their value is extreme? 
+If we ran the Prestige study in America in 2023, we would have an even more skewed income graph: people in top positions are paid astronomically more than working-class people. We might be able to tell a compelling story about why these extreme observations have so much influence, and our (theory-based) argument could give us reason to exclude them.  
+
+- Based on the claims we're trying to make with our research, can we exclude these observations? 
+Removing extreme observations can, in certain cases, affect the external validity of our research. For example, if we exclude top earners when we analyze the Prestige data, we can't claim that our conclusions apply to those professions. However, we will have more precise parameter estimates for the large majority of occupations we've included in our sample. We have to note these shortcomings by being precise with our conclusions. 
+
+
