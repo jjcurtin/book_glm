@@ -1,5 +1,5 @@
 ---
-title: "Lab 8 TA Script" 
+title: "Lab 8 Student Shell" 
 author: "TAs" 
 date: "`r lubridate::today()`"
 format: 
