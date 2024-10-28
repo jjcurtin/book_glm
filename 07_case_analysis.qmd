@@ -613,6 +613,7 @@ An observation is *influential* if it substantially alters the fitted regression
 - Cooks distance
 - dfBetas
 
+
 ```{r}
 #| echo: false
 #| warning: false

@@ -2520,13 +2520,6 @@ ggplot() +
 
 --------------------------------------------------------------------------------
 
-:::{.callout-important}
-# Question
-What do you report and why?
-:::
-
---------------------------------------------------------------------------------
-
 Lets mean-center TA and fit a final full model
 ```{r}
 #| code-fold: true
@@ -2540,6 +2533,13 @@ m_3_c |> tidy()
 What would have changed from previous model with uncentered TA?
 
 --------------------------------------------------------------------------------
+:::{.callout-important}
+# Question
+What do you report and why?
+:::
+
+--------------------------------------------------------------------------------
+
 
 $\eta_p^2$ effect size for BAC
 ```{r}
@@ -2630,7 +2630,7 @@ What other table should you consider in your results?
 :::
 
 :::{.fragment}
-[Table of simple correlations between variables. Can summarize with other important info fairly concisely. Could also include reliability, skewness, kurtosis, etc.}{style="color:blue;"}
+[Table of simple correlations between variables. Can summarize with other important info fairly concisely. Could also include reliability, skewness, kurtosis, etc.]{style="color:blue;"}
 
 ```{r}
 #| code-fold: true
@@ -2643,6 +2643,8 @@ tibble(` ` = c("Trait Anxiety", "Blood Alcohol Concentration", "Mean", "SD"),
   knitr::kable(digits = 2, align = c("l", "c", "c", "c"))
 ```
 :::
+
+--------------------------------------------------------------------------------
 
 ## Adding a Third Predictor
 
