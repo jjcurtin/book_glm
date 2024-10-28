@@ -8,12 +8,11 @@ editor_options:
 # Unit 8: Dealing with Messy Data II - Model Assumptions
 
 ```{r}
-#| echo: false
+#| include: false 
 
 options(scipen = 999) # turns off scientfic notation
 options(knitr.kable.NA = '')
 ```
-
 
 ## Goals of Unit
 
@@ -30,34 +29,39 @@ options(knitr.kable.NA = '')
 
 - Examination of assumptions will further inform you about your data.
 
------
+--------------------------------------------------------------------------------
 
 ## Assessment of Assumptions for Sig. Tests
 
-All GLM procedures commonly make the **5 assumptions below**. When these assumptions are met, OLS regression coefficients are MVUE (Minimum Variance Unbiased Estimators) and BLUE (Best Linear Unbiased Estimators). With the exception of $\#1$, these assumptions are expressed (and assessed) with respect to the residuals around the prediction line.
+All GLM procedures commonly make the **5 assumptions below**. 
+
+When these assumptions are met, OLS regression coefficients are MVUE (Minimum Variance Unbiased Estimators) and BLUE (Best Linear Unbiased Estimators). 
+
+With the exception of $\#1$, these assumptions are expressed (and assessed) with respect to the residuals around the prediction line.
 
 1. **Exact X:** The IVs are assumed to be known exactly (i.e., without measurement error).
 2. **Independence:**  Residuals are independently distributed (prob. of obtaining a specific observation does not depend on other observations).
 3. **Normality:**  All residual distributions are normally distributed.
-4. **Constant variance:**  All residual distributions have a constant variance, $\text{SEE}^2$.
-5. **Linearity:**  All residual distributions (i.e., for each $Y'$) are assumed to have means equal to zero.
+4. **Constant variance:**  All residual distributions have a constant variance.
+5. **Linearity:**  All residual distributions (i.e., for each $\hat{Y}$) are assumed to have means equal to zero.
 
------
+-------------------------------------------------------------------------------
 
 ## Exact X
 
 ```{r}
-#| echo: false
-#| message: false
+#| include: false
 
 library(tidyverse)
+library(broom)
 library(patchwork)
+library(skimr)
 
 theme_set(theme_classic()) 
 ```
 
 ```{r}
-#| echo: false
+#| include: false
 
 plot_exact <- tibble(x = seq(0,100),
                      y = seq(0, 100)) |> 
@@ -100,13 +104,11 @@ Violations of the Exact X assumption lead to biased (i.e., inaccurate) estimates
 
 Violations are caused by problems with reliability of measurement of your predictors.
 
-
 ::: {.callout-important}
 # Question
 
 In simple, bivariate regression, how will reducing reliability affect the regression model?
 :::
-
 
 :::{.fragment}
 [It will reduce $b_1$. We will underestimate the strength of relationship between $X$ and $Y$.]{style="color:blue;"}    
@@ -114,14 +116,13 @@ In simple, bivariate regression, how will reducing reliability affect the regres
 [In multiple predictor models, the bias can be either positive or negative based on the nature of the correlations among the predictors. **Use reliable variables!**.]{style="color:blue;"}
 
 ```{r}
-#| echo: false
-#| warning: false
+#| include: false
 
 plot_exact + plot_y_noise + plot_x_noise
 ```
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question
@@ -129,14 +130,13 @@ plot_exact + plot_y_noise + plot_x_noise
 What are the implications of unreliable $X$ for the use of covariates to *control* variables?
 :::
 
-
 :::{.fragment}
 [Covariates only *control* from the construct they measure to the degree that they are reliable (and valid) measures of that construct.]{style="color:blue;"}   
 
 [Analysis that rely on unreliable covariates are not controlling the variance for the construct well.]{style="color:blue;"}   
 :::
 
------
+--------------------------------------------------------------------------------
 
 ## Independence
 
@@ -146,9 +146,9 @@ Violations of residuals independence is a function of the research design caused
 
 Often difficult to detect in data but clear from research design.
 
-Can be fixed by a variety of approaches including repeated measures analyses (**later this semester**) or multi-level, mixed effects, and/or hierarchical linear models (**next semester**).
+Can be fixed by a variety of approaches including repeated measures analyses or multi-level, mixed effects, and/or hierarchical linear models (**next semester**).
 
------
+--------------------------------------------------------------------------------
 
 ## Assessment of Residuals: General Issues
 
@@ -161,67 +161,65 @@ Statistical tests of assumptions exist but should be used cautiously.
 Assessment of assumptions about residuals is an inexact science: Conclusions are tentative.
 
 The process of examining residuals will increase your understanding of your data.
+
 	- May suggest transformations of your data.
 	- May suggest alternative analytic strategies.
 	- Will increase your confidence in your conclusions.
 
------
+--------------------------------------------------------------------------------
 
-## Residuals by $\hat{Y}$: Normal M = 0, S = Constant
+## Residuals by Predicted Y: Normal M = 0, S = Constant
 
 ```{r}
 #| code-fold: true 
 
-norm_tbl <- tibble(`Y'` = rep(1:25, 1000),
-                   `E'` = rnorm(25000, mean = 0, sd = 1))
+norm_tbl <- tibble(y_hat = rep(1:25, 1000),
+                   e = rnorm(25000, mean = 0, sd = 1))
 
-norm_tbl |> 
-  ggplot(aes(x = `Y'`,
-             y = `E'`)) +
-  geom_jitter(alpha = .4, width = .75, height = 0, size = .5) +
-  geom_hline(yintercept = 0, color = "blue", linewidth = 1) +
-  geom_vline(xintercept = 10, color = "red", linewidth = 1) +
-  geom_vline(xintercept = 15, color = "red", linewidth = 1) +
-  geom_vline(xintercept = 20, color = "red", linewidth = 1) +
-  scale_x_continuous(breaks = c(0, 5, 10, 15, 20, 25))
+norm_tbl |>
+  ggplot(aes(x = y_hat,
+             y = e)) +
+    geom_jitter(alpha = .4, width = .75, height = 0, size = .5) +
+    geom_hline(yintercept = 0, color = "blue", linewidth = 1) +
+    geom_vline(xintercept = 10, color = "red", linewidth = 1) +
+    geom_vline(xintercept = 15, color = "red", linewidth = 1) +
+    geom_vline(xintercept = 20, color = "red", linewidth = 1) +
+    scale_x_continuous(breaks = c(0, 5, 10, 15, 20, 25))
 ```
 
------
+--------------------------------------------------------------------------------
 
 ```{r}
 #| code-fold: true
 
 hist_10 <- norm_tbl |> 
-  filter(`Y'` == 10) |> 
-  ggplot(aes(x = `E'`)) +
+  filter(y_hat == 10) |> 
+  ggplot(aes(x = e)) +
   geom_histogram(aes(y = after_stat(density)), color = "black", 
                  fill = "light grey", bins = 10) +
   geom_density() +
-  labs(title = "Y' = 10")
-
+  labs(title = "y_hat = 10")
 
 hist_15 <- norm_tbl |> 
-  filter(`Y'` == 15) |> 
-  ggplot(aes(x = `E'`)) +
+  filter(y_hat == 15) |> 
+  ggplot(aes(x = e)) +
   geom_histogram(aes(y = after_stat(density)), color = "black", 
                  fill = "light grey", bins = 10) +
   geom_density() +
-  labs(title = "Y' = 15")
-
+  labs(title = "y_hat = 15")
 
 hist_20 <- norm_tbl |> 
-  filter(`Y'` == 20) |> 
-  ggplot(aes(x = `E'`)) +
+  filter(y_hat == 20) |> 
+  ggplot(aes(x = e)) +
   geom_histogram(aes(y = after_stat(density)), color = "black", 
                  fill = "light grey", bins = 10) +
   geom_density() +
-  labs(title = "Y' = 20")
+  labs(title = "y_hat = 20")
 
 hist_10 + hist_15 + hist_20
 ```
 
-
------
+--------------------------------------------------------------------------------
 
 ## Normally Distributed Errors
 
@@ -237,22 +235,10 @@ Multimodal error distributions suggest the **omission of one or more categorical
 
 Transformations may correct shape of residuals (*Unit 9*).
 
-
------
-
-## Normality: Quantile Comparison & Density Plots
+--------------------------------------------------------------------------------
 
 ```{r}
 #| code-fold: true
-#| message: false
-#| warning: false
-
-options(conflicts.policy = "depends.ok") 
-library(tidyverse)
-library(patchwork)
-library(skimr)
-
-theme_set(theme_classic()) 
 
 path_data <- "data_lecture"
 
@@ -261,10 +247,7 @@ data <- read_csv(here::here(path_data, "07_three_predictors_fps.csv"),
    mutate(sex_c = if_else(sex == "female", -.5, .5))
 ```
 
-
------
-
-Lets refit our last model from the previous section.
+Lets refit our last model from the previous unit
 ```{r}
 data_rm_outliers <- data |> 
   filter(!subid %in% c("0125", "2112"))
@@ -272,84 +255,91 @@ data_rm_outliers <- data |>
 m_2 <- lm(fps ~ bac + ta + sex_c, data = data_rm_outliers) 
 ```
 
+--------------------------------------------------------------------------------
 
-We can use `qqplot()` from the `car` package to assess normality of residuals.
+### Density plot of residuals
+
+We can use a density plot to plot the model's residuals against a normal distribution.   
 ```{r}
-car::qqPlot(m_2, id = FALSE, simulate = TRUE,
-            main = "Quantile-Comparison Plot to Assess Normality", 
-            ylab = "Studentized Residuals")
-```
+#| fig-width: 6 
+#| fig-height: 4
 
-
------
-
-We can also use a density plot to plot the model's residuals against a normal distribution.   
-```{r}
 ggplot() +
   geom_density(aes(x = value), data = enframe(rstudent(m_2), name = NULL)) +
   labs(title = "Density Plot to Assess Normality of Residuals",
        x = "Studentized Residual") +
-  geom_line(aes(x = x, y = y), data = tibble(x = seq(-4, 4, length.out = 100),
-                                      y = dnorm(seq(-4, 4, length.out = 100), 
-                                      mean=0, sd=sd(rstudent(m_2)))), 
+  geom_line(aes(x = x, y = y), 
+            data = tibble(x = seq(-4, 4, length.out = 100),
+                          y = dnorm(seq(-4, 4, length.out = 100), 
+                                    mean = 0, sd = sd(rstudent(m_2)))), 
             linetype = "dashed", color = "blue")
 ```
 
+--------------------------------------------------------------------------------
 
-**Descriptive Statistics for Studentized Residuals**
+### Quantile-Quantile Plot
+Better still We can use `qqplot()` from the `car` package to assess normality of residuals.
 ```{r}
-#| code-fold: true
-
-rstudent(m_2) |> 
-  skim() |> 
-  focus(n_missing, numeric.mean, numeric.sd, min = numeric.p0, max = numeric.p100) |> 
-  yank("numeric")
+car::qqPlot(m_2, id = FALSE, simulate = TRUE,
+            main = "QQ Plot to Assess Normality", 
+            ylab = "Studentized Residuals")
 ```
 
------
+--------------------------------------------------------------------------------
 
-## Normality: q-q Plot Examples
-
+Here are three examples of qq plots for normal distributions of small samples (N = 100)
 ```{r}
-#| echo: false
+#| code-fold: true 
 
 set.seed(102030)
-n1 <- tibble(x = rnorm(100*1, mean=0, sd=1))
-
-car::qqPlot(n1$x, id = FALSE, 
-       main = "Quantile-Comparison Plot for Random Normal (N = 100)", 
+tibble(x = rnorm(100, mean=0, sd=1)) |> 
+  pull(x) |>
+  car::qqPlot(id = FALSE, 
+              main = "QQ Plot for Random Normal (N = 100)", 
        ylab = "n1") 
 
-n2 <- tibble(x = rnorm(100*1, mean=0, sd=1))
+tibble(x = rnorm(100, mean=0, sd=1)) |> 
+  pull(x) |>
+  car::qqPlot(id = FALSE, 
+              main = "QQ Plot for Random Normal (N = 100)", 
+              ylab = "n2")
 
-car::qqPlot(n2$x, id = FALSE, 
-       main = "Quantile-Comparison Plot for Random Normal (N = 100)",  
-       ylab = "n2") 
-
-n3 <- tibble(x = rnorm(100*1, mean=0, sd=1))
-car::qqPlot(n3$x, id = FALSE, 
-       main = "Quantile-Comparison Plot for Random Normal (N = 100)", 
-       ylab = "n3") 
+tibble(x = rnorm(100, mean=0, sd=1)) |> 
+  pull(x) |>
+  car::qqPlot(id = FALSE, 
+              main = "QQ Plot for Random Normal (N = 100)", 
+              ylab = "n3")
 ```
 
------
+--------------------------------------------------------------------------------
+
+And here for the chi-squared (positive skewed)
+```{r}
+#| echo: false
+
+tibble(x = rchisq(100, 3)) |> 
+  pull(x) |> 
+  car::qqPlot(id = FALSE, 
+              main = "QQ Plot + Skew (Chi-sq w/DF = 3; N = 100)",
+              ylab = "chi") 
+```
+
+
+--------------------------------------------------------------------------------
+
+And the t-distributions (which is heavy tailed)
 
 ```{r}
 #| echo: false
 
-c1 <- tibble(x = rchisq(100, 3))
-car::qqPlot(c1$x, id = FALSE, 
-       main = "Quantile-Comparison Plot + Skew (Chi-sq w/DF = 3; N = 100)",
-       ylab = "c1") 
-
-t1 <- tibble(x = rt(100, 3))
-car::qqPlot(t1$x, id = FALSE, main = "Quantile-Comparison Plot for Heavy Tailed (t w/DF = 3; N = 100)",
-       ylab = "t1") 
+tibble(x = rt(100, 3)) |>
+  pull(x) |>
+  car::qqPlot(id = FALSE, 
+              main = "QQ Plot for Heavy Tailed (t w/DF = 3; N = 100)",
+              ylab = "t") 
 ```
 
-
-
------
+--------------------------------------------------------------------------------
 
 ## Constant Variance
 
@@ -365,128 +355,147 @@ Rough rule is that estimation is seriously degraded if the ratio of largest to s
 
 3.  Corrections also exist for SEs when errors are heteroscedastic (more on this in a moment).
 
------
+--------------------------------------------------------------------------------
 
-## Constant Variance: Residual and Spread-Level Plots
+### Residual by Predicted Values
 
-
+Can look at plot of studentized residuals vs. predicted values
 ```{r}
-#| echo: false
+#| code-fold: true
 
-tibble(x = fitted.values(m_2),
+tibble(x = predict(m_2),
        y = rstudent(m_2)) |> 
   ggplot(aes(x = x, y = y)) +
   geom_point(alpha = .6) +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "blue", linewidth = 1) +
-  labs(title = "Studentized Residuals vs. Fitted Values",
-       x = "Fitted Values",
+  geom_hline(yintercept = 0, linetype = "dashed", 
+             color = "blue", linewidth = 1) +
+  labs(title = "Studentized Residuals vs.  Predicted Values",
+       x = "Predicted Values",
        y = "Studentized Residuals")
 ```
 
------
+--------------------------------------------------------------------------------
 
+### Spread Level Plot
 
-A spread level plot is a plot of the log(abs(studentized residuals) vs. log(fitted values). $1-b$ (from the regression line below) is the suggested power transformation for $Y$ to stabilize variance.  
+A spread level plot is a plot of the log(abs(studentized residuals) vs. log(predicted values). 
 
-<!--Warning being returned due to 2 negative fitted values - can't get log. Not sure how you prefer to handle this so suppressed warning for now.-->
+Predicted values must all be positive to take log.  Can use `start` to handle negative predicted values.
 ```{r}
-#| warning: false
+min(predict(m_2))
 
-tibble(x = log(fitted.values(m_2)),
+start <- 7
+```
+
+```{r}
+#| code-fold: true
+
+tibble(x = log(predict(m_2) + start), # shift to positive values
        y = log(abs(rstudent(m_2)))) |> 
   ggplot(aes(x = x, y = y)) +
   geom_point(alpha = .6) +
   geom_smooth(formula = y ~ x, method = "lm", se = FALSE, 
               color = "blue", linetype = "dashed") +
   labs(title = "Spread-Level Plot for m_2",
-       x = "Fitted Values",
-       y = "Absolute Studentized Residuals") +
+       x = "Predicted Values",
+       y = "|Studentized Residuals|") +
   scale_x_continuous(trans = "exp", 
                      breaks = scales::trans_breaks("exp", function(x) log(x)),
-                     labels = scales::trans_format("exp", scales::math_format(.x))) +
+                     labels = scales::trans_format("exp", 
+                                                   format = scales::math_format(.x))) +
   scale_y_continuous(trans = "exp", 
                      breaks = scales::trans_breaks("exp", function(y) log(y)),
                      labels = scales::trans_format("exp", scales::math_format(.x)))
 ```
 
+--------------------------------------------------------------------------------
 
+$1-b$ (from the regression line) is the suggested power transformation for $Y$ to stabilize variance.  
 ```{r}
-#| warning: false
-
-1 - lm(log(abs(rstudent(m_2))) ~ log(fitted.values(m_2)))$coefficients[2]
+1 - (lm(log(abs(rstudent(m_2))) ~ log(predict(m_2) + start))$coefficients[2])
 ```
 
+::: {.callout-tip}
+see also: `car::spreadLevelPlot()`
+:::
 
-Alternative way to get plot using `car` package.
-```{r}
-#| warning: false
+--------------------------------------------------------------------------------
 
-car::spreadLevelPlot(m_2)
-```
+### Statistical Test
 
+Two groups independently developed test for constant variance:
 
------
+- Breusch,T. S. and Pagan,A. R. (1979) A simple test for heteroscedasticity and random coefficient variation. *Econometrica*, 47,  1287-1294. 
+- Cook & Weisberg (1983)^[Cook,R. D. and Weisberg,S. (1983) Diagnostics for heteroscedasticity in regression. *Biometrika*, 70, 1-10. 
 
-## Constant Variance: Statistical Test
+Available as `ncvTest()` in `car` package. 
 
-Breusch & Pagan (1979)^[Breusch,T. S. and Pagan,A. R. (1979) A simple test for heteroscedasticity and random coefficient variation. *Econometrica*, 47,  1287-1294.] and Cook & Weisberg (1983)^[Cook,R. D. and Weisberg,S. (1983) Diagnostics for heteroscedasticity in regression. *Biometrika*, 70, 1-10.] independently developed test for constant variance.
+Do not use it blindly. 
 
-`ncvTest()` in `car` package. 
-
-Do not use it blindly. All statistical tests are designed to be sensitive to specific types of violations. May miss other types of violations.May also provide false positive due to other aspects of the distribution.
+- All statistical tests are designed to be sensitive to specific types of violations. 
+- May miss other types of violations.
+- May also provide false positive due to other aspects of the distribution.
 
 ```{r}
 car::ncvTest(m_2)
 ```
 
------
+--------------------------------------------------------------------------------
 
-## Constant Variance: Correcting SEs
+### Correcting SEs
 
-Standard errors are inaccurate when variance of residuals is not constant. A procedure to provide White (1980)^[Long,J.S. and Ervin,L.H. (2000) Using heteroscedasity consistent standard errors in the linear regression model. *The American Statistician* 54, 217–224.;cWhite,H. (1980) A heterskedastic consistent covariance matrix estimator and a direct test of heteroskedasticity.
-*Econometrica* 48, 817–838.] corrected SEs is described in Fox (2008), chapter 12, pp 275-276. 
+Standard errors are inaccurate when variance of residuals is not constant. 
 
+A procedure to provide White (1980) corrected SEs is described in Fox (2008), chapter 12, pp 275-276. 
+
+See: 
+
+- White,H. (1980) A heterskedastic consistent covariance matrix estimator and a direct test of heteroskedasticity. *Econometrica* 48, 817–838.
+- Long,J.S. and Ervin,L.H. (2000) Using heteroscedasity consistent standard errors in the linear regression model. *The American Statistician* 54, 217–224.
 
 Uncorrected Tests of Coefficients
 ```{r}
-broom::tidy(m_2)
+tidy(m_2)
 ```
+
+--------------------------------------------------------------------------------
 
 White (1980) Heteroscedasticity-corrected SEs and Tests
 
 ```{r}
+# Heteroscedasticity-Corrected Covariance Matrices (hccm)
 corrected_ses <- sqrt(diag(car::hccm(m_2)))
 
-broom::tidy(m_2) |> 
+tidy(m_2) |> 
   select(term, estimate) |> 
   add_column(std.error = corrected_ses) |> 
   mutate(statistic = estimate/std.error,
-         p.value = 2*(pt(abs(statistic), df=m_2$df.residual, lower.tail=FALSE)))
+         p.value = 2 * (pt(abs(statistic), 
+                         df = m_2$df.residual, 
+                         lower.tail=FALSE)))
 ```
 
-
------
+--------------------------------------------------------------------------------
 
 ## Linearity: Component + Residuals Plots
 
 If Linearity assumption is not met, coefficients are biased.  
 
-Plot partial residual ($e_{i(j)} = e_i + b_jX_{ij}$) by each predictor.  
+- Plot partial residual ($e_{i(j)} = e_i + b_jX_{ij}$) by each predictor.  
 
-Can include factors but can not include interactions with factors. Code regressors manually. 
+- Can include factors but can not include interactions with factors. Code regressors manually. 
 
 ```{r}
 car::crPlots(m_2, ask = FALSE)
 ```
 
-
-
------
-
+--------------------------------------------------------------------------------
 
 ## Global Test of Model Assumptions
 
-Pena and Slate (2006) validated a global test of linear model assumptions.^[Pena,E.A. and Slate,E.H. (2006). Global validation of linear model assumptions, *Journal of the American Statistical Association*, 101, 341-354.]
+Pena and Slate (2006) validated a global test of linear model assumptions.
+
+- Pena,E.A. and Slate,E.H. (2006). Global validation of linear model assumptions, *Journal of the American Statistical Association*, 101, 341-354.
 
 Provided by `gvlma()` using `gvlma` package
 
@@ -494,20 +503,18 @@ Provided by `gvlma()` using `gvlma` package
 gvlma::gvlma(m_2)
 ```
 
+--------------------------------------------------------------------------------
 
------
-
-## Transformations: The Family of Powers & Roots
+## Some Solutions
 
 - Power transformations (*next unit*) are very useful for correcting problems with normality, constant, variance, and linearity of errors.
 
-- Polynomial regression (*PSY 710*) is useful when you have quadratic, cubic, etc. effects of $X$s on $Y$.
+- Polynomial regression (*710*) is useful when you have quadratic, cubic, etc. effects of $X$s on $Y$.
 
-- Generalized linear models (e.g., Logistic regression; *PSY 710*) are also available.
+- Generalized linear models (e.g., Logistic regression; *last unit*) are also available.
 
 
-
------
+--------------------------------------------------------------------------------
 
 ## Summary of Violation Consequences and Solutions
 
@@ -535,4 +542,3 @@ gvlma::gvlma(m_2)
 
     - Inaccurate (biased) parameter estimates.
     - Use transformations, use polynomial regression, use generalized linear models.
-

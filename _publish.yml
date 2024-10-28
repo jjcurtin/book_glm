@@ -50,3 +50,7 @@
   quarto-pub:
     - id: 28d1e6c4-2ba6-43a0-84b2-a35119c6e6d9
       url: 'https://jjcurtin.quarto.pub/test_slide'
+- source: 08_model_assumptions.qmd
+  quarto-pub:
+    - id: e0f550ab-c12e-42f5-ae41-16ed9cf0c182
+      url: 'https://jjcurtin.quarto.pub/08_model_assumptions-cded'
