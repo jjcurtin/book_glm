@@ -54,3 +54,7 @@
   quarto-pub:
     - id: e0f550ab-c12e-42f5-ae41-16ed9cf0c182
       url: 'https://jjcurtin.quarto.pub/08_model_assumptions-cded'
+- source: 09_transformations.qmd
+  quarto-pub:
+    - id: c3f6c963-067d-406a-a574-22c9f8632295
+      url: 'https://jjcurtin.quarto.pub/09_transformations-e562'

@@ -8,11 +8,12 @@ editor_options:
 # Unit 9: Dealing with Messy Data III - Transformations
 
 ```{r}
-#| echo: false
+#| include: false
 
-library(tidyverse) |> 
-  suppressPackageStartupMessages()
+library(tidyverse)
+library(broom)
 library(patchwork)
+library(skimr)
 
 theme_set(theme_classic()) 
 
@@ -23,32 +24,39 @@ options(knitr.kable.NA = '')
 
 ## Transformations: The Family of Power and Roots
 
-- The GLM makes **strong assumptions** about the structure of data, assumptions which often fail to hold in practice.
+The GLM makes **strong assumptions** about the structure of data, assumptions which often fail to hold in practice.
 
 - One solution is to abandon the GLM for more complicated models (generalized linear models; weighted least squares; robust regression).
 
 - Another solution is to transform the data (either the $X$s or $Y$) so that they conform more closely to the assumptions.  
 
-- A particularly useful group of transformations is the *family* of powers and roots: 
+------------------------------------------------------------------------------
 
-    **$X$ → $X^p$**
+A particularly useful group of transformations is the *family* of powers and roots: 
 
-    - If p is negative, then the transformation is an inverse power: $X^{-1} = \frac{1}{X}$, and $X^{−2} = \frac{1}{X^2}$
-    - If p is a fraction, then the transformation represents a root: $X^{\frac{1}{2}} = \sqrt{X}$, and $X^{-\frac{1}{2}} = \frac{1}{\sqrt{X}}$
+$X$ → $X^p$
+
+If p is negative, then the transformation is an inverse power: 
+
+- $X^{-1} = \frac{1}{X}$, and $X^{−2} = \frac{1}{X^2}$
+
+If p is a fraction, then the transformation represents a root: 
+
+- $X^{\frac{1}{2}} = \sqrt{X}$, and $X^{-\frac{1}{2}} = \frac{1}{\sqrt{X}}$
     
     
------
+------------------------------------------------------------------------------
 
-- The Box-Cox family of transformations provides a comparable but more convenient form (in some cases*).
+The Box-Cox family of transformations provides a comparable but more convenient form (in some cases*).
 
-    **$X$ → $X^{(p)} \equiv \frac{X^p- 1}{p}$**  
+- $X$ → $X^{(p)} \equiv \frac{X^p- 1}{p}$
     
-- Since $X^{(p)}$ is a linear function of $X^p$, the 2 transformations have the same essential effect on the data.
+Since $X^{(p)}$ is a linear function of $X^p$, the 2 transformations have the same essential effect on the data.
 
-    - Dividing by p preserves the direction of $X$, which otherwise would be reversed when p is negative.  
-    - This function also matches level and slope of curve at $X=1$.
+- Dividing by p preserves the direction of $X$, which otherwise would be reversed when p is negative.  
+- This function also matches level and slope of curve at $X=1$.
     
------
+------------------------------------------------------------------------------
     
 ```{r}
 #| echo: false
@@ -66,71 +74,69 @@ transform |>
   geom_line(aes(x = X, y = `X'`, color = p), linewidth = 1)
 ```
 
------
+------------------------------------------------------------------------------
 
-- The power transformation $X^{(0)}$ is useless, but the very useful log transformation is a kind of *zeroth* power:
+The power transformation $X^{(0)}$ is useless, but the very useful log transformation is a kind of *zero* power:
                    
-    lim
-    $p$ → $0$   $\frac{X^p - 1}{p} = \text{log}_eX$
+lim
+$p$ → $0$   $\frac{X^p - 1}{p} = \text{log}_eX$
                    
-    where $e \approx 2.718$ is the base of the natural logarithms. Thus, we will take $X^{(0)} \equiv log(X)$.
+where $e \approx 2.718$ is the base of the natural logarithms. Thus, we will take $X^{(0)} \equiv log(X)$.
 
-- It is generally more convenient to use logs to the base 10 or base 2, which are more easily interpreted than logs to the base e.
+
+It is generally more convenient to use logs to the base 10 or base 2, which are more easily interpreted than logs to the base e.
 
 - Changing bases is equivalent to multiplying your variable by a constant. No effect on significance tests.
 
+------------------------------------------------------------------------------
+
+Descending the *ladder* of powers and roots from $p = 1$ (i.e., no transformation) towards $p = -2$ **compresses the large values of X and spreads out the small ones**.
+
+Ascending the ladder of powers from $p = 1$ towards $p = 3$ has the **opposite effect**.
 
 -----
 
-- Descending the *ladder* of powers and roots from $p = 1$ (i.e., no transformation) towards $p = -2$ **compresses the large values of X and spreads out the small ones**.
+Power transformations are sensible only when all of the values of $X$ are positive:
 
-- Ascending the ladder of powers from $p = 1$ towards $p = 3$ has the **opposite effect**.
+- Some of the transformations, such as log ($p= 0$) and square root ($p= .5$), are undefined for negative or zero values of $X$.
 
------
+- Power transformations are not monotone (i.e., they change to order of scores) when there are both positive and negative values among the data.
 
-- Power transformations are sensible only when all of the values of $X$ are positive:
+- We can add a positive constant (called a *start*) to each data value to make all of the values positive: 
 
-    - Some of the transformations, such as log ($p= 0$) and square root ($p= .5$), are undefined for negative or zero values of $X$.
-
-    - Power transformations are not monotone (i.e., they change to order of scores) when there are both positive and negative values among the data.
-
-    - We can add a positive constant (called a *start*) to each data value to make all of the values positive: 
-
-      $X$ → $(X + s)^{(p)}$
+  - $X$ → $(X + s)^{(p)}$
     
------
+------------------------------------------------------------------------------
 
-- Power transformations are effective only when the ratio of the biggest data values to the smallest ones is sufficiently large; if this ratio is close to 1, then power transformations are nearly linear.  For example:  
+Power transformations are effective only when the ratio of the biggest data values to the smallest ones is sufficiently large; if this ratio is close to 1, then power transformations are nearly linear.  For example:  
 
-    - Power transformations will work well if range of $X = 1 – 100$.
+- Power transformations will work well if range of $X = 1 – 100$.
   
-    - Power transformations will have little effect if range of $X = 1000 – 1100$
+- Power transformations will have little effect if range of $X = 1000 – 1100$
     
-- Using a negative start can often increase the ratio of highest/lowest score.
+Using a negative start can often increase the ratio of highest/lowest score.
 
-- Using reasonable starts, if necessary, an adequate power transformation can usually be found in the range $−2 \le p \le 3$.
+Using reasonable starts, if necessary, an adequate power transformation can usually be found in the range $−2 \le p \le 3$.
 
------
+------------------------------------------------------------------------------
 
-- Power transformations of $Y$ (or sometimes $X$) can correct problems with normality of errors.
+Power transformations of $Y$ (or sometimes $X$) can correct problems with normality of errors.
 
-- Power transformations of $Y$ (or sometimes $X$) can stabilize the variance of the errors.
+Power transformations of $Y$ (or sometimes $X$) can stabilize the variance of the errors.
 
-- Power transformations of $X$ (or sometimes $Y$) can make many nonlinear relationships more nearly linear.
+Power transformations of $X$ (or sometimes $Y$) can make many nonlinear relationships more nearly linear.
 
-- You can experiment with Box-Cox transformations of $X$ or $Y$ in R using `bcPower()` in the `car` package.
+You can experiment with Box-Cox transformations of $X$ or $Y$ in R using `bcPower()` in the `car` package.
 
-- In many fields, $X^p$ rather than $X^{(p)}$ may be preferred. Particularly, if $p \ge 0$. This is simply done algebraically.
+In many fields, $X^p$ rather than $X^{(p)}$ may be preferred. Particularly, if $p \ge 0$. This is simply done algebraically.
 
------
+------------------------------------------------------------------------------
 
 ## Transformations: Dealing with Skew
 
-- Transforming $Y$ *down the ladder* can correct positive skew in the errors (most common problem).  
+Transforming $Y$ *down the ladder* can correct positive skew in the errors (most common problem).  
 
-- Transforming $Y$ *up the ladder* corrects negative skew in the errors.
-
------
+Transforming $Y$ *up the ladder* corrects negative skew in the errors.
 
 ```{r}
 #| code-fold: true
@@ -177,41 +183,36 @@ plot_0 <- y |>
 (plot_raw + plot_.5) / (plot_.25 + plot_0)
 ```
 
------
+------------------------------------------------------------------------------
 
 ## Transformations: Dealing with Heteroscedasticity
 
-- Transforming $Y$ *down the ladder* can correct problems with increasing spread of errors as $Y$ increases (most common problem).  
+Transforming $Y$ *down the ladder* can correct problems with increasing spread of errors as $Y$ increases (most common problem).  
 
-- Transforming $Y$ *up the ladder* corrects decreasing spread. 
+Transforming $Y$ *up the ladder* corrects decreasing spread. 
 
-- The problems of unequal spread and skewness commonly occur together and can be corrected together. Therefore, transforming $Y$ down the ladder can correct both issues simultaneously.
+The problems of unequal spread and skewness commonly occur together and can be corrected together. Therefore, transforming $Y$ down the ladder can correct both issues simultaneously.
 
------
+------------------------------------------------------------------------------
 
+Lets return to the FPS example from the previous units and fit the 3 predictor model
 ```{r}
-#| code-fold: true
-#| message: false
-#| warning: false
-
-options(conflicts.policy = "depends.ok") 
-library(tidyverse)
-library(skimr)
-
-
 path_data <- "data_lecture"
-
 data <- read_csv(here::here(path_data, "09_transformations_fps.csv"), 
                  show_col_types = FALSE) |> 
    mutate(sex_c = if_else(sex == "female", -.5, .5)) |> 
    # remove outliers to fit same model as last two units 
    filter(!subid %in% c("0125", "2112"))
-```
 
-```{r}
 m <- lm(fps ~ bac + ta + sex_c, data = data)
+summary(m)
 ```
 
+------------------------------------------------------------------------------
+
+Let review model assumptions 
+
+- Here is a QQ plot and a density plot of residuals
 ```{r}
 #| code-fold: true
 
@@ -233,43 +234,43 @@ ggplot() +
             linetype = "dashed", color = "blue")
 ```
 
-----
+------------------------------------------------------------------------------
 
+- Here is a plot of residuals by predicted values
 ```{r}
-#| code-fold: true
-
-tibble(x = fitted.values(m),
-       y = rstudent(m)) |> 
-  ggplot(aes(x = x, y = y)) +
+tibble(y_hat = predict(m),
+              res = rstudent(m)) |> 
+  ggplot(aes(x = y_hat, y = res)) +
   geom_point(alpha = .6) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "blue", linewidth = 1) +
-  labs(title = "Studentized Residuals vs. Fitted Values",
-       x = "Fitted Values",
+  labs(title = "Studentized Residuals vs. Predicted Values",
+       x = "Predicted Values",
        y = "Studentized Residuals")
 ```
 
------
+-------------------------------------------------------------------------------
+
+- And a spread level plot
 
 ```{r}
-#| echo: false
-#| warning: false
-#| code-fold: true
-
-car::spreadLevelPlot(m)
+m |> car::spreadLevelPlot()
 ```
 
+-------------------------------------------------------------------------------
+
+- And statistical test for non-constant variance
 ```{r}
-car::ncvTest(m)
+m |> car::ncvTest()
 ```
 
------
+-------------------------------------------------------------------------------
 
-
+- And global tests of model assumptions
 ```{r}
-gvlma::gvlma(m)
+m |> gvlma::gvlma()
 ```
 
------
+-------------------------------------------------------------------------------
 
 
 ## Box Cox Transformation Function
