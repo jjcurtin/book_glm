@@ -6,4 +6,7 @@
 - [Unit 3: Inferences about a Single Mean (1 Parameter Models)](https://jjcurtin.quarto.pub/03_single_mean/)
 - [Unit 4: Inferences about a Single Quantitative Predictor](https://jjcurtin.quarto.pub/04_single_quantitative/)
 - [Unit 5: Inferences about a Single Dichotomous Predictor](https://jjcurtin.quarto.pub/05_single_dichotomous/)
-- [Unit 6: Inferences about Two Predictors](https://jjcurtin.quarto.pub/06_two_predictors/)
+- [Unit 6: Inferences about two predictors](https://jjcurtin.quarto.pub/06_two_predictors/)
+- [Unit 7: Case analysis](https://jjcurtin.quarto.pub/07_case_analysis/)
+- [Unit 8: Model assumptions](https://jjcurtin.quarto.pub/08_model_assumptions/)
+- [Unit 9: Transformations](https://jjcurtin.quarto.pub/09_transformations/)

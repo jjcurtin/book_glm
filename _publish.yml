@@ -38,23 +38,11 @@
   quarto-pub:
     - id: 3fc4f1f5-aeec-4ce6-907a-125d07df0ada
       url: 'https://jjcurtin.quarto.pub/07_case_analysis'
-- source: 14_power.qmd
-  quarto-pub:
-    - id: afc40bc0-1928-419c-b5da-3cd0bcd6239b
-      url: 'https://kendra-wyant.quarto.pub/14_power-4a3d'
-- source: 15_the_generalized_linear_model.qmd
-  quarto-pub:
-    - id: eedae972-7c79-41c6-bd53-b7c55b261718
-      url: 'https://kendra-wyant.quarto.pub/15_the_generalized_linear_model-94da'
-- source: test_slide.qmd
-  quarto-pub:
-    - id: 28d1e6c4-2ba6-43a0-84b2-a35119c6e6d9
-      url: 'https://jjcurtin.quarto.pub/test_slide'
 - source: 08_model_assumptions.qmd
   quarto-pub:
-    - id: e0f550ab-c12e-42f5-ae41-16ed9cf0c182
-      url: 'https://jjcurtin.quarto.pub/08_model_assumptions-cded'
+    - id: a3a3780a-4367-4107-bbc9-35381fd5cc4d
+      url: 'https://jjcurtin.quarto.pub/08_model_assumptions'
 - source: 09_transformations.qmd
   quarto-pub:
-    - id: c3f6c963-067d-406a-a574-22c9f8632295
-      url: 'https://jjcurtin.quarto.pub/09_transformations-e562'
+    - id: 0bb84801-4ff1-44fd-9279-15f9c5ee3017
+      url: 'https://jjcurtin.quarto.pub/09_transformations'
