@@ -1,0 +1,11 @@
+SubID	Group	TimeCon	TimeTxt	Diff
+1	College	130	130	0
+2	College	135	130	-5
+3	College	140	130	-10
+4	College	135	125	-10
+5	College	135	135	0
+6	Recreation	180	170	-10
+7	Recreation	200	190	-10
+8	Recreation	240	225	-15
+9	Recreation	220	200	-20
+10	Recreation	260	240	-20
