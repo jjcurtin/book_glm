@@ -1,0 +1,359 @@
+---
+title: "Lab 9 TA Script" 
+author: "TAs" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Conceptual exercise
+
+**What are two methods to inspect the influence of individual data points on the model? How are these two methods different?**
+
+
+
+## Setup 
+
+```{r}
+#| message: false
+
+options(conflicts.policy = "depends.ok") 
+library(tidyverse)
+library(skimr)
+library(broom)
+
+# exclude some functions that conflict with tidyverse
+library(car, exclude = c("recode", "some")) theme_set(theme_classic()) 
+
+path_data <- "lab/data"
+```
+
+
+## Read in data
+
+We are going to return to the modified `prestige` dataset from previous labs. Load `lab_09_data.csv`.
+
+```{r}
+d <- read_csv(here::here(path_data, "lab_09_data.csv"),
+              show_col_types = FALSE) |>
+  glimpse()
+
+d |> 
+  skim(-c(sub_id, name))
+```
+
+
+## Data Cleaning
+
+Remember we had a value in `education` that was clearly a data entry error. So, let's remove it! Get descriptives on `education` variable after removing the error.   
+```{r}
+d <- d |> 
+
+  
+d |> 
+  skim(education) |> 
+  focus(n_missing, complete_rate, mean = numeric.mean, sd = numeric.sd, 
+        min = numeric.p0, median = numeric.p50, max = numeric.p100) |> 
+  yank("numeric")
+```
+
+Say we are (again) interested in modeling `income ~ education + women`
+Lets fit the model.
+```{r}
+m_1 <- 
+
+tidy(m_1)
+```
+
+In lab 07 we also had identified two observations with high influence: physicians and general managers. These observations exhibited extreme values in `income`. 
+```{r}
+d |> 
+
+```
+
+Our recent analysis reveals that both income and the percentage of women follow non-normal distributions. 
+
+```{r}
+hist(d$income)
+hist(d$women)
+```
+
+Given this, we may question whether the anomalies in our two problematic cases arise not from peculiar instances but rather from the inherent nature of our variables' distributions, potentially leading to systematic violations of the assumptions underlying the General Linear Model's expectations for our data structure.   
+
+### Model Assumptions
+
+Quick review from lecture!   
+
+**What are the 5 primary assumptions the GLM makes about the structure of the data?**   
+
+
+
+
+
+
+
+
+**Violations of assumptions can cause...?**   
+
+
+
+
+
+
+#### Assumption 1: Exact X 
+
+No measurement error in the predictors is always violated to some extent, but essentially demands that you use the most reliable measures at your disposal.  
+
+**What are the consequences of non-exact X?**
+
+
+
+
+#### Assumption 2: Independence
+
+Non-independence of residuals are usually due to data structure (e.g., repeated measures of the same individual; twins and families) and cannot be "made independent" once the data is collected. However, non-independence can be explicitly addressed by modeling approaches (e.g., mixed effect models, which you will learn in PSYCH 710).   
+
+**What are the consequences of non-independence in residuals that are not correctly modeled?**
+
+
+
+One extreme example of non-independence is when the data contains duplicates (i.e., same data points included multiple times). 
+
+For example, here we manually introduce non-independence by manipulating the Prestige data into a dataset of the same sample size but with some of its samples as duplicates (you should never do this in data analysis). Therefore, the residuals for pairs of duplicates will be correlated at r = 1.0. 
+
+```{r}
+set.seed(123)
+d_nonind <- d |> slice_sample(prop = 1, replace = TRUE)
+
+lm(income ~ education + women, data = d) |> tidy()
+lm(income ~ education + women, data = d_nonind) |> tidy()
+```
+
+Note that as a consequence of these duplicates, the standard errors of parameter estimates decreased, and the p value also decreased. This is not because the effects were more statistically significant. Rather, it is because the way we calculated error is no longer a fair way to characterize model and error variances when the residuals are correlated/non-independent (due to wrong degrees of freedom). Note that while the statistical inference about the parameters is invalidated, the model predictions (i.e., predicted values for Y at different levels of X) may still be appropriate.
+
+#### Assumption 3: Normality
+
+**Is a non-normally distributed predictor problematic? What about a non-normal outcome variable?**
+
+
+
+Plot a density plot of the residuals of our model compared to a normal distribution.   
+
+```{r}
+ggplot() +
+  geom_density(aes(x = value), data = enframe(rstudent(m_1), name = NULL)) +
+  labs(title = "Density Plot to Assess Normality of Residuals",
+       x = "Studentized Residual") +
+  geom_line(aes(x = x, y = y), data = tibble(x = seq(-4, 4, length.out = 100),
+                                      y = dnorm(seq(-4, 4, length.out = 100), 
+                                      mean=0, sd=sd(rstudent(m_1)))), 
+            linetype = "dashed", color = "blue")
+```
+
+**What does the blue dashed line represent?**
+
+
+**Are our residuals in `m_1` normally distributed?**
+
+
+
+Now we will create a quantile-comparison (Q-Q) plot. A Q-Q plot compares two distributions against each other to see if they’re similar. GLMs assume that residuals are normally distributed, so we compare the actual distribution of model residuals to the theoretical normal distribution. The closer the two distributions are, the more normal the residuals are. Use the function in the car package
+```{r}
+
+```
+
+
+**What's on the X-axis in this plot?**   
+
+
+**What about the Y-axis?**    
+
+
+**What are we looking for?**    
+
+
+**How are we doing for normality of errors?**   
+
+
+**What is the problem?**    
+
+
+
+***ASIDE: The logic of the QQ plot***    
+These plots are difficult to understand. You should think of the X-axis as representing "where I'm looking for it" and the Y-axis as representing "where I found it."    
+
+For example, look at the lower end of the X-axis on this QQ plot. We're going to look for the error we'd expect to occur at a t-value of 2.25 (2.25 on X-axis). As we move up the Y-axis, we encounter that error at something more like 4.5. Put differently, this case is farther from the center of the data (i.e., t of 0) than we would expect it to be if the distribution of errors were normal. Because we're encountering data farther from the center of the distribution than we should be, we can infer that we have thin tails, which indeed seems to be the case based on our density plot figure.    
+
+For another example, say we want to look for the error we'd expect to occur at a t-value of 1 (1 on the X-axis). Moving up the Y-axis, we "find" this error at about 0.5, closer to the center of the distribution than we'd expect. Because we found this error closer to a t of 0 than we'd expect in a perfectly normal distribution, we can infer we have a steep, skinny peak of our error distribution, which indeed we do! I encourage practicing this!    
+
+
+**So, should we be concerned at this point?** 
+
+
+
+#### Assumption 4: Constant Variance
+
+The constant variance assumption implies that, for any given predicted value of the dependent variable, the residuals will have the same variance.    
+
+One easy way to assess the viability of this assumption is to plot the predicted values against the observed values and assess visually whether the residuals have more scatter at some predicted values than at others.   
+```{r}
+tibble(x = fitted.values(m_1),
+       y = rstudent(m_1)) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_point(alpha = .6) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "blue", linewidth = 1) +
+  labs(title = "Studentized Residuals vs. Fitted Values",
+       x = "Fitted Values",
+       y = "Studentized Residuals")
+```
+
+We can also generate a spread-level plot to assess the constant variance assumption. This plot shows the absolute residuals against the predicted values.
+```{r}
+#| warning: false
+
+spreadLevelPlot(m_1)
+```
+
+***ASIDE: the logic of these plots***      
+These two plots differ in 2 important ways.   
+
+1. The Y-axis on the spread-level plot has the absolute value of the studentized residuals. (Imagine you took the first plot and folded it bottom to top along the y = 0 line. If the variance is not constant, the regression line plotted on the spread-level plot will deviate more from a slope of 0.   
+2. Look at the tick marks on the Y-axes of these plots. The first plot is linear, while the spread-level plot is logarithmic. This is why the two don't match up perfectly based on the "folding" idea.   
+
+**What are we looking for here?**   
+
+
+
+
+
+**So... are we concerned now?**     
+
+
+
+#### Assumption 5: Linearity
+
+If the modeled relationships are linear, then the slope of the best fitting line should be approximately the same no matter what sub-sample of the data you consider. Imagine sorting your dataframe on one of your predictor variables, and sliding a window down the dataframe and fitting little models for each window. If the relationship is linear, the solutions for the sub models should be very similar, deviating from each other randomly. On the other hand, if the relationship of X and Y is non-linear, then the estimate of the slope will differ systematically at different points along X.   
+
+`car::crPlots()` will plot such lines (summarized in pink), overlayed on the residual scores and in addition to the best linear fit (blue-dashed).    
+```{r}
+
+```
+
+This plot is referred to as a component+residual/partial residual plots. It shows you the residuals from the full model, plotted against the effect of a particular predictor.
+
+If the relationship isn’t a line, then we are concerned about the assumption of linearity of predictors (i.e., their relationship with Y). All that detail aside, if the dotted blue line and the pink line look similar, then the relation between that X and Y is relatively linear. Otherwise, there may be a non-linear relationship.
+
+So, we're actually doing pretty well in terms of the linearity assumption. There aren't any places where the blue and pink lines radically diverge.
+
+
+### So... what next?
+
+
+
+
+## Finally, unrelated to model assumptions...
+
+At the end of today, we would like to take a minute to review one special scenario we might see in multiple regression: suppression. 
+
+Back then we dropped all occupations that were professional jobs.
+
+```{r}
+d_prof_rm <- d |> filter(type != "prof")
+```
+
+
+Remember when we predicted `income` from `education` alone in the prestige dataset, the regression coefficient for `education` was b = 234 And the R-squared associated with education was 3.93%.
+
+```{r}
+m_0_1 <- lm(income ~ education, data = d_prof_rm)
+broom::tidy(m_0_1)
+broom::glance(m_0_1)
+```
+
+
+When we predicted `income` from `women` alone, the regression coefficient for `women` was b = -39.9. And the R-squared associated with education was 43.5%.
+
+```{r}
+m_0_2 <- lm(income ~ women, data = d_prof_rm)
+broom::tidy(m_0_2)
+broom::glance(m_0_2)
+```
+
+
+And when we predicted `income` from both `education` and `women`, the regression coefficient for `education` became b = 533, and the effect of `women` became b = -48.4. The model R-squared is 62.1%.
+
+```{r}
+m_0_3 <- lm(income ~ education + women, data = d_prof_rm)
+broom::tidy(m_0_3)
+broom::glance(m_0_3)
+
+```
+
+**What is the interpretation of model R-squared? Delta R-squared?**
+
+
+
+**What is the delta R squared for `education` and `women`?**
+
+
+
+**What do you notice about these delta R squared?**
+
+
+This is the case where we observe a suppression effect. 
+**Let's look at the correlations among the three variables. What do you notice?**
+
+
+```{r}
+d |> select(income, education, women) |> 
+  cor(use = "pairwise") |> 
+  round(2)
+```
+
+**TA draw a path diagram on board**
+
+In this scenario, the conditional effect of `education` is stronger than its unconditional effect, because we statistically controlled for variable `women`, which correlates positively with `education` but associate with `income` in the opposite direction.
+
+This is the special case when the variance explained by individual predictors have negative covariance and when the effect size estimates like delta-R-squared may sum up larger than the model R-squared.
+
+
+## ggplot Exercise Time!
+
+Create a model where you predict `income` from `prestige` and `type` using `d_prof_rm`.
+```{r}
+
+
+```
+
+
+Create a publication quality plot with the below specifications:
+1. Show education on the x axis and income on the y axis.
+2. Plot raw data points.
+3. Show two regression lines in the same panel. One should represent the effect of `education` on `income`, holding `type` constant at white collar. The other should represent the same effect but holding `type` constant at blue collar.
+4. Show respective standard error bands for those regression lines.
+5. Include meaning labels for the axes and other aesthetic components. 
+
+```{r}
+
+
+
+
+
+```
+
+
+**Where can you find the intercept on the plot?**
+
+
+**Where can you find the regression coefficient for `prestige` on the plot?**
+
+
+**Where can you find the regression coefficient for `type` on the plot?**
+
+
+## Questions?

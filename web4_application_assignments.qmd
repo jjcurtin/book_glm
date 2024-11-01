@@ -47,6 +47,10 @@
 
 ## Week 09: Due Friday, 11/08 at 8:30 am
 
+- [shell](/homework/week_98/hw_09_shell.qmd)
+- [data](/homework/data/hw_09_data.csv)
+- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw_09_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw_09_key.qmd)
+
 ## Week 10: No application assignnment.  Application exam week!
 
 ## Week 11: Due Friday, 11/22 at 8:30 am
