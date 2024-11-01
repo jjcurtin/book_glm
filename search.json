@@ -414,7 +414,7 @@
     "href": "web4_application_assignments.html#week-09-due-friday-1108-at-830-am",
     "title": "Application Assignments",
     "section": "Week 09: Due Friday, 11/08 at 8:30 am",
-    "text": "Week 09: Due Friday, 11/08 at 8:30 am",
+    "text": "Week 09: Due Friday, 11/08 at 8:30 am\n\nshell\ndata\nkey: html; qmd",
     "crumbs": [
       "Application Assignments"
     ]
@@ -565,6 +565,16 @@
     "title": "Lab Materials",
     "section": "Week 8: 10/25",
     "text": "Week 8: 10/25\n\ndata\nStudent shell\nTA notebook: qmd; html",
+    "crumbs": [
+      "Lab Materials"
+    ]
+  },
+  {
+    "objectID": "web5_labs.html#week-9-1101",
+    "href": "web5_labs.html#week-9-1101",
+    "title": "Lab Materials",
+    "section": "Week 9: 11/01",
+    "text": "Week 9: 11/01\n\ndata\nStudent shell\nTA notebook: qmd; html",
     "crumbs": [
       "Lab Materials"
     ]
