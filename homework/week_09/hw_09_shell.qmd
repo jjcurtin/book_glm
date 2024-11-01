@@ -12,178 +12,145 @@ editor_options:
 ---
 
 
-## Part A: Reading Questions
-
-### 1. Judd, McClelland, & Ryan talk of a “paradox” in using standardized residuals to detect outliers. Describe this paradox, present what the authors recommend using to solve it, and list the three reasons they recommend this solution. 
+## Part A: Conceptual Questions
 
 
-
-
-### 2. Of the assumptions of linear regression that refer to residuals, which two are the most problematic to violate in large samples? Why are these particularly concerning? What are solutions to violating these assumptions?
+### 1. Of the assumptions of linear regression that refer to residuals, which two are the most problematic to violate in large samples? Why are these particularly concerning? What are solutions to violating these assumptions?
 
 
 
 
-### 3. Explain the logic of a Q-Q plot and what normally distributed data would look like (about 3 sentences).
-
+### 2. Explain the logic of a Q-Q plot and what normally distributed data would look like (about 3 sentences).
 
 
 
 
 ## Part B: Data Analysis
 
-The data for this homework were adapted from a dataframe in the `car` package. You will be using the `hw_09_data.csv` data file provided to you.   
+A public health organization wants to test the importance of staying active and healthy in the winter by examining links between cross-country skiing, vegetable consumption, and health, as measured by an independent doctor at the end of winter. Participants were 53 residents of the Madison, WI area who were recruited at the beginning of the winter and asked to record the number of times they went cross-country skiing over the course of the winter and their average daily vegetable consumption (in servings). At the end of the winter (i.e., the last week of March), a doctor conducted a health assessment of each participant and reported their health on a 0-10 scale, with 0 representing very poor health and 10 representing excellent health.    
 
-Each row in the data represents a country in the United Nations (`Country`). Infant mortality (`infantMortality`) is the rate of death in infancy among live births. Per capita GDP (`ppgdp`) is a measure of a country’s wealth that takes gross domestic product (GDP) and divides it by the number of people in the country. Both GDP and per capita GDP should be positive numbers. 
+The researchers in the public health organization predict that cross-country skiing and vegetable consumption both contribute to overall health. They also expect to see little to no relationship between vegetable consumption and skiing behavior.   
 
-- `Country`: Name of the country (unique string variable)    
-- `infantMortality`: Infant deaths/1000 live births	(range 1.92 – 124.53)   
-- `ppgdp`: GDP per capita, in US dollars (range 114.8 – 105095.4)   
+The following variables can be found in the `hw_07_ski_veg_data.csv` dataset.    
 
+- `sub_id`: Unique subject identification number (range 1 - 53).
+- `skiing`:	Number of times participant went cross-country skiing over the course of the winter (range 0 - 93).
+- `veggies`: Number of servings of vegetables participant consumes on an average day (range 0 - 16).
+- `fitness`: Level of health, as assessed by doctor, at the end of March (range 0-10).
 
-### 1. Explore the data! 
-#### a. Read in the raw data and change the variable names to snake case.
 
+### Setup
+```{r}
+#| message: false
 
 
 
 
-#### b. Remove unrelated variables, keep only `infant_mortality`, `ppgdp`, and `country`.
 
+```
 
+### 1. Read in and inspect the data. Also source the functions you will use for case analysis.
 
+```{r}
 
-#### c. Obtain descriptive statistics for numeric variables using `skim()` and `yank()`.
 
+```
 
 
+### 2. Fit a model testing the researchers’ hypothesis. Specifically, run a model testing whether skiing and vegetable consumption both uniquely explain variance in people’s health scores at the end of March (when included in the same model). Report your results (F stats, p-values, and model $R^2$) in a sentence.
 
-#### d. Create quick-and-dirty histograms of `infant_mortality` and `ppgdp`. 
+```{r}
 
 
+```
 
 
-#### e. There are two obvious outliers with invalid values on variable `infant_mortality` and `ppgdp`. Find them and assign NA to replace the invalid values.
+### 3. Examine whether there are violations to model assumptions for the model you fit above.
 
+#### a. Is the assumption of normality violated? How do you know?
 
+```{r}
 
 
+```
 
-#### f. Create quick-and-dirty histograms of `infant_mortality` and `ppgdp` once more. Are these variables normally distributed? If the variables are not normally distributed, would it always be a problem by itself? Why or why not? 
+#### b. Is the assumption of constant variance violated? How do you know?
 
+```{r}
 
 
+```
 
+#### c. Is the assumption of linearity violated? How do yoy know?
 
-### 2. Conduct the following analysis **without** data transformation or case analysis.
-#### a.	Fit a model to predict infant mortality from per capita GDP. 
+```{r}
 
 
+```
 
 
-#### b.	Report the results in one sentence, including relevant statistics. 
+### 4. You suspect there may be outliers present in the dataset. 
 
+#### a. Identify which participants have high leverage. Note the variables on which each of these participants is extreme (i.e., why it has a large hat value). 
 
+```{r}
 
 
-### 3. Check for violations of model assumptions.
-#### a. Make a quick-and-dirty scatterplot of the relationship between infant mortality and per capita GDP. 
+```
 
 
+#### b. Identify participants that are regression outliers. Why are these participants regression outliers? 
 
+```{r}
 
-#### b. Create a Q-Q plot and density plot (using code from lab) to check for nomality. What are your conclusioins?
 
+```
 
 
+#### c. Examine the Cook’s D influences of the participants. Are the participants who have extreme Cook’s D scores surprising to you or not?
 
+```{r}
 
-#### c. Plot the predicted values against the observed values (using code from lab) to check for constant variance. What are your conclusions?
 
+```
 
 
+### 5. Remove the 4 participants who have the highest Cook's D influence from the data and run your focal model again. What has changed? Why?
 
+```{r}
 
-#### d. Use `car::crPlots()` to check for linearity. What are your conclusions?
 
+```
 
 
+### 6. Examine whether there are violations to model assumptions for the model you just fit with outliers (i.e., high influence points) removed. 
 
-### 4. It turns out that the model assumptions were rather severely violated. So, let’s transform the variable(s). 
+#### a. Is the assumption of normality violated? How does this model compare to the model above before removing the outliers, in terms of residual normality?
 
-#### a. What is the suggested Box-Cox transformation? 
+```{r}
 
 
+```
 
+#### b. Is the assumption of constant variance violated? How does this model compare to the model above before removing the outliers, in terms of constant variance?
 
-#### b. According to what you learned in lecture and lab, what might be a better transformation?
+```{r}
 
 
-### 5. Log-transformation of the outcome variable.
+```
 
-#### a. Apply a log-transformation to `infant mortality` and create a quick-and-dirty histogram plot of your new variable.
+#### c. Is the assumption of linearity violated? How does this model compare to the model above before removing the outliers, in terms of linearity?
 
+```{r}
 
 
+```
 
-#### b. Fit a new model with your transformed outcome. Summarize the results of the model in a sentence, including a practical interpretation of the coefficient. 
 
+### 7. In the exercise above, we examined model assumptions first, conducted case analysis, and then examined model assumptions again with outliers removed. What is your take away from this exercise? How does case analysis influence your inspection of model assumptions? Write 2-3 sentences to reflect.
 
 
-#### c. Check for violations of model assumptions again on the refitted model above. Did log-transforming infant mortality solve the problems? 
 
 
+### 8.	How many hours did this homework take you?
 
-
-### 6. Log-transformation of the predictor variable.
-
-#### a. Apply log-transformation to per capita GDP and refit the model to predict untransformed infant mortality. Summarize the results of this model, including a practical interpretation of the coefficient. 
-
-
-
-#### b. Check for violations of model assumptions again on the refitted model above. Did log-transforming per capita GDP solve the problems?
-
-
-
-
-### 7. Log-transformation of the outcome variable and the predictor variable.
-#### a.	Fit a model where you use log-transformed per capita GDP to predict log-transformed infant mortality. Summarize the results of this model, including a practical interpretation of the coefficient.
-
-
-
-#### b.	Check for violations of model assumptions again on the model you fit above. Did log-transforming both infant mortality and per capita GDP solve the problems?
-
-
-
-### 8. Using the model you fit to answer question 7a, conduct a full case analysis. Specify which countried you would consider to have high leverage, to be model/regression outliers, to have excessive influence on the model as a whole, and to have excessive influence on the parameter estimate for log-transformed per capita GDP specifically.
-
-
-
-
-### 9. Remove outlier(s).
-
-#### a.	Remove any observations of countries which you think are outliers. 
-
-
-
-#### b.	Justify why you removed the observation(s). How would it/they impact your conclusion regarding the relationship between infant mortality rate and per capita GDP, should it/they be kept in your model?
-
-
-
-### 10. Refit the model you fit in 7a but with the outlier(s) removed. What changed in your results?
-
-
-
-
-
-### 11.	Make two publication-quality graphs that show the effect of GDP on infant mortality, using the model you fit in question 10. In one graph, plot both the transformed variables [a linear relationship between log2(infant mortality) and log2(ppgdp)]. In the other graph, plot both the untransformed variables [a curvilinear relationship between infant mortality and ppgdp]. 
-
-
-
-
-### 12.	Write a short paragraph reporting these results. Explain the transformation you made, and why you made it. Explain your case analysis, and why you chose to exclude the data that you did. Finally, interpret your model using all stats in APA format (i.e., report the effect of GDP on infant mortality, the F value, degrees of freedom, a variance-based effect size, and the p value).
-
-
-
-
-### 13. How long did this week’s homework take you? 
