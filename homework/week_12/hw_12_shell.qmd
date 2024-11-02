@@ -1,0 +1,125 @@
+---
+title: "hw_12_shell" 
+author: "TAs" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+
+## Part A: Conceptual Questions
+
+### 1. A researcher is studying population density maps. She presents different maps to participants to indicate how many people live in each region of a made-up country. She predicts that presenting the map on a white background rather than a black background will predict higher estimates of the country’s population. She also examines whether a map that has borders (versus no boarders) leads to higher estimates of the country’s population than a map that does not have borders.    
+
+Please refer to the following table, representing participants’ group means for estimated population density (1 = 1,000,000 people):    
+
+
+|Background|No Borders|  Borders |
+|----------|----------|----------|
+|  White   |    5.0   |    7.0   |
+|  Black   |    4.0   |    5.0   |
+
+
+#### a.	What is(are) the simple effect(s) for background? 
+
+
+
+
+#### b.	What is(are) the simple effect(s) for boarders? 
+
+
+
+
+#### c.	What is(are) the main effect(s) for background? 
+
+
+
+
+#### d.	What is(are) the main effect(s) for boarders? 
+
+
+
+
+#### e.	What is(are) the grand mean(s) for the present study? 
+
+
+
+
+
+## Part B: Data Analysis
+
+Instructional gestures can influence children’s comprehension and learning. One potential reason is that seeing gesturing encourages children to gesture themselves. The current study examined the role of gesture for learning shape patterns in a sample of 60 four- to six-year-old children.  
+
+Children received a lesson from a researcher on shape patterning with or without gesture. Then, children solved nine patterning problems on their own. The nine patterning problems consisted of three completion, extension, and abstraction items. After solving each item, children were asked to explain their solutions. During each child’s explanation, the researcher noted whether the child produced gestures themselves. The researcher hypothesized that the effect of gesture is moderated by whether children gesture themselves, even after controlling for age. 
+
+
+**Codebook:**    
+
+- `Child_ID`: A unique identifier for each child (1-60).    
+- `Age`: The child’s age in months (48-72).   
+- `Condition`: Whether the child received a lesson with or without gesture (with_gesture; without_gesture).
+- `Produced_Gesture`: Whether the child produced gestured during the explanation (0 = no gestures, 1 = gestures).
+- `Performance`: Percent correct on 9 pattern problems (0-100).
+
+
+### 1. Read in the data (`hw_12_data.csv`), convert names to snake case, and update class caegories according to our class conventions.
+
+
+
+
+
+
+### 2. Center `condition`, `produced_gesture`, and `age`. 
+
+
+
+
+
+### 3. Examine univariate and bivariate statistics.
+
+
+
+
+
+### 4. Fit a model that regresses `performance` on `condition_c`, `produced_gesture_c`, the `condition_c`*`produced_gesture_c` interaction, and `age_c` (covariate).
+
+
+
+
+### 5. Interpret each parameter etimate. Report partial eta squared and F stat for each non-intercept parameter estimate. 
+
+
+
+
+### 6. According to Yzerbyt et al. (2004), why is this not the correct analysis in this situation? Hint: think about the IVs.
+
+
+
+
+
+### 7. Create a new model that Yzerbyt and colleagues (and we) would consider the be the correct way to analyze these data. 
+
+
+
+
+### 8. Interpret each parameter etimate in one sentence, report partial eta squared and F stat for each parameter estimate.
+
+
+
+
+
+### 9. Make a publication-quality bar plot displaying the results of your second model. Use the adjusted means when controlling for age. Hint: this means you should not plot the raw data.
+
+
+
+
+
+### 10.	How long did this assignment take you (in hours)?
+
+
+
