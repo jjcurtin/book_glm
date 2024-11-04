@@ -46,3 +46,7 @@
   quarto-pub:
     - id: 0bb84801-4ff1-44fd-9279-15f9c5ee3017
       url: 'https://jjcurtin.quarto.pub/09_transformations'
+- source: 10_interactions_two_quantitative.qmd
+  quarto-pub:
+    - id: 02daea56-5245-4aee-b995-9a7197394b88
+      url: 'https://jjcurtin.quarto.pub/10_interactions_two_quantitative'
