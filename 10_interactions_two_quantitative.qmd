@@ -374,7 +374,7 @@ Link intercept and coefficients from the raw model to the expanded figure below 
 :::
 
 ```{r}
-#| echo: true
+#| echo: false
 
 preds_expanded <- expand.grid(att = 0:5, pp = 0:5)
 preds_int_y_expanded <- predict(m_int, newdata = preds_expanded)

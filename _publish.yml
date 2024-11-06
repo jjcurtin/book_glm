@@ -44,9 +44,9 @@
       url: 'https://jjcurtin.quarto.pub/08_model_assumptions'
 - source: 09_transformations.qmd
   quarto-pub:
-    - id: 0bb84801-4ff1-44fd-9279-15f9c5ee3017
+    - id: 693ec93d-41e1-47ca-9775-0876762a2413
       url: 'https://jjcurtin.quarto.pub/09_transformations'
 - source: 10_interactions_two_quantitative.qmd
   quarto-pub:
-    - id: 02daea56-5245-4aee-b995-9a7197394b88
+    - id: 3340c00b-68ce-4325-9829-22ae4f90bdb6
       url: 'https://jjcurtin.quarto.pub/10_interactions_two_quantitative'

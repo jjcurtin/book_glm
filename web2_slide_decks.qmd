@@ -10,3 +10,4 @@
 - [Unit 7: Case analysis](https://jjcurtin.quarto.pub/07_case_analysis/)
 - [Unit 8: Model assumptions](https://jjcurtin.quarto.pub/08_model_assumptions/)
 - [Unit 9: Transformations](https://jjcurtin.quarto.pub/09_transformations/)
+- [Unit 10: Interactive models with two quantitative predictors](https://jjcurtin.quarto.pub/10_interactions_two_quantitative/)
