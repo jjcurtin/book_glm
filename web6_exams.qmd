@@ -9,6 +9,8 @@
 
 ## Application Exam 2
 
+- [data](https://dionysus.psych.wisc.edu/610/exams/synchrony.csv)
+- [exam shell](https://dionysus.psych.wisc.edu/610/exams/app_exam_2_shell.qmd)
 
 ## Application Exam 3
 
