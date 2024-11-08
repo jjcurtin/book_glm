@@ -52,3 +52,9 @@
 - [data](/lab/data/lab_09_data.csv)
 - [Student shell](/lab/week_09/lab_09_shell.qmd)
 - TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_09_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_09_ta.html)
+
+## Week 10: 11/08
+
+- [data](/lab/data/lab_10_data.csv)
+- [Student shell](/lab/week_10/lab_10_shell.qmd)
+- TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_10_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_10_ta.html)
