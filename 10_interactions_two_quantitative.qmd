@@ -1,8 +1,3 @@
---- 
-editor_options:  
-  chunk_output_type: console
---- 
- 
 # Unit 10: Inferences about Two Continuous Predictors and their Interaction
 
 ```{r}
@@ -322,7 +317,7 @@ $BC = 11.0 + 3.0 * Att_c + -2.0*PP_c + -1.0*Att_c*PP_c$
 Link intercepts and coefficients from each model to their respective figures.
 :::
 
-*Note:* figures use raw (not centered) predictors. Means for both predictors are 3.
+*Note:* figures use raw (not centered) predictors. Means for both predictors are 3.  
 
 ```{r}
 #| echo: false 
