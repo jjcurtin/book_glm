@@ -50,3 +50,7 @@
   quarto-pub:
     - id: 3340c00b-68ce-4325-9829-22ae4f90bdb6
       url: 'https://jjcurtin.quarto.pub/10_interactions_two_quantitative'
+- source: 11_interactions_quantitative_and_dichotomous.qmd
+  quarto-pub:
+    - id: 237e55d2-5de7-4a68-9d62-aa0362b4bf01
+      url: 'https://jjcurtin.quarto.pub/11_interactions_quantitative_and_dichotomous'

@@ -1,10 +1,3 @@
---- 
-output: html_document 
-editor_options:  
-  chunk_output_type: console
---- 
- 
-
 # Unit 11: Inferences about a Continuous and Dichotomous Predictor and their Interaction
 
 ```{r}
@@ -19,7 +12,7 @@ options(knitr.kable.NA = '')
 
 **Example:**    
 
-Effect of juror implicit bias (0-100) and race of defendant (White = 0; Black =1) on ratings of defendant guilt (0-100).
+Effect of juror implicit bias (0 - 100) and race of defendant (White = 0; Black = 1) on ratings of defendant guilt (0 - 100).
 
 ```{r}
 #| message: false
@@ -27,6 +20,7 @@ Effect of juror implicit bias (0-100) and race of defendant (White = 0; Black =1
 
 options(conflicts.policy = "depends.ok") 
 library(tidyverse)
+library(broom)
 library(patchwork)
 library(skimr)
 
@@ -55,8 +49,7 @@ data <- read_csv(here::here(path_data, "11_interactions_jurors.csv"),
   glimpse()
 ```
 
-
------
+--------------------------------------------------------------------------------
 
 ```{r}
 data |> 
@@ -68,90 +61,78 @@ data |>
 
 ::: {.callout-important}
 # Question
-
 How do you conduct an ANCOVA analysis in regression using bias as a covariate?
 :::
 
-
 :::{.fragment}
-[Regress guilt on defendant race and bias in an additive model. Test & interpret bias effect.]{style="color:blue;"}
+[Regress guilt on defendant race and bias in an additive model. Test & interpret the defendant race effect.]{style="color:blue;"}
 :::
 
-----
-
+--------------------------------------------------------------------------------
 
 ```{r}
 m_add <- lm(guilt ~ black_defend + bias, data = data)
 
-m_add |> 
-  broom::tidy()
+m_add |> tidy()
 ```
 
 ```{r}
 confint(m_add)
 ```
 
-$\eta_p^2$ for bias
+$\eta_p^2$ for defendant race 
 ```{r}
-pre(lm(guilt ~ black_defend, data), m_add)
+pre(lm(guilt ~ bias, data), m_add)
 ```
-
 
 ::: {.callout-important}
 # Question
-
 What do we conclude? What do we report?
 :::
 
-
 :::{.fragment}
-::: {.callout-important}
+:::: {.callout-important}
 # Question
-
 What is the specific interpretation in terms of the effect of defendant race?
-:::
+::::
 :::
 
 :::{.fragment}
 [On average, Black defendants are judged to be 8.5 units more guilty than White defendants, controlling for (holding constant) implicit bias.]{style="color:blue;"}   
 
-::: {.callout-important}
+:::: {.callout-important}
 # Question 
-
 What does this model require with respect to this group comparison across various levels of implicit bias?
-:::
+::::
 :::
 
 :::{.fragment}
 [It requires that the magnitude of the Black defendant (vs. White defendant) group difference ($b=8.5$) be the same for all levels of implicit bias **and** the bias effect be the same for both defendant races.]{style="color:blue;"}
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question
-
 How can you remove that constraint?
 :::
 
 :::{.fragment}
 [Include an interaction between defendant race and bias.]{style="color:blue;"}    
 
-::: {.callout-important}
+:::: {.callout-important}
 # Question
-
 But what is now important to do with $X$s?
-:::
+::::
 :::
 
------
+--------------------------------------------------------------------------------
 
 ```{r}
 data <- data |> 
   mutate(black_defend_c = if_else(black_defend == 0, -.5, .5),
          bias_c = bias - mean(bias))
 ```
-
 
 Always check that your transformations work as expected (mean, min, max, N, exemplar values).
 ```{r}
@@ -168,14 +149,12 @@ data |>
             max = max(value))
 ```
 
-
------
+--------------------------------------------------------------------------------
 
 ```{r}
 m_int <- lm(guilt ~ black_defend_c * bias_c, data = data)
 
-m_int |> 
-  broom::tidy()
+m_int |> tidy()
 
 confint(m_int)
 ```
@@ -195,7 +174,7 @@ $\eta_p^2$ for defendant race (centered)
 pre(lm(guilt ~ bias_c + bias_c:black_defend_c, data), m_int)
 ```
 
------
+--------------------------------------------------------------------------------
 
 **Additive Model:**   
 
@@ -207,7 +186,7 @@ $\text{guilt} = 11.8 + 8.5*\text{black defend} + 0.8*\text{bias}$
 $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$  
 
 
-<span style="color: red;">Link model coefficients to each figure.</span>  
+[Link model coefficients to each figure.]{style="color:red;"}
 
 ```{r}
 #| code-fold: true
@@ -263,40 +242,33 @@ plot_int <- ggplot() +
        y = "Defendant Guilt",
        color = "Defendant Race") 
 
-
 plot_add + plot_int
 ```
 
-
------
+--------------------------------------------------------------------------------
 
 ## Quantitative & Dichotomous: Predictor *Main* effects
 
 ```{r}
-m_int |> 
-  broom::tidy()
+m_int |> tidy()
 ```
-
 
 $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$  
 
-
 ::: {.callout-important}
 # Question
-
 What is the interpretation of $b= 0.8$ for bias (centered)?
 :::
 
 :::{.fragment}
-
 [This is the unweighted effect of bias averaged across White and Black defendants.]{style="color:blue;"}       
 
 [You can think about this like a main effect in ANOVA. For every one unit increase in bias, ratings of defendants’ guilt increased by 0.8 units when averaging across defendants of both races (holding constant race at its unweighted average), $t(236)= 17.1, p < .001$.]{style="color:blue;"}    
 
 You should also describe the effect with the 95% CI for $b$ and a variance effect size estimate.
+:::
 
-----
-
+--------------------------------------------------------------------------------
 
 ```{r}
 #| code-fold: true
@@ -316,20 +288,16 @@ plot_int <- plot_int +
 plot_int
 ```
 
-
------
+--------------------------------------------------------------------------------
 
 ```{r}
-m_int |> 
-  broom::tidy()
+m_int |> tidy()
 ```
-
 
 $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$  
 
 ::: {.callout-important}
 # Question
-
 What is the interpretation of $b= 8.5$ for defendant race (centered)?
 :::
 
@@ -339,8 +307,9 @@ What is the interpretation of $b= 8.5$ for defendant race (centered)?
 [Black defendants are rated 8.5 units more guilty than White defendants among jurors with average bias (holding constant bias at its mean), $t(236) = 5.66, p < .001$.]{style="color:blue;"}     
 
 You should also describe the effect with the 95% CI for $b$ and a variance effect size estimate.  
+:::
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 #| code-fold: true
@@ -351,34 +320,28 @@ plot_int <- plot_int +
 plot_int
 ```
 
------
+--------------------------------------------------------------------------------
 
 ```{r}
-m_int |> 
-  broom::tidy()
+m_int |> tidy()
 ```
-
 
 $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$  
 
 ::: {.callout-important}
 # Question
-
 How do we test for the interaction between Bias and Defendant Race on Guilt?
 :::
-
 
 :::{.fragment}
 [The test of the $b$ for the product term (defendant race X bias) is the test of the interaction. It is significant, $t(236)= 4.45, p< .001$.]{style="color:blue;"}     
 :::
 
-
 :::{.fragment}
-::: {.callout-important}
+:::: {.callout-important}
 # Question
-
 What does this mean to have an interaction and how do you interpret $b = 0.4$?
-:::
+::::
 :::
 
 :::{.fragment}
@@ -387,8 +350,7 @@ What does this mean to have an interaction and how do you interpret $b = 0.4$?
 [The magnitude of the effect of bias is 0.4 units greater when the defendants are Black than when they are White.]{style="color:blue;"}    
 :::
 
------
-
+--------------------------------------------------------------------------------
 
 ```{r}
 #| code-fold: true
@@ -401,49 +363,41 @@ plot_int
 
 - The separation of the lines increases by 0.4 for every 1 unit increase in bias.
 
------
+--------------------------------------------------------------------------------
 
 ## Quantitative & Dichotomous: Predictor *simple* effects
 
 ```{r}
-m_int |> 
-  broom::tidy()
+m_int |> tidy()
 ```
-
 
 $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$  
 
-
 ::: {.callout-important}
 # Question
-
-How do you quantify and test the simple effects of bias, separately for Whites and Blacks? What are these two simple effects on the previous figure?
+How do you quantify and test the simple effects of bias, separately for White and Black defendants? What are these two simple effects on the previous figure?
 :::
 
 :::{.fragment}
 [Simple effects of bias are represented as the slopes of the two lines.]{style="color:blue;"}    
-
 [Fit two interactive models with dummy coding for defendant race - one with White = 0 for **White** simple effect and one with Black = 0 for **Black** simple effect.]{style="color:blue;"}     
 
 [In each of these models, $b$ for bias will be the simple effect for group coded as 0.]{style="color:blue;"}    
 :::
 
 :::{.fragment}
-
-:::{.callout-important}
+::::{.callout-important}
 # Question
-
 What should the coefficients be (think about it)?
-:::
+::::
 :::
 
------
+--------------------------------------------------------------------------------
 
 ```{r}
 m_white <- lm(guilt ~ black_defend * bias_c, data = data)
 
-m_white |> 
-  broom::tidy()
+m_white |> tidy()
 ```
 
 ```{r}
@@ -452,16 +406,14 @@ data <- data |>
 
 m_black <- lm(guilt ~ white_defend * bias_c, data = data)
 
-m_black |> 
-  broom::tidy()
+m_black |> tidy()
 ```
 
------
+--------------------------------------------------------------------------------
 
 **Centered model**   
 
 $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$  
-
 
 **Dummy, White = 0**   
 $\text{guilt} = 39.6 + 8.5*\text{black defend} + 0.6*\text{bias}_c + .4*\text{black defend}*\text{bias}_c$  
@@ -471,7 +423,6 @@ $\text{guilt} = 48.1 + -8.5*\text{white defend} + 1.0*\text{bias}_c + -.4*\text{
 
 ::: {.callout-important}
 # Question
-
 What are the interpretations of the intercept in each model?
 :::
 
@@ -483,12 +434,11 @@ What are the interpretations of the intercept in each model?
 [Dummy/Black as 0: Predicted guilt rating for Black defendant for juror of average bias.}{style="color:blue;"}    
 :::
 
------
+--------------------------------------------------------------------------------
 
 **Centered model**   
 
 $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$  
-
 
 **Dummy, White = 0**   
 $\text{guilt} = 39.6 + 8.5*\text{black defend} + 0.6*\text{bias}_c + .4*\text{black defend}*\text{bias}_c$  
@@ -496,10 +446,8 @@ $\text{guilt} = 39.6 + 8.5*\text{black defend} + 0.6*\text{bias}_c + .4*\text{bl
 **Dummy, Black = 0**   
 $\text{guilt} = 48.1 + -8.5*\text{white defend} + 1.0*\text{bias}_c + -.4*\text{white defend}*\text{bias}_c$   
 
-
 ::: {.callout-important}
 # Question
-
 What are the interpretations of $b$ for defendant race in each model?
 :::
 
@@ -511,12 +459,11 @@ What are the interpretations of $b$ for defendant race in each model?
 [Dummy/Black as 0: The contrast of mean guilt ratings for White vs. Black defendants for jurors of average bias.]{style="color:blue;"}    
 :::
 
------
+--------------------------------------------------------------------------------
 
 **Centered model**   
 
 $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$  
-
 
 **Dummy, White = 0**   
 $\text{guilt} = 39.6 + 8.5*\text{black defend} + 0.6*\text{bias}_c + .4*\text{black defend}*\text{bias}_c$  
@@ -524,10 +471,8 @@ $\text{guilt} = 39.6 + 8.5*\text{black defend} + 0.6*\text{bias}_c + .4*\text{bl
 **Dummy, Black = 0**   
 $\text{guilt} = 48.1 + -8.5*\text{white defend} + 1.0*\text{bias}_c + -.4*\text{white defend}*\text{bias}_c$   
 
-
 ::: {.callout-important}
 # Question
-
 What are the interpretations of $b$ for bias in each model?
 :::
 
@@ -539,12 +484,11 @@ What are the interpretations of $b$ for bias in each model?
 [Dummy/Black as 0: The change in guilt for a 1 unit increase in bias for Black defendants.]{style="color:blue;"}    
 :::
 
------
+--------------------------------------------------------------------------------
 
 **Centered model**   
 
 $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$  
-
 
 **Dummy, White = 0**   
 $\text{guilt} = 39.6 + 8.5*\text{black defend} + 0.6*\text{bias}_c + .4*\text{black defend}*\text{bias}_c$  
@@ -554,7 +498,6 @@ $\text{guilt} = 48.1 + -8.5*\text{white defend} + 1.0*\text{bias}_c + -.4*\text{
 
 ::: {.callout-important}
 # Question
-
 What are the interpretations of $b$ for product term in each model (from a bias effect perspective)?
 :::
 
@@ -564,13 +507,12 @@ What are the interpretations of $b$ for product term in each model (from a bias 
 [Dummy/White as 0: The change in the magnitude of the bias effect for a one unit change in defendant race (White to Black).]{style="color:blue;"}      
 
 [Dummy/Black as 0: The change in the magnitude of the bias effect for a one unit change in defendant race (Black to White).]{style="color:blue;"}   
-
------
+:::
+--------------------------------------------------------------------------------
 
 **Centered model**   
 
 $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$  
-
 
 **Dummy, White = 0**   
 $\text{guilt} = 39.6 + 8.5*\text{black defend} + 0.6*\text{bias}_c + .4*\text{black defend}*\text{bias}_c$  
@@ -580,36 +522,33 @@ $\text{guilt} = 48.1 + -8.5*\text{white defend} + 1.0*\text{bias}_c + -.4*\text{
 
 ::: {.callout-important}
 # Exercise
-
 Quantify effect of bias from model formula (can use any model).
 :::
 
------
+--------------------------------------------------------------------------------
 
 **From Dummy, White = 0 model**  
 
-<span style="color: blue;">For Whites:</span> 
+[For White defendants:]{style="color:blue;"}
     
 Bias effect = $0.6*\text{bias}_c + .4*\text{black defend}*\text{bias}_c$  
 Bias effect = $0.6*\text{bias}_c + .4*0*\text{bias}_c$  
 Bias effect = $0.6*\text{bias}_c$
 
-<span style="color: blue;">For Blacks:</span>     
+[For Black defendants:}{style="color:blue;"}     
 
 Bias effect = $0.6*\text{bias}_c + .4*\text{black defend}*\text{bias}_c$  
 Bias effect = $0.6*\text{bias}_c + .4*1*\text{bias}_c$  
 Bias effect = $1.0*\text{bias}_c$
     
------
+--------------------------------------------------------------------------------
 
 ## Quantitative & Dichotomous: Dichotomous *simple* effects   
 
 ::: {.callout-important}
 # Question
-
 How do you test simple effects of defendant race at various levels of bias (and what levels might you choose to test)?
 :::
-
 
 :::{.fragment}
 [We want to report simple effects of defendant race at the mean of bias and one SD above and below mean (or other meaningful values).]{style="color:blue;"}      
@@ -619,14 +558,13 @@ How do you test simple effects of defendant race at various levels of bias (and 
 [As we noted earlier, the coefficient for defendant race (8.5) from the centered model is the simple effect of defendant race at the mean of bias.]{style="color:blue;"}       
 
 [We need to perform two more transformations of bias to get the other simple effect tests for defendant race.]{style="color:blue;"}      
+:::
 
------
-
+--------------------------------------------------------------------------------
 
 **Centered model**   
 
 $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$    
-
 
 Bias is centered such that 0 = mean of bias.  
 
@@ -646,10 +584,9 @@ data <- data |>
   mutate(bias_lo = bias_c + sd(bias_c))
 ```
 
-
 *Note*: It is easy to confuse these transformations. Do a logical check on your results.   
 
------
+--------------------------------------------------------------------------------
 
 ```{r}
 m_bias_hi = lm(guilt ~ black_defend_c * bias_hi, data = data)
@@ -660,7 +597,7 @@ m_bias_hi |>
 
 For Jurors who are highly biased, Black defendants are rated 15.2 units more guilty than White defendants. 
 
------
+--------------------------------------------------------------------------------
 
 ```{r}
 m_bias_lo = lm(guilt ~ black_defend_c * bias_lo, data = data)
@@ -671,12 +608,11 @@ m_bias_lo |>
 
 For Jurors who are highly unbiased, Black defendants are rated 1.8 units more guilty than White defendants. 
 
------
+--------------------------------------------------------------------------------
 
 **Mean centered bias**   
 
 $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$  
-
 
 **Centered on -1 SD for bias**   
 $\text{guilt} = 31.0 + 1.8*\text{black defend}_c + 0.8*\text{bias}_l + .4*\text{black defend}_c*\text{bias}_l$  
@@ -684,10 +620,8 @@ $\text{guilt} = 31.0 + 1.8*\text{black defend}_c + 0.8*\text{bias}_l + .4*\text{
 **Centered on +1 SD for bias**   
 $\text{guilt} = 56.7 + 15.2*\text{black defend}_c + 0.8*\text{bias}_h + .4*\text{black defend}_c*\text{bias}_h$  
 
-
 ::: {.callout-important}
 # Question
-
 What are the interpretations of the intercept in each model?
 :::
 
@@ -699,12 +633,10 @@ What are the interpretations of the intercept in each model?
 [+1 SD: Predicted guilt rating for jurors who are high on bias, unweighted across defendant race.]{style="color:blue;"}   
 :::
 
------
+--------------------------------------------------------------------------------
 
 **Mean centered bias**   
-
 $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$  
-
 
 **Centered on -1 SD for bias**   
 $\text{guilt} = 31.0 + 1.8*\text{black defend}_c + 0.8*\text{bias}_l + .4*\text{black defend}_c*\text{bias}_l$  
@@ -714,7 +646,6 @@ $\text{guilt} = 56.7 + 15.2*\text{black defend}_c + 0.8*\text{bias}_h + .4*\text
 
 ::: {.callout-important}
 # Question
-
 What are the interpretations of $b$ for defendant race in each model?
 :::
 
@@ -726,12 +657,10 @@ What are the interpretations of $b$ for defendant race in each model?
 [+1 SD: The contrast of mean guilt ratings for Black vs. White defendants for jurors high on bias (simple effect).]{style="color:blue;"}   
 :::
 
------
+--------------------------------------------------------------------------------
 
 **Mean centered bias**   
-
 $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$  
-
 
 **Centered on -1 SD for bias**   
 $\text{guilt} = 31.0 + 1.8*\text{black defend}_c + 0.8*\text{bias}_l + .4*\text{black defend}_c*\text{bias}_l$  
@@ -739,10 +668,8 @@ $\text{guilt} = 31.0 + 1.8*\text{black defend}_c + 0.8*\text{bias}_l + .4*\text{
 **Centered on +1 SD for bias**   
 $\text{guilt} = 56.7 + 15.2*\text{black defend}_c + 0.8*\text{bias}_h + .4*\text{black defend}_c*\text{bias}_h$  
 
-
 ::: {.callout-important}
 # Question
-
 What are the interpretations of $b$ for bias in each model?
 :::
 
@@ -754,12 +681,10 @@ What are the interpretations of $b$ for bias in each model?
 [+1 SD: The change in guilt for a 1 unit increase in bias, unweighted across defendant race.]{style="color:blue;"}    
 :::
 
------
+--------------------------------------------------------------------------------
 
 **Mean centered bias**   
-
 $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$  
-
 
 **Centered on -1 SD for bias**   
 $\text{guilt} = 31.0 + 1.8*\text{black defend}_c + 0.8*\text{bias}_l + .4*\text{black defend}_c*\text{bias}_l$  
@@ -767,10 +692,8 @@ $\text{guilt} = 31.0 + 1.8*\text{black defend}_c + 0.8*\text{bias}_l + .4*\text{
 **Centered on +1 SD for bias**   
 $\text{guilt} = 56.7 + 15.2*\text{black defend}_c + 0.8*\text{bias}_h + .4*\text{black defend}_c*\text{bias}_h$  
 
-
 :::{.callout-important}
 # Question
-
 What are the interpretations of $b$ for product term in each model (from a defendant race effect perspective)?
 :::
 
@@ -782,12 +705,10 @@ What are the interpretations of $b$ for product term in each model (from a defen
 [+1 SD: The change in the magnitude of the defendant race effect for a one unit change in juror bias.]{style="color:blue;"}    
 :::
 
------
+--------------------------------------------------------------------------------
 
 **Mean centered bias**   
-
 $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$  
-
 
 **Centered on -1 SD for bias**   
 $\text{guilt} = 31.0 + 1.8*\text{black defend}_c + 0.8*\text{bias}_l + .4*\text{black defend}_c*\text{bias}_l$  
@@ -795,36 +716,33 @@ $\text{guilt} = 31.0 + 1.8*\text{black defend}_c + 0.8*\text{bias}_l + .4*\text{
 **Centered on +1 SD for bias**   
 $\text{guilt} = 56.7 + 15.2*\text{black defend}_c + 0.8*\text{bias}_h + .4*\text{black defend}_c*\text{bias}_h$  
 
-
 ::: {.callout-important}
 # Exercise
-
 Quantify effect of defendant race from model formula (can use any model).
 :::
 
------
+--------------------------------------------------------------------------------
 
 **From centered model**  
-
-<span style="color: blue;">Mean:</span> 
+[Mean:]{style="color:blue;"}
     
 Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*\text{bias}_c$  
 Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*0$  
 Defendant race effect = $8.5*\text{black defend}_c$
 
-<span style="color: blue;">-1 SD:</span> 
+[-1 SD:]{style="color:blue;"}
 
 Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*\text{bias}_c$  
 Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*-16.2$  
 Defendant race effect = $1.8*\text{black defend}_c$ (w/rounding error)
 
-<span style="color: blue;">+1 SD:</span> 
+[+1 SD:]{style="color:blue;"}
 
 Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*\text{bias}_c$  
 Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*16.2$  
 Defendant race effect = $15.2*\text{black defend}_c$ (w/rounding error)
 
------
+--------------------------------------------------------------------------------
 
 ```{r}
 #| code-fold: true
@@ -834,7 +752,7 @@ plot_int +
   geom_vline(xintercept = mean(data$bias) - sd(data$bias), linewidth = .75)
 ```
 
------
+--------------------------------------------------------------------------------
 
 ## A sample brief report:  Defendant race is focal
 
