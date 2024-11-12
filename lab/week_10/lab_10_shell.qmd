@@ -77,11 +77,6 @@ We will pull the best lambda value from a plot of log-likelihood values by lambd
 
 **What do these results mean?**
 
-**Before we apply a transformation what do we need to check about the values of `income`?**   
-
-**And are they?**
-
-**Will adding a negative start (e.g., -610) help?**    
 
 Create a new variable using the `car::bcPower()` Box-Cox power transformation function. The `bcPower()` function computes the scaled power transformation of x = U + gamma where gamma is set by the user so U + gamma is strictly positive for these transformations to make sense.
 ```{r}
@@ -93,11 +88,15 @@ Refit model with transformed outcome.
 
 ```
 
+Let's take a look at our model R-squared to get a sense of how much variance in income is explained by ALL predictors in our model.
+```{r}
+
+```
 
 **What is the logic of log (base 2)? What does a 1-unit increase in a log2 variable represent?**
 A one unit increase in log2(income), represents a doubling of income. We'll apply that transformation and refit the model.   
 
-Create a new variable and model with an adjusted and transformed version of our outcome variable `income` (dividing by 100 to bring values into operable range for transformation).
+Create a new variable and model with an adjusted and transformed version of our outcome variable `income`.
 ```{r}
 
 ```
@@ -107,7 +106,6 @@ Create a new variable and model with an adjusted and transformed version of our 
 ```{r}
 
 ```
-
 
 
 NOTE: There are other ways to convert logs to more interpretable units, and I encourage you to look into it if this is something you encounter in your own research.
@@ -125,7 +123,7 @@ ggplot() +
                                       mean=0, sd=sd(rstudent(m_income_log)))), 
             linetype = "dashed", color = "blue")
 
-car::qqPlot(m_income_log, 
+qqPlot(m_income_log, 
             id = FALSE, 
             simulate = TRUE,
             main = "Quantile-Comparison Plot to Assess Normality", 
@@ -146,12 +144,12 @@ tibble(x = fitted.values(m_income_log),
        y = "Studentized Residuals")
 
 
-car::spreadLevelPlot(m_income_log)
+spreadLevelPlot(m_income_log)
 ```
 
 Linearity
 ```{r}
-car::crPlots(m_income_log, ask = FALSE)
+crPlots(m_income_log, ask = FALSE)
 ```
 
 
@@ -194,12 +192,12 @@ tibble(x = fitted.values(m_women_sqrt),
        y = "Studentized Residuals")
 
 
-car::spreadLevelPlot(m_women_sqrt)
+spreadLevelPlot(m_women_sqrt)
 ```
 
 Linearity
 ```{r}
-car::crPlots(m_women_sqrt, ask = FALSE)
+crPlots(m_women_sqrt, ask = FALSE)
 ```
 
 
