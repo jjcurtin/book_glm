@@ -59,6 +59,8 @@ data |>
   yank("numeric")
 ```
 
+--------------------------------------------------------------------------------    
+
 ::: {.callout-important}
 # Question
 How do you conduct an ANCOVA analysis in regression using bias as a covariate?
@@ -85,6 +87,9 @@ $\eta_p^2$ for defendant race
 pre(lm(guilt ~ bias, data), m_add)
 ```
 
+
+--------------------------------------------------------------------------------
+
 ::: {.callout-important}
 # Question
 What do we conclude? What do we report?
@@ -99,6 +104,9 @@ What is the specific interpretation in terms of the effect of defendant race?
 
 :::{.fragment}
 [On average, Black defendants are judged to be 8.5 units more guilty than White defendants, controlling for (holding constant) implicit bias.]{style="color:blue;"}   
+
+
+--------------------------------------------------------------------------------
 
 :::: {.callout-important}
 # Question 
