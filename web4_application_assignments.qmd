@@ -55,6 +55,9 @@
 
 ## Week 11: Due Friday, 11/22 at 8:30 am
 
+- [shell](/homework/week_11/hw_11_shell.qmd)
+- [data](/homework/data/hw_11_data.csv)
+
 ## Week 12: Due Friday 11/29 at 8:30 am
 
 ## Week 13: No application assignment.  Thanksgiving Break
