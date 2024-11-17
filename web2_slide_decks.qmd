@@ -11,3 +11,5 @@
 - [Unit 8: Model assumptions](https://jjcurtin.quarto.pub/08_model_assumptions/)
 - [Unit 9: Transformations](https://jjcurtin.quarto.pub/09_transformations/)
 - [Unit 10: Interactive models with two quantitative predictors](https://jjcurtin.quarto.pub/10_interactions_two_quantitative/)
+- [Unit 11: Interactive models with quantitative and dichotomous predictors](https://jjcurtin.quarto.pub/11_interactions_quantitative_and_dichotomous/)
+- [Unit 12: Interactive models with two dichotomous predictors](https://jjcurtin.quarto.pub/12_interactions_two_dichotomous/)
