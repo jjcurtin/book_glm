@@ -1,5 +1,5 @@
 ---
-title: "hw_11_shell" 
+title: "hw_11_key" 
 author: "TAs" 
 date: "`r lubridate::today()`"
 format: 
@@ -14,11 +14,11 @@ editor_options:
 
 ## Part A: Conceptual Questions
 
-### 1.	What do Judd and colleagues recommend in terms of reporting *simple* and *main* effects? What is their justification? Does Jaccard (2003) agree or disagree with this perspective? 
+### 1.	In the textbook, what do Judd and colleagues recommend in terms of reporting *simple* and *main* effects? What is their justification? Does Jaccard (2003) agree or disagree with this perspective? 
 
 
 
-### 2.	When should you dichotomize a continuous variable? Why?
+### 2.	According to MacCallum and colleagues (2002), when should you dichotomize a continuous variable? Why?
 
 
 
@@ -34,7 +34,7 @@ Some researchers plan to examine whether alcohol consumption affects dart playin
 
 Sixty dart players are invited to an open-bar event where dartboards are made available. Participants were randomly assigned to either receive real alcohol or a convincing placebo. Non-alcoholic placebos were piloted beforehand and shown to be indistinguishable from alcoholic beverages. Players reported their prior experience with dart games and self-assessed coordination (rated right before the game) to control for differences in dart playing ability and to monitor for interactions with the experimental manipulation. Performance scores during the study ranged from 0-150. Blood alcohol concentration (BAC) was also determined. BAC was multiplied by 100 in this dataset.
 
-Researchers hypothesized that (1) there will be an effect of condition such that participants in the alcohol group would have lower game scores than those in the placebo group. Furthermore, the researchers hypothesized that (2) the effect of condition on game scores would be stronger for less experienced players. In addition, the researchers proposed to (3) conduct an exploratory analysis to examine whether blood alcohol concentration and self-rated coordination interacted to predict game scores.
+Researchers want to test their confirmatory hypothesis that the effect of BAC on game scores would be stronger for less experienced players. In addition, they also want to run exploratory analysis to test whether BAC and self-rated coordination interact to predict game scores.
 
 
 **Codebook:**   
@@ -46,127 +46,211 @@ Researchers hypothesized that (1) there will be an effect of condition such that
 - `coordination`: self-assessed coordination. (0/poor - 10/good)   
 - `score`: performance scores during the study. (63 - 150)   
 
+```{r}
+#| message: false
+
+options(conflicts.policy = "depends.ok") 
+library(tidyverse)
+library(broom)
+devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/case_analysis.R?raw=true")
+
+theme_set(theme_classic()) 
+
+path_data <- "homework/data"
+```
+
+### 1. Data preparation
+
+#### a. Read in the data file (`hw_11_data.csv`). 
+
+```{r}
 
 
-### 1. Read in the data file (`hw_11_data.csv`), create centered versions of the four predictor variables (`condition`, `experience`, `coordination`, and `bac`), and explore univariate statistics and bivariate relationships.
+
+
+```
+
+
+#### b. Explore univariate descriptive statistics for all variables. Also calculate bivariate correlations among continuous variables.
+
+```{r}
 
 
 
 
-### 2.	Make a table including the mean and standard deviation for score, coordination, and BAC broken down into the four possible combinations of condition and experience.
+
+
+```
+
+#### c. To test the two hypotheses, what variables should be centered to maximize the interpretability of your models? Why? 
 
 
 
+#### d. Create centered versions of the variables you named in question 1c.
+
+```{r}
 
 
-### 3. Does the effect of the alcohol condition on game scores depend on experience?
+
+```
+
+
+### 2.	Group the data by all possible combinations of `condition` and `experience`. Then, run code to obtain the means and standard deviations for `score`, `coordination`, and `bac` in each of these groups.
+
+```{r}
+
+
+
+```
+
+
+### 3. Does the effect of BAC on game scores depend on experience?
 
 #### a.	Fit a model that addresses this question.
+```{r}
 
 
+```
 
 
 #### b.	Report and interpret each of the parameter estimates. Report F-value, and p-value for non-intercept estimates (one sentence each is sufficient).
 
+b0: 
 
 
-#### c.	Describe the experience effect for those in the alcohol group. Use a general linear model with condition dummy coded for alcohol. Interpret the relevant coefficient and report an F-value and p-value.
+b1: 
 
 
-#### d.	Create a publication quality graph depicting the first model that you fit.
+b2: 
 
 
-
-### 4.	Fill in the blanks for this regression equation, recording your answers as A-D in your QMD document:
-score = ___A___ + __B___ * condition_c + __C___ * experience_c + ___D____ * condition_c * experience_c
+b3: 
 
 
 
-> A: 
-
-> B: 
-
-> C: 
-
-> D: 
-
-
-### 5.	Using the equation above, what is the magnitude of the effect of condition for novice participants? Try to find the answer from the equation above, without recoding your variables in R.
+#### c.	Create a publication quality graph depicting the first model that you fit.
+```{r}
 
 
 
 
 
-### 6.	Using the equation above, what is the magnitude of the effect of experience for participants in the alcohol condition? Try to find the answer from the equation above, without recoding your variables in R.
 
 
 
 
 
-### 7.	Although this was not part of the researchers hypotheses, examine whether the effect of alcohol condition on game scores depended on coordination?
+```
+
+#### d.	Fill in the blanks for this regression equation, recording your answers as A-D in your QMD document:
+score = ___A___ + __B___ * bac_c + __C___ * experience_c + ___D____ * bac_c * experience_c
+
+```{r}
+
+
+```
+
+
+
+#### e.	What is the magnitude of the effect of BAC for novice participants? Find the answer using the equation above, without recoding your variables in R.
+
+
+
+
+
+#### f.	What is the magnitude of the effect of experience groups for an individual with a BAC of 0? Find the answer using the equation above, without recoding your variables in R.
+
+
+
+
+
+#### g.	Test the simple effect of BAC for individuals in the novice group by fitting a model with experience groups dummy coded. Interpret the relevant coefficient and report an F-value and p-value.
+
+```{r}
+
+
+
+
+```
+
+
+#### h.	Test the simple effect of experience for someone with a BAC one standard deviation above the mean of that variable by fitting a model with recentered BAC. Interpret the relevant coefficient and report appropriate statistics.
+
+```{r}
+
+
+
+```
+
+
+#### i. Run code to conduct case analysis on the interaction model. 
+```{r}
+
+
+
+
+
+
+```
+
+
+#### j. Run code to examine if there are any violations to the assumption of normality and the assumption of constant variance. 
+
+**Note: Skip the assumption of linearity for now, since the component+residual plots do not accommodate interaction terms.**
+
+```{r}
+
+
+
+```
+
+#### k. Summarize the findings from your case analysis and inspection of model assumptions. Are there any issues? What can potentially be done to address these issues?
+
+
+
+
+
+### 4.	Does the effect of BAC on game scores depend on coordination?
 
 #### a.	Fit a model that addresses this question.
+```{r}
 
 
+```
 
 #### b.	Report and interpret each of the parameter estimates, reporting relevant statistics (one sentence each is sufficient).
 
-
-#### c.	Determine the (simple) alcohol condition effect for someone with a coordination score one standard deviation above the mean of that variable. Interpret the relevant coefficient and report appropriate statistics.
-
+b0: 
 
 
 
-### 8.	Using the b-value estimates obtained in question 7, write out the regression equation for the model you fit in 7a.
+b1: 
 
 
 
-
-### 9.	What is the magnitude of the effect of coordination for participants in the placebo condition? Try to find the answer from the equation above, without recoding your variables in R.
-
+b2: 
 
 
 
-### 10.	What is the expected score for participants with a coordination score of 9 who were in the placebo condition? Try to find the answer from the equation above, without recoding your variables in R.
+b3: 
 
 
 
-### 11.	Does the effect of (measured) blood alcohol concentration on game scores depend on coordination?
+#### c.	Test whether there is a significant simple effect of coordination for someone who has a BAC at the legal limit (coded as 8 in this data file) by fitting a model with recentered BAC. Interpret the relevant coefficient and report appropriate statistics.
 
-#### a.	Fit a model that addresses this question.
-
-
-
-#### b.	Report and interpret each of the parameter estimates, reporting relevant statistics (one sentence each is sufficient).
-
-
-#### c.	Is there an effect of coordination for someone who has a BAC at the legal limit (coded as 8 in this data file)?
+```{r}
 
 
 
 
 
-#### d.	Graph the model you ran in question 11a, with coordination on the x-axis. For BAC, plot two different regression lines: one representing participants with 0 BAC and the other representing the mean BAC among participants in the alcohol group. Bonus: Add a dotted vertical line at the mean of coordination. 
+```
 
 
+### 5.	What would happen to the SE of the parameter estimate of the interaction term in the previous model if you had used the uncentered versions of blood alcohol concentration and coordination? Would it increase, decrease, stay the same, or is it impossible to say what will happen to it?
 
 
-#### f.	Graph the model you ran in question 11a, with BAC on the x-axis. For coordination, plot two different regression lines: one representing participants 1 SD above the mean of coordination and the 1 SD below the mean. Bonus: Add a dotted line showing the effect of BAC on game scores for people at the mean of coordination.
-
-
-
-
-###  12.	What would happen to the SE of the parameter estimate of the interaction term in the previous model if you had used the uncentered versions of blood alcohol concentration and coordination? Would it increase, decrease, stay the same, or is it impossible to say what will happen to it?
-
-
-
-
-### 13.	Write up the results of the study and be explicit about whether the researchers’ 3 hypotheses were confirmed or not. There is no need to discuss the results from the model in question 7.
-
-
-
-
-### 14.	How long did this assignment take you (in hours)?
+### 6.	How long did this assignment take you (in hours)?
 
 
 
