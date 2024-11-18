@@ -571,7 +571,7 @@ ex_tbl
 
 Catholic men: $14.5 + 3*(-.5) + 1*(-.5) + 2*(-.5)*(-.5) = 13$   
 
-Jewish women: $14.5 + 3*(.5) + 1*(.5) + 2*(.5)*(-.5) = 17$    
+Jewish women: $14.5 + 3*(.5) + 1*(.5) + 2*(.5)*(.5) = 17$    
 
 Etc…
 
@@ -769,6 +769,8 @@ What will the regression equation be now?
 $att = 13 +  4*sex_d + 0*rel_d + -2*sex_d*rel_d$     
 
 [Recoding the moderator changes the simple effect for the focal variable. With dummy codes, the parameter estimate for the focal variable is always its simple effect when the moderator = 0.]{style="color: blue;"}
+
+[Note that the coefficient for the interaction also changed direction because the change for religion reversed direction.]{style="color: blue;"}
 :::
 
 -------------------------------------------------------------------------------
