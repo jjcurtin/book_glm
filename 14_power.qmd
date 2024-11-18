@@ -32,7 +32,7 @@ tibble("Research Concludes" = c("FAIL TO REJECT NULL; NO EFFECT",
 ```
 
 
-----
+--------------------------------------------------------------------------------
 
 ## Power
 
@@ -42,7 +42,7 @@ Symbol is 1 - $\beta$, where $\beta$ is the probability of making a Type II erro
 
 In everyday language, power is the probability of concluding that variables are related (or groups differ) based on inferential statistics calculated in your sample, when the variables are related (or groups differ) in the population.
 
-----
+--------------------------------------------------------------------------------
 
 ## What Determines Power?
 
@@ -53,7 +53,7 @@ Parametric tests often are more powerful than non-parametric, because they work 
 GLM is MVUE when assumptions are met.   
 
 
-----
+--------------------------------------------------------------------------------
 
 ## What Factors Affect Power in GLM?
 
@@ -67,7 +67,7 @@ GLM is MVUE when assumptions are met.
 
 5. Error (unexplained  variance in $Y$): As $SSE_a$ goes up (and model $R_2$ goes down) power is lower – larger error means larger standard error of parameter estimates. More difficult to tell if effects $\ne$ 0 because $b$s vary more greatly from sample to sample (and from zero) by chance.
 
-----
+--------------------------------------------------------------------------------
 
 ## Power Conventions
 
@@ -82,7 +82,7 @@ Two strategies:
 2. Determine power for a given design (e.g., completed experiment with fixed $N$).   
 
 
-----
+--------------------------------------------------------------------------------
 
 **Power can be calculated for tests of:**    
 
@@ -103,7 +103,7 @@ Two strategies:
 2. Specify minimum effect size of interest. Be very conservative.
 3. Power will be a function of above factors.
 
-----
+--------------------------------------------------------------------------------
 
 ## Effect Size: $\eta_p^2$
 
@@ -114,7 +114,7 @@ $\eta_p^2 = \frac{F*\text{df}_n}{F*\text{df}_n + \text{df}_d}$
 Where $\text{df}_n$ and $\text{df}_d$ are numerator and denominator degrees of freedom from the F statistic.
 <!--John: the spacing for df looked weird without specifying it as text so I am using \text here-->
 
-----
+--------------------------------------------------------------------------------
 
 
 ## Cohen (1992) Rules of Thumb for $\eta_p^2$
@@ -136,7 +136,7 @@ tibble("Effect" = c("Small", "Medium", "Large"),
 - Use ANOVA/t effect sizes if you are testing one categorical variable.
 - Use r effect sizes if you are testing one quantitative variable.
 
-----
+--------------------------------------------------------------------------------
 
 ## Power Analysis in Quarto
 
@@ -150,7 +150,7 @@ It takes the following parameters:
 - `sig.level` = Significance level (Type I error probability; $\alpha$).
 - `power`	= Power of test (1 minus Type II error probability)
 
-----
+--------------------------------------------------------------------------------
 
 ## A Priori Power Analysis for One Parameter in MR
 
@@ -176,7 +176,7 @@ pwr::pwr.f2.test(u = 1,
 :::
 
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question
@@ -199,7 +199,7 @@ pwr::pwr.f2.test(u = 1,
 [$N = v + P_a = 125.648 + 4 = 129.648$]{style="color: blue;"}
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ## Hefner et al. (2013): Duration Task
 
@@ -207,7 +207,7 @@ pwr::pwr.f2.test(u = 1,
 
 "We analyzed startle potentiation at 4.5 s postcue onset in a General Linear Model (GLM) with a between-subjects regressor for beverage group (alcohol vs. control) and repeated measures on cue type (certain vs. uncertain). We included two covariates, baseline startle response and sex, as additive regressors to increase power. [**As predicted, we observed a significant interaction between beverage group and cue type, $b = 22.2, \eta_p^2 = 0.16, t(64) = 3.45, p = .001$.**]{style="color: green;"}"
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question
@@ -232,7 +232,7 @@ pwr::pwr.f2.test(u = 1,
 
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ## Post Hoc Power Analysis for One Parameter in MR
 
@@ -256,7 +256,7 @@ pwr::pwr.f2.test(u = 1,
 
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ## Problems from Low Power
 
@@ -264,7 +264,7 @@ pwr::pwr.f2.test(u = 1,
 2. Low positive predictive value (PPV). 
 3. An exaggerated estimate of the magnitude of the effect when a true effect is discovered. 
 
-----
+--------------------------------------------------------------------------------
 
 ## Missed True Effects
 
@@ -278,7 +278,7 @@ We tend to focus on false alarms, but misses can be equally costly (e.g., new tr
 
 You waste resources (time, money) with low-powered studies. One high-powered study (N) > Two low-powered studies (N/2).
 
-----
+--------------------------------------------------------------------------------
 
 ## Low Positive Predictive Value (PPV)
 
@@ -296,7 +296,7 @@ If alpha = .05, what is PPV?
 [You need more information. Probably not 95%!]{style="color: blue;"}
 :::
 
-----
+--------------------------------------------------------------------------------
 
 $\text{PPV} = \frac{(1 - \beta) * \text{OR}}{(1 - \beta) * \text{OR} + \alpha}$   
 
@@ -310,7 +310,7 @@ Where:
 Formula can be rewritten as:   
 $\text{PPV} = \frac{\text{Power * OR}}{\text{Power * OR} + \alpha}$
 
-----
+--------------------------------------------------------------------------------
 
 A priori odds ratio that effect exists: 1 (1:1 or 1/2)  
 Power: 80%   
@@ -336,7 +336,7 @@ tibble("Research Concludes" = c("FAIL TO REJECT NULL; NO EFFECT",
   kableExtra::row_spec(2, background = "yellow")
 ```
 
-----
+--------------------------------------------------------------------------------
 
 A priori odds ratio that effect exists: 1 (1:1 or 1/2)  
 Power: 20%   
@@ -362,7 +362,7 @@ tibble("Research Concludes" = c("FAIL TO REJECT NULL; NO EFFECT",
   kableExtra::row_spec(2, background = "yellow")
 ```
 
-----
+--------------------------------------------------------------------------------
 
 A priori odds ratio that effect exists: .25 (1:4 or 1/5)  
 Power: 20%   
@@ -388,7 +388,7 @@ tibble("Research Concludes" = c("FAIL TO REJECT NULL; NO EFFECT",
   kableExtra::row_spec(2, background = "yellow")
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ## What does this imply about papers in Science?
 
@@ -399,7 +399,7 @@ knitr::include_graphics(path = here::here("figures/power_science.png"))
 ```
 
 
-----
+--------------------------------------------------------------------------------
   
 ## Sample Estimate of Effect is Too Large
 
@@ -418,7 +418,7 @@ Why does this make sense?
 Consider an example where $\beta = 5, SE = 4$. Draw sampling distribution. Indicate region where sample $b$s would be significant. What can we conclude about estimates ($b$) for $\beta$ in any one study or across a bunch of studies?
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ## Other Biases That Often Come With Low Power
 
@@ -426,7 +426,7 @@ Consider an example where $\beta = 5, SE = 4$. Draw sampling distribution. Indic
 2. Publication bias, selective data analysis, and selective reporting of outcomes.
 3. May be of lower quality in other aspects of their design.
 
-----
+--------------------------------------------------------------------------------
 
 ## Vibration of Effects
 
@@ -439,7 +439,7 @@ This is more often the case for small studies.
 
 Results can vary markedly depending on the analysis strategy when power is low because of small N.
 
-----
+--------------------------------------------------------------------------------
 
 ## Publication Bias and Selective Reporting
 
@@ -457,7 +457,7 @@ Small studies may be opportunistic, quick and dirty experiments. Data collection
 
 Large studies often require more funding and personnel resources. Designs are examined more carefully before data collection, and analysis and reporting may be more structured.    
 
-----
+--------------------------------------------------------------------------------
 
 ##### Simmons, J. P., Nelson, L. D., & Simonsohn, U. (2011). False-positive psychology: Undisclosed flexibility in data collection and analysis allows presenting anything as significant. Psychological Science, 22(11), 1359–1366.
 
@@ -469,7 +469,7 @@ knitr::include_graphics(path = here::here("figures/Simmons_fig_1.png"), dpi = 10
 ```
 
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 #| echo: false
@@ -478,7 +478,7 @@ knitr::include_graphics(path = here::here("figures/Simmons_fig_2.png"))
 ```
 
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 #| echo: false
@@ -487,7 +487,7 @@ knitr::include_graphics(path = here::here("figures/Simmons_fig_3.png"), dpi = 12
 ```
 
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 #| echo: false
@@ -495,7 +495,7 @@ knitr::include_graphics(path = here::here("figures/Simmons_fig_3.png"), dpi = 12
 knitr::include_graphics(path = here::here("figures/Simmons_fig_4.png"), dpi = 100)
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ## Commitment to Research Transparency and Open Science
 
@@ -508,7 +508,7 @@ knitr::include_graphics(path = here::here("figures/research_transparency_logo.pn
 ```
 
 
-----
+--------------------------------------------------------------------------------
 
 ## Method Transparency and Sharing
 
@@ -520,7 +520,7 @@ We have adopted the recommendation to report 1) how we determined our sample siz
 
 "We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study.”
 
-----
+--------------------------------------------------------------------------------
 
 <!--John, I am finding this section a little confusing. Are you quoting the paper or are these requests you are making for the students to follow? Also, request one is essentially the 21 word statement from the previous slide so it feels weird to say this is an additional request.-->
 
@@ -542,7 +542,7 @@ Second, as you likely know, substantial concerns have been raised in recent year
 Third, the ability to evaluate (and associated confidence in) the integrity of the study design and analyses for any manuscript is substantially enhanced when authors make data, measures, and analysis code publicly available, online, hosted by a reliable third party (e.g., https://osf.io/), and provide a persistent link to these materials in the paper. Data and materials sharing also increases the impact of any study beyond its current findings because such sharing can stimulate and assist further research on the topic. The data and study materials from this study should be shared unless clear reasons (e.g., legal, ethical constraints, or severe impracticality) that prevent sharing are provided.
 -->
 
-----
+--------------------------------------------------------------------------------
 
 ## Important Research Degrees of Freedom
 
@@ -554,7 +554,7 @@ Third, the ability to evaluate (and associated confidence in) the integrity of t
 6. Outliers and influence  
 7. N
 
-----
+--------------------------------------------------------------------------------
 
 ## Resources
 

@@ -25,7 +25,7 @@ The general linear model makes the 5 assumptions below. When these assumptions a
 5. **Linearity**: All residual distributions (i.e., for each $Y'$) are assumed to have means equal to zero.
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question
@@ -42,7 +42,7 @@ What are the consequences of violating each of these assumptions? What options e
 5. **Linearity**: Biased parameter estimates. Use power transformations, polynomial regression, **generalized linear models**.
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ## Generalized Linear Models
 
@@ -51,20 +51,15 @@ What are the consequences of violating each of these assumptions? What options e
 #| message: false
 
 library(tidyverse)
+library(broom)
 library(skimr)
 theme_set(theme_classic()) 
 ```
 
-
-```{r}
-#| eval: false
-
-glm(formula, family = familytype(link = linkfunction), data = data)
-```
+`glm(formula, family = familytype(link = linkfunction), data = data)`
 
 ```{r}
 #| echo: false
-
 
 tibble(Family = c("binomial", "gaussian", "Gamma", "inverse.gaussian", 
                   "poisson", "quasi", "quasibinomial", "quasipoisson"),
@@ -77,7 +72,7 @@ tibble(Family = c("binomial", "gaussian", "Gamma", "inverse.gaussian",
   kableExtra::kable_styling()
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ## An Example
 
@@ -86,8 +81,9 @@ Predicting admission to a grad program in engineering based on quantitative GRE,
 ```{r}
 #| echo: false
 
-data <- read_csv(here::here("data_lecture/15_glm_admit.csv"),
-                 show_col_types = FALSE)
+data <- read_csv(here::here("data_lecture/15_grad_admit.csv"),
+                 show_col_types = FALSE) |> 
+  glimpse()
 ```
 
 ```{r}
@@ -97,12 +93,12 @@ data |>
   yank("numeric")
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 m_lm <- lm(admit ~ gpa, data = data)
 
-broom::tidy(m_lm)
+tidy(m_lm)
 ```
 
 
@@ -112,7 +108,7 @@ broom::tidy(m_lm)
 What is the effect of GPA on admission to grad school?
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question
@@ -131,54 +127,312 @@ What are the problems with using a general linear model to assess the effects of
 4. Y is not constrained between 0 – 1 (model may make nonsensical predictions).
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
+#| code-fold: true
+
 data |> 
   ggplot(aes(x = gpa, y = admit)) +
   geom_point() +
   scale_x_continuous(limits = c(0, 4))
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
+#| code-fold: true
+
 data |> 
   ggplot(aes(x = gpa, y = admit)) +
   geom_jitter(width = 0, height = .05) +
   scale_x_continuous(limits = c(0, 4))
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
+#| code-fold: true
+
 data |> 
   ggplot(aes(x = gpa, y = admit)) +
   geom_jitter(width = 0, height = .05) +
-  scale_x_continuous(limits = c(0, 4)) +
-  geom_smooth(formula = y ~ x, method = "lm", color = "red", se = FALSE)
+  scale_x_continuous(limits = c(0, 4.2)) +
+  geom_smooth(formula = y ~ x, method = "lm", color = "red", se = FALSE,
+              fullrange = TRUE)
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
+#| code-fold: true
+
 data |> 
   ggplot(aes(x = gpa, y = admit)) +
   geom_jitter(width = 0, height = .05) +
   scale_x_continuous(limits = c(0, 4)) +
   scale_y_continuous(limits = c(-2, 1.2)) +
-  geom_smooth(formula = y ~ x, method = "lm", color = "red", se = FALSE)
+  geom_smooth(formula = y ~ x, method = "lm", color = "red", se = FALSE,
+              fullrange = TRUE)
 ```
 
 
-----
+--------------------------------------------------------------------------------
 
 
 ```{r}
 gvlma::gvlma(m_lm)
 ```
 
+--------------------------------------------------------------------------------
 
 
+```{r}
+#| code-fold: true
+
+ggplot() +
+  geom_density(aes(x = value), data = enframe(rstudent(m_lm), name = NULL)) +
+  labs(title = "Density Plot to Assess Normality of Residuals",
+       x = "Studentized Residual") +
+  geom_line(aes(x = x, y = y), 
+            data = tibble(x = seq(-4, 4, length.out = 100),
+                          y = dnorm(seq(-4, 4, length.out = 100), 
+                                    mean = 0, sd = sd(rstudent(m_lm)))), 
+            linetype = "dashed", color = "blue")
+```
+
+```{r}
+#| code-fold: true
+
+car::qqPlot(m_lm, id = FALSE, simulate = TRUE,
+            main = "QQ Plot to Assess Normality", 
+            ylab = "Studentized Residuals")
+```
+
+
+--------------------------------------------------------------------------------
+
+```{r}
+#| code-fold: true
+
+tibble(x = predict(m_lm),
+       y = rstudent(m_lm)) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_point(alpha = .6) +
+  geom_hline(yintercept = 0, linetype = "dashed", 
+             color = "blue", linewidth = 1) +
+  labs(title = "Studentized Residuals vs.  Predicted Values",
+       x = "Predicted Values",
+       y = "Studentized Residuals")
+```
+
+```{r}
+#| cold-fold: true
+#| warning: false
+
+car::spreadLevelPlot(m_lm)
+```
+
+--------------------------------------------------------------------------------
+
+```{r}
+#| code-fold: true
+
+car::crPlots(m_lm, ask = FALSE)
+```
+
+--------------------------------------------------------------------------------
+
+```{r}
+m_glm <- glm(admit ~ gpa, data = data, family = binomial(logit))
+
+tidy(m_glm)
+```
+
+--------------------------------------------------------------------------------
+
+
+```{r}
+#| code-fold: true
+
+x <- tibble(gpa = seq(0, 6, length.out = 500))
+
+preds <- predict(m_glm, newdata = x, se.fit = TRUE) |> 
+  as_tibble() |> 
+  mutate(upper = fit + se.fit,
+         lower = fit - se.fit,
+         fit = boot::inv.logit(fit)) |> 
+  bind_cols(x)
+
+ggplot(data = data, aes(x = gpa, y = admit)) +
+  geom_point() +
+  scale_x_continuous(limits = c(0, 6)) +
+  geom_line(data = preds, aes(y = fit, x = gpa), color = "blue") 
+```
+
+--------------------------------------------------------------------------------
+
+<!--KW: need to smooth line-->
+```{r}
+#| echo: false
+#| warning: false
+
+ex_tbl <- tibble(x = c(rep(1:4, 10), rep(5, 10), rep(6:10, 10)),
+                 y = c(rep(0, 40), rep(0:1, 5), rep(1, 50))) 
+
+m_ex <- glm(y ~ x, data = ex_tbl, family = binomial(logit))
+
+preds_ex <- predict(m_ex, newdata = tibble(x = rep(1:10, 100)), se.fit = TRUE) |> 
+  as_tibble() |> 
+  mutate(upper = fit + se.fit,
+         lower = fit - se.fit,
+         fit = boot::inv.logit(fit)) |> 
+  bind_cols(tibble(x = rep(1:10, 100)))
+
+ex_tbl |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_jitter(width = 0, height = .04) +
+  scale_x_continuous(limits = c(1, 10), 
+                     breaks = c(2, 4, 6, 8, 10)) +
+  geom_line(data = preds_ex, aes(x = x, y = fit), color = "blue") 
+```
+
+--------------------------------------------------------------------------------
+
+:::{.callout-important}
+# Question
+
+What other non-linear shapes do you know how to model in the general linear model?
+:::
+
+:::{.fragment}
+
+1. Simple monotone relationships with power transforms.
+
+2. Quadratic, cubic, etc relationships with polynomial regression. <!--KW: I don't think this was introduced?-->
+:::
+
+--------------------------------------------------------------------------------
+
+```{r}
+#| echo: false
+
+tibble(x = 1:100,
+       y = sqrt(x)) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_line() +
+  labs(y = "y = sqrt(x)")
+
+tibble(x = -100:100,
+       y = x + x^2) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_line() +
+  labs(y = "y = x + x^2")
+
+tibble(x = -100:100,
+       y = x + x^2 + x^3) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_line() +
+  labs(y = "y = x + x^2 + x^3")
+```
+
+--------------------------------------------------------------------------------
+
+```{r}
+#| echo: false
+#| warning: false
+
+tidy(m_glm)
+
+ggplot(data = data, aes(x = gpa, y = admit)) +
+  geom_point() +
+  scale_x_continuous(limits = c(2, 4)) +
+  geom_line(data = preds, aes(y = fit, x = gpa), color = "blue") 
+```
+
+--------------------------------------------------------------------------------
+
+**Linear Regression:**   
+
+- Residuals are gaussian.   
+- Link function is identity.   
+
+$Y = 1 * (b_0 + b_1X_1 + ... + b_kX_k)$    
+
+**Logistic Regression:**   
+
+- Residuals are binomial   
+- Link function is logit (a transformation of the logistic function).   
+
+$\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$    
+
+$\pi$ = probability of $Y = 1$    
+$e$ = 2.718 (approx)
+
+--------------------------------------------------------------------------------
+
+## Logs and Exponentials
+
+You are likely familiar with logs using base 10.
+
+```{r}
+log10(10)
+
+log10(100)
+
+log10(1000)
+
+log10(1)
+
+log10(15)
+
+log10(0)
+
+log10(.1)
+```
+
+--------------------------------------------------------------------------------
+
+The natural log (often abbreviated ln) is similar but uses base $e$ (approx 2.718) rather than base 10.  
+
+```{r}
+log(2.718282)
+
+log(10)
+
+log(1)
+
+log(0)
+```
+
+--------------------------------------------------------------------------------
+
+The inverse of the natural log is the exponential function: `exp()`.  This function simply raises $e$ to the power of $X$ (whatever value you provide).   
+
+```{r}
+exp(1)
+
+exp(2)
+
+exp(0)
+
+exp(-1)
+```
+
+Logistic regression uses natural logs and exponentials for the transformations of $Y$ and $X$s.
+
+--------------------------------------------------------------------------------
+
+$\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$    
+
+```{r}
+#| echo: false
+
+tidy(m_glm)
+```
+
+$\pi = \frac{e^{-14.5 + 4.1}}{1 + e^{-14.5 + 4.1X_1}}$   
+
+--------------------------------------------------------------------------------
 
 

@@ -30,7 +30,7 @@ options(knitr.kable.NA = '')
     
 - How to test simple effects when categorical variables have > 2 levels.   
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question 
@@ -46,7 +46,7 @@ How do we handle analysis of categorical variables in regression (a *linear mode
 :::
 
 
------
+---------------------------------------------------------------------------------
 
 ## Example
 
@@ -96,7 +96,7 @@ delta_r2 <- function(mean, compact, augmented) {
 ```
 
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question  
@@ -110,7 +110,7 @@ Why can we not handle multilevel categorical variables by simply coding each gro
 [Moreover, we are often interested in individual pair-wise group comparisons that would be lost by forcing linear relationship.]{style="color:blue;"}    
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 #| code-fold: true
@@ -152,7 +152,7 @@ order_3 <- data |>
 order_1 + order_2 + order_3
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ## 3 Group Dummy Coding (Non-orthogonal)  
 
@@ -172,7 +172,7 @@ order_1 + order_2 + order_3
 
 - Reference group (healthy) is coded 0 for all regressors.
 
-----
+--------------------------------------------------------------------------------
 
 
 ```{r}
@@ -183,7 +183,7 @@ data <- data |>
 slice_sample(data, n = 6)
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 m_d <- lm(health ~ alcohol_d + depress_d, data)
@@ -191,7 +191,7 @@ m_d <- lm(health ~ alcohol_d + depress_d, data)
 broom::tidy(m_d)
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ## 3 Group Dummy: What does $b_j$ test?  
 
@@ -202,7 +202,7 @@ Each regression coefficient represents the contrast between its respective targe
 tibble_d
 ```
 
-----
+--------------------------------------------------------------------------------
 
 For example, consider the effect of the first regressor (`alcohol_d`). Considered by itself, it is the contrast of patients with alcohol use disorder (1) vs. other groups (0). However, if you held the second regressor (`depress_d`) constant at zero you would be examining the effect of patients with alcohol use disorder vs. other groups when it is 0 on `depress_d` (i.e., the control group). 
 
@@ -210,7 +210,7 @@ For example, consider the effect of the first regressor (`alcohol_d`). Considere
 tibble_d
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 broom::tidy(m_d)
@@ -220,7 +220,7 @@ data |>
   summarise(mean = mean(health))
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 #| echo: false
@@ -228,7 +228,7 @@ data |>
 knitr::include_graphics(path = here::here("figures/dummy_3d.png"))
 ```
 
-----
+--------------------------------------------------------------------------------
 
 
 ## Dummy Coding Group Mean Estimates
@@ -265,7 +265,7 @@ What is $b_0$ when using dummy codes?
 [The predicted value (mean) for the reference group.]{style="color:blue;"}  
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ## Dummy Coding Decomposition
 
@@ -291,7 +291,7 @@ $= (b_0 + b_1*1 + b_2*0) - (b+0 + b_1*0 + b_2*1)$
 $= (b_0 + b_1) - (b_0 + b_2)$   
 $= b_1 - b_2$   
 
-----
+--------------------------------------------------------------------------------
 
 ## Introducing Factors and Contrasts
 
@@ -313,7 +313,7 @@ matrix_contr
 ```
 
 
-----
+--------------------------------------------------------------------------------
 
 Set contrasts for `group` factor variable
 ```{r}
@@ -332,7 +332,7 @@ tidy_m_d_2
 
 
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question 
@@ -359,7 +359,7 @@ t.test(health ~ group, data = data_sub, var.equal = TRUE)
 ```
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question 
@@ -384,7 +384,7 @@ How could we get this test?
 [Recode the group contrasts such that the patients with depression is the reference group. Then test and interpret the alcohol vs. depress parameter estimate.]{style="color:blue;"}    
 :::
 
-----
+--------------------------------------------------------------------------------
 
 
 ```{r}
@@ -404,7 +404,7 @@ tidy_m_d_3 <-broom::tidy(m_d_3) |>
 tidy_m_d_3
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question 
@@ -426,7 +426,7 @@ broom::glance(m_d_3)$r.squared
 [Not generally very useful. Tradition is still to report it (unless using POCs) but likely for wrong reasons. (more in this later).]{style="color:blue;"}
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question 
@@ -438,7 +438,7 @@ Why does model $R^2$ not test the main effect if there are other predictors in t
 [Model $R^2$ is the variance in $Y$ explained by all the regressors in the model. Only tests the main effect of an IV if only regressors for that IV are in the model.]{style="color:blue;"}
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ## Variance Based Effect Sizes
 
@@ -456,7 +456,7 @@ $\eta_p^2$ for group
 pre(lm(health ~ 1, data = data), m_d_2)
 ```
 
-----
+--------------------------------------------------------------------------------
 
 Quarto handles regressors internally once you set contrasts for the factor. It is generally not necessary to add the regressors to the dataframe except for handful of special circumstances (e.g., some figures, variance effect sizes for contrasts).   
 
@@ -474,7 +474,7 @@ data <- data |>
 slice_sample(data, n = 6)
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 m_r <- lm(health ~ r_1 + r_2, data = data)
@@ -492,7 +492,7 @@ $\eta_p^2$ for depress v. healthy (r_2)
 pre(lm(health ~ r_1, data = data), m_r)
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ## Planned Orthogonal Contrasts
 
@@ -505,7 +505,7 @@ Planned orthogonal contrasts allow you to:
 2. Test for contrasts other than pairwise.
 
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question 
@@ -542,7 +542,7 @@ c_b
 ```
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question 
@@ -577,7 +577,7 @@ How will the analyses in Quarto be similar and different?
 [The model $R^2$ and the test of the null will be identical.]{style="color:blue;"} 
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 data <- data |> 
@@ -597,7 +597,7 @@ m_c_a <- lm(health ~ c_1a + c_2a, data = data)
 broom::tidy(m_c_a)
 ```
 
-----
+--------------------------------------------------------------------------------
 
 
 ```{r}
@@ -626,7 +626,7 @@ data <- data |>
 ```
 
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question
@@ -650,7 +650,7 @@ c_a |>
 [Therefore, unit weights allow you to report $b_1$ and have it represent the difference in the means of the two groups/sets.]{style="color:blue;"}    
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 #| echo: false
@@ -671,7 +671,7 @@ data |>
 
 You can do the math to confirm that $b_1$ and $b_2$ match the mean differences associated with the `c_1` and `c_2` comparisons.  
 
-----
+--------------------------------------------------------------------------------
 
 ## How to Calculate Unit Weights
 
@@ -685,7 +685,7 @@ $C = (c_1*\text{group}_1 + c_2*\text{group}_2...)-(c_3*\text{group}_3+c_4*\text{
 - Call them set U (with u groups included) and set V (with v groups included).
 - A third set can be ignored by assigning coefficients of 0.
 
-----
+--------------------------------------------------------------------------------
 
 
 $C = \text{set U} - \text{set V}$   
@@ -698,7 +698,7 @@ The coefficients in set V should all be: $\frac{u}{(u + v)}$.
 
 The coefficients in the ignored set should all be 0.
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question
@@ -741,7 +741,7 @@ tibble(` ` = c("c_1", "c_2"),
 [But you will never do this! R does this for you.]{style="color:blue;"}
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 matrix_contr <- matrix(c(.333, .333, -.667,
@@ -756,7 +756,7 @@ contrasts(data$group) <- matrix_contr
 ```
 
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 m_poc <- lm(health ~ group, data = data)
@@ -800,7 +800,7 @@ broom::glance(m_poc)$r.squared
 ```
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ## Display: Group Means + SEM
 
@@ -818,7 +818,7 @@ data |>
 
 **<span style="color: red;">NOT RECOMMENDED!</span>**
 
-----
+--------------------------------------------------------------------------------
 
 ## Dummy Coding Group Mean Estimates
 
@@ -832,7 +832,7 @@ How can we get standard errors for the group mean point estimates using the line
 [Fit three separate models. Set a different group as the reference group in each model. $b_0$ will be the predicted mean for the reference group in each model. The standard error for $b_0$ is the standard error for this parameter.]{style="color:blue;"}    
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 matrix_contr <- contr.treatment(levels(data$group), base = 1) 
@@ -870,7 +870,7 @@ broom::tidy(m_health) |>
 
 [This standard error is the standard error you should graph! But there is an easier way to get these.]{style="color:blue;"}   
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 data_new <- tibble(group = levels(data$group))
@@ -888,7 +888,7 @@ preds <- predict(m_poc, newdata = data_new, se.fit = TRUE) |>
 preds
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ## Display: Point Estimates + SE
 
@@ -900,7 +900,7 @@ preds |>
   labs(y = "Health", x = NULL)
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ## Parsing Variance: Dummy Codes
 
@@ -932,7 +932,7 @@ $\Delta R^2$
          augmented = m_alc))
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question
@@ -950,7 +950,7 @@ r_1 + r_2
 
 
 
-----
+--------------------------------------------------------------------------------
 
 `depress` dummy codes
 ```{r}
@@ -964,7 +964,7 @@ data_dep <- model.matrix(~ group, data = data) |>
   bind_cols(data)
 ```
 
-----
+--------------------------------------------------------------------------------
 
 Model $R^2$
 ```{r}
@@ -988,7 +988,7 @@ $\sum \Delta R^2$
 r_1 + r_2
 ```
 
-----
+--------------------------------------------------------------------------------
 
 `healthy` dummy codes
 ```{r}
@@ -1002,7 +1002,7 @@ data_health <- model.matrix(~ group, data = data) |>
   bind_cols(data)
 ```
 
-----
+--------------------------------------------------------------------------------
 
 Model $R^2$
 ```{r}
@@ -1026,7 +1026,7 @@ $\sum \Delta R^2$
 r_1 + r_2
 ```
 
-----
+--------------------------------------------------------------------------------
 
 
 ## Parsing Variance: POCs
@@ -1046,7 +1046,7 @@ data_poc <- model.matrix(~ group, data = data) |>
   bind_cols(data)
 ```
 
-----
+--------------------------------------------------------------------------------
 
 Model $R^2$
 ```{r}
@@ -1065,7 +1065,7 @@ $\Delta R^2$
          augmented = m_alc))
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question
@@ -1082,7 +1082,7 @@ poc_1 + poc_2
 
 
 
-----
+--------------------------------------------------------------------------------
 
 ## POC Contrast Coding: Common Contrasts
 
@@ -1108,7 +1108,7 @@ tibble(group_1 = .5,
        group_3 = 0)
 ```
 
-----
+--------------------------------------------------------------------------------
 
 **4 group contrasts**   
 
@@ -1144,7 +1144,7 @@ tibble(group_1 = .5,
        group_4 = 0)
 ```
 
-----
+--------------------------------------------------------------------------------
 
 **4 group contrasts**   
 
@@ -1181,7 +1181,7 @@ tibble(group_1 = 0,
        group_4 = -.5)
 ```
 
-----
+--------------------------------------------------------------------------------
 
 **4 group contrasts (polynomials)**   
 
@@ -1221,7 +1221,7 @@ tibble(group_1 = -1,
 
 **Note that range is not 1.**
 
-----
+--------------------------------------------------------------------------------
 
 ## Single and Multiple Comparisons 
 
@@ -1239,7 +1239,7 @@ What do you gain from testing the main effect (or interaction) of a categorical 
 [The test of the main effect is not needed (with one exception) to reduce the probability of making any Type I errors. In many instances, it will increase the probability of Type II errors. This is a **big** misconception in our field.]{style="color:blue;"}    
 :::
 
-----
+--------------------------------------------------------------------------------
 
 **Option 1: POCs**   
 
@@ -1247,7 +1247,7 @@ What do you gain from testing the main effect (or interaction) of a categorical 
 tidy_m_poc
 ```
 
-----
+--------------------------------------------------------------------------------
 
 **Option 2: Planned non-orthogonal pairwise comparisons**    
 
@@ -1282,7 +1282,7 @@ lm(health ~ group, data = data) |>
 
 
 
-----
+--------------------------------------------------------------------------------
 
 **Option 3: Unplanned; observed patterns of means dictate comparisons**   
 
@@ -1292,7 +1292,7 @@ data |>
   summarise(mean = mean(health))
 ```
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question
@@ -1310,7 +1310,7 @@ Statistical/conclusion validity.{style="color:blue;"}
 [We should wonder (and be concerned about) what happens to the probability of making an error across *all* of our tests.]{style="color:blue;"} 
 :::
 
-----
+--------------------------------------------------------------------------------
 
 **Test-wise error rate:** The probability of making a type I (or II) error for any specific statistical test. <span style="color: red;">What is it for type I and type II?</span>   
 
@@ -1321,7 +1321,7 @@ Statistical/conclusion validity.{style="color:blue;"}
 **Bonferroni Inequality:**   
 $\text{alpha}_{\text{set}} \le \text{set size}*\text{alpha}_{\text{test}}$
 
-----
+--------------------------------------------------------------------------------
 
 - In Psychology, we are generally concerned with test-wise and family-wise error rates (and most discussion is about Type I errors).  
 
@@ -1331,7 +1331,7 @@ $\text{alpha}_{\text{set}} \le \text{set size}*\text{alpha}_{\text{test}}$
 
 - Non-orthogonal contrasts within multi-df effects are clearly related (in same family).
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question
@@ -1348,7 +1348,7 @@ What do we now know about statistical validity for POC approaches?
 [Must be comfortable with these contrasts testing *different* questions and therefore being in different families.]{style="color:blue;"}
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question
@@ -1371,7 +1371,7 @@ What do we do with multiple planned, non-orthogonal contrasts, and worse still u
 **Scheffe** can be used when you can't limit yourself a priori. Power sucks!   
 :::
 
-----
+--------------------------------------------------------------------------------
 
 ## Fisher LSD (Protected Testing)
 
@@ -1392,7 +1392,7 @@ How is family-wise alpha controlled?
 :::
 
 
-----
+--------------------------------------------------------------------------------
 
 
 ## Holm-Bonferroni Method
@@ -1412,7 +1412,7 @@ Note: Does **not** require significant omnibus test for type I protection.
 Holm, S. (1979). A simple sequentially rejective multiple test procedure. *Scandinavian Journal of Statistics*, 6 (2): 65–70.
 
 
-----
+--------------------------------------------------------------------------------
 
 ```{r}
 p = c(.001, .009, .005, .100, .200, .040, .011)
@@ -1428,7 +1428,7 @@ p.adjust(p, method= 'holm')
 ```
 
 
-----
+--------------------------------------------------------------------------------
 
 ## Scheffe Test
 
@@ -1442,7 +1442,7 @@ p.adjust(p, method= 'holm')
 
 - Provides good alpha protection. Test of omnibus effect is **not** required. Very conservative with high Type II errors.
 
-----
+--------------------------------------------------------------------------------
 
 ## Monte Carlo Examples
 
@@ -1488,7 +1488,7 @@ type_1 <- map_int(1:n_experiments, simulate_poc)
 
 Average type I error is `r mean(type_1)`
 
-----
+--------------------------------------------------------------------------------
 
 **2. All (3) pairwise contrasts (no protection).** 
 
@@ -1515,7 +1515,7 @@ type_1 <- map_int(1:n_experiments, simulate_uncorrected)
 
 Average type I error is `r mean(type_1)`
 
-----
+--------------------------------------------------------------------------------
 
 **3. Fisher LSD with 3 pairwise comparisons**
 ```{r}
@@ -1543,7 +1543,7 @@ type_1 <- map_int(1:n_experiments, simulate_fisher)
 
 Average type I error is `r mean(type_1)`
 
-----
+--------------------------------------------------------------------------------
 
 **4. Holm-Bonferroni correction with 3 pairwise comparisons**
 ```{r}
@@ -1569,7 +1569,7 @@ type_1 <- map_int(1:n_experiments, simulate_hb)
 
 Average type I error is `r mean(type_1)`
     
-----
+--------------------------------------------------------------------------------
 
 ### 3 Groups with One Group Difference (Type II Errors)
 
@@ -1579,7 +1579,7 @@ m_2 <- 10
 m_3 <- 20
 ```
 
-----
+--------------------------------------------------------------------------------
 
 **1. Fisher LSD with 3 pairwise comparisons**
 
@@ -1608,7 +1608,7 @@ type_2 <- map_int(1:n_experiments, simulate_fisher)
 
 Average type II error is `r mean(type_2)`
 
-----
+--------------------------------------------------------------------------------
 
 **2. Holm-Bonferroni correction with 3 pairwise comparisons**
 ```{r}
@@ -1635,7 +1635,7 @@ type_2 <- map_int(1:n_experiments, simulate_hb)
 
 Average type II error is `r mean(type_2)`
 
-----
+--------------------------------------------------------------------------------
 
 ### 3 Groups with All Groups Different (Type II Errors)
 
