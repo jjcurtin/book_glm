@@ -1,5 +1,4 @@
 --- 
-output: html_document 
 editor_options:  
   chunk_output_type: console
 --- 
@@ -10,6 +9,10 @@ editor_options:
 ```{r}
 #| echo: false
 
+
+library(tidyverse)
+library(broom)
+theme_set(theme_classic())
 options(scipen = 999) # turns off scientfic notation
 options(knitr.kable.NA = '')
 ```
@@ -29,39 +32,51 @@ For models with dichotomous independent variables, you will learn:
 
 - How to write up and display results.
 
------
+
+-------------------------------------------------------------------------------
 
 ## An Example
 
 **Example:**   
-Attitudes toward abortion as a function of sex and religion.    
+Attitudes about abortion in US as a function of sex and religion (based loosely on Pew Research Center data but simplified group means to easier numbers!)
 
-Sex: Male vs. Female    
-Religion: Catholic vs. Jewish   
-Attitude: 1–10 with higher scores indicating more permissive attitudes    
+Sex: 
+
+- Male vs. Female    
+
+Religion: 
+
+- Catholic vs. Jewish   
+
+Attitude: 
+
+- 1–20 with higher score indicating more permissive attitudes    
 
 Equal $n = 20$ in each cell ($N = 80$).   
 
+-------------------------------------------------------------------------------
+
+Open data and set up categorical variables as factors
 ```{r}
-#| echo: false
-#| message: false
-
-library(tidyverse)
-
-theme_set(theme_classic())
-
 data <- read_csv(here::here("data_lecture/12_interactions_abortion.csv"),
                  show_col_types = FALSE) |> 
-  mutate(sex = factor(sex, levels = 0:1, labels = c("male", "female")),
-         rel = factor(rel, levels = 0:1, labels = c("Catholic", "Jewish")))
+  mutate(sex = factor(sex, levels = c("male", "female")),
+         rel = factor(rel, levels = c("Catholic", "Jewish")))
+```
 
+-------------------------------------------------------------------------------
+
+Make and display table of data using `kableExtra`
+
+```{r}
+#| code-fold: true
 
 ex_tbl <- data |> 
   group_by(sex, rel) |> 
   summarise(mean = mean(att), .groups = "drop") |> 
   pivot_wider(names_from = sex, values_from = mean) |> 
   mutate(all = (male + female)/2) |> 
-  add_row(rel = "all", male = 3, female = 6, all = 4.5) |> 
+  add_row(rel = "all", male = 13, female = 16, all = 14.5) |> 
   rename(` ` = rel) |> 
   kableExtra::kable() |> 
   kableExtra::kable_classic()
@@ -69,21 +84,7 @@ ex_tbl <- data |>
 ex_tbl
 ```
 
-```{r}
-#| echo: false
-
-sse <- function(model) {
-  sum(residuals(model)^2)
-}
-
-pre <- function(compact, augmented) {
-  sse_c <- sse(compact)
-  sse_a <- sse(augmented)
-  (sse_c - sse_a)/sse_c
-}
-```
-
------
+-------------------------------------------------------------------------------
 
 ## Terms and Brief Definitions
 
@@ -92,7 +93,6 @@ pre <- function(compact, augmented) {
 
 ex_tbl
 ```
-
 
 **Common terminology:** One-way ANOVA, Two-way ANOVA, Three-way ANOVA; 2 X 2 ANOVA; 2 X 3 X 2 ANOVA; Factorial ANOVA.   
 
@@ -106,9 +106,15 @@ ex_tbl
 **Grand mean:** The mean of all cell means.  
 
 
-**Unweighted vs. weighted means**
+**Unweighted vs. weighted means**: 
 
------
+- Unweighted means are the average of the cell means. 
+- Weighted means are the average of the cell means, but the cells are weighted by the number of observations in each cell. 
+- In our fields, we generally want unweighted means because sampling is not representative
+
+-------------------------------------------------------------------------------
+
+## Terms and Brief Definitions
 
 ```{r}
 #| echo: false
@@ -116,16 +122,13 @@ ex_tbl
 ex_tbl
 ```
 
-
 **Main effect**: The *average* effect of an IV on the DV across the levels of another IV in the model (The effect of an IV at the average level of another IV).  Evaluated with marginal means for IV.   
 
 **Simple effect**:  The effect of an IV on the DV at a specific level of the other IV.  Evaluated with cell means for focal IV at specific level of other IV (moderator).  
 
 **Interaction**: The simple effect of a (focal) IV on the DV differs across the levels of another (moderator) IV in the model.
 
-
------
-
+-------------------------------------------------------------------------------
 
 ## Describing Effects
 
@@ -137,7 +140,6 @@ ex_tbl
 
 ::: {.callout-important}
 # Question
-
 What is the magnitude of the **main effect** of sex on attitudes?
 :::
 
@@ -145,20 +147,26 @@ What is the magnitude of the **main effect** of sex on attitudes?
 [Women have 3 points more permissive attitudes about abortion than men.]{style="color: blue;"}
 :::
 
-:::{.fragment}
+-------------------------------------------------------------------------------
+
+## Describing Effects
+
+```{r}
+#| echo: false
+
+ex_tbl
+```
+
 :::{.callout-important}
 # Question
-
 What is the magnitude of the **main effect** of religion on attitudes?
-:::
 :::
 
 :::{.fragment}
 [Jews have 1 point more permissive attitudes about abortion than Catholics.]{style="color: blue;"} 
 :::
 
-
------
+-------------------------------------------------------------------------------
 
 ```{r}
 #| echo: false
@@ -168,7 +176,6 @@ ex_tbl
 
 ::: {.callout-important}
 # Question
-
 What is the magnitude of the **simple effects** of sex on attitudes?
 :::
 
@@ -178,12 +185,19 @@ What is the magnitude of the **simple effects** of sex on attitudes?
 [Among Jews, women have 4 points more permissive attitudes about abortion than men.]{style="color: blue;"}
 :::
 
-:::{.fragment}
+-------------------------------------------------------------------------------
+
+## Describing Effects
+
+```{r}
+#| echo: false
+
+ex_tbl
+```
+
 :::{.callout-important}
 # Question
-
 What is the magnitude of the **simple effects** of religion on attitudes?
-:::
 :::
 
 :::{.fragment}
@@ -192,9 +206,9 @@ What is the magnitude of the **simple effects** of religion on attitudes?
 [Among women, Jews have 2 points more permissive attitudes about abortion than Catholics.]{style="color: blue;"}
 :::
 
+-------------------------------------------------------------------------------
 
------
-
+## Describing Effects
 
 ```{r}
 #| echo: false
@@ -204,20 +218,18 @@ ex_tbl
 
 ::: {.callout-important}
 # Question
-
 Does there appear to be an interaction between sex and religion? Why or why not?
 :::
-
 
 :::{.fragment}
 [Yes, there does appear to be an interaction. The simple effects of sex appear to be different across Jews (4 points) than Catholics (2 points). Alternatively, the simple effects of religion appear to be different across women (2 points) and men (0 points).]{style="color: blue;"}      
 
-[Of course, you can't tell if the interaction is significant by looking at the data descriptively, you have to test the interaction.]{style="color: blue;"}
+[Of course, you can't tell if any of these (interaction, main effects, simple effects) are significant by looking at the data descriptively, you have to test the parameter estimates for each effect.]{style="color: blue;"}
 :::
 
+-------------------------------------------------------------------------------
 
------
-
+## Describing Effects
 
 ```{r}
 #| echo: false
@@ -228,7 +240,6 @@ ex_tbl
 
 ::: {.callout-important}
 # Question 
-
 How might you quantify the magnitude of the interaction?
 :::
 
@@ -240,42 +251,42 @@ How might you quantify the magnitude of the interaction?
 [This will be the parameter estimate for the interaction!]{style="color: blue;"}  
 :::
 
-------
+-------------------------------------------------------------------------------
 
-You have learned that there are two common options for coding the regressors for categorical IVs: *Dummy* codes and *Centered* codes.   
-
+You have learned that there are two common options for coding the regressors for categorical predictors: *Dummy* codes and *Centered* codes.   
 
 
 **Centered**    
-`sex_c`: male (-0.5), female (0.5)    
-`rel_c`: Catholic (-0.5), Jewish (0.5)     
+
+- `sex_c`: male (-0.5), female (0.5)    
+- `rel_c`: Catholic (-0.5), Jewish (0.5)     
 
 
 **Dummy**    
-`sex_c`: male (0), female (1)    
-`rel_c`: Catholic (0), Jewish (1)     
+
+- `sex_c`: male (0), female (1)    
+- `rel_c`: Catholic (0), Jewish (1)     
 
 
-The two systems yield essentially the same result (except for $b_0$) for **additive models**.
+The two systems yield the same result (except for $b_0$) for **additive models**.
 
------
+-------------------------------------------------------------------------------
 
 ## Centered Codes for Additive Model
 
 **Centered**    
-`sex_c`: male (-0.5), female (0.5)    
-`rel_c`: Catholic (-0.5), Jewish (0.5)  
+
+- `sex_c`: male (-0.5), female (0.5)    
+- `rel_c`: Catholic (-0.5), Jewish (0.5)  
 
 
-$\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c$   
+$att =  14.5 +  3*sex_c + 1*rel_c$   
 
 
 ::: {.callout-important}
 # Exercise
-
 Link parameter estimates $b_0$, $b_1$, & $b_2$ to the figure below. 
 :::
-
 
 ```{r}
 #| echo: false
@@ -301,24 +312,23 @@ data_plot |>
   labs(color = NULL,
        y = "Attitudes about abortion",
        x = "Sex (centered)") +
-  scale_y_continuous(limits = c(1, 8)) +
+  scale_y_continuous(limits = c(10, 20)) +
   scale_x_continuous(breaks = c(-.5, 0, .5))
 ```
 
------
-
+------------------------------------------------------------------------------
 
 **Centered**    
-`sex_c`: male (-0.5), female (0.5)    
-`rel_c`: Catholic (-0.5), Jewish (0.5)  
+
+- `sex_c`: male (-0.5), female (0.5)    
+- `rel_c`: Catholic (-0.5), Jewish (0.5)  
 
 
-$\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c$   
+$att =  14.5 +  3*sex_c + 1*rel_c$   
 
 
 ::: {.callout-important}
 # Exercise 
-
 Link parameter estimates $b_0$, $b_1$, & $b_2$ to the table of means below.
 :::
 
@@ -329,10 +339,7 @@ Link parameter estimates $b_0$, $b_1$, & $b_2$ to the table of means below.
 ex_tbl
 ```
 
-
 :::{.fragment}
-$\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c$    
-
 [$b_0$ is the predicted value for attitudes for 0 on both regressors. This is the grand mean.]{style="color: blue;"}   
 
 [$b_1$ is the effect of sex. It will be forced to be constant across religions (6 – 3 = 3).]{style="color: blue;"}   
@@ -340,12 +347,41 @@ $\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c$
 [$b_2$ is the effect of religion constant across sexes (5 – 4 = 1).]{style="color: blue;"}  
 :::
 
+-------------------------------------------------------------------------------
 
------
+**Centered**    
+
+- `sex_c`: male (-0.5), female (0.5)    
+- `rel_c`: Catholic (-0.5), Jewish (0.5)     
+
+$att =  14.5 +  3*sex_c + 1*rel_c$   
+
+
+**Dummy**    
+
+- `sex_c`: male (0), female (1)    
+- `rel_c`: Catholic (0), Jewish (1)     
+
+
+```{r}
+#| echo: false
+
+ex_tbl
+```
+
+::: {.callout-important}
+# Exercise 
+Only the intercept would change in the linear model if we used dummy codes (above).  What would the intercept be for the dummy coded model?
+:::
+
+:::{.fragment}
+$att =  13 +  3*sex_c + 1*rel_c$   
+:::
+
+-------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question
-
 What constraints were imposed in the additive model?
 :::
 
@@ -355,7 +391,7 @@ What constraints were imposed in the additive model?
 [The effect of religion was constrained to be the same for both men and women. 1 is the *best* parameter value because it is the average of the two simple effects of religion (0 vs. 2).]{style="color: blue;"}
 :::
 
------
+-------------------------------------------------------------------------------
 
 ## Interactive Models
 
@@ -368,24 +404,22 @@ ex_tbl
 
 ::: {.callout-important}
 # Question
-
 How do you relax this constraint and test the interaction between sex and religion?
 :::
-
 
 :::{.fragment}
 [Regress attitudes on sex, religion and their interaction (calculated as the product of sex * religion).]{style="color: blue;"}   
 
-$\text{att} =  b_0 +  b_1*\text{sex} + b_2*\text{rel} + b_3*\text{sex}*\text{rel}$   
+$att =  b_0 +  b_1*sex + b_2*rel + b_3*sex*rel$   
 
 [The test of the $b_3$ coefficient against zero is the test of the interaction (Alternatively: the comparison of this model to the compact model:]{style="color: blue;"}     
 
-$\text{att} =  b_0 +  b_1*\text{sex} + b_2*\text{rel} + 0*\text{sex}*\text{rel}$ 
+$att =  b_0 +  b_1*sex + b_2*rel + 0*sex*rel$ 
 :::
 
------
+-------------------------------------------------------------------------------
 
-In interactive models, centered codes and dummy codes yield very different results because they are testing different questions.    
+In interactive models, centered codes and dummy codes yield very different results for all of the parameters estimates (other than the interaction) because the parameter estimates are testing different questions depending on the coding of the $X$s.    
 
 You will use **centered codes** when you want to test main effects and interactions. The parameter estimate for the regressors coding for the IVs test the main effect of each IV. **This is the approach you will almost always use for your primary analysis.**     
 
@@ -393,53 +427,45 @@ You will use **dummy codes** when you want to test simple effects. The  paramete
 
 The parameter estimate for the interaction and its interpretation is the same across these systems.
 
------
+-------------------------------------------------------------------------------
 
 ## Centered Codes for Interactive Model
 
 **Centered**    
-`sex_c`: male (-0.5), female (0.5)    
-`rel_c`: Catholic (-0.5), Jewish (0.5)  
+
+- `sex_c`: male (-0.5), female (0.5)    
+- `rel_c`: Catholic (-0.5), Jewish (0.5)  
 
 
-$\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c + 2*\text{sex}_c*\text{rel}_c$   
-
-
+$att =  14.5 +  3*sex_c + 1*rel_c + 2*sex_c*rel_c$   
 
 ::: {.callout-important}
 # Exercise
-
 Link parameter estimates $b_0$, $b_1$, & $b_2$ to the table of means below.
 :::
 
-
 ```{r}
 #| echo: false
 
 ex_tbl
 ```
 
-
 :::{.fragment}
-$\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c + 2*\text{sex}_c*\text{rel}_c$ 
+[$b_0$ is the predicted value for attitudes for 0 on both $X$s. This is the grand mean.]{style="color: blue;"}   
 
-[$b_0$ is the predicted value for attitudes for 0 on both regressors. This is the grand mean.]{style="color: blue;"}   
+[$b_1$ is the main effect of sex (16 – 13 = 3).]{style="color: blue;"}   
 
-[$b_1$ is the main effect of sex (6 – 3 = 3).]{style="color: blue;"}   
-
-[$b_2$ is the main effect of religion (5 – 4 = 1).]{style="color: blue;"}
+[$b_2$ is the main effect of religion (15 - 14 = 1).]{style="color: blue;"}
 :::
 
-
------
+-------------------------------------------------------------------------------
 
 **Centered**    
-`sex_c`: male (-0.5), female (0.5)    
-`rel_c`: Catholic (-0.5), Jewish (0.5)  
 
+- `sex_c`: male (-0.5), female (0.5)    
+- `rel_c`: Catholic (-0.5), Jewish (0.5)  
 
-$\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c + 2*\text{sex}_c*\text{rel}_c$   
-
+$att =  4.5 +  3*sex_c + 1*rel_c + 2*sex_c*rel_c$   
 
 ```{r}
 #| echo: false
@@ -449,49 +475,56 @@ ex_tbl
 
 ::: {.callout-important}
 # Exercise
-
 Link $b_3$ to the table of means above considering sex as the focal variable. 
 :::
 
 :::{.fragment}
-$\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c + 2*\text{sex}_c*\text{rel}_c$   
-
 [$b_3$ is the change in the magnitude of the (simple) sex effect across religions.]{style="color: blue;"}  
 
-[(7 - 3; Jewish) - (5 - 3; Catholic) = 2]{style="color: blue;"}
+[(17 - 13; Jewish) - (15 - 13; Catholic) = 2]{style="color: blue;"}
 :::
 
-:::{.fragment}
+-------------------------------------------------------------------------------
+
+**Centered**    
+
+- `sex_c`: male (-0.5), female (0.5)    
+- `rel_c`: Catholic (-0.5), Jewish (0.5)  
+
+$att =  4.5 +  3*sex_c + 1*rel_c + 2*sex_c*rel_c$   
+
+```{r}
+#| echo: false
+
+ex_tbl
+```
+
 ::: {.callout-important}
 # Exercise
-
 Link $b_3$ to the table of means above considering religion as the focal variable.
-:::
 :::
 
 :::{.fragment}
 [$b_3$ is the change in the magnitude of the (simple) religion effect across sexes.]{style="color: blue;"}   
 
-[(7 - 5; female) - (3 - 3; male) = 2]{style="color: blue;"}
+[(17 - 15; female) - (13 - 13; male) = 2]{style="color: blue;"}
 :::
 
-
------
+-------------------------------------------------------------------------------
 
 **Centered**    
-`sex_c`: male (-0.5), female (0.5)    
-`rel_c`: Catholic (-0.5), Jewish (0.5)  
+
+- `sex_c`: male (-0.5), female (0.5)    
+- `rel_c`: Catholic (-0.5), Jewish (0.5)  
 
 
-$\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c + 2*\text{sex}_c*\text{rel}_c$   
+$att =  14.5 +  3*sex_c + 1*rel_c + 2*sex_c*rel_c$   
 
 
 ::: {.callout-important}
 # Exercise
-
 Link all coefficients to the figure below.
 :::
-
 
 ```{r}
 #| echo: false
@@ -513,19 +546,19 @@ data_plot |>
   labs(color = NULL,
        y = "Attitudes about abortion",
        x = NULL) +
-  scale_y_continuous(limits = c(1, 8)) +
+  scale_y_continuous(limits = c(10, 20)) +
   scale_x_continuous(breaks = c(-.5, .5), labels = c("Male", "Female"))
 ```
 
-
------
+-------------------------------------------------------------------------------
 
 **Centered**    
-`sex_c`: male (-0.5), female (0.5)    
-`rel_c`: Catholic (-0.5), Jewish (0.5)  
+
+- `sex_c`: male (-0.5), female (0.5)    
+- `rel_c`: Catholic (-0.5), Jewish (0.5)  
 
 
-$\text{att} =  4.5 +  3*\text{sex}_c + 1*\text{rel}_c + 2*\text{sex}_c*\text{rel}_c$    
+$att =  4.5 +  3*sex_c + 1*rel_c + 2*sex_c*rel_c$    
 
 ```{r}
 #| echo: false
@@ -536,112 +569,110 @@ ex_tbl
 
 **You can use the model to reproduce cell means.**   
 
-Catholic men: $4.5 + 3*(-.5) + 1*(-.5) + 2*(-.5)*(-.5) = 3$   
+Catholic men: $14.5 + 3*(-.5) + 1*(-.5) + 2*(-.5)*(-.5) = 13$   
 
-Jewish women: $4.5 + 3*(.5) + 1*(.5) + 2*(.5)*(-.5) = 7$    
+Jewish women: $14.5 + 3*(.5) + 1*(.5) + 2*(.5)*(-.5) = 17$    
 
 Etc…
 
------
+-------------------------------------------------------------------------------
 
 ## Dummy Codes for Interactive Model
 
 **Dummy**    
-`sex_c`: male (0), female (1)    
-`rel_c`: Catholic (0), Jewish (1)  
+
+- `sex_c`: male (0), female (1)    
+- `rel_c`: Catholic (0), Jewish (1)  
 
 
-$\text{att} =  3 +  2*\text{sex}_d + 0*\text{rel}_d + 2*\text{sex}_d*\text{rel}_d$   
-
+$att =  13 +  2*sex_d + 0*rel_d + 2*sex_d*rel_d$   
 
 ::: {.callout-important}
 # Exercise
-
 Link parameter estimates $b_0$, $b_1$, & $b_2$ to the table of means below.
 :::
-
 
 ```{r}
 #| echo: false
 
 ex_tbl
 ```
-
 
 :::{.fragment}
 [$b_0$ is the predicted value for attitudes for 0 on both regressors. This is the predicted value for male Catholics.]{style="color: blue;"}    
 
-[$b_1$ is the simple effect of sex for Catholics (5 - 3 = 2).]{style="color: blue;"}     
+[$b_1$ is the simple effect of sex for Catholics (15 - 13 = 2).]{style="color: blue;"}     
 
-[$b_2$ is the simple effect of religion for men (3 – 3 = 0).]{style="color: blue;"}     
+[$b_2$ is the simple effect of religion for men (13 – 13 = 0).]{style="color: blue;"}     
 :::
 
-```{r}
-#| echo: false
-
-ex_tbl
-```
-
-
------
+-------------------------------------------------------------------------------
 
 **Dummy**    
-`sex_c`: male (0), female (1)    
-`rel_c`: Catholic (0), Jewish (1)  
+
+- `sex_c`: male (0), female (1)    
+- `rel_c`: Catholic (0), Jewish (1)  
 
 
-$\text{att} =  3 +  2*\text{sex}_d + 0*\text{rel}_d + 2*\text{sex}_d*\text{rel}_d$ 
-
+$att =  13 +  2*sex_d + 0*rel_d + 2*sex_d*rel_d$ 
 
 ```{r}
 #| echo: false
 
 ex_tbl
 ```
-
 
 ::: {.callout-important}
 # Exercise
-
 Link $b_3$ to the table of means above considering sex as the focal variable.
 :::
 
 :::{.fragment}
 [$b_3$ is the change in the magnitude of the (simple) sex effect across religions.]{style="color: blue;"}   
 
-[(7 - 3; Jewish) - (5 - 3; Catholic) = 2]{style="color: blue;"}
+[(17 - 13; Jewish) - (15 - 13; Catholic) = 2]{style="color: blue;"}
 :::
 
-:::{.fragment}
+-------------------------------------------------------------------------------
+
+**Dummy**    
+
+- `sex_c`: male (0), female (1)    
+- `rel_c`: Catholic (0), Jewish (1)  
+
+$att =  13 +  2*sex_d + 0*rel_d + 2*sex_d*rel_d$ 
+
+```{r}
+#| echo: false
+
+ex_tbl
+```
+
 ::: {.callout-important}
 # Exercise
-
 Link $b_3$ to the table of means below considering religion as the focal variable.
-:::
 :::
 
 :::{.fragment}
 [$b_3$ is the change in the magnitude of the (simple) religion effect across sexes.]{style="color: blue;"}   
 
-[(7 - 5; female) - (3 - 3; male) = 2]{style="color: blue;"}
+[(17 - 15; female) - (13 - 13; male) = 2]{style="color: blue;"}
 :::
 
------
+-------------------------------------------------------------------------------
 
 **Dummy**    
-`sex_c`: male (0), female (1)    
-`rel_c`: Catholic (0), Jewish (1)  
+
+- `sex_c`: male (0), female (1)    
+- `rel_c`: Catholic (0), Jewish (1)  
 
 
-$\text{att} =  3 +  2*\text{sex}_d + 0*\text{rel}_d + 2*\text{sex}_d*\text{rel}_d$ 
-
+$att =  3 +  2*sex_d + 0*rel_d + 2*sex_d*rel_d$ 
 
 ::: {.callout-important}
 # Exercise
-
 Link all coefficients to the figure below.
 :::
-
 
 ```{r}
 #| echo: false
@@ -667,19 +698,18 @@ data_plot |>
   labs(color = NULL,
        y = "Attitudes about abortion",
        x = NULL) +
-  scale_y_continuous(limits = c(1, 8)) +
+  scale_y_continuous(limits = c(10, 20)) +
   scale_x_continuous(breaks = c(0, 1), labels = c("Male (0)", "Female (1)"))
 ```
 
-
------
+-------------------------------------------------------------------------------
 
 **Dummy**    
-`sex_c`: male (0), female (1)    
-`rel_c`: Catholic (0), Jewish (1)  
 
+- `sex_c`: male (0), female (1)    
+- `rel_c`: Catholic (0), Jewish (1)  
 
-$\text{att} =  3 +  2*\text{sex}_d + 0*\text{rel}_d + 2*\text{sex}_d*\text{rel}_d$ 
+$att =  3 +  2*sex_d + 0*rel_d + 2*sex_d*rel_d$ 
 
 
 ```{r}
@@ -688,52 +718,46 @@ $\text{att} =  3 +  2*\text{sex}_d + 0*\text{rel}_d + 2*\text{sex}_d*\text{rel}_
 ex_tbl
 ```
 
-
 **You can use the model to reproduce cell means.**   
 
-Catholic men: $3 + 2*(0) + 0*(0) + 2*(0)*(0) = 3$   
+Catholic men: $13 + 2*(0) + 0*(0) + 2*(0)*(0) = 13$   
 
-Jewish women: $3 + 2*(1) + 0*(1) + 2*(1)*(1) = 7$    
+Jewish women: $13 + 2*(1) + 0*(1) + 2*(1)*(1) = 17$    
 
 Etc…
 
 
------
+-------------------------------------------------------------------------------
 
 **Dummy**    
-`sex_c`: male (0), female (1)    
-`rel_c`: Catholic (0), Jewish (1)  
 
+- `sex_c`: male (0), female (1)    
+- `rel_c`: Catholic (0), Jewish (1)  
 
-$\text{att} =  3 +  2*\text{sex}_d + 0*\text{rel}_d + 2*\text{sex}_d*\text{rel}_d$ 
-
-
+$att =  3 +  2*sex_d + 0*rel_d + 2*sex_d*rel_d$ 
 
 ::: {.callout-important}
 # Question
-
 The above dummy coding system gave us the above regression equation where $b_1$ was the simple effect of sex for Catholics. How do we get the simple effect of sex for Jews?
 :::
-
 
 :::{.fragment}
 [Recode religion with dummy codes: Jewish = 0 and Catholic = 1.  Now the sex effect will be the simple effect for Jews because Jews = 0.]{style="color: blue;"}  
 :::
 
------
+-------------------------------------------------------------------------------
 
 
 **Dummy**    
-`sex_c`: male (0), female (1)    
-`rel_c`: Catholic (1), Jewish (0)  
 
+- `sex_c`: male (0), female (1)    
+- `rel_c`: [Catholic (1), Jewish (0)]{style="color: red;"}
 
 ```{r}
 #| echo: false
 
 ex_tbl
 ```
-
 
 ::: {.callout-important}
 # Question 
@@ -742,29 +766,30 @@ What will the regression equation be now?
 :::
 
 :::{.fragment}
-$\text{att} =  3 +  4*\text{sex}_d + 0*\text{rel}_d + -2*\text{sex}_d*\text{rel}_d$     
+$att = 13 +  4*sex_d + 0*rel_d + -2*sex_d*rel_d$     
 
-[Recoding the moderator changes the simple effect for the focal variable. With dummy codes, the parameter estimate for the focal variable is always the simple effect when the moderator = 0.]{style="color: blue;"}
+[Recoding the moderator changes the simple effect for the focal variable. With dummy codes, the parameter estimate for the focal variable is always its simple effect when the moderator = 0.]{style="color: blue;"}
 :::
 
+-------------------------------------------------------------------------------
 
------
-
-
-## Sample Writeup
-
-We analyzed attitudes about abortion in a general linear model with centered, unit-weighted regressors for sex (female vs. male), religion (Jewish vs. Catholic) and their interaction. We report both raw GLM coefficients ($b$) and partial eta-squared ($\eta_p^2$) to document effect sizes.   
-
-The main effect of sex was significant, 95% CI($b$)=[2.22, 3.78], $\eta_p^2= 0.44, t(76) = 7.68, p < .001$, indicating that women’s attitudes about abortion were 3 points higher than men on average. However, the sex X religion interaction was also significant, 95% CI($b$)=[0.44, 3.56], $\eta_p^2= 0.08, t(76) = 2.56, p = .001$ (see Figure 1). This indicates that the magnitude of the sex effect was significantly greater in Jews (95% CI($b$)=[2.90, 5.10], $\eta_p^2= 0.41, p < .001$) than in Catholics (95% CI($b$%)=[0.90, 3.10], $\eta_p^2 = 0.15, p < .001$).
-
-
+Here are all the relevant analyses
 ```{r}
 #| code-fold: true
-#| output: false
+
+sse <- function(model) {
+  sum(residuals(model)^2)
+}
+
+pre <- function(compact, augmented) {
+  sse_c <- sse(compact)
+  sse_a <- sse(augmented)
+  (sse_c - sse_a) / sse_c
+}
 
 # centered interactive model
 m_int <- lm(att ~ sex_c*rel_c, data)
-broom::tidy(m_int)
+tidy(m_int)
 confint(m_int)
 
 # peta sex main effect
@@ -773,30 +798,36 @@ pre(lm(att ~ rel_c + sex_c:rel_c, data), m_int)
 # peta interaction
 pre(lm(att ~ rel_c + sex_c, data), m_int)
 
-# simple effect for Jews (coded 0)
+# simple effect of sex for Jews (coded 0)
 data <- data |> 
   mutate(rel_d = if_else(rel == "Catholic", 1, 0))
 
 m_int_se_j <- lm(att ~ rel_d*sex_d, data)
-broom::tidy(m_int_se_j)
+tidy(m_int_se_j)
 confint(m_int_se_j)
 
 pre(lm(att ~ rel_d + sex_d:rel_d, data), m_int_se_j)
 
-# simple effect for Catholic (coded 0)
+# simple effect sex for Catholic (coded 0)
 data <- data |> 
   mutate(rel_d = if_else(rel == "Catholic", 0, 1))
 
 m_int_se_c <- lm(att ~ rel_d*sex_d, data)
-broom::tidy(m_int_se_c)
+tidy(m_int_se_c)
 confint(m_int_se_c)
 
 pre(lm(att ~ rel_d + sex_d:rel_d, data), m_int_se_c)
 ```
 
+-------------------------------------------------------------------------------
 
+## Sample Writeup
 
------
+We analyzed attitudes about abortion in a general linear model with centered, unit-weighted regressors for sex (female vs. male), religion (Jewish vs. Catholic) and their interaction. We report both raw GLM coefficients ($b$) and partial eta-squared ($\eta_p^2$) to document effect sizes.   
+
+The main effect of sex was significant, 95% CI($b$)=[2.22, 3.78], $\eta_p^2= 0.44, t(76) = 7.68, p < .001$, indicating that women’s attitudes about abortion were 3 points higher than men on average. However, the sex X religion interaction was also significant, 95% CI($b$)=[0.44, 3.56], $\eta_p^2= 0.08, t(76) = 2.56, p = .001$ (see Figure 1). This indicates that the magnitude of the sex effect was significantly greater in Jews (95% CI($b$)=[2.90, 5.10], $\eta_p^2= 0.41, p < .001$) than in Catholics (95% CI($b$%)=[0.90, 3.10], $\eta_p^2 = 0.15, p < .001$).
+
+-------------------------------------------------------------------------------
 
 ## Figure
 
@@ -825,7 +856,6 @@ data_plot |>
 
 ::: {.callout-important}
 # Question
-
 What else should be included in this publication quality figure?
 :::
 
@@ -837,7 +867,7 @@ What else should be included in this publication quality figure?
 [Notation to indicate simple effects for focal variable?]{style="color: blue;"}
 :::
 
------
+-------------------------------------------------------------------------------
 
 ## On your Own
 
@@ -855,22 +885,23 @@ ex_tbl_2
 ```
 
 **Centered**    
-`group_c`: sober (-0.5), drunk (0.5)    
-`threat_c`: certain (-0.5), uncertain (0.5)  
+
+- `group_c`: sober (-0.5), drunk (0.5)    
+- `threat_c`: certain (-0.5), uncertain (0.5)  
 
 
 ::: {.callout-important}
 # Exercise
+Provide the specific values for the parameter estimates in this model based on the table above
 
-Complete the following regression equation using the table above: $\text{fps} =  b_0 +  b_1*\text{group}_c + b_2*\text{threat}_c + b_3*\text{group}_c*\text{threat}_c$
+- $fps =  b_0 +  b_1*group_c + b_2*threat_c + b_3*group_c*threat_c$
 :::
 
 :::{.fragment}
-$\text{fps} =  100 +  -20*\text{group}_c + 10*\text{threat}_c + -20*\text{group}_c*\text{threat}_c$
+$fps =  100 +  -20*group_c + 10*threat_c + -20*group_c*threat_c$
 :::
 
-
------
+-------------------------------------------------------------------------------
 
 
 ## On your Own (Continued)
@@ -882,21 +913,24 @@ ex_tbl_2
 ```
 
 **Dummy**    
-`group_d`: sober (0), drunk (1)    
-`threat_d`: certain (0), uncertain (1)  
+
+- `group_d`: sober (0), drunk (1)    
+- `threat_d`: certain (0), uncertain (1)  
 
 ::: {.callout-important}
 # Exercise
 
-Complete the following regression equation using the table above: $\text{fps} =  b_0 +  b_1*\text{group}_d + b_2*\text{threat}_d + b_3*\text{group}_d*\text{threat}_d$
+Provide the specific values for the parameter estimates in this model based on the table above
+
+- $fps =  b_0 +  b_1*group_d + b_2*threat_d + b_3*group_d*threat_d$
 :::
 
 :::{.fragment}
-$\text{fps} =  100 +  -10*\text{group}_d + 20*\text{threat}_d + -20*\text{group}_d*\text{threat}_d$
+$fps =  100 +  -10*group_d + 20*threat_d + -20*group_d*threat_d$
 :::
 
 
------
+-------------------------------------------------------------------------------
 
 ## Learning Outcomes
 
@@ -911,4 +945,3 @@ For models with dichotomous independent variables, you learned:
 - How to calculate simple effects.
 
 - How to write up and display results.
-
