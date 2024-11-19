@@ -1,5 +1,4 @@
 --- 
-output: html_document 
 editor_options:  
   chunk_output_type: console
 --- 
@@ -12,69 +11,6 @@ editor_options:
 
 options(scipen = 999) # turns off scientfic notation
 options(knitr.kable.NA = '')
-```
-
-
-## Learning Objectives
-
-- Two categorical coding schemes to know:   
-  
-    1. Dummy coding (reference/control group).  
-    2. Contrast coding (whatever you can dream up!, POCs).   
-    
-- How best to test the comparisons coded by these methods if the comparisons are:   
-
-    1. Planned and orthogonal.   
-    2. planned and non-orthogonal.   
-    3. Unplanned.
-    
-- How to test simple effects when categorical variables have > 2 levels.   
-
---------------------------------------------------------------------------------
-
-::: {.callout-important}
-# Question 
-
-How do we handle analysis of categorical variables in regression (a *linear model*)?
-:::
-
-
-:::{.fragment}
-[We will need to recode the categorical variable into $N_{\text{levels}}/\text{groups}-1$ regressors that represent comparisons/contrasts within the overall categorical variable.]{style="color:blue;"}   
-
-[Testing the **set** of regressors will allow us to test the overall effect of the categorical variable but we will often not care about this test. We are generally much more focused on planned or unplanned comparisons between the groups/levels.]{style="color:blue;"}
-:::
-
-
----------------------------------------------------------------------------------
-
-## Example
-
-Examine the differences in overall health among patients with alcohol use disorder, patients with depression, and healthy controls.   
-
-```{r}
-#| code-fold: true
-#| message: false
-
-options(conflicts.policy = "depends.ok") 
-library(tidyverse)
-library(patchwork)
-
-theme_set(theme_classic()) 
-
-path_data <- "data_lecture"
-```
-
-```{r}
-data <- read_csv(here::here(path_data, "13_three_groups.csv"),
-                 show_col_types = FALSE) |> 
-  mutate(group = factor(group))
-
-slice_sample(data, n = 6)
-```
-
-```{r}
-#| code-fold: true
 
 sse <- function(model) {
   sum(residuals(model)^2)
@@ -96,24 +32,88 @@ delta_r2 <- function(mean, compact, augmented) {
 ```
 
 
+## Learning Objectives
+
+- Two categorical coding schemes to know:   
+  
+    1. Dummy coding (reference/control group).  
+    2. Contrast coding (whatever you can dream up!, POCs).   
+    
+- How best to test the comparisons coded by these methods if the comparisons are:   
+
+    1. Planned and orthogonal.   
+    2. Planned and non-orthogonal.   
+    3. Unplanned.
+    
+- How to test simple effects when categorical variables have > 2 levels.   
+
+--------------------------------------------------------------------------------
+
+::: {.callout-important}
+# Question 
+How have we handled categorical variables in our linear models and what constraint has been true for all of our categorical variables so far?
+:::
+
+::: {.fragment}
+[We have handled categorical variables by recoding using dummy codes or centered coefficients. This turned categorical/nominal variables into numeric variables.]{style="color:blue;"}
+
+[However, so far, we have only handled categorical variables with 2 levels.]{style="color:blue;"}
+:::
+
+--------------------------------------------------------------------------------
+
+These single $X$ variables coded with dummy or contrast systems yielded one comparison of the mean of $Y$ across the two levels of the categorical variable.
+
+One we have more than two levels/groups within the categorical variable
+
+- We will need to recode the categorical variable into $N_{levels/groups}-1$ regressors ($X$s) that represent $N - 1$ comparisons/contrasts within the overall categorical variable.
+
+- Testing the **set** of regressors will allow us to test the overall effect of the categorical variable but we will often not care about this test. We are generally much more focused on planned or unplanned comparisons between the groups/levels.
+
+---------------------------------------------------------------------------------
+
+## Example
+
+Examine the differences in overall health among patients with alcohol use disorder, patients with depression, and healthy controls.   
+
+```{r}
+#| code-fold: true
+#| message: false
+
+options(conflicts.policy = "depends.ok") 
+library(tidyverse)
+library(broom)
+library(patchwork)
+
+theme_set(theme_classic()) 
+path_data <- "data_lecture"
+```
+
+```{r}
+data <- read_csv(here::here(path_data, "13_three_groups.csv"),
+                 show_col_types = FALSE) |> 
+  mutate(group = factor(group))
+
+slice_sample(data, n = 10)
+```
+
 --------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question  
-
-Why can we not handle multilevel categorical variables by simply coding each group with a different consecutive value (e.g., alcohol = 1, depress = 2 , healthy = 3)?
+Why can we not handle multi-level categorical variables by simply coding each group with a different consecutive value (e.g., alcohol = 1, depress = 2 , healthy = 3)?
 :::
 
 :::{.fragment}
 [There is no meaningful way to order the multiple groups. The shape of the relationship will completely change based on arbitrary ordering of the groups (exception is when categorical variable is ordinal).]{style="color:blue;"}    
 
-[Moreover, we are often interested in individual pair-wise group comparisons that would be lost by forcing linear relationship.]{style="color:blue;"}    
+[Moreover, we are often interested in individual pair-wise group comparisons that would be lost by forcing linear relationship.]{style="color:blue;"}
 :::
 
 --------------------------------------------------------------------------------
 
 ```{r}
-#| code-fold: true
+#| echo: false 
 
 order_1 <- data |> 
   mutate(group = case_match(group,
@@ -156,6 +156,15 @@ order_1 + order_2 + order_3
 
 ## 3 Group Dummy Coding (Non-orthogonal)  
 
+We will start with generalizing the dummy coding approach to more than 2 levels
+
+- Need 2 regressors (`alcohol_d`, `depress_d`) to represent a 3 level categorical variable.   
+- Regressor 1 is coded 1 for membership in Group 1 (alcohol) and 0 for all other group membership.
+- Regressor 2 is coded 1 for membership in Group 2 (depress) and 0 for all other group membership.
+- Reference group (healthy) is coded 0 for all regressors.
+
+This yields the following dummy coding table for our example
+
 ```{r}
 #| echo: false
 
@@ -164,31 +173,28 @@ order_1 + order_2 + order_3
        depress_d = c(0, 1, 0)))
 ```
 
-- Need 2 regressors (`alcohol_d`, `depress_d`) to represent a 3 level categorical variable.   
-
-- Regressor 1 is coded 1 for membership in Group 1 (alcohol) and 0 for all other group membership.
-
-- Regressor 2 is coded 1 for membership in Group 2 (depress) and 0 for all other group membership.
-
-- Reference group (healthy) is coded 0 for all regressors.
-
 --------------------------------------------------------------------------------
 
+```{r}
+tibble_d
+```
 
+And here are the two new regressors for our data
 ```{r}
 data <- data |> 
   mutate(alcohol_d = if_else(group == "alcohol", 1, 0),
          depress_d = if_else(group == "depress", 1, 0))
 
-slice_sample(data, n = 6)
+slice_sample(data, n = 10)
 ```
 
 --------------------------------------------------------------------------------
 
+Now 
 ```{r}
 m_d <- lm(health ~ alcohol_d + depress_d, data)
 
-broom::tidy(m_d)
+tidy(m_d)
 ```
 
 --------------------------------------------------------------------------------
