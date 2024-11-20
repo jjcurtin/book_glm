@@ -1,34 +1,10 @@
---- 
-editor_options:  
-  chunk_output_type: console
---- 
- 
-
 # Unit 13: Categorical Variables > 2 Levels 
 
 ```{r}
 #| echo: false
 
-options(scipen = 999) # turns off scientfic notation
+options(scipen = 999) # turns off scientific notation
 options(knitr.kable.NA = '')
-
-sse <- function(model) {
-  sum(residuals(model)^2)
-}
-
-pre <- function(compact, augmented) {
-  sse_c <- sse(compact)
-  sse_a <- sse(augmented)
-  (sse_c - sse_a)/sse_c
-}
-
-delta_r2 <- function(mean, compact, augmented) {
-  sse_m <- sse(mean)
-  sse_c <- sse(compact)
-  sse_a <- sse(augmented)
-  
-  (sse_c - sse_a)/sse_m
-}
 ```
 
 
@@ -41,8 +17,8 @@ delta_r2 <- function(mean, compact, augmented) {
     
 - How best to test the comparisons coded by these methods if the comparisons are:   
 
-    1. Planned and orthogonal.   
-    2. Planned and non-orthogonal.   
+    1. Planned and non-orthogonal.   
+    2. Planned and orthogonal.   
     3. Unplanned.
     
 - How to test simple effects when categorical variables have > 2 levels.   
@@ -64,7 +40,7 @@ How have we handled categorical variables in our linear models and what constrai
 
 These single $X$ variables coded with dummy or contrast systems yielded one comparison of the mean of $Y$ across the two levels of the categorical variable.
 
-One we have more than two levels/groups within the categorical variable
+Once we have more than two levels/groups within the categorical variable
 
 - We will need to recode the categorical variable into $N_{levels/groups}-1$ regressors ($X$s) that represent $N - 1$ comparisons/contrasts within the overall categorical variable.
 
@@ -92,7 +68,7 @@ path_data <- "data_lecture"
 ```{r}
 data <- read_csv(here::here(path_data, "13_three_groups.csv"),
                  show_col_types = FALSE) |> 
-  mutate(group = factor(group))
+  mutate(group = fct(group, levels = c("alcohol", "depress", "healthy")))
 
 slice_sample(data, n = 10)
 ```
@@ -182,8 +158,8 @@ tibble_d
 And here are the two new regressors for our data
 ```{r}
 data <- data |> 
-  mutate(alcohol_d = if_else(group == "alcohol", 1, 0),
-         depress_d = if_else(group == "depress", 1, 0))
+  mutate(alcohol_d3 = if_else(group == "alcohol", 1, 0),
+         depress_d3 = if_else(group == "depress", 1, 0))
 
 slice_sample(data, n = 10)
 ```
@@ -192,16 +168,16 @@ slice_sample(data, n = 10)
 
 Now 
 ```{r}
-m_d <- lm(health ~ alcohol_d + depress_d, data)
+m_d3 <- lm(health ~ alcohol_d3 + depress_d3, data)
 
-tidy(m_d)
+tidy(m_d3)
 ```
 
 --------------------------------------------------------------------------------
 
 ## 3 Group Dummy: What does $b_j$ test?  
 
-Each regression coefficient represents the contrast between its respective target group (the group that was coded 1 for that contrast) and the **reference** group. This is because each effect represents the effect of that specific IV holding constant the other IV.
+Each regression coefficient represents the contrast between the mean of $Y$ in its respective target group (the group that was coded 1 for that contrast) and the **reference** group. This is because each effect represents the effect of that specific $X$ holding constant the other $X$ constant at 0.
 
 
 ```{r}
@@ -210,7 +186,9 @@ tibble_d
 
 --------------------------------------------------------------------------------
 
-For example, consider the effect of the first regressor (`alcohol_d`). Considered by itself, it is the contrast of patients with alcohol use disorder (1) vs. other groups (0). However, if you held the second regressor (`depress_d`) constant at zero you would be examining the effect of patients with alcohol use disorder vs. other groups when it is 0 on `depress_d` (i.e., the control group). 
+For example, consider the effect of the first regressor (`alcohol_d`). Considered by itself, it is the contrast of patients with alcohol use disorder (1) vs. other groups (0). 
+
+However, if you held the second regressor (`depress_d`) constant at zero you would be examining the effect of patients with alcohol use disorder vs. other groups when it is 0 on `depress_d` (i.e., the control group). 
 
 ```{r}
 tibble_d
@@ -219,8 +197,15 @@ tibble_d
 --------------------------------------------------------------------------------
 
 ```{r}
-broom::tidy(m_d)
+tidy(m_d3)
+```
 
+
+Here is mean `health` among the three groups
+
+- alcohol vs healthy = 4.58 - 7.94 = -3.36
+- depress vs. healthy = 6.44 - 7.94 = -1.50j
+```{r}
 data |> 
   group_by(group) |> 
   summarise(mean = mean(health))
@@ -228,14 +213,10 @@ data |>
 
 --------------------------------------------------------------------------------
 
-```{r}
-#| echo: false
+![]("figures/dummy_3d.png")
 
-knitr::include_graphics(path = here::here("figures/dummy_3d.png"))
-```
 
 --------------------------------------------------------------------------------
-
 
 ## Dummy Coding Group Mean Estimates
 
@@ -263,7 +244,6 @@ $= 7.94$
 
 ::: {.callout-important}
 # Question 
-
 What is $b_0$ when using dummy codes?
 :::
 
@@ -301,62 +281,85 @@ $= b_1 - b_2$
 
 ## Introducing Factors and Contrasts
 
+We set up `group` as a factor
 ```{r}
 class(data$group)
 ```
 
+We set up the levels of the factor earlier with 
+
+- `mutate(group = fct(group, levels = c("alcohol", "depress", "healthy")))`
 ```{r}
 levels(data$group)
 ```
 
-Create contrast matrix
+By default, R assigns what it calls treatment contrasts to unordered factors (the only type of factor I use). 
 ```{r}
-matrix_contr <- contr.treatment(levels(data$group), base = 3) 
-col_names <- str_c(colnames(matrix_contr), "_v_healthy")
-colnames(matrix_contr) <- col_names
-
-matrix_contr
+options("contrasts")
 ```
 
+Treatment contrasts are dummy contrasts!  
+
+- Default is to assign the first level as the reference group.
+- We may not want this
+```{r}
+contrasts(data$group)
+```
 
 --------------------------------------------------------------------------------
 
-Set contrasts for `group` factor variable
-```{r}
-contrasts(data$group) <- matrix_contr
-```
+We can reset the reference level (or even change the contrast type - more on that in a moment) 
 
-Run model
+Here we continue to use treatment/dummy contrasts but change the reference level to the third level (healthy)
 
 ```{r}
-m_d_2 <- lm(health ~ group, data = data)
-tidy_m_d_2 <-broom::tidy(m_d_2) |> 
-  mutate(term = str_replace(term, "group", "")) # remove variable name from term
-
-tidy_m_d_2
+contrasts(data$group) <- contr.treatment(levels(data$group), base = 3)
 ```
 
-
+Lets confirm this
+```{r}
+contrasts(data$group)
+```
 
 --------------------------------------------------------------------------------
+
+Internally, R is now calculating the two dummy coded regressors for you when you use group as the predictor
+
+- This can be quicker/easier
+- It does hide some of what is going on (not great for understanding)
+- Results are, of course, the same!
+```{r}
+m <- lm(health ~ group, data = data)
+tidy(m)
+```
+
+You can use the approach (manually coding $X$s or contrasts on factor) that best suits your needs
+
+--------------------------------------------------------------------------------
+
+Now lets continue to expand our understanding of these tests of the two dummy contrasts
 
 ::: {.callout-important}
 # Question 
-
-How are these t-tests of $b_j$ in GLM different from what you would get if you simply ran two separate between groups t-tests?
+How are these t-tests of $b_j$ in the linear different from what you would get if you simply ran two separate between groups t-tests?
 :::
 
 :::{.fragment}
 [The GLM t-tests of $b_j$ use the full error term including all subjects (including the “ignored” group; see dfs below). This yields a more powerful test.]{style="color:blue;"}     
 
 
-GLM degrees of freedom
+The linear model
 ```{r}
-m_d_2$df.residual
+tidy(m_d3)
+```
+
+The df for testing the paramemeter estimates is $N-P$ (42 - 3) = 39
+```{r}
+m_d3$df.residual
 ```
 
 
-t-test 
+The between groups/subject t-test for alcohol vs. healthy
 ```{r}
 data_sub <- data |> 
   filter(group != "depress")
@@ -369,66 +372,75 @@ t.test(health ~ group, data = data_sub, var.equal = TRUE)
 
 ::: {.callout-important}
 # Question 
-
-What may be missing from our analysis of the `group` variable at this point?
+What may be missing from our analysis of the `group` variable at this point and how could we get it?
 :::
 
 :::{.fragment}
 [We might want a test of the contrast between patients with alcohol use disorder vs. patients with depression.]{style="color:blue;"}    
-:::
 
-:::{.fragment}
-::: {.callout-important}
-# Question 
-
-How could we get this test?
-:::
-:::
-
-
-:::{.fragment}
 [Recode the group contrasts such that the patients with depression is the reference group. Then test and interpret the alcohol vs. depress parameter estimate.]{style="color:blue;"}    
 :::
 
 --------------------------------------------------------------------------------
 
-
+We could do this using `contra.treatment()`
 ```{r}
-matrix_contr <- contr.treatment(levels(data$group), base = 2) 
-col_names <- str_c(colnames(matrix_contr), "_v_depress")
-colnames(matrix_contr) <- col_names
-
-contrasts(data$group) <- matrix_contr
+contrasts(data$group) <- contr.treatment(levels(data$group), base = 2)
+contrasts(data$group)
 ```
 
 ```{r}
-m_d_3 <- lm(health ~ group, data = data)
+m_d2 <- lm(health ~ group, data = data)
+```
 
-tidy_m_d_3 <-broom::tidy(m_d_3) |> 
-  mutate(term = str_replace(term, "group", "")) 
+--------------------------------------------------------------------------------
 
-tidy_m_d_3
+Or we could do this by manually calculating two new dummy coded $X$s using depress as the level that is set to zero for both $X$s
+
+```{r}
+data <- data |> 
+  mutate(alcohol_d2 = if_else(group == "alcohol", 1, 0),
+         healthy_d2 = if_else(group == "healthy", 1, 0))
+
+slice_sample(data, n = 10) |> 
+  select(-subid)
+```
+
+```{r}
+m_d2 <- lm(health ~ alcohol_d2 + healthy_d2, data)
+```
+
+--------------------------------------------------------------------------------
+Remember that these are teh group means
+
+```{r}
+data |> 
+  group_by(group) |> 
+  summarise(mean = mean(health))
+```
+
+And here are the parameter estimates from the model with healthy as reference
+```{r}
+tidy(m_d3)
+```
+
+
+And the parameter estimates from the model with depressed as reference
+```{r}
+tidy(m_d2)
 ```
 
 --------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question 
-
 What does the 2 df F-test of $R^2$ test conceptually?
 :::
-
-```{r}
-anova(m_d_3)
-
-broom::glance(m_d_3)$r.squared
-```
 
 :::{.fragment}
 [In this special case (with only one IV/Predictor) it provides a test of the main effect of group.]{style="color:blue;"}          
 
 [A significant main effect means that at least 1 contrast in one set of all possible sets of orthogonal contrasts is significant.]{style="color:blue;"}         
-
 [Not generally very useful. Tradition is still to report it (unless using POCs) but likely for wrong reasons. (more in this later).]{style="color:blue;"}
 :::
 
@@ -441,61 +453,62 @@ Why does model $R^2$ not test the main effect if there are other predictors in t
 :::
 
 :::{.fragment}
-[Model $R^2$ is the variance in $Y$ explained by all the regressors in the model. Only tests the main effect of an IV if only regressors for that IV are in the model.]{style="color:blue;"}
+[Model $R^2$ is the variance in $Y$ explained by all the regressors in the model. It will only test the main effect of an IV if only regressors for that IV are in the model.]{style="color:blue;"}
 :::
 
 --------------------------------------------------------------------------------
 
-## Variance Based Effect Sizes
+How do you get model $R^2$ and its test for our model?
 
+- You can get the value using `glance` as always
 ```{r}
-matrix_contr <- contr.treatment(levels(data$group), base = 3) 
-col_names <- str_c(colnames(matrix_contr), "_v_healthy")
-colnames(matrix_contr) <- col_names
-
-contrasts(data$group) <- matrix_contr
+glance(m_d3)$r.squared
 ```
 
+To test the combined effect of the two dummy coded regressors you can do a model comparison
 
-$\eta_p^2$ for group
+-  Augmented model is full with both dummy regressors vs.
+-  Compact model is mean only model
 ```{r}
-pre(lm(health ~ 1, data = data), m_d_2)
+anova(lm(health ~ 1, data = data), m_d3)
+```
+
+Alternatively, if you fit the model with contrasts on `group`, then `anova()` will give you this test if you use only the full model (again, not great for understanding!)
+```{r}
+anova(m)
+```
+
+This is the proportion of variance explained in `health` by `group` (all three levels)
+
+--------------------------------------------------------------------------------
+
+We can also get variance based effect sizes for each contrast
+
+When we set healthy as the reference, we had contrasts for 
+
+- alcohol vs. healthy (`alcohol_d3`)
+- depress vs. healthy (`depress_d3`)
+
+We can set up our functions for $\Delta R^2$ 
+
+```{r}
+
+delta_r2 <- function(compact, augmented) {
+  broom::glance(augmented)$r.squared - broom::glance(compact)$r.squared
+}
 ```
 
 --------------------------------------------------------------------------------
 
-Quarto handles regressors internally once you set contrasts for the factor. It is generally not necessary to add the regressors to the dataframe except for handful of special circumstances (e.g., some figures, variance effect sizes for contrasts).   
+PRE for alcohol vs. healthy (compace model includes only the depress vs. healthy contrast)
 
 ```{r}
-tibble_reg <- model.matrix(~ group, data = data) |> 
-  as_tibble() |> 
-  select(-1, r_1 = 2, r_2 = 3)
-
-data <- data |> 
-  select(-c(ends_with("_d"))) |> 
-  bind_cols(tibble_reg)
+delta_r2(lm(health ~ depress_d3, data = data), m_d3)
 ```
 
+PRE for depress vs. healthy
 ```{r}
-slice_sample(data, n = 6)
-```
-
---------------------------------------------------------------------------------
-
-```{r}
-m_r <- lm(health ~ r_1 + r_2, data = data)
-
-broom::tidy(m_r)
-```
-
-$\eta_p^2$ for alcohol v. healthy (r_1)
-```{r}
-pre(lm(health ~ r_2, data = data), m_r)
-```
-
-$\eta_p^2$ for depress v. healthy (r_2)
-```{r}
-pre(lm(health ~ r_1, data = data), m_r)
+delta_r2(lm(health ~ alcohol_d3, data = data), m_d3)
 ```
 
 --------------------------------------------------------------------------------
