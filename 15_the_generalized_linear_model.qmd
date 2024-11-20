@@ -53,6 +53,7 @@ What are the consequences of violating each of these assumptions? What options e
 library(tidyverse)
 library(broom)
 library(skimr)
+library(patchwork)
 theme_set(theme_classic()) 
 ```
 
@@ -135,7 +136,8 @@ What are the problems with using a general linear model to assess the effects of
 data |> 
   ggplot(aes(x = gpa, y = admit)) +
   geom_point() +
-  scale_x_continuous(limits = c(0, 4))
+  scale_x_continuous(limits = c(0, 4)) +
+  labs(y = "p(admit)")
 ```
 
 --------------------------------------------------------------------------------
@@ -146,7 +148,8 @@ data |>
 data |> 
   ggplot(aes(x = gpa, y = admit)) +
   geom_jitter(width = 0, height = .05) +
-  scale_x_continuous(limits = c(0, 4))
+  scale_x_continuous(limits = c(0, 4)) +
+  labs(y = "p(admit)")
 ```
 
 --------------------------------------------------------------------------------
@@ -159,7 +162,8 @@ data |>
   geom_jitter(width = 0, height = .05) +
   scale_x_continuous(limits = c(0, 4.2)) +
   geom_smooth(formula = y ~ x, method = "lm", color = "red", se = FALSE,
-              fullrange = TRUE)
+              fullrange = TRUE)  +
+  labs(y = "p(admit)")
 ```
 
 --------------------------------------------------------------------------------
@@ -173,7 +177,8 @@ data |>
   scale_x_continuous(limits = c(0, 4)) +
   scale_y_continuous(limits = c(-2, 1.2)) +
   geom_smooth(formula = y ~ x, method = "lm", color = "red", se = FALSE,
-              fullrange = TRUE)
+              fullrange = TRUE)  +
+  labs(y = "p(admit)")
 ```
 
 
@@ -265,7 +270,9 @@ preds <- predict(m_glm, newdata = x) |>
 ggplot(data = data, aes(x = gpa, y = admit)) +
   geom_point() +
   scale_x_continuous(limits = c(0, 6)) +
-  geom_line(data = preds, aes(y = value, x = gpa), color = "blue") 
+  geom_line(data = preds, aes(y = value, x = gpa), color = "blue")  +
+  labs(y = "p(admit)")
+
 ```
 
 --------------------------------------------------------------------------------
@@ -335,14 +342,16 @@ tibble(x = -100:100,
 
 ```{r}
 #| echo: false
-#| warning: false
 
 tidy(m_glm)
 
 ggplot(data = data, aes(x = gpa, y = admit)) +
   geom_point() +
   scale_x_continuous(limits = c(2, 4)) +
-  geom_line(data = preds, aes(y = value, x = gpa), color = "blue") 
+  geom_line(data = preds |> 
+              filter(!(gpa > 4 | gpa < 2)), 
+            aes(y = value, x = gpa), color = "blue")  +
+  labs(y = "p(admit)")
 ```
 
 --------------------------------------------------------------------------------
@@ -591,12 +600,14 @@ What are the approximate odds of getting into grad school with a GPA of 3.5?
 
 ```{r}
 #| echo: false
-#| warning: false
 
 ggplot(data = data, aes(x = gpa, y = admit)) +
   geom_point() +
   scale_x_continuous(limits = c(2, 4)) +
-  geom_line(data = preds, aes(y = value, x = gpa), color = "blue", linewidth = .75) +
+  geom_line(data = preds |> 
+              filter(!(gpa > 4 | gpa < 2)), 
+            aes(y = value, x = gpa), color = "blue") +
+  labs(y = "p(admit)") +
   geom_vline(xintercept = 3.5, color = "dark green", linewidth = .75) +
   geom_hline(yintercept = .49, color = "dark green", linewidth = .75)
 ```
@@ -691,6 +702,240 @@ $= -14.5 + 4.1 * 3.5$
 $= -0.15$  
 
 **Note: Odds of 1 occur when logit = 0.**
+:::
+
+--------------------------------------------------------------------------------
+
+Log-odds are not very intuitive.    
+
+However, they are a linear function of our regressors. GLM estimates the parameters in the logit function.   
+
+```{r}
+#| code-fold: true
+
+tidy(m_glm)
+```
+
+$logit(Y) = -14.5 + 4.1*gpa$    
+
+We transform the logit function to either odds or probability functions to convey relationships in meaningful units.   
+
+--------------------------------------------------------------------------------
+
+```{r}
+#| echo: false
+
+plot_logit <- preds |> 
+  mutate(value = log(value/(1-value))) |> 
+  filter(!gpa > 4) |> 
+  ggplot(aes(y = value, x = gpa)) +
+  scale_x_continuous(limits = c(0, 4)) +
+  scale_y_continuous(limits = c(-15, 2)) +
+  geom_line(color = "blue") +
+  labs(title = "Logit(Y)",
+       y = "logit(admit)")
+
+plot_odds <- preds |> 
+  mutate(value = value/(1-value)) |> 
+  filter(!gpa > 4) |> 
+  ggplot(aes(y = value, x = gpa)) +
+  scale_x_continuous(limits = c(0, 4)) +
+  scale_y_continuous(limits = c(0, 8)) +
+  geom_line(color = "blue") +
+  labs(title = "Odds(Y)",
+       y = "odds(admit)")
+
+plot_prob <- ggplot(data = data, aes(x = gpa, y = admit)) +
+  geom_point() +
+  scale_x_continuous(limits = c(0, 4)) +
+  geom_line(data = preds |> 
+              filter(!gpa > 4), 
+            aes(y = value, x = gpa), color = "blue") +
+  labs(title = "Probability(Y)",
+       y = "p(admit)")
+```
+
+```{r}
+#| echo: false
+
+plot_logit + plot_odds + plot_prob
+```
+
+
+--------------------------------------------------------------------------------
+
+Log-odds are a linear function of $X$s, but these parameter estimates are not very descriptive.   
+
+$logit(admission)= -14.5 + 4.1*gpa$    
+
+Not clear how to interpret a parameter estimate of 4.1 for GPA.    
+
+The log-odds of admission increases by 4.1 units for every 1 point increase on GPA??   
+
+```{r}
+#| echo: false
+
+plot_logit +
+  labs(title = NULL)
+```
+
+--------------------------------------------------------------------------------
+
+Odds and probability are more descriptive but they are not linear functions of the $X$s so their parameter estimates aren't very useful to describe effect of $X$s.    
+
+Can't make simple statement about unit change in odds or probability as a result of unit change in GPA.  
+
+$\frac{\pi}{1-\pi} = e^{b_0 + b_1X_1 + ... + b_kX_k}$    
+
+$\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$  
+
+```{r}
+#| echo: false
+
+plot_odds + plot_prob
+```
+
+--------------------------------------------------------------------------------
+
+## Odds Ratios
+
+This is where the odds ratio comes in!   
+
+Odds are defined at a specific point for $X$.   
+
+**Odds ratio ($\Psi$)** = the change in odds for a change in $X$ of some magnitude $c$.   
+
+$\Psi = \frac{odds(X+c)}{odds(X)}$   
+
+$= \frac{e^{b_0 +b_1(X+c)}}{e^{b_0+b_1(X)}}$   
+
+$= e^{c*b_1}$  
+
+--------------------------------------------------------------------------------
+
+:::{.callout-important}
+# Question 
+
+What is the odds ratio for a change in GPA of 1.0?
+:::   
+
+```{r}
+#| code-fold: true
+
+tidy(m_glm)
+```
+
+:::{.fragment}
+$\Psi = e^{c*b_1}$   
+
+$= e^{1.0*4.1}$   
+
+$= 60.3$     
+
+**The odds of getting into grad school increase by a factor of 60.3 for every 1 point increase in GPA.**    
+
+This is the preferred descriptor for the effect of $X$. For a quantitative variable, choose a meaningful value for $c$ (though often 1 is most appropriate).
+:::
+
+--------------------------------------------------------------------------------
+
+$\Psi = e^{c*b_1}$    
+
+- When $b_1 = 0$, $\Psi = 1$, indicating no change in odds for change in $X$.   
+
+- When $b_1 > 0$, $\Psi > 1$, indicating an increase in odds with increasing $X$.   
+
+- When $b_1 < 0$, $\Psi < 1$, indicting a decrease in odds with increasing $X$.   
+
+- Odds ratio ($\Psi$) is never negative.   
+
+--------------------------------------------------------------------------------
+
+## Parameter Significance Tests
+
+There are three common statistical tests for a parameter in logistic regression:   
+
+1. **Z test:** Reported in the `tidy()` output.  
+
+    $z = \frac{b_j}{SE_j}$
+
+
+2. ***Wald test:** Reported by SPSS. Wald is asymptotically distributed as Chi-square with 1 df.   
+
+    $wald = \frac{b_j^2}{SE_j^2}$   
+
+**Both 1 and 2 are not preferred as they have higher type II error rates than the third option.**   
+
+3. **Likelihood ratio test:** Reported in the `anova` output.   
+
+--------------------------------------------------------------------------------
+
+## Likelihood Ratio Test
+
+Deviance is the maximum likelihood generalization of SSE from OLS.   
+
+The likelihood ratio test involves a comparison of two models' deviances.   
+
+To test the effect of GPA, compare deviances.    
+**Compact**: Intercept only (null model)   
+**Augmented**: Model with GPA    
+
+LR test = compact - augmented    
+
+Distributed as chi-square with df = df(augmented) - df(compact).    
+
+--------------------------------------------------------------------------------
+
+```{r}
+compact <- glm(admit ~ 1, data = data, family = binomial(logit))
+augmented <- glm(admit ~ gpa, data = data, family = binomial(logit))
+
+anova(compact, augmented)
+```
+
+--------------------------------------------------------------------------------
+
+## Maximum Likelihood Estimation (MLE)
+
+The regression coefficients are estimated using maximum likelihood estimation.   
+
+It is iterative (Newton's method).   
+
+Model may fail to converge if:   
+
+- Ratio of predictors to infrequent cases (10 *events* per predictor).   
+- High multicollinearity.
+- Sparseness (cells with zero events). Bigger problem for categorical predictor.   
+- Complete separation: Predictors perfectly predict the criterion.   
+
+MLE can yield biased parameters with small samples. Definitions of what is not small vary, but $\ge 200$ is a reasonable minimum.   
+
+--------------------------------------------------------------------------------
+
+## Model Assumptions
+
+1. Exact X.
+2. Independence.
+3. Logistic function and logit correctly specify the form of the relationship (equivalent to the correct fit in linear regression). Logistic function is almost always correct for dichotomous data. You can examine the logit function directly to assess the shape of the relationship.
+
+
+--------------------------------------------------------------------------------
+
+:::{.callout-important}
+# Question 
+
+What about categorical variables?
+:::   
+
+
+:::{.fragment}
+- Handled exactly as in linear regression.  
+
+- Contrast codes, dummy codes.  
+
+- Issues of family-wise error rates apply as before for non-orthogonal and unplanned contrasts. Holm-bonferroni is available.
+
+- Odds ratio is for contrast (assuming unit weighted).
 :::
 
 --------------------------------------------------------------------------------
