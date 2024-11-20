@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Unit 13: Categorical Variables > 2 Levels 
 
 ```{r}
@@ -13,7 +18,7 @@ options(knitr.kable.NA = '')
 - Two categorical coding schemes to know:   
   
     1. Dummy coding (reference/control group).  
-    2. Contrast coding (whatever you can dream up!, POCs).   
+    2. Contrast coding (POCs).   
     
 - How best to test the comparisons coded by these methods if the comparisons are:   
 
@@ -21,24 +26,19 @@ options(knitr.kable.NA = '')
     2. Planned and orthogonal.   
     3. Unplanned.
     
-- How to test simple effects when categorical variables have > 2 levels.   
+- How to test main and simple effects when categorical variables have > 2 levels.   
 
 --------------------------------------------------------------------------------
 
-::: {.callout-important}
-# Question 
-How have we handled categorical variables in our linear models and what constraint has been true for all of our categorical variables so far?
-:::
+We have handled categorical variables by recoding them using dummy codes or centered coefficients. 
 
-::: {.fragment}
-[We have handled categorical variables by recoding using dummy codes or centered coefficients. This turned categorical/nominal variables into numeric variables.]{style="color:blue;"}
+This turned categorical/nominal variables into numeric regressors 
 
-[However, so far, we have only handled categorical variables with 2 levels.]{style="color:blue;"}
-:::
+However, so far, we have only handled categorical variables with 2 levels
 
 --------------------------------------------------------------------------------
 
-These single $X$ variables coded with dummy or contrast systems yielded one comparison of the mean of $Y$ across the two levels of the categorical variable.
+These single $X$ regressors coded with dummy or contrast systems yielded one comparison of the mean of $Y$ across the two levels of the categorical variable.
 
 Once we have more than two levels/groups within the categorical variable
 
@@ -83,7 +83,7 @@ Why can we not handle multi-level categorical variables by simply coding each gr
 :::{.fragment}
 [There is no meaningful way to order the multiple groups. The shape of the relationship will completely change based on arbitrary ordering of the groups (exception is when categorical variable is ordinal).]{style="color:blue;"}    
 
-[Moreover, we are often interested in individual pair-wise group comparisons that would be lost by forcing linear relationship.]{style="color:blue;"}
+[Moreover, we are often interested in individual pair-wise group comparisons that would be lost by forcing a linear relationship with only one parameter estimate.]{style="color:blue;"}
 :::
 
 --------------------------------------------------------------------------------
@@ -124,7 +124,6 @@ order_3 <- data |>
   scale_x_continuous(name = NULL, breaks = c(1, 2, 3), 
                      labels = c("depress", "healthy", "alcohol"))
 
-
 order_1 + order_2 + order_3
 ```
 
@@ -132,9 +131,9 @@ order_1 + order_2 + order_3
 
 ## 3 Group Dummy Coding (Non-orthogonal)  
 
-We will start with generalizing the dummy coding approach to more than 2 levels
+We will start by generalizing the dummy coding approach to more than 2 levels
 
-- Need 2 regressors (`alcohol_d`, `depress_d`) to represent a 3 level categorical variable.   
+- Need 2 regressors (`alcohol_d3`, `depress_d3`) to represent a 3 level categorical variable.   
 - Regressor 1 is coded 1 for membership in Group 1 (alcohol) and 0 for all other group membership.
 - Regressor 2 is coded 1 for membership in Group 2 (depress) and 0 for all other group membership.
 - Reference group (healthy) is coded 0 for all regressors.
@@ -148,6 +147,10 @@ This yields the following dummy coding table for our example
        alcohol_d = c(1, 0, 0),
        depress_d = c(0, 1, 0)))
 ```
+
+::: {.footer}
+We are usind `_d3` in regressor names to indicate they are dummy codes with the third level as reference
+:::
 
 --------------------------------------------------------------------------------
 
@@ -175,10 +178,9 @@ tidy(m_d3)
 
 --------------------------------------------------------------------------------
 
-## 3 Group Dummy: What does $b_j$ test?  
+## 3 Group Dummy: What do the parameter estimates test?  
 
-Each regression coefficient represents the contrast between the mean of $Y$ in its respective target group (the group that was coded 1 for that contrast) and the **reference** group. This is because each effect represents the effect of that specific $X$ holding constant the other $X$ constant at 0.
-
+Each parameter estimate for the $X$s represents the contrast between the mean of $Y$ in its respective target group (the group that was coded 1 for that $X$) and the **reference** group. This is because each effect represents the effect of that specific $X$ holding constant the other $X$ constant at 0.
 
 ```{r}
 tibble_d
@@ -186,13 +188,15 @@ tibble_d
 
 --------------------------------------------------------------------------------
 
-For example, consider the effect of the first regressor (`alcohol_d`). Considered by itself, it is the contrast of patients with alcohol use disorder (1) vs. other groups (0). 
+For example, consider the effect of the first regressor (`alcohol_d3`). Considered by itself, it is the contrast of patients with alcohol use disorder (1) vs. other groups (0). 
 
-However, if you held the second regressor (`depress_d`) constant at zero you would be examining the effect of patients with alcohol use disorder vs. other groups when it is 0 on `depress_d` (i.e., the control group). 
+However, if you held the second regressor (`depress_d3`) constant at zero you would be examining the effect of patients with alcohol use disorder vs. other groups when it is 0 on `depress_d3` (i.e., the reference group). 
 
 ```{r}
 tibble_d
 ```
+
+NOTE: More on separate visual and mathematical ways to think about this later
 
 --------------------------------------------------------------------------------
 
@@ -200,21 +204,20 @@ tibble_d
 tidy(m_d3)
 ```
 
-
 Here is mean `health` among the three groups
 
-- alcohol vs healthy = 4.58 - 7.94 = -3.36
-- depress vs. healthy = 6.44 - 7.94 = -1.50j
 ```{r}
 data |> 
   group_by(group) |> 
   summarise(mean = mean(health))
 ```
 
+- alcohol vs healthy = 4.58 - 7.94 = -3.36
+- depress vs. healthy = 6.44 - 7.94 = -1.50j
+
 --------------------------------------------------------------------------------
 
 ![]("figures/dummy_3d.png")
-
 
 --------------------------------------------------------------------------------
 
@@ -222,25 +225,25 @@ data |>
 
 **The Prediction equation:**   
 
-$\hat{Y} = 7.94+-3.36*alcohol_d+ - 1.50*depress_d$     
+- $\hat{Y} = 7.94+-3.36*alcohol_{d3}+ - 1.50*depress_{d3}$     
 
 
 Patients with alcohol use disorder:    
 
-$= 7.94 + -3.36*(1)+-1.50*(0)$   
-$= 4.58$   
+- $= 7.94 + -3.36*(1)+-1.50*(0)$   
+- $= 4.58$   
 
 
 Patients with depression:    
 
-$= 7.94 + -3.36*(0)+-1.50*(1)$   
-$= 6.44$   
+- $= 7.94 + -3.36*(0)+-1.50*(1)$   
+- $= 6.44$   
 
 
 Healthy controls:    
 
-$= 7.94 + -3.36*(0)+-1.50*(0)$   
-$= 7.94$
+- $= 7.94 + -3.36*(0)+-1.50*(0)$   
+- $= 7.94$
 
 ::: {.callout-important}
 # Question 
@@ -257,41 +260,52 @@ What is $b_0$ when using dummy codes?
 
 **The Prediction equation:**   
 
-$\hat{Y} = 7.94+-3.36*alcohol_d+ - 1.50*depress_d$     
+- $\hat{Y} = 7.94+-3.36*alcohol_d+ - 1.50*depress_d$     
 
 alcohol vs. healthy contrast:   
 
-$= (b_0 + b_1*1 + b_2*0) - (b+0 + b_1*0 + b_2*0)$   
-$= (b_0 + b_1) - (b_0)$   
-$= b_1$   
+- $= (b_0 + b_1*1 + b_2*0) - (b+0 + b_1*0 + b_2*0)$   
+- $= (b_0 + b_1) - (b_0)$   
+- $= b_1$   
 
 depress vs. healthy contrast:   
 
-$= (b_0 + b_1*0 + b_2*1) - (b+0 + b_1*0 + b_2*0)$   
-$= (b_0 + b_2) - (b_0)$   
-$= b_2$   
+- $= (b_0 + b_1*0 + b_2*1) - (b+0 + b_1*0 + b_2*0)$   
+- $= (b_0 + b_2) - (b_0)$   
+- $= b_2$   
  
 alcohol vs. depress contrast:   
 
-$= (b_0 + b_1*1 + b_2*0) - (b+0 + b_1*0 + b_2*1)$   
-$= (b_0 + b_1) - (b_0 + b_2)$   
-$= b_1 - b_2$   
+- $= (b_0 + b_1*1 + b_2*0) - (b+0 + b_1*0 + b_2*1)$   
+- $= (b_0 + b_1) - (b_0 + b_2)$   
+- $= b_1 - b_2$   
 
 --------------------------------------------------------------------------------
 
 ## Introducing Factors and Contrasts
 
-We set up `group` as a factor
+We can (and often do) manually code our $X$s to represent categorical predictors.
+
+However, R can also handle this for us directly if we set up the categorical predictor as a factor and set contrasts for it.
+
+
+We set up `group` as a factor and indicated its levels when we read in the data earlier
+
+- `mutate(group = fct(group, levels = c("alcohol", "depress", "healthy")))`
+- We prefer to use `forcats::fct()` vs. base R `factor()`
+
+
+Confirm this
+
 ```{r}
 class(data$group)
 ```
 
-We set up the levels of the factor earlier with 
-
-- `mutate(group = fct(group, levels = c("alcohol", "depress", "healthy")))`
 ```{r}
 levels(data$group)
 ```
+
+--------------------------------------------------------------------------------
 
 By default, R assigns what it calls treatment contrasts to unordered factors (the only type of factor I use). 
 ```{r}
@@ -308,7 +322,7 @@ contrasts(data$group)
 
 --------------------------------------------------------------------------------
 
-We can reset the reference level (or even change the contrast type - more on that in a moment) 
+We can (re)set the reference level or even change the contrast type (more on that in a moment) using `contrasts()` on the factor 
 
 Here we continue to use treatment/dummy contrasts but change the reference level to the third level (healthy)
 
@@ -325,15 +339,15 @@ contrasts(data$group)
 
 Internally, R is now calculating the two dummy coded regressors for you when you use group as the predictor
 
-- This can be quicker/easier
+- This can be quicker/easier in some instances
 - It does hide some of what is going on (not great for understanding)
 - Results are, of course, the same!
+- You should be comfortable with both approaches
+- Use the approach (manually coding $X$s or contrasts on factor) that best suits your needs
 ```{r}
-m <- lm(health ~ group, data = data)
-tidy(m)
+m_d3f <- lm(health ~ group, data = data)
+tidy(m_d3f)
 ```
-
-You can use the approach (manually coding $X$s or contrasts on factor) that best suits your needs
 
 --------------------------------------------------------------------------------
 
@@ -345,8 +359,7 @@ How are these t-tests of $b_j$ in the linear different from what you would get i
 :::
 
 :::{.fragment}
-[The GLM t-tests of $b_j$ use the full error term including all subjects (including the “ignored” group; see dfs below). This yields a more powerful test.]{style="color:blue;"}     
-
+[The linear model t-tests of $b_j$ use the full error term including all subjects (including the “ignored” group; see dfs below). This yields a more powerful and therefore preferred test.]{style="color:blue;"}     
 
 The linear model
 ```{r}
@@ -361,11 +374,13 @@ m_d3$df.residual
 
 The between groups/subject t-test for alcohol vs. healthy
 ```{r}
-data_sub <- data |> 
-  filter(group != "depress")
-
-t.test(health ~ group, data = data_sub, var.equal = TRUE)
+data |> 
+  filter(group != "depress") |> 
+  t.test(health ~ group, var.equal = TRUE,
+         data = _)
 ```
+
+NOTE: use of `_` to pipe the object from `filter()` into a later argument in`t.test()`
 :::
 
 --------------------------------------------------------------------------------
@@ -383,14 +398,15 @@ What may be missing from our analysis of the `group` variable at this point and 
 
 --------------------------------------------------------------------------------
 
-We could do this using `contra.treatment()`
+We could do this using `contr.treatment()`
 ```{r}
 contrasts(data$group) <- contr.treatment(levels(data$group), base = 2)
 contrasts(data$group)
 ```
 
 ```{r}
-m_d2 <- lm(health ~ group, data = data)
+m_d2f <- lm(health ~ group, data = data)
+tidy(m_d2f)
 ```
 
 --------------------------------------------------------------------------------
@@ -408,10 +424,12 @@ slice_sample(data, n = 10) |>
 
 ```{r}
 m_d2 <- lm(health ~ alcohol_d2 + healthy_d2, data)
+tidy(m_d2)
 ```
 
 --------------------------------------------------------------------------------
-Remember that these are teh group means
+
+Remember that these are the group means
 
 ```{r}
 data |> 
@@ -430,6 +448,10 @@ And the parameter estimates from the model with depressed as reference
 tidy(m_d2)
 ```
 
+::: {.callout-important}
+Do the differences in all the parameter estimates across these two models make sense to you?
+:::
+
 --------------------------------------------------------------------------------
 
 ::: {.callout-important}
@@ -438,61 +460,64 @@ What does the 2 df F-test of $R^2$ test conceptually?
 :::
 
 :::{.fragment}
-[In this special case (with only one IV/Predictor) it provides a test of the main effect of group.]{style="color:blue;"}          
+[In this special case (with only one categorical predictor represented by multiple $X$s), it provides a test of the main effect of group.]{style="color:blue;"}          
 
 [A significant main effect means that at least 1 contrast in one set of all possible sets of orthogonal contrasts is significant.]{style="color:blue;"}         
-[Not generally very useful. Tradition is still to report it (unless using POCs) but likely for wrong reasons. (more in this later).]{style="color:blue;"}
+
+[It is not generally very useful. Tradition is still to report it (unless using POCs) but likely for wrong reasons (more in this later).]{style="color:blue;"}
 :::
 
 --------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question 
-
-Why does model $R^2$ not test the main effect if there are other predictors in the model?
+Why will model $R^2$ not test the main effect if there are regressors for other predictors in the model?
 :::
 
 :::{.fragment}
-[Model $R^2$ is the variance in $Y$ explained by all the regressors in the model. It will only test the main effect of an IV if only regressors for that IV are in the model.]{style="color:blue;"}
+[Model $R^2$ is the variance in $Y$ explained by all the regressors in the model. It will only test the main effect of a categorical predictor if only regressors for that categorical predictor are in the model.]{style="color:blue;"}
+
+[We will return in a bit to testing `group` effect with other $X$s in the model]{style="color:blue;"}
 :::
 
 --------------------------------------------------------------------------------
 
-How do you get model $R^2$ and its test for our model?
+How do you get $R^2$ and its test for our model?
 
-- You can get the value using `glance` as always
+- You can get the value for $R^2$ using `glance` as always
 ```{r}
 glance(m_d3)$r.squared
 ```
 
-To test the combined effect of the two dummy coded regressors you can do a model comparison
+To test the null hypothesis for $R^2$ (i.e., the combined effect of the two dummy coded regressors in this example) you can do a model comparison
 
--  Augmented model is full with both dummy regressors vs.
--  Compact model is mean only model
+-  Augmented model is full model with both dummy regressors
+-  Compact model is mean only model (parameter estimates for both $X$s set to 0)
 ```{r}
 anova(lm(health ~ 1, data = data), m_d3)
 ```
 
+--------------------------------------------------------------------------------
+
 Alternatively, if you fit the model with contrasts on `group`, then `anova()` will give you this test if you use only the full model (again, not great for understanding!)
 ```{r}
-anova(m)
+anova(m_d3f)
 ```
 
-This is the proportion of variance explained in `health` by `group` (all three levels)
+Either way, $R^2$ is the proportion of variance explained in `health` by `group` (all three levels)
 
 --------------------------------------------------------------------------------
 
-We can also get variance based effect sizes for each contrast
+We can also get variance based effect sizes for each contrast (and this is likely more important than the overall `group` effect)
 
 When we set healthy as the reference, we had contrasts for 
 
 - alcohol vs. healthy (`alcohol_d3`)
 - depress vs. healthy (`depress_d3`)
 
-We can set up our functions for $\Delta R^2$ 
+We can first set up our functions for $\Delta R^2$ (or for PRE if you prefer - not shown here)
 
 ```{r}
-
 delta_r2 <- function(compact, augmented) {
   broom::glance(augmented)$r.squared - broom::glance(compact)$r.squared
 }
@@ -500,21 +525,80 @@ delta_r2 <- function(compact, augmented) {
 
 --------------------------------------------------------------------------------
 
-PRE for alcohol vs. healthy (compace model includes only the depress vs. healthy contrast)
+$\Delta R^2$ for alcohol vs. healthy (compact model includes only the depress vs. healthy contrast)
 
 ```{r}
 delta_r2(lm(health ~ depress_d3, data = data), m_d3)
 ```
 
-PRE for depress vs. healthy
+$\Delta R^2$ for depress vs. healthy (compact model includes only the alcohol vs. healthy contrast)
 ```{r}
 delta_r2(lm(health ~ alcohol_d3, data = data), m_d3)
 ```
 
 --------------------------------------------------------------------------------
 
-## Planned Orthogonal Contrasts
+## Testing Overall Effect with Other Xs in Model
 
+You can use the model comparison approach to get the test of the main effect of `group` even when $X$s for other predictors (e.g., covariates) are included in the model (such that $R^2$ is no longer a test of the `group` effect only)
+
+Lets add a covariate to the dataset and the model
+
+```{r}
+data <- data |> 
+  mutate(age = rnorm(nrow(data), 50, 10))
+
+m_d3_cov <- lm(health ~ alcohol_d3 + depress_d3 + age, data = data)
+
+tidy(m_d3_cov)
+```
+
+Remember that the $R^2$ for this model is not a test of the main effect of `group` but instead it is the combined effect of `group` and `age`
+
+--------------------------------------------------------------------------------
+
+:::{.callout-important}
+# Question
+What model comparison will get you the test of the main effect of `group`?
+:::
+
+:::{.fragment}
+[You will compare the full model with `group` and `age` to the compact model with only `age`.]{style="color:blue;"}
+
+- Compact: $health ~ b_0 + 0*alcohol_{d3} + 0* depress_{d3} + b_3*age$
+- Augmented: $health ~ b_0 + b_1*alcohol_{d3} + b_2*depress_{d3} + b_3*age$
+
+This is an F test with 2 df ($P_a - P_c$) in the numerator and 38 ($N-P_a$) in the denominator
+
+```{r}
+anova(lm(health ~ age, data = data), m_d3_cov)
+```
+:::
+
+--------------------------------------------------------------------------------
+
+And we can do model comparisons to get $\Delta R^2$ for the full `group` effect or the contrasts within `group`
+
+$\Delta R^2$ for the full `group` effect
+
+```{r}
+delta_r2(lm(health ~ age, data = data), m_d3_cov)
+```
+
+$\Delta R^2$ for alcohol vs. healthy (compact model includes the depress vs. healthy contrast AND age)
+
+```{r}
+delta_r2(lm(health ~ depress_d3 + age, data = data), m_d3_cov)
+```
+
+$\Delta R^2$ for depress vs. healthy (compact model includes the alcohol vs. healthy contrast AND age)
+```{r}
+delta_r2(lm(health ~ alcohol_d3 + age, data = data), m_d3_cov)
+```
+
+--------------------------------------------------------------------------------
+
+## Planned Orthogonal Contrasts
 
 The second coding option for regressors for categorical IVs yields planned orthogonal contrasts (POCs).   
 
@@ -585,8 +669,7 @@ c_a |>
 :::{.fragment}
 ::: {.callout-important}
 # Question
-
-How will the analyses in Quarto be similar and different?
+How will the analyses be similar and different?
 :::
 :::
 
