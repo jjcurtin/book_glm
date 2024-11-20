@@ -607,6 +607,12 @@ You can set up contrasts that test these two comparisons
 (c_a <- tibble(Group = c("alcohol", "depress", "healthy"),
        c1_a = c(.5, .5, -1),
        c2_a = c(1, -1, 0)))
+
+c_a <- tibble(` ` = c("c_1a", "c_2a"),
+              alcohol = c(0.5, 1),
+              depress = c(0.5, -1),
+              healthy = c(-1, 0))
+c_a <- tibble(group )
 c_a
 ```
 
@@ -861,4 +867,886 @@ anova(m_poc)
 glance(m_poc)$r.squared
 ```
 :::
+
+--------------------------------------------------------------------------------
+
+## Display: Group Means + SEM
+
+```{r}
+data |> 
+  group_by(group) |> 
+  summarise(mean = mean(health),
+            se = sd(health)/sqrt(n())) |> 
+  ggplot(aes(x = group, y = mean)) +
+  geom_col(color = "black", fill = "light grey") +
+  geom_errorbar(aes(ymin = mean - se, ymax = mean + se), width = 0.2) +
+  labs(y = "Health", x = NULL)
+```
+
+
+**<span style="color: red;">NOT RECOMMENDED!</span>**
+
+--------------------------------------------------------------------------------
+
+## Dummy Coding Group Mean Estimates
+
+::: {.callout-important}
+# Question
+
+How can we get standard errors for the group mean point estimates using the linear model parameters?
+:::
+
+:::{.fragment}
+[Fit three separate models. Set a different group as the reference group in each model. $b_0$ will be the predicted mean for the reference group in each model. The standard error for $b_0$ is the standard error for this parameter.]{style="color:blue;"}    
+:::
+
+--------------------------------------------------------------------------------
+
+```{r}
+matrix_contr <- contr.treatment(levels(data$group), base = 1) 
+col_names <- str_c(colnames(matrix_contr), "_v_healthy")
+colnames(matrix_contr) <- col_names
+contrasts(data$group) <- matrix_contr
+
+m_alc <- lm(health ~ group, data = data)
+
+broom::tidy(m_alc) |> 
+  mutate(term = str_replace(term, "group", ""))
+```
+
+```{r}
+matrix_contr <- contr.treatment(levels(data$group), base = 2) 
+colnames(matrix_contr) <- col_names
+contrasts(data$group) <- matrix_contr
+
+m_dep <- lm(health ~ group, data = data)
+
+broom::tidy(m_dep) |> 
+  mutate(term = str_replace(term, "group", ""))
+```
+
+```{r}
+matrix_contr <- contr.treatment(levels(data$group), base = 3) 
+col_names <- str_c(colnames(matrix_contr), "_v_healthy")
+contrasts(data$group) <- matrix_contr
+
+m_health <- lm(health ~ group, data = data)
+
+broom::tidy(m_health) |> 
+  mutate(term = str_replace(term, "group", ""))
+```
+
+[This standard error is the standard error you should graph! But there is an easier way to get these.]{style="color:blue;"}   
+
+--------------------------------------------------------------------------------
+
+```{r}
+data_new <- tibble(group = levels(data$group))
+
+data_new
+```
+
+```{r}
+preds <- predict(m_poc, newdata = data_new, se.fit = TRUE) |> 
+  as_tibble() |> 
+  mutate(upper = fit + se.fit,
+         lower = fit - se.fit) |> 
+  bind_cols(data_new)
+
+preds
+```
+
+--------------------------------------------------------------------------------
+
+## Display: Point Estimates + SE
+
+```{r}
+preds |> 
+  ggplot(aes(x = group, y = fit)) +
+  geom_col(color = "black", fill = "light grey") +
+  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.2) +
+  labs(y = "Health", x = NULL)
+```
+
+--------------------------------------------------------------------------------
+
+## Parsing Variance: Dummy Codes
+
+`alcohol` dummy codes
+```{r}
+matrix_contr <- contr.treatment(levels(data$group), base = 1) 
+contrasts(data$group) <- matrix_contr
+
+data_alc <- model.matrix(~ group, data = data) |> 
+  as_tibble() |> 
+  select(-1, r_1 = 2, r_2 = 3) |> 
+  bind_cols(data)
+```
+
+Model $R^2$
+```{r}
+m_alc <- lm(health ~ r_1 + r_2, data = data_alc)
+broom::glance(m_alc)$r.squared
+```
+
+$\Delta R^2$
+```{r}
+(r_1 <- delta_r2(mean = lm(health ~ 1, data = data_alc), 
+         compact = lm(health ~ r_2, data = data_alc),
+         augmented = m_alc))
+
+(r_2 <- delta_r2(mean = lm(health ~ 1, data = data_alc), 
+         compact = lm(health ~ r_1, data = data_alc),
+         augmented = m_alc))
+```
+
+--------------------------------------------------------------------------------
+
+::: {.callout-important}
+# Question
+
+What do you notice about model $R^2$ vs. $\sum \Delta R^2?$
+:::
+
+
+```{r}
+broom::glance(m_alc)$r.squared
+
+r_1 + r_2
+```
+
+
+
+
+--------------------------------------------------------------------------------
+
+`depress` dummy codes
+```{r}
+matrix_contr <- contr.treatment(levels(data$group), base = 2) 
+colnames(matrix_contr) <- col_names
+contrasts(data$group) <- matrix_contr
+
+data_dep <- model.matrix(~ group, data = data) |> 
+  as_tibble() |> 
+  select(-1, r_1 = 2, r_2 = 3) |> 
+  bind_cols(data)
+```
+
+--------------------------------------------------------------------------------
+
+Model $R^2$
+```{r}
+m_dep <- lm(health ~ r_1 + r_2, data = data_dep)
+broom::glance(m_dep)$r.squared
+```
+
+$\Delta R^2$
+```{r}
+(r_1 <- delta_r2(mean = lm(health ~ 1, data = data_dep), 
+         compact = lm(health ~ r_2, data = data_dep),
+         augmented = m_alc))
+
+(r_2 <- delta_r2(mean = lm(health ~ 1, data = data_dep), 
+         compact = lm(health ~ r_1, data = data_dep),
+         augmented = m_alc))
+```
+
+$\sum \Delta R^2$
+```{r}
+r_1 + r_2
+```
+
+--------------------------------------------------------------------------------
+
+`healthy` dummy codes
+```{r}
+matrix_contr <- contr.treatment(levels(data$group), base = 3) 
+colnames(matrix_contr) <- col_names
+contrasts(data$group) <- matrix_contr
+
+data_health <- model.matrix(~ group, data = data) |> 
+  as_tibble() |> 
+  select(-1, r_1 = 2, r_2 = 3) |> 
+  bind_cols(data)
+```
+
+--------------------------------------------------------------------------------
+
+Model $R^2$
+```{r}
+m_health <- lm(health ~ r_1 + r_2, data = data_health)
+broom::glance(m_health)$r.squared
+```
+
+$\Delta R^2$
+```{r}
+(r_1 <- delta_r2(mean = lm(health ~ 1, data = data_health), 
+         compact = lm(health ~ r_2, data = data_health),
+         augmented = m_alc))
+
+(r_2 <- delta_r2(mean = lm(health ~ 1, data = data_health), 
+         compact = lm(health ~ r_1, data = data_health),
+         augmented = m_alc))
+```
+
+$\sum \Delta R^2$
+```{r}
+r_1 + r_2
+```
+
+--------------------------------------------------------------------------------
+
+
+## Parsing Variance: POCs
+
+```{r}
+matrix_contr <- matrix(c(.333, .333, -.667,
+                         .5,  -.5, 0), 
+                       ncol = 2,
+                       dimnames = list(levels(data$group),
+                                       c("patient_v_healthy", "alcohol_v_depress")))
+
+contrasts(data$group) <- matrix_contr
+
+data_poc <- model.matrix(~ group, data = data) |> 
+  as_tibble() |> 
+  select(-1, poc_1 = 2, poc_2 = 3) |> 
+  bind_cols(data)
+```
+
+--------------------------------------------------------------------------------
+
+Model $R^2$
+```{r}
+m_poc<- lm(health ~ poc_1 + poc_2, data = data_poc)
+broom::glance(m_poc)$r.squared
+```
+
+$\Delta R^2$
+```{r}
+(poc_1 <- delta_r2(mean = lm(health ~ 1, data = data_poc), 
+         compact = lm(health ~ poc_2, data = data_poc),
+         augmented = m_alc))
+
+(poc_2 <- delta_r2(mean = lm(health ~ 1, data = data_poc), 
+         compact = lm(health ~ poc_1, data = data_poc),
+         augmented = m_alc))
+```
+
+--------------------------------------------------------------------------------
+
+::: {.callout-important}
+# Question
+
+What do you notice about model $R^2$ vs. $\sum \Delta R^2?$
+:::
+
+
+```{r}
+broom::glance(m_poc)$r.squared
+
+poc_1 + poc_2
+```
+
+
+
+--------------------------------------------------------------------------------
+
+## POC Contrast Coding: Common Contrasts
+
+**3 group contrasts**   
+
+$C_1: \frac{(\text{group}_1 + \text{group}_2)}{2} \text{vs.} \text{group}_3$    
+
+```{r}
+#| echo: false
+
+tibble(group_1 = .333,
+       group_2 = .333,
+       group_3 = -.667)
+```
+
+
+$C_2: \text{group}_1 \text{vs.}  \text{group}_2$
+```{r}
+#| echo: false
+
+tibble(group_1 = .5,
+       group_2 = -.5,
+       group_3 = 0)
+```
+
+--------------------------------------------------------------------------------
+
+**4 group contrasts**   
+
+$C_1: \frac{(\text{group}_1 + \text{group}_2 + \text{group}_3)}{3} \text{vs.} \text{group}_4$    
+
+```{r}
+#| echo: false
+
+tibble(group_1 = .25,
+       group_2 = .25,
+       group_3 = .25,
+       group_4 = -.75)
+```
+
+$C_2: \frac{(\text{group}_1 + \text{group}_2)}{2} \text{vs.} \text{group}_3$     
+```{r}
+#| echo: false
+
+tibble(group_1 = .333,
+       group_2 = .333,
+       group_3 = -.667,
+       group_4 = 0)
+```
+
+$C_3: \text{group}_1 \text{vs.}  \text{group}_2$
+
+```{r}
+#| echo: false
+
+tibble(group_1 = .5,
+       group_2 = -.5,
+       group_3 = 0,
+       group_4 = 0)
+```
+
+--------------------------------------------------------------------------------
+
+**4 group contrasts**   
+
+$C_1: \frac{(\text{group}_1 + \text{group}_2)}{2} \text{vs.} + \frac{(\text{group}_3 + \text{group}_4)}{2}$    
+
+```{r}
+#| echo: false
+
+tibble(group_1 = .5,
+       group_2 = .5,
+       group_3 = -.5,
+       group_4 = -.5)
+```
+
+$C_2: \text{group}_1 \text{vs.}  \text{group}_2$
+
+```{r}
+#| echo: false
+
+tibble(group_1 = .5,
+       group_2 = -.5,
+       group_3 = 0,
+       group_4 = 0)
+```
+
+$C_3: \text{group}_3 \text{vs.}  \text{group}_4$
+
+```{r}
+#| echo: false
+
+tibble(group_1 = 0,
+       group_2 = 0,
+       group_3 = .5,
+       group_4 = -.5)
+```
+
+--------------------------------------------------------------------------------
+
+**4 group contrasts (polynomials)**   
+
+Linear:  
+
+```{r}
+#| echo: false
+
+tibble(group_1 = -3,
+       group_2 = -1,
+       group_3 = 1,
+       group_4 = 3)
+```
+
+Quadratic:  
+
+```{r}
+#| echo: false
+
+tibble(group_1 = 1,
+       group_2 = -1,
+       group_3 = -1,
+       group_4 = 1)
+```
+
+
+Cubic:  
+
+```{r}
+#| echo: false
+
+tibble(group_1 = -1,
+       group_2 = 3,
+       group_3 = -3,
+       group_4 = 1)
+```
+
+**Note that range is not 1.**
+
+--------------------------------------------------------------------------------
+
+## Single and Multiple Comparisons 
+
+::: {.callout-important}
+# Question
+
+What do you gain from testing the main effect (or interaction) of a categorical variable that has more than 2 levels? What do you not gain?
+:::
+
+:::{.fragment}
+[You learn that some contrast across the groups/conditions in some set of orthogonal contrasts is significant. Does this really tell you something interesting?]{style="color:blue;"}        
+
+[You do not learn which groups are different from each other. In almost all instances our question is about differences between groups (or combinations of groups; or patterns across groups). We need contrasts.]{style="color:blue;"}        
+
+[The test of the main effect is not needed (with one exception) to reduce the probability of making any Type I errors. In many instances, it will increase the probability of Type II errors. This is a **big** misconception in our field.]{style="color:blue;"}    
+:::
+
+--------------------------------------------------------------------------------
+
+**Option 1: POCs**   
+
+```{r}
+tidy_m_poc
+```
+
+--------------------------------------------------------------------------------
+
+**Option 2: Planned non-orthogonal pairwise comparisons**    
+
+```{r}
+matrix_contr <- matrix(c(.5, 0, -.5,
+                         0,  .5, -.5), 
+                       ncol = 2,
+                       dimnames = list(levels(data$group),
+                                       c("alcohol_v_healthy", "depress_v_healthy")))
+
+contrasts(data$group) <- matrix_contr
+
+lm(health ~ group, data = data) |> 
+  broom::tidy() |> 
+  mutate(term = str_replace(term, "group", ""))
+```
+
+
+```{r}
+matrix_contr <- matrix(c(-.5, .5, 0,
+                         -.5,  0, .5), 
+                       ncol = 2,
+                       dimnames = list(levels(data$group),
+                                       c("depress_v_alcohol", "healthy_v_alcohol")))
+
+contrasts(data$group) <- matrix_contr
+
+lm(health ~ group, data = data) |> 
+  broom::tidy() |> 
+  mutate(term = str_replace(term, "group", ""))
+```
+
+
+
+--------------------------------------------------------------------------------
+
+**Option 3: Unplanned; observed patterns of means dictate comparisons**   
+
+```{r}
+data |> 
+  group_by(group) |> 
+  summarise(mean = mean(health))
+```
+
+--------------------------------------------------------------------------------
+
+::: {.callout-important}
+# Question
+
+What validity concerns do we need to evaluate for these various options?
+:::
+
+:::{.fragment}
+Statistical/conclusion validity.{style="color:blue;"}     
+
+[1. Do results clearly support your theory (fundamental)?]{style="color:blue;"}    
+[2. Probability of Type 1 error.]{style="color:blue;"}     
+[3. Probability of Type 2 error.]{style="color:blue;"}     
+
+[We should wonder (and be concerned about) what happens to the probability of making an error across *all* of our tests.]{style="color:blue;"} 
+:::
+
+--------------------------------------------------------------------------------
+
+**Test-wise error rate:** The probability of making a type I (or II) error for any specific statistical test. <span style="color: red;">What is it for type I and type II?</span>   
+
+**Family-wise error rate:** The probability of making a type I (or II) error among a *family* of statistical tests reported (and performed).   
+
+**Experiment-wise error rate:** The probability of making a type I (or II) error among all statistical tests reported (and performed).   
+
+**Bonferroni Inequality:**   
+$\text{alpha}_{\text{set}} \le \text{set size}*\text{alpha}_{\text{test}}$
+
+--------------------------------------------------------------------------------
+
+- In Psychology, we are generally concerned with test-wise and family-wise error rates (and most discussion is about Type I errors).  
+
+- Orthogonal effects in factorial ANOVA (e.g., two main effects and interaction in 2-way ANOVA) are typically considered to come from different families (different questions).
+
+- POCs within a multi-df effect (main effect or interaction) are typically considered to come from different families. This makes most sense if the contrasts are testing clearly different questions.
+
+- Non-orthogonal contrasts within multi-df effects are clearly related (in same family).
+
+--------------------------------------------------------------------------------
+
+::: {.callout-important}
+# Question
+
+What do we now know about statistical validity for POC approaches?
+:::
+
+
+:::{.fragment}
+[Can only use POCs when your research questions map onto $n_{\text{levels}}-1$ orthogonal predictions.]{style="color:blue;"}    
+
+[Need to proceed cautiously because statistical results may support predictions but patterns of means may undermine your conclusions (pharmacological and expectancy example - draw graphs for two scenarios).]{style="color:blue;"}     
+
+[Must be comfortable with these contrasts testing *different* questions and therefore being in different families.]{style="color:blue;"}
+:::
+
+--------------------------------------------------------------------------------
+
+::: {.callout-important}
+# Question
+
+What do we do with multiple planned, non-orthogonal contrasts, and worse still unplanned contrasts?
+:::
+
+:::{.fragment}
+**Many** procedures exist. Kirk summarizes more but...
+
+[**For planned, non-orthogonal**]{style="color:blue;"}         
+
+**Fisher LSD** is reasonable with planned, non-orthogonal contrasts for 3 level variables (family-wise alpha controlled and reasonable power).   
+
+**Holm-Bonferonni** is most flexible but need to keep planned contrasts to a minimum (family-wise type I is strictly controlled, but power drops with increasing number of contrasts). Fisher LSD may be more powerful in some instances with 3 level variables.    
+
+
+[**For post-hoc/unplanned**]{style="color:blue;"}        
+
+**Scheffe** can be used when you can't limit yourself a priori. Power sucks!   
+:::
+
+--------------------------------------------------------------------------------
+
+## Fisher LSD (Protected Testing)
+
+- First test omnibus (multi-df) effect (main effect or interaction). If non-significant, stop.    
+
+- If omnibus effect is significant, test pairwise comparisons among groups/conditions using dummy codes (other contrasts may be used if planned). No additional “protection” is needed.   
+
+::: {.callout-important}
+# Question
+
+How is family-wise alpha controlled?
+:::
+
+:::{.fragment}
+[Only proceed when omnibus test indicates some comparison is significant (monte carlo of null main effect).]{style="color:blue;"}     
+
+[Problems emerge if omnibus is significant but you do multiple tests, only some of which are significant). Not a problem, generally, with 3 level variable and 3 tests (e.g. pairwise comparisons). Inadequate with more levels (monte-carlo for three group with effect; thought experiment with 1 significant group difference in 4 level).]{style="color:blue;"}    
+:::
+
+
+--------------------------------------------------------------------------------
+
+
+## Holm-Bonferroni Method
+
+1. Suppose there are $k$ null hypotheses to be tested and the overall type I error rate is $\alpha$. 
+
+2. Order the tests from smallest to largest p-value.
+
+3. Multiply the smallest p-value by $k$ and compare to $\alpha$. If reject, continue. 
+
+4. Multiply the next smallest p-value by $k-1$. Its new p-value is the max of this p-value and all preceding it.
+
+5. Continue doing this until a hypothesis cannot be rejected. At that point, stop and accept all remaining hypotheses.
+
+Note: Does **not** require significant omnibus test for type I protection.
+
+Holm, S. (1979). A simple sequentially rejective multiple test procedure. *Scandinavian Journal of Statistics*, 6 (2): 65–70.
+
+
+--------------------------------------------------------------------------------
+
+```{r}
+p = c(.001, .009, .005, .100, .200, .040, .011)
+p
+```
+
+```{r}
+p.adjust(p, method= 'bonferroni')
+```
+
+```{r}
+p.adjust(p, method= 'holm')
+```
+
+
+--------------------------------------------------------------------------------
+
+## Scheffe Test
+
+- Can be used for complete exploratory comparisons.
+
+- Adjust the F-statistic for each comparison by dividing it by (number of groups - 1).
+
+- Get new p-value using: `pf(F, df1, df2, lower.tail = FALSE)`.
+
+- If you are working with t values, square them to convert to F before dividing.
+
+- Provides good alpha protection. Test of omnibus effect is **not** required. Very conservative with high Type II errors.
+
+--------------------------------------------------------------------------------
+
+## Monte Carlo Examples
+
+### 3 Groups with No Group Differences (Type I Errors) 
+
+```{r}
+n_experiments <- 10000
+
+m_1 <- 10
+m_2 <- 10
+m_3 <- 10
+
+sd <- 20
+n <- 50
+
+x <-  factor(c(rep("a", n), rep("b", n), rep("c", n)))  
+```
+
+**1. POCs - all focal (separate research questions)**
+
+```{r}
+simulate_poc <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  m <- lm(y ~ x)
+  results <- broom::tidy(m)
+  
+  significant <- any(results$p.value[2:3] < 0.05)
+
+  return(if_else(significant, 1, 0))
+}
+```
+
+```{r}
+matrix_contr <- matrix(c(2, -1, -1,
+                         0,  1, -1), 
+                       ncol = 2,
+                       dimnames = list(levels(x),
+                                       c("a_v_bc", "b_v_c")))
+contrasts(x) <- matrix_contr
+
+type_1 <- map_int(1:n_experiments, simulate_poc)
+```
+
+Average type I error is `r mean(type_1)`
+
+--------------------------------------------------------------------------------
+
+**2. All (3) pairwise contrasts (no protection).** 
+
+```{r}
+simulate_uncorrected <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  mod_1 <- lm(y ~ x)
+  results_1 <- broom::tidy(mod_1)
+  
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  mod_2 <- lm(y ~ x)
+  results_2 <- broom::tidy(mod_2)
+  
+  significant <- any(c(results_1$p.value[2:3], results_2$p.value[2]) < 0.05)
+
+  return(if_else(significant, 1, 0))
+}
+```
+
+```{r}
+type_1 <- map_int(1:n_experiments, simulate_uncorrected)
+```
+
+Average type I error is `r mean(type_1)`
+
+--------------------------------------------------------------------------------
+
+**3. Fisher LSD with 3 pairwise comparisons**
+```{r}
+simulate_fisher <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  mod_1 <- lm(y ~ x)
+  results_1 <- broom::tidy(mod_1)
+  
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  mod_2 <- lm(y ~ x)
+  results_2 <- broom::tidy(mod_2)
+  
+  omnibus <- anova(mod_1)$`Pr(>F)`[1]
+  
+  significant <- omnibus < .05 & any(c(results_1$p.value[2:3], results_2$p.value[2]) < 0.05)
+
+  return(if_else(significant, 1, 0))
+}
+```
+
+```{r}
+type_1 <- map_int(1:n_experiments, simulate_fisher)
+```
+
+Average type I error is `r mean(type_1)`
+
+--------------------------------------------------------------------------------
+
+**4. Holm-Bonferroni correction with 3 pairwise comparisons**
+```{r}
+simulate_hb <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  mod_1 <- lm(y ~ x)
+  results_1 <- broom::tidy(mod_1)
+  
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  mod_2 <- lm(y ~ x)
+  results_2 <- broom::tidy(mod_2)
+  
+  significant <- any(p.adjust(c(results_1$p.value[2:3], results_2$p.value[2]), method = "holm") < 0.05)
+
+  return(if_else(significant, 1, 0))
+}
+```
+
+```{r}
+type_1 <- map_int(1:n_experiments, simulate_hb)
+```
+
+Average type I error is `r mean(type_1)`
+    
+--------------------------------------------------------------------------------
+
+### 3 Groups with One Group Difference (Type II Errors)
+
+```{r}
+m_1 <- 10
+m_2 <- 10
+m_3 <- 20
+```
+
+--------------------------------------------------------------------------------
+
+**1. Fisher LSD with 3 pairwise comparisons**
+
+```{r}
+simulate_fisher <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  mod_1 <- lm(y ~ x)
+  results_1 <- broom::tidy(mod_1)
+  omnibus <- anova(mod_1)$`Pr(>F)`[1]
+  
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  mod_2 <- lm(y ~ x)
+  results_2 <- broom::tidy(mod_2)
+  
+  significant <- omnibus < .05 && ((results_1$p.value[2] < 0.05) || 
+                                     (results_1$p.value[3] || results_2$p.value[2] < 0.05))
+
+  return(if_else(significant, 0, 1))
+}
+```
+
+```{r}
+type_2 <- map_int(1:n_experiments, simulate_fisher)
+```
+
+Average type II error is `r mean(type_2)`
+
+--------------------------------------------------------------------------------
+
+**2. Holm-Bonferroni correction with 3 pairwise comparisons**
+```{r}
+simulate_hb <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  mod_1 <- lm(y ~ x)
+  results_1 <- broom::tidy(mod_1)
+  
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  mod_2 <- lm(y ~ x)
+  results_2 <- broom::tidy(mod_2)
+
+  
+  significant <- any(p.adjust(c(results_1$p.value[2:3], results_2$p.value[2]), method = "holm") < 0.05)
+
+  return(if_else(significant, 0, 1))
+}
+```
+
+```{r}
+type_2 <- map_int(1:n_experiments, simulate_hb)
+```
+
+Average type II error is `r mean(type_2)`
+
+--------------------------------------------------------------------------------
+
+### 3 Groups with All Groups Different (Type II Errors)
+
+```{r}
+m_1 <- 10
+m_2 <- 20
+m_3 <- 30
+```
+
+
+**1. Fisher LSD with 3 pairwise comparisons**
+
+```{r}
+type_2 <- map_int(1:n_experiments, simulate_fisher)
+```
+
+Average type II error is `r mean(type_2)`    
+
+
+**2. Holm-Bonferroni correction with 3 pairwise comparisons**
+
+```{r}
+type_2 <- map_int(1:n_experiments, simulate_hb)
+
+```
+
+Average type II error is `r mean(type_2)`
+  
+:::{.fragment}
+::: {.callout-important}
+# Question
+
+What would family-wise error rate be if we conducted only 2 dummy contrasts?
+:::
+:::
+
+:::{.fragment}
+[$\le .10$, but they would definitely be considered in the same family (related questions) and most people won't tolerate this.]{style="color:blue;"}
+:::
+
+
+
+
+
+
 
