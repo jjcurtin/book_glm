@@ -58,3 +58,7 @@
   quarto-pub:
     - id: cda8b4e7-eac8-4e08-a54b-e96c28d7a128
       url: 'https://jjcurtin.quarto.pub/12_interactions_two_dichotomous'
+- source: 13_categorical_variables.qmd
+  quarto-pub:
+    - id: b1e44104-03ca-4722-90b9-45cac3fecbf7
+      url: 'https://jjcurtin.quarto.pub/13_categorical_variables'
