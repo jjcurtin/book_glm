@@ -1,0 +1,315 @@
+---
+title: "contrasts_simulation.qmd"
+format: html
+---
+
+# Monte Carlo Simulation of Contrast Approaches {.unnumbered}
+
+### 3 Groups with No Group Differences (Type I Errors) 
+
+Set up simulation characteristics
+```{r}
+# simulate N experiments
+n_experiments <- 20000
+
+# group means
+m_1 <- 10
+m_2 <- 10
+m_3 <- 10
+
+sd <- 20 # sd for y
+n <- 50 # group size
+
+# set up x as factor
+x <-  factor(c(rep("a", n), rep("b", n), rep("c", n)))  
+
+set.seed(1234567)
+```
+
+--------------------------------------------------------------------------------
+
+**1. POCs - all focal (separate research questions)**
+
+```{r}
+#| label: null_poc 
+#| code-fold: true
+
+simulate_poc <- function(i) {
+  # vector of y for three groups
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  
+  # fit model
+  results <- lm(y ~ x) |> 
+    tidy()
+  
+  # extract and organize key results
+  tibble(sim = i,
+         sig_c1 = results$p.value[2] < 0.05,
+         sig_c2 = results$p.value[3] < 0.05,
+         sig_any = any(results$p.value[2:3] < 0.05))
+}
+
+contrasts(x)<- matrix(c(2, -1, -1,
+                         0,  1, -1), 
+                       ncol = 2,
+                       dimnames = list(levels(x),
+                                       c("a_v_bc", "b_v_c")))
+type1_poc <- map(1:n_experiments, simulate_poc) |> 
+  list_rbind()
+```
+
+Results (to make clear what function returns)
+```{r}
+type1_poc |> head()
+```
+
+Test wise type I error for each contrast is 5%
+```{r}
+mean(type1_poc$sig_c1)
+mean(type1_poc$sig_c2)
+```
+
+The results across contrasts are independent because they come from different families
+```{r}
+cor(type1_poc$sig_c1, type1_poc$sig_c2) |> round(2)
+```
+
+To be clear, the family-wise type I error across the set is 10% BUT often not considered in same family so not important?
+```{r}
+mean(type1_poc$sig_any)
+```
+
+--------------------------------------------------------------------------------
+
+**2. All (3) pairwise contrasts (no protection).** 
+
+```{r}
+#| label: null_pair
+#| code-fold: true
+
+simulate_uncorrected <- function(i) {
+  # vector of y for three groups
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  
+  # fit first model
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  results_3 <- lm(y ~ x) |> 
+    tidy()
+ 
+  # fit second model 
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  results_1 <- lm(y ~ x) |> 
+    tidy()
+ 
+  # extract and organize key results 
+  tibble(sim = i,
+         sig_d1 = results_3$p.value[2] < 0.05,
+         sig_d2 = results_3$p.value[3] < 0.05,
+         sig_d3 = results_1$p.value[2] < 0.05,
+         sig_any = any(c(results_3$p.value[2:3], results_1$p.value[2]) < 0.05))
+}
+
+type1_pair <- map(1:n_experiments, simulate_uncorrected) |> 
+  list_rbind()
+```
+
+Test-wise Type I for each contrast is 5%
+```{r}
+mean(type1_pair$sig_d1)
+mean(type1_pair$sig_d2)
+mean(type1_pair$sig_d3)
+```
+
+But these are from same family (results of contrasts are related)
+```{r}
+cor(type1_pair$sig_d1, type1_pair$sig_d2) |> round(2)
+cor(type1_pair$sig_d1, type1_pair$sig_d3) |> round(2)
+cor(type1_pair$sig_d2, type1_pair$sig_d3) |> round(2)
+```
+
+Family-wise error rate is higher (but not 15% because contrasts are dependent/related)
+```{r}
+mean(type1_pair$sig_any)
+```
+
+--------------------------------------------------------------------------------
+
+**3. Fisher LSD with 3 pairwise comparisons**
+```{r}
+#| label: null_fish
+#| code-fold: true
+simulate_fisher <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  results_3 <- lm(y ~ x) |> 
+    tidy()
+  
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  results_1 <- lm(y ~ x) |> 
+    tidy()
+  
+  sig_omnibus <- anova(lm(y ~ x))$`Pr(>F)`[1] < 0.05
+  
+  # extract and organize key results 
+  tibble(sim = i,
+         sig_d1 = sig_omnibus && results_3$p.value[2] < 0.05,
+         sig_d2 = sig_omnibus && results_3$p.value[3] < 0.05,
+         sig_d3 = sig_omnibus && results_1$p.value[2] < 0.05,
+         sig_any = sig_omnibus && any(c(results_3$p.value[2:3], results_1$p.value[2]) < 0.05))
+}
+
+type1_fish <- map(1:n_experiments, simulate_fisher) |> 
+  list_rbind()
+```
+
+Test-wise Type I for each contrast is < 5% (too conservative!)
+```{r}
+mean(type1_fish$sig_d1)
+mean(type1_fish$sig_d2)
+mean(type1_fish$sig_d3)
+```
+
+These are from same family (results of contrasts are even more related)
+```{r}
+cor(type1_fish$sig_d1, type1_fish$sig_d2) |> round(2)
+cor(type1_fish$sig_d1, type1_fish$sig_d3) |> round(2)
+cor(type1_fish$sig_d2, type1_fish$sig_d3) |> round(2)
+```
+
+Family-wise error rate is controlled at 5% 
+```{r}
+mean(type1_fish$sig_any)
+```
+
+--------------------------------------------------------------------------------
+
+**4. Holm-Bonferroni correction with 3 pairwise comparisons**
+```{r}
+simulate_hb <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  mod_1 <- lm(y ~ x)
+  results_1 <- broom::tidy(mod_1)
+  
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  mod_2 <- lm(y ~ x)
+  results_2 <- broom::tidy(mod_2)
+  
+  significant <- any(p.adjust(c(results_1$p.value[2:3], results_2$p.value[2]), method = "holm") < 0.05)
+
+  return(if_else(significant, 1, 0))
+}
+```
+
+```{r}
+type_1 <- map_int(1:n_experiments, simulate_hb)
+```
+
+Average type I error is `r mean(type_1)`
+    
+--------------------------------------------------------------------------------
+
+### 3 Groups with One Group Difference (Type II Errors)
+
+```{r}
+m_1 <- 10
+m_2 <- 10
+m_3 <- 20
+```
+
+--------------------------------------------------------------------------------
+
+**1. Fisher LSD with 3 pairwise comparisons**
+
+```{r}
+simulate_fisher <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  mod_1 <- lm(y ~ x)
+  results_1 <- broom::tidy(mod_1)
+  omnibus <- anova(mod_1)$`Pr(>F)`[1]
+  
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  mod_2 <- lm(y ~ x)
+  results_2 <- broom::tidy(mod_2)
+  
+  significant <- omnibus < .05 && ((results_1$p.value[2] < 0.05) || 
+                                     (results_1$p.value[3] || results_2$p.value[2] < 0.05))
+
+  return(if_else(significant, 0, 1))
+}
+```
+
+```{r}
+type_2 <- map_int(1:n_experiments, simulate_fisher)
+```
+
+Average type II error is `r mean(type_2)`
+
+--------------------------------------------------------------------------------
+
+**2. Holm-Bonferroni correction with 3 pairwise comparisons**
+```{r}
+simulate_hb <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  mod_1 <- lm(y ~ x)
+  results_1 <- broom::tidy(mod_1)
+  
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  mod_2 <- lm(y ~ x)
+  results_2 <- broom::tidy(mod_2)
+
+  
+  significant <- any(p.adjust(c(results_1$p.value[2:3], results_2$p.value[2]), method = "holm") < 0.05)
+
+  return(if_else(significant, 0, 1))
+}
+```
+
+```{r}
+type_2 <- map_int(1:n_experiments, simulate_hb)
+```
+
+Average type II error is `r mean(type_2)`
+
+--------------------------------------------------------------------------------
+
+### 3 Groups with All Groups Different (Type II Errors)
+
+```{r}
+m_1 <- 10
+m_2 <- 20
+m_3 <- 30
+```
+
+
+**1. Fisher LSD with 3 pairwise comparisons**
+
+```{r}
+type_2 <- map_int(1:n_experiments, simulate_fisher)
+```
+
+Average type II error is `r mean(type_2)`    
+
+
+**2. Holm-Bonferroni correction with 3 pairwise comparisons**
+
+```{r}
+type_2 <- map_int(1:n_experiments, simulate_hb)
+
+```
+
+Average type II error is `r mean(type_2)`
+  
+:::{.fragment}
+::: {.callout-important}
+# Question
+
+What would family-wise error rate be if we conducted only 2 dummy contrasts?
+:::
+:::
+
+:::{.fragment}
+[$\le .10$, but they would definitely be considered in the same family (related questions) and most people won't tolerate this.]{style="color:blue;"}
+:::

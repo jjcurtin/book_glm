@@ -34,5 +34,6 @@ book:
     - web7_videos.qmd
     - part: Appendices
       chapters:
-        - app1_exam.qmd
+        - app1_exam_review.qmd
         - app2_terminology.qmd
+        - app3_contrasts.qmd
