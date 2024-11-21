@@ -371,6 +371,8 @@ How are these t-tests of $b_j$ in the linear model different from what you would
 :::{.fragment}
 [The linear model t-tests of $b_j$ use the full error term including all subjects (including the “ignored” group; see dfs below). This yields a more powerful and therefore preferred test.]{style="color:blue;"}     
 
+--------------------------------------------------------------------------------
+
 The linear model
 ```{r}
 tidy(m_d3)
@@ -627,7 +629,7 @@ You can set up contrasts that test these two comparisons
 c_a
 ```
 
-**A common alternative:**
+**A common alternative (whole numbers):**
 
 ```{r}
 #| echo: false
@@ -714,6 +716,8 @@ data <- data |>
                            "depress" ~ -.5,
                            "healthy" ~ 0))
 ```
+
+--------------------------------------------------------------------------------
 
 ```{r}
 data |> 
@@ -870,6 +874,8 @@ data <- data |>
                            "healthy" ~ 0))
 ```
 
+--------------------------------------------------------------------------------
+
 Lets see them!
 ```{r}
 data |> 
@@ -1016,6 +1022,8 @@ data |>
             se = sd(health)/sqrt(n())) 
 ```
 
+--------------------------------------------------------------------------------
+
 ```{r}
 #| code-fold: true
 
@@ -1118,6 +1126,8 @@ NOTE: You could also add raw data or residualized data if you like
 Dummy-coded regressors are NOT orthogonal
 
 ```{r}
+#| code-fold: true
+
 data <- data |> 
   select(-contains("_v_")) |> 
   mutate(alcohol_d3 = if_else(group == "alcohol", 1, 0),
@@ -1137,7 +1147,7 @@ What are the implications of this for the relationship between the total effect 
 :::
 
 :::{.fragment}
-[The $/Delta R^2$ for the two contrasts will not sum to the model $R^2$.]{style="color:blue;"}
+[The $\Delta R^2$ for the two contrasts will not sum to the model $R^2$.]{style="color:blue;"}
 
 ::::{.callout-important}
 # Question
@@ -1150,50 +1160,36 @@ Do you have any intuition about whether they will sum to more or less?
 Dummy codes w/ healthy as reference
 
 ```{r}
-#| echo: false
+#| code-fold: true
 
 preds |> 
   ggplot(aes(x = group, y = fit)) +
   geom_col(color = "black", fill = "light grey") +
   geom_errorbar(aes(ymin = lwr, ymax = upr), width = 0.2) +
   labs(y = "Health", x = NULL)
-```
 
-- Add dummy coded regressors 
-```{r}
-#| code-fold: true
 
 data <- data |> 
   mutate(d1_3 = if_else(group == "alcohol", 1, 0),
          d2_3 = if_else(group == "depress", 1, 0))
-```
-
-- Fit model
-```{r}
-#| code-fold: true
 
 m_3 <- lm(health ~ d1_3 + d2_3, data = data)
 ```
 
 - Model $R^2$
 ```{r}
-#| code-fold: true
 glance(m_3)$r.squared
 ```
 
 - $\Delta R^2$ for alcohol vs. healthy
 
 ```{r}
-#| code-fold: true
-
 delta_r2(lm(health ~ d2_3, data = data), m_3)
 ```
 
 - $\Delta R^2$ for depress vs. healthy
 
 ```{r}
-#| code-fold: true
-
 delta_r2(lm(health ~ d1_3, data = data), m_3)
 ```
 
@@ -1202,50 +1198,35 @@ delta_r2(lm(health ~ d1_3, data = data), m_3)
 Dummy codes w/ depress as reference
 
 ```{r}
-#| echo: false
+#| code-fold: true
 
 preds |> 
   ggplot(aes(x = group, y = fit)) +
   geom_col(color = "black", fill = "light grey") +
   geom_errorbar(aes(ymin = lwr, ymax = upr), width = 0.2) +
   labs(y = "Health", x = NULL)
-```
-
-- Add dummy coded regressors 
-```{r}
-#| code-fold: true
 
 data <- data |> 
   mutate(d1_2 = if_else(group == "alcohol", 1, 0),
          d2_2 = if_else(group == "healthy", 1, 0))
-```
-
-- Fit model
-```{r}
-#| code-fold: true
 
 m_2 <- lm(health ~ d1_2 + d2_2, data = data)
 ```
 
 - Model $R^2$
 ```{r}
-#| code-fold: true
 glance(m_2)$r.squared
 ```
 
 - $\Delta R^2$ for alcohol vs. depress
 
 ```{r}
-#| code-fold: true
-
 delta_r2(lm(health ~ d2_2, data = data), m_2)
 ```
 
 - $\Delta R^2$ for healthy vs. depress
 
 ```{r}
-#| code-fold: true
-
 delta_r2(lm(health ~ d1_2, data = data), m_2)
 ```
 
@@ -1254,50 +1235,35 @@ delta_r2(lm(health ~ d1_2, data = data), m_2)
 Dummy codes w/ alchol as reference
 
 ```{r}
-#| echo: false
+#| code-fold: true
 
 preds |> 
   ggplot(aes(x = group, y = fit)) +
   geom_col(color = "black", fill = "light grey") +
   geom_errorbar(aes(ymin = lwr, ymax = upr), width = 0.2) +
   labs(y = "Health", x = NULL)
-```
-
-- Add dummy coded regressors 
-```{r}
-#| code-fold: true
 
 data <- data |> 
   mutate(d1_1 = if_else(group == "depress", 1, 0),
          d2_1 = if_else(group == "healthy", 1, 0))
-```
-
-- Fit model
-```{r}
-#| code-fold: true
 
 m_1 <- lm(health ~ d1_1 + d2_1, data = data)
 ```
 
 - Model $R^2$
 ```{r}
-#| code-fold: true
 glance(m_1)$r.squared
 ```
 
 - $\Delta R^2$ for depress vs. alcohol
 
 ```{r}
-#| code-fold: true
-
 delta_r2(lm(health ~ d2_1, data = data), m_1)
 ```
 
 - $\Delta R^2$ for healthy vs. alcohol 
 
 ```{r}
-#| code-fold: true
-
 delta_r2(lm(health ~ d1_1, data = data), m_1)
 ```
 
@@ -1339,7 +1305,7 @@ Lets do the same exercise with our orthogonal contrast codes
 - Alcohol and Depress vs. Healthy
 - Alcohol vs. Depress
 
-Code regressors
+Code regressors and look at data
 ```{r}
 #| code-fold: true
  
@@ -1353,19 +1319,14 @@ data <- data |>
                            "alcohol" ~ .5,
                            "depress" ~ -.5,
                            "healthy" ~ 0))
-```
-
-Look at the data
-```{r}
-#| code-fold: true
 
 data |> 
   slice_sample(n = 20)
 ```
 
+The regressors are uncorrelated
 ```{r}
-cor(data$alcohol_v_depress, data$patient_v_control) |> 
-  round(5)
+cor(data$alcohol_v_depress, data$patient_v_control) |> round(5)
 ```
 
 --------------------------------------------------------------------------------
@@ -1376,50 +1337,40 @@ What are the implications of this for the relationship between the total effect 
 :::
 
 :::{.fragment}
-[The $/Delta R^2$ for the two contrasts WILL sum to the model $R^2$.]{style="color:blue;"}
+[The $\Delta R^2$ for the two contrasts WILL sum to the model $R^2$.]{style="color:blue;"}
 
 --------------------------------------------------------------------------------
 
 Lets confirm
 ```{r}
-#| echo: false
+#| code-fold: true
 
 preds |> 
   ggplot(aes(x = group, y = fit)) +
   geom_col(color = "black", fill = "light grey") +
   geom_errorbar(aes(ymin = lwr, ymax = upr), width = 0.2) +
   labs(y = "Health", x = NULL)
-```
-
-- Fit model
-```{r}
-#| code-fold: true
 
 m_poc <- lm(health ~ patient_v_control + alcohol_v_depress, data = data)
 ```
 
 - Model $R^2$
 ```{r}
-#| code-fold: true
-
 glance(m_poc)$r.squared
 ```
 
 - $\Delta R^2$ for patient vs. control 
 
 ```{r}
-#| code-fold: true
-
 delta_r2(lm(health ~ alcohol_v_depress, data = data), m_poc)
 ```
 
 - $\Delta R^2$ for alcohol vs. depress
 
 ```{r}
-#| code-fold: true
-
 delta_r2(lm(health ~ patient_v_control, data = data), m_1)
 ```
+:::
 
 --------------------------------------------------------------------------------
 
@@ -1502,14 +1453,17 @@ Statistical/conclusion validity.{style="color:blue;"}
 
 --------------------------------------------------------------------------------
 
-**Test-wise error rate:** The probability of making a type I (or II) error for any specific statistical test. [What is it for type I and type II?]{style="color:red;"}
+**Test-wise error rate:** The probability of making a type I (or II) error for any specific statistical test. 
+
+[What is it for type I and type II?]{style="color:red;"}
 
 **Family-wise error rate:** The probability of making a type I (or II) error among a *family* of statistical tests reported (and performed).   
 
 **Experiment-wise error rate:** The probability of making a type I (or II) error among all statistical tests reported (and performed).   
 
 **Bonferroni Inequality:**   
-$alpha_{set}} \le set size*alpha_{test}$
+
+- $alpha_{set} \le set\_size*alpha_{test}$
 
 --------------------------------------------------------------------------------
 
@@ -1604,7 +1558,6 @@ Here are some p-values for a set of 7 planned comparisons
 (p = c(.001, .009, .005, .100, .200, .040, .011))
 ```
 
-
 Bonerroni adjusts them by multipying each by 7.  Too conservative! (low power)
 ```{r}
 p.adjust(p, method= 'bonferroni')
@@ -1632,296 +1585,3 @@ p.adjust(p, method= 'holm')
 - If you are working with t values, square them to convert to F before dividing.
 - Provides good alpha protection (Type I errors). 
 - Very conservative with high Type II errors.
-
---------------------------------------------------------------------------------
-
-## Monte Carlo Examples
-
-### 3 Groups with No Group Differences (Type I Errors) 
-
-Set up simulation characteristics
-```{r}
-# simulate N experiments
-n_experiments <- 20000
-
-# group means
-m_1 <- 10
-m_2 <- 10
-m_3 <- 10
-
-sd <- 20 # sd for y
-n <- 50 # group size
-
-# set up x as factor
-x <-  factor(c(rep("a", n), rep("b", n), rep("c", n)))  
-
-set.seed(1234567)
-```
-
---------------------------------------------------------------------------------
-
-**1. POCs - all focal (separate research questions)**
-
-```{r}
-#| label: poc_sim
-#| code-fold: true
-
-simulate_poc <- function(i) {
-  # vector of y for three groups
-  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
-  
-  # fit model
-  results <- lm(y ~ x) |> 
-    tidy()
-  
-  # extract and organize key results
-  tibble(sim = i,
-         sig_c1 = results$p.value[2] < 0.05,
-         sig_c2 = results$p.value[3] < 0.05,
-         sig_any = any(results$p.value[2:3] < 0.05))
-}
-
-contrasts(x)<- matrix(c(2, -1, -1,
-                         0,  1, -1), 
-                       ncol = 2,
-                       dimnames = list(levels(x),
-                                       c("a_v_bc", "b_v_c")))
-type1_poc <- map(1:n_experiments, simulate_poc) |> 
-  list_rbind()
-```
-
-Results (to make clear what function returns)
-```{r}
-type1_poc |> head()
-```
-
-Test wise type I error for each contrast is 5%
-```{r}
-mean(type1_poc$sig_c1)
-mean(type1_poc$sig_c2)
-```
-
-The results across contrasts are independent because they come from different families
-```{r}
-cor(type1_poc$sig_c1, type1_poc$sig_c2) |> round(2)
-```
-
-To be clear, the family-wise type I error across the set is 10% BUT often not considered in same family so not important?
-```{r}
-mean(type1_poc$sig_any)
-```
-
---------------------------------------------------------------------------------
-
-**2. All (3) pairwise contrasts (no protection).** 
-
-```{r}
-#| label: poc_sim
-#| code-fold: true
-
-simulate_uncorrected <- function(i) {
-  # vector of y for three groups
-  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
-  
-  # fit first model
-  contrasts(x) <- contr.treatment(levels(x), base = 3) 
-  results_3 <- lm(y ~ x) |> 
-    tidy()
- 
-  # fit second model 
-  contrasts(x) <- contr.treatment(levels(x), base = 1) 
-  results_1 <- lm(y ~ x) |> 
-    tidy()
- 
-  # extract and organize key results 
-  tibble(sim = i,
-         sig_d1 = results_3$p.value[2] < 0.05,
-         sig_d2 = results_3$p.value[3] < 0.05,
-         sig_d3 = results_1$p.value[2] < 0.05,
-         sig_any = any(c(results_3$p.value[2:3], results_1$p.value[2]) < 0.05))
-}
-
-type1_pair <- map(1:n_experiments, simulate_uncorrected) |> 
-  list_rbind()
-```
-
-
-Test-wise Type I for each contrast is 5%
-```{r}
-mean(type1_pair$sig_d1)
-mean(type1_pair$sig_d2)
-mean(type1_pair$sig_d3)
-```
-
-But these are from same family (results of contrasts are related)
-```{r}
-cor(type1_pair$sig_d1, type1_pair$sig_d2) |> round(2)
-cor(type1_pair$sig_d1, type1_pair$sig_d3) |> round(2)
-cor(type1_pair$sig_d2, type1_pair$sig_d3) |> round(2)
-```
-
-Family-wise error rate is higher (but not 15% because contrasts are dependent/related)
-```{r}
-mean(type1_pair$sig_any)
-```
-
---------------------------------------------------------------------------------
-
-**3. Fisher LSD with 3 pairwise comparisons**
-```{r}
-simulate_fisher <- function(i) {
-  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
-  contrasts(x) <- contr.treatment(levels(x), base = 3) 
-  mod_1 <- lm(y ~ x)
-  results_1 <- broom::tidy(mod_1)
-  
-  contrasts(x) <- contr.treatment(levels(x), base = 1) 
-  mod_2 <- lm(y ~ x)
-  results_2 <- broom::tidy(mod_2)
-  
-  omnibus <- anova(mod_1)$`Pr(>F)`[1]
-  
-  significant <- omnibus < .05 & any(c(results_1$p.value[2:3], results_2$p.value[2]) < 0.05)
-
-  return(if_else(significant, 1, 0))
-}
-```
-
-```{r}
-type_1 <- map_int(1:n_experiments, simulate_fisher)
-```
-
-Average type I error is `r mean(type_1)`
-
---------------------------------------------------------------------------------
-
-**4. Holm-Bonferroni correction with 3 pairwise comparisons**
-```{r}
-simulate_hb <- function(i) {
-  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
-  contrasts(x) <- contr.treatment(levels(x), base = 3) 
-  mod_1 <- lm(y ~ x)
-  results_1 <- broom::tidy(mod_1)
-  
-  contrasts(x) <- contr.treatment(levels(x), base = 1) 
-  mod_2 <- lm(y ~ x)
-  results_2 <- broom::tidy(mod_2)
-  
-  significant <- any(p.adjust(c(results_1$p.value[2:3], results_2$p.value[2]), method = "holm") < 0.05)
-
-  return(if_else(significant, 1, 0))
-}
-```
-
-```{r}
-type_1 <- map_int(1:n_experiments, simulate_hb)
-```
-
-Average type I error is `r mean(type_1)`
-    
---------------------------------------------------------------------------------
-
-### 3 Groups with One Group Difference (Type II Errors)
-
-```{r}
-m_1 <- 10
-m_2 <- 10
-m_3 <- 20
-```
-
---------------------------------------------------------------------------------
-
-**1. Fisher LSD with 3 pairwise comparisons**
-
-```{r}
-simulate_fisher <- function(i) {
-  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
-  contrasts(x) <- contr.treatment(levels(x), base = 3) 
-  mod_1 <- lm(y ~ x)
-  results_1 <- broom::tidy(mod_1)
-  omnibus <- anova(mod_1)$`Pr(>F)`[1]
-  
-  contrasts(x) <- contr.treatment(levels(x), base = 1) 
-  mod_2 <- lm(y ~ x)
-  results_2 <- broom::tidy(mod_2)
-  
-  significant <- omnibus < .05 && ((results_1$p.value[2] < 0.05) || 
-                                     (results_1$p.value[3] || results_2$p.value[2] < 0.05))
-
-  return(if_else(significant, 0, 1))
-}
-```
-
-```{r}
-type_2 <- map_int(1:n_experiments, simulate_fisher)
-```
-
-Average type II error is `r mean(type_2)`
-
---------------------------------------------------------------------------------
-
-**2. Holm-Bonferroni correction with 3 pairwise comparisons**
-```{r}
-simulate_hb <- function(i) {
-  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
-  contrasts(x) <- contr.treatment(levels(x), base = 3) 
-  mod_1 <- lm(y ~ x)
-  results_1 <- broom::tidy(mod_1)
-  
-  contrasts(x) <- contr.treatment(levels(x), base = 1) 
-  mod_2 <- lm(y ~ x)
-  results_2 <- broom::tidy(mod_2)
-
-  
-  significant <- any(p.adjust(c(results_1$p.value[2:3], results_2$p.value[2]), method = "holm") < 0.05)
-
-  return(if_else(significant, 0, 1))
-}
-```
-
-```{r}
-type_2 <- map_int(1:n_experiments, simulate_hb)
-```
-
-Average type II error is `r mean(type_2)`
-
---------------------------------------------------------------------------------
-
-### 3 Groups with All Groups Different (Type II Errors)
-
-```{r}
-m_1 <- 10
-m_2 <- 20
-m_3 <- 30
-```
-
-
-**1. Fisher LSD with 3 pairwise comparisons**
-
-```{r}
-type_2 <- map_int(1:n_experiments, simulate_fisher)
-```
-
-Average type II error is `r mean(type_2)`    
-
-
-**2. Holm-Bonferroni correction with 3 pairwise comparisons**
-
-```{r}
-type_2 <- map_int(1:n_experiments, simulate_hb)
-
-```
-
-Average type II error is `r mean(type_2)`
-  
-:::{.fragment}
-::: {.callout-important}
-# Question
-
-What would family-wise error rate be if we conducted only 2 dummy contrasts?
-:::
-:::
-
-:::{.fragment}
-[$\le .10$, but they would definitely be considered in the same family (related questions) and most people won't tolerate this.]{style="color:blue;"}
-:::
