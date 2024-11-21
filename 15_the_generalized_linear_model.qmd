@@ -84,6 +84,7 @@ Predicting admission to a grad program in engineering based on quantitative GRE,
 
 data <- read_csv(here::here("data_lecture/15_grad_admit.csv"),
                  show_col_types = FALSE) |> 
+  mutate(rank_2 = factor(rank_2, levels = c("Low rank", "High rank"))) |> 
   glimpse()
 ```
 
@@ -939,4 +940,189 @@ What about categorical variables?
 :::
 
 --------------------------------------------------------------------------------
+
+```{r}
+levels(data$rank_2)
+```
+
+```{r}
+matrix_contr <- matrix(c(-.5, .5), 
+                       ncol = 1,
+                       dimnames = list(c("low rank", "high rank"),
+                                       c("poc")))
+
+contrasts(data$rank_2) <- matrix_contr
+
+contrasts(data$rank_2)
+```
+
+--------------------------------------------------------------------------------
+
+```{r}
+m_rank <- glm(admit ~ rank_2, data = data, family = binomial(logit))
+
+tidy(m_rank)
+```
+
+
+--------------------------------------------------------------------------------
+
+```{r}
+m_rank_c <- glm(admit ~ 1, data = data, family = binomial(logit))
+
+anova(m_rank_c, m_rank)
+```
+
+:::{.callout-important}
+# Question 
+
+What are the odds of getting into grad school from a high rank university?
+:::
+
+:::{.fragment}
+```{r}
+exp(m_rank$coefficients[1] +  m_rank$coefficients[2] * 0.5)
+```
+:::
+
+::::{.fragment}
+:::{.callout-important}
+# Question 
+
+What are the odds of getting into grad school from a low rank university?
+:::
+::::
+
+:::{.fragment}
+```{r}
+exp(m_rank$coefficients[1] +  m_rank$coefficients[2] * -0.5)
+```
+:::
+
+--------------------------------------------------------------------------------
+
+```{r}
+data_new <- tibble(rank_2 = factor(c("High rank", "Low rank")))
+
+(p <- predict(m_rank, newdata = data_new, type = "response")) 
+```
+
+odds for High rank
+```{r}
+p[1] / (1-p[1]) 
+```
+
+odds for Low rank
+```{r}
+p[2] / (1-p[2]) 
+```
+
+Odds ratio
+```{r}
+(p[1] / (1-p[1]))  / (p[2] / (1-p[2]))
+```
+
+$c$ = 1
+```{r}
+exp(m_rank$coefficients[2]) 
+```
+
+--------------------------------------------------------------------------------
+
+:::{.callout-important}
+# Question 
+
+What about multiple predictors?
+What about interactions?
+:::   
+
+
+:::{.fragment}
+**Nothing new!**
+:::
+
+--------------------------------------------------------------------------------
+
+
+```{r}
+data <- data |> 
+  mutate(gpa_c = gpa - mean(gpa))
+
+contrasts(data$rank_2)
+
+m_int <- glm(admit ~ gpa_c*rank_2, data = data, family = binomial(logit)) 
+
+summary(m_int)
+```
+
+
+--------------------------------------------------------------------------------
+
+
+Likelihood ratio test for `rank_2`
+```{r}
+m_compact <- glm(admit ~ gpa_c + gpa_c:rank_2, data = data, family = binomial(logit))
+
+anova(m_compact, m_int)
+```
+
+Likelihood ratio test for interaction
+
+```{r}
+m_compact <- glm(admit ~ gpa_c + rank_2, data = data, family = binomial(logit))
+
+anova(m_compact, m_int)
+```
+
+--------------------------------------------------------------------------------
+
+odds ratio for 2nd coefficient
+
+```{r}
+exp(m_int$coefficients[2])
+```
+
+
+odds ratio for 3rd coefficient
+
+```{r}
+exp(m_int$coefficients[3])
+```
+
+--------------------------------------------------------------------------------
+
+## Results
+
+We analyzed admission (yes vs. no) in a generalized linear model (GLM) that included GPA, School rank (High rank vs. Low rank) and their interaction as regressors. We used the binomial family with the logit link function for the GLM because the dependent variable, admission, was dichotomous. GPA was mean centered and School rank was coded using centered, unit weighted contrast codes to represent the contrast of High vs. Low rank. We report the raw parameter estimates from the GLM and the odds ratio to quantify effect size of significant effects.
+
+The effect of GPA was significant, $b = 4.37, SE = 0.46, \chi^2(1) = 148.50, p < .001$, which indicates that the odds of admission increase by a factor of 78.7 for every one point increase in GPA. The effect of School rank was significant, $b = 0.96, SE= 0.28, \chi^2(1) = 12.90, p< .001$, which indicates that the odds of admission increase by a factor of 2.6 for students at high relative to low ranked undergraduate institutions. The interaction between GPA and School rank was not significant, $b = -0.97, SE= 0.92, \chi^2(1) = 12.90, p= .282$. See figure 1 for display of the probability of admission as a function of GPA and school rank.
+
+--------------------------------------------------------------------------------
+
+
+## Figure 1
+
+```{r}
+#| code-fold: true
+
+m_int_plot <- glm(admit ~ gpa*rank_2, data = data, family = binomial(logit)) 
+
+x <- expand.grid(gpa = seq(0, 4, length.out = 100),
+                 rank_2 = c("Low rank", "High rank"))
+
+preds <- predict(m_int_plot, newdata = x, se.fit = TRUE) |> 
+  as_tibble() |> 
+  mutate(fit = boot::inv.logit(fit),
+         upper = fit + se.fit,
+         lower = fit - se.fit) |> 
+  bind_cols(x)
+
+ggplot(data = data, aes(x = gpa, y = admit)) +
+  geom_point() +
+  geom_line(data = preds, aes(y = fit, x = gpa, color = rank_2), 
+            linewidth = .75) +
+  labs(y = "p(admit)",
+       color = NULL) +
+  scale_x_continuous(limits = c(0, 4)) 
+```
 
