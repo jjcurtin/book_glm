@@ -680,8 +680,8 @@
     ]
   },
   {
-    "objectID": "app1_exam.html",
-    "href": "app1_exam.html",
+    "objectID": "app1_exam_review.html",
+    "href": "app1_exam_review.html",
     "title": "Exam Concepts",
     "section": "",
     "text": "Unit 1 - Overview",
@@ -691,8 +691,8 @@
     ]
   },
   {
-    "objectID": "app1_exam.html#unit-1---overview",
-    "href": "app1_exam.html#unit-1---overview",
+    "objectID": "app1_exam_review.html#unit-1---overview",
+    "href": "app1_exam_review.html#unit-1---overview",
     "title": "Exam Concepts",
     "section": "",
     "text": "What are the four levels of the General Linear model\nHow do the number of \\(X\\) variables differ across these levels?\nNumber of \\(Y\\) variables differ across these levels?\nExamples of special case analyses across these levels?",
@@ -702,8 +702,8 @@
     ]
   },
   {
-    "objectID": "app1_exam.html#unit-2---sampling-distributions",
-    "href": "app1_exam.html#unit-2---sampling-distributions",
+    "objectID": "app1_exam_review.html#unit-2---sampling-distributions",
+    "href": "app1_exam_review.html#unit-2---sampling-distributions",
     "title": "Exam Concepts",
     "section": "Unit 2 - Sampling Distributions",
     "text": "Unit 2 - Sampling Distributions\n\npopulations vs. samples\nparameters vs. parameter estimates\nWhat is sampling error?\nThe logic and procedure for null hypothesis signficance testing\nConnecting NHST to sampling distributions\nRaw score distribitions vs. sampling distributions\nThe Central Limit Theorem\nWhat is an unbiased estimator?\nWhat is the standard error for a parameter estimate and how does that connect to sampling distributions\nWhat factors affect the standard error of the mean\nHow does the one-sample z-test connect sampling distributions and standard errors.\nWhat is the difference between the one-sample z-test and the one sample t-test",
@@ -713,8 +713,8 @@
     ]
   },
   {
-    "objectID": "app1_exam.html#unit-3---one-parameter-models",
-    "href": "app1_exam.html#unit-3---one-parameter-models",
+    "objectID": "app1_exam_review.html#unit-3---one-parameter-models",
+    "href": "app1_exam_review.html#unit-3---one-parameter-models",
     "title": "Exam Concepts",
     "section": "Unit 3 - One parameter models",
     "text": "Unit 3 - One parameter models\n\nWhat are the three uses of models\nWhat is the equation for a one parameter model for \\(Y_i\\) and for \\(\\hat{Y}_i\\)\nWhat is an error or residual in the context of a model. Define it in terms of \\(Y_i\\) and \\(\\hat{Y}_i\\)\nWhat are two reasonable methods for estimating total model error\nWhat are three important properties of parameter estimates? Define each\nWhy do we prefer the sum of squared errors over the sum of absolute errors?\nWhat is the interpretation of \\(b_0\\) if we estimate it by minimizing the sum of squared errors vs. the sum of absolute errors?\nParameter estimates in our models miminize what?\nHow do we use a t-test the null hypothesis that \\(b_0\\) is zero in a one parameter model? Connect this to the sampling distribution of \\(b_0\\)\nHow do we use an F-test and model comparison to test the null hypothesis that \\(b_0\\) is zero in a one parameter model? How do we use sum of squared errors in this comparison? What is the compact and augmented model used to test the null about \\(b_0\\) = 0. How would you change these models if you had a null hypothesis about some value other than 0?\nWhat is a confidence interval for a parameter estimate? Connect the confidence interval to the standard error of that parameter estimate\nHow can we use a confidence interval to test the null hypothesis that \\(b_0\\) (or any parameter estimate) is zero?\nThe test of \\(b_0\\) in a one parameter model is equivalent to what special case analysis?\nWhat is the formula for the t-test to test the null hypothesis that \\(b_0\\) (or any parameter estimate) is zero? How would you modify this formula to test a null hypothesis about a value other than 0.",
@@ -724,8 +724,8 @@
     ]
   },
   {
-    "objectID": "app1_exam.html#unit-4---two-parameter-models",
-    "href": "app1_exam.html#unit-4---two-parameter-models",
+    "objectID": "app1_exam_review.html#unit-4---two-parameter-models",
+    "href": "app1_exam_review.html#unit-4---two-parameter-models",
     "title": "Exam Concepts",
     "section": "Unit 4 - Two parameter models",
     "text": "Unit 4 - Two parameter models\n\nWhat is the equation for a two parameter model for \\(Y_i\\) and for \\(\\hat{Y}_i\\)\nWhat is the interpretation of \\(b_0\\) and \\(b_1\\) in a two parameter model?\nIdentify \\(b_0\\) and \\(b_1\\) on a line plot of the data\nHow are \\(b_0\\) and \\(b_1\\) estimated in a two parameter model?\nCompare the interpretation of \\(b_0\\) in a one vs. two parameter model\nHow do we test null hypotheses about \\(b_0\\) and \\(b_1\\) in a two parameter model using a t-test? Connect this to the sampling distribution of \\(b_0\\) and \\(b_1\\)A\nHow do we test null hypotheses about \\(b_0\\) and \\(b_1\\) in a two parameter model using an F-test and model comparison? What are the associated compact and augmented models for each test?\nWhat are the degrees of freedom equal to for the t-test and F-test\nWhat would the SSE be for two parameter model that perfectly predicts \\(Y\\). What would it be if there was no relationship between \\(X\\) and \\(Y\\)?\nWhat is the impact of mean-centering \\(X\\) on the interpretation of \\(b_0\\) and \\(b_1\\) in a two parameter model?\nWhat is the formula for the confidence interval for a parameter estimate in a two parameter model? Connect the confidence interval to the standard error of that parameter estimate\nWhat is \\(R^2\\) and how is it calculated in a two parameter model using SSE or using variances of \\(Y_i\\), \\(\\hat{Y}_i\\), and \\(e_i\\)?\nWhat this the relationship between \\(R^2\\) and \\(r_xy\\) in the two parameter model?",
@@ -735,8 +735,8 @@
     ]
   },
   {
-    "objectID": "app1_exam.html#unit-5---one-dichotomous-predictor",
-    "href": "app1_exam.html#unit-5---one-dichotomous-predictor",
+    "objectID": "app1_exam_review.html#unit-5---one-dichotomous-predictor",
+    "href": "app1_exam_review.html#unit-5---one-dichotomous-predictor",
     "title": "Exam Concepts",
     "section": "Unit 5 - One Dichotomous Predictor",
     "text": "Unit 5 - One Dichotomous Predictor\n\nHow do we handle dichotomous categorical variables in linear models?\nWhat are the two coding schemes we learned for coding regressors (\\(X\\)s) for dichtomous categorical predictors\nHow do we interpret the parameter estimates for each coding scheme?\nHow would values or interpretations of \\(b_0\\) and \\(b_1\\) change if we used other coding schemes (e.g., -1 vs. 1, 2 vs. 0)?\nWhat are the typical consequences of dichotomizing a quantitative predictor? Should we generally do this or avoid it?\nHow does the t-test or model comparison approach work for testing parameter estimates in a model with a dichotomous predictor?\nIdentify \\(b_0\\) and \\(b_1\\) on a line plot of the data",
@@ -746,14 +746,25 @@
     ]
   },
   {
-    "objectID": "app1_exam.html#unit-6---models-with-two-or-more-predictors",
-    "href": "app1_exam.html#unit-6---models-with-two-or-more-predictors",
+    "objectID": "app1_exam_review.html#unit-6---models-with-two-or-more-predictors",
+    "href": "app1_exam_review.html#unit-6---models-with-two-or-more-predictors",
     "title": "Exam Concepts",
     "section": "Unit 6 - Models with Two or More Predictors",
     "text": "Unit 6 - Models with Two or More Predictors\n\nWhat is the equation for a model with two predictors for \\(Y_i\\) and for \\(\\hat{Y}_i\\)? What is the general form for \\(k\\) predictors?\nWhat is the interpretation of \\(b_0\\), \\(b_1\\), and \\(b_2\\) in a model with two predictors?\nWhat are the five benefits of using multiple predictors in a model?\nWhat factors affect the standard error of a parameter estimate in a model with multiple predictors? (You do not need to know the exact formula for this but you do need to know all the components and the direction of their impact on the SE)\nWhat is \\(R^2_j\\)?\nWhat is the problem of multicolinearity?\nHow do you identify if multicolinarity is a problem in a model?\nWhat are the appropriate compact and augmented models for testing any parameter estimate in a model with multiple predictors?\nWhat is the relationship between the SE for a parameter estimate and power to test the null hypothesis about that parameter estimate? Connect this to your understanding of the sampling distribution for a parameter estimate\nWhat is the relationship between the SE for a parameter estimate and the precision of the parameter estimate? Connect this to your understanding of the confidence interval and the sampling distribution for a parameter estimate.\nWhat are the total, direct, and indirect/spurious effects of \\(X\\)s in a two predictor model? How do you calculate each? What models do you use to calculate each?\nWhat are the three variance based effect size estimates for models with two or more predictors?\n\nDefine them in terms of the variances of \\(Y_i\\), \\(\\hat{Y}_i\\), and \\(e_i\\)\nDefine them in terms of sums of squares and models/model comparisons\nWhat is the interpreation of each?\nLink them to the areas of the Venn diagrams\nCalculate them from sums of squares in Venn diagrams\nHow are they similar and different from each other?\nWhen are each generally used?\n\nIdentify \\(b_0\\), \\(b_1\\), and \\(b_2\\) on a line plot of the data from a two predictor model with a dichotomous and quantitative predictor",
     "crumbs": [
       "Appendices",
       "Exam Concepts"
+    ]
+  },
+  {
+    "objectID": "app3_contrasts.html",
+    "href": "app3_contrasts.html",
+    "title": "Monte Carlo Simulation of Contrast Approaches",
+    "section": "",
+    "text": "Code\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\nlibrary(broom)\n\n\n\n3 Groups with No Group Differences (Type I Errors)\nSet up simulation characteristics for Null Findings\n\n\nCode\n# simulate N experiments\nn_experiments &lt;- 20000\n\n# group means\nm_1 &lt;- 10\nm_2 &lt;- 10\nm_3 &lt;- 10\n\nsd &lt;- 20 # sd for y\nn &lt;- 50 # group size\n\n# set up x as factor\nx &lt;-  factor(c(rep(\"a\", n), rep(\"b\", n), rep(\"c\", n)))  \n\nset.seed(1234567)\n\n\n\n1. POCs - all focal (separate research questions)\n\n\nCode\nsimulate_poc &lt;- function(i) {\n  # vector of y for three groups\n  y &lt;- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))\n  \n  # fit model\n  results &lt;- lm(y ~ x) |&gt; \n    tidy()\n  \n  # extract and organize key results\n  tibble(sim = i,\n         sig_c1 = results$p.value[2] &lt; 0.05,\n         sig_c2 = results$p.value[3] &lt; 0.05,\n         sig_any = any(results$p.value[2:3] &lt; 0.05))\n}\n\ncontrasts(x)&lt;- matrix(c(2, -1, -1,\n                         0,  1, -1), \n                       ncol = 2,\n                       dimnames = list(levels(x),\n                                       c(\"a_v_bc\", \"b_v_c\")))\ntype1_poc &lt;- map(1:n_experiments, simulate_poc) |&gt; \n  list_rbind()\n\n\nResults (to make clear what function returns)\n\n\nCode\ntype1_poc |&gt; head()\n\n\n# A tibble: 6 × 4\n    sim sig_c1 sig_c2 sig_any\n  &lt;int&gt; &lt;lgl&gt;  &lt;lgl&gt;  &lt;lgl&gt;  \n1     1 FALSE  FALSE  FALSE  \n2     2 FALSE  FALSE  FALSE  \n3     3 TRUE   FALSE  TRUE   \n4     4 FALSE  FALSE  FALSE  \n5     5 FALSE  FALSE  FALSE  \n6     6 FALSE  FALSE  FALSE  \n\n\nTest wise type I error for each contrast is 5%\n\n\nCode\nmean(type1_poc$sig_c1)\n\n\n[1] 0.0491\n\n\nCode\nmean(type1_poc$sig_c2)\n\n\n[1] 0.0545\n\n\nThe results across contrasts are independent because they come from different families\n\n\nCode\ncor(type1_poc$sig_c1, type1_poc$sig_c2) |&gt; round(2)\n\n\n[1] 0.01\n\n\nTo be clear, the family-wise type I error across the set is 10% BUT often not considered in same family so not important?\n\n\nCode\nmean(type1_poc$sig_any)\n\n\n[1] 0.1002\n\n\n\n2. All (3) pairwise contrasts (no protection).\n\n\nCode\nsimulate_uncorrected &lt;- function(i) {\n  # vector of y for three groups\n  y &lt;- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))\n  \n  # fit first model\n  contrasts(x) &lt;- contr.treatment(levels(x), base = 3) \n  results_3 &lt;- lm(y ~ x) |&gt; \n    tidy()\n \n  # fit second model \n  contrasts(x) &lt;- contr.treatment(levels(x), base = 1) \n  results_1 &lt;- lm(y ~ x) |&gt; \n    tidy()\n \n  # extract and organize key results \n  tibble(sim = i,\n         sig_d1 = results_3$p.value[2] &lt; 0.05,\n         sig_d2 = results_3$p.value[3] &lt; 0.05,\n         sig_d3 = results_1$p.value[2] &lt; 0.05,\n         sig_any = any(c(results_3$p.value[2:3], results_1$p.value[2]) &lt; 0.05))\n}\n\ntype1_pair &lt;- map(1:n_experiments, simulate_uncorrected) |&gt; \n  list_rbind()\n\n\nTest-wise Type I for each contrast is 5%\n\n\nCode\nmean(type1_pair$sig_d1)\n\n\n[1] 0.0508\n\n\nCode\nmean(type1_pair$sig_d2)\n\n\n[1] 0.051\n\n\nCode\nmean(type1_pair$sig_d3)\n\n\n[1] 0.0529\n\n\nBut these are from same family (results of contrasts are related)\n\n\nCode\ncor(type1_pair$sig_d1, type1_pair$sig_d2) |&gt; round(2)\n\n\n[1] 0.15\n\n\nCode\ncor(type1_pair$sig_d1, type1_pair$sig_d3) |&gt; round(2)\n\n\n[1] 0.16\n\n\nCode\ncor(type1_pair$sig_d2, type1_pair$sig_d3) |&gt; round(2)\n\n\n[1] 0.15\n\n\nFamily-wise error rate is higher (but not 15% because contrasts are dependent/related)\n\n\nCode\nmean(type1_pair$sig_any)\n\n\n[1] 0.12425\n\n\n\n3. Fisher LSD with 3 pairwise comparisons\n\n\nCode\nsimulate_fisher &lt;- function(i) {\n  y &lt;- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))\n  contrasts(x) &lt;- contr.treatment(levels(x), base = 3) \n  results_3 &lt;- lm(y ~ x) |&gt; \n    tidy()\n  \n  contrasts(x) &lt;- contr.treatment(levels(x), base = 1) \n  results_1 &lt;- lm(y ~ x) |&gt; \n    tidy()\n  \n  sig_omnibus &lt;- anova(lm(y ~ x))$`Pr(&gt;F)`[1] &lt; 0.05\n  \n  # extract and organize key results \n  tibble(sim = i,\n         sig_d1 = sig_omnibus && results_3$p.value[2] &lt; 0.05,\n         sig_d2 = sig_omnibus && results_3$p.value[3] &lt; 0.05,\n         sig_d3 = sig_omnibus && results_1$p.value[2] &lt; 0.05,\n         sig_any = sig_omnibus && any(c(results_3$p.value[2:3], results_1$p.value[2]) &lt; 0.05))\n}\n\ntype1_fish &lt;- map(1:n_experiments, simulate_fisher) |&gt; \n  list_rbind()\n\n\nTest-wise Type I for each contrast is &lt; 5% (too conservative!)\n\n\nCode\nmean(type1_fish$sig_d1)\n\n\n[1] 0.02365\n\n\nCode\nmean(type1_fish$sig_d2)\n\n\n[1] 0.024\n\n\nCode\nmean(type1_fish$sig_d3)\n\n\n[1] 0.0228\n\n\nThese are from same family (results of contrasts are even more related)\n\n\nCode\ncor(type1_fish$sig_d1, type1_fish$sig_d2) |&gt; round(2)\n\n\n[1] 0.32\n\n\nCode\ncor(type1_fish$sig_d1, type1_fish$sig_d3) |&gt; round(2)\n\n\n[1] 0.32\n\n\nCode\ncor(type1_fish$sig_d2, type1_fish$sig_d3) |&gt; round(2)\n\n\n[1] 0.29\n\n\nFamily-wise error rate is controlled at 5%\n\n\nCode\nmean(type1_fish$sig_any)\n\n\n[1] 0.0474\n\n\n\n4. Holm-Bonferroni correction with 3 pairwise comparisons\n\n\nCode\nsimulate_hb &lt;- function(i) {\n  y &lt;- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))\n  contrasts(x) &lt;- contr.treatment(levels(x), base = 3) \n  mod_1 &lt;- lm(y ~ x)\n  results_1 &lt;- broom::tidy(mod_1)\n  \n  contrasts(x) &lt;- contr.treatment(levels(x), base = 1) \n  mod_2 &lt;- lm(y ~ x)\n  results_2 &lt;- broom::tidy(mod_2)\n  \n  significant &lt;- any(p.adjust(c(results_1$p.value[2:3], results_2$p.value[2]), method = \"holm\") &lt; 0.05)\n\n  return(if_else(significant, 1, 0))\n}\n\n\n\n\nCode\ntype_1 &lt;- map_int(1:n_experiments, simulate_hb)\n\n\nAverage type I error is 0.04525\n\n\n\n3 Groups with One Group Difference (Type II Errors)\n\n\nCode\nm_1 &lt;- 10\nm_2 &lt;- 10\nm_3 &lt;- 20\n\n\n\n1. Fisher LSD with 3 pairwise comparisons\n\n\nCode\nsimulate_fisher &lt;- function(i) {\n  y &lt;- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))\n  contrasts(x) &lt;- contr.treatment(levels(x), base = 3) \n  mod_1 &lt;- lm(y ~ x)\n  results_1 &lt;- broom::tidy(mod_1)\n  omnibus &lt;- anova(mod_1)$`Pr(&gt;F)`[1]\n  \n  contrasts(x) &lt;- contr.treatment(levels(x), base = 1) \n  mod_2 &lt;- lm(y ~ x)\n  results_2 &lt;- broom::tidy(mod_2)\n  \n  significant &lt;- omnibus &lt; .05 && ((results_1$p.value[2] &lt; 0.05) || \n                                     (results_1$p.value[3] || results_2$p.value[2] &lt; 0.05))\n\n  return(if_else(significant, 0, 1))\n}\n\n\n\n\nCode\ntype_2 &lt;- map_int(1:n_experiments, simulate_fisher)\n\n\nAverage type II error is 0.2765\n\n2. Holm-Bonferroni correction with 3 pairwise comparisons\n\n\nCode\nsimulate_hb &lt;- function(i) {\n  y &lt;- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))\n  contrasts(x) &lt;- contr.treatment(levels(x), base = 3) \n  mod_1 &lt;- lm(y ~ x)\n  results_1 &lt;- broom::tidy(mod_1)\n  \n  contrasts(x) &lt;- contr.treatment(levels(x), base = 1) \n  mod_2 &lt;- lm(y ~ x)\n  results_2 &lt;- broom::tidy(mod_2)\n\n  \n  significant &lt;- any(p.adjust(c(results_1$p.value[2:3], results_2$p.value[2]), method = \"holm\") &lt; 0.05)\n\n  return(if_else(significant, 0, 1))\n}\n\n\n\n\nCode\ntype_2 &lt;- map_int(1:n_experiments, simulate_hb)\n\n\nAverage type II error is 0.29885\n\n\n\n3 Groups with All Groups Different (Type II Errors)\n\n\nCode\nm_1 &lt;- 10\nm_2 &lt;- 20\nm_3 &lt;- 30\n\n\n1. Fisher LSD with 3 pairwise comparisons\n\n\nCode\ntype_2 &lt;- map_int(1:n_experiments, simulate_fisher)\n\n\nAverage type II error is 0.00425\n2. Holm-Bonferroni correction with 3 pairwise comparisons\n\n\nCode\ntype_2 &lt;- map_int(1:n_experiments, simulate_hb)\n\n\nAverage type II error is 0.0045\n\n\n\n\n\n\n\nQuestion\n\n\n\nWhat would family-wise error rate be if we conducted only 2 dummy contrasts?\n\n\n\n\n\\(\\le .10\\), but they would definitely be considered in the same family (related questions) and most people won’t tolerate this.",
+    "crumbs": [
+      "Appendices",
+      "Monte Carlo Simulation of Contrast Approaches"
     ]
   }
 ]
