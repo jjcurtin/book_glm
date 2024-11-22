@@ -21,7 +21,6 @@ book:
   repo-url: https://github.com/jjcurtin/book_glm
   repo-branch: main
   repo-actions: [edit]
-  sharing: [facebook, linkedin]
   page-navigation: true
   reader-mode: true
   chapters:

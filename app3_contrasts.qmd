@@ -1,13 +1,13 @@
----
-title: "contrasts_simulation.qmd"
-format: html
----
-
 # Monte Carlo Simulation of Contrast Approaches {.unnumbered}
+
+```{r}
+library(tidyverse)
+library(broom)
+```
 
 ### 3 Groups with No Group Differences (Type I Errors) 
 
-Set up simulation characteristics
+Set up simulation characteristics for Null Findings
 ```{r}
 # simulate N experiments
 n_experiments <- 20000
