@@ -60,6 +60,9 @@
 
 ## Week 12: Due Friday 11/29 at 8:30 am
 
+- [shell](/homework/week_12/hw_12_shell.qmd)
+- [data](/homework/data/hw_12_data.csv)
+
 ## Week 13: No application assignment.  Thanksgiving Break
 
 ## Week 14: Due Friday 12/13 at 8:30 am
