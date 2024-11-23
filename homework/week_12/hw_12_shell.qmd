@@ -1,0 +1,264 @@
+---
+title: "hw_12_key" 
+author: "TAs" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+
+## Part A: Conceptual Questions
+
+A researcher is studying population density maps. She presents different maps to participants to indicate how many people live in each region of a made-up country. She predicts that presenting the map on a white background rather than a black background will predict higher estimates of the country’s population. She also examines whether a map that has borders (versus no borders) leads to higher estimates of the country’s population than a map that does not have borders.    
+
+### 1. Suppose the researcher showed you the following table, representing participants’ group means for estimated population density (1 = 1,000,000 people):    
+
+
+|Background|No Borders|  Borders |
+|----------|----------|----------|
+|  White   |    5.0   |    7.0   |
+|  Black   |    4.0   |    5.0   |
+
+
+#### a.	What is(are) the simple effect(s) for background? 
+
+
+
+#### b.	What is(are) the simple effect(s) for borders? 
+
+
+
+#### c.	What is(are) the main effect(s) for background? 
+
+
+
+#### d.	What is(are) the main effect(s) for borders? 
+
+
+
+#### e.	What is(are) the grand mean(s) for the present study? 
+
+
+
+### 2. Forget about the table above. Suppose the researcher fit a linear model where:
+
+- `background_c` is coded `white` = -0.5 and `black` = 0.5
+- `borders_c` is coded `no borders` = -0.5 and `borders` = 0.5
+
+And the researcher got the following parameter estimates:
+$density = 10 + 2*background_c + 3*borders_c + 2*background_c*borders_c$
+
+
+Fill in the following table:
+
+|Background|No Borders|  Borders |
+|----------|----------|----------|
+|  White   |     A    |     B    |
+|  Black   |     C    |     D    |
+
+
+#### a. A = ?
+
+
+
+#### b. B = ?
+
+
+
+#### c. C = ?
+
+
+
+#### d. D = ?
+
+
+
+## Part B: Data Analysis
+
+```{r}
+#| message: false
+
+options(conflicts.policy = "depends.ok") 
+library(tidyverse)
+library(skimr)
+library(broom)
+library(janitor)
+
+theme_set(theme_classic()) 
+
+path_data <- 
+```
+
+A group of researchers were interested in how individuals with Attention-Deficit Hyperactivity Disorder (ADHD) may develop depression. Their theory posited that the comorbidity between ADHD and depressive symptoms depends on biological sex. In addition, the researchers believed that executive function of ADHD-diagnosed individuals is associated with the severity of depression symptoms, and this association becomes stronger as one gets older.
+
+The researchers recruited a sample of adolescents and young adults (N = 1000) from the local community. Basic demographic information (`age`, `sex`, `income`) were solicited. In addition, the participants self-reported whether they had ever received a formal ADHD diagnosis (`adhd`). They also completed the Beck Depression Inventory (BDI; `depression`), which is a questionnaire that measures the severity of depression and has a score range of 0 to 63, with higher scores indicating endorsement of more depressive symptoms. Lastly, the participants' executive functioning was assessed using the NIH Toolbox Cognition Battery and were each assigned a T-score for their performance (`exec_func`).
+
+Specifically, the researchers aim to test the following two hypotheses: 
+
+1. ADHD is associated with depressive symptoms, more so among females than males.
+2. Among individuals diagnosed with ADHD, their level of executive function is more strongly associated with depression among older individuals.
+
+**Codebook:**    
+
+- `age`: participant age in years.
+- `sex`: biological sex.
+- `adhd`: historical diagnosis of ADHD.
+- `exec_func`: T-score for executive functioning; a higher score indicates better executive functioning relative to a same-aged normative sample.
+- `income`: annual household income in US dollars. Ignore this variable for now.
+- `depression`: total score on the BDI; a higher score indicates more severe depressive symptomatology.
+
+### 1. Read in the data (`hw_12_data.csv`), convert names to snake case, and update class categories according to our class conventions.
+
+
+```{r}
+
+
+
+```
+
+
+### 2. Create *dummy codes* for categorical predictors and *mean center* quantitative predictors. 
+
+```{r}
+
+
+
+```
+
+
+### 3. Examine descriptive statistics.
+
+#### a. Create a table that shows the number of children across levels of `adhd` and `sex` (making a total of four groups of observations).
+
+```{r}
+
+
+```
+
+
+#### b. Create a table that shows the mean of `depression` across levels of `adhd` and `sex` (making a total of four groups of observations).
+
+```{r}
+
+
+
+
+```
+
+
+### 4. Fit a model that regresses `depression` on `adhd`, `sex`, and the `adhd`*`sex` interaction. Use dummy codes for your predictors.
+
+```{r}
+
+
+```
+
+### 5. Interpret each parameter etimate. 
+
+
+
+
+
+
+
+### 6. Recenter your predictors and refit the model to test the statistical significance of the simple effect of `adhd` for individuals whose biological sex assigned-at-birth is female. Report the statistical significance of that simple effect, along with relevant statistics (i.e., t- or F-statistics, p-value, and SE or 95% CI). Use proper formatting when reporting your statistics.
+
+
+
+
+```{r}
+
+
+
+
+
+```
+
+### 7. Make a publication-quality bar plot displaying the interaction effect of `adhd` and `sex` on BDI scores. Show predicted cell means, corresponding standard errors, and raw data points. Also appropriately label the axes, tick labels, and legend.
+
+```{r}
+
+
+
+
+
+
+
+
+
+
+```
+
+### 8. Create a subset of the data for testing the second hypothesis.
+
+```{r}
+
+
+```
+
+
+### 9. Center the quantitative predictors within the subset of the data. 
+
+```{r}
+
+
+```
+
+
+### 10. Fit a model that regresses `depression` on `age_c`, `exec_func_c`, and the `age_c`*`exec_func_c` interaction.
+
+```{r}
+
+
+```
+
+
+### 11. Interpret each parameter etimate regardless of their statistical significance. 
+
+
+
+
+
+
+
+
+### 12. Without refitting the model, calculate the following simple effects: 
+
+#### a. The simple effect of executive functions for individuals who are 21 years old: 
+
+
+
+
+#### b. The simple effect of age for individuals whose executive functioning is two standard deviations above the mean
+
+
+
+  
+### 13. Make a publication-quality bar plot displaying the interaction effect of `age` and `exec_func` on BDI scores. Plot multiple regression lines representing the effect of `exec_func` at ages 16, 20, and 24. Include corresponding standard error bands, but do not include raw data points. Appropriately label the axes and any other aesthetics you use.
+
+```{r}
+
+
+
+
+
+
+
+
+
+
+
+```
+
+
+### 14.	How long did this assignment take you (in hours)?
+
+
+### 15. (OPTIONAL) Next semester, 2/3 of your TAs will be new. Is there anything in particular you would like to make sure your new TAs do (or don't) do? Things you have liked this semester that you want to make sure we keep doing in lab?
+
+
