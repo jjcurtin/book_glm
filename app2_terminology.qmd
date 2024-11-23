@@ -1,7 +1,1 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-
 # Key Terminology and Concepts {.unnumbered}

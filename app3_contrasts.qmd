@@ -1,13 +1,22 @@
+---
+editor_options: 
+  chunk_output_type: console
+---
+
 # Monte Carlo Simulation of Contrast Approaches {.unnumbered}
 
 ```{r}
+#| echo: false
+
 library(tidyverse)
 library(broom)
 ```
 
 ### 3 Groups with No Group Differences (Type I Errors) 
 
-Set up simulation characteristics for Null Findings
+Set up simulation characteristics for Null Findings.
+
+This will allow us to determine Type I error rates because any signficant effect is a type I error given we have set the population effect to 0
 ```{r}
 # simulate N experiments
 n_experiments <- 20000
@@ -38,6 +47,12 @@ simulate_poc <- function(i) {
   # vector of y for three groups
   y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
   
+ contrasts(x)<- matrix(c(2, -1, -1,
+                         0,  1, -1), 
+                       ncol = 2,
+                       dimnames = list(levels(x),
+                                       c("a_v_bc", "b_v_c")))
+
   # fit model
   results <- lm(y ~ x) |> 
     tidy()
@@ -49,11 +64,6 @@ simulate_poc <- function(i) {
          sig_any = any(results$p.value[2:3] < 0.05))
 }
 
-contrasts(x)<- matrix(c(2, -1, -1,
-                         0,  1, -1), 
-                       ncol = 2,
-                       dimnames = list(levels(x),
-                                       c("a_v_bc", "b_v_c")))
 type1_poc <- map(1:n_experiments, simulate_poc) |> 
   list_rbind()
 ```
@@ -81,13 +91,57 @@ mean(type1_poc$sig_any)
 
 --------------------------------------------------------------------------------
 
-**2. All (3) pairwise contrasts (no protection).** 
+**2. Dummy contrasts from one model (3 levels; no protection).** 
+
+```{r}
+#| label: null_dummy
+#| code-fold: true
+
+simulate_dummy <- function(i) {
+  # vector of y for three groups
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  
+  # fit first model
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  results <- lm(y ~ x) |> 
+    tidy()
+ 
+  # extract and organize key results 
+  tibble(sim = i,
+         sig_d1 = results$p.value[2] < 0.05,
+         sig_d2 = results$p.value[3] < 0.05,
+         sig_any = any(c(results$p.value[2:3]) < 0.05))
+}
+
+type1_dummy <- map(1:n_experiments, simulate_dummy) |> 
+  list_rbind()
+```
+
+Test-wise Type I for each contrast is 5%
+```{r}
+mean(type1_dummy$sig_d1)
+mean(type1_dummy$sig_d2)
+```
+
+But these are from same family (results of contrasts are related)
+```{r}
+cor(type1_dummy$sig_d1, type1_dummy$sig_d2) |> round(2)
+```
+
+Therefore, family-wise error rate is higher (but not 10% because contrasts are dependent/related)
+```{r}
+mean(type1_dummy$sig_any)
+```
+
+--------------------------------------------------------------------------------
+
+**3. All (3) pairwise contrasts (no protection).** 
 
 ```{r}
 #| label: null_pair
 #| code-fold: true
 
-simulate_uncorrected <- function(i) {
+simulate_pair <- function(i) {
   # vector of y for three groups
   y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
   
@@ -109,7 +163,7 @@ simulate_uncorrected <- function(i) {
          sig_any = any(c(results_3$p.value[2:3], results_1$p.value[2]) < 0.05))
 }
 
-type1_pair <- map(1:n_experiments, simulate_uncorrected) |> 
+type1_pair <- map(1:n_experiments, simulate_pair) |> 
   list_rbind()
 ```
 
@@ -134,10 +188,11 @@ mean(type1_pair$sig_any)
 
 --------------------------------------------------------------------------------
 
-**3. Fisher LSD with 3 pairwise comparisons**
+**4. Fisher LSD with 3 pairwise comparisons**
 ```{r}
 #| label: null_fish
 #| code-fold: true
+
 simulate_fisher <- function(i) {
   y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
   contrasts(x) <- contr.treatment(levels(x), base = 3) 
@@ -183,34 +238,60 @@ mean(type1_fish$sig_any)
 
 --------------------------------------------------------------------------------
 
-**4. Holm-Bonferroni correction with 3 pairwise comparisons**
+**5. Holm-Bonferroni correction with 3 pairwise comparisons**
 ```{r}
+#| label: null_hb
+#| code-fold: true
+
 simulate_hb <- function(i) {
   y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
   contrasts(x) <- contr.treatment(levels(x), base = 3) 
-  mod_1 <- lm(y ~ x)
-  results_1 <- broom::tidy(mod_1)
+  results_3 <- lm(y ~ x) |> 
+    tidy()
   
   contrasts(x) <- contr.treatment(levels(x), base = 1) 
-  mod_2 <- lm(y ~ x)
-  results_2 <- broom::tidy(mod_2)
+  results_1 <- lm(y ~ x) |> 
+    tidy()
   
-  significant <- any(p.adjust(c(results_1$p.value[2:3], results_2$p.value[2]), method = "holm") < 0.05)
-
-  return(if_else(significant, 1, 0))
-}
-```
-
-```{r}
-type_1 <- map_int(1:n_experiments, simulate_hb)
-```
-
-Average type I error is `r mean(type_1)`
+  p_contrasts <- p.adjust(c(results_3$p.value[2:3], results_1$p.value[2]), method = "holm")
     
+  tibble(sim = i,
+         sig_d1 = p_contrasts[1] < 0.05,
+         sig_d2 = p_contrasts[2] < 0.05,
+         sig_d3 = p_contrasts[3] < 0.05,
+         sig_any = any(p_contrasts < 0.05))
+}
+
+type1_hb <- map(1:n_experiments, simulate_hb) |> 
+  list_rbind()
+```
+
+Test-wise Type I is well under 5% (too conservative!) 
+```{r}
+mean(type1_hb$sig_d1)
+mean(type1_hb$sig_d2)
+mean(type1_hb$sig_d3)
+```
+
+These are from same family (results of contrasts are related)
+```{r}
+cor(type1_hb$sig_d1, type1_hb$sig_d2) |> round(2)
+cor(type1_hb$sig_d1, type1_hb$sig_d3) |> round(2)
+cor(type1_hb$sig_d2, type1_hb$sig_d3) |> round(2)
+```
+
+Family-wise error rate is controlled at 5%
+```{r}
+mean(type1_hb$sig_any)
+```
+
 --------------------------------------------------------------------------------
 
 ### 3 Groups with One Group Difference (Type II Errors)
 
+Now lets consider Type II errors.  This is too often neglected in these discussions.  However it is also complicated because there are LOTS of different ways that the population effects could be set up and its not necessarily true that the same method would be more powerful across these settings.  You should consider these simulations as only a start to comparing the power of these methods.
+
+Here we update the pattern of means such that one group is different from the other two but the other two group means are equal
 ```{r}
 m_1 <- 10
 m_2 <- 10
@@ -219,59 +300,155 @@ m_3 <- 20
 
 --------------------------------------------------------------------------------
 
-**1. Fisher LSD with 3 pairwise comparisons**
+**1. Dummy contrasts from one model (3 levels; no protection).** 
+
+This pattern of means is well-suited to using dummy codes with the third group as reference.  
+That said, if we only tested these two contrasts, we couldnt conclude anything about differences between groups 1 and 2.
 
 ```{r}
-simulate_fisher <- function(i) {
+#| label: eff_dummy
+#| code-fold: true
+
+simulate_dummy_2 <- function(i) {
+  # vector of y for three groups
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  
+  # fit first model
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  results <- lm(y ~ x) |> 
+    tidy()
+ 
+  # extract and organize key results 
+  tibble(sim = i,
+         sig_d1 = results$p.value[2] < 0.05,
+         sig_d2 = results$p.value[3] < 0.05,
+         sig_both = all(c(results$p.value[2:3]) < 0.05))
+}
+
+type2_dummy <- map(1:n_experiments, simulate_dummy_2) |> 
+  list_rbind()
+```
+
+
+Here is power for the two contrasts that should be significant and for finding both significant.
+
+Power is low (70%) for the individual tests but what we would expect given the effect size and sample size.  What we care about is relative power across the approaches. 
+
+But again, we should also note that this method doesnt inform us about differences between group 1 and 2
+```{r}
+mean(type2_dummy$sig_d1)
+mean(type2_dummy$sig_d2)
+mean(type2_dummy$sig_both)
+```
+
+**2. Fisher LSD with 3 pairwise comparisons**
+
+If we wanted all three contrasts, we could use Fisher LSD.
+
+```{r}
+#| label: eff_fish 
+#| code-fold: true
+
+simulate_fish_2 <- function(i) {
   y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
   contrasts(x) <- contr.treatment(levels(x), base = 3) 
-  mod_1 <- lm(y ~ x)
-  results_1 <- broom::tidy(mod_1)
-  omnibus <- anova(mod_1)$`Pr(>F)`[1]
   
-  contrasts(x) <- contr.treatment(levels(x), base = 1) 
-  mod_2 <- lm(y ~ x)
-  results_2 <- broom::tidy(mod_2)
+  results_3 <- lm(y ~ x) |> 
+    tidy()
   
-  significant <- omnibus < .05 && ((results_1$p.value[2] < 0.05) || 
-                                     (results_1$p.value[3] || results_2$p.value[2] < 0.05))
+  sig_omnibus <- anova(lm(y ~ x))$`Pr(>F)`[1] < 0.05
 
-  return(if_else(significant, 0, 1))
+  tibble(sim = i,
+         sig_d1 = sig_omnibus && results_3$p.value[2] < 0.05,
+         sig_d2 = sig_omnibus && results_3$p.value[3] < 0.05,
+         sig_both = sig_omnibus && all(c(results_3$p.value[2:3]) < 0.05))
 }
+
+type2_fish <- map(1:n_experiments, simulate_fish_2) |> 
+  list_rbind()
 ```
 
+
+Power is lower for the two individual contrasts (63-64%) but we get the third contrasts to show that G1 and G2 are not difference (with 5% false alarm rate).
 ```{r}
-type_2 <- map_int(1:n_experiments, simulate_fisher)
+mean(type2_fish$sig_d1)
+mean(type2_fish$sig_d2)
+mean(type2_fish$sig_both)
 ```
-
-Average type II error is `r mean(type_2)`
 
 --------------------------------------------------------------------------------
 
 **2. Holm-Bonferroni correction with 3 pairwise comparisons**
 ```{r}
-simulate_hb <- function(i) {
+#| label: eff_hb 
+#| code-fold: true
+
+simulate_hb_2 <- function(i) {
   y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
   contrasts(x) <- contr.treatment(levels(x), base = 3) 
-  mod_1 <- lm(y ~ x)
-  results_1 <- broom::tidy(mod_1)
+  results_3 <- lm(y ~ x) |> 
+    tidy()
   
   contrasts(x) <- contr.treatment(levels(x), base = 1) 
-  mod_2 <- lm(y ~ x)
-  results_2 <- broom::tidy(mod_2)
+  results_1 <- lm(y ~ x) |> 
+    tidy()
 
-  
-  significant <- any(p.adjust(c(results_1$p.value[2:3], results_2$p.value[2]), method = "holm") < 0.05)
+  p_contrasts <- p.adjust(c(results_3$p.value[2:3], results_1$p.value[2]), method = "holm")
+    
+  tibble(sim = i,
+         sig_d1 = p_contrasts[1] < 0.05,
+         sig_d2 = p_contrasts[2] < 0.05,
+         sig_both = all(p_contrasts[1:2] < 0.05))
+} 
 
-  return(if_else(significant, 0, 1))
-}
+type2_hb <- map(1:n_experiments, simulate_hb_2) |> 
+  list_rbind()
 ```
+
+HB is worse still on power for the individual contrasts (55-56%)
+```{r}
+mean(type2_hb$sig_d1)
+mean(type2_hb$sig_d2)
+mean(type2_hb$sig_both)
+```
+
+--------------------------------------------------------------------------------
+
+**4. POCs - Assuming we were right about the pattern of means**
+
+POCs don't fit perfectly to this setting.  However, if in this instance our theory predicts only group three different from groups 1 and 2, we could test only that contrast or we might test the second contrast to demonstrate it was NOT significant.
 
 ```{r}
-type_2 <- map_int(1:n_experiments, simulate_hb)
+#| label: eff_poc 
+#| code-fold: true
+
+simulate_poc_2 <- function(i) {
+  # vector of y for three groups
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  
+ contrasts(x)<- matrix(c(-1, -1, 2,
+                          1, -1, 0), 
+                       ncol = 2,
+                       dimnames = list(levels(x),
+                                       c("a_v_bc", "b_v_c")))
+
+  # fit model
+  results <- lm(y ~ x) |> 
+    tidy()
+  
+  # extract and organize key results
+  tibble(sim = i,
+         sig_c1 = results$p.value[2] < 0.05)
+}
+
+type2_poc <- map(1:n_experiments, simulate_poc_2) |> 
+  list_rbind()
 ```
 
-Average type II error is `r mean(type_2)`
+Here we only care about the power for the first effect.  Clearly, the best power (~81%) if this is sufficient.  We would likely want the second contrast to be non-significant to demonstrate that the effect is specific to group 3.  This would false alarm at 5%.
+```{r}
+mean(type2_poc$sig_c1)
+```
 
 --------------------------------------------------------------------------------
 
@@ -284,32 +461,96 @@ m_3 <- 30
 ```
 
 
-**1. Fisher LSD with 3 pairwise comparisons**
+**1. Dummy contrasts from one model (3 levels; no protection).** 
+
+This approach doesn't make sense because we want to test all three contrasts (assuming our theory correctly predicted all groups different)
+
+**2. Fisher LSD with 3 pairwise comparisons**
+
+If we wanted all three contrasts, we could use Fisher LSD.
 
 ```{r}
-type_2 <- map_int(1:n_experiments, simulate_fisher)
+#| label: eff_fish_3 
+#| code-fold: true
+
+simulate_fish_3 <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  results_3 <- lm(y ~ x) |> 
+    tidy()
+
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  results_1 <- lm(y ~ x) |> 
+    tidy()
+  
+  sig_omnibus <- anova(lm(y ~ x))$`Pr(>F)`[1] < 0.05
+  
+  tibble(sim = i,
+         sig_d1 = sig_omnibus && results_3$p.value[2] < 0.05,
+         sig_d2 = sig_omnibus && results_3$p.value[3] < 0.05,
+         sig_d3 = sig_omnibus && results_1$p.value[2] < 0.05,
+         sig_all = sig_omnibus && all(c(results_3$p.value[2:3], results_1$p.value[2]) < 0.05))
+}
+
+type2_fish_3 <- map(1:n_experiments, simulate_fish_3) |> 
+  list_rbind()
 ```
 
-Average type II error is `r mean(type_2)`    
 
+Power is much better for G1 vs G3 (~99%) because its a bigger mean difference than for the other two (w/ ~ 70% power).  But again, its about relative power now.  We need to compare to other methods.
+```{r}
+mean(type2_fish_3$sig_d1)
+mean(type2_fish_3$sig_d2)
+mean(type2_fish_3$sig_d3)
+mean(type2_fish_3$sig_all)
+```
+
+--------------------------------------------------------------------------------
 
 **2. Holm-Bonferroni correction with 3 pairwise comparisons**
-
 ```{r}
-type_2 <- map_int(1:n_experiments, simulate_hb)
+#| label: eff_hb_3 
+#| code-fold: true
 
+simulate_hb_3 <- function(i) {
+  y <- c(rnorm(n, m_1, sd), rnorm(n, m_2, sd), rnorm(n, m_3, sd))
+  contrasts(x) <- contr.treatment(levels(x), base = 3) 
+  results_3 <- lm(y ~ x) |> 
+    tidy()
+  
+  contrasts(x) <- contr.treatment(levels(x), base = 1) 
+  results_1 <- lm(y ~ x) |> 
+    tidy()
+
+  p_contrasts <- p.adjust(c(results_3$p.value[2:3], results_1$p.value[2]), method = "holm")
+    
+  tibble(sim = i,
+         sig_d1 = p_contrasts[1] < 0.05,
+         sig_d2 = p_contrasts[2] < 0.05,
+         sig_d3 = p_contrasts[3] < 0.05,
+         sig_all = all(p_contrasts[1:3] < 0.05))
+} 
+
+type2_hb_3 <- map(1:n_experiments, simulate_hb_3) |> 
+  list_rbind()
 ```
 
-Average type II error is `r mean(type_2)`
-  
-:::{.fragment}
-::: {.callout-important}
-# Question
+HB is a bit worse power for the the smaller individual contrasts (66-67%)
+```{r}
+mean(type2_hb_3$sig_d1)
+mean(type2_hb_3$sig_d2)
+mean(type2_hb_3$sig_d3)
+mean(type2_hb_3$sig_all)
+```
 
-What would family-wise error rate be if we conducted only 2 dummy contrasts?
-:::
-:::
+--------------------------------------------------------------------------------
 
-:::{.fragment}
-[$\le .10$, but they would definitely be considered in the same family (related questions) and most people won't tolerate this.]{style="color:blue;"}
-:::
+**4. POCs - Assuming we were right about the pattern of means**
+
+Again, not clear exactly how to use POCs in this setting if we expect all groups to be different
+
+
+###  What about with 4 levels?
+
+Havent done this year but we will see that Type 1 control falls apart for all pairwise with fisher LSD because there are two many pairwise contrasts.   Without, that most wouldnt tolerate it.   HB will still handle 4 levels with go type 1 control.   Power will be lower still though because there will be bigger adjustments to all p-values.  POCs can really shine here but ONLY if the pattern of means works.   Otherwise, HB is the best bet.
