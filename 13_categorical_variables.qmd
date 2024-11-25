@@ -616,7 +616,7 @@ You might have contrasts that interest you that don't all use one reference grou
 - You predict that psychopathology will reduce overall health. 
 - And you also think that the type of psychopathology matters (AUD is worse than depression)
 
-You can set up contrasts that test these two comparisons
+You can set up contrasts that test these two comparisons.  There are several equivalent ways to do this.
 
 **for conceptual understanding:**
 
@@ -626,7 +626,6 @@ You can set up contrasts that test these two comparisons
 (c_a <- tibble(Group = c("alcohol", "depress", "healthy"),
        c1_a = c(.5, .5, -1),
        c2_a = c(1, -1, 0)))
-c_a
 ```
 
 **A common alternative (whole numbers):**
@@ -638,6 +637,8 @@ c_a
        c1_b = c(1, 1, -2),
        c2_b = c(1, -1, 0)))
 ```
+
+--------------------------------------------------------------------------------
 
 **John's preference (unit weighted):**
 
@@ -690,6 +691,8 @@ How will the analyses be similar and different across these three contrasts?
 
 Put all three options for regressors into the data set
 ```{r}
+#| code-fold: true
+
 data <- data |> 
   mutate(c1_a = case_match(group,
                            "alcohol" ~ 0.5,
@@ -717,8 +720,7 @@ data <- data |>
                            "healthy" ~ 0))
 ```
 
---------------------------------------------------------------------------------
-
+And view a few rows
 ```{r}
 data |> 
   select(-contains("d")) |> 
@@ -779,7 +781,7 @@ data |>
   summarise(mean = mean(health))
 ```
 
-You can do the math to confirm that $b_1$ and $b_2$ match the mean differences associated with the `c1` and `c2` comparisons.  
+You can do the math to confirm that $b_1$ and $b_2$ for the unit-weighted contrasts match the mean differences associated with the `c1` and `c2` comparisons.  
 
 --------------------------------------------------------------------------------
 
@@ -837,26 +839,6 @@ $Contrast_2 = (.5*alcohol)-(.5*depress) + (0* healthy)$
 
 --------------------------------------------------------------------------------
 
-For the factor contrasts approach
-
-- We can set these contrasts up as a matrix (and name the contrasts)
-```{r}
-our_contrasts <- matrix(c(.333, .333, -.667,
-                            .5,  -.5, 0), 
-                        ncol = 2,
-                        dimnames = list(c("alcohol", "depress", "healthy"),
-                                        c("patient_v_healthy", "alcohol_v_depress")))
-
-our_contrasts
-```
-
-- And then assign them to the contrasts for the factor
-```{r}
-contrasts(data$group) <- our_contrasts
-```
-
---------------------------------------------------------------------------------
-
 For the manual approach
 
 - We can code them into our dataframe directly as before
@@ -881,6 +863,27 @@ Lets see them!
 data |> 
   slice_sample(n = 10)
 ```
+
+--------------------------------------------------------------------------------
+
+Alternatively, for the factor contrasts approach
+
+- We can set these contrasts up as a matrix (and name the contrasts)
+```{r}
+our_contrasts <- matrix(c(.333, .333, -.667,
+                            .5,  -.5, 0), 
+                        ncol = 2,
+                        dimnames = list(c("alcohol", "depress", "healthy"),
+                                        c("patient_v_healthy", "alcohol_v_depress")))
+
+our_contrasts
+```
+
+- And then assign them to the contrasts for the factor
+```{r}
+contrasts(data$group) <- our_contrasts
+```
+
 
 --------------------------------------------------------------------------------
 
@@ -1141,6 +1144,8 @@ data |>
 cor(data$alcohol_d3, data$depress_d3)
 ```
 
+--------------------------------------------------------------------------------
+
 ::: {.callout-important}
 # Question
 What are the implications of this for the relationship between the total effect of `group` (i.e., $R^2$ in this model) vs. the sum of the $\Delta R^2$ for the two contrasts?
@@ -1176,19 +1181,20 @@ data <- data |>
 m_3 <- lm(health ~ d1_3 + d2_3, data = data)
 ```
 
-- Model $R^2$
+
+Model $R^2$
 ```{r}
 glance(m_3)$r.squared
 ```
 
-- $\Delta R^2$ for alcohol vs. healthy
 
+$\Delta R^2$ for alcohol vs. healthy
 ```{r}
 delta_r2(lm(health ~ d2_3, data = data), m_3)
 ```
 
-- $\Delta R^2$ for depress vs. healthy
 
+$\Delta R^2$ for depress vs. healthy
 ```{r}
 delta_r2(lm(health ~ d1_3, data = data), m_3)
 ```
@@ -1213,19 +1219,20 @@ data <- data |>
 m_2 <- lm(health ~ d1_2 + d2_2, data = data)
 ```
 
-- Model $R^2$
+
+Model $R^2$
 ```{r}
 glance(m_2)$r.squared
 ```
 
-- $\Delta R^2$ for alcohol vs. depress
 
+$\Delta R^2$ for alcohol vs. depress
 ```{r}
 delta_r2(lm(health ~ d2_2, data = data), m_2)
 ```
 
-- $\Delta R^2$ for healthy vs. depress
 
+$\Delta R^2$ for healthy vs. depress
 ```{r}
 delta_r2(lm(health ~ d1_2, data = data), m_2)
 ```
@@ -1250,19 +1257,20 @@ data <- data |>
 m_1 <- lm(health ~ d1_1 + d2_1, data = data)
 ```
 
-- Model $R^2$
+
+Model $R^2$
 ```{r}
 glance(m_1)$r.squared
 ```
 
-- $\Delta R^2$ for depress vs. alcohol
 
+$\Delta R^2$ for depress vs. alcohol
 ```{r}
 delta_r2(lm(health ~ d2_1, data = data), m_1)
 ```
 
-- $\Delta R^2$ for healthy vs. alcohol 
 
+$\Delta R^2$ for healthy vs. alcohol 
 ```{r}
 delta_r2(lm(health ~ d1_1, data = data), m_1)
 ```
@@ -1287,7 +1295,7 @@ What did you learn from these patterns?
 :::{.fragment}
 [The sum of the $\Delta R^2$ for the two contrasts does not equal the model $R^2$.]{style="color:blue;"}
 
-[The magnitude of any specific \Delta R^2 reflects the size of the mean difference for the contrast]{style="color:blue;"}
+[The magnitude of any specific $\Delta R^2$ reflects the size of the mean difference for the contrast]{style="color:blue;"}
 
 [Depending on which group is set to be the reference, the size of the pair of mean differences were bigger or smaller]{style="color:blue;"}
 
@@ -1338,6 +1346,7 @@ What are the implications of this for the relationship between the total effect 
 
 :::{.fragment}
 [The $\Delta R^2$ for the two contrasts WILL sum to the model $R^2$.]{style="color:blue;"}
+:::
 
 --------------------------------------------------------------------------------
 
@@ -1354,19 +1363,20 @@ preds |>
 m_poc <- lm(health ~ patient_v_control + alcohol_v_depress, data = data)
 ```
 
-- Model $R^2$
+
+Model $R^2$
 ```{r}
 glance(m_poc)$r.squared
 ```
 
-- $\Delta R^2$ for patient vs. control 
 
+$\Delta R^2$ for patient vs. control 
 ```{r}
 delta_r2(lm(health ~ alcohol_v_depress, data = data), m_poc)
 ```
 
-- $\Delta R^2$ for alcohol vs. depress
 
+$\Delta R^2$ for alcohol vs. depress
 ```{r}
 delta_r2(lm(health ~ patient_v_control, data = data), m_1)
 ```
@@ -1442,10 +1452,12 @@ What validity concerns do we need to evaluate for these various options?
 :::
 
 :::{.fragment}
-Statistical/conclusion validity.{style="color:blue;"}     
+[Statistical/conclusion validity.]{style="color:blue;"}     
 
 [1. Do results clearly support your theory (fundamental)?]{style="color:blue;"} 
+
 [2. Probability of Type 1 error.]{style="color:blue;"}     
+
 [3. Probability of Type 2 error.]{style="color:blue;"}     
 
 [We should wonder (and be concerned about) what happens to the probability of making an error across *all* of our tests.]{style="color:blue;"} 
@@ -1528,7 +1540,7 @@ How is family-wise alpha controlled?
 :::{.fragment}
 [Only proceed when omnibus test indicates some comparison is significant (see monte carlo of null main effect).]{style="color:blue;"}     
 
-[Problems emerge if omnibus is significant but you do multiple tests, only some of which are significant). Not a problem, generally, with 3 level variable and 3 tests (e.g. pairwise comparisons). Inadequate with more levels (monte-carlo for three group with effect; thought experiment with 1 significant group difference in 4 level).]{style="color:blue;"}    
+[Problems emerge if omnibus is significant but you do multiple tests, only some of which are significant. Not a problem, generally, with 3 level variable and 3 tests (e.g. pairwise comparisons). Inadequate with more levels (monte-carlo for three group with effect; thought experiment with 1 significant group difference in 4 level).]{style="color:blue;"}    
 :::
 
 --------------------------------------------------------------------------------
