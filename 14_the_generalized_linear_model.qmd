@@ -1,18 +1,9 @@
---- 
-output: html_document 
-editor_options:  
-  chunk_output_type: console
---- 
- 
-
 # Unit 15: The Generalized Linear Model
 
 ::: {.callout-important}
 # Question
-
 What are the assumptions of **general** linear models?
 :::
-
 
 :::{.fragment}
 The general linear model makes the 5 assumptions below. When these assumptions are met, OLS regression coefficients are MVUE (Minimum Variance Unbiased Estimators) and BLUE (Best Linear Unbiased Estimators). 
@@ -29,10 +20,8 @@ The general linear model makes the 5 assumptions below. When these assumptions a
 
 ::: {.callout-important}
 # Question
-
 What are the consequences of violating each of these assumptions? What options exist when these assumptions are violated?
 :::
-
 
 :::{.fragment}
 1. **Exact X**: Biased parameters (to the degree that measurement error exists). Use reliable measures.
@@ -44,8 +33,210 @@ What are the consequences of violating each of these assumptions? What options e
 
 --------------------------------------------------------------------------------
 
+## An Example
+Predicting admission to a grad program in engineering based on quantitative GRE, GPA, and Undergraduate Institution Rank.   
+
+```{r}
+#| echo: false
+
+library(tidyverse)
+library(broom)
+library(skimr)
+library(patchwork)
+theme_set(theme_classic()) 
+options(scipen = 999) # turns off scientfic notation
+options(knitr.kable.NA = '')
+
+data <- read_csv(here::here("data_lecture/15_grad_admit.csv"),
+                 show_col_types = FALSE) |> 
+  mutate(rank_2 = factor(rank_2, levels = c("Low rank", "High rank")))
+```
+
+```{r}
+data |> head()
+```
+
+```{r}
+data |> 
+  skim() |> 
+  focus(n_missing, numeric.mean, numeric.sd, 
+        min = numeric.p0, max = numeric.p100) |> 
+  yank("numeric")
+```
+
+--------------------------------------------------------------------------------
+
+You will occasionally see linear regressions conducted with binary outcomes. 
+
+The binary outcome is coded as 0 and 1.
+
+This model is called the [linear probability model](https://en.wikipedia.org/wiki/Linear_probability_model) where $\hat{Y}$ is considered the probability of membership in the group coded 1
+
+```{r}
+m_lm <- lm(admit ~ gpa, data = data)
+m_lm |> tidy()
+```
+
+::: {.callout-important}
+# Question
+What is the effect of GPA on admission to grad school?
+:::
+
+--------------------------------------------------------------------------------
+
+::: {.callout-important}
+# Question
+What are the problems with using a general linear model to assess the effects of these predictors on admission outcomes?
+:::
+
+:::{.fragment}
+1. Residuals will not be normal (not efficient).
+
+2. Residual variance often will not be constant (not efficient, SEs are inaccurate).
+
+3. Probability may not be linear on X (yielding biased parameter estimates).
+
+4. $\hat{Y}$ is not constrained between 0 – 1 (model may make nonsensical predictions if we consider $\hat{Y}$ to be probabilites).
+:::
+
+--------------------------------------------------------------------------------
+
+Here is a scatterplot of admit as a function of GPA.
+```{r}
+#| code-fold: true
+
+data |> 
+  ggplot(aes(x = gpa, y = admit)) +
+  geom_point() +
+  scale_x_continuous(limits = c(0, 4)) +
+  labs(y = "p(admit)")
+```
+
+--------------------------------------------------------------------------------
+
+Overplotting can be a problem in scatterplots when one (or both) of the variables are integers. 
+
+Jittering that variable can help.
+```{r}
+#| code-fold: true
+
+data |> 
+  ggplot(aes(x = gpa, y = admit)) +
+  geom_jitter(width = 0, height = .05) +
+  scale_x_continuous(limits = c(0, 4)) +
+  labs(y = "p(admit)")
+```
+
+--------------------------------------------------------------------------------
+
+Clearly not a good model.
+```{r}
+#| code-fold: true
+
+data |> 
+  ggplot(aes(x = gpa, y = admit)) +
+  geom_jitter(width = 0, height = .05) +
+  scale_x_continuous(limits = c(0, 4)) +
+  geom_smooth(formula = y ~ x, method = "lm", color = "red", se = FALSE,
+              fullrange = TRUE)  +
+  labs(y = "p(admit)")
+```
+
+--------------------------------------------------------------------------------
+
+Still a problem even if we limit the plot (like we should!) to just the range of observed data for `gpa`
+```{r}
+#| code-fold: true
+
+data |> 
+  ggplot(aes(x = gpa, y = admit)) +
+  geom_jitter(width = 0, height = .05) +
+  scale_x_continuous(limits = c(2, 4)) +
+  scale_y_continuous(limits = c(-2, 1.2)) +
+  geom_smooth(formula = y ~ x, method = "lm", color = "red", se = FALSE,
+              fullrange = TRUE)  +
+  labs(y = "p(admit)")
+```
+
+--------------------------------------------------------------------------------
+
+Global test of assumptions
+```{r}
+gvlma::gvlma(m_lm)
+```
+
+--------------------------------------------------------------------------------
+
+Normality of residuals
+```{r}
+#| code-fold: true
+
+ggplot() +
+  geom_density(aes(x = value), data = enframe(rstudent(m_lm), name = NULL)) +
+  labs(title = "Density Plot to Assess Normality of Residuals",
+       x = "Studentized Residual") +
+  geom_line(aes(x = x, y = y), 
+            data = tibble(x = seq(-4, 4, length.out = 100),
+                          y = dnorm(seq(-4, 4, length.out = 100), 
+                                    mean = 0, sd = sd(rstudent(m_lm)))), 
+            linetype = "dashed", color = "blue")
+```
+
+```{r}
+#| code-fold: true
+
+car::qqPlot(m_lm, id = FALSE, simulate = TRUE,
+            main = "QQ Plot to Assess Normality", 
+            ylab = "Studentized Residuals")
+```
+
+--------------------------------------------------------------------------------
+
+Constant variance of residuals
+```{r}
+#| code-fold: true
+
+tibble(x = predict(m_lm),
+       y = rstudent(m_lm)) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_point(alpha = .6) +
+  geom_hline(yintercept = 0, linetype = "dashed", 
+             color = "blue", linewidth = 1) +
+  labs(title = "Studentized Residuals vs.  Predicted Values",
+       x = "Predicted Values",
+       y = "Studentized Residuals")
+```
+
+```{r}
+#| cold-fold: true
+#| warning: false
+
+# Note that negative values exist.  Could make plot manually to fix this
+# But this is just a quick demonstration
+car::spreadLevelPlot(m_lm)
+```
+
+--------------------------------------------------------------------------------
+
+Linearity
+```{r}
+#| code-fold: true
+
+car::crPlots(m_lm, ask = FALSE)
+```
+
+--------------------------------------------------------------------------------
+
 ## Generalized Linear Models
 
+The Generalized Linear Model is a family of models that includes linear regression, logistic regression, Poisson regression, and others.
+
+The linear model is a special case of this more general(ized) model.
+
+Some of the other models in this family are used to to address problems with model assumptions of the linear model.
+
+- binary outcomes (logistic regression): binomial family
+- count data (bounded at 0): poisson family
 ```{r}
 #| echo: false
 #| message: false
@@ -75,184 +266,11 @@ tibble(Family = c("binomial", "gaussian", "Gamma", "inverse.gaussian",
 
 --------------------------------------------------------------------------------
 
-## An Example
-
-Predicting admission to a grad program in engineering based on quantitative GRE, GPA, and Undergraduate Institution Rank.   
-
-```{r}
-#| echo: false
-
-data <- read_csv(here::here("data_lecture/15_grad_admit.csv"),
-                 show_col_types = FALSE) |> 
-  mutate(rank_2 = factor(rank_2, levels = c("Low rank", "High rank"))) |> 
-  glimpse()
-```
-
-```{r}
-data |> 
-  skim() |> 
-  focus(n_missing, numeric.mean, numeric.sd, min = numeric.p0, max = numeric.p100) |> 
-  yank("numeric")
-```
-
---------------------------------------------------------------------------------
-
-```{r}
-m_lm <- lm(admit ~ gpa, data = data)
-
-tidy(m_lm)
-```
-
-
-::: {.callout-important}
-# Question
-
-What is the effect of GPA on admission to grad school?
-:::
-
---------------------------------------------------------------------------------
-
-::: {.callout-important}
-# Question
-
-What are the problems with using a general linear model to assess the effects of these predictors on admission outcomes?
-:::
-
-:::{.fragment}
-
-1. Residuals will not be normal (not efficient).
-
-2. Residual variance often will not be constant (not efficient, SEs are inaccurate).
-
-3. Relationship will not be linear (parameter estimates biased).
-
-4. Y is not constrained between 0 – 1 (model may make nonsensical predictions).
-:::
-
---------------------------------------------------------------------------------
-
-```{r}
-#| code-fold: true
-
-data |> 
-  ggplot(aes(x = gpa, y = admit)) +
-  geom_point() +
-  scale_x_continuous(limits = c(0, 4)) +
-  labs(y = "p(admit)")
-```
-
---------------------------------------------------------------------------------
-
-```{r}
-#| code-fold: true
-
-data |> 
-  ggplot(aes(x = gpa, y = admit)) +
-  geom_jitter(width = 0, height = .05) +
-  scale_x_continuous(limits = c(0, 4)) +
-  labs(y = "p(admit)")
-```
-
---------------------------------------------------------------------------------
-
-```{r}
-#| code-fold: true
-
-data |> 
-  ggplot(aes(x = gpa, y = admit)) +
-  geom_jitter(width = 0, height = .05) +
-  scale_x_continuous(limits = c(0, 4.2)) +
-  geom_smooth(formula = y ~ x, method = "lm", color = "red", se = FALSE,
-              fullrange = TRUE)  +
-  labs(y = "p(admit)")
-```
-
---------------------------------------------------------------------------------
-
-```{r}
-#| code-fold: true
-
-data |> 
-  ggplot(aes(x = gpa, y = admit)) +
-  geom_jitter(width = 0, height = .05) +
-  scale_x_continuous(limits = c(0, 4)) +
-  scale_y_continuous(limits = c(-2, 1.2)) +
-  geom_smooth(formula = y ~ x, method = "lm", color = "red", se = FALSE,
-              fullrange = TRUE)  +
-  labs(y = "p(admit)")
-```
-
-
---------------------------------------------------------------------------------
-
-
-```{r}
-gvlma::gvlma(m_lm)
-```
-
---------------------------------------------------------------------------------
-
-
-```{r}
-#| code-fold: true
-
-ggplot() +
-  geom_density(aes(x = value), data = enframe(rstudent(m_lm), name = NULL)) +
-  labs(title = "Density Plot to Assess Normality of Residuals",
-       x = "Studentized Residual") +
-  geom_line(aes(x = x, y = y), 
-            data = tibble(x = seq(-4, 4, length.out = 100),
-                          y = dnorm(seq(-4, 4, length.out = 100), 
-                                    mean = 0, sd = sd(rstudent(m_lm)))), 
-            linetype = "dashed", color = "blue")
-```
-
-```{r}
-#| code-fold: true
-
-car::qqPlot(m_lm, id = FALSE, simulate = TRUE,
-            main = "QQ Plot to Assess Normality", 
-            ylab = "Studentized Residuals")
-```
-
-
---------------------------------------------------------------------------------
-
-```{r}
-#| code-fold: true
-
-tibble(x = predict(m_lm),
-       y = rstudent(m_lm)) |> 
-  ggplot(aes(x = x, y = y)) +
-  geom_point(alpha = .6) +
-  geom_hline(yintercept = 0, linetype = "dashed", 
-             color = "blue", linewidth = 1) +
-  labs(title = "Studentized Residuals vs.  Predicted Values",
-       x = "Predicted Values",
-       y = "Studentized Residuals")
-```
-
-```{r}
-#| cold-fold: true
-#| warning: false
-
-car::spreadLevelPlot(m_lm)
-```
-
---------------------------------------------------------------------------------
-
-```{r}
-#| code-fold: true
-
-car::crPlots(m_lm, ask = FALSE)
-```
-
---------------------------------------------------------------------------------
+Let's fit a logistic regression (binomial) model to predict admission to grad school based on GPA.
 
 ```{r}
 m_glm <- glm(admit ~ gpa, data = data, family = binomial(logit))
-
-tidy(m_glm)
+m_glm |> tidy()
 ```
 
 --------------------------------------------------------------------------------
@@ -270,11 +288,14 @@ preds <- predict(m_glm, newdata = x) |>
 
 ggplot(data = data, aes(x = gpa, y = admit)) +
   geom_point() +
+  geom_jitter(width = 0, height = .05) +
   scale_x_continuous(limits = c(0, 6)) +
   geom_line(data = preds, aes(y = value, x = gpa), color = "blue")  +
   labs(y = "p(admit)")
 
 ```
+
+NOTE: I plotted GPA from 0 to 6 to show the full range of the logistic function.  In practice, you would limit the x-axis to the range of observed data.
 
 --------------------------------------------------------------------------------
 
@@ -282,6 +303,7 @@ ggplot(data = data, aes(x = gpa, y = admit)) +
 #| echo: false
 #| warning: false
 
+# warning indicates perfect separation.  This was intentional for this example
 ex_data <- tibble(x = c(rep(1:4, 10), rep(5, 10), rep(6:10, 10)),
                  y = c(rep(0, 40), rep(0:1, 5), rep(1, 50))) 
 
@@ -304,15 +326,13 @@ ex_data |>
 
 :::{.callout-important}
 # Question
-
 What other non-linear shapes do you know how to model in the general linear model?
 :::
 
 :::{.fragment}
-
 1. Simple monotone relationships with power transforms.
 
-2. Quadratic, cubic, etc relationships with polynomial regression. <!--KW: I don't think this was introduced?-->
+2. You will also eventually learn how to model quadratic, cubic, etc relationships with polynomial regression.
 :::
 
 --------------------------------------------------------------------------------
@@ -341,10 +361,13 @@ tibble(x = -100:100,
 
 --------------------------------------------------------------------------------
 
+Not simple monotone (logistic function has two bends)
+
+Not cubic (cubic is unbounded)
 ```{r}
 #| echo: false
 
-tidy(m_glm)
+m_glm |> tidy()
 
 ggplot(data = data, aes(x = gpa, y = admit)) +
   geom_point() +
@@ -357,22 +380,26 @@ ggplot(data = data, aes(x = gpa, y = admit)) +
 
 --------------------------------------------------------------------------------
 
+There are two characteristics that vary across the families within the generalized linear models
+
+- The distribution of the residuals
+- The link function that connects the $X$s to $\hat{Y}$
+
+
+--------------------------------------------------------------------------------
+
 **Linear Regression:**   
 
 - Residuals are gaussian.   
-- Link function is identity.   
-
-$Y = 1 * (b_0 + b_1X_1 + ... + b_kX_k)$    
+- Model predicts raw scores on $Y$. Link function is identity/no transformation ($1 * \hat{Y}$ ).   
+  - $1 * \hat{Y} = b_0 + b_1X_1 + ... + b_kX_k$    
 
 **Logistic Regression:**   
 
 - Residuals are binomial   
-- Link function is logit (a transformation of the logistic function).   
-
-$\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$    
-
-$\pi$ = probability of $Y = 1$    
-$e$ = 2.718 (approx)
+- Model predicts probability of Y = 1 ($\pi$).  Link function is logit (or log-odd; A transformation of these predicted probabilities).   
+  - $ln(\frac{\pi}{1-\pi}) = b_0 + b_1X_1 + ... + b_kX_k$   
+  - It is still a linear (on $X$) model
 
 --------------------------------------------------------------------------------
 
@@ -424,28 +451,45 @@ exp(0)
 exp(-1)
 ```
 
-Logistic regression uses natural logs and exponentials for the transformations of $Y$ and $X$s.
+Logistic regression uses natural logs and exponentials for the transformations that connect $\hat{Y}$ with $X$s.
 
 --------------------------------------------------------------------------------
 
-$\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$    
+This is the model we are fitting for logistic regression.
+
+- $ln(\frac{\pi}{1-\pi}) = b_0 + b_1X_1 + ... + b_kX_k$   
+
+\
+
+We can manipulate the formula to isolate $\pi$ on one side such that it predicts the probability ($\pi$) of $Y = 1$ as a function of $X$s.
+
+- $\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$    
+- This is often how we will use the model for prediction (and plots)
+- Probability is non-linear on $X$ (as we saw in the previous plot) 
+--------------------------------------------------------------------------------
 
 ```{r}
-#| echo: false
-
-tidy(m_glm)
+m_glm |> tidy()
 ```
 
 $\pi = \frac{e^{-14.5 + 4.1}}{1 + e^{-14.5 + 4.1X_1}}$   
 
 --------------------------------------------------------------------------------
 
-$\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$    
+Logistic regression (and all generalized linear models) can accommodate multiple $X$s.
 
-$b_0 = 0$    
+- $\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$    
 
-$b_1 = 0$
+But lets consider simple (one $X$) logistic regression to understand what the intercept and parameter estimates for $X$ tell us about the probability of $Y$.
 
+- $\pi = \frac{e^{b_0 + b_1X_1}}{1 + e^{b_0 + b_1X_1}}$    
+
+First 
+
+- $b_0 = 0$    
+- $b_1 = 0$
+
+No relationship between $X$ and $\pi$.  $\pi$ is always .5.
 ```{r}
 #| echo: false
 
@@ -455,17 +499,24 @@ tibble(x = -10:10,
   mutate(y = exp(b0 + b1 * x) / (1 + exp(b0 + b1 * x))) |> 
   ggplot(aes(x = x, y = y)) +
   geom_line(color = "red") +
+  ylab("p(y = 1)") +
   scale_y_continuous(limits = c(0, 1))
 ```
 
 --------------------------------------------------------------------------------
 
-$\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$    
+$\pi = \frac{e^{b_0 + b_1X_1}}{1 + e^{b_0 + b_1X_1}}$    
 
-$b_0 = 0$    
+- $b_0 = 0$    
 
-$b_1 = 0 \text{ to }1$   
+- $b_1 = 0 \text{ to }1$   
 
+As $b_1$ becomes more positive, the slope of the logistic function increases.  
+
+- The steeper the slope, the more quickly the probability of $y = 1$ changes as $x$ changes.  
+- As $X$ increases, the probability of $Y = 1$ increases.
+
+$\pi$ is 0.5 at mean of $x$ (because $b_0 = 0$).  
 ```{r}
 #| echo: false
 
@@ -476,17 +527,24 @@ expand.grid(x = -10:10,
          b1 = factor(b1)) |> 
   ggplot(aes(x = x, y = y, color = b1)) +
   geom_line() +
+  ylab("p(y = 1)") +
   scale_y_continuous(limits = c(0, 1))
 ```
 
 --------------------------------------------------------------------------------
 
-$\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$    
+$\pi = \frac{e^{b_0 + b_1X_1}}{1 + e^{b_0 + b_1X_1}}$    
 
-$b_0 = 0$    
+- $b_0 = 0$    
+- $b_1 = -1 \text{ to }0$   
 
-$b_1 = -1 \text{ to }0$   
 
+As $b_1$ becomes more negative (relative to 0), the negative slope of the logistic function increases.  
+
+- The steeper the slope, the more quickly the probability of $y = 1$ changes as $x$ changes.  
+- As $X$ increases, the probability of $Y = 1$ decreases.
+
+$\pi$ is 0.5 at mean of $x$ (because $b_0 = 0$).  
 ```{r}
 #| echo: false
 
@@ -497,16 +555,16 @@ expand.grid(x = -10:10,
          b1 = factor(b1)) |> 
   ggplot(aes(x = x, y = y, color = b1)) +
   geom_line() +
+  ylab("p(y = 1)") +
   scale_y_continuous(limits = c(0, 1))
 ```
 
 --------------------------------------------------------------------------------
 
-$\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$    
+$\pi = \frac{e^{b_0 + b_1X_1}}{1 + e^{b_0 + b_1X_1}}$    
 
-$b_0 = -5 \text{ to } 5$    
-
-$b_1 = 0$   
+- $b_0 = -5 \text{ to } 5$    
+- $b_1 = 0$   
 
 ```{r}
 #| echo: false
@@ -518,17 +576,27 @@ expand.grid(x = -10:10,
          b0 = factor(b0)) |> 
   ggplot(aes(x = x, y = y, color = b0)) +
   geom_line() +
+  ylab("p(y = 1)") +
   scale_y_continuous(limits = c(0, 1))
 ```
 
+When $b_0 = 0$, the model predicts $\pi = 0.5$ at the mean of $X$.
+
+- As $b_0$ becomes more positive, the model predicts higher probabilites for $Y = 1$ at the mean of $X$.  
+- As $b_0$ becomes more negative, the model predicts lower probabilites for $Y = 1$
+- This is clearest when $b_1 = 0$.   
+
 --------------------------------------------------------------------------------
 
-$\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$    
+$\pi = \frac{e^{b_0 + b_1X_1}}{1 + e^{b_0 + b_1X_1}}$    
 
-$b_0 = -5 \text{ to } 5$    
+- $b_0 = -5 \text{ to } 5$    
+- $b_1 = 1$   
 
-$b_1 = 1$   
+But the same is true for non-zero values for $b_1$.  
 
+- Increases in probability for $Y = 1$ result in left shift of the logistic function.
+- Decreases in probability for $Y = 1$ result in right shift of the logistic function.
 ```{r}
 #| echo: false
 
@@ -539,6 +607,7 @@ expand.grid(x = -10:10,
          b0 = factor(b0)) |> 
   ggplot(aes(x = x, y = y, color = b0)) +
   geom_line() +
+  ylab("p(y = 1)") +
   scale_y_continuous(limits = c(0, 1))
 ```
 
@@ -546,11 +615,12 @@ expand.grid(x = -10:10,
 
 ## Odds
 
+Odds are a transformation of probabilites that can be useful in some situations (e.g., gambling). 
+
 Odds = $\frac{\pi}{1-\pi}$   
 
 ::: {.callout-important}
 # Question
-
 What are the odds of obtaining a head on a fair coin toss?
 :::
 
@@ -561,7 +631,6 @@ Odds = $\frac{0.5}{1-0.5} = \frac{0.5}{0.5} = 1 [1:1]$
 ::::{.fragment}
 ::: {.callout-important}
 # Question
-
 What would the odds of obtaining a head be if I altered the coin to have a probability of heads = 0.67?
 :::
 ::::
@@ -576,15 +645,12 @@ $\pi = \frac{\text{odds}}{\text{odds} + 1}$
 
 ::: {.callout-important}
 # Question
-
 What is the probability of an event that has an odds of 3?
 :::
 
 :::{.fragment}
 $\pi = \frac{3}{3 + 1} = .75$ 
-:::
 
-:::{.fragment}
 **Odds can range from 0 - infinity.**
 :::
 
@@ -594,7 +660,6 @@ Odds = $\frac{\pi}{1-\pi}$
 
 ::: {.callout-important}
 # Question
-
 What are the approximate odds of getting into grad school with a GPA of 3.5?
 :::   
 
@@ -613,38 +678,36 @@ ggplot(data = data, aes(x = gpa, y = admit)) +
   geom_hline(yintercept = .49, color = "dark green", linewidth = .75)
 ```
 
-
 :::{.fragment}
 Odds = $\frac{0.5}{1-0.5} = 1[1:1]$  
 :::
 
 --------------------------------------------------------------------------------
 
+We can connect our $X$s to either the probability of $Y = 1$ or the odds of $Y = 1$ 
+
 **Logistic function (probability Y = 1):**   
 
-$\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$  
-
-$0 \le\pi \le 1$   
+- $\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$  
+- $0 \le\pi \le 1$   
 
 **Convert $\pi$ to odds (odds of Y = 1)**    
 
-$\frac{\pi}{1-\pi} = e^{b_0 + b_1X_1 + ... + b_kX_k}$    
-
-$0 \le \text{odds} \le\text{INF}$  
+- $\frac{\pi}{1-\pi} = e^{b_0 + b_1X_1 + ... + b_kX_k}$    
+- $0 \le \text{odds} \le\text{INF}$  
 
 
 --------------------------------------------------------------------------------
 
 :::{.callout-important}
 # Question 
-
 What are the predicted odds of getting into grad school with a GPA of 3.5?
 :::   
 
 ```{r}
 #| code-fold: true
 
-tidy(m_glm)
+m_glm |> tidy()
 ```
 
 :::{.fragment}
@@ -661,29 +724,28 @@ $= 0.86 [0.86:1]$
 
 --------------------------------------------------------------------------------
 
+Remember that we said the link function for logistic regression is the logit function.  This is yet one more transformation.
+
 **Logistic function (probability Y = 1):**   
 
-$\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$  
-
-$0 \le\pi \le 1$   
+- $\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$  
+- $0 \le\pi \le 1$   
 
 **Convert $\pi$ to odds (odds of Y = 1):**    
 
-$\frac{\pi}{1-\pi} = e^{b_0 + b_1X_1 + ... + b_kX_k}$    
-
-$0 \le \text{odds} \le\text{INF}$  
+- $\frac{\pi}{1-\pi} = e^{b_0 + b_1X_1 + ... + b_kX_k}$    
+- $0 \le \text{odds} \le\text{INF}$  
 
 **Convert odds to log-odds(logit function; log-odds of Y = 1):**   
 
-$ln(\frac{\pi}{1-\pi}) = b_0 + b_1X_1 + ... + b_kX_k$   
-
-$-\text{INF} \le logit \le \text{INF}$  
+- $ln(\frac{\pi}{1-\pi}) = b_0 + b_1X_1 + ... + b_kX_k$   
+- $-\text{INF} \le logit \le \text{INF}$  
+- And now we are back to a linear (on $X$) model!  
 
 --------------------------------------------------------------------------------
 
 :::{.callout-important}
 # Question 
-
 What are the log-odds (logit) of getting into grad school with a GPA of 3.5?
 :::   
 
@@ -714,10 +776,10 @@ However, they are a linear function of our regressors. GLM estimates the paramet
 ```{r}
 #| code-fold: true
 
-tidy(m_glm)
+m_glm |> tidy()
 ```
 
-$logit(Y) = -14.5 + 4.1*gpa$    
+$logit(pY) = -14.5 + 4.1*gpa$    
 
 We transform the logit function to either odds or probability functions to convey relationships in meaningful units.   
 
@@ -754,18 +816,13 @@ plot_prob <- ggplot(data = data, aes(x = gpa, y = admit)) +
             aes(y = value, x = gpa), color = "blue") +
   labs(title = "Probability(Y)",
        y = "p(admit)")
-```
-
-```{r}
-#| echo: false
 
 plot_logit + plot_odds + plot_prob
 ```
 
-
 --------------------------------------------------------------------------------
 
-Log-odds are a linear function of $X$s, but these parameter estimates are not very descriptive.   
+Log-odds are a linear function of $X$s, but because log-odds are not intuitive, it decreases the descriptive value of the raw parameter estimates.  
 
 $logit(admission)= -14.5 + 4.1*gpa$    
 
@@ -782,7 +839,7 @@ plot_logit +
 
 --------------------------------------------------------------------------------
 
-Odds and probability are more descriptive but they are not linear functions of the $X$s so their parameter estimates aren't very useful to describe effect of $X$s.    
+Odds and probability are more descriptive but they are not linear functions of the $X$s so their parameter estimates aren't very useful to describe effect of $X$s because they are not constant across the values of $X$ (the slope is not linear).    
 
 Can't make simple statement about unit change in odds or probability as a result of unit change in GPA.  
 
@@ -793,7 +850,7 @@ $\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k
 ```{r}
 #| echo: false
 
-plot_odds + plot_prob
+plot_logit + plot_odds + plot_prob
 ```
 
 --------------------------------------------------------------------------------
@@ -1031,11 +1088,8 @@ exp(m_rank$coefficients[2])
 
 :::{.callout-important}
 # Question 
-
 What about multiple predictors?
-What about interactions?
 :::   
-
 
 :::{.fragment}
 **Nothing new!**
@@ -1043,21 +1097,18 @@ What about interactions?
 
 --------------------------------------------------------------------------------
 
-
 ```{r}
 data <- data |> 
   mutate(gpa_c = gpa - mean(gpa))
 
 contrasts(data$rank_2)
 
-m_int <- glm(admit ~ gpa_c*rank_2, data = data, family = binomial(logit)) 
+m_int <- glm(admit ~ gpa_c + rank_2, data = data, family = binomial(logit)) 
 
 summary(m_int)
 ```
 
-
 --------------------------------------------------------------------------------
-
 
 Likelihood ratio test for `rank_2`
 ```{r}

@@ -62,3 +62,7 @@
   quarto-pub:
     - id: b1e44104-03ca-4722-90b9-45cac3fecbf7
       url: 'https://jjcurtin.quarto.pub/13_categorical_variables'
+- source: 14_the_generalized_linear_model.qmd
+  quarto-pub:
+    - id: bdb4345e-d0f7-4152-90ae-0ad0b7afb5c7
+      url: 'https://jjcurtin.quarto.pub/14_the_generalized_linear_model-8ee6'
