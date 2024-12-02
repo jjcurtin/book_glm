@@ -1,4 +1,4 @@
-# Unit 15: The Generalized Linear Model
+# Unit 14: The Generalized Linear Model
 
 ```{r}
 #| include: false
