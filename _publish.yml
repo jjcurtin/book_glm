@@ -64,5 +64,5 @@
       url: 'https://jjcurtin.quarto.pub/13_categorical_variables'
 - source: 14_the_generalized_linear_model.qmd
   quarto-pub:
-    - id: bdb4345e-d0f7-4152-90ae-0ad0b7afb5c7
-      url: 'https://jjcurtin.quarto.pub/14_the_generalized_linear_model-8ee6'
+    - id: 8ab32f0e-51e7-47d2-b1a6-74d4a34c6329
+      url: 'https://jjcurtin.quarto.pub/14_the_generalized_linear_model'

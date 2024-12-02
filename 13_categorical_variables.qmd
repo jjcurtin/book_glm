@@ -1581,7 +1581,12 @@ Holm-Bonferroni adjusts them in a stepwise fashion.
 - Provides good protection against inflation of Type I errors
 - Power drops (Type II increases) as number of comparisons/tests increases
 - Easy to apply to any statistical tests
+
 ```{r}
+# first sort (but keep track!!)
+(p_ord <- sort(p))
+
+# then adjust
 p.adjust(p, method= 'holm')
 ```
 
