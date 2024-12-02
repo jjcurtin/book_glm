@@ -1,5 +1,21 @@
 # Unit 15: The Generalized Linear Model
 
+```{r}
+#| include: false
+
+library(tidyverse)
+library(broom)
+library(patchwork)
+library(skimr)
+
+theme_set(theme_classic()) 
+
+options(scipen = 999) # turns off scientfic notation
+options(knitr.kable.NA = '')
+```
+
+-------------------------------------------------------------------------------
+
 ::: {.callout-important}
 # Question
 What are the assumptions of **general** linear models?
@@ -34,18 +50,11 @@ What are the consequences of violating each of these assumptions? What options e
 --------------------------------------------------------------------------------
 
 ## An Example
+
 Predicting admission to a grad program in engineering based on quantitative GRE, GPA, and Undergraduate Institution Rank.   
 
 ```{r}
 #| echo: false
-
-library(tidyverse)
-library(broom)
-library(skimr)
-library(patchwork)
-theme_set(theme_classic()) 
-options(scipen = 999) # turns off scientfic notation
-options(knitr.kable.NA = '')
 
 data <- read_csv(here::here("data_lecture/15_grad_admit.csv"),
                  show_col_types = FALSE) |> 
@@ -55,6 +64,8 @@ data <- read_csv(here::here("data_lecture/15_grad_admit.csv"),
 ```{r}
 data |> head()
 ```
+
+-------------------------------------------------------------------------------
 
 ```{r}
 data |> 
@@ -68,9 +79,8 @@ data |>
 
 You will occasionally see linear regressions conducted with binary outcomes. 
 
-The binary outcome is coded as 0 and 1.
-
-This model is called the [linear probability model](https://en.wikipedia.org/wiki/Linear_probability_model) where $\hat{Y}$ is considered the probability of membership in the group coded 1
+- The binary outcome is coded as 0 and 1.
+- This model is called the [linear probability model](https://en.wikipedia.org/wiki/Linear_probability_model) where $\hat{Y}$ is considered the probability of membership in the group coded 1
 
 ```{r}
 m_lm <- lm(admit ~ gpa, data = data)
@@ -182,6 +192,10 @@ ggplot() +
             linetype = "dashed", color = "blue")
 ```
 
+--------------------------------------------------------------------------------
+
+Normality of residuals
+
 ```{r}
 #| code-fold: true
 
@@ -207,12 +221,12 @@ tibble(x = predict(m_lm),
        y = "Studentized Residuals")
 ```
 
+--------------------------------------------------------------------------------
+
 ```{r}
 #| cold-fold: true
 #| warning: false
 
-# Note that negative values exist.  Could make plot manually to fix this
-# But this is just a quick demonstration
 car::spreadLevelPlot(m_lm)
 ```
 
@@ -337,6 +351,7 @@ What other non-linear shapes do you know how to model in the general linear mode
 
 --------------------------------------------------------------------------------
 
+Simple monotone
 ```{r}
 #| echo: false
 
@@ -345,13 +360,27 @@ tibble(x = 1:100,
   ggplot(aes(x = x, y = y)) +
   geom_line() +
   labs(y = "y = sqrt(x)")
+```
 
+
+--------------------------------------------------------------------------------
+
+Quadradic
+
+```{r}
 tibble(x = -100:100,
        y = x + x^2) |> 
   ggplot(aes(x = x, y = y)) +
   geom_line() +
   labs(y = "y = x + x^2")
+```
 
+
+--------------------------------------------------------------------------------
+
+Cubic
+
+```{r}
 tibble(x = -100:100,
        y = x + x^2 + x^3) |> 
   ggplot(aes(x = x, y = y)) +
@@ -397,7 +426,7 @@ There are two characteristics that vary across the families within the generaliz
 **Logistic Regression:**   
 
 - Residuals are binomial   
-- Model predicts probability of Y = 1 ($\pi$).  Link function is logit (or log-odd; A transformation of these predicted probabilities).   
+- Model predicts probability of Y = 1 ($\pi$).  Link function is logit (or log-odds; A transformation of these predicted probabilities).   
   - $ln(\frac{\pi}{1-\pi}) = b_0 + b_1X_1 + ... + b_kX_k$   
   - It is still a linear (on $X$) model
 
@@ -439,7 +468,10 @@ log(0)
 
 --------------------------------------------------------------------------------
 
-The inverse of the natural log is the exponential function: `exp()`.  This function simply raises $e$ to the power of $X$ (whatever value you provide).   
+The inverse of the natural log is the exponential function: `exp()`.  
+
+- This function simply raises $e$ to the power of $X$ (whatever value you provide).   
+- Logistic regression uses natural logs and exponentials for the transformations that connect $\hat{Y}$ with $X$s.
 
 ```{r}
 exp(1)
@@ -450,8 +482,6 @@ exp(0)
 
 exp(-1)
 ```
-
-Logistic regression uses natural logs and exponentials for the transformations that connect $\hat{Y}$ with $X$s.
 
 --------------------------------------------------------------------------------
 
@@ -466,6 +496,7 @@ We can manipulate the formula to isolate $\pi$ on one side such that it predicts
 - $\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$    
 - This is often how we will use the model for prediction (and plots)
 - Probability is non-linear on $X$ (as we saw in the previous plot) 
+
 --------------------------------------------------------------------------------
 
 ```{r}
@@ -538,13 +569,14 @@ $\pi = \frac{e^{b_0 + b_1X_1}}{1 + e^{b_0 + b_1X_1}}$
 - $b_0 = 0$    
 - $b_1 = -1 \text{ to }0$   
 
-
 As $b_1$ becomes more negative (relative to 0), the negative slope of the logistic function increases.  
 
 - The steeper the slope, the more quickly the probability of $y = 1$ changes as $x$ changes.  
 - As $X$ increases, the probability of $Y = 1$ decreases.
 
 $\pi$ is 0.5 at mean of $x$ (because $b_0 = 0$).  
+
+
 ```{r}
 #| echo: false
 
@@ -918,7 +950,7 @@ There are three common statistical tests for a parameter in logistic regression:
     $z = \frac{b_j}{SE_j}$
 
 
-2. ***Wald test:** Reported by SPSS. Wald is asymptotically distributed as Chi-square with 1 df.   
+2. **Wald test:** Reported by SPSS. Wald is asymptotically distributed as Chi-square with 1 df.   
 
     $wald = \frac{b_j^2}{SE_j^2}$   
 
@@ -935,12 +967,11 @@ Deviance is the maximum likelihood generalization of SSE from OLS.
 The likelihood ratio test involves a comparison of two models' deviances.   
 
 To test the effect of GPA, compare deviances.    
-**Compact**: Intercept only (null model)   
-**Augmented**: Model with GPA    
 
-LR test = compact - augmented    
-
-Distributed as chi-square with df = df(augmented) - df(compact).    
+- **Compact**: Intercept only (null model)   
+- **Augmented**: Model with GPA    
+- LR test = compact - augmented    
+- Distributed as chi-square with df = df(augmented) - df(compact).    
 
 --------------------------------------------------------------------------------
 
