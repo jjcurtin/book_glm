@@ -1208,3 +1208,45 @@ ggplot(data = data, aes(x = gpa, y = admit)) +
   scale_x_continuous(limits = c(0, 4)) 
 ```
 
+## All Common Transformations
+1. the odds of the event occurring are
+odds =
+0.2
+0.8
+= 0.25
+2. the log-odds of the event occurring are
+ln0.2
+0.8
+
+= −1.3863
+or
+ln(0.25) = −1.3863
+3. the probability can be reconstructed as
+odds
+1 + odds =
+0.25
+1.25
+= 0.2
+4. the probability can also be reconstructed as
+exp(ln(odds))
+1 + exp(ln(odds)) =
+exp(−1.3683)
+1 + exp(−1.3683) =
+0.25
+1.25
+= 0.2
+In R, you can
+1. obtain the odds for a given probability by dividing the probability by 1 minus the probability, e.g.,
+odds = 0.2/(1-0.2) = 0.25
+2. obtain the log-odds for a given probability by taking the natural logarithm of the odds, e.g., log(0.25)
+= -1.3862944 or using the qlogis function on the probability value, e.g., qlogis(0.2) = -1.3862944.
+3. obtain the probability from the log-odds using exp(x)
+1+exp(x)
+, where x represents the log-odds value either by
+writing the expression out, e.g., exp(-1.3862944)/(1 + exp(-1.3862944)), or by using the plogis
+function, e.g., plogis(-1.3862944) = 0.2.
+4. obtain the probability from the odds by using odds
+1+odds , e.g., 0.25/1.25 = 0.2
+
+
+
