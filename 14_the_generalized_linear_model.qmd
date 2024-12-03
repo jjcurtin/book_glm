@@ -4,10 +4,8 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Unit 15: The Generalized Linear Model
-=======
+
 # Unit 14: The Generalized Linear Model
->>>>>>> 3e626313add19813fd57111c7f033cbd009f6826
 
 ```{r}
 #| include: false
