@@ -1193,9 +1193,6 @@ gpa <- tibble(gpa = rep(seq(2, 4, length.out = 50), 4))
 x <- gpa |> 
   bind_cols(ranks)
 
-```
-
-```{r}
 preds <- x |> 
   bind_cols(predict(m_rank, newdata = x, type = "link",
                  se.fit = TRUE)) |> 
