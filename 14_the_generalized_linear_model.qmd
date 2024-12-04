@@ -1166,8 +1166,33 @@ We tested the main effect and pairwise contrasts for rank, controlling for `gpa`
 ```{r}
 anova(glm(admit ~ d_rank1 + d_rank2 + d_rank3, data = data, family = binomial(logit)), m_rank)
 ```
-
 :::
+
+
+---------------------------------------------------------------------------
+
+What about interactions?  This is a more complicated story.
+
+Interactions with respect to log-odds($Y$) are handled exactly in the linear model
+
+- Use product terms for regressors
+- Center regressors for overall/marginal effects
+- Use dummy coded regressors for simple effects
+- Overall and simple effects are quantified as odds ratios
+- Interaction term is a ratio of odds ratios!
+
+--------------------------------------------------------------------------------
+
+However, we often want to consider interactions with respect to changes in the probability of $Y = 1$.
+
+- This is NOT what is tested and an interaction for log-odds ($Y$) is not the same as an interaction for probability ($Y$).
+- The interaction can be significant in log-odds($Y$) but not for probsbility ($Y$) and vice versa!
+- Also, the interaction is not constant across values of other covariates/predictors in the model!
+- Use interactions sparingly if at all in logistic regression.
+- Maybe linear probability model?
+
+
+You can read more about this issue [elsewhere](https://stats.oarc.ucla.edu/stata/seminars/deciphering-interactions-in-logistic-regression/) and I plan to create a more elaborate demonstration of this issue using R in an appendix to this course.
 
 --------------------------------------------------------------------------------
 
@@ -1211,44 +1236,61 @@ ggplot() +
 ```
 
 ## All Common Transformations
-1. the odds of the event occurring are
-odds =
-0.2
-0.8
-= 0.25
-2. the log-odds of the event occurring are
-ln0.2
-0.8
-
-= −1.3863
-or
-ln(0.25) = −1.3863
-3. the probability can be reconstructed as
-odds
-1 + odds =
-0.25
-1.25
-= 0.2
-4. the probability can also be reconstructed as
-exp(ln(odds))
-1 + exp(ln(odds)) =
-exp(−1.3683)
-1 + exp(−1.3683) =
-0.25
-1.25
-= 0.2
-In R, you can
-1. obtain the odds for a given probability by dividing the probability by 1 minus the probability, e.g.,
-odds = 0.2/(1-0.2) = 0.25
-2. obtain the log-odds for a given probability by taking the natural logarithm of the odds, e.g., log(0.25)
-= -1.3862944 or using the qlogis function on the probability value, e.g., qlogis(0.2) = -1.3862944.
-3. obtain the probability from the log-odds using exp(x)
-1+exp(x)
-, where x represents the log-odds value either by
-writing the expression out, e.g., exp(-1.3862944)/(1 + exp(-1.3862944)), or by using the plogis
-function, e.g., plogis(-1.3862944) = 0.2.
-4. obtain the probability from the odds by using odds
-1+odds , e.g., 0.25/1.25 = 0.2
+
+In logistic regression, we need to move back and forth between logit($Y), odds($Y$), and $\pi_Y$.  We also need to calculate odds ratios.  There are lots of ways to transform between these metrics.
+
+## The Model
+
+Predicting logit($Y$) (aka log-odds($Y$)).  This is the native model in the GLM
+
+- $logit(Y) = b_0 + b_1X_1 + ... + b_kX_k$
+
+Predicting $\pi_Y$
+
+- $\pi_Y$ = $\frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$
+- $\pi_Y$ = $\frac{1}{1 + e^{-(b_0 + b_1X_1 + ... + b_kX_k)}}$}
+
+### Calculating odds
+
+From logit($Y$) to odds
+
+- odds($Y$) = $e^{logit(Y)}$  [use `exp()` in R]
+
+From $\pi_Y$ to odds
+
+- odds($Y$) = $\frac{\pi_Y}{1-\pi_Y}$
+
+### Calculating probability
+
+From odds($Y$) to $\pi_Y$
+$\pi_Y$ = $\frac{odds(Y)}{1 + odds(Y)}$ 
+
+For logit($Y$) to $\pi_Y$
+
+- $\pi_Y$ = $\frac{e^{logit(Y)}}{1 + e^{logit(Y)}}$  [use `plogis()` in R]
+
+### Calculating logit
+
+From odds($Y$) to logit($Y$)
+
+- logit($Y$) = $ln(odds(Y))$  [use `log()` in R]
+
+From probability ($Y$) to logit($Y$)
+
+- logit($Y$) = $ln(\frac{\pi_Y}{1-\pi_Y})$  [use `qlogis()` in R]
+
+### Odds Ratios
+
+The odds ratio is the ratio of odds for a change in $X$ of some magnitude $c$.  For unit weighted contrasts (dummy or contrast codes), $c = 1$ by default
+
+- $\Psi = e^{c*b_1}$
+
+The odds ratio between two levels of $X$ can also be calculated manually as 
+
+- Odds($X$ at level 1) / Odds($X$ at level 2)
+
+
+
 
 
 
