@@ -308,7 +308,6 @@ preds <- predict(m_glm, newdata = x) |>
   bind_cols(x)
 
 ggplot(data = data, aes(x = gpa, y = admit)) +
-  geom_point() +
   geom_jitter(width = 0, height = .05) +
   scale_x_continuous(limits = c(0, 6)) +
   geom_line(data = preds, aes(y = value, x = gpa), color = "blue")  +
@@ -406,7 +405,7 @@ Not cubic (cubic is unbounded)
 m_glm |> tidy()
 
 ggplot(data = data, aes(x = gpa, y = admit)) +
-  geom_point() +
+  geom_jitter(width = 0, height = .04) +
   scale_x_continuous(limits = c(2, 4)) +
   geom_line(data = preds |> 
               filter(!(gpa > 4 | gpa < 2)), 
@@ -501,6 +500,7 @@ This is the model we are fitting for logistic regression.
 We can manipulate the formula to isolate $\pi$ on one side such that it predicts the probability ($\pi$) of $Y = 1$ as a function of $X$s.
 
 - $\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$    
+- $\pi_Y$ = $\frac{1}{1 + e^{-(b_0 + b_1X_1 + ... + b_kX_k)}}$}
 - This is often how we will use the model for prediction (and plots)
 - Probability is non-linear on $X$ (as we saw in the previous plot) 
 
@@ -516,11 +516,11 @@ $\pi = \frac{e^{-14.5 + 4.1}}{1 + e^{-14.5 + 4.1X_1}}$
 
 Logistic regression (and all generalized linear models) can accommodate multiple $X$s.
 
-- $\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$    
+- $\pi = \frac{1}{1 + e^{-(b_0 + b_1X_1 + ... + b_kX_k)}}$    
 
 But lets consider simple (one $X$) logistic regression to understand what the intercept and parameter estimates for $X$ tell us about the probability of $Y$.
 
-- $\pi = \frac{e^{b_0 + b_1X_1}}{1 + e^{b_0 + b_1X_1}}$    
+- $\pi = \frac{1}{1 + e^{-(b_0 + b_1X_1)}}$    
 
 First 
 
@@ -543,7 +543,7 @@ tibble(x = -10:10,
 
 --------------------------------------------------------------------------------
 
-$\pi = \frac{e^{b_0 + b_1X_1}}{1 + e^{b_0 + b_1X_1}}$    
+$\pi = \frac{1}{1 + e^{-(b_0 + b_1X_1)}}$    
 
 - $b_0 = 0$    
 
@@ -571,7 +571,7 @@ expand.grid(x = -10:10,
 
 --------------------------------------------------------------------------------
 
-$\pi = \frac{e^{b_0 + b_1X_1}}{1 + e^{b_0 + b_1X_1}}$    
+$\pi = \frac{1}{1 + e^{-(b_0 + b_1X_1)}}$    
 
 - $b_0 = 0$    
 - $b_1 = -1 \text{ to }0$   
@@ -600,7 +600,7 @@ expand.grid(x = -10:10,
 
 --------------------------------------------------------------------------------
 
-$\pi = \frac{e^{b_0 + b_1X_1}}{1 + e^{b_0 + b_1X_1}}$    
+$\pi = \frac{1}{1 + e^{-(b_0 + b_1X_1)}}$    
 
 - $b_0 = -5 \text{ to } 5$    
 - $b_1 = 0$   
@@ -627,7 +627,7 @@ When $b_0 = 0$, the model predicts $\pi = 0.5$ at the mean of $X$.
 
 --------------------------------------------------------------------------------
 
-$\pi = \frac{e^{b_0 + b_1X_1}}{1 + e^{b_0 + b_1X_1}}$    
+$\pi = \frac{1}{1 + e^{-(b_0 + b_1X_1)}}$    
 
 - $b_0 = -5 \text{ to } 5$    
 - $b_1 = 1$   
@@ -707,7 +707,7 @@ What are the approximate odds of getting into grad school with a GPA of 3.5?
 #| echo: false
 
 ggplot(data = data, aes(x = gpa, y = admit)) +
-  geom_point() +
+  geom_jitter(width = 0, height = .04) +
   scale_x_continuous(limits = c(2, 4)) +
   geom_line(data = preds |> 
               filter(!(gpa > 4 | gpa < 2)), 
@@ -727,7 +727,7 @@ We can connect our $X$s to either the probability of $Y = 1$ or the odds of $Y =
 
 **Logistic function (probability Y = 1):**   
 
-- $\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$  
+- $\pi = \frac{1}{1 + e^{-(b_0 + b_1X_1)}}$    
 - $0 \le\pi \le 1$   
 
 **Convert $\pi$ to odds (odds of Y = 1)**    
@@ -848,7 +848,7 @@ plot_odds <- preds |>
        y = "odds(admit)")
 
 plot_prob <- ggplot(data = data, aes(x = gpa, y = admit)) +
-  geom_point() +
+  geom_jitter(width = 0, height = .04) +
   scale_x_continuous(limits = c(0, 4)) +
   geom_line(data = preds |> 
               filter(!gpa > 4), 
@@ -884,7 +884,7 @@ Can't make simple statement about unit change in odds or probability as a result
 
 $\frac{\pi}{1-\pi} = e^{b_0 + b_1X_1 + ... + b_kX_k}$    
 
-$\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$  
+$\pi = \frac{1}{1 + e^{-(b_0 + b_1X_1 + ... + b_kX_k)}}$  
 
 ```{r}
 #| echo: false
@@ -985,7 +985,8 @@ To test the effect of GPA, compare deviances.
 compact <- glm(admit ~ 1, data = data, family = binomial(logit))
 augmented <- glm(admit ~ gpa, data = data, family = binomial(logit))
 
-anova(compact, augmented)
+anova(compact, 
+      augmented)
 ```
 
 --------------------------------------------------------------------------------
@@ -1048,13 +1049,14 @@ data |> head()
 
 --------------------------------------------------------------------------------
 
-Test main effect of rank (if needed for Fisher LSD).  
+Test main effect of rank, controlling for GPA (main effect is only needed if using Fisher LSD).  
 
 - Compact model excludes all the dummy codes
 - Compact model DOES include other covariates/predictors (if present in augmented model)
 ```{r}
 m_rank <- glm(admit ~ gpa + d_rank1 + d_rank2 + d_rank3, data = data, family = binomial(logit))
-anova(glm(admit ~ gpa, data = data, family = binomial(logit)), m_rank)
+anova(glm(admit ~ gpa, data = data, family = binomial(logit)), 
+      m_rank)
 ```
 
 --------------------------------------------------------------------------------
@@ -1063,17 +1065,20 @@ Test each pairwise contrast
 
 - rank 1 vs. rank 4
 ```{r}
-anova(glm(admit ~ gpa + d_rank2 + d_rank3, data = data, family = binomial(logit)), m_rank)
+anova(glm(admit ~ gpa + d_rank2 + d_rank3, data = data, family = binomial(logit)), 
+      m_rank)
 ```
 
 - rank 2 vs. rank 4
 ```{r}
-anova(glm(admit ~ gpa + d_rank1 + d_rank3, data = data, family = binomial(logit)), m_rank)
+anova(glm(admit ~ gpa + d_rank1 + d_rank3, data = data, family = binomial(logit)), 
+      m_rank)
 ```
 
 - rank 3 vs. rank 4
 ```{r}
-anova(glm(admit ~ gpa + d_rank1 + d_rank2, data = data, family = binomial(logit)), m_rank)
+anova(glm(admit ~ gpa + d_rank1 + d_rank2, data = data, family = binomial(logit)), 
+      m_rank)
 ```
 
 --------------------------------------------------------------------------------
@@ -1110,7 +1115,9 @@ odds4
 ```
 
 
-And if you wanted the probability, use `response` rather than `link` in the `predict()` function. And remove `exp()`
+--------------------------------------------------------------------------------
+
+And if you wanted the probability for any combination of $X$, use `response` rather than `link` in the `predict()` function. And remove `exp()`
 ```{r}
 tibble(gpa = 3.5, d_rank1 = 0, d_rank2 = 0, d_rank3 = 0) |> 
   predict(m_rank, newdata = _, type = "response")
@@ -1136,7 +1143,9 @@ Odds ratio
 odds1/odds4
 ```
 
-Or directly from the parameter estimate from this contrast ($c$ = 1 for unit weighted contrast or dummy codes)
+--------------------------------------------------------------------------------
+
+Or we can get the odds ratio directly from the parameter estimate from this contrast ($c$ = 1 for unit weighted contrast or dummy codes)
 
 ```{r}
 m_rank |> tidy()
@@ -1164,7 +1173,8 @@ What about multiple predictors?
 
 We tested the main effect and pairwise contrasts for rank, controlling for `gpa` above.  Here we test of the effect of `gpa` controlling for rank.  
 ```{r}
-anova(glm(admit ~ d_rank1 + d_rank2 + d_rank3, data = data, family = binomial(logit)), m_rank)
+anova(glm(admit ~ d_rank1 + d_rank2 + d_rank3, data = data, family = binomial(logit)), 
+      m_rank)
 ```
 :::
 
@@ -1227,7 +1237,7 @@ preds <- x |>
   select(-se.fit, -residual.scale)
 
 ggplot() +
-  geom_point(data = data, aes(x = gpa, y = admit, color = rank)) +
+  geom_jitter(data = data, aes(x = gpa, y = admit, color = rank), width = 0, height = .04) +
   geom_line(data = preds, aes(y = fit, x = gpa, color = rank), 
             linewidth = .75) +
   labs(y = "p(admit)",
@@ -1239,18 +1249,24 @@ ggplot() +
 
 In logistic regression, we need to move back and forth between logit($Y), odds($Y$), and $\pi_Y$.  We also need to calculate odds ratios.  There are lots of ways to transform between these metrics.
 
+The remaining slides put all the formulas for this transformations/calculations in one place!
+
 ## The Model
 
 Predicting logit($Y$) (aka log-odds($Y$)).  This is the native model in the GLM
 
 - $logit(Y) = b_0 + b_1X_1 + ... + b_kX_k$
 
+Predicting odds($Y$)
+
+- $odds(Y) = e^{b_0 + b_1X_1 + ... + b_kX_k}$
+
 Predicting $\pi_Y$
 
 - $\pi_Y$ = $\frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$
 - $\pi_Y$ = $\frac{1}{1 + e^{-(b_0 + b_1X_1 + ... + b_kX_k)}}$}
 
-### Calculating odds
+## Calculating odds
 
 From logit($Y$) to odds
 
@@ -1260,7 +1276,7 @@ From $\pi_Y$ to odds
 
 - odds($Y$) = $\frac{\pi_Y}{1-\pi_Y}$
 
-### Calculating probability
+## Calculating probability
 
 From odds($Y$) to $\pi_Y$
 $\pi_Y$ = $\frac{odds(Y)}{1 + odds(Y)}$ 
@@ -1269,7 +1285,7 @@ For logit($Y$) to $\pi_Y$
 
 - $\pi_Y$ = $\frac{e^{logit(Y)}}{1 + e^{logit(Y)}}$  [use `plogis()` in R]
 
-### Calculating logit
+## Calculating logit
 
 From odds($Y$) to logit($Y$)
 
@@ -1279,7 +1295,7 @@ From probability ($Y$) to logit($Y$)
 
 - logit($Y$) = $ln(\frac{\pi_Y}{1-\pi_Y})$  [use `qlogis()` in R]
 
-### Odds Ratios
+## Odds Ratios
 
 The odds ratio is the ratio of odds for a change in $X$ of some magnitude $c$.  For unit weighted contrasts (dummy or contrast codes), $c = 1$ by default
 
@@ -1288,9 +1304,3 @@ The odds ratio is the ratio of odds for a change in $X$ of some magnitude $c$.  
 The odds ratio between two levels of $X$ can also be calculated manually as 
 
 - Odds($X$ at level 1) / Odds($X$ at level 2)
-
-
-
-
-
-

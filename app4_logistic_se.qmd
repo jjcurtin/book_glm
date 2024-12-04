@@ -245,9 +245,21 @@ preds |>
 ```
 
 For PR from LO 
-Not good.  This is why we should use CIs for probability formed from log odds predictions!
+Not perfect.  This is why we should use CIs for probability formed from log odds predictions!
 ```{r}
 preds |> 
+  mutate(value_in_ci = if_else(lwr_pr <= true_pr & 
+                               upr_pr >= true_pr, 
+                               1, 0)) |> 
+ pull(value_in_ci) |> 
+ mean()
+```
+
+
+As expected the CI coverage is worse for the edge of the X range
+```{r}
+preds |> 
+  filter(x = -8) |>
   mutate(value_in_ci = if_else(lwr_pr <= true_pr & 
                                upr_pr >= true_pr, 
                                1, 0)) |> 
