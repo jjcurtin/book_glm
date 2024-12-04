@@ -36,3 +36,4 @@ book:
         - app1_exam_review.qmd
         - app2_terminology.qmd
         - app3_contrasts.qmd
+        - app4_logistic_se.qmd

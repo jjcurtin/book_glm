@@ -120,6 +120,73 @@ se_true <- preds |>
             .groups = "drop")
 ```
 
+Review preds
+```{r}
+preds |> head(10)
+```
+
+## Visual sampling distributions for predictions
+
+For log-odds
+```{r}
+preds |> 
+  ggplot(aes(x = fit_lo, fill = fct(as.character(x)))) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Sampling Distribution of Log-Odds",
+       x = "Log-Odds",
+       y = "Density") + 
+  scale_fill_discrete(name = "X")
+```
+
+For pr from log-odds
+```{r}
+preds |> 
+  ggplot(aes(x = fit_lo_pr, fill = fct(as.character(x)))) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Sampling Distribution of Pr from Log-Odds",
+       x = "Pr",
+       y = "Density") + 
+  scale_fill_discrete(name = "X")
+```
+
+For pr
+```{r}
+preds |> 
+  ggplot(aes(x = fit_pr, fill = fct(as.character(x)))) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Sampling Distribution of Pr",
+       x = "Pr",
+       y = "Density") + 
+  scale_fill_discrete(name = "X")
+```
+
+Look more closely at edge of X.  Its mostly but not completely symetric.   This is why a symetric confidence interval will NOT work optimally for pr. 
+```{r}
+preds |> 
+  filter(x == -8) |> 
+  ggplot(aes(x = fit_pr)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Sampling Distribution of Pr for X = -8",
+       x = "Pr",
+       y = "Density")
+```
+
+
+## Review min and max values for probability based CIs
+
+CIs for probability are NOT equivalent when formed from log-odds vs. pr.  This is because the transformation from log-odds to pr is non-linear (after adding/subtracting SE).
+
+In this example, the CI boundaries for probability are never < 0 or greater than 1 even when calculated directly as probability + 1.96 SE.  But that may  not be always true.  Also clear that +- 1.96 SE is not appropriate for a probability CI given its not symetric and therefore clearly not always normal.
+```{r}
+preds |> 
+  group_by(x) |> 
+  summarise(min_lwr_lo_pr = min(lwr_lo_pr),
+            min_lwr_pr = min(lwr_pr),
+            max_upr_lo_pr = max(upr_lo_pr),
+            max_upr_pr = max(upr_pr),
+            .groups = "drop")
+```
+
 ## Check model SEs (from predict) for lo and pr
 
 Now fit a single model and use `predict()` to se.fit for lo and pr 
@@ -178,7 +245,7 @@ preds |>
 ```
 
 For PR from LO 
-OK?
+Not good.  This is why we should use CIs for probability formed from log odds predictions!
 ```{r}
 preds |> 
   mutate(value_in_ci = if_else(lwr_pr <= true_pr & 
