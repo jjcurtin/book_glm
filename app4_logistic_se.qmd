@@ -1,0 +1,189 @@
+---
+editor_options: 
+  chunk_output_type: console
+---
+
+# Exploring SEs for Logistic Regression 
+
+
+## Setup 
+```{r}
+#| messages: false
+#| warnings: false
+
+# packages
+options(conflicts.policy = "depends.ok")
+library(tidyverse)
+library(furrr)
+
+# source  
+devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/format_path.R?raw=true", 
+                     sha1 = "a58e57da996d1b70bb9a5b58241325d6fd78890f")
+devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/my_skim.R?raw=true",
+                     sha1 = "839a13530805f9d28f407483a18b7e3368389fe7")
+
+
+# options
+theme_set(theme_classic()) 
+```
+
+## Functions 
+
+```{r}
+make_data <- function(n, b0, b1){
+  x <- runif(n, -10, 10) 
+  z <- b0 + b1 * x
+  p <- 1 / (1 + exp(-z))
+  y <- rbinom(n, 1, p)
+  tibble(y = y, x = x)  
+}
+```
+
+```{r}
+get_preds <- function(sim, n, b0, b1){
+  d <- make_data(n, b0, b1)
+  m <- glm(y ~ x, data = d, family = binomial) 
+  preds <- tibble(x = c(-8, -3, 0, 3, 8))
+  preds <- preds |> 
+    bind_cols(predict(m, newdata = preds,
+                      type = "link",
+                      se.fit = TRUE)) |> 
+    select(x, se_lo = se.fit, fit_lo = fit)
+  preds |> 
+    bind_cols(predict(m, newdata = preds, 
+                      type = "response",
+                      se.fit = TRUE),
+           sim = sim) |>
+    select(sim, x, fit_lo, fit_pr = fit, se_lo, se_pr = se.fit)
+}
+```
+
+## Simulate sampling distribution
+
+Settings
+```{r}
+# set n high to have robust models (and to handle uncertainty about z vs. t)
+n <- 1000 
+b0 <- 0
+b1 <- 0.5 
+n_sims <- 50000
+```
+
+simulate predictions to create sampling distribution
+```{r}
+cl <- parallel::makePSOCKcluster(parallel::detectCores(logical = FALSE))
+doParallel::registerDoParallel(cl)
+plan(multisession, workers = parallel::detectCores(logical = FALSE))
+
+preds <- 1:n_sims |> 
+  future_map(\(sim) get_preds(sim, n, b0, b1),
+             .options = furrr_options(seed = 2468)) |>
+  list_rbind()
+
+plan(sequential)
+```
+
+## Add post simulation calcs to preds
+
+Transform log-odds to pr and get CIs for log-odds, pr from log-odds, and native pr
+```{r}
+preds <- preds |> 
+  mutate(upr_lo = fit_lo + 1.96 * se_lo,
+         lwr_lo = fit_lo - 1.96 * se_lo,
+         fit_lo_pr = plogis(fit_lo),
+         upr_lo_pr = plogis(upr_lo),
+         lwr_lo_pr = plogis(lwr_lo),
+         upr_pr = fit_pr + 1.96 * se_pr,
+         lwr_pr = fit_pr - 1.96 * se_pr) 
+```
+
+Calc true values and join with preds 
+```{r}
+true_values <- tibble(x = c(-8, -3, 0, 3, 8)) |> 
+  mutate(true_lo = b0 + b1 * x,
+         true_pr = plogis(true_lo))
+
+preds <- preds |> 
+  left_join(true_values, by = "x") |> 
+  relocate(sim, x, true_lo, true_pr, 
+           fit_lo, lwr_lo, upr_lo, 
+           fit_lo_pr, lwr_lo_pr, upr_lo_pr,
+           fit_pr, lwr_pr, upr_pr)
+```
+
+Calculate true SE (sd of sampling distribution for fits across simulations)
+```{r}
+se_true <- preds |> 
+  group_by(x) |>
+  summarise(se_lo_true = sd(fit_lo), 
+            se_pr_true = sd(fit_pr),
+            .groups = "drop")
+```
+
+## Check model SEs (from predict) for lo and pr
+
+Now fit a single model and use `predict()` to se.fit for lo and pr 
+```{r}
+d <- make_data(n, b0, b1)
+m <- glm(y ~ x, data = d, family = binomial) 
+sample_preds <- tibble(x = c(-8, -3, 0, 3, 8))
+sample_preds <- sample_preds |> 
+  bind_cols(predict(m, newdata = sample_preds, 
+                        type = "link",
+                        se.fit = TRUE)) |> 
+  select(x, se_lo_mod = se.fit)
+sample_preds <- sample_preds |> 
+  bind_cols(predict(m, newdata = sample_preds, 
+                        type = "response",
+                        se.fit = TRUE)) |> 
+  select(x, se_lo_mod, se_pr_mod = se.fit)
+```
+
+Now compare model SEs to true SEs
+
+```{r}
+se <- se_true |> 
+  full_join(sample_preds, by = "x") |> 
+  mutate(diff_lo = se_lo_true - se_lo_mod,
+         diff_pr = se_pr_true - se_pr_mod) |> 
+  relocate(x, 
+           se_lo_true, se_lo_mod, diff_lo, 
+           se_pr_true, se_pr_mod, diff_pr)
+se
+```
+
+## Check CIs
+
+For LO
+GOOD!
+```{r}
+preds |> 
+  mutate(value_in_ci = if_else(lwr_lo <= true_lo & 
+                               upr_lo >= true_lo, 
+                               1, 0)) |> 
+ pull(value_in_ci) |> 
+ mean()
+```
+
+
+For PR from LO 
+GOOD!
+```{r}
+preds |> 
+  mutate(value_in_ci = if_else(lwr_lo_pr <= true_pr & 
+                               upr_lo_pr >= true_pr, 
+                               1, 0)) |> 
+ pull(value_in_ci) |> 
+ mean()
+```
+
+For PR from LO 
+OK?
+```{r}
+preds |> 
+  mutate(value_in_ci = if_else(lwr_pr <= true_pr & 
+                               upr_pr >= true_pr, 
+                               1, 0)) |> 
+ pull(value_in_ci) |> 
+ mean()
+```
