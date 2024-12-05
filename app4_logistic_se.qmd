@@ -259,7 +259,7 @@ preds |>
 As expected the CI coverage is worse for the edge of the X range
 ```{r}
 preds |> 
-  filter(x = -8) |>
+  filter(x == -8) |>
   mutate(value_in_ci = if_else(lwr_pr <= true_pr & 
                                upr_pr >= true_pr, 
                                1, 0)) |> 
