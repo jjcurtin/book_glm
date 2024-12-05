@@ -590,13 +590,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 7
-      x se_lo_true se_lo_mod   diff_lo se_pr_true se_pr_mod   diff_pr
-  &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1    -8      0.266     0.266 -0.000641    0.00463   0.00440  0.000233
-2    -3      0.137     0.140 -0.00263     0.0202    0.0197   0.000517
-3     0      0.102     0.101  0.000918    0.0254    0.0252   0.000225
-4     3      0.137     0.129  0.00738     0.0202    0.0207  -0.000516
-5     8      0.265     0.251  0.0133      0.00462   0.00504 -0.000412</code></pre>
+      x se_lo_true se_lo_mod diff_lo se_pr_true se_pr_mod   diff_pr
+  &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1    -8      0.266    0.244  0.0211     0.00463   0.00524 -0.000601
+2    -3      0.137    0.130  0.00724    0.0202    0.0201   0.000100
+3     0      0.102    0.0983 0.00350    0.0254    0.0246   0.000813
+4     3      0.137    0.127  0.00954    0.0202    0.0203  -0.000164
+5     8      0.265    0.240  0.0244     0.00462   0.00541 -0.000782</code></pre>
 </div>
 </div>
 </section>
@@ -632,7 +632,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 0.949692</code></pre>
 </div>
 </div>
-<p>For PR from LO Not good. This is why we should use CIs for probability formed from log odds predictions!</p>
+<p>For PR from LO Not perfect. This is why we should use CIs for probability formed from log odds predictions!</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -645,6 +645,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.941612</code></pre>
+</div>
+</div>
+<p>As expected the CI coverage is worse for the edge of the X range</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>preds <span class="sc">|&gt;</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(x <span class="sc">==</span> <span class="sc">-</span><span class="dv">8</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value_in_ci =</span> <span class="fu">if_else</span>(lwr_pr <span class="sc">&lt;=</span> true_pr <span class="sc">&amp;</span> </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                               upr_pr <span class="sc">&gt;=</span> true_pr, </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                               <span class="dv">1</span>, <span class="dv">0</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">pull</span>(value_in_ci) <span class="sc">|&gt;</span> </span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">mean</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.93338</code></pre>
 </div>
 </div>
 
