@@ -69,3 +69,9 @@
 
 - [Student shell](/lab/week_12/lab_12_shell.qmd)
 - TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_12_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_12_ta.html)
+
+## Week 14: 12/6
+
+- [data](/lab/data/lab_14_data.csv)
+- [Student shell](/lab/week_14/lab_14_shell.qmd)
+- TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_14_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_14_ta.html)
