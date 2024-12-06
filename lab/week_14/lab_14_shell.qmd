@@ -1,0 +1,449 @@
+---
+title: "Lab 14 TA Script" 
+author: "TAs" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+Welcome to lab 14!
+
+## Objectives
+
+Today we will cover:
+1. Dummy Coding & Contrast Coding
+2. Generalized linear model
+
+## Predictor with Three Levels
+
+We'll go back to the prestige dataset again!
+
+In this example, we want to test the hypothesis that average income will differ by the type of occupation. We control for education as a covariate.
+
+**education** (numeric): average education of occupational incumbents, years, in 1971
+
+**income** (numeric): average income of incumbents, dollars, in 1971
+
+**type** (factor): Type of occupation. A factor with levels: bc, Blue Collar; prof, Professional, Managerial, and Technical; wc, White Collar.
+
+### Setup
+
+```{r}
+#| message: false
+
+options(conflicts.policy = "depends.ok") 
+library(tidyverse)
+library(broom)
+library(skimr)
+
+theme_set(theme_classic()) 
+
+path_data <- "lab/data"
+```
+
+Read in `lab_14.csv` and inspect the data
+```{r}
+data <- read_csv(here::here(path_data, "lab_14_data.csv")) |> 
+  glimpse()
+```
+
+```{r}
+skim(data)
+```
+
+Our type variable has three different categories. It would be most appropriate to class type as a factor. Let's define the levels!
+```{r}
+data <- data |> 
+  mutate()
+```
+
+
+### Dummy Coding
+
+First, let's mean center the covariate education.
+```{r}
+data <- data |> 
+  mutate()
+```
+
+Create dummy variables using professional as a reference group
+```{r}
+data <- data |> 
+  mutate()
+```
+
+Now let's fit the model and see what the output is
+```{r}
+m_1 <- 
+tidy(m_1)
+```
+
+income = 7639 + (-102) * blue_d3 + (-2788) * white_d3 + 888 * education_m
+
+**What's the predicted income for someone with average levels of education in blue collar jobs?**
+
+> Your response here.
+
+**What's the predicted income for someone with average levels of education in professional jobs?**
+
+> Your response here.
+
+**What's the predicted income for someone with average levels of education in white collar jobs?**
+
+> Your response here.
+
+``CHECKPOINT``
+
+----
+
+Let's try another method to dummy code our predictor using R's native function
+
+```{r}
+
+```
+
+We see that the default reference group for contrasts() is the first level of the factor variable. Let's change the reference group to `Professional` by changing the base argument
+
+```{r}
+
+```
+
+Compare the results to the hand-coded version. Is there any difference?
+```{r}
+lm() |> tidy()
+```
+
+**What model comparison will get you the test of the main effect of group?**
+
+*Compact*: ???????
+
+```{r}
+
+```
+
+Now let's calculate delta_r2
+
+```{r}
+delta_r2 <- function(compact, augmented) {
+  broom::glance(augmented)$r.squared - broom::glance(compact)$r.squared
+}
+```
+
+**$\Delta R^2$ for the full model:**
+
+```{r}
+delta_r2(lm(), m_1)
+```
+
+**$\Delta R^2$ for the blue collar vs. professional:**
+
+```{r}
+delta_r2(lm(), m_1)
+```
+
+**$\Delta R^2$ for the white collar vs. professional:**
+
+```{r}
+delta_r2(lm(), m_1)
+```
+
+### Contrast Coding
+
+We want to test a more specific hypothesis that Professional workers earn more than White Collar workers and Blue Collar workers. We expect no differences between White Collar and Blue Collar workers in terms of income. In other words, Professionals make more money than White and Blue Collar workers, while White and Blue Collar workers do not differ in their income. 
+
+**What contrasts are we testing?**
+
+> Your answer here.
+
+Let's manually create a unit-weighted contrast.
+```{r}
+data <- data |> 
+  mutate(
+
+  )
+```
+
+Fit our model
+```{r}
+m_2 <- lm()
+tidy(m_2)
+```
+
+We can also use the `matrix` function to create contrast coding
+```{r}
+our_contrasts <- matrix()
+
+our_contrasts
+contrasts(data$type) <- our_contrasts
+```
+
+Fit the model again. Are the results different?
+```{r}
+m_3 <- lm()
+tidy(m_3)
+```
+
+**How to test the main effect of type?**
+
+We compare it to a model that includes the covariate only!
+
+```{r}
+anova(lm(), m_3)
+```
+
+**Plotting**: Create a publication quality graph that depicts a bar graph representing mean income of different occupation types with standard error bars
+```{r}
+d_graph <- tibble(
+  type = ,
+  education = 
+)
+
+m_graph <- lm()
+
+preds <- predict(m_graph, d_graph, se.fit = TRUE) |> 
+  as_tibble() |> 
+  mutate(upper = fit + se.fit,
+         lower = fit - se.fit) |> 
+  bind_cols(d_graph)
+```
+
+```{r}
+ggplot()
+
+```
+
+``CHECKPOINT``
+
+## GLM
+
+**What type of data requires logistic regression?**
+
+> Your answer here.
+
+**What are odds? What is the formula to use to get from probabilities to odds?**
+
+Odds are generally defined as the ratio of an event occurring vs not occurring. So, if an event occurs with a probability of .5, the odds are even (1:1)
+
+.5 / (1 - .5) = 1
+
+If an event occurs with a probability of .33, then the odds of that event occurring are .33 / (1 - .33) \# .5 or 1:2 (rather low). That is, out of three times, the event is likely to happen once, so the odds are the 1 time it happens: the 2 times it doesn't, 1:2 or .5
+
+You don't need a formula to convert from odds to probabilities if you understand what they are! For instance, if a race horse has 3:2 odds of winning, we expect it to win 3 times for every 2 losses. In other words, it should win 3 out of 5 (3/5) races, or 60% of the time. It can be helpful when converting from odds to probability to map out the sample space of possible outcomes and their frequencies of occurrence, and then you just need to count.
+
+``EXCERCISE``
+
+**1.  What is the probability that an event has 3:1 odds of occurring?**
+
+> Your answer here.
+
+**2.  What are the odds that an event with 80% chance of occurring will occur?**
+
+> Your answer here.
+
+**3.  What is the probability that an event has an odds of 5?**
+
+> Your answer here.
+
+``CHECKPOINT``
+
+For questions 4, 5, and 6, refer to the following table:
+
+Table 1. A 2 x 2 design with a dichotomous outcome. Each cell has 12 participants. Note a value of x represents x/12 participants in that cell had an outcome score of 1 (all  other participants in that cell had a score of 0).
+
+|             | Group A | Group B |
+|-------------|---------|---------|
+| Condition 1 | 6       | 2       |
+| Condition 2 | 8       | 4       |
+
+**4. Calculate the probability that someone in Group A Condition 1 will have an outcome score of 1**
+
+> Your answer here.
+
+**5. Calculate the odds that someone in Group B Condition 1 will have an outcome score of 1**
+
+> Your answer here.
+
+**6. Calculate the probability someone in Group B will have an outcome score of 1 **
+
+> Your answer here.
+
+**7. Calculate the odds that someone in Group B will have an outcome score of 1**
+
+> Your answer here.
+
+**8. Calculate the odds ratio that someone in Group A, compared to Group B will have a score of 1.**
+
+> Your answer here.
+
+**9. Interpret the odds ratio you found in part 8**
+
+> Your answer here.
+
+--------
+
+Let's look at a more specific example.
+
+**First, clean your workspace!**
+
+Fitting a generalized linear model is straightforward.  You merely use the glm() function and specify a family with which you wish to model the error. You can also specify a link function by doing family = binomial("logit"), for example. However, the default link for the binomial family is the logit (log-odds), so the extra bit of typing is unnecessary.
+
+We'll be using the Cowles dataset from carData package. These data come from a study of the personality determinants of volunteering for psychological research.
+
+**extraversion**: scale from Eysenck personality inventory\
+**sex at birth**: a factor with two levels: female; male\
+**volunteer**: volunteering, a factor with levels: no; yes
+
+Read and inspect your data.
+```{r}
+data <- carData::Cowles |> 
+  glimpse()
+
+skim_without_charts(data)
+```
+
+Center our predictors.
+```{r}
+data <- data |> 
+  mutate(
+    sex_c = if_else(sex == "male", .5, -.5),
+    extraversion_m = extraversion - mean(extraversion)
+  )
+```
+
+We are interested in understanding the effect of extraversion and sex at birth on volunteering for psychological studies. Fit the model.
+```{r}
+m_1 <- glm()
+tidy(m_1)
+```
+
+Some exploration: The outcome `volunteer` is now coded as a factor. Let's transform it into a numeric variable of 0-1. Does the recoding change our results?
+```{r}
+data <- data |> 
+  mutate()
+```
+
+Refit the model!
+```{r}
+m_2 <- glm()
+tidy(m_2)
+```
+
+It appears that the results are the same. Why is that? The default of glm model is to take the lowest level (in this case, no volunteering) as 0.
+
+### Interpret the parameter estimates
+
+How do we interpret these parameter estimates? Each of our parameter estimates makes predictions on the log-odds scale instead of on the probability scale.
+
+Intercept: The log-odds of a person volunteering in a study when they are averaged on extraversion and are in hypothetically in between female and male. 
+
+What does that mean??? It's very hard to interpret!
+
+Instead, we can interpret our parameter estimates using the more interpretable odds scale. To do this, we need to "undo the log" by exponentiating each of the coefficients.
+
+estimated coefficient = log(odds)
+
+e^(estimated coefficient) = odds
+
+`exp(coef(m_1))` gives us e ^ b0 and e^ b1
+
+Intercept: The predicted odds of person volunteering in a study when they are averaged on extraversion and are in hypothetically in between female and male. In this case, these odds are `exp(coef(m_1)[1])`. To make this more interpretable, it probably makes most sense to convert this into a probability: `exp(coef(m_1)[1])/(1 + exp(coef(m_1)[1]))`
+
+For a person with a score of 0 on both predictors, there is a 41.56% probability of volunteering in a study.
+
+The other parameter estimates are odds ratios (now that we have converted them from log odds to odds). Odds ratios are ratios of two odds. The interpretation for an odds ratio is different from other parameters for effects we have discussed before:
+
+The odds increase by a factor of ... for a one unit increase in X.
+
+Effect of e1: Sex influences one's chance of volunteering in a study for someone of averaged extraversion
+exp(coef(m_1)[3])
+
+In this case, the odds of volunteering increase by a factor of 0.78 from females to males for someone of averaged extraversion.
+
+-----
+
+### Interpret the statistics
+
+R reports z tests of these parameters in the default tidy output.
+
+**What's the problem with a z test, and what's an alternative?**
+
+> Your answer here.
+
+likelihood ratio test on extraversion:
+```{r}
+compact <- 
+anova(compact, m_1)
+```
+
+### Interpreting the Graphs (Can skip if you're running out of time!!)
+
+Now let's see how the graph will change as our regression coefficients change. What do you observe?
+```{r}
+# simulate data
+d <- tibble(
+  x = -200:200,
+  "0" = exp(2 + x * 0),
+  "0.03" = exp(2 + x * 0.03),
+  "0.05" = exp(2 + x * 0.05),
+  "0.08" = exp(2 + x * 0.08)
+) |> 
+  pivot_longer(!x, names_to = "coefficient", values_to = "y")
+
+# plots
+ggplot(d, aes(x = x, y = y / (1 + y), color = coefficient)) +
+  geom_line() +
+  labs(y = "probability")
+```
+
+Larger coefficients lead to steeper slopes, meaning that the probability of y = 1 changes more quickly as x increases.
+
+What if we get negative regression coefficients?
+```{r}
+# simulate data
+d <- tibble(
+  x = -200:200,
+  "0" = exp(2 + x * 0),
+  "-0.03" = exp(2 + x * -0.03),
+  "-0.05" = exp(2 + x * -0.05),
+  "-0.08" = exp(2 + x * -0.08)
+) |> 
+  pivot_longer(!x, names_to = "coefficient", values_to = "y")
+
+# plots
+ggplot(d, aes(x = x, y = y / (1 + y), color = coefficient)) +
+  geom_line() +
+  labs(y = "probability")
+```
+
+Again, larger absolute value in coefficients lead to steeper slopes. The probability of y = 1 drops now more quickly as x increases.
+
+### Plotting Exercise
+
+Create a publication quality graph where you depict the probability of volunteering as extraversion changes for each sex.
+
+```{r}
+
+m_graph <- glm()
+
+d_graph <- expand.grid(
+  sex = 
+  extraversion = 
+)
+
+preds <- predict(m_graph, newdata = d_graph, se.fit = TRUE) |> 
+  as_tibble() |> 
+  mutate(
+
+  ) |> 
+  bind_cols(d_graph)
+
+ggplot()
+
+```
+
+**Congratulations on finishing your last lab:D!!**
