@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>web4_application_assignments</title>
+<title>Application Assignments – Introduction to the General Linear Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,31 +23,225 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="web4_application_assignments_files/libs/clipboard/clipboard.min.js"></script>
-<script src="web4_application_assignments_files/libs/quarto-html/quarto.js"></script>
-<script src="web4_application_assignments_files/libs/quarto-html/popper.min.js"></script>
-<script src="web4_application_assignments_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="web4_application_assignments_files/libs/quarto-html/anchor.min.js"></script>
-<link href="web4_application_assignments_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="web4_application_assignments_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="web4_application_assignments_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="web4_application_assignments_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="web4_application_assignments_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./web5_labs.html" rel="next">
+<link href="./web3_required_readings.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
 
+<link rel="stylesheet" href="book.css">
 </head>
 
-<body class="fullcontent">
+<body class="nav-sidebar floating">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./web4_application_assignments.html">Application Assignments</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to the General Linear Model</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/jjcurtin/book_glm" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Syllabus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./web2_slide_decks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Slide Decks</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./web3_required_readings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Readings</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./web4_application_assignments.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Application Assignments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./web5_labs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab Materials</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./web6_exams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exams</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./web7_videos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Video Recordings from Lab and Lecture</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app1_exam_review.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exam Concepts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app2_terminology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Key Terminology and Concepts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app3_contrasts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Monte Carlo Simulation of Contrast Approaches</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./app4_logistic_se.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exploring SEs for Logistic Regression</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#week-01-due-wednesday-911-at-130-pm" id="toc-week-01-due-wednesday-911-at-130-pm" class="nav-link active" data-scroll-target="#week-01-due-wednesday-911-at-130-pm">Week 01: Due Wednesday, 9/11 at 1:30 pm</a></li>
+  <li><a href="#week-02-due-wednesday-0918-at-130-pm" id="toc-week-02-due-wednesday-0918-at-130-pm" class="nav-link" data-scroll-target="#week-02-due-wednesday-0918-at-130-pm">Week 02: Due Wednesday, 09/18 at 1:30 pm</a></li>
+  <li><a href="#week-03-due-friday-0927-at-830-am" id="toc-week-03-due-friday-0927-at-830-am" class="nav-link" data-scroll-target="#week-03-due-friday-0927-at-830-am">Week 03: Due Friday, 09/27 at 8:30 am</a></li>
+  <li><a href="#week-04-due-friday-1004-at-830-am" id="toc-week-04-due-friday-1004-at-830-am" class="nav-link" data-scroll-target="#week-04-due-friday-1004-at-830-am">Week 04: Due Friday, 10/04 at 8:30 am</a></li>
+  <li><a href="#week-05-no-application-assignment.-application-exam-week" id="toc-week-05-no-application-assignment.-application-exam-week" class="nav-link" data-scroll-target="#week-05-no-application-assignment.-application-exam-week">Week 05: No application assignment. Application exam week!</a></li>
+  <li><a href="#week-06-due-friday-1018-at-830-am" id="toc-week-06-due-friday-1018-at-830-am" class="nav-link" data-scroll-target="#week-06-due-friday-1018-at-830-am">Week 06: Due Friday, 10/18 at 8:30 am</a></li>
+  <li><a href="#week-07-due-friday-1025-at-830-am" id="toc-week-07-due-friday-1025-at-830-am" class="nav-link" data-scroll-target="#week-07-due-friday-1025-at-830-am">Week 07: Due Friday, 10/25 at 8:30 am</a></li>
+  <li><a href="#week-08-due-friday-1101-at-830-am" id="toc-week-08-due-friday-1101-at-830-am" class="nav-link" data-scroll-target="#week-08-due-friday-1101-at-830-am">Week 08: Due Friday, 11/01 at 8:30 am</a></li>
+  <li><a href="#week-09-due-friday-1108-at-830-am" id="toc-week-09-due-friday-1108-at-830-am" class="nav-link" data-scroll-target="#week-09-due-friday-1108-at-830-am">Week 09: Due Friday, 11/08 at 8:30 am</a></li>
+  <li><a href="#week-10-no-application-assignnment.-application-exam-week" id="toc-week-10-no-application-assignnment.-application-exam-week" class="nav-link" data-scroll-target="#week-10-no-application-assignnment.-application-exam-week">Week 10: No application assignnment. Application exam week!</a></li>
+  <li><a href="#week-11-due-friday-1122-at-830-am" id="toc-week-11-due-friday-1122-at-830-am" class="nav-link" data-scroll-target="#week-11-due-friday-1122-at-830-am">Week 11: Due Friday, 11/22 at 8:30 am</a></li>
+  <li><a href="#week-12-due-friday-1129-at-830-am" id="toc-week-12-due-friday-1129-at-830-am" class="nav-link" data-scroll-target="#week-12-due-friday-1129-at-830-am">Week 12: Due Friday 11/29 at 8:30 am</a></li>
+  <li><a href="#week-13-no-application-assignment.-thanksgiving-break" id="toc-week-13-no-application-assignment.-thanksgiving-break" class="nav-link" data-scroll-target="#week-13-no-application-assignment.-thanksgiving-break">Week 13: No application assignment. Thanksgiving Break</a></li>
+  <li><a href="#week-14-due-friday-1213-at-830-am" id="toc-week-14-due-friday-1213-at-830-am" class="nav-link" data-scroll-target="#week-14-due-friday-1213-at-830-am">Week 14: Due Friday 12/13 at 8:30 am</a></li>
+  <li><a href="#week-15-no-application-assignment.-application-exam-week" id="toc-week-15-no-application-assignment.-application-exam-week" class="nav-link" data-scroll-target="#week-15-no-application-assignment.-application-exam-week">Week 15: No application assignment. Application exam week!</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/web4_application_assignments.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+    </div>
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Application Assignments</h1>
+</div>
 
 
 
-<section id="application-assignments" class="level1 unnumbered">
-<h1 class="unnumbered">Application Assignments</h1>
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
 <section id="week-01-due-wednesday-911-at-130-pm" class="level2">
 <h2 class="anchored" data-anchor-id="week-01-due-wednesday-911-at-130-pm">Week 01: Due Wednesday, 9/11 at 1:30 pm</h2>
 <ul>
@@ -147,11 +341,11 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="week-15-no-application-assignment.-application-exam-week" class="level2">
 <h2 class="anchored" data-anchor-id="week-15-no-application-assignment.-application-exam-week">Week 15: No application assignment. Application exam week!</h2>
-</section>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -244,7 +438,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/github\.io\/jjcurtin\/book_glm");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -572,9 +766,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./web3_required_readings.html" class="pagination-link" aria-label="Readings">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Readings</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./web5_labs.html" class="pagination-link" aria-label="Lab Materials">
+        <span class="nav-page-text">Lab Materials</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/web4_application_assignments.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
