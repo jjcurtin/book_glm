@@ -57,6 +57,7 @@
 
 - [shell](/homework/week_11/hw_11_shell.qmd)
 - [data](/homework/data/hw_11_data.csv)
+- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw_11_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw_11_key.qmd)
 
 ## Week 12: Due Friday 11/29 at 8:30 am
 
