@@ -150,7 +150,7 @@ $\text{df}_{num}$ and $\text{df}_{dem}$ are numerator and denominator degrees of
 
 --------------------------------------------------------------------------------
 
-## Cohen (1992) Rules of Thumb for $\eta_p^2$
+## Cohen (1992) Rules of Thumb for partial eta-squared 
 
 The values of $\eta_p^2$ that Cohen implicitly defines as small, medium, and large vary across research context/statistical test.  
 
