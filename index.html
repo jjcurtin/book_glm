@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="John J. Curtin, PhD">
 
-<title>Introduction to the General Linear Model</title>
+<title>web4_application_assignments</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,578 +23,135 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./web2_slide_decks.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
-  }
-}</script>
+<script src="web4_application_assignments_files/libs/clipboard/clipboard.min.js"></script>
+<script src="web4_application_assignments_files/libs/quarto-html/quarto.js"></script>
+<script src="web4_application_assignments_files/libs/quarto-html/popper.min.js"></script>
+<script src="web4_application_assignments_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="web4_application_assignments_files/libs/quarto-html/anchor.min.js"></script>
+<link href="web4_application_assignments_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="web4_application_assignments_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="web4_application_assignments_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="web4_application_assignments_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="web4_application_assignments_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="book.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="fullcontent">
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Course Syllabus</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
-<!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">Introduction to the General Linear Model</a> 
-        <div class="sidebar-tools-main">
-    <a href="https://github.com/jjcurtin/book_glm" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
-  <div class="quarto-reader-toggle-btn">
-  <i class="bi"></i>
-  </div>
-</a>
-</div>
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Course Syllabus</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./web2_slide_decks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Slide Decks</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./web3_required_readings.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Readings</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./web4_application_assignments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Application Assignments</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./web5_labs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Lab Materials</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./web6_exams.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exams</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./web7_videos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Video Recordings from Lab and Lecture</span></a>
-  </div>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./app1_exam_review.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exam Concepts</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./app2_terminology.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Key Terminology and Concepts</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./app3_contrasts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Monte Carlo Simulation of Contrast Approaches</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./app4_logistic_se.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exploring SEs for Logistic Regression</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#course-syllabus" id="toc-course-syllabus" class="nav-link active" data-scroll-target="#course-syllabus">Course Syllabus</a>
-  <ul class="collapse">
-  <li><a href="#course-designations-and-attributes" id="toc-course-designations-and-attributes" class="nav-link" data-scroll-target="#course-designations-and-attributes">Course Designations And Attributes</a></li>
-  <li><a href="#meeting-time-and-location" id="toc-meeting-time-and-location" class="nav-link" data-scroll-target="#meeting-time-and-location">Meeting Time And Location</a></li>
-  <li><a href="#instructor" id="toc-instructor" class="nav-link" data-scroll-target="#instructor">Instructor</a></li>
-  <li><a href="#teaching-assistants" id="toc-teaching-assistants" class="nav-link" data-scroll-target="#teaching-assistants">Teaching Assistants</a></li>
-  <li><a href="#communications" id="toc-communications" class="nav-link" data-scroll-target="#communications">Communications</a></li>
-  <li><a href="#course-description" id="toc-course-description" class="nav-link" data-scroll-target="#course-description">Course Description</a></li>
-  <li><a href="#course-goals" id="toc-course-goals" class="nav-link" data-scroll-target="#course-goals">Course Goals</a></li>
-  <li><a href="#course-learning-outcomes" id="toc-course-learning-outcomes" class="nav-link" data-scroll-target="#course-learning-outcomes">Course Learning Outcomes</a></li>
-  <li><a href="#course-requirements-and-grades" id="toc-course-requirements-and-grades" class="nav-link" data-scroll-target="#course-requirements-and-grades">Course Requirements And Grades</a></li>
-  <li><a href="#required-texts" id="toc-required-texts" class="nav-link" data-scroll-target="#required-texts">Required Texts</a></li>
-  <li><a href="#additional-required-readings" id="toc-additional-required-readings" class="nav-link" data-scroll-target="#additional-required-readings">Additional Required Readings</a></li>
-  <li><a href="#required-software" id="toc-required-software" class="nav-link" data-scroll-target="#required-software">Required Software</a></li>
-  <li><a href="#course-schedule" id="toc-course-schedule" class="nav-link" data-scroll-target="#course-schedule">Course Schedule</a></li>
-  <li><a href="#recommended-general-texts-for-data-analysis-and-research-methodology" id="toc-recommended-general-texts-for-data-analysis-and-research-methodology" class="nav-link" data-scroll-target="#recommended-general-texts-for-data-analysis-and-research-methodology">Recommended General Texts For Data Analysis And Research Methodology</a></li>
-  <li><a href="#ethics-of-being-a-student-in-the-department-of-psychology" id="toc-ethics-of-being-a-student-in-the-department-of-psychology" class="nav-link" data-scroll-target="#ethics-of-being-a-student-in-the-department-of-psychology">Ethics of Being a Student in the Department of Psychology</a></li>
-  <li><a href="#academic-integrity" id="toc-academic-integrity" class="nav-link" data-scroll-target="#academic-integrity">Academic Integrity</a></li>
-  <li><a href="#chatgpt-and-other-llms" id="toc-chatgpt-and-other-llms" class="nav-link" data-scroll-target="#chatgpt-and-other-llms">ChatGPT and other LLMs</a></li>
-  <li><a href="#diversity-inclusion" id="toc-diversity-inclusion" class="nav-link" data-scroll-target="#diversity-inclusion">Diversity &amp; Inclusion</a></li>
-  <li><a href="#complaints" id="toc-complaints" class="nav-link" data-scroll-target="#complaints">Complaints</a></li>
-  <li><a href="#concerns-about-sexual-misconduct" id="toc-concerns-about-sexual-misconduct" class="nav-link" data-scroll-target="#concerns-about-sexual-misconduct">Concerns About Sexual Misconduct</a></li>
-  </ul></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
-    </div>
-<!-- main -->
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Introduction to the General Linear Model</h1>
-</div>
 
 
 
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>John J. Curtin, PhD </p>
-          </div>
-  </div>
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="course-syllabus" class="level1 unnumbered">
-<h1 class="unnumbered">Course Syllabus</h1>
-<section id="course-designations-and-attributes" class="level2">
-<h2 class="anchored" data-anchor-id="course-designations-and-attributes">Course Designations And Attributes</h2>
+<section id="application-assignments" class="level1 unnumbered">
+<h1 class="unnumbered">Application Assignments</h1>
+<section id="week-01-due-wednesday-911-at-130-pm" class="level2">
+<h2 class="anchored" data-anchor-id="week-01-due-wednesday-911-at-130-pm">Week 01: Due Wednesday, 9/11 at 1:30 pm</h2>
 <ul>
-<li><strong>Course Website</strong>: <a href="https://jjcurtin.github.io/book_glm/">https://jjcurtin.github.io/book_glm/</a></li>
-<li><strong>Credits</strong>: 4</li>
-<li><strong>Level</strong>: Advanced</li>
-<li><strong>Breadth</strong>: Social Science</li>
-<li><strong>L&amp;S</strong> Credit Type: Counts as LAS credit (L&amp;S)</li>
-<li><strong>Instructional</strong> Mode: All face-to-face</li>
-<li><strong>How Credit Hours are met by the Course</strong>: Four and ½ hours of classroom or direct faculty/instructor instruction and a minimum of eight hours of out of class student work each week over approximately 14 weeks.</li>
-<li><strong>Requisites</strong>: None</li>
+<li><a href="./homework/week_01/hw_01.pdf">instructions</a></li>
+<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw1_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw1_key.qmd">qmd</a></li>
 </ul>
 </section>
-<section id="meeting-time-and-location" class="level2">
-<h2 class="anchored" data-anchor-id="meeting-time-and-location">Meeting Time And Location</h2>
+<section id="week-02-due-wednesday-0918-at-130-pm" class="level2">
+<h2 class="anchored" data-anchor-id="week-02-due-wednesday-0918-at-130-pm">Week 02: Due Wednesday, 09/18 at 1:30 pm</h2>
 <ul>
-<li><strong>Lecture</strong>: Monday and Wednesday, 2:30-3:45 pm; Psychology 103</li>
-<li><strong>Labs</strong>:
-<ul>
-<li>Friday 9:00-11:00 am (section 301, room 228; Punturieri)</li>
-<li>Friday 1:30-3:30 pm (section 302, room 228; Yu)</li>
-<li>Friday 9:00-11:00 am (section 303, room 311i; Dong)</li>
-</ul></li>
+<li><a href="homework/week_02/hw_02_shell.qmd">shell</a></li>
+<li><a href="homework/data/hw_02_data.csv">data</a></li>
+<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw2_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw2_key.qmd">qmd</a></li>
 </ul>
 </section>
-<section id="instructor" class="level2">
-<h2 class="anchored" data-anchor-id="instructor">Instructor</h2>
+<section id="week-03-due-friday-0927-at-830-am" class="level2">
+<h2 class="anchored" data-anchor-id="week-03-due-friday-0927-at-830-am">Week 03: Due Friday, 09/27 at 8:30 am</h2>
 <ul>
-<li>John J. Curtin, Ph.D.</li>
-<li>Office hours: Room 326, Wednesdays, 3:45 - 4:45 pm or by appt.</li>
+<li><a href="./homework/week_03/ggplot2_cheatsheet.pdf">ggplot cheatsheet</a></li>
+<li><a href="./homework/week_03/hw_03_shell.qmd">shell</a></li>
+<li><a href="./homework/data/hw_03_data.csv">data</a></li>
+<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw3_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw3_key.qmd">qmd</a></li>
 </ul>
 </section>
-<section id="teaching-assistants" class="level2">
-<h2 class="anchored" data-anchor-id="teaching-assistants">Teaching Assistants</h2>
+<section id="week-04-due-friday-1004-at-830-am" class="level2">
+<h2 class="anchored" data-anchor-id="week-04-due-friday-1004-at-830-am">Week 04: Due Friday, 10/04 at 8:30 am</h2>
 <ul>
-<li>LiChen Dong; Office hours: Room 626, Mondays, 11 - 12 pm</li>
-<li>Claire Punturieri; Office hours: Room 325, Thursdays, 8:30 - 9:30 am</li>
-<li>Coco Yu; Office hours: Room 325, Tuesdays, 1 - 2 pm</li>
+<li><a href="./homework/week_04/hw_04_shell.qmd">shell</a></li>
+<li><a href="./homework/data/hw_04_data.csv">data</a></li>
+<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw4_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw4_key.qmd">qmd</a></li>
 </ul>
 </section>
-<section id="communications" class="level2">
-<h2 class="anchored" data-anchor-id="communications">Communications</h2>
-<p>All course communications will occur in the course’s Slack workspace. You should have received an invitation to join the workspace. If you have difficulty joining, please let me know immediately. The TAs and I will respond to all Slack messages within 1 business day (and often much quicker). Please plan accordingly (e.g., weekend messages may not receive a response until Monday). For general questions about class, coding assignments, etc., please post the question to the appropriate public channel. If you have the question, you are probably not alone. For issues relevant only to you (e.g., class absences, accommodations, etc.), you can send a direct message in Slack to me and the TAs. If you DM only me, I will share the DM with the TAs unless you request otherwise. Therefore, it is generally best if you include all three TAs on the DM when you start the thread. In general, we prefer that all course communication occur within Slack rather than by email so that it is centralized in one location.</p>
+<section id="week-05-no-application-assignment.-application-exam-week" class="level2">
+<h2 class="anchored" data-anchor-id="week-05-no-application-assignment.-application-exam-week">Week 05: No application assignment. Application exam week!</h2>
 </section>
-<section id="course-description" class="level2">
-<h2 class="anchored" data-anchor-id="course-description">Course Description</h2>
-<p>One-sample t-test, independent-samples t-test, simple and multiple regression, effect size indicators, analysis of variance (ANOVA), analysis of covariance (ANCOVA), case analysis, model assumptions, transformations, and the generalized linear model</p>
-</section>
-<section id="course-goals" class="level2">
-<h2 class="anchored" data-anchor-id="course-goals">Course Goals</h2>
-<p>The goal of this course is to familiarize you with a statistical data analysis procedure called the general linear model. We will spend most of the semester on the use of the general linear model as a tool for analyzing data from psychological experiments. We will give special attention to the interpretation of model parameter estimates, models with quantitative and categorical predictors, and the interpretation of interaction effects in the general linear model. We will be using the statistics software R (http://www.r-project.org/). Please know that extensive work outside the classroom is required in order to succeed in this class. You are encouraged to participate actively in the class, both the lecture and the lab session.</p>
-</section>
-<section id="course-learning-outcomes" class="level2">
-<h2 class="anchored" data-anchor-id="course-learning-outcomes">Course Learning Outcomes</h2>
-<p>By the end of the course, the students should master the following data-analytic techniques and skills:</p>
+<section id="week-06-due-friday-1018-at-830-am" class="level2">
+<h2 class="anchored" data-anchor-id="week-06-due-friday-1018-at-830-am">Week 06: Due Friday, 10/18 at 8:30 am</h2>
 <ul>
-<li>Inferences about a single mean (t-test)</li>
-<li>The analysis of single and multiple dichotomous/categorical predictors</li>
-<li>The analysis of single and multiple quantitative predictors</li>
-<li>The analysis of interactions among predictors</li>
-<li>The analysis of contrasts among levels of categorical predictors</li>
-<li>The use of centering predictors in interactive models</li>
-<li>Assessment and remediation techniques for case analysis and model assumptions</li>
-<li>Logistic regression as exemplar of the generalized linear model</li>
-<li>Generating publication-level graphs</li>
+<li><a href="./homework/week_06/hw_06_shell.qmd">shell</a></li>
+<li><a href="./homework/data/hw_06_data.csv">data</a></li>
+<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw6_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw6_key.qmd">qmd</a></li>
 </ul>
 </section>
-<section id="course-requirements-and-grades" class="level2">
-<h2 class="anchored" data-anchor-id="course-requirements-and-grades">Course Requirements And Grades</h2>
-<p>Course requirements include regular attendance, active participation in class discussion, and completion of all exams and application assignments.</p>
-<p>There will be two closed-book concepts exams completed in class to assess conceptual knowledge and three application exams completed outside of class to assess your ability to implement your conceptual knowledge with real data (each of these 5 exams counts for 15% of your total grade). The first concepts exam is scheduled for Wednesday, 10/23. The second concepts exam is scheduled during the exam period on Wednesday, December 18 from 8:15 - 9:45 am (room TBD). Please plan your end of semester travel accordingly. The application exams will be assigned at the end of weeks 5 (Friday 10/4), 10 (Friday 11/8), and 15 (Wednesday 12/11).</p>
-<p>There will also be approximately weekly application assignments, which will involve hands-on application of the material similar to (but shorter than) the application exams. They are assigned Fridays at 5 pm and are due the following Friday at 8:30 am. These application assignments are graded on a pass/fail basis, and together constitute 20% of your total grade.</p>
-<p>Finally, 5% of your grade will be determined by your attendance and participation in lecture and lab.</p>
-<p>Final letter grades are based on total course percentages as follows:</p>
+<section id="week-07-due-friday-1025-at-830-am" class="level2">
+<h2 class="anchored" data-anchor-id="week-07-due-friday-1025-at-830-am">Week 07: Due Friday, 10/25 at 8:30 am</h2>
 <ul>
-<li>A: 93 or above</li>
-<li>AB: 88 - 92</li>
-<li>B: 83 - 87</li>
-<li>BC: 78 - 82</li>
-<li>C: 70 - 77</li>
-<li>D: 60-69</li>
-<li>F: &lt; 60</li>
+<li><a href="./homework/week_07/hw_07_shell.qmd">shell</a></li>
+<li><a href="./homework/data/hw_07_iq">iq data</a></li>
+<li><a href="./homework/data/hw_07_brain">brain data</a></li>
+<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw_07_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw_07_key.qmd">qmd</a></li>
 </ul>
 </section>
-<section id="required-texts" class="level2">
-<h2 class="anchored" data-anchor-id="required-texts">Required Texts</h2>
-<p>Judd, C.M., McClelland, G. H., &amp; Ryan, C. (2017). Data Analysis: A Model- Comparison Approach. 3rd Edition. New York, US: Routledge. ISBN: 9780805833881.</p>
-</section>
-<section id="additional-required-readings" class="level2">
-<h2 class="anchored" data-anchor-id="additional-required-readings">Additional Required Readings</h2>
-<p>Additional required readings will be provided as pdfs on the course website. The readings are pulled from various texts and primary sources. Supplemental readings and recommended reference texts are also provided on the course website and the end of this document. You are expected to read only the required readings. You will not be tested on the other readings.</p>
-</section>
-<section id="required-software" class="level2">
-<h2 class="anchored" data-anchor-id="required-software">Required Software</h2>
-<p>This course will contain a significant applied component. As such, access to statistical analysis software is required. In the context of this course, we will rely heavily on <a href="http://www.r-project.org/">R</a>. R is freely available and is rapidly becoming the standard for statistical analysis in many disciplines.</p>
-<p>A secondary goal of the course will be to provide you with introductory data wrangling skills in R within the <a href="https://www.tidyverse.org/">Tidyverse</a> ecosystem of packages. The Tidyverse is “an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.” It is arguably the dominant approach for data science in R today.</p>
-</section>
-<section id="course-schedule" class="level2">
-<h2 class="anchored" data-anchor-id="course-schedule">Course Schedule</h2>
-<p>This schedule is provisional so that we may adjust our rate of progress as necessary to ensure maximal mastery of the material. See course website for the most up to date version of the assigned readings and topics.</p>
-<ol type="1">
-<li>Introduction to inferential statistics (1 day)</li>
-</ol>
+<section id="week-08-due-friday-1101-at-830-am" class="level2">
+<h2 class="anchored" data-anchor-id="week-08-due-friday-1101-at-830-am">Week 08: Due Friday, 11/01 at 8:30 am</h2>
 <ul>
-<li>introduction to the course</li>
-<li>the GLM framework</li>
-<li>data exploration in R (descriptive statistics, visual displays) (lab only)</li>
-</ul>
-<ol start="2" type="1">
-<li>Sampling Distributions (1 day)</li>
-</ol>
-<ul>
-<li>standard deviation, standard error of the mean</li>
-<li>theory of null hypothesis significance testing</li>
-</ul>
-<ol start="3" type="1">
-<li>Inferences about a single mean (one-sample t test) (1 day)</li>
-</ol>
-<ul>
-<li>the null model (<span class="math inline">\(Y = b_{0}\)</span>)</li>
-<li>sum of squares, number of estimated parameters, residuals, etc.</li>
-<li>the basic model (<span class="math inline">\(Y = b_{0}\)</span>)</li>
-<li>statistical inference (comparison of basic model with null model, computation of t, interpretation of p)</li>
-<li>writing up the results (text, graphs, tables) of a one-sample t test</li>
-</ul>
-<ol start="4" type="1">
-<li>Inferences about a single quantitative predictor (simple regression) (2 days)</li>
-</ol>
-<ul>
-<li>the model : <span class="math inline">\(Y = b_0 + b_{1}X_{1}\)</span> when <span class="math inline">\(X_{1}\)</span> is quantitative</li>
-<li>computation of residuals, meaning of residuals</li>
-<li>graphic representation: intercept, slope, residuals</li>
-<li>statistical inference (comparison of the new model with the basic model, computation of t and F, interpretation of p)</li>
-<li>proportion of variance explained, computation of <span class="math inline">\(R^{2}\)</span>, interpretation of <span class="math inline">\(R^{2}\)</span>, effect sizes</li>
-<li>running a simple regression in R and interpreting the R output</li>
-<li>writing up the results (text, graphs, tables) of a simple regression analysis</li>
-</ul>
-<ol start="5" type="1">
-<li>Inferences about a single dichotomous predictor (independent-samples t test) (1 day)</li>
-</ol>
-<ul>
-<li>the model: <span class="math inline">\(Y = b_{0} + b_{1}X_{1}\)</span> when <span class="math inline">\(X_{1}\)</span> is dichotomous</li>
-<li>computation of residuals, meaning of residuals (= within-group variance)</li>
-<li>graphic representation: intercept, slope, residuals; comparison with bar graph</li>
-<li>statistical inference (comparison of the new model with the basic model, computation of t and F, interpretation of p)</li>
-<li>running an independent-samples t test in R (using the <code>lm()</code> function in R) and interpreting the R output</li>
-<li>writing up the results (text, graphs, tables) of an independent-samples t test</li>
-</ul>
-<ol start="6" type="1">
-<li>Inferences about two (or more) predictors (multiple regression without interaction) (4 days)</li>
-</ol>
-<ul>
-<li>the model: <span class="math inline">\(Y = b_{0} + b_{1}X_{1} + b_{2}X_{2}\)</span> when <span class="math inline">\(X_{1}\)</span> is dichotomous and <span class="math inline">\(X_{2}\)</span> is quantitative</li>
-<li>the model: <span class="math inline">\(Y = b_{0} + b_{1}X_{1} + b_{2}X_{2}\)</span> when <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span> are both quantitative</li>
-<li>computation of residuals, meaning of residuals</li>
-<li>graphic representation: two lines, intercepts, slopes, residuals</li>
-<li>statistical inference (model comparison, interpretation of the effect of one variable on DV while controlling for the effects of another variable)</li>
-<li>computation of partial r, interpretation of partial r</li>
-<li>different theoretical predictions that can be answered by multiple regression analyses that do not contain interactions</li>
-<li>models with 3, 4, 5, etc. predictors</li>
-<li>issues of collinearity, variance inflation, tolerance</li>
-<li>data fishing, overfitting, hierarchical vs.&nbsp;stepwise vs.&nbsp;simultaneous models</li>
-<li>raw vs.&nbsp;standardized coefficients, partial r</li>
-<li>writing up the results of a multiple regression analysis</li>
-</ul>
-<ol start="7" type="1">
-<li>Dealing with messy data I – case analysis (1 day)</li>
-</ol>
-<ul>
-<li>the different ways of being an outlier</li>
-<li>outlier statistics: levers <span class="math inline">\(h_{ij}\)</span>, studentized deleted residuals, Cook’s D</li>
-<li>dealing with outliers</li>
-</ul>
-<ol start="8" type="1">
-<li>Dealing with messy data II – model assumptions (1 day)</li>
-</ol>
-<ul>
-<li>the 5 assumptions of the GLM: exact X, independence, normality, constant variance, and linearity</li>
-<li>data exploration in R (visual displays: residual plots, normal quantile plots, density plots, spread-level plots, etc.)</li>
-<li>statistical indicators: ncv test, gvlma test</li>
-<li>first remedies: heteroscedasticity-corrected standard errors, weighted least squares</li>
-</ul>
-<ol start="9" type="1">
-<li>Dealing with messy data III – transformations (1 day)</li>
-</ol>
-<ul>
-<li>How to address violations of GLM model assumptions: power transformations, root transformations, how to find the best transformations</li>
-<li>how to analyze proportions and correlations as data</li>
-</ul>
-<ol start="10" type="1">
-<li>Inferences about two predictors and their interaction (= moderation) (1 day)</li>
-</ol>
-<ul>
-<li>centering variables: mean deviation form, contrast codes</li>
-<li>the model: <span class="math inline">\(Y = b_{0} + b_{1}X_{1}c + b_{2}X_{2}c + b_{3}(X_{1}c * X_{2}c\)</span>) when <span class="math inline">\(X_{1}\)</span> is dichotomous, <span class="math inline">\(X_{2}\)</span> is quantitative and both predictors are centered]</li>
-<li>graphic representation: different slopes for different folks, <span class="math inline">\(b_{3}\)</span> tests the difference between the two slopes</li>
-<li>what happens if variables are not centered?</li>
-<li>interpretation of an interaction</li>
-<li>writing up the results of a multiple regression analysis with an interaction</li>
-</ul>
-<ol start="11" type="1">
-<li>Inferences about two quantitative predictors and their interaction (1 day)</li>
-</ol>
-<ul>
-<li>the model: <span class="math inline">\(Y = b_{0} + b_{1}X_{1}c + b_{2}X_{2}c + b_{3}(X_{1}c * X_{2}c\)</span>) when <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span> are both quantitative</li>
-<li>interpretation of an interaction between two quantitative predictors</li>
-<li>the pitfalls of dichotomization II: imaginary interaction effects</li>
-</ul>
-<ol start="12" type="1">
-<li>Inferences about two dichotomous predictors and their interaction (= 2 x 2 ANOVA) (1 day)</li>
-</ol>
-<ul>
-<li>the model: <span class="math inline">\(Y = b_{0} + b_{1}X_{1}c + b_{2}X_{2}c + b_{3}(X_{1}c * X_{2}c\)</span>) when <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span> are both dichotomous</li>
-<li>difference between main effects and simple effects</li>
-<li>interpretation of interactions in 2 x 2 ANOVAs (Rosnow &amp; Rosenthal)</li>
-<li>comparison of the GLM terminology and the ANOVA terminology</li>
-<li>the pitfalls of dichotomization I: loss of power, biased estimates</li>
-<li>writing up the results of a 2 x 2 ANOVA</li>
-</ul>
-<ol start="13" type="1">
-<li>Inferences about three predictors and one interaction (= ANCOVA) (1 day)</li>
-</ol>
-<ul>
-<li>the model: <span class="math inline">\(Y = b_{0} + b_{1}X_{1}c + b_{2}X_{2}c + b_{3}(X_{1}c * X_{2}c) + b_{4}X_{3}\)</span> when <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span> are both dichotomous and <span class="math inline">\(X_{3}\)</span> is quantitative</li>
-<li>interpretation of <span class="math inline">\(b_{3}\)</span></li>
-<li>generalization to other models (e.g., the covariate is dichotomous, one of the predictors is quantitative)</li>
-<li>appropriate and “inappropriate” uses of ANCOVA</li>
-<li>writing up the results of an ANCOVA</li>
-</ul>
-<ol start="14" type="1">
-<li>Statistical power and power analysis (2 day)</li>
-</ol>
-<ul>
-<li>type I and type II errors</li>
-<li>factors determining statistical power</li>
-<li>how to compute power</li>
-<li>positive predictive value</li>
-<li>Readings: Button et al.&nbsp;(2013). Cohen (1992).</li>
-</ul>
-<ol start="15" type="1">
-<li>Inferences about categorical predictors with three or more levels (2 days)</li>
-</ol>
-<ul>
-<li>orthogonal and non-orthogonal contrasts</li>
-<li>comparing several experimental groups to one reference group (dummy codes)</li>
-<li>test-wise error rate vs.&nbsp;family-wise error rate</li>
-<li>Fisher LSD Protected Testing for two or three planned comparisons</li>
-<li>Holm-Bonferroni Adjustment for four or more planned comparisons</li>
-<li>Scheffé Approach for unplanned comparisons</li>
-<li>Readings: Abelson &amp; Prentice (1997). Guggenmos et al.&nbsp;(2018).</li>
+<li><a href="./homework/week_08/hw_08_shell.qmd">shell</a></li>
+<li><a href="./homework/data/hw_08_data.csv">data</a></li>
+<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw_08_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw_08_key.qmd">qmd</a></li>
 </ul>
 </section>
-<section id="recommended-general-texts-for-data-analysis-and-research-methodology" class="level2">
-<h2 class="anchored" data-anchor-id="recommended-general-texts-for-data-analysis-and-research-methodology">Recommended General Texts For Data Analysis And Research Methodology</h2>
+<section id="week-09-due-friday-1108-at-830-am" class="level2">
+<h2 class="anchored" data-anchor-id="week-09-due-friday-1108-at-830-am">Week 09: Due Friday, 11/08 at 8:30 am</h2>
 <ul>
-<li>Abelson, R. P. (1995). Statistics as Principled Argument. Hillsdale, NJ: Lawrence Erlbaum Associates.</li>
-<li>Aiken, L. S., &amp; West, S. G. (1991). Multiple Regression: Testing and Interpreting Interactions. Newbury Park, CA.: Sage.</li>
-<li>Chambers, J (2008). Software for Data Analysis: Programming with R. New York: Springer Science Business Media.</li>
-<li>Cook, T. D., &amp; Campbell, D. T. (1979). Quasi-Experimentation - Design and Analysis Issues for Field Settings. Boston, MA: Houghton Mifflin Company.</li>
-<li>Cohen, J., Cohen, P., West, S. G., &amp; Aiken,, L. S. (2003). Applied Multiple Regression/Correlation Analysis for the Behavioral Sciences (3rd. Ed.). Mahwah, NJ: Lawrence Erlbaum Associates.</li>
-<li>Dalgaard, P. (2008) Introductory Statistics with R (2nd edition). New York: Springer Science Business Media.</li>
-<li>Fox, J. (2015). Applied Regression, Generalized Linear Models, and Related Methods, Third Edition. Sage Publications.</li>
-<li>Fox, J., &amp; Weisberg, S. (2010). An R Companion to Applied Regression (3rd Edition). Sage Publications.</li>
-<li>Hayes, A. F. (2013). Introduction to mediation, moderation, and conditional process analysis; A regression-based approach (3rd edition). NY, US: Guilford Press.</li>
-<li>Healy, K. (2019). Data Visualization A Practical Introduction. Princeton, NJ: Princeton University Press</li>
-<li>Hoyle, R. H., Harris, M. J., &amp; Judd, C. M. (2006). Research Methods in Social Relations (8th edition). Belmont, CA, US: Allyn &amp; Bacon.</li>
-<li>Judd, C. M., &amp; Kenny, D. A. (1981). Estimating the Effects of Social Interventions. New York, NY: Cambridge University Press.</li>
-<li>Kline, R. B. (2016). Principles and practice of structural equation modeling (5th edition). New York, US: The Guilford Press</li>
-<li>Kutner, M., Nachtscheim, C., &amp; Neter, J (2004). Applied Linear Regression Models, Fourth edition, McGraw-Hill.</li>
-<li>Raudenbush, S. W., &amp; Bryk, A. S. (2002). Hierarchical Linear Models. Applications and Data Analysis Methods (2nd ed.). Newbury Park, CA: Sage.</li>
-<li>Reis, H. T., &amp; Judd, C. M. (2014). Handbook of Research Methods in Social and Personality Social Psychology (2nd ed.). New York, NY: Cambridge University Press.</li>
-<li>Snijders, T. A. B., &amp; Bosker, R. J. (2012). Multilevel Analysis: An Introduction to Basic and Advanced Multilevel Modeling (2nd ed.). London, UK: Sage Publishers.</li>
-<li>Tabachnick, B. G., &amp; Fidell, L. S. (2018). Using Multivariate Statistics (7th edition). New York, NY: Pearson.</li>
-<li>Wickham, H., &amp; Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data (2nd edition). Sebastopol, CA: O’Reilly Media</li>
+<li><a href="./homework/week_09/hw_09_shell.qmd">shell</a></li>
+<li><a href="./homework/data/hw_09_data.csv">data</a></li>
+<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw_09_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw_09_key.qmd">qmd</a></li>
 </ul>
 </section>
-<section id="ethics-of-being-a-student-in-the-department-of-psychology" class="level2">
-<h2 class="anchored" data-anchor-id="ethics-of-being-a-student-in-the-department-of-psychology">Ethics of Being a Student in the Department of Psychology</h2>
-<p>The members of the faculty of the Department of Psychology at UW-Madison uphold the highest ethical standards of teaching and research. They expect their students to uphold the same standards of ethical conduct. By registering for this course, you are implicitly agreeing to conduct yourself with the utmost integrity throughout the semester. In the Department of Psychology, acts of academic misconduct are taken very seriously. Such acts diminish the educational experience for all involved – students who commit the acts, classmates who would never consider engaging in such behaviors, and instructors. Academic misconduct includes, but is not limited to, cheating on assignments and exams, stealing exams, sabotaging the work of classmates, submitting fraudulent data, plagiarizing the work of classmates or published and/or online sources, acquiring previously written papers and submitting them (altered or unaltered) for course assignments, collaborating with classmates when such collaboration is not authorized, and assisting fellow students in acts of misconduct. Students who have knowledge that classmates have engaged in academic misconduct should report this to the instructor.</p>
+<section id="week-10-no-application-assignnment.-application-exam-week" class="level2">
+<h2 class="anchored" data-anchor-id="week-10-no-application-assignnment.-application-exam-week">Week 10: No application assignnment. Application exam week!</h2>
 </section>
-<section id="academic-integrity" class="level2">
-<h2 class="anchored" data-anchor-id="academic-integrity">Academic Integrity</h2>
-<p>By enrolling in this course, each student assumes the responsibilities of an active participant in UW-Madison’s community of scholars in which everyone’s academic work and behavior are held to the highest academic integrity standards. Academic misconduct compromises the integrity of the university. Cheating, fabrication, plagiarism, unauthorized collaboration, and helping others commit these acts are examples of academic misconduct, which can result in disciplinary action. This includes but is not limited to failure on the assignment/course, disciplinary probation, or suspension. Substantial or repeated cases of misconduct will be forwarded to the Office of Student Conduct &amp; Community Standards for additional review. For more information, refer to <a href="https://conduct.students.wisc.edu/academic-misconduct/">https://conduct.students.wisc.edu/academic-misconduct/</a></p>
+<section id="week-11-due-friday-1122-at-830-am" class="level2">
+<h2 class="anchored" data-anchor-id="week-11-due-friday-1122-at-830-am">Week 11: Due Friday, 11/22 at 8:30 am</h2>
+<ul>
+<li><a href="./homework/week_11/hw_11_shell.qmd">shell</a></li>
+<li><a href="./homework/data/hw_11_data.csv">data</a></li>
+<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw_11_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw_11_key.qmd">qmd</a></li>
+</ul>
 </section>
-<section id="chatgpt-and-other-llms" class="level2">
-<h2 class="anchored" data-anchor-id="chatgpt-and-other-llms">ChatGPT and other LLMs</h2>
-<p>I suspect you have all seen discussions of all that ChatGPT and other LLMs can do by now and their impact on teaching and assessment. I believe that AI like ChatGPT will eventually become an incredible tool for data scientists and programmers. As such, I view these advances with excitement. Of course, I don’t plan to assign a grade to ChatGPT so I want to make sure that we are clear on when you can and when you cannot use it.</p>
-<p>Given that I expect AI like ChatGPT and other LLMs to become a useful tool in our workflow as professionals, now is the time to start to learn how they can help. Therefore, you are free to use them for coding assistance during any of our <strong>application assignments</strong> AND the <strong>application exams</strong>. Code from ChatGPT is unlikely to be sufficient in either context (and my testing suggests it can be flat out wrong in some instances!) but I suspect that it will still be useful.</p>
-<p>In contrast, you <strong>cannot</strong> use ChatGPT or other LLMs/AI to answer the conceptual questions on the conceptual exams. Those questions are designed to assess your working knowledge about concepts and best practices. That information must be in YOUR head and I want to be 100% clear that use of ChatGPT/AI (or any other sources other than what is in your head) to answer those questions will be considered cheating and handled as such if detected. There will be a zero tolerance policy for such cheating and it will be considered academic misconduct and disciplined as such. ## Accommodations Policies McBurney Disability Resource Center syllabus statement: “The University of Wisconsin- Madison supports the right of all enrolled students to a full and equal educational opportunity. The Americans with Disabilities Act (ADA), Wisconsin State Statute (36.12), and UW-Madison policy (Faculty Document 1071) require that students with disabilities be reasonably accommodated in instruction and campus life. Reasonable accommodations for students with disabilities is a shared faculty and student responsibility. Students are expected to inform faculty [me] of their need for instructional accommodations by the end of the third week of the semester, or as soon as possible after a disability has been incurred or recognized. Faculty [I], will work either directly with the student [you] or in coordination with the McBurney Center to identify and provide reasonable instructional accommodations. Disability information, including instructional accommodations as part of a student’s educational record, is confidential and protected under FERPA.” <a href="http://mcburney.wisc.edu/facstaffother/faculty/syllabus.php">http://mcburney.wisc.edu/facstaffother/faculty/syllabus.php</a></p>
-<p>UW-Madison students who have experienced sexual misconduct (which can include sexual harassment, sexual assault, dating violence and/or stalking) also have the right to request academic accommodations. This right is afforded them under Federal legislation (Title IX). Information about services and resources (including information about how to request accommodations) is available through Survivor Services, a part of University Health Services: <a href="https://www.uhs.wisc.edu/survivor-services/">https://www.uhs.wisc.edu/survivor-services/</a>.</p>
+<section id="week-12-due-friday-1129-at-830-am" class="level2">
+<h2 class="anchored" data-anchor-id="week-12-due-friday-1129-at-830-am">Week 12: Due Friday 11/29 at 8:30 am</h2>
+<ul>
+<li><a href="./homework/week_12/hw_12_shell.qmd">shell</a></li>
+<li><a href="./homework/data/hw_12_data.csv">data</a></li>
+</ul>
 </section>
-<section id="diversity-inclusion" class="level2">
-<h2 class="anchored" data-anchor-id="diversity-inclusion">Diversity &amp; Inclusion</h2>
-<p>Institutional statement on diversity: “Diversity is a source of strength, creativity, and innovation for UW-Madison. We value the contributions of each person and respect the profound ways their identity, culture, background, experience, status, abilities, and opinion enrich the university community. We commit ourselves to the pursuit of excellence in teaching, research, outreach, and diversity as inextricably linked goals.</p>
-<p>The University of Wisconsin-Madison fulfills its public mission by creating a welcoming and inclusive community for people from every background – people who as students, faculty, and staff serve Wisconsin and the world.” <a href="https://diversity.wisc.edu/">https://diversity.wisc.edu/</a></p>
+<section id="week-13-no-application-assignment.-thanksgiving-break" class="level2">
+<h2 class="anchored" data-anchor-id="week-13-no-application-assignment.-thanksgiving-break">Week 13: No application assignment. Thanksgiving Break</h2>
 </section>
-<section id="complaints" class="level2">
-<h2 class="anchored" data-anchor-id="complaints">Complaints</h2>
-<p>Occasionally, a student may have a complaint about a TA or course instructor. If that happens, you should feel free to discuss the matter directly with the TA or instructor. If the complaint is about the TA and you do not feel comfortable discussing it with the individual, you should discuss it with the course instructor. Complaints about mistakes in grading should be resolved with the TA and/or instructor in the great majority of cases. If the complaint is about the instructor (other than ordinary grading questions) and you do not feel comfortable discussing it with the individual, make an appointment to speak to the Associate Chair for Graduate Studies, Professor Shawn Green, cshawn.green@wisc.edu. If you have concerns about climate or bias in this class, or if you wish to report an incident of bias or hate that has occurred in class, you may contact the Chair of the Department, Professor Allyson Bennett (allyson.j.bennett@wisc.edu) or the Chair of the Psychology Department Climate &amp; Diversity Committee, Martha Alibali (martha.alibali@wisc.edu). You may also use the University’s bias incident reporting system, which you can reach at the following link: <a href="https://doso.students.wisc.edu/services/bias-reporting-process/">https://doso.students.wisc.edu/services/bias-reporting-process/</a>.</p>
+<section id="week-14-due-friday-1213-at-830-am" class="level2">
+<h2 class="anchored" data-anchor-id="week-14-due-friday-1213-at-830-am">Week 14: Due Friday 12/13 at 8:30 am</h2>
+<ul>
+<li><a href="./homework/week_14/hw_14_shell.qmd">shell</a></li>
+<li><a href="./homework/data/hw_14_glm.dat">data1</a></li>
+<li><a href="./homework/data/hw_14_three_level.dat">data2</a></li>
+</ul>
 </section>
-<section id="concerns-about-sexual-misconduct" class="level2">
-<h2 class="anchored" data-anchor-id="concerns-about-sexual-misconduct">Concerns About Sexual Misconduct</h2>
-<p>All students deserve to be safe and respected at UW-Madison. Unfortunately, we know that sexual and relationship violence do happen here. Free, confidential resources are available on and off campus for students impacted by sexual assault, sexual harassment, dating violence, and stalking (regardless of when the violence occurred). You don’t have to label your experience to seek help. Friends of survivors can reach out for support too. A list of resources can be found at <a href="https://www.uhs.wisc.edu/survivor-resources/">https://www.uhs.wisc.edu/survivor-resources/</a> If you wish to speak to someone in the Department of Psychology about your concerns, you may contact the Chair of the Department, Professor Allyson Bennett (allyson.j.bennett@wisc.edu) or the Associate Chair of Graduate Studies, Professor Shawn Green (cshawn.green@wisc.edu). Please note that all of these individuals are Responsible Employees (<a href="https://compliance.wisc.edu/titleix/mandatory-reporting/#responsible-employees">https://compliance.wisc.edu/titleix/mandatory-reporting/#responsible-employees)</a>.</p>
-
-
+<section id="week-15-no-application-assignment.-application-exam-week" class="level2">
+<h2 class="anchored" data-anchor-id="week-15-no-application-assignment.-application-exam-week">Week 15: No application assignment. Application exam week!</h2>
 </section>
 </section>
 
-</main> <!-- /main -->
+</main>
+<!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -688,7 +244,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/github\.io\/jjcurtin\/book_glm");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -1016,18 +572,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="./web2_slide_decks.html" class="pagination-link" aria-label="Slide Decks">
-        <span class="nav-page-text">Slide Decks</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+</body></html>
