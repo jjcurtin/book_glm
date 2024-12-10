@@ -1,6 +1,8 @@
 # Exam Concepts {.unnumbered}
 
-## Unit 1 - Overview
+## Exam 1
+
+### Unit 1 - Overview
 
 - What are the four levels of the General Linear model
 - How do the number of $X$ variables differ across these levels?
@@ -8,7 +10,7 @@
 - Examples of special case analyses across these levels?
 
 
-## Unit 2 - Sampling Distributions
+### Unit 2 - Sampling Distributions
 
 - populations vs. samples
 - parameters vs. parameter estimates
@@ -24,7 +26,7 @@
 - What is the difference between the one-sample z-test and the one sample t-test
 
 
-## Unit 3 - One parameter models
+### Unit 3 - One parameter models
 
 - What are the three uses of models
 - What is the equation for a one parameter model for $Y_i$ and for $\hat{Y}_i$
@@ -42,7 +44,7 @@
 - What is the formula for the t-test to test the null hypothesis that $b_0$ (or any parameter estimate) is zero? How would you modify this formula to test a null hypothesis about a value other than 0.
 
 
-## Unit 4 - Two parameter models
+### Unit 4 - Two parameter models
 
 - What is the equation for a two parameter model for $Y_i$ and for $\hat{Y}_i$
 - What is the interpretation of $b_0$ and $b_1$ in a two parameter model?
@@ -59,7 +61,7 @@
 - What this the relationship between $R^2$ and $r_xy$ in the two parameter model?
 
 
-## Unit 5 - One Dichotomous Predictor
+### Unit 5 - One Dichotomous Predictor
 
 - How do we handle dichotomous categorical variables in linear models?
 - What are the two coding schemes we learned for coding regressors ($X$s) for dichtomous categorical predictors
@@ -70,7 +72,7 @@
 - Identify $b_0$ and $b_1$ on a line plot of the data
 
 
-## Unit 6 - Models with Two or More Predictors
+### Unit 6 - Models with Two or More Predictors
 
 - What is the equation for a model with two predictors for $Y_i$ and for $\hat{Y}_i$?  What is the general form for $k$ predictors?
 - What is the interpretation of $b_0$, $b_1$, and $b_2$ in a model with two predictors?
@@ -92,3 +94,66 @@
   - How are they similar and different from each other?
   - When are each generally used?
 - Identify $b_0$, $b_1$, and $b_2$ on a line plot of the data from a two predictor model with a dichotomous and quantitative predictor
+
+### Unit 7 - Case Analysis
+
+- What is case analysis and why do we do it?
+- What are the three primary characteristics of observations that we focus on in case analysis?
+- When doing univariate and bivariate exploratory data analysis, what plots and summary statistics do we typically review; Which plots are good for which types of variables?
+- Leverage
+  - What is it
+  - What metric do we use to identify points with high leverage
+  - What is the impact of leverage on our models?
+- Regression Outliers
+  - What are they?
+  - What three metrics do we use to identify regression outliers and which one do we prefer?
+  - What are the two potential impacts of regression outliers on our models?
+- Influential Observartions
+  - What are they?
+  - What metrics do we use to identify influential observations and how are they different from each other?
+  - What is an added variable plot? What do we plot on the x and y axes this plot?
+  - What are the two potential impacts of influential observations on our models?
+- Identify points with high leverage, regression outliers, and influential points on a scatterplot?
+- What is the Covratio?
+- What are three options for how to handle regression outliers and influential points?
+
+### Unit 8 - Model Assumptions
+
+- What are the five assumptions of the general linear model?
+- What are the consequences of violating each assumption?
+- What are the implications of the unreliable X assumption for the use of covariates?
+- What is a quantile-quantile (quantile comparison) plot and what do we use it for?
+- What is a spread-location plot and what do we use it for?
+- What options exist to address problems with non-constant (heterogeneity) variance of residuals?
+- What is a Component + Residual plot and what do we use it for?  What do we plot on the x and y axes of this plot?
+
+### Unit 9 - Transformations
+
+- What are power transformations and why do we use them?
+- What are the benefits of the Box-Cox transformation vs. a simple power transformation?
+- What happens to scores as we ascend and descend the ladder of power transformations?
+- What is a start and when do we need to use one (two uses)?
+- How can we use power transformations to address skewed residuals?
+- How can we use power transformations to address non-constant variance of residuals?
+- Is it more common to transform y or x to adddress skew and non-constant variance problems?  What about linearity problems (when y and when)
+- What type of lineary problems can power transformations address and what types can it not fix?
+- What is the Mosteller and Tukey’s bulging rule? What transformations do we use for linearity issues in each quadrant?
+
+
+
+
+
+### Unit 10 - Interactions with Quantitative Predictors
+
+
+### Unit 11 - Innteractions with Quantitative and Dichotomous Predictors
+
+### Unit 12 - Interactions with Dichotomous Predictors
+
+### Unit 13 - Categorical Predictors with More than Two Levels
+
+
+### Unit 14 - The Generalized Linear Model
+
+### Unit 15 - Power Analysis and Statistical Validity
+
