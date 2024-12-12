@@ -239,12 +239,13 @@ window.Quarto = {
   <li><a href="#unit-4---two-parameter-models" id="toc-unit-4---two-parameter-models" class="nav-link" data-scroll-target="#unit-4---two-parameter-models">Unit 4 - Two parameter models</a></li>
   <li><a href="#unit-5---one-dichotomous-predictor" id="toc-unit-5---one-dichotomous-predictor" class="nav-link" data-scroll-target="#unit-5---one-dichotomous-predictor">Unit 5 - One Dichotomous Predictor</a></li>
   <li><a href="#unit-6---models-with-two-or-more-predictors" id="toc-unit-6---models-with-two-or-more-predictors" class="nav-link" data-scroll-target="#unit-6---models-with-two-or-more-predictors">Unit 6 - Models with Two or More Predictors</a></li>
+  </ul></li>
+  <li><a href="#exam-2" id="toc-exam-2" class="nav-link" data-scroll-target="#exam-2">Exam 2</a>
+  <ul class="collapse">
   <li><a href="#unit-7---case-analysis" id="toc-unit-7---case-analysis" class="nav-link" data-scroll-target="#unit-7---case-analysis">Unit 7 - Case Analysis</a></li>
   <li><a href="#unit-8---model-assumptions" id="toc-unit-8---model-assumptions" class="nav-link" data-scroll-target="#unit-8---model-assumptions">Unit 8 - Model Assumptions</a></li>
   <li><a href="#unit-9---transformations" id="toc-unit-9---transformations" class="nav-link" data-scroll-target="#unit-9---transformations">Unit 9 - Transformations</a></li>
-  <li><a href="#unit-10---interactions-with-quantitative-predictors" id="toc-unit-10---interactions-with-quantitative-predictors" class="nav-link" data-scroll-target="#unit-10---interactions-with-quantitative-predictors">Unit 10 - Interactions with Quantitative Predictors</a></li>
-  <li><a href="#unit-11---innteractions-with-quantitative-and-dichotomous-predictors" id="toc-unit-11---innteractions-with-quantitative-and-dichotomous-predictors" class="nav-link" data-scroll-target="#unit-11---innteractions-with-quantitative-and-dichotomous-predictors">Unit 11 - Innteractions with Quantitative and Dichotomous Predictors</a></li>
-  <li><a href="#unit-12---interactions-with-dichotomous-predictors" id="toc-unit-12---interactions-with-dichotomous-predictors" class="nav-link" data-scroll-target="#unit-12---interactions-with-dichotomous-predictors">Unit 12 - Interactions with Dichotomous Predictors</a></li>
+  <li><a href="#unit-10-12---interactions" id="toc-unit-10-12---interactions" class="nav-link" data-scroll-target="#unit-10-12---interactions">Unit 10-12 - Interactions</a></li>
   <li><a href="#unit-13---categorical-predictors-with-more-than-two-levels" id="toc-unit-13---categorical-predictors-with-more-than-two-levels" class="nav-link" data-scroll-target="#unit-13---categorical-predictors-with-more-than-two-levels">Unit 13 - Categorical Predictors with More than Two Levels</a></li>
   <li><a href="#unit-14---the-generalized-linear-model" id="toc-unit-14---the-generalized-linear-model" class="nav-link" data-scroll-target="#unit-14---the-generalized-linear-model">Unit 14 - The Generalized Linear Model</a></li>
   <li><a href="#unit-15---power-analysis-and-statistical-validity" id="toc-unit-15---power-analysis-and-statistical-validity" class="nav-link" data-scroll-target="#unit-15---power-analysis-and-statistical-validity">Unit 15 - Power Analysis and Statistical Validity</a></li>
@@ -378,6 +379,9 @@ window.Quarto = {
 <li>Identify <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span>, and <span class="math inline">\(b_2\)</span> on a line plot of the data from a two predictor model with a dichotomous and quantitative predictor</li>
 </ul>
 </section>
+</section>
+<section id="exam-2" class="level2">
+<h2 class="anchored" data-anchor-id="exam-2">Exam 2</h2>
 <section id="unit-7---case-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="unit-7---case-analysis">Unit 7 - Case Analysis</h3>
 <ul>
@@ -434,23 +438,80 @@ window.Quarto = {
 <li>What is the Mosteller and Tukey’s bulging rule? What transformations do we use for linearity issues in each quadrant?</li>
 </ul>
 </section>
-<section id="unit-10---interactions-with-quantitative-predictors" class="level3">
-<h3 class="anchored" data-anchor-id="unit-10---interactions-with-quantitative-predictors">Unit 10 - Interactions with Quantitative Predictors</h3>
-</section>
-<section id="unit-11---innteractions-with-quantitative-and-dichotomous-predictors" class="level3">
-<h3 class="anchored" data-anchor-id="unit-11---innteractions-with-quantitative-and-dichotomous-predictors">Unit 11 - Innteractions with Quantitative and Dichotomous Predictors</h3>
-</section>
-<section id="unit-12---interactions-with-dichotomous-predictors" class="level3">
-<h3 class="anchored" data-anchor-id="unit-12---interactions-with-dichotomous-predictors">Unit 12 - Interactions with Dichotomous Predictors</h3>
+<section id="unit-10-12---interactions" class="level3">
+<h3 class="anchored" data-anchor-id="unit-10-12---interactions">Unit 10-12 - Interactions</h3>
+<ul>
+<li>What is an interaction?</li>
+<li>How do you create a regressor to test for an interaction between predictors?</li>
+<li>How do you interpret the parameter estimates for a model with an interaction between two predictors? How does this change if the predictors are both quant, both dichotomous, or one of each?</li>
+<li>Which parameter estimates will change (and which won’t) as you change the scaling of <span class="math inline">\(X\)</span>s in a model with an interaction.</li>
+<li>How can you use the model formula (with parameter estimates) to describe how the magnitude of the effect of one X will change depending on a second X? Again, know how to do this for models with two quant predictors, two dichotomous predictors, and one of each.</li>
+<li>Calculate how any parameter estimate in a model will change if a specific <span class="math inline">\(X\)</span> was re-scaled in some way (e.g., mean centered or centered on some other value). Know this for both quant predictors and dichotomous predictors.</li>
+<li>When do you mean center a quant <span class="math inline">\(X\)</span> in an interactive model When do you center on some value other than the mean</li>
+<li>When do you use centered (contrast) codes vs.&nbsp;dummy codes for a dichotomous <span class="math inline">\(X\)</span> in an interactive model?</li>
+<li>Link parameter estimates from an interactive model to a plot of the model. Know how to do this for models with two quant predictors, two dichotomous predictors, and one of each.</li>
+<li>What are main an simple effects in a model with an interaction? How do you obtain them? How do you interpret them? How is this different for models with two quant predictors, two dichotomous predictors, and one of each?</li>
+<li>How do you test for an interaction using a t-test or model comparison? How do you test for main and simple effects in these models?</li>
+<li>what is a cell mean, marginal mean, and grand mean in a model with two dichotomous predictors?</li>
+<li>Link the parameter estimates from an interactive model with two dichotomous predictors to table of means. Be able to go both directions such that you could write out the model formula (including parameter estimates) for a model from a table of means either when using centered (contrast) codes or dummy codes.</li>
+<li>Quantify the magnitude of main effects, simple effects and an interaction between two dichotomous predictors using a table of means.</li>
+</ul>
 </section>
 <section id="unit-13---categorical-predictors-with-more-than-two-levels" class="level3">
 <h3 class="anchored" data-anchor-id="unit-13---categorical-predictors-with-more-than-two-levels">Unit 13 - Categorical Predictors with More than Two Levels</h3>
+<ul>
+<li>Why can we not simple assign sequential numbers to levels of a categorical predictor?</li>
+<li>How do you calculate dummy coded regressors for categorical variables with 3 or more levels (including what codes are assigned to each regressor)?</li>
+<li>How do you interpret the parameter estimates for dummy coded regressors?</li>
+<li>How do you calculate contrast coded regressors for categorical variables with 3 or more levels (including what codes are assigned to each regressor)? Know how to do this for 3 and 4 level categorical variables given a description of the planned contrasts.</li>
+<li>How do you interpret the parameter estimates for contrast coded regressors?</li>
+<li>Be able to calculate predicted means for any level given a model formula that used either dummy or contrast codes</li>
+<li>Why are pairwise contrasts using dummy coded regressors in a linear model superior to pairwise t-tests using between subjects/two group t-tests?</li>
+<li>How can you get the test of the third pairwise contrast when using dummy coded regressors for a 3 level categorical predictor?</li>
+<li>What is the value of testing for a main effect of a categorical variable? When will you do this?</li>
+<li>What model comparison will provide a test of the main effect of a categorical predictor when other predictors are also in the model</li>
+<li>When will <span class="math inline">\(\Delta R^2\)</span> sum to the full <span class="math inline">\(R^2\)</span> for a model with a categorical predictor? When will they not?</li>
+<li>What is test-wise and family-wise error rates?<br>
+</li>
+<li>When and how do we protect against inflation of family-wise Type I error rates when doing multiple comparisons among levels of a categorical predictor? How is this similar or different when using planned orthogonal contrasts vs.&nbsp;planned pairwise conntrasts vs.&nbsp;unplanned contrasts?</li>
+<li>How and when should we use Fisher LSD approach</li>
+<li>How and when should we use Holm-Bonferroni approach</li>
+<li>How is the Holm-Bonferroni approach superior to the Bonferroni approach?</li>
+<li>How and when should we use Scheffe test approach</li>
+<li>What is the Bonferroni inequality</li>
+</ul>
 </section>
 <section id="unit-14---the-generalized-linear-model" class="level3">
 <h3 class="anchored" data-anchor-id="unit-14---the-generalized-linear-model">Unit 14 - The Generalized Linear Model</h3>
+<ul>
+<li>When might you use the generalized linear model?
+<ul>
+<li>When would you specifically use a generalized linear model with the logit link function and binomial distribution? What special case analysis is this?</li>
+<li>When would you use a generalized linear model with the log link function and poisson distribution?<br>
+</li>
+</ul></li>
+<li>Be able to calculate odds or probability from the other. Be able to calculate log-odds from a model.</li>
+<li>What is an odds ratio and how do you interpret it for a quantitative predictor or regressor for a categorical predictor?</li>
+<li>What do we use the odds ratio as the preferred effect size in logistic regression?</li>
+<li>Be able to compare two simple (one X) logistic plots (in probability units) and tell which has bigger/smaller <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span></li>
+<li>What are the three approaches to testing parameter estimates in logistic regression? Which is preferred and why?</li>
+<li>How do we handle categorical predictors and multiple predictors in logistic regression?</li>
+</ul>
 </section>
 <section id="unit-15---power-analysis-and-statistical-validity" class="level3">
 <h3 class="anchored" data-anchor-id="unit-15---power-analysis-and-statistical-validity">Unit 15 - Power Analysis and Statistical Validity</h3>
+<ul>
+<li>Understand the confusion matrix and its use with talking about statistical validity. Be able to label the four cells of the confusion matrix.</li>
+<li>What the difference between Type I and Type II errors?</li>
+<li>What are the factors that affect power in the linear model? How do they affect power? Be able to discuss these relationships with respect to the sampling distribution for a parameter estimate</li>
+<li>What are the two approaches to power analyses. When and why do you do each of them</li>
+<li>What problems are associated with low power studies?</li>
+<li>What is positive predictive value and why does it matter?</li>
+<li>Why are sample effect size estimates often incorrect (too large) when calculated in studies with low power</li>
+<li>What is the problem of vibration of effects?</li>
+<li>What is publication bias and why is it worse for low power studies?</li>
+<li>What are the 7 important study characteristics that should be pre-registered?</li>
+</ul>
 
 
 </section>
