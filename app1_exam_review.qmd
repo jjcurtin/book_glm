@@ -95,8 +95,9 @@
   - When are each generally used?
 - Identify $b_0$, $b_1$, and $b_2$ on a line plot of the data from a two predictor model with a dichotomous and quantitative predictor
 
-### Unit 7 - Case Analysis
+## Exam 2
 
+### Unit 7 - Case Analysis
 - What is case analysis and why do we do it?
 - What are the three primary characteristics of observations that we focus on in case analysis?
 - When doing univariate and bivariate exploratory data analysis, what plots and summary statistics do we typically review; Which plots are good for which types of variables?
@@ -143,17 +144,67 @@
 
 
 
-### Unit 10 - Interactions with Quantitative Predictors
+### Unit 10-12 - Interactions
 
+- What is an interaction? 
+- How do you create a regressor to test for an interaction between predictors?
+- How do you interpret the parameter estimates for a model with an interaction between two predictors? How does this change if the predictors are both quant, both dichotomous, or one of each?
+- Which parameter estimates will change (and which won't) as you change the scaling of $X$s in a model with an interaction.
+- How can you use the model formula (with parameter estimates) to describe how the magnitude of the effect of one X will change depending on a second X?  Again, know how to do this for models with two quant predictors, two dichotomous predictors, and one of each.
+- Calculate how any parameter estimate in a model will change if a specific $X$ was re-scaled in some way (e.g., mean centered or centered on some other value).  Know this for both quant predictors and dichotomous predictors.
+- When do you mean center a quant $X$ in an interactive model When do you center on some value other than the mean
+- When do you use centered (contrast) codes vs. dummy codes for a dichotomous $X$ in an interactive model? 
+- Link parameter estimates from an interactive  model to a plot of the model.  Know how to do this for models with two quant predictors, two dichotomous predictors, and one of each.
+- What are main an simple effects in a model with an interaction?  How do you obtain them?  How do you  interpret them?  How is this different for models with two quant predictors, two dichotomous predictors, and one of each?
+- How do you test for an interaction using a t-test or model comparison?  How do you test for main and simple effects in these models?
+- what is a cell mean, marginal mean, and grand mean in a model with two dichotomous predictors?
+- Link the parameter estimates from an interactive model with two dichotomous predictors to table of means.   Be able to go both directions such that you could write out the model formula (including parameter estimates) for a model from a table of means either when using centered (contrast) codes or dummy codes.
+- Quantify the magnitude of main effects, simple effects and an interaction between two dichotomous predictors using a table of means.
 
-### Unit 11 - Innteractions with Quantitative and Dichotomous Predictors
-
-### Unit 12 - Interactions with Dichotomous Predictors
 
 ### Unit 13 - Categorical Predictors with More than Two Levels
 
+- Why can we not simple assign sequential numbers to levels of a categorical predictor?
+- How do you calculate dummy coded regressors for categorical variables with 3 or more levels (including what codes are assigned to each regressor)?
+- How do you interpret the parameter estimates for dummy coded regressors?
+- How do you calculate contrast coded regressors for categorical variables with 3 or more levels (including what codes are assigned to each regressor)?  Know how to do this for 3 and 4 level categorical variables given a description of the planned contrasts.
+- How do you interpret the parameter estimates for contrast coded regressors?
+- Be able to calculate predicted means for any level given a model formula that used either dummy or contrast codes
+- Why are pairwise contrasts using dummy coded regressors in a linear model superior to pairwise t-tests using between subjects/two group t-tests?
+- How can you get the test of the third pairwise contrast when using dummy coded regressors for a 3 level categorical predictor?
+- What is the value of testing for a main effect of a categorical variable?  When will you do this?
+- What model comparison will provide a test of the main effect of a categorical predictor when other predictors are also in the model
+- When will $\Delta R^2$ sum to the full $R^2$ for a model with a categorical predictor?  When will they not?
+- What is test-wise and family-wise error rates?  
+- When and how do we protect against inflation of family-wise Type I error rates when doing multiple comparisons among levels of a categorical predictor?  How is this similar or different when using planned orthogonal contrasts vs. planned pairwise conntrasts vs. unplanned contrasts?
+- How and when should we use Fisher LSD approach
+- How and when should we use Holm-Bonferroni approach
+- How is the Holm-Bonferroni approach superior to the Bonferroni approach?
+- How and when should we use Scheffe test approach
+- What is the Bonferroni inequality
 
 ### Unit 14 - The Generalized Linear Model
 
+- When might you use the generalized linear model?
+  - When would you specifically use a generalized linear model with the logit link function and binomial distribution?  What special case analysis is this?
+  - When would you use a generalized linear model with the log link function and poisson distribution?  
+- Be able to calculate odds or probability from the other.  Be able to calculate log-odds from a model.
+- What is an odds ratio and how do you interpret it for a quantitative predictor or regressor for a categorical predictor?
+- What do we use the odds ratio as the preferred effect size in logistic regression?
+- Be able to compare two simple (one X) logistic plots (in probability units) and tell which has bigger/smaller $b_0$ and $b_1$ 
+- What are the three approaches to testing parameter estimates in logistic regression? Which is preferred and why?
+- How do we handle categorical predictors and multiple predictors in logistic regression?
+
 ### Unit 15 - Power Analysis and Statistical Validity
+
+- Understand the confusion matrix and its use with talking about statistical validity.  Be able to label the four cells of the confusion matrix.
+- What the difference between Type I and Type II errors?
+- What are the factors that affect power in the linear model?  How do they affect power? Be able to discuss these relationships with respect to the sampling distribution for a parameter estimate
+- What are the two approaches to power analyses.  When and why do you do each of them
+- What problems are associated with low power studies?
+- What is positive predictive value and why does it matter?
+- Why are sample effect size estimates often incorrect (too large) when calculated in studies with low power
+- What is the problem of vibration of effects?
+- What is publication bias and why is it worse for low power studies?
+- What are the 7 important study characteristics that should be pre-registered?
 
