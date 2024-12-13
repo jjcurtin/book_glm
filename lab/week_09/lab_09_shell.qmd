@@ -15,7 +15,9 @@ editor_options:
 
 **What are two methods to inspect the influence of individual data points on the model? How are these two methods different?**
 
+Cook's d - overall influence on overall model SSE
 
+dfbeta(s) - tell us about the influence on individual parameters
 
 ## Setup 
 
@@ -28,7 +30,8 @@ library(skimr)
 library(broom)
 
 # exclude some functions that conflict with tidyverse
-library(car, exclude = c("recode", "some")) theme_set(theme_classic()) 
+library(car, exclude = c("recode", "some"))
+theme_set(theme_classic()) 
 
 path_data <- "lab/data"
 ```
@@ -53,6 +56,8 @@ d |>
 Remember we had a value in `education` that was clearly a data entry error. So, let's remove it! Get descriptives on `education` variable after removing the error.   
 ```{r}
 d <- d |> 
+  #filter(education > 0)
+  mutate(education = if_else(education < 0, NA, education))
 
   
 d |> 
@@ -65,7 +70,7 @@ d |>
 Say we are (again) interested in modeling `income ~ education + women`
 Lets fit the model.
 ```{r}
-m_1 <- 
+m_1 <- lm(income ~ education + women, data = d)
 
 tidy(m_1)
 ```
@@ -73,6 +78,7 @@ tidy(m_1)
 In lab 07 we also had identified two observations with high influence: physicians and general managers. These observations exhibited extreme values in `income`. 
 ```{r}
 d |> 
+  filter(name %in% c("physicians", "general.managers"))
 
 ```
 
@@ -91,18 +97,18 @@ Quick review from lecture!
 
 **What are the 5 primary assumptions the GLM makes about the structure of the data?**   
 
-
-
-
-
-
+1. Linearity of relationships
+2. Exact X - no measurement error in our predictors
+3. Independence of residuals
+4. Normality of residuals
+5. Constant variance - homoscedasticity
 
 
 **Violations of assumptions can cause...?**   
 
-
-
-
+1. Biased/inaccurate parameter estimates
+2. Inaccurate standard errors (inaccurate statistical tests) 
+3. Inefficient standard errors (low power)
 
 
 #### Assumption 1: Exact X 
@@ -111,7 +117,8 @@ No measurement error in the predictors is always violated to some extent, but es
 
 **What are the consequences of non-exact X?**
 
-
+- Standard errors will be larger (inflated)
+- Parameter estimates will be biased towards the null (i.e., 0)
 
 
 #### Assumption 2: Independence
@@ -120,7 +127,8 @@ Non-independence of residuals are usually due to data structure (e.g., repeated 
 
 **What are the consequences of non-independence in residuals that are not correctly modeled?**
 
-
+- Standard errors will be biased
+- Increased type-I error rate
 
 One extreme example of non-independence is when the data contains duplicates (i.e., same data points included multiple times). 
 
@@ -140,7 +148,7 @@ Note that as a consequence of these duplicates, the standard errors of parameter
 
 **Is a non-normally distributed predictor problematic? What about a non-normal outcome variable?**
 
-
+Remember that *normality* is about our residuals! We can still have normally distributed residuals even our data are not normally distributed.
 
 Plot a density plot of the residuals of our model compared to a normal distribution.   
 
@@ -156,32 +164,37 @@ ggplot() +
 ```
 
 **What does the blue dashed line represent?**
-
+Normal distribution
 
 **Are our residuals in `m_1` normally distributed?**
-
+Not really! Kind of have a big peak - high kurtosis.
 
 
 Now we will create a quantile-comparison (Q-Q) plot. A Q-Q plot compares two distributions against each other to see if they’re similar. GLMs assume that residuals are normally distributed, so we compare the actual distribution of model residuals to the theoretical normal distribution. The closer the two distributions are, the more normal the residuals are. Use the function in the car package
 ```{r}
-
+qqPlot(m_1,
+       id = FALSE,
+       simulate = TRUE, # claire will look up more about
+       main = "Quantile-Comparison Plot to Assess Normality",
+       ylab = "Studentized Residuals")
 ```
 
 
 **What's on the X-axis in this plot?**   
-
+Number of SDs from the mean in a simulated t-distribution
 
 **What about the Y-axis?**    
-
+Studentized residuals of our model's predictions
 
 **What are we looking for?**    
-
+Our points to be on the blue line!
+If these two match, that means that our theoretical and actual distributions are matching (which would mean that our residuals are normally distributed).
 
 **How are we doing for normality of errors?**   
-
+Doesn't seem like we are doing that well!
 
 **What is the problem?**    
-
+Tails have very high residual values!
 
 
 ***ASIDE: The logic of the QQ plot***    
@@ -193,7 +206,7 @@ For another example, say we want to look for the error we'd expect to occur at a
 
 
 **So, should we be concerned at this point?** 
-
+Doesn't look like we're doing super well with our normality assumption..!
 
 
 #### Assumption 4: Constant Variance
@@ -226,13 +239,12 @@ These two plots differ in 2 important ways.
 2. Look at the tick marks on the Y-axes of these plots. The first plot is linear, while the spread-level plot is logarithmic. This is why the two don't match up perfectly based on the "folding" idea.   
 
 **What are we looking for here?**   
-
-
-
+First plot: we want our spread at a given value of x to be similar to other values (we want our scatter to look constant).
+Second plot: ideally, we want to see our regression line be basically as flat as possible (slope close to 0!).
 
 
 **So... are we concerned now?**     
-
+We are remaining concerned. Doesn't look like we're doing super well in terms of our constant variance assumption.
 
 
 #### Assumption 5: Linearity
@@ -241,7 +253,7 @@ If the modeled relationships are linear, then the slope of the best fitting line
 
 `car::crPlots()` will plot such lines (summarized in pink), overlayed on the residual scores and in addition to the best linear fit (blue-dashed).    
 ```{r}
-
+crPlots(m_1)
 ```
 
 This plot is referred to as a component+residual/partial residual plots. It shows you the residuals from the full model, plotted against the effect of a particular predictor.
@@ -252,7 +264,7 @@ So, we're actually doing pretty well in terms of the linearity assumption. There
 
 
 ### So... what next?
-
+Our data violate constant variance and normality of errors assumptions.
 
 
 
@@ -295,19 +307,23 @@ broom::glance(m_0_3)
 ```
 
 **What is the interpretation of model R-squared? Delta R-squared?**
-
+Model R-squared is the percentage of variance explained by all predictors in our model.
+Delta R-squared additional variance that's explained by one predictor above and beyond other predictors.
 
 
 **What is the delta R squared for `education` and `women`?**
+Education:
+.621 - .435 = .186
 
-
+Women:
+.621 - .0393 = .5817
 
 **What do you notice about these delta R squared?**
-
+If we add them together, we get a bigger number than our model R-squared value! The delta R-squared of each predictor is also larger than their R-squared in their respective one predictor models.
 
 This is the case where we observe a suppression effect. 
 **Let's look at the correlations among the three variables. What do you notice?**
-
+Our predictors have opposite relationships with our outcome variable. They are also slightly positively correlated.
 
 ```{r}
 d |> select(income, education, women) |> 
@@ -326,20 +342,45 @@ This is the special case when the variance explained by individual predictors ha
 
 Create a model where you predict `income` from `prestige` and `type` using `d_prof_rm`.
 ```{r}
-
-
+m_2 <- lm(income ~ prestige + type, data = d_prof_rm)
+tidy(m_2)
 ```
 
 
 Create a publication quality plot with the below specifications:
 1. Show education on the x axis and income on the y axis.
 2. Plot raw data points.
-3. Show two regression lines in the same panel. One should represent the effect of `education` on `income`, holding `type` constant at white collar. The other should represent the same effect but holding `type` constant at blue collar.
+3. Show two regression lines in the same panel. One should represent the effect of `prestige` on `income`, holding `type` constant at white collar. The other should represent the same effect but holding `type` constant at blue collar.
 4. Show respective standard error bands for those regression lines.
 5. Include meaning labels for the axes and other aesthetic components. 
 
 ```{r}
+d_pred <- expand_grid(prestige = seq(min(d_prof_rm$prestige, na.rm = TRUE),
+                                     max(d_prof_rm$prestige, na.rm = TRUE),
+                                     length.out = 100),
+                      type = c("wc", "bc"))
 
+d_pred <- predict(m_2, newdata = d_pred, se.fit = TRUE) |> 
+  as_tibble() |> 
+  bind_cols(d_pred) |> 
+  mutate(type_lab = if_else(type == "wc", "White Collar", "Blue Collar"),
+         upper = fit + se.fit,
+         lower = fit - se.fit)
+
+d_prof_rm <- d_prof_rm |> 
+  mutate(type_lab = if_else(type == "wc", "White Collar", "Blue Collar"))
+
+ggplot() +
+  geom_point(data = d_prof_rm,
+             aes(x = prestige, y = income, color = type_lab)) +
+  geom_smooth(data = d_pred, stat = "identity",
+              aes(x = prestige, y = fit, ymin = lower, ymax = upper,
+                  color = type_lab), fill = "lightgray") +
+  labs(x = "Job Prestige", y = "Average Income", color = "Type of Job") +
+  scale_discrete_manual(aesthetics = "color",
+                        values = c("White Collar" = "coral2",
+                                   "Blue Collar" = "aquamarine3"),
+                        breaks = c("White Collar", "Blue Collar"))
 
 
 
