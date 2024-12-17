@@ -830,5 +830,49 @@
       "Appendices",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Exploring SEs for Logistic Regression</span>"
     ]
+  },
+  {
+    "objectID": "app5_noise.html",
+    "href": "app5_noise.html",
+    "title": "Monte Carlo Simulation of Contrast Approaches",
+    "section": "",
+    "text": "3 Groups with No Group Differences (Type I Errors)\nSet up simulation characteristics for Null Findings.\nThis will allow us to determine Type I error rates because any signficant effect is a type I error given we have set the population effect to 0\nCode\n# simulate N experiments\nn_experiments &lt;- 10000\nn &lt;- 200\nset.seed(1234567)\nBeta &lt;- 10\nCode\nget_data &lt;- function(n, Beta, noise_x = 0, noise_y = 0){\n  x &lt;- rnorm(n, 0, 10)\n  y &lt;- 0 + Beta * x + rnorm(n, 0, 10) \n  \n  if (noise_x != 0) {\n    x &lt;- x + rnorm(n, 0, noise_x)\n  }\n  if (noise_y != 0) {\n    y &lt;- y + rnorm(n, 0, noise_y)\n  }\n  \n  tibble(x, y) \n}\nCode\nget_b &lt;- function(n, Beta, noise_x = 0, noise_y = 0){\n  \n  get_data(n, Beta, noise_x, noise_y) |&gt; \n  lm(y ~ x, data = _) |&gt; \n    tidy() |&gt; \n    filter(term == \"x\") \n}",
+    "crumbs": [
+      "Appendices",
+      "Monte Carlo Simulation of Contrast Approaches"
+    ]
+  },
+  {
+    "objectID": "app5_noise.html#simulate-no-additional-noise-in-y-beyond-e",
+    "href": "app5_noise.html#simulate-no-additional-noise-in-y-beyond-e",
+    "title": "Monte Carlo Simulation of Contrast Approaches",
+    "section": "Simulate no additional noise in Y (beyond e)",
+    "text": "Simulate no additional noise in Y (beyond e)\n\n\nCode\nnoise_none &lt;- 1:n_experiments |&gt; \n  map(\\(i) get_b(n, Beta)) |&gt;\n  list_rbind()\n\n\nMean of sampling distribution for parameter estimate\n\n\nCode\nnoise_none |&gt; \n  summarise(mean = mean(estimate))\n\n\n# A tibble: 1 × 1\n   mean\n  &lt;dbl&gt;\n1  10.0\n\n\nStandard deviation of sampling distribution for parameter estimate (i.e. SE of b)\n\n\nCode\nnoise_none |&gt; \n  summarise(sd = sd(estimate))\n\n\n# A tibble: 1 × 1\n      sd\n   &lt;dbl&gt;\n1 0.0714",
+    "crumbs": [
+      "Appendices",
+      "Monte Carlo Simulation of Contrast Approaches"
+    ]
+  },
+  {
+    "objectID": "app5_noise.html#noise-in-y",
+    "href": "app5_noise.html#noise-in-y",
+    "title": "Monte Carlo Simulation of Contrast Approaches",
+    "section": "Noise in Y",
+    "text": "Noise in Y\n\n\nCode\nnoise_y &lt;- 1:n_experiments |&gt; \n  map(\\(i) get_b(n, Beta, noise_y = 10)) |&gt;\n  list_rbind()\n\n\nMean of sampling distribution for parameter estimate\n\n\nCode\nnoise_y |&gt; \n  summarise(mean = mean(estimate))\n\n\n# A tibble: 1 × 1\n   mean\n  &lt;dbl&gt;\n1  10.0\n\n\nStandard deviation of sampling distribution for parameter estimate (i.e. SE of b)\n\n\nCode\nnoise_y |&gt; \n  summarise(sd = sd(estimate))\n\n\n# A tibble: 1 × 1\n      sd\n   &lt;dbl&gt;\n1 0.0997",
+    "crumbs": [
+      "Appendices",
+      "Monte Carlo Simulation of Contrast Approaches"
+    ]
+  },
+  {
+    "objectID": "app5_noise.html#noise-in-x",
+    "href": "app5_noise.html#noise-in-x",
+    "title": "Monte Carlo Simulation of Contrast Approaches",
+    "section": "Noise in X",
+    "text": "Noise in X\n\n\nCode\nnoise_x &lt;- 1:n_experiments |&gt; \n  map(\\(i) get_b(n, Beta, noise_x = 10)) |&gt;\n  list_rbind()\n\n\nMean of sampling distribution for parameter estimate\n\n\nCode\nnoise_x |&gt; \n  summarise(mean = mean(estimate))\n\n\n# A tibble: 1 × 1\n   mean\n  &lt;dbl&gt;\n1  5.00\n\n\nStandard deviation of sampling distribution for parameter estimate (i.e. SE of b)\n\n\nCode\nnoise_x |&gt; \n  summarise(sd = sd(estimate))\n\n\n# A tibble: 1 × 1\n     sd\n  &lt;dbl&gt;\n1 0.360",
+    "crumbs": [
+      "Appendices",
+      "Monte Carlo Simulation of Contrast Approaches"
+    ]
   }
 ]

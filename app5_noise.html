@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction to the General Linear Model - Video Recordings from Lab and Lecture</title>
+<title>Introduction to the General Linear Model - Monte Carlo Simulation of Contrast Approaches</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./app1_exam_review.html" rel="next">
-<link href="./web6_exams.html" rel="prev">
+<link href="./app4_logistic_se.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./web7_videos.html">Video Recordings from Lab and Lecture</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app1_exam_review.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app5_noise.html">Monte Carlo Simulation of Contrast Approaches</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -153,7 +186,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./web7_videos.html" class="sidebar-item-text sidebar-link active">
+  <a href="./web7_videos.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Video Recordings from Lab and Lecture</span></a>
   </div>
 </li>
@@ -192,7 +225,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app5_noise.html" class="sidebar-item-text sidebar-link">
+  <a href="./app5_noise.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Monte Carlo Simulation of Contrast Approaches</span></a>
   </div>
 </li>
@@ -208,18 +241,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lab" id="toc-lab" class="nav-link active" data-scroll-target="#lab">Lab</a></li>
-  <li><a href="#lecture" id="toc-lecture" class="nav-link" data-scroll-target="#lecture">Lecture</a></li>
-  <li><a href="#review-sessions" id="toc-review-sessions" class="nav-link" data-scroll-target="#review-sessions">Review sessions</a></li>
+  <li><a href="#groups-with-no-group-differences-type-i-errors" id="toc-groups-with-no-group-differences-type-i-errors" class="nav-link active" data-scroll-target="#groups-with-no-group-differences-type-i-errors">3 Groups with No Group Differences (Type I Errors)</a></li>
+  <li><a href="#simulate-no-additional-noise-in-y-beyond-e" id="toc-simulate-no-additional-noise-in-y-beyond-e" class="nav-link" data-scroll-target="#simulate-no-additional-noise-in-y-beyond-e">Simulate no additional noise in Y (beyond e)</a></li>
+  <li><a href="#noise-in-y" id="toc-noise-in-y" class="nav-link" data-scroll-target="#noise-in-y">Noise in Y</a></li>
+  <li><a href="#noise-in-x" id="toc-noise-in-x" class="nav-link" data-scroll-target="#noise-in-x">Noise in X</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/web7_videos.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/app5_noise.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app1_exam_review.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app5_noise.html">Monte Carlo Simulation of Contrast Approaches</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Video Recordings from Lab and Lecture</h1>
+<h1 class="title">Monte Carlo Simulation of Contrast Approaches</h1>
 </div>
 
 
@@ -236,49 +270,168 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="lab" class="level2">
-<h2 class="anchored" data-anchor-id="lab">Lab</h2>
-<ul>
-<li><a href="https://mediaspace.wisc.edu/media/lab_04_claire/1_l1mfwvlq">Week 4</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_05_claire/1_i06aljoy">Week 5</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_06_coco/1_1b8aqlu9">Week 6</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_07a_coco/1_hznxr36i">Week 7 - part I</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_07b_claire/1_2rggj7rr">Week 7 - part II</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_08_coco/1_9rj11r3y">Week 8</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_09_LiChen/1_iu1svxyx">Week 9</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_10_claire/1_b44rdylt">Week 10</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_11_coco/1_ij1noawu">Week 11</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_12_coco/1_wxmoczg6">Week 12</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_14_coco/1_eqytv9js">Week 14</a></li>
-</ul>
+<section id="groups-with-no-group-differences-type-i-errors" class="level3">
+<h3 class="anchored" data-anchor-id="groups-with-no-group-differences-type-i-errors">3 Groups with No Group Differences (Type I Errors)</h3>
+<p>Set up simulation characteristics for Null Findings.</p>
+<p>This will allow us to determine Type I error rates because any signficant effect is a type I error given we have set the population effect to 0</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate N experiments</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n_experiments <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234567</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Beta <span class="ot">&lt;-</span> <span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>get_data <span class="ot">&lt;-</span> <span class="cf">function</span>(n, Beta, <span class="at">noise_x =</span> <span class="dv">0</span>, <span class="at">noise_y =</span> <span class="dv">0</span>){</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="sc">+</span> Beta <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">10</span>) </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (noise_x <span class="sc">!=</span> <span class="dv">0</span>) {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, noise_x)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (noise_y <span class="sc">!=</span> <span class="dv">0</span>) {</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> y <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, noise_y)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(x, y) </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>get_b <span class="ot">&lt;-</span> <span class="cf">function</span>(n, Beta, <span class="at">noise_x =</span> <span class="dv">0</span>, <span class="at">noise_y =</span> <span class="dv">0</span>){</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_data</span>(n, Beta, noise_x, noise_y) <span class="sc">|&gt;</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> _) <span class="sc">|&gt;</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tidy</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"x"</span>) </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
 </section>
-<section id="lecture" class="level1">
-<h1>Lecture</h1>
-<ul>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_10_09/1_gsb1ai91">Oct 09</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_10_16/1_i5aix5ax">Oct 16</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_10_21/1_kl86kwle">Oct 21</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_10_28/1_832zh3tc">Oct 28</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_10_30/1_hpnq713a">Oct 30</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_11_04/1_bd15u3ed">Nov 04</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_11_06/1_35539di0">Nov 06</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_11_11/1_v80ogln2">Nov 11</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_11_13/1_38ncghi4">Nov 13</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_11_18/1_pea6t6df">Nov 18</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_11_20/1_ay62ufx9">Nov 20</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_11_25/1_3ylvv1rq">Nov 25</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_12_02/1_snkalq6j">Dec 02</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_12_04/1_41yex7hv">Dec 04</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_12_09/1_8rzze966">Dec 09</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_12_11/1_p86l6we5">Dec 11</a></li>
-</ul>
+<section id="simulate-no-additional-noise-in-y-beyond-e" class="level2">
+<h2 class="anchored" data-anchor-id="simulate-no-additional-noise-in-y-beyond-e">Simulate no additional noise in Y (beyond e)</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>noise_none <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n_experiments <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(i) <span class="fu">get_b</span>(n, Beta)) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Mean of sampling distribution for parameter estimate</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>noise_none <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(estimate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+   mean
+  &lt;dbl&gt;
+1  10.0</code></pre>
+</div>
+</div>
+<p>Standard deviation of sampling distribution for parameter estimate (i.e.&nbsp;SE of b)</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>noise_none <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sd =</span> <span class="fu">sd</span>(estimate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+      sd
+   &lt;dbl&gt;
+1 0.0714</code></pre>
+</div>
+</div>
 </section>
-<section id="review-sessions" class="level1">
-<h1>Review sessions</h1>
-<ul>
-<li><a href="https://mediaspace.wisc.edu/media/midterm_concepts_review/1_zgeiuhh2">Midterm concepts</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/exam_2_review/1_4rcrz19k">Final concepts</a></li>
-</ul>
+<section id="noise-in-y" class="level2">
+<h2 class="anchored" data-anchor-id="noise-in-y">Noise in Y</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>noise_y <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n_experiments <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(i) <span class="fu">get_b</span>(n, Beta, <span class="at">noise_y =</span> <span class="dv">10</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Mean of sampling distribution for parameter estimate</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>noise_y <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(estimate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+   mean
+  &lt;dbl&gt;
+1  10.0</code></pre>
+</div>
+</div>
+<p>Standard deviation of sampling distribution for parameter estimate (i.e.&nbsp;SE of b)</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>noise_y <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sd =</span> <span class="fu">sd</span>(estimate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+      sd
+   &lt;dbl&gt;
+1 0.0997</code></pre>
+</div>
+</div>
+</section>
+<section id="noise-in-x" class="level2">
+<h2 class="anchored" data-anchor-id="noise-in-x">Noise in X</h2>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>noise_x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n_experiments <span class="sc">|&gt;</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(\(i) <span class="fu">get_b</span>(n, Beta, <span class="at">noise_x =</span> <span class="dv">10</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list_rbind</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Mean of sampling distribution for parameter estimate</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>noise_x <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(estimate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+   mean
+  &lt;dbl&gt;
+1  5.00</code></pre>
+</div>
+</div>
+<p>Standard deviation of sampling distribution for parameter estimate (i.e.&nbsp;SE of b)</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>noise_x <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sd =</span> <span class="fu">sd</span>(estimate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+     sd
+  &lt;dbl&gt;
+1 0.360</code></pre>
+</div>
+</div>
 
 
 </section>
@@ -673,14 +826,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./web6_exams.html" class="pagination-link" aria-label="Exams">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exams</span>
+      <a href="./app4_logistic_se.html" class="pagination-link" aria-label="Exploring SEs for Logistic Regression">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exploring SEs for Logistic Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./app1_exam_review.html" class="pagination-link" aria-label="Exam Concepts">
-        <span class="nav-page-text">Exam Concepts</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -688,4 +838,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/web7_videos.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/app5_noise.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
