@@ -1,0 +1,115 @@
+---
+editor_options: 
+  chunk_output_type: console
+---
+
+# Monte Carlo Simulation of Contrast Approaches {.unnumbered}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+ 
+library(tidyverse)
+library(broom)
+```
+
+### 3 Groups with No Group Differences (Type I Errors) 
+
+Set up simulation characteristics for Null Findings.
+
+This will allow us to determine Type I error rates because any signficant effect is a type I error given we have set the population effect to 0
+```{r}
+# simulate N experiments
+n_experiments <- 10000
+n <- 200
+set.seed(1234567)
+Beta <- 10
+```
+
+
+```{r}
+get_data <- function(n, Beta, noise_x = 0, noise_y = 0){
+  x <- rnorm(n, 0, 10)
+  y <- 0 + Beta * x + rnorm(n, 0, 10) 
+  
+  if (noise_x != 0) {
+    x <- x + rnorm(n, 0, noise_x)
+  }
+  if (noise_y != 0) {
+    y <- y + rnorm(n, 0, noise_y)
+  }
+  
+  tibble(x, y) 
+}
+```
+
+```{r}
+get_b <- function(n, Beta, noise_x = 0, noise_y = 0){
+  
+  get_data(n, Beta, noise_x, noise_y) |> 
+  lm(y ~ x, data = _) |> 
+    tidy() |> 
+    filter(term == "x") 
+}
+```
+
+--------------------------------------------------------------------------------
+
+## Simulate no additional noise in Y (beyond e)
+```{r}
+noise_none <- 1:n_experiments |> 
+  map(\(i) get_b(n, Beta)) |>
+  list_rbind()
+```
+
+Mean of sampling distribution for parameter estimate
+```{r}
+noise_none |> 
+  summarise(mean = mean(estimate))
+```
+
+Standard deviation of sampling distribution for parameter estimate (i.e. SE of b)
+```{r}
+noise_none |> 
+  summarise(sd = sd(estimate))
+```
+ 
+
+## Noise in Y
+```{r}
+noise_y <- 1:n_experiments |> 
+  map(\(i) get_b(n, Beta, noise_y = 10)) |>
+  list_rbind()
+```
+
+Mean of sampling distribution for parameter estimate
+```{r}
+noise_y |> 
+  summarise(mean = mean(estimate))
+```
+
+Standard deviation of sampling distribution for parameter estimate (i.e. SE of b)
+```{r}
+noise_y |> 
+  summarise(sd = sd(estimate))
+```
+
+## Noise in X
+```{r}
+noise_x <- 1:n_experiments |> 
+  map(\(i) get_b(n, Beta, noise_x = 10)) |>
+  list_rbind()
+```
+
+Mean of sampling distribution for parameter estimate
+```{r}
+noise_x |> 
+  summarise(mean = mean(estimate))
+```
+
+Standard deviation of sampling distribution for parameter estimate (i.e. SE of b)
+```{r}
+noise_x |> 
+  summarise(sd = sd(estimate))
+```
