@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Exploring SEs for Logistic Regression – Introduction to the General Linear Model</title>
+<title>Exploring SEs for Logistic Regression – Introduction to the General Linear Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -145,7 +145,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app1_exam_review.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app4_logistic_se.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exploring SEs for Logistic Regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app1_exam_review.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app4_logistic_se.html">Exploring SEs for Logistic Regression</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -250,7 +250,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./app4_logistic_se.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exploring SEs for Logistic Regression</span></span></a>
+ <span class="menu-text">Exploring SEs for Logistic Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -271,23 +271,23 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup"><span class="header-section-number">1.1</span> Setup</a></li>
-  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="header-section-number">1.2</span> Functions</a></li>
-  <li><a href="#simulate-sampling-distribution" id="toc-simulate-sampling-distribution" class="nav-link" data-scroll-target="#simulate-sampling-distribution"><span class="header-section-number">1.3</span> Simulate sampling distribution</a></li>
-  <li><a href="#add-post-simulation-calcs-to-preds" id="toc-add-post-simulation-calcs-to-preds" class="nav-link" data-scroll-target="#add-post-simulation-calcs-to-preds"><span class="header-section-number">1.4</span> Add post simulation calcs to preds</a></li>
-  <li><a href="#visual-sampling-distributions-for-predictions" id="toc-visual-sampling-distributions-for-predictions" class="nav-link" data-scroll-target="#visual-sampling-distributions-for-predictions"><span class="header-section-number">1.5</span> Visual sampling distributions for predictions</a></li>
-  <li><a href="#review-min-and-max-values-for-probability-based-cis" id="toc-review-min-and-max-values-for-probability-based-cis" class="nav-link" data-scroll-target="#review-min-and-max-values-for-probability-based-cis"><span class="header-section-number">1.6</span> Review min and max values for probability based CIs</a></li>
-  <li><a href="#check-model-ses-from-predict-for-lo-and-pr" id="toc-check-model-ses-from-predict-for-lo-and-pr" class="nav-link" data-scroll-target="#check-model-ses-from-predict-for-lo-and-pr"><span class="header-section-number">1.7</span> Check model SEs (from predict) for lo and pr</a></li>
-  <li><a href="#check-cis" id="toc-check-cis" class="nav-link" data-scroll-target="#check-cis"><span class="header-section-number">1.8</span> Check CIs</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">Functions</a></li>
+  <li><a href="#simulate-sampling-distribution" id="toc-simulate-sampling-distribution" class="nav-link" data-scroll-target="#simulate-sampling-distribution">Simulate sampling distribution</a></li>
+  <li><a href="#add-post-simulation-calcs-to-preds" id="toc-add-post-simulation-calcs-to-preds" class="nav-link" data-scroll-target="#add-post-simulation-calcs-to-preds">Add post simulation calcs to preds</a></li>
+  <li><a href="#visual-sampling-distributions-for-predictions" id="toc-visual-sampling-distributions-for-predictions" class="nav-link" data-scroll-target="#visual-sampling-distributions-for-predictions">Visual sampling distributions for predictions</a></li>
+  <li><a href="#review-min-and-max-values-for-probability-based-cis" id="toc-review-min-and-max-values-for-probability-based-cis" class="nav-link" data-scroll-target="#review-min-and-max-values-for-probability-based-cis">Review min and max values for probability based CIs</a></li>
+  <li><a href="#check-model-ses-from-predict-for-lo-and-pr" id="toc-check-model-ses-from-predict-for-lo-and-pr" class="nav-link" data-scroll-target="#check-model-ses-from-predict-for-lo-and-pr">Check model SEs (from predict) for lo and pr</a></li>
+  <li><a href="#check-cis" id="toc-check-cis" class="nav-link" data-scroll-target="#check-cis">Check CIs</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/app4_logistic_se.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app1_exam_review.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app4_logistic_se.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exploring SEs for Logistic Regression</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app1_exam_review.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app4_logistic_se.html">Exploring SEs for Logistic Regression</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exploring SEs for Logistic Regression</span></h1>
+<h1 class="title">Exploring SEs for Logistic Regression</h1>
 </div>
 
 
@@ -304,8 +304,8 @@ window.Quarto = {
 </header>
 
 
-<section id="setup" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="setup"><span class="header-section-number">1.1</span> Setup</h2>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <div class="cell" data-messages="false" data-warnings="false">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -346,8 +346,8 @@ window.Quarto = {
 </details>
 </div>
 </section>
-<section id="functions" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="functions"><span class="header-section-number">1.2</span> Functions</h2>
+<section id="functions" class="level2">
+<h2 class="anchored" data-anchor-id="functions">Functions</h2>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -382,8 +382,8 @@ window.Quarto = {
 </details>
 </div>
 </section>
-<section id="simulate-sampling-distribution" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="simulate-sampling-distribution"><span class="header-section-number">1.3</span> Simulate sampling distribution</h2>
+<section id="simulate-sampling-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="simulate-sampling-distribution">Simulate sampling distribution</h2>
 <p>Settings</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -412,8 +412,8 @@ window.Quarto = {
 </details>
 </div>
 </section>
-<section id="add-post-simulation-calcs-to-preds" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="add-post-simulation-calcs-to-preds"><span class="header-section-number">1.4</span> Add post simulation calcs to preds</h2>
+<section id="add-post-simulation-calcs-to-preds" class="level2">
+<h2 class="anchored" data-anchor-id="add-post-simulation-calcs-to-preds">Add post simulation calcs to preds</h2>
 <p>Transform log-odds to pr and get CIs for log-odds, pr from log-odds, and native pr</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -480,8 +480,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="visual-sampling-distributions-for-predictions" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="visual-sampling-distributions-for-predictions"><span class="header-section-number">1.5</span> Visual sampling distributions for predictions</h2>
+<section id="visual-sampling-distributions-for-predictions" class="level2">
+<h2 class="anchored" data-anchor-id="visual-sampling-distributions-for-predictions">Visual sampling distributions for predictions</h2>
 <p>For log-odds</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -563,8 +563,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="review-min-and-max-values-for-probability-based-cis" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="review-min-and-max-values-for-probability-based-cis"><span class="header-section-number">1.6</span> Review min and max values for probability based CIs</h2>
+<section id="review-min-and-max-values-for-probability-based-cis" class="level2">
+<h2 class="anchored" data-anchor-id="review-min-and-max-values-for-probability-based-cis">Review min and max values for probability based CIs</h2>
 <p>CIs for probability are NOT equivalent when formed from log-odds vs.&nbsp;pr. This is because the transformation from log-odds to pr is non-linear (after adding/subtracting SE).</p>
 <p>In this example, the CI boundaries for probability are never &lt; 0 or greater than 1 even when calculated directly as probability + 1.96 SE. But that may not be always true. Also clear that +- 1.96 SE is not appropriate for a probability CI given its not symetric and therefore clearly not always normal.</p>
 <div class="cell">
@@ -590,8 +590,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="check-model-ses-from-predict-for-lo-and-pr" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="check-model-ses-from-predict-for-lo-and-pr"><span class="header-section-number">1.7</span> Check model SEs (from predict) for lo and pr</h2>
+<section id="check-model-ses-from-predict-for-lo-and-pr" class="level2">
+<h2 class="anchored" data-anchor-id="check-model-ses-from-predict-for-lo-and-pr">Check model SEs (from predict) for lo and pr</h2>
 <p>Now fit a single model and use <code>predict()</code> to se.fit for lo and pr</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -628,16 +628,16 @@ window.Quarto = {
 <pre><code># A tibble: 5 × 7
       x se_lo_true se_lo_mod diff_lo se_pr_true se_pr_mod   diff_pr
   &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1    -8      0.266    0.244  0.0211     0.00463   0.00524 -0.000601
-2    -3      0.137    0.130  0.00724    0.0202    0.0201   0.000100
-3     0      0.102    0.0983 0.00350    0.0254    0.0246   0.000813
-4     3      0.137    0.127  0.00954    0.0202    0.0203  -0.000164
-5     8      0.265    0.240  0.0244     0.00462   0.00541 -0.000782</code></pre>
+1    -8      0.266     0.252 0.0140     0.00463   0.00491 -0.000271
+2    -3      0.137     0.132 0.00581    0.0202    0.0199   0.000314
+3     0      0.102     0.100 0.00131    0.0254    0.0251   0.000264
+4     3      0.137     0.135 0.00200    0.0202    0.0210  -0.000834
+5     8      0.265     0.256 0.00866    0.00462   0.00521 -0.000588</code></pre>
 </div>
 </div>
 </section>
-<section id="check-cis" class="level2" data-number="1.8">
-<h2 data-number="1.8" class="anchored" data-anchor-id="check-cis"><span class="header-section-number">1.8</span> Check CIs</h2>
+<section id="check-cis" class="level2">
+<h2 class="anchored" data-anchor-id="check-cis">Check CIs</h2>
 <p>For LO GOOD!</p>
 <div class="cell">
 <details open="" class="code-fold">
