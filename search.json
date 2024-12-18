@@ -834,45 +834,67 @@
   {
     "objectID": "app5_noise.html",
     "href": "app5_noise.html",
-    "title": "Monte Carlo Simulation of Contrast Approaches",
+    "title": "Simulate Noise Added to \\(X\\) vs. \\(Y\\)",
     "section": "",
-    "text": "3 Groups with No Group Differences (Type I Errors)\nSet up simulation characteristics for Null Findings.\nThis will allow us to determine Type I error rates because any signficant effect is a type I error given we have set the population effect to 0\nCode\n# simulate N experiments\nn_experiments &lt;- 10000\nn &lt;- 200\nset.seed(1234567)\nBeta &lt;- 10\nCode\nget_data &lt;- function(n, Beta, noise_x = 0, noise_y = 0){\n  x &lt;- rnorm(n, 0, 10)\n  y &lt;- 0 + Beta * x + rnorm(n, 0, 10) \n  \n  if (noise_x != 0) {\n    x &lt;- x + rnorm(n, 0, noise_x)\n  }\n  if (noise_y != 0) {\n    y &lt;- y + rnorm(n, 0, noise_y)\n  }\n  \n  tibble(x, y) \n}\nCode\nget_b &lt;- function(n, Beta, noise_x = 0, noise_y = 0){\n  \n  get_data(n, Beta, noise_x, noise_y) |&gt; \n  lm(y ~ x, data = _) |&gt; \n    tidy() |&gt; \n    filter(term == \"x\") \n}",
+    "text": "The problem\nLinear models assume that there is no noise in the measurement of \\(X\\). In contrast, noise in \\(Y\\) is permitted (and modeled) by the inclusion of an error term (the residuals) into the model.\nIf there is noise in \\(X\\) in a simple (one predictor) model, we will underestimate the effect of \\(X\\). In models with more than one \\(X\\), we may either underestimate or overestimate the unique effect of an \\(X\\) controlling for \\(X2\\) if we add noise to \\(X2\\), depending on the pattern of relationships among the \\(X\\)s and \\(Y\\)\nLets understand this a bit better. We can start by setting up a context to simulate estimating the effect of \\(X\\) by repeatedly sampling \\(X\\) and \\(Y\\) from the population so that we can look at the sampling distribution for \\(b_x\\). We will consider three conditions",
     "crumbs": [
       "Appendices",
-      "Monte Carlo Simulation of Contrast Approaches"
+      "Simulate Noise Added to $X$ vs. $Y$"
     ]
   },
   {
-    "objectID": "app5_noise.html#simulate-no-additional-noise-in-y-beyond-e",
-    "href": "app5_noise.html#simulate-no-additional-noise-in-y-beyond-e",
-    "title": "Monte Carlo Simulation of Contrast Approaches",
-    "section": "Simulate no additional noise in Y (beyond e)",
-    "text": "Simulate no additional noise in Y (beyond e)\n\n\nCode\nnoise_none &lt;- 1:n_experiments |&gt; \n  map(\\(i) get_b(n, Beta)) |&gt;\n  list_rbind()\n\n\nMean of sampling distribution for parameter estimate\n\n\nCode\nnoise_none |&gt; \n  summarise(mean = mean(estimate))\n\n\n# A tibble: 1 × 1\n   mean\n  &lt;dbl&gt;\n1  10.0\n\n\nStandard deviation of sampling distribution for parameter estimate (i.e. SE of b)\n\n\nCode\nnoise_none |&gt; \n  summarise(sd = sd(estimate))\n\n\n# A tibble: 1 × 1\n      sd\n   &lt;dbl&gt;\n1 0.0714",
+    "objectID": "app5_noise.html#the-problem",
+    "href": "app5_noise.html#the-problem",
+    "title": "Simulate Noise Added to \\(X\\) vs. \\(Y\\)",
+    "section": "",
+    "text": "A baseline model with \\(X\\) and \\(Y\\)\nThe addition of noise to \\(Y\\)\nThe addition of noise to \\(X\\)",
     "crumbs": [
       "Appendices",
-      "Monte Carlo Simulation of Contrast Approaches"
+      "Simulate Noise Added to $X$ vs. $Y$"
     ]
   },
   {
-    "objectID": "app5_noise.html#noise-in-y",
-    "href": "app5_noise.html#noise-in-y",
-    "title": "Monte Carlo Simulation of Contrast Approaches",
-    "section": "Noise in Y",
-    "text": "Noise in Y\n\n\nCode\nnoise_y &lt;- 1:n_experiments |&gt; \n  map(\\(i) get_b(n, Beta, noise_y = 10)) |&gt;\n  list_rbind()\n\n\nMean of sampling distribution for parameter estimate\n\n\nCode\nnoise_y |&gt; \n  summarise(mean = mean(estimate))\n\n\n# A tibble: 1 × 1\n   mean\n  &lt;dbl&gt;\n1  10.0\n\n\nStandard deviation of sampling distribution for parameter estimate (i.e. SE of b)\n\n\nCode\nnoise_y |&gt; \n  summarise(sd = sd(estimate))\n\n\n# A tibble: 1 × 1\n      sd\n   &lt;dbl&gt;\n1 0.0997",
+    "objectID": "app5_noise.html#set-up-simulation-characteristics",
+    "href": "app5_noise.html#set-up-simulation-characteristics",
+    "title": "Simulate Noise Added to \\(X\\) vs. \\(Y\\)",
+    "section": "Set up simulation characteristics",
+    "text": "Set up simulation characteristics\nWe set up these (mostly arbitrary) characteristics for our simulation\n\n20000 simulations\nsample size of 200\nPopulation effect for \\(X\\) of \\(\\beta_x\\) = 10\n\n\n\nCode\nn_experiments &lt;- 20000\nn &lt;- 200\nBeta &lt;- 3 \n\nset.seed(1234567)",
     "crumbs": [
       "Appendices",
-      "Monte Carlo Simulation of Contrast Approaches"
+      "Simulate Noise Added to $X$ vs. $Y$"
     ]
   },
   {
-    "objectID": "app5_noise.html#noise-in-x",
-    "href": "app5_noise.html#noise-in-x",
-    "title": "Monte Carlo Simulation of Contrast Approaches",
-    "section": "Noise in X",
-    "text": "Noise in X\n\n\nCode\nnoise_x &lt;- 1:n_experiments |&gt; \n  map(\\(i) get_b(n, Beta, noise_x = 10)) |&gt;\n  list_rbind()\n\n\nMean of sampling distribution for parameter estimate\n\n\nCode\nnoise_x |&gt; \n  summarise(mean = mean(estimate))\n\n\n# A tibble: 1 × 1\n   mean\n  &lt;dbl&gt;\n1  5.00\n\n\nStandard deviation of sampling distribution for parameter estimate (i.e. SE of b)\n\n\nCode\nnoise_x |&gt; \n  summarise(sd = sd(estimate))\n\n\n# A tibble: 1 × 1\n     sd\n  &lt;dbl&gt;\n1 0.360",
+    "objectID": "app5_noise.html#set-up-some-functions-to-support-simulation",
+    "href": "app5_noise.html#set-up-some-functions-to-support-simulation",
+    "title": "Simulate Noise Added to \\(X\\) vs. \\(Y\\)",
+    "section": "Set up some functions to support simulation",
+    "text": "Set up some functions to support simulation\nThis function draws a sample of data using the characteristics set by the function arguments\n\n\nCode\nget_data &lt;- function(n, Beta, noise_x = 0, noise_y = 0){\n  x &lt;- rnorm(n, 0, 10)\n  y &lt;- 0 + Beta * x + rnorm(n, 0, 10) \n\n  # add noise to our measurement of either X or Y  \n  if (noise_x != 0) {\n    x &lt;- x + rnorm(n, 0, noise_x)\n  }\n  if (noise_y != 0) {\n    y &lt;- y + rnorm(n, 0, noise_y)\n  }\n  \n  tibble(x, y) \n}\n\n\nThis function draws a sample using earlier function and then fits model and returns statistics for the effect of \\(X\\)\n\n\nCode\nget_b &lt;- function(n, Beta, noise_x = 0, noise_y = 0){\n  \n  get_data(n, Beta, noise_x, noise_y) |&gt; \n  lm(y ~ x, data = _) |&gt; \n    tidy() |&gt; \n    filter(term == \"x\") \n}",
     "crumbs": [
       "Appendices",
-      "Monte Carlo Simulation of Contrast Approaches"
+      "Simulate Noise Added to $X$ vs. $Y$"
+    ]
+  },
+  {
+    "objectID": "app5_noise.html#simulations",
+    "href": "app5_noise.html#simulations",
+    "title": "Simulate Noise Added to \\(X\\) vs. \\(Y\\)",
+    "section": "Simulations",
+    "text": "Simulations\nLets run simulations for our three contexts\n\nbaseline model\nadd noise to y\nadd noise to x\n\n\n\nCode\nnoise_none &lt;- 1:n_experiments |&gt; \n  map(\\(i) get_b(n, Beta)) |&gt;\n  list_rbind()\n\nnoise_y &lt;- 1:n_experiments |&gt; \n  map(\\(i) get_b(n, Beta, noise_y = 10)) |&gt;\n  list_rbind()\n\nnoise_x &lt;- 1:n_experiments |&gt; \n  map(\\(i) get_b(n, Beta, noise_x = 10)) |&gt;\n  list_rbind()\n\n\nAnd lets look at the parameter estimate and (SE) for \\(X\\) from the three simulations\n\nNoise in \\(Y\\) has no effect on \\(b_x\\) but it does increase the associated standard error\nNoise in \\(X\\) introduces bias into \\(b_x\\). It now underestimates the true \\(\\beta\\) = 3. This noise, also increase the associated standard error.\n\n\n\nCode\nresults_base &lt;- noise_none |&gt; \n  summarise(mean_b = mean(estimate),\n            se_b = sd(estimate)) |&gt;\n  mutate(context = \"baseline\")\nresults_y &lt;- noise_y |&gt; \n  summarise(mean_b = mean(estimate),\n            se_b = sd(estimate)) |&gt;\n  mutate(context = \"noise y\")\nresults_x &lt;- noise_x |&gt; \n  summarise(mean_b = mean(estimate),\n            se_b = sd(estimate)) |&gt;\n  mutate(context = \"noise x\")\n\nresults_base |&gt; \n  bind_rows(results_y) |&gt; \n  bind_rows(results_x) |&gt; \n  relocate(context)\n\n\n# A tibble: 3 × 3\n  context  mean_b   se_b\n  &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;\n1 baseline   3.00 0.0714\n2 noise y    3.00 0.101 \n3 noise x    1.50 0.119",
+    "crumbs": [
+      "Appendices",
+      "Simulate Noise Added to $X$ vs. $Y$"
+    ]
+  },
+  {
+    "objectID": "app5_noise.html#simple-demonstration-with-a-single-sample",
+    "href": "app5_noise.html#simple-demonstration-with-a-single-sample",
+    "title": "Simulate Noise Added to \\(X\\) vs. \\(Y\\)",
+    "section": "Simple demonstration with a single sample",
+    "text": "Simple demonstration with a single sample\nLets dive into the problem a little deeper with a single sample\nFirst, lets draw a sample and fit the model. As we see, the parameter estimate is approximately 3, as expected.\n\n\nCode\nd_base &lt;- get_data(n, Beta)\n\nlm(y ~ x, data = d_base) |&gt; \n  tidy() |&gt; \n  filter(term == \"x\")\n\n\n# A tibble: 1 × 5\n  term  estimate std.error statistic  p.value\n  &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 x         2.94    0.0728      40.4 1.20e-97\n\n\nNow lets see what happens when we add noise to \\(Y\\). As seen, the parameter estimate is still approximately 3\n\n\nCode\nd_y &lt;- get_data(n, Beta, noise_y = 10)\n\nlm(y ~ x, data = d_y) |&gt; \n  tidy() |&gt; \n  filter(term == \"x\")\n\n\n# A tibble: 1 × 5\n  term  estimate std.error statistic  p.value\n  &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 x         2.96     0.104      28.5 4.65e-72\n\n\nNow lets see what happens when we add noise to \\(X\\). The parameter estimate is much smaller! It underestimates the effect of \\(X\\)\n\n\nCode\nd_x &lt;- get_data(n, Beta, noise_x = 10)\n\nlm(y ~ x, data = d_x) |&gt; \n  tidy() |&gt; \n  filter(term == \"x\")\n\n\n# A tibble: 1 × 5\n  term  estimate std.error statistic  p.value\n  &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;\n1 x         1.49     0.119      12.5 8.98e-27\n\n\nLets also visualize all three of these models to understand them better. Hopefully, this helps your intution regarding why noise in X decreases our estimate of its effect.\n\n\nCode\np_base &lt;- d_base |&gt; \n  ggplot(aes(x = x, y = y)) +\n    geom_point() +\n    stat_smooth(method = \"lm\", \n                formula = y ~ x, \n                geom = \"smooth\") +\n  xlim(-50, 50) +\n  ylim(-100, 100) +\n  ggtitle(\"baseline\")\n\np_y &lt;- d_y |&gt; \n  ggplot(aes(x = x, y = y)) +\n    geom_point() +                                      \n    stat_smooth(method = \"lm\", \n                formula = y ~ x, \n                geom = \"smooth\") +\n  xlim(-50, 50) +\n  ylim(-100, 100) + \n  ggtitle(\"y noise\")\n\np_x &lt;- d_x |&gt; \n  ggplot(aes(x = x, y = y)) +\n    geom_point() +\n    stat_smooth(method = \"lm\", \n                formula = y ~ x, \n                geom = \"smooth\") +\n  xlim(-50, 50) +\n  ylim(-100, 100) +\n  ggtitle(\"x noise\")\n\np_base + p_y + p_x\n\n\nWarning: Removed 1 row containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 1 row containing missing values or values outside the scale range\n(`geom_point()`).",
+    "crumbs": [
+      "Appendices",
+      "Simulate Noise Added to $X$ vs. $Y$"
     ]
   }
 ]
