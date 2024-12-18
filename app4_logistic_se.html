@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exploring SEs for Logistic Regression – Introduction to the General Linear Model</title>
+<title>Simulate SEs for Logistic Regression – Introduction to the General Linear Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -145,7 +145,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app1_exam_review.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app4_logistic_se.html">Exploring SEs for Logistic Regression</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app1_exam_review.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app4_logistic_se.html">Simulate SEs for Logistic Regression</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -244,13 +244,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./app3_contrasts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Monte Carlo Simulation of Contrast Approaches</span></a>
+ <span class="menu-text">Simulate Error Rates for Contrast Approaches</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./app4_logistic_se.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Exploring SEs for Logistic Regression</span></a>
+ <span class="menu-text">Simulate SEs for Logistic Regression</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -285,9 +285,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app1_exam_review.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app4_logistic_se.html">Exploring SEs for Logistic Regression</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app1_exam_review.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app4_logistic_se.html">Simulate SEs for Logistic Regression</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Exploring SEs for Logistic Regression</h1>
+<h1 class="title">Simulate SEs for Logistic Regression</h1>
 </div>
 
 
@@ -626,13 +626,13 @@ window.Quarto = {
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 7
-      x se_lo_true se_lo_mod diff_lo se_pr_true se_pr_mod   diff_pr
-  &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1    -8      0.266     0.252 0.0140     0.00463   0.00491 -0.000271
-2    -3      0.137     0.132 0.00581    0.0202    0.0199   0.000314
-3     0      0.102     0.100 0.00131    0.0254    0.0251   0.000264
-4     3      0.137     0.135 0.00200    0.0202    0.0210  -0.000834
-5     8      0.265     0.256 0.00866    0.00462   0.00521 -0.000588</code></pre>
+      x se_lo_true se_lo_mod  diff_lo se_pr_true se_pr_mod   diff_pr
+  &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1    -8      0.266     0.281 -0.0152     0.00463   0.00382  0.000815
+2    -3      0.137     0.141 -0.00407    0.0202    0.0204  -0.000183
+3     0      0.102     0.104 -0.00270    0.0254    0.0261  -0.000699
+4     3      0.137     0.147 -0.00983    0.0202    0.0190   0.00119 
+5     8      0.265     0.288 -0.0230     0.00462   0.00334  0.00129 </code></pre>
 </div>
 </div>
 </section>
@@ -1126,8 +1126,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./app3_contrasts.html" class="pagination-link" aria-label="Monte Carlo Simulation of Contrast Approaches">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Monte Carlo Simulation of Contrast Approaches</span>
+      <a href="./app3_contrasts.html" class="pagination-link" aria-label="Simulate Error Rates for Contrast Approaches">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Simulate Error Rates for Contrast Approaches</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
