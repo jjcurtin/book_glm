@@ -3,7 +3,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Monte Carlo Simulation of Contrast Approaches {.unnumbered}
+# Simulate Noise Added to $X$ vs. $Y$ {.unnumbered}
 
 ```{r}
 #| echo: false
@@ -12,27 +12,45 @@ editor_options:
  
 library(tidyverse)
 library(broom)
+library(patchwork)
 ```
 
-### 3 Groups with No Group Differences (Type I Errors) 
+## The problem
 
-Set up simulation characteristics for Null Findings.
+Linear models assume that there is no noise in the measurement of $X$.  In contrast, noise in $Y$ is permitted (and modeled) by the inclusion of an error term (the residuals) into the model.
 
-This will allow us to determine Type I error rates because any signficant effect is a type I error given we have set the population effect to 0
+If there is noise in $X$ in a simple (one predictor) model, we will underestimate the effect of $X$.  In models with more than one $X$, we may either underestimate or overestimate the unique effect of an $X$ controlling for $X2$ if we add noise to $X2$, depending on the pattern of relationships among the $X$s and $Y$
+
+Lets understand this a bit better.  We can start by setting up a context to simulate estimating the effect of $X$ by repeatedly sampling $X$ and $Y$ from the population so that we can look at the sampling distribution for $b_x$.  We will consider three conditions
+
+1. A baseline model with $X$ and $Y$
+2. The addition of noise to $Y$
+3. The addition of noise to $X$
+
+## Set up simulation characteristics
+
+We set up these (mostly arbitrary) characteristics for our simulation
+
+- 20000 simulations
+- sample size of 200
+- Population effect for $X$ of $\beta_x$ = 3 
 ```{r}
-# simulate N experiments
-n_experiments <- 10000
+n_experiments <- 20000
 n <- 200
+Beta <- 3 
+
 set.seed(1234567)
-Beta <- 10
 ```
 
+## Set up some functions to support simulation
 
+This function draws a sample of data using the characteristics set by the function arguments
 ```{r}
 get_data <- function(n, Beta, noise_x = 0, noise_y = 0){
   x <- rnorm(n, 0, 10)
   y <- 0 + Beta * x + rnorm(n, 0, 10) 
-  
+
+  # add noise to our measurement of either X or Y  
   if (noise_x != 0) {
     x <- x + rnorm(n, 0, noise_x)
   }
@@ -44,6 +62,7 @@ get_data <- function(n, Beta, noise_x = 0, noise_y = 0){
 }
 ```
 
+This function draws a sample using earlier function and then fits model and returns statistics for the effect of $X$
 ```{r}
 get_b <- function(n, Beta, noise_x = 0, noise_y = 0){
   
@@ -54,62 +73,120 @@ get_b <- function(n, Beta, noise_x = 0, noise_y = 0){
 }
 ```
 
---------------------------------------------------------------------------------
+## Simulations 
 
-## Simulate no additional noise in Y (beyond e)
+Lets run simulations for our three contexts
+
+- baseline model
+- add noise to y
+- add noise to x
 ```{r}
 noise_none <- 1:n_experiments |> 
   map(\(i) get_b(n, Beta)) |>
   list_rbind()
-```
 
-Mean of sampling distribution for parameter estimate
-```{r}
-noise_none |> 
-  summarise(mean = mean(estimate))
-```
-
-Standard deviation of sampling distribution for parameter estimate (i.e. SE of b)
-```{r}
-noise_none |> 
-  summarise(sd = sd(estimate))
-```
- 
-
-## Noise in Y
-```{r}
 noise_y <- 1:n_experiments |> 
   map(\(i) get_b(n, Beta, noise_y = 10)) |>
   list_rbind()
-```
 
-Mean of sampling distribution for parameter estimate
-```{r}
-noise_y |> 
-  summarise(mean = mean(estimate))
-```
-
-Standard deviation of sampling distribution for parameter estimate (i.e. SE of b)
-```{r}
-noise_y |> 
-  summarise(sd = sd(estimate))
-```
-
-## Noise in X
-```{r}
 noise_x <- 1:n_experiments |> 
   map(\(i) get_b(n, Beta, noise_x = 10)) |>
   list_rbind()
 ```
 
-Mean of sampling distribution for parameter estimate
+And lets look at the parameter estimate and (SE) for $X$ from the three simulations
+
+- Noise in $Y$ has no effect on $b_x$ but it does increase the associated standard error
+- Noise in $X$ introduces bias into $b_x$.  It now underestimates the true $\beta$ = 3.  This noise, also increase the associated standard error. 
 ```{r}
-noise_x |> 
-  summarise(mean = mean(estimate))
+#| code-fold: true
+
+results_base <- noise_none |> 
+  summarise(mean_b = mean(estimate),
+            se_b = sd(estimate)) |>
+  mutate(context = "baseline")
+results_y <- noise_y |> 
+  summarise(mean_b = mean(estimate),
+            se_b = sd(estimate)) |>
+  mutate(context = "noise y")
+results_x <- noise_x |> 
+  summarise(mean_b = mean(estimate),
+            se_b = sd(estimate)) |>
+  mutate(context = "noise x")
+
+results_base |> 
+  bind_rows(results_y) |> 
+  bind_rows(results_x) |> 
+  relocate(context)
 ```
 
-Standard deviation of sampling distribution for parameter estimate (i.e. SE of b)
+## Simple demonstration with a single sample
+
+Lets dive into the problem a little deeper with a single sample
+
+First, lets draw a sample and fit the model.  As we see, the parameter estimate is approximately 3, as expected.
+
 ```{r}
-noise_x |> 
-  summarise(sd = sd(estimate))
+d_base <- get_data(n, Beta)
+
+lm(y ~ x, data = d_base) |> 
+  tidy() |> 
+  filter(term == "x")
+```
+
+Now lets see what happens when we add noise to $Y$.  As seen, the parameter estimate is still approximately 3 
+```{r}
+d_y <- get_data(n, Beta, noise_y = 10)
+
+lm(y ~ x, data = d_y) |> 
+  tidy() |> 
+  filter(term == "x")
+```
+
+Now lets see what happens when we add noise to $X$.  The parameter estimate is much smaller!  It underestimates the effect of $X$
+```{r}
+d_x <- get_data(n, Beta, noise_x = 10)
+
+lm(y ~ x, data = d_x) |> 
+  tidy() |> 
+  filter(term == "x")
+```
+
+Lets also visualize all three of these models to understand them better.  Hopefully, this helps your intution regarding why noise in X decreases our estimate of its effect.
+
+```{r}
+#| code-fold: true
+#| warning: false
+ 
+p_base <- d_base |> 
+  ggplot(aes(x = x, y = y)) +
+    geom_point() +
+    stat_smooth(method = "lm", 
+                formula = y ~ x, 
+                geom = "smooth") +
+  xlim(-50, 50) +
+  ylim(-100, 100) +
+  ggtitle("baseline")
+
+p_y <- d_y |> 
+  ggplot(aes(x = x, y = y)) +
+    geom_point() +                                      
+    stat_smooth(method = "lm", 
+                formula = y ~ x, 
+                geom = "smooth") +
+  xlim(-50, 50) +
+  ylim(-100, 100) + 
+  ggtitle("y noise")
+
+p_x <- d_x |> 
+  ggplot(aes(x = x, y = y)) +
+    geom_point() +
+    stat_smooth(method = "lm", 
+                formula = y ~ x, 
+                geom = "smooth") +
+  xlim(-50, 50) +
+  ylim(-100, 100) +
+  ggtitle("x noise")
+
+p_base + p_y + p_x
 ```
