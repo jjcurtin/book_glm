@@ -3,7 +3,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Exploring SEs for Logistic Regression {.unnumbered}
+# Simulate SEs for Logistic Regression {.unnumbered}
 
 
 ## Setup 

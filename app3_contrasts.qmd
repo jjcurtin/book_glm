@@ -3,7 +3,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Monte Carlo Simulation of Contrast Approaches {.unnumbered}
+# Simulate Error Rates for Contrast Approaches {.unnumbered}
 
 ```{r}
 #| echo: false
