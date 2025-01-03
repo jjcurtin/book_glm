@@ -98,8 +98,8 @@ noise_x <- 1:n_experiments |>
 
 And lets look at the parameter estimate and (SE) for $X$ from the three simulations
 
-- Noise in $Y$ has no effect on $b_x$ but it does increase the associated standard error
-- Noise in $X$ introduces bias into $b_x$.  It now underestimates the true $\beta$ = 3.  This noise, also increase the associated standard error. 
+- Noise in $Y$ has no effect on $b_x$ but it does increase the associated standard error for $b_x$
+- Noise in $X$ introduces bias into $b_x$.  Now $b_x$ underestimates the true $\beta$ (3).  This noise, also increase the associated standard error for $b_X$. 
 ```{r}
 #| code-fold: true
 
