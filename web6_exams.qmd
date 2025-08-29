@@ -1,7 +1,6 @@
 # Exams {.unnumbered}
 
 
-
 ## Application Exam 1
 
 - [data](https://dionysus.psych.wisc.edu/610/exams/aggression_data.csv)
@@ -17,11 +16,3 @@
 - [data1](https://dionysus.psych.wisc.edu/610/exams/Stepping2.dat)
 - [data2](https://dionysus.psych.wisc.edu/610/exams/donation.csv)
 - [exam shell](https://dionysus.psych.wisc.edu/610/exams/app_exam_3_shell.qmd)
-
-## Concepts Exam 1
-
-
-## Concepts Exam 2
-
-
-
