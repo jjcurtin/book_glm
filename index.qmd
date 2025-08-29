@@ -16,7 +16,7 @@
 - **Lecture**: Monday and Wednesday, 2:30-3:45 pm; COMP SCI 1221 
 - **Labs**: 
   - Friday 9:00-11:00 am (section 301, Coco Yu) in Brogden 228 
-  - Friday 1:30-3:30 pm  (section 302, Shanti Astra) UPDATE
+  - Friday 1:30-3:30 pm  (section 302, Shanti Astra) Brogden 228 
   - Friday 9:00-11:00 am (section 303, Jamie Jiwon Lee) in Brogden 138
 
 ## Instructor
@@ -26,9 +26,9 @@
 
 ## Teaching Assistants
 
-- Shanti Astra; Office hours: Brogden 626, Mondays, 11 - 12 pm UPDATE
+- Shanti Astra; Office hours: Brogden 469, Wednesdays, 1:30 - 2:30pm 
 - Jamie Jiwon Lee; Office hours:  Brogden 626, Mondays 5 - 6pm
-- Coco Yu; Office hours: Brogden 325, Wednesdays 1 - 2pm
+- Coco Yu; Office hours: Brogden 325, Tuesdays 2:30 - 3:30pm
 
 ## Communications
 All course communications will occur in the course’s Slack workspace.  You should have received an invitation to join the workspace.  If you have difficulty joining, please let me know immediately.  The TAs and I will respond to all Slack messages within 1 business day (and often much quicker).  Please plan accordingly (e.g., weekend messages may not receive a response until Monday).  For general questions about class, coding assignments, etc., please post the question to the appropriate public channel.  If you have the question, you are probably not alone.  For issues relevant only to you (e.g., class absences, accommodations, etc.), you can send a direct message in Slack to me and the TAs.  If you DM only me, I will share the DM with the TAs unless you request otherwise. Therefore, it is generally best if you include all three TAs on the DM when you start the thread.  In general, we prefer that all course communication occur within Slack rather than by email so that it is centralized in one location.   
