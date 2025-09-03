@@ -34,16 +34,11 @@ editor_options:
 I was born on a small island...
 
 ![](./pics/long_island.jpg){width=80%}
-```{r}
-#| echo: false
-
-# knitr::include_graphics(path = here::here("figures/john_long_island.jpg"))
-```
 
 -----
 
 - My family  
-  - Melody, Jacob (13 years old) and Hana (10 years old)
+  - Melody, Jacob (14 years old) and Hana (11 years old)
 
 
 ![](./pics/sail_family.jpg){width=80%}
@@ -51,7 +46,7 @@ I was born on a small island...
 -----
 
 - My/our passions
-  - Trail running, biking, nordic skiing, all things mountain...
+  - Trail running, mountain and road biking, nordic skiing, all things mountain...
 
 ::: {layout-ncol=2}
 
@@ -85,28 +80,28 @@ I was born on a small island...
 
 -----
 
-## Materials and Assignments
+## Materials 
 
-### Materials
 
-- [Unit 1 Slide Deck](https://jjcurtin.quarto.pub/01_overview/#/unit-1-overview)
-- All slide decks on course website ([https://jjcurtin.github.io/book_glm/](https://jjcurtin.github.io/book_glm/))
+- [Unit 1 Slide Deck](https://jjcurtin.quarto.pub/01_overview/#/unit-1-overview) (published in my QuartoPub account)
+- All slide decks linked from course website ([https://jjcurtin.github.io/book_glm/](https://jjcurtin.github.io/book_glm/))
 - And Canvas for application assignments and exams
-- [syllabus](syllabus.pdf)
+- [syllabus](syllabus.pdf) (Slack us if you need a printed copy!!)
 
-### Assignments
+
+## Assignments
 
 - [Survey](https://forms.gle/qGH2Cppei3P4ppTP7) (complete ASAP)
 
 - Read
   - Judd et al. Chapter 1,  Introduction to Data Analysis
 
-- Application assignment (due 9/11 @ 1:30 via Canvas)
+- Application assignment (available this Friday; due 9/12 @ 8:30AM via Canvas)
   - [assignment](./_homework/week_01/hw_01)
   - [data]()
   - [key]()
 
-- Slack DM to John and TAs with Name/Nickname and preferred pronouns
+- Slack DM to John and TAs with preferred name/nickname and pronouns
 
 -----
 
@@ -122,36 +117,37 @@ I was born on a small island...
 
 -----
 
-## Single Mean Models (Bottom level)
+### Single Mean (intercept-only) Models (Bottom level)
 
 
 $\widehat{Y} = \beta_0$  
 
+\
 
 **Basic Question**  
 
 What is the mean of an outcome/dependent variable in a sample? Is that mean different from some specified value?   
 
+\
 
 **Example**    
 
 What is the mean IQ of Psych 610 students? Is it different from the average IQ of 100?   
 
-
-<span style="color: red;">Question: What is this GLM special case analysis often called?</span>  
-
------
-
-<span style="color: red;">Question: What is this GLM special case analysis often called?</span>
-
 \
 
-<span style="color: blue;">One sample t-test</span>
+::: {.callout-important}
+# Question
+What is this GLM special case analysis often called?
+:::
+
+:::{.fragment}
+[one sample t-test]{style="color:blue;"}
+:::
 
 -----
 
-
-## Simple Regression Models (2nd level)
+### Simple Regression Models (2nd level)
 
 $\widehat{Y} = \beta_0 + \beta_1*X_1$  
 
@@ -171,37 +167,34 @@ Is trait level of positive emotionality related to satisfaction with a romantic 
 
 $\widehat{Y} = \beta_0 + \beta_1*X_1$  
 
-<span style="color: red;">Question: What is the special case analysis when both $X$ and $Y$ are quantitative?</span>  
+::: {.callout-important}
+# Question
+What is the special case analysis when both $X$ and $Y$ are quantitative?
+:::
+
+:::{.fragment}
+[Pearson's correlation]{style="color:blue;"}
+:::
 
 -----
 
 $\widehat{Y} = \beta_0 + \beta_1*X_1$  
-
-<span style="color: red;">Question: What is the special case analysis when both $X$ and $Y$ are quantitative?</span>  
 
 \
 
-<span style="color: blue;">Pearson's correlation</span>
+::: {.callout-important}
+# Question
+What is the special case analysis when $X$ is a regressor coding for a dichotomous variable representing group membership (e.g., treatment group: treatment vs. control)?
+:::
+
+:::{.fragment}
+[Between groups (independent samples) t-test (or one-way ANOVA with two groups)]{style="color:blue;"}
+:::
 
 -----
 
-$\widehat{Y} = \beta_0 + \beta_1*X_1$  
 
-<span style="color: red;">Question: What is the special case analysis when $X$ is a regressor coding for a dichotomous variable representing group membership (e.g., sex)?</span>  
-
------
-
-$\widehat{Y} = \beta_0 + \beta_1*X_1$  
-
-<span style="color: red;">Question: What is the special case analysis when $X$ is a regressor coding for a dichotomous variable representing group membership (e.g., sex)?</span>  
-
-\
-
-<span style="color: blue;">Between groups (independent samples) t-test (or one-way ANOVA with two groups)</span>
-
------
-
-## Multiple Regression Models (3rd level)
+### Multiple Regression Models (3rd level)
 
 $\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
@@ -221,27 +214,29 @@ How well do the predictors: (a) number of absences, (b) time spent studying, and
 
 $\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
-<span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical predictors (e.g., independent variables) representing group membership?</span>  
+
+::: {.callout-important}
+# Question
+What is the special case analysis when $X$s are regressors coding for categorical predictors (e.g., independent variables) representing group membership?
+:::
+
+:::{.fragment}
+[Analysis of Variance (ANOVA)]{style="color:blue;"}
+:::
+
 
 -----
 
-$\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
-
-<span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical predictors (e.g., independent variables) representing group membership?</span>  
-
-\
-
-<span style="color: blue;">Analysis of Variance (ANOVA)</span>    
-
------
 
 **Basic Question for (one-way) ANOVA**  
 
-What are the mean differences in the dependent variable between the groups represented by the independent variable(s)?     
-
 $\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
-\  
+\
+
+What are the mean differences in the dependent variable between the groups represented by the independent variable(s)?     
+
+\
 
 **Example**    
 
@@ -251,26 +246,26 @@ Are there differences among control, placebo and alcohol groups on mean fear res
 
 $\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
-<span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical variables representing group membership, and one or more quantitative *covariates*?</span>  
+::: {.callout-important}
+# Question
+What is the special case analysis when $X$s are regressors coding for categorical variables representing group membership, and one or more quantitative *covariates*?
+:::
+
+:::{.fragment}
+[Analysis of Covariance (ANCOVA)]{style="color:blue;"}
+:::
 
 
 -----
 
 $\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
-<span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical variables representing group membership, and one or more quantitative *covariates*?</span>  
-
 \
-
-<span style="color: blue;">Analysis of Covariance (ANCOVA)</span>    
-
------
 
 **Basic Question for (one-way) ANCOVA**  
 
 What are the mean differences in the dependent variable between the groups represented by the independent variable(s), holding one or more *covariates* constant?    
 
-$\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
 \    
 
@@ -282,27 +277,29 @@ Are there differences among control, placebo and alcohol groups on mean fear res
 
 $\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
-<span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical and quantitative variables representing group membership, and quantitative scores on individual difference variables, and their interactions?</span>  
-
------
-
-$\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
-
-<span style="color: red;">Question: What is the special case analysis when $X$s are regressors coding for categorical and quantitative variables representing group membership, and quantitative scores on individual difference variables, and their interactions?</span>  
-
 \
 
-<span style="color: blue;">Aptitude Treatment Interaction (ATI)</span>    
+::: {.callout-important}
+# Question
+What is the special case analysis when $X$s are regressors coding for categorical and quantitative variables representing group membership, and quantitative scores on individual difference variables, and their interactions?
+:::
+
+:::{.fragment}
+[Aptitude Treatment Interaction (ATI)]{style="color:blue;"}
+:::
+
 
 -----
  
+$\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
+\
+
 **Basic Question for ATI**  
 
 Are the magnitudes of the contrasts among groups different across different levels of some individual difference variable?     
 
-$\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
-
-\    
+\j
 
 **Example**    
 
@@ -310,7 +307,7 @@ Does the effect of CBT treatment (i.e., contrast of CBT vs. wait list control) o
   
 -----
 
-## General Linear Models (Top level)
+### General Linear Models (Top level)
 
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
@@ -320,42 +317,43 @@ $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + 
 
 What are the relationships between linear combinations of two sets of variables?     
 
-\     
+\
 
 **Example**    
 
 What are relationships between (a) Personality and temperamental variables, and (b) frequency/quantity of substance use, problems, and motives for use?   
   
------
-
-$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
-
-<span style="color: red;">Question: What is this GLM special case analysis called when all the regressors for $X$ and $Y$ are quantitative?</span>  
 
 -----
 
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
-
-<span style="color: red;">Question: What is this GLM special case analysis called when all the regressors for $X$ and $Y$ are quantitative?</span>  
-
-\
-<span style="color: blue;">Canonical correlation</span> 
-
------
-
-$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
-
-<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical variables representing group membership?</span>  
-
------
-
-$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
-
-<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical variables representing group membership?</span>  
 
 \
 
-<span style="color: blue;">Multivariate Analysis of Variance (MANOVA)</span>    
+::: {.callout-important}
+# Question
+What is this GLM special case analysis called when all the regressors for $X$ and $Y$ are quantitative?
+:::
+
+:::{.fragment}
+[Canonical correlation]{style="color:blue;"}
+:::
+
+
+-----
+
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
+\
+
+::: {.callout-important}
+# Question
+What is the special GLM case when $X$s are regressors coding for categorical variables representing group membership?
+:::
+
+:::{.fragment}
+[Multivariate Analysis of Variance (MANOVA)]{style="color:blue;"}
+:::
 
 -----
 
@@ -365,7 +363,6 @@ What linear combination of dependent variables ($Y$s) maximally differentiates g
      
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
-\  
 
 **Example**    
 
@@ -375,17 +372,15 @@ Do children with ADHD who receive (a) medication, (b) parent behavioral training
 
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
-<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical and quantitative variables representing group membership and quantitative *covariates*?</span>  
+::: {.callout-important}
+# Question
+What is the special GLM case when $X$s are regressors coding for categorical and quantitative variables representing group membership and quantitative *covariates*?
+:::
 
------
+:::{.fragment}
+[Multivariate Analysis of Covariance (MANCOVA)]{style="color:blue;"}
+:::
 
-$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
-
-<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical and quantitative variables representing group membership and quantitative *covariates*?</span> 
-
-\
-
-<span style="color: blue;">Multivariate Analysis of Covariance (MANCOVA)</span>    
 
 -----
 
@@ -395,7 +390,6 @@ What linear combination of dependent variables ($Y$s) maximally differentiates g
    
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
-\ 
 
 **Example**    
 
@@ -405,16 +399,15 @@ Do children with ADHD who receive (a) medication, (b) parent behavioral training
 
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
-<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for quantitative variables and $Y$s are categorical variables representing group membership?</span>  
+::: {.callout-important}
+# Question
+What is the special GLM case when $X$s are regressors coding for quantitative variables and $Y$s are categorical variables representing group membership?
+:::
 
------
+:::{.fragment}
+[Discriminant Analysis]{style="color:blue;"}
+:::
 
-$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
-
-<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for quantitative variables and $Y$s are categorical variables representing group membership?</span>  
-
-\
-<span style="color: blue;">Discriminant Analysis</span>    
 
 -----
 
@@ -422,7 +415,6 @@ $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + 
 
 What linear combination of independent variables ($X$s) maximally differentiates groups (represented categorically by $Y$s)?    
     
-\
 
 **Example**    
 
@@ -432,17 +424,16 @@ What combination of sociocultural, personality, and intellectual variables best 
 
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
-<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical variables representing group membership and $Y$s are repeated measures of a quantitative variable?</span>  
 
------
+::: {.callout-important}
+# Question
+What is the special GLM case when $X$s are regressors coding for categorical variables representing group membership and $Y$s are repeated measures of a quantitative variable?
+:::
 
-$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+:::{.fragment}
+[Repeated measures ANOVA]{style="color:blue;"}
+:::
 
-<span style="color: red;">Question: What is the special GLM case when $X$s are regressors coding for categorical variables representing group membership and $Y$s are repeated measures of a quantitative variable?</span>  
-
-\
-
-<span style="color: blue;">Repeated measures ANOVA</span>   
 
 -----
 
@@ -452,7 +443,6 @@ What are the mean differences across $Y$s, overall or between the groups represe
   
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
-\   
 
 **Example**    
 
@@ -484,12 +474,12 @@ tibble::tibble(Xs = c("0", "1", ">1"),
 
 -----
 
-## Final, Mind-blowing Wrinkles
+### Final, Mind-blowing Wrinkles
 
 - The top-level General Linear Model is itself a special case of an even more general statistical model - the **Generalized Linear Model** - which allows for models with dependent measures (errors really) from different distributions and non-linear link functions connecting $X$s and $Y$s.   
 
 - The General Linear Model can also be thought of as a special case of Structural Equation Modeling.
 
-    - All of the variables that we have described so far are single-indicator, observed variables (i.e., individual constructs of interest are measured using a single task or measure). 
+  - All of the variables that we have described so far are single-indicator, observed variables (i.e., individual constructs of interest are measured using a single task or measure). 
 
-    - Each of the statistics we have described have a multiple-indicator, latent variable analog. They are special cases of these latent models in which there is only one indicator per individual construct.
+  - Each of the statistics we have described have a multiple-indicator, latent variable analog. They are special cases of these latent models in which there is only one indicator per individual construct.
