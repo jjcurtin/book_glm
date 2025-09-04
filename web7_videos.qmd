@@ -2,39 +2,12 @@
 
 ## Lab
  
-- [Week 4](https://mediaspace.wisc.edu/media/lab_04_claire/1_l1mfwvlq)
-- [Week 5](https://mediaspace.wisc.edu/media/lab_05_claire/1_i06aljoy)
-- [Week 6](https://mediaspace.wisc.edu/media/lab_06_coco/1_1b8aqlu9)
-- [Week 7 - part I](https://mediaspace.wisc.edu/media/lab_07a_coco/1_hznxr36i)
-- [Week 7 - part II](https://mediaspace.wisc.edu/media/lab_07b_claire/1_2rggj7rr)
-- [Week 8](https://mediaspace.wisc.edu/media/lab_08_coco/1_9rj11r3y)
-- [Week 9](https://mediaspace.wisc.edu/media/lab_09_LiChen/1_iu1svxyx)
-- [Week 10](https://mediaspace.wisc.edu/media/lab_10_claire/1_b44rdylt)
-- [Week 11](https://mediaspace.wisc.edu/media/lab_11_coco/1_ij1noawu)
-- [Week 12](https://mediaspace.wisc.edu/media/lab_12_coco/1_wxmoczg6)
-- [Week 14](https://mediaspace.wisc.edu/media/lab_14_coco/1_eqytv9js)
 
-# Lecture
+## Lecture
 
-- [Oct 09](https://mediaspace.wisc.edu/media/lecture_2024_10_09/1_gsb1ai91 )
-- [Oct 16](https://mediaspace.wisc.edu/media/lecture_2024_10_16/1_i5aix5ax)
-- [Oct 21](https://mediaspace.wisc.edu/media/lecture_2024_10_21/1_kl86kwle)
-- [Oct 28](https://mediaspace.wisc.edu/media/lecture_2024_10_28/1_832zh3tc)
-- [Oct 30](https://mediaspace.wisc.edu/media/lecture_2024_10_30/1_hpnq713a)
-- [Nov 04](https://mediaspace.wisc.edu/media/lecture_2024_11_04/1_bd15u3ed)
-- [Nov 06](https://mediaspace.wisc.edu/media/lecture_2024_11_06/1_35539di0)
-- [Nov 11](https://mediaspace.wisc.edu/media/lecture_2024_11_11/1_v80ogln2)
-- [Nov 13](https://mediaspace.wisc.edu/media/lecture_2024_11_13/1_38ncghi4)
-- [Nov 18](https://mediaspace.wisc.edu/media/lecture_2024_11_18/1_pea6t6df)
-- [Nov 20](https://mediaspace.wisc.edu/media/lecture_2024_11_20/1_ay62ufx9)
-- [Nov 25](https://mediaspace.wisc.edu/media/lecture_2024_11_25/1_3ylvv1rq)
-- [Dec 02](https://mediaspace.wisc.edu/media/lecture_2024_12_02/1_snkalq6j)
-- [Dec 04](https://mediaspace.wisc.edu/media/lecture_2024_12_04/1_41yex7hv) 
-- [Dec 09](https://mediaspace.wisc.edu/media/lecture_2024_12_09/1_8rzze966)
-- [Dec 11](https://mediaspace.wisc.edu/media/lecture_2024_12_11/1_p86l6we5)
-
+- [09/03](https://mediaspace.wisc.edu/media/glm_2025_0903/1_qef89lqx)
   
-# Review sessions
+## Review sessions
 
 - [Midterm concepts]()
 - [Final concepts]()
