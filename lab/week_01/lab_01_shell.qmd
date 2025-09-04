@@ -27,8 +27,10 @@ TAs:
 - 2022: Ivette Colón and Emma Cunningham
 - 2023: Ben Douglas, LiChen Dong, and Nick Vest
 - 2024: Coco Yu, Claire Punturieri, LiChen Dong
+- 2025: Shanti Astra, Jamie Jiwon Lee, Coco Yu
 
 :::{.callout-note}
+UPDATE
 Note for future TA's: this script uses anonymous data collected via Google Forms from the students in the course prior to the first lab. Reach out to Coco, Claire, or LiChen so they can share the survey with you.
 :::
 
@@ -49,8 +51,9 @@ Make sure that you have at least:
 - installed Quarto
 
 ### Download lab materials from <https://jjcurtin.github.io/book_glm/>
+UPATE - describe how to make a root folder for the class and what the subfolder system might look like
 
-- Navigate to Labs -> Week 1 and find lab_1_student.qmd and psych610_survey_data files. 
+- Navigate to Labs -> Week 1 and find lab_1_student.qmd and psych610_survey_data files. (UPDATE - SAVE DATA THERE.  Filename for qmd??)
 - Save the Quarto notebook (.qmd file) in the *lab* folder or its sub-folders separated by weeks.
 - Save the data files in the *data* folder inside the *lab* folder. 
 - Open your psych_610 R Project and open lab_1_student.qmd from the File menus (top left corner, above the tool bar) or the Files window (usually bottom right of RStudio). Your student script should look mostly the same as the script I am showing now on my screen.
@@ -72,6 +75,7 @@ You'll have access to the student script before lab. The TA version of lab scrip
    + Editing tab, Check use native pipe operator
    + Display tab, Check show margin (80 characters)
 
+UPDATE - TURN ON COPILOT?
 
 # Basics
 
@@ -94,7 +98,7 @@ In RStudio, there is a menu/tool bar at the top, as well as several panels. The 
 These panels can all be moved around and rearranged to your liking.
 
 
-# Quarto Markdown
+# Quarto Notebooks 
 There are many ways to write code using R or RStudio. The simple way to do that is to create a R Script. Next, the TAs will show you what an R script looks like.
 
 As you see, R scripts only support text and code in a very basic way... R scripts may be useful for sourcing custom functions (i.e., write a DIY R package for yourself). Yet, Quarto is preferred over R script for a variety of reasons.
@@ -103,12 +107,12 @@ Quarto is an alternative tool to create readable and transparent documents. In Q
 
 This feature makes it easier to: 1) annotate and explain the code you wrote using plain text, and 2) run code and show the output to support an argument you made in plain text. In this class, you will complete your homework in Quarto notebooks and submit your Quarto notebooks (.qmd files) as well as HTML files you rendered using Quarto.
 
-Additionally, Quarto is not limited to any coding language. You can create documents with embedded R, Python, Visual Studio, and other code in Quarto, making it very flexible.
+Additionally, Quarto is not limited to any coding language. You can create documents with embedded R, Python, and other languages in Quarto, making it very flexible.
 
 A Quarto notebook is usually consists of three components:
 
 - YAML header
-- Plain text
+- Markdown text
 - Code chunk
 
 ### YAML header
@@ -127,11 +131,11 @@ YAML header is located at the top of this notebook. We can set up a variety of f
   - chunk_output_type: where to print the output if you run a line of code in RStudio
 
 
-### Plain text
+### Markdown text
 
 You can write your text in a Quarto notebook just like this. For the purpose of this class, you will often use this space to explain your code, interpret results, and answer homework questions. In real life, you can write anything you want here, just like in a word document. For example, you can even write and render your manuscript here.
 
-Text you type here will be recognized as plain text (i.e., without any formatting). To further format your text, you will need to use markdown syntax.
+Text you type here will be recognized as text (i.e., without any formatting). To further format your text, you will need to use markdown syntax.
 
 For example:
 
@@ -324,6 +328,8 @@ Vectors can also be used for arithmetic operations
 
 We will take a closer look at this data the next lab, but now we are just going to run some code and see some fancy things R could do for us. You will learn how to do these in this class!
 
+UDDATE - DISCUSS USE OF HERE::HERE with relative and absolute paths
+UPDATE - DISCUSS use of :: to call function from package that you have not loaded.  Best practice if you will not use many functions from a package and not often.  Another way to limit potential function conflicts
 ```{r}
 d <- read_csv(here::here(path_data, "psych610_survey_data.csv"),
               show_col_types = FALSE) |> 
@@ -366,6 +372,9 @@ d |> ggplot(aes(x = stats_course, y = stats_conf,
 ### Render .qmd
 
 Now that we are done with coding, let's have Quarto do the job and render the materials we have covered in this lab into a single .html file. For the purpose of this class, you can just click on the Render button (the blue rightward arrow). You will be expected to submit the Quarto notebook as well as the rendered .html file for future application assignments and take-home exams.
+
+UPDATE - SHOW THEM HOW TO RENDER IN THE TERMINAL
+UPDATE - talk about the use of the terminal for git and file management?
 
 ### Best practices for writing code:
 
