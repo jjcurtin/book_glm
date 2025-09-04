@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -267,43 +267,15 @@ window.Quarto = {
 
 <section id="lab" class="level2">
 <h2 class="anchored" data-anchor-id="lab">Lab</h2>
+</section>
+<section id="lecture" class="level2">
+<h2 class="anchored" data-anchor-id="lecture">Lecture</h2>
 <ul>
-<li><a href="https://mediaspace.wisc.edu/media/lab_04_claire/1_l1mfwvlq">Week 4</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_05_claire/1_i06aljoy">Week 5</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_06_coco/1_1b8aqlu9">Week 6</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_07a_coco/1_hznxr36i">Week 7 - part I</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_07b_claire/1_2rggj7rr">Week 7 - part II</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_08_coco/1_9rj11r3y">Week 8</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_09_LiChen/1_iu1svxyx">Week 9</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_10_claire/1_b44rdylt">Week 10</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_11_coco/1_ij1noawu">Week 11</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_12_coco/1_wxmoczg6">Week 12</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lab_14_coco/1_eqytv9js">Week 14</a></li>
+<li><a href="https://mediaspace.wisc.edu/media/glm_2025_0903/1_qef89lqx">09/03</a></li>
 </ul>
 </section>
-<section id="lecture" class="level1">
-<h1>Lecture</h1>
-<ul>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_10_09/1_gsb1ai91">Oct 09</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_10_16/1_i5aix5ax">Oct 16</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_10_21/1_kl86kwle">Oct 21</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_10_28/1_832zh3tc">Oct 28</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_10_30/1_hpnq713a">Oct 30</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_11_04/1_bd15u3ed">Nov 04</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_11_06/1_35539di0">Nov 06</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_11_11/1_v80ogln2">Nov 11</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_11_13/1_38ncghi4">Nov 13</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_11_18/1_pea6t6df">Nov 18</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_11_20/1_ay62ufx9">Nov 20</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_11_25/1_3ylvv1rq">Nov 25</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_12_02/1_snkalq6j">Dec 02</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_12_04/1_41yex7hv">Dec 04</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_12_09/1_8rzze966">Dec 09</a></li>
-<li><a href="https://mediaspace.wisc.edu/media/lecture_2024_12_11/1_p86l6we5">Dec 11</a></li>
-</ul>
-</section>
-<section id="review-sessions" class="level1">
-<h1>Review sessions</h1>
+<section id="review-sessions" class="level2">
+<h2 class="anchored" data-anchor-id="review-sessions">Review sessions</h2>
 <ul>
 <li><a href="">Midterm concepts</a></li>
 <li><a href="">Final concepts</a></li>
@@ -392,6 +364,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/github\.io\/jjcurtin\/book_glm");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -426,7 +416,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
