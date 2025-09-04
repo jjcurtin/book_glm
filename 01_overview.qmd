@@ -68,7 +68,7 @@ I was born on a small island...
 
 - My other family.....
 
-![](./pics/lab.jpg)
+![](./pics/lab2025.jpg)
 
 -----
 
@@ -83,25 +83,25 @@ I was born on a small island...
 ## Materials 
 
 
-- [Unit 1 Slide Deck](https://jjcurtin.quarto.pub/01_overview/#/unit-1-overview) (published in my QuartoPub account)
-- All slide decks linked from course website ([https://jjcurtin.github.io/book_glm/](https://jjcurtin.github.io/book_glm/))
+- All slide decks and other course materials linked from course website ([https://jjcurtin.github.io/book_glm/](https://jjcurtin.github.io/book_glm/))
 - And Canvas for application assignments and exams
-- [syllabus](syllabus.pdf) (Slack us if you need a printed copy!!)
+- [Syllabus](syllabus.pdf) (Slack us if you need a printed copy!!)
 
 
 ## Assignments
 
-- [Survey](https://forms.gle/qGH2Cppei3P4ppTP7) (complete ASAP)
+- Course Survey in Canvas (complete ASAP!)
 
 - Read
   - Judd et al. Chapter 1,  Introduction to Data Analysis
 
 - Application assignment (available this Friday; due 9/12 @ 8:30AM via Canvas)
-  - [assignment](./_homework/week_01/hw_01)
-  - [data]()
+  - [assignment](./_homework/week_01/hw_01.pdf)
   - [key]()
+  
+- Join Slack ASAP at this [link](https://join.slack.com/t/glm-2025/shared_invite/zt-3cjoe02a9-ELYeDjxyjBhkX8ZI284VXA).  Add yourself to all the channels
 
-- Slack DM to John and TAs with preferred name/nickname and pronouns
+- Slack DM to John and TAs with preferred name/nickname and pronouns.  
 
 -----
 
@@ -357,12 +357,15 @@ What is the special GLM case when $X$s are regressors coding for categorical var
 
 -----
 
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
+\
+
 **Basic Question for MANOVA**  
 
 What linear combination of dependent variables ($Y$s) maximally differentiates groups?      
      
-$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
-
+\
 
 **Example**    
 
@@ -371,6 +374,8 @@ Do children with ADHD who receive (a) medication, (b) parent behavioral training
 -----
 
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
+\
 
 ::: {.callout-important}
 # Question
@@ -384,12 +389,15 @@ What is the special GLM case when $X$s are regressors coding for categorical and
 
 -----
 
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
+\
+
 **Basic Question for MANCOVA**  
 
 What linear combination of dependent variables ($Y$s) maximally differentiates groups, holding constant one or more covariates?     
    
-$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
-
+\
 
 **Example**    
 
@@ -398,6 +406,8 @@ Do children with ADHD who receive (a) medication, (b) parent behavioral training
 -----
 
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
+\
 
 ::: {.callout-important}
 # Question
@@ -414,7 +424,8 @@ What is the special GLM case when $X$s are regressors coding for quantitative va
 **Basic Question for Discriminant Analysis**  
 
 What linear combination of independent variables ($X$s) maximally differentiates groups (represented categorically by $Y$s)?    
-    
+
+\
 
 **Example**    
 
@@ -424,6 +435,7 @@ What combination of sociocultural, personality, and intellectual variables best 
 
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
+\
 
 ::: {.callout-important}
 # Question
@@ -437,12 +449,15 @@ What is the special GLM case when $X$s are regressors coding for categorical var
 
 -----
 
+$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
+
+\
+
 **Basic Question**  
 
 What are the mean differences across $Y$s, overall or between the groups represented by the independent variables ($X$s)?    
   
-$\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
-
+\
 
 **Example**    
 
@@ -453,6 +468,8 @@ Does affective response differ when viewing pleasant, neutral vs. unpleasant sli
 ## Survey of GLM Landscape with One Y
 
 - 610 only adddresses GLMs with a single Y
+- 710 handles multiple Ys in the context of repeated measures analyses
+- Multivariate statistics courses address other contexts with multiple Ys
 
 
 ```{r}
@@ -469,8 +486,6 @@ tibble::tibble(Xs = c("0", "1", ">1"),
   kableExtra::column_spec(2:4, width = "30%")
 ```
 
-- 710 handles multiple Ys in the context of repeated measures analyses
-- Multivariate statistics courses address other contexts with multiple Ys
 
 -----
 

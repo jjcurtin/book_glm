@@ -42,7 +42,7 @@ Jamie Jiwon Lee
 Coco Yu
 
 - Office hours: Tuesdays 2:30 - 3:30pm
-- Brogden 325
+- Brogden 325 or  https://uwmadison.zoom.us/j/9831256068
 
 ## Communications
 All course communications will occur in the course’s Slack workspace.  You should have received an invitation to join the workspace.  If you have difficulty joining, please let me know immediately.  The TAs and I will respond to all Slack messages within 1 business day (and often much quicker).  Please plan accordingly (e.g., weekend messages may not receive a response until Monday).  For general questions about class, coding assignments, etc., please post the question to the appropriate public channel.  If you have the question, you are probably not alone.  For issues relevant only to you (e.g., class absences, accommodations, etc.), you can send a direct message in Slack to me and the TAs.  If you DM only me, I will share the DM with the TAs unless you request otherwise. Therefore, it is generally best if you include all three TAs on the DM when you start the thread.  In general, we prefer that all course communication occur within Slack rather than by email so that it is centralized in one location.   
@@ -72,7 +72,7 @@ By the end of the course, the students should master the following data-analytic
 Course requirements include regular attendance, active participation in class discussion, and completion of all exams and application assignments. 
 There will be two closed-book concepts exams completed in class to assess conceptual knowledge and three application exams completed outside of class to  assess your ability to implement your conceptual knowledge with real data (each of these 5 exams counts for 15% of your total grade). 
 
-The first concepts exam is scheduled for Wednesday, 10/22.  The second concepts exam is scheduled during the exam period on Wednesday, December 17 from 2:30 - 3:45 pm (room TBD). Please plan your end of semester travel accordingly. The application exams will be assigned at the end of weeks 5 (Friday 10/3; Due 10/10), 10 (Friday 11/7; Due 11/15), and 15 (Friday 12/5; Due 12/12).
+The first concepts exam is scheduled for Wednesday, 10/22.  The second concepts exam is scheduled during the exam period on Wednesday, December 17 from 2:30 - 3:45 pm (room TBD). Please plan your end of semester travel accordingly. The application exams will be assigned at the end of weeks 5 (Friday 10/3; Due 10/10), 10 (Friday 11/7; Due 11/14), and 15 (Friday 12/5; Due 12/12).
 
 There will also be approximately weekly application assignments, which will involve hands-on application of the material similar to (but shorter than) the application exams. They are assigned Fridays at 5 pm and are due the following Friday at 8:30 am. These application assignments are graded on a pass/fail basis, and together constitute 20% of your total grade. 
 
