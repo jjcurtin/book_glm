@@ -30,8 +30,7 @@ TAs:
 - 2025: Shanti Astra, Jamie Jiwon Lee, Coco Yu
 
 :::{.callout-note}
-UPDATE
-Note for future TA's: this script uses anonymous data collected via Google Forms from the students in the course prior to the first lab. Reach out to Coco, Claire, or LiChen so they can share the survey with you.
+Note for future TA's: this script uses data downloaded and anonymized from the canvas survey from the students in the course prior to the first lab. Download and prepare the new dataset from this year's students before this lab. 
 :::
 
 # Quick Ice Breaker!
@@ -50,12 +49,29 @@ Make sure that you have at least:
 - installed RStudio
 - installed Quarto
 
-### Download lab materials from <https://jjcurtin.github.io/book_glm/>
-UPATE - describe how to make a root folder for the class and what the subfolder system might look like
+### Directory Structure
 
-- Navigate to Labs -> Week 1 and find lab_1_student.qmd and psych610_survey_data files. (UPDATE - SAVE DATA THERE.  Filename for qmd??)
-- Save the Quarto notebook (.qmd file) in the *lab* folder or its sub-folders separated by weeks.
-- Save the data files in the *data* folder inside the *lab* folder. 
+To keep things organized, you will need a directory (i.e. folder) on your computer dedicated to this course, where you save all the data files, Quarto notebooks, etc. 
+
+- Create a folder called psych_610 somewhere on your computer. 
+- Inside the psych_610 folder, create two additional folders named homework and lab. 
+- Lastly, create a folder named data inside the homework and the lab folder, for a total of two "data" folders in different locations.
+
+### Project
+
+Finally, we are going to create an R project at the root of our psych_610 directory. Anytime we use R for the purpose of this class, we will boot R by opening this project. It will allow for consistency with file paths across students (even if people save their folders in different places) and it is considered as a best practice when working in R.
+
+- In RStudio, go to the File menu -> New Project. 
+- Select Existing Directory and select your psych_610 folder as the project working directory. 
+- Then, click Create Directory.
+
+Once you are done, a new R session should pop-up. You will also see in your psych_610 directory a new R project file. In the future, you can start your R session by double-clicking this project.
+
+### Download lab materials from <https://jjcurtin.github.io/book_glm/>
+
+- Navigate to Labs -> Week 1 -> Student shell and download the file. It should be called lab_01_shell.qmd. Click lab_01_data to download the psych610_survey_data file. 
+- Save the Quarto notebook (.qmd file) in the *lab* folder.
+- Save the data file in the *data* folder which is inside the *lab* folder. 
 - Open your psych_610 R Project and open lab_1_student.qmd from the File menus (top left corner, above the tool bar) or the Files window (usually bottom right of RStudio). Your student script should look mostly the same as the script I am showing now on my screen.
 
 :::{.callout-note}
@@ -74,8 +90,11 @@ You'll have access to the student script before lab. The TA version of lab scrip
  * Code: 
    + Editing tab, Check use native pipe operator
    + Display tab, Check show margin (80 characters)
+   
+:::{.callout-note}
+RStudio has a copilot plugin, to give you AI suggestions when writing code. These settings are found under Tools -> Global Options -> Copilot. Setting this up requires a student github account - ask in office hours if you're interested in getting this set up!
+:::
 
-UPDATE - TURN ON COPILOT?
 
 # Basics
 
@@ -133,13 +152,15 @@ YAML header is located at the top of this notebook. We can set up a variety of f
 
 ### Markdown text
 
-You can write your text in a Quarto notebook just like this. For the purpose of this class, you will often use this space to explain your code, interpret results, and answer homework questions. In real life, you can write anything you want here, just like in a word document. For example, you can even write and render your manuscript here.
+You can write your text in a Quarto notebook just like this. For the purpose of this class, you will often use this space to explain your code, interpret results, and answer homework questions. In real life, you can write anything you want here, just like in a word document. 
 
 Text you type here will be recognized as text (i.e., without any formatting). To further format your text, you will need to use markdown syntax.
 
 For example:
 
 This is how you add *italics*, **bold**, ***bold italics***, superscript^2^, subscript~2~, and ~~strikethrough~~.
+
+If you want to see how this is going to render, click "Visual" in the top left corner of this box. Switch back to "Source" to see the keys you pressed for easier editing.
 
 There are various other markdown syntax for formatting (e.g., bullet point lists). Read more [here](https://bookdown.org/yihui/rmarkdown/markdown-syntax.html).
 
@@ -163,7 +184,7 @@ print("Hello World!")
 1 + 1 # What is one plus one? (Inside code chunks, you can type after hash-tags to add comments. However, only do so when you are commenting on a specific line of code.)
 ```
 
-You can insert your own code chunks with a keyboard shortcut (`command` + `option` + `I` on Mac, `ctrl` + `alt` + `I` on PC).
+You can insert your own code chunks with a keyboard shortcut (`command` + `option` + `I` on Mac, `ctrl` + `alt` + `I` on PC) or use the button with the green square in RStudio. 
 
 To run a single line of code in the code chunk, select the line of code (or put your cursor on the line) and hit `command` + `enter` (Mac) or `control` + `enter` (PC). To run an entire code chunk you can click the small green triangle at the top-left corner of the chunk.
 
@@ -270,7 +291,7 @@ What if we request the value of `whatever`? Why do we get an error?
 whatever 
 ```
 
-Errors are R's way of telling you it can't do something. If you don't know what an error means, it is useful to copy and paste the error into Google for help.
+Errors are R's way of telling you it can't do something. If you don't know what an error means, it is useful to copy and paste the error into Google or an AI for help.
 
 We can also do many fancy things with R objects, including arithmetic, creating a new object with existing objects, etc.
 
@@ -324,20 +345,36 @@ Vectors can also be used for arithmetic operations
 ```
 
 
+
+### Loading a data file
+
+First, we can load an already existing data file into an R object
+
+```{r}
+d <- read_csv(here::here(path_data, "psych610_survey_data.csv"))
+```
+
+How did we do that? The function here() takes your relative path, the file name, and the root folder of the R project to find the exact file you want in a way that is reproducable by anyone with the same file structure. This means your friends, collaborators, and TAs can run your code without changing this line. It also helps Quarto find the right data file when rendering your code - we'll see that at the end of this lab.
+
+The here() function is part of the "here" package, but we aren't interested in anything else in that package. We use the :: to tell R to use that package only this once and not bother loading the entire package and dealing with any conflicts, the way library(here) would do.
+
 ### Finally, fancy things you can do with R
 
 We will take a closer look at this data the next lab, but now we are just going to run some code and see some fancy things R could do for us. You will learn how to do these in this class!
 
-UDDATE - DISCUSS USE OF HERE::HERE with relative and absolute paths
-UPDATE - DISCUSS use of :: to call function from package that you have not loaded.  Best practice if you will not use many functions from a package and not often.  Another way to limit potential function conflicts
 ```{r}
 d <- read_csv(here::here(path_data, "psych610_survey_data.csv"),
               show_col_types = FALSE) |> 
      janitor::clean_names() |> 
+     select(-starts_with("x1")) |> 
      glimpse()
 
-d |> mutate(across(ends_with("exp")|ends_with("conf"), ~ factor(.x, 1:5))) |> 
-      ggplot(aes(x = stats_exp)) + 
+newnames <- str_split(names(d), "_", n = 2)
+names(d) <- map_chr(newnames, ~ .x[2])
+
+d |> mutate(
+  what_is_your_level_of_experience_with_statistics = as.factor(what_is_your_level_of_experience_with_statistics)) |> 
+      ggplot(aes(x = what_is_your_level_of_experience_with_statistics)) +
         geom_bar() +
         theme_classic() +
         scale_x_discrete(drop = FALSE) +
@@ -345,8 +382,9 @@ d |> mutate(across(ends_with("exp")|ends_with("conf"), ~ factor(.x, 1:5))) |>
              y = "Count") + 
         coord_cartesian(ylim = c(0,18))
 
-d |> mutate(across(ends_with("exp")|ends_with("conf"), ~ factor(.x, 1:5))) |> 
-      ggplot(aes(x = r_exp)) + 
+d |> mutate(
+  what_is_your_level_of_experience_with_r = as.factor(what_is_your_level_of_experience_with_r)) |> 
+      ggplot(aes(x = what_is_your_level_of_experience_with_r)) +
         geom_bar() +
         theme_classic() +
         scale_x_discrete(drop = FALSE) +
@@ -354,8 +392,10 @@ d |> mutate(across(ends_with("exp")|ends_with("conf"), ~ factor(.x, 1:5))) |>
              y = "Count") + 
         coord_cartesian(ylim = c(0,18))
 
-d |> ggplot(aes(x = stats_course, y = stats_conf, 
-                color = pineapple_pizza, fill = pineapple_pizza)) + 
+d |> ggplot(aes(x = how_many_statistics_courses_have_you_taken, 
+                y = how_confident_do_you_feel_in_your_ability_to_learn_statistics_over_the_course_of_this_class, 
+                color = do_you_like_pineapple_on_pizza,
+                fill = do_you_like_pineapple_on_pizza)) + 
         geom_smooth(method = "lm", alpha = .2) +
         geom_point(position = position_jitter(width = .1, height = .1)) +
         theme_classic() +
@@ -366,15 +406,34 @@ d |> ggplot(aes(x = stats_course, y = stats_conf,
         coord_cartesian(ylim = c(0, 5))
 ```
 
+Click the zoom button in the Plots pane to view any graph at a larger size, or use the forward and back arrows to navigate between different plots you have generated.
 
 # Final Words
 
 ### Render .qmd
 
-Now that we are done with coding, let's have Quarto do the job and render the materials we have covered in this lab into a single .html file. For the purpose of this class, you can just click on the Render button (the blue rightward arrow). You will be expected to submit the Quarto notebook as well as the rendered .html file for future application assignments and take-home exams.
+Now that we are done with coding, let's have Quarto do the job and render the materials we have covered in this lab into a single .html file. You will be expected to submit the Quarto notebook as well as the rendered .html file for future application assignments and take-home exams. Double-check your rendered files! Sometimes errors appear when rendering, even if your file runs just fine in RStudio. 
 
-UPDATE - SHOW THEM HOW TO RENDER IN THE TERMINAL
-UPDATE - talk about the use of the terminal for git and file management?
+There are two ways to render a quarto document:
+
+1. The quick-and-easy way - just click on the Render button (the blue rightward arrow).
+2. Using the terminal command "quarto render"
+
+### What is the terminal?
+
+If you're new to computer programming, just know that the terminal tab should be next to the console tab in RStudio. If you work with more detailed programming in the future, you may know other ways to access the terminal and you'll learn many, many more things you can do with it. 
+
+First, you need to navigate the terminal to the location of your file. To do this, you can use a few commands:
+
+- pwd - tells you your current location
+- cd my_folder - changes your location to the folder you name
+- cd .. - changes your location to one level up from your current i.e. the folder that contains the one you are currently located in
+- ls - tells you all the folders and files in your terminal location - useful for reminding you of your file structure and what you named your files and folders
+
+
+Once you've navigated to your lab folder, type quarto render lab_01_shell.qmd
+
+Learning to use the terminal will be very useful for you in future programming, especially if you are programming in collaboration with other people. 
 
 ### Best practices for writing code:
 
@@ -384,7 +443,7 @@ UPDATE - talk about the use of the terminal for git and file management?
 
 ### Chat GPT
 
-Coding is really hard. Large language models (LLMs) are meant to help. You are allowed to utilize Chat GPT or other LLMs in your assignments. However, these tools DO NOT always provide the code that does exactly what you want. It is IMPORTANT that you establish fundamental understanding of R coding, so you can at minimum spot errors in code generated by LLMs and debug accordingly. At times, we may ask you to explain the code you wrote in your homework assignments.
+Coding is really hard. Large language models (LLMs) are meant to help. You are allowed to utilize Chat GPT or other LLMs in your assignments, including your application exams. However, these tools DO NOT always provide the code that does exactly what you want. It is IMPORTANT that you establish fundamental understanding of R coding, so you can at minimum spot errors in code generated by LLMs and debug accordingly. At times, we may ask you to explain the code you wrote in your homework assignments. 
 
 ### TAs are here to help!
 
