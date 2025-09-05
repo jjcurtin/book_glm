@@ -3,7 +3,7 @@
 
 ## Week 1: 09/05
 
-- [Installing R, R Studio, & Quarto](/lab/install_notes.pdf)
+- [Installing R, R Studio, & Quarto](/lab/week_01/install_notes.pdf)
 - [Lab 01 data](/lab/data/psych610_survey_data.csv)
 - [Student shell](/lab/week_01/lab_01_shell.qmd)
 - TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_01_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_01_ta.html)
