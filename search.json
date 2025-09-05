@@ -672,31 +672,41 @@
   {
     "objectID": "web7_videos.html",
     "href": "web7_videos.html",
-    "title": "Video Recordings from Lab and Lecture",
+    "title": "Course Video Recordings",
     "section": "",
-    "text": "Lab",
+    "text": "Lecture",
     "crumbs": [
-      "Video Recordings from Lab and Lecture"
+      "Course Video Recordings"
     ]
   },
   {
     "objectID": "web7_videos.html#lecture",
     "href": "web7_videos.html#lecture",
-    "title": "Video Recordings from Lab and Lecture",
-    "section": "Lecture",
-    "text": "Lecture\n\n09/03",
+    "title": "Course Video Recordings",
+    "section": "",
+    "text": "09/03",
     "crumbs": [
-      "Video Recordings from Lab and Lecture"
+      "Course Video Recordings"
+    ]
+  },
+  {
+    "objectID": "web7_videos.html#lab",
+    "href": "web7_videos.html#lab",
+    "title": "Course Video Recordings",
+    "section": "Lab",
+    "text": "Lab\n\n09/05",
+    "crumbs": [
+      "Course Video Recordings"
     ]
   },
   {
     "objectID": "web7_videos.html#review-sessions",
     "href": "web7_videos.html#review-sessions",
-    "title": "Video Recordings from Lab and Lecture",
+    "title": "Course Video Recordings",
     "section": "Review sessions",
     "text": "Review sessions\n\nMidterm concepts\nFinal concepts",
     "crumbs": [
-      "Video Recordings from Lab and Lecture"
+      "Course Video Recordings"
     ]
   },
   {
