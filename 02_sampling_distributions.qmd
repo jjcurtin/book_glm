@@ -8,7 +8,7 @@ editor_options:
 ```{r}
 #| echo: false
 
-options(scipen = 999) # turns off scientfic notation
+options(scipen = 999) # turns off scientific notation
 ```
 
 ## Inferential Statistics
@@ -31,7 +31,6 @@ A population is any clearly defined set of objects or events (people, occurrence
 - It is often an abstract concept because in many/most instances you will never have access to the entire population
 - Many of our studies may have the population of **all people** as its implicit target
 
-\
 \
 
 Researchers usually want to describe or draw conclusions about populations
@@ -62,7 +61,6 @@ A sample is a finite group of units (e.g., participants) selected from the popul
 - Samples can be selected randomly or not (e.g., convenience samples) from the population, which has implications for the conclusions we reach but not necessarily for the analyses.
 
 \
-\
 
 We use the sample to estimate and test parameters in the population
 
@@ -78,7 +76,6 @@ Since a sample does not include all members of the population, the value for any
 - For example, the mean height of a sample of 1000 people drawn randomly from the US population will not exactly match the mean height of US population
 - This difference between the (sample) parameter estimate and the (population) parameter is called sampling error
 
-\
 \
 
 You will not be able to calculate the sampling error of your parameter estimate directly because you don't know the value of the population parameter. However, you can estimate it by probabilistic modeling of the **hypothetical sampling distibution** for that parameter.
@@ -108,17 +105,16 @@ A sampling distribution is a probability distribution for a parameter estimate d
 
 ***Hypotheses:*** $H_0: \mu = 0; H_a: \mu \neq 0$ 
 
-\
-
-<span style="color: red;">Question: How would you answer this question if you had unlimited resources (e.g., time, money, and patience)?</span>
-
 -----
 
-<span style="color: red;">Question: How would you answer this question if you had unlimited resources (e.g., time, money, and patience)?</span>
+::: {.callout-important}
+# Question
+How would you answer this question if you had unlimited resources (e.g., time, money, and patience)?
+:::
 
-\
-
-<span style="color: blue;">Administer the Ocean liking scale to all 10,000 inhabitants in the population and calculate the population mean score. Is it 0?  If not, the inhabitants are not neutral on average.</span>
+:::{.fragment}
+[Administer the Ocean liking scale to all 10,000 inhabitants in the population and calculate the population mean score. Is it 0?  If not, the inhabitants are not neutral on average.]{style="color:blue;"}
+:::
 
 -----
 
@@ -157,8 +153,10 @@ data |>
 
 \
 
-**See also:**    
-`view()` allows you to open up the data frame in a GUI window in RStudio.    
+::: {.callout-tip}
+# Coding Tip 
+`view()` opens up the dataframe in a GUI window in RStudio.    
+:::
 
 -----
 
@@ -190,24 +188,24 @@ data |>
 
 You can also pull out a few rows from the dataframe/tibble to look at your data. This can be done using 
 
-- `slice_head()` to pull out $n$ top rows of the data set, 
-- `slice_tail()` to pull out $n$ bottom rows of the data set, or 
-- `slice_sample()` to pull out a random $n$ of rows from the data set
+- `slice_head(n = 5)` to pull out $n$ (5 in this example) top rows of the data set, 
+- `slice_tail(n = 5)` to pull out $n$ bottom rows of the data set, or 
+- `slice_sample(n = 5)` to pull out a random $n$ of rows from the data set
 
 \
 
 ```{r}
 data |> 
-  slice_head(n = 5) 
+  slice_head(n = 3) 
 ```
 
 -----
 
 ```{r}
 data |> 
-  slice_tail(n = 5) 
+  slice_tail(n = 10)
 ```
-
+ 
 -----
 
 ```{r}
@@ -236,46 +234,50 @@ plot_raw <- data |>
 -----
 
 ```{r}
-theme_set(theme_classic()) 
+theme_set(theme_classic()) #<1>
 plot_raw
 ```
+
+1. Now all plots for the rest of the script will use this theme unless you specify otherwise in the code for a specific plot.
 
 -----
 
 ## Parameter Estimation and Testing
 
-<span style="color: red;">Question: What do you conclude?</span>
+::: {.callout-important}
+# Question
+What do you conclude about average Ocean Liking for the inhabitants of the island?
+:::
+
+:::{.fragment}
+[Inhabitants of the island are neutral on average on the Ocean Liking Scale; $\mu$ = 0.]{style="color:blue;"}
+:::
 
 -----
 
-<span style="color: red;">Question: What do you conclude?</span>
+::: {.callout-important}
+# Question
+How confident are you about this conclusion?
+:::
 
-\
-
-<span style="color: blue;">Inhabitants of the island are neutral on average on the Ocean Liking Scale; $\mu$ = 0.</span>
-
------
-
-<span style="color: red;">Question: How confident are you about this conclusion?</span>
-
------
-
-<span style="color: red;">Question: How confident are you about this conclusion?</span>
-
-\
-
-<span style="color: blue;">Excluding issues of measurement of the scale (i.e., reliability), you are 100% confident that the population mean score on this scale is 0 because you calculated the mean using all the scores in the population($\mu$ = 0).</span>
-
------
-
-<span style="color: red;">Question: Of course, this approach to answering a research question is not typical. Why? And how would you normally answer this question?</span>
+:::{.fragment}
+[Excluding issues of measurement of the scale (i.e., reliability), you are 100% confident that the population mean score on this scale is 0 because you calculated the mean using all the scores in the population($\mu$ = 0).]{style="color:blue;"}
+:::
 
 -----
 
 <span style="color: red;">Question: Of course, this approach to answering a research question is not typical. Why? And how would you normally answer this question?</span>
-\
 
-<span style="color: blue;">You will very rarely have access to all scores in the population. Instead, you have to use inferential statistics to “infer” (estimate) the size of the population parameter using a parameter estimate calculated from a sample of that population.</span>
+-----
+
+::: {.callout-important}
+# Question
+Of course, this approach to answering a research question is not typical. Why? And how would you normally answer this question?
+:::
+
+:::{.fragment}
+[You will very rarely have access to all scores in the population. Instead, you have to use inferential statistics to “infer” (estimate) the size of the population parameter using a parameter estimate calculated from a sample of that population.]{style="color:blue;"}
+:::
 
 -----
 
@@ -296,15 +298,14 @@ data |>
 
 \
 
-<span style="color: red;">Question: What do you conclude and why?
+::: {.callout-important}
+# Question
+What do you conclude and why?
+:::
 
------
-
-<span style="color: red;">Question: What do you conclude and why?
-
-\
-
-<span style="color: blue;">A sample mean of 2.14 is not 0. However, you know that the sample mean will not match the population mean exactly. How likely is it to get a sample mean of 2.14 if the population mean is 0 (think about it!)?</span>
+:::{.fragment}
+[A sample mean of 2.14 is not 0. However, you know that the sample mean will not match the population mean exactly. How likely is it to get a sample mean of 2.14 if the population mean is 0 (think about it!)?]{style="color:blue;"}
+:::
 
 -----
 
@@ -322,15 +323,14 @@ data |>
 
 \
 
-<span style="color: red;">Question: What does she conclude and why?</span>
+::: {.callout-important}
+# Question
+What does she conclude and why?
+:::
 
------
-
-<span style="color: red;">Question: What does she conclude and why?</span>
-
-\
-
-<span style="color: blue;">A sample mean of 1.74 is not 0. However, she knows that the sample mean will not match the population mean exactly. It is more likely to get a sample mean of 1.74 than 2.14 if the population mean is 0 but she still doesn’t know how likely either outcome is. What if she obtained a sample with mean of 30?</span>
+:::{.fragment}
+[A sample mean of 1.74 is not 0. However, she knows that the sample mean will not match the population mean exactly. It is more likely to get a sample mean of 1.74 than 2.14 if the population mean is 0 but she still doesn’t know how likely either outcome is. What if she obtained a sample with mean of 30?]{style="color:blue;"}
+:::
 
 -----
 
@@ -338,7 +338,6 @@ data |>
 
 You can construct a sampling distribution for any parameter estimate (e.g., mean, $s$, min, max, $r$, $b_0$, $b_1$).
 
-\
 \
 
 For the mean, you can think of the sampling distribution conceptually as follows:  
@@ -348,13 +347,15 @@ For the mean, you can think of the sampling distribution conceptually as follows
 3. Finally, create a histogram (or density plot) of these sample means.
 
 \
-\
 
-**Note**: In your research, you don't form a sampling distribution by repeated sampling. You (typically) only have one sample
+::: {.callout-note}
+# Note 
+In your research, you don't form a sampling distribution by repeated sampling. You (typically) only have one sample.  But we can estimate the sampling distribution using simulation (see next slides).  Or we can estimate it using specific formula after making several assumptions (more on that later)
+:::
 
 -----
 
-### 1000 Samples of $N$=10
+### Simulate 1000 samples of $N$=10
 
 ```{r}
 get_sample_mean <- function(data, n_sub) { # <1>
@@ -381,7 +382,6 @@ samples <- 1:1000 |>
 
 1. We use the `map()` function to repeat our function 1000 times.  We do this by piping in a vector of 1000 numbers using `1:1000`
 
-\
 \
 
 ```{r}
@@ -431,15 +431,14 @@ plot_raw + plot_samples
 
 ## Sampling Distribution of the Mean
 
-<span style="color: red;">Question: What will the mean of the sample means be? In other words, what is the mean of the sampling distribution?</span>
+::: {.callout-important}
+# Question
+What will the mean of the sample means be? In other words, what is the mean of the sampling distribution?
+:::
 
------
-
-<span style="color: red;">Question: What will the mean of the sample means be? In other words, what is the mean of the sampling distribution?</span>
-
-\
-
-<span style="color: blue;">The mean of the sample means (i.e., the mean of the sampling distribution) will equal the population mean of raw scores on the dependent measure.  This is important because it indicates that the sample mean is an unbiased estimator of the population mean.</span>
+:::{.fragment}
+[The mean of the sample means (i.e., the mean of the sampling distribution) will equal the population mean of raw scores on the dependent measure.  This is important because it indicates that the sample mean is an unbiased estimator of the population mean.]{style="color:blue;"}
+:::
 
 ```{r}
 #| code-fold: true
@@ -485,15 +484,16 @@ The sample variance ($s^2$; with n-1 denominator) is also an **unbiased estimato
 
 -----
 
-<span style="color: red;">Question: Will all of the sample means be the same?</span>
+::: {.callout-important}
+# Question
+Will all of the sample means be the same?
+:::
 
------
-
-<span style="color: red;">Question: Will all of the sample means be the same?</span>
+:::{.fragment}
+[No, there was a distribution of means that varied from each other. The mean of the sampling distribution was the population mean but the standard deviation was not zero.]{style="color:blue;"}
+:::
 
 \
-
-<span style="color: blue;">No, there was a distribution of means that varied from each other. The mean of the sampling distribution was the population mean but the standard deviation was not zero.</span>
 
 ```{r}
 #| code-fold: true
@@ -521,7 +521,6 @@ $\frac{\sigma}{\sqrt{N_{sample}}}$
 Where $\sigma$ is the standard deviation of the population raw scores.  
 
 \
-\
 
 This variability in the sampling distribution is due to sampling error
 
@@ -531,90 +530,80 @@ This variability in the sampling distribution is due to sampling error
 
 -----
 
-<span style="color: red;">Question: What factors affect the size of the standard error of the mean(i.e., its sampling error)?</span>
+::: {.callout-important}
+# Question
+What factors affect the size of the standard error of the mean(i.e., its sampling error)?
+:::
+
+:::{.fragment}
+[The standard deviation of the population raw scores and the sample size.]{style="color:blue;"}
+:::
 
 -----
 
-<span style="color: red;">Question: What factors affect the size of the standard error of the mean(i.e., its sampling error)?</span>
+::: {.callout-important}
+# Question
+Variation among raw scores for a variable in the population is broadly caused by two factors. What are they?
+:::
 
-\
-
-<span style="color: blue;">The standard deviation of the population raw scores and the sample size.</span>
-
------
-
-<span style="color: red;">Question: Variation among raw scores for a variable in the population is broadly caused by two factors. What are they?</span>
-
------
-
-<span style="color: red;">Question: Variation among raw scores for a variable in the population is broadly caused by two factors. What are they?</span>
-
-\
-
-<span style="color: blue;">1.  Individual differences</span>.     
-<span style="color: blue;">2.  Measurement error (the opposite of reliability)</span>
+:::{.fragment}
+[1. Individual differences, and 2. Measurement error (the opposite of reliability)]{style="color:blue;"}
+:::
 
 -----
 
-<span style="color: red;">Question: What is the relationship between population variability in the raw scores ($\sigma$) and the standard error of the mean?</span>
+::: {.callout-important}
+# Question
+What is the relationship between population variability in the raw scores ($\sigma$) and the standard error of the mean?
+:::
+
+:::{.fragment}
+[As the variability (e.g., its standard deviation) of the raw scores on the variable increases in the population, the standard error of the mean increases.]{style="color:blue;"}
+:::
 
 -----
 
-<span style="color: red;">Question: What is the relationship between population variability in the raw scores ($\sigma$) and the standard error of the mean?</span>
+::: {.callout-important}
+# Question
+What would happen to standard error of the mean if there was no variation in population scores?
+:::
 
-\
-
-<span style="color: blue;">As the variability (e.g., its standard deviation) of the raw scores on the variable increases in the population, the standard error of the mean increases.</span>    
-
------
-
-<span style="color: red;">Question: What would happen to standard error of the mean if there was no variation in population scores?</span>
-
------
-
-<span style="color: red;">Question: What would happen to standard error of the mean if there was no variation in population scores?</span>
-
-\
-
-<span style="color: blue;">The standard error of the mean would equal 0 no matter which participants you sampled. They would all have the same scores!</span>  
-
+:::{.fragment}
+[The standard error of the mean would equal 0 no matter which participants you sampled. They would all have the same scores!]{style="color:blue;"}
+:::
 
 -----
 
-<span style="color: red;">Question: What is the relationship between sample size and the standard error of the mean?</span>
+::: {.callout-important}
+# Question
+What is the relationship between sample size and the standard error of the mean?
+:::
+
+:::{.fragment}
+[As the sample size increases, the standard error of the mean will decrease.]{style="color:blue;"}
+:::
 
 -----
 
-<span style="color: red;">Question: What is the relationship between sample size and the standard error of the mean?</span>
+::: {.callout-important}
+# Question
+What would the standard error of the mean be if the sample size equaled the population size?
+:::
 
-\
-
-<span style="color: blue;">As the sample size increases, the standard error of the mean will decrease.</span>   
-
------
-
-<span style="color: red;">Question: What would the standard error of the mean be if the sample size equalled the population size?</span>
-
------
-
-<span style="color: red;">Question: What would the standard error of the mean be if the sample size equalled the population size?</span>
-
-\
-
-<span style="color: blue;">If the sample contained all participants from the population, the standard error of the mean would be equal to 0 because each sample mean would have exactly the same value as the overall population mean (because all same scores).  In this instance, there would be no sampling error because you sampled the full population!</span>   
-
+:::{.fragment}
+[If the sample contained all participants from the population, the standard error of the mean would be equal to 0 because each sample mean would have exactly the same value as the overall population mean (because all same scores).  In this instance, there would be no sampling error because you sampled the full population!]{style="color:blue;"}
+:::
 
 -----
 
-<span style="color: red;">Question: What would happen if the samples contained only 1 participant?</span>
+::: {.callout-important}
+# Question
+What would happen if the samples contained only 1 participant?
+:::
 
------
-
-<span style="color: red;">Question: What would happen if the samples contained only 1 participant?</span>
-
-\
-
-<span style="color: blue;">If each sample contained only 1 participant, the standard error of the mean would be equal to the standard deviation ($\sigma$) observed for the population raw scores.  This is the upper bound for how much sampling error you can expect (it is biggest when you have the smallest possible sample size)</span>   
+:::{.fragment}
+[If each sample contained only 1 participant, the standard error of the mean would be equal to the standard deviation ($\sigma$) observed for the population raw scores.  This is the upper bound for how much sampling error you can expect (it is biggest when you have the smallest possible sample size)]{style="color:blue;"}
+:::
 
 -----
 
@@ -622,7 +611,6 @@ This variability in the sampling distribution is due to sampling error
 
 ***Central Limit Theorem:*** The shape of the sampling distribution approaches normal as $N$ increases. 
 
-\
 \
 
 The shape is roughly normal even for moderate sample sizes assuming that the original distribution isn’t really weird (i.e., non-normal). 
@@ -669,7 +657,6 @@ samp_norm_100 <- 1:10000 |>
   map(\(i) get_sample_mean(data = data_sim[, "normal"], n_sub = 100)) |>
   list_rbind()
 ```
-
 
 ```{r}
 #| echo: false
@@ -749,7 +736,6 @@ samp_norm_100_plot <- samp_norm_100 |>
 (samp_norm_20_plot + samp_norm_50_plot + samp_norm_100_plot)
 ```
 
-
 -----
 
 ## Uniform Population and Various Sampling Distributions
@@ -780,7 +766,6 @@ samp_unif_100 <- 1:10000 |>
   map(\(i) get_sample_mean(data = data_sim[, "uniform"], n_sub = 100)) |>
   list_rbind()
 ```
-
 
 ```{r}
 #| echo: false
@@ -860,8 +845,6 @@ samp_unif_100_plot <- samp_unif_100 |>
 (samp_unif_20_plot + samp_unif_50_plot + samp_unif_100_plot)
 ```
 
-
-
 -----
 
 ## Skewed Population and Various Sampling Distributions
@@ -892,7 +875,6 @@ samp_skew_100 <- 1:10000 |>
   map(\(i) get_sample_mean(data = data_sim[, "skewed"], n_sub = 100)) |>
   list_rbind()
 ```
-
 
 ```{r}
 #| echo: false
@@ -1038,7 +1020,7 @@ probability_1sd + probability_2sd + probability_3sd
 
 How could you use the $z$ distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of $N=10$ from a population of Ocean Liking scores with a population mean (parameter) of 0 and population standard deviation of 10?
 
-
+\
 
 Think about it……
 
@@ -1068,8 +1050,6 @@ hist_samples
 
 -----
 
-<span style="color: red;">Question: If $H_0$ is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?</span>
-
 ```{r}
 #| echo: false
 
@@ -1080,10 +1060,14 @@ hist_samples_vline
 
 ```
 
------
+::: {.callout-important}
+# Question
+If $H_0$ is true and this is the sampling distribution (in blue), how likely is it to get a sample mean of 2.4 or more extreme?
+:::
 
-<span style="color: blue;">Pretty likely…</span>   
-<span style="color: blue;">But we can do better than that!</span>
+:::{.fragment}
+[Pretty likely…   But we can do better than that with our probability estimate!]{style="color:blue;"}
+:::
 
 -----
 
@@ -1091,7 +1075,6 @@ hist_samples_vline
 
 $z = \frac{2.4 - 0}{7.5} = 0.32; p \le .749$  
 
-\
 \
 
 ```{r}
@@ -1125,65 +1108,52 @@ hist_samples_vline + probability
 $z = \frac{2.4 - 0}{7.5} = 0.32$  
 
 \
-\
 
-<span style="color: red;">Question: Where did we get the 2.4 from in our z-test?</span>
+::: {.callout-important}
+# Question
+Where did we get the 2.4 from in our z-test?
+:::
 
------
+:::{.fragment}
+[Our sample mean from our study. This is our parameter estimate of the population mean for ocean like scores (like_score) scores.]{style="color:blue;"}
 
-<span style="color: red;">Question: Where did we get the 2.4 from in our z-test?</span>
 
-\
+:::: {.callout-important}
+# Question
+Question: where did we get the 7.5 from in our z-test and what is the problem with this?
+::::
 
-<span style="color: blue;">Our sample mean from our study. This is our parameter estimate of the population mean for ocean like scores (like_score) scores.</span>   
-
------
-
-<span style="color: red;">Question: where did we get the 7.5 from in our z-test and what is the problem with this?</span>
-
------
-
-<span style="color: red;">Question: where did we get the 7.5 from in our z-test and what is the problem with this?</span>
-
-\
-
-<span style="color: blue;">This was our estimate of the standard deviation of the sampling distribution.</span>  
-
-\
-
-<span style="color: blue;">$\frac{\sigma}{\sqrt{N_{sample}}}$</span>  
-
-\
-
-<span style="color: blue;">... But we do not know $\sigma$.</span>   
+::::{.fragment}
+[This was our estimate of the standard deviation of the sampling distribution.   
+$\frac{\sigma}{\sqrt{N_{sample}}}$]{style="color:blue;"}
+... But we do not know $\sigma$.
+::::
+:::
 
 -----
 
-<span style="color: red;">Question: How can we estimate $\sigma$?</span>
 
------
+::: {.callout-important}
+# Question
+How can we estimate $\sigma$?
+:::
 
-<span style="color: red;">Question: How can we estimate $\sigma$?</span>
+:::{.fragment}
+[We can use our sample standard deviation ($s$), but $s$ is a negatively biased parameter estimate.  On average, it will underestimate $\sigma$.]{style="color:blue;"}
 
-\
 
-<span style="color: blue;">We can use our sample standard deviation ($s$), but $s$ is a negatively biased parameter estimate.  On average, it will underestimate $\sigma$.</span>   
 
------
+:::: {.callout-important}
+# Question
+So what do we do?
+::::
 
-<span style="color: red;">Question: So what do we do?</span>
+::::{.fragment}
+[We account for this underestimation of $\sigma$ and therefore of the standard deviation (standard error) of the sampling distribution by using the $t$ distribution rather than the $z$ distribution to calculate the probability of our parameter estimate if $H_0$ is true.
 
------
-
-<span style="color: red;">Question: So what do we do?</span>
-
-\
-
-<span style="color: blue;">We account for this underestimation of $\sigma$ and therefore of the standard deviation (standard error) of the sampling distribution by using the $t$ distribution rather than the $z$ distribution to calculate the probability of our parameter estimate if $H_0$ is true.</span>    
-
-\
-
-<span style="color: blue;">The $t$ distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.</span>
+The $t$ distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.]{style="color:blue;"}
+::::
+:::
 
 -----
 

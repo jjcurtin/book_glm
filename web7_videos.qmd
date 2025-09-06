@@ -1,11 +1,13 @@
-# Video Recordings from Lab and Lecture {.unnumbered}
-
-## Lab
- 
+# Course Video Recordings {.unnumbered}
 
 ## Lecture
 
 - [09/03](https://mediaspace.wisc.edu/media/glm_2025_0903/1_qef89lqx)
+
+## Lab
+
+- [09/05](https://mediaspace.wisc.edu/media/glmlab_2025_0905/1_67gru0gu) 
+
   
 ## Review sessions
 
