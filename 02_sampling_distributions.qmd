@@ -266,10 +266,6 @@ How confident are you about this conclusion?
 
 -----
 
-<span style="color: red;">Question: Of course, this approach to answering a research question is not typical. Why? And how would you normally answer this question?</span>
-
------
-
 ::: {.callout-important}
 # Question
 Of course, this approach to answering a research question is not typical. Why? And how would you normally answer this question?
@@ -1149,9 +1145,9 @@ So what do we do?
 ::::
 
 ::::{.fragment}
-[We account for this underestimation of $\sigma$ and therefore of the standard deviation (standard error) of the sampling distribution by using the $t$ distribution rather than the $z$ distribution to calculate the probability of our parameter estimate if $H_0$ is true.
+[We account for this underestimation of $\sigma$ and therefore of the standard deviation (standard error) of the sampling distribution by using the $t$ distribution rather than the $z$ distribution to calculate the probability of our parameter estimate if $H_0$ is true.]{style="color:blue;"}
 
-The $t$ distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.]{style="color:blue;"}
+[The $t$ distribution is slightly wider, particularly for small sample sizes to correct for our underestimate of the standard deviation.]{style="color:blue;"}
 ::::
 :::
 
