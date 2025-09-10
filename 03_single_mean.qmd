@@ -289,18 +289,18 @@ data |>
 
 \
 
-1. Create a simple model of FPS scores in the population
+Step 1: Create a simple model of FPS scores in the population
 
-- $\text{FPS}=\beta_0$   
+  - $\text{FPS}=\beta_0$   
 
-2. Collect sample of $N=96$ to estimate $\beta_0$
+Step 2. Collect sample of $N=96$ to estimate $\beta_0$
 
-3. Calculate sample parameter estimate ($b_0$) that minimizes SSE in sample
+Step 3. Calculate sample parameter estimate ($b_0$) that minimizes SSE in sample
 
-4. Use $b_0$ to test hypotheses
+Step 4. Use $b_0$ to test hypotheses
 
-- $H_0: \beta_0 = 0$    
-- $H_a: \beta_0 \neq 0$
+  - $H_0: \beta_0 = 0$    
+  - $H_a: \beta_0 \neq 0$
 
 
 -----
