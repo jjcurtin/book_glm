@@ -85,18 +85,12 @@ Read in `hw2_data.csv`, from the course webpage. Name the dataframe `d`.
 ```
 
 ### b. 
-Use one of the functions we learned in lab to inspect the data.
+Use one of the functions we learned in class to view some of the data (note that `view()` should not be used in a qmd document that you intend to render.  That is only for interactive use in the console) 
 ```{r}
 
 ```
 
-What object class does skim() return?
-
-```{r}
-
-```
-
-Glimpse results from skim()
+Use the `skim()` function to get descriptive statistics on the data file.
 
 ```{r}
 
