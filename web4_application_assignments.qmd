@@ -3,26 +3,26 @@
 ## Week 01: Due Friday, 9/12 at 8:30 am
 
 - [instructions](/homework/week_01/hw_01.pdf) 
-- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw1_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw1_key.qmd)
+- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw_01_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw_01_key.qmd)
 
 ## Week 02: Due Friday, 09/19 at 8:30 am
 
 - [shell](homework/week_02/hw_02_shell.qmd)
 - [data](homework/data/hw_02_data.csv)
-- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw2_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw2_key.qmd)
+- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw_02_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw_02_key.qmd)
 
 ## Week 03: Due Friday, 09/26 at 8:30 am
 
 - [ggplot cheatsheet](/homework/week_03/ggplot2_cheatsheet.pdf)
 - [shell](/homework/week_03/hw_03_shell.qmd)
 - [data](/homework/data/hw_03_data.csv)
-- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw3_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw3_key.qmd)
+- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw_03_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw_03_key.qmd)
 
 ## Week 04: Due Friday, 10/03 at 8:30 am
 
 - [shell](/homework/week_04/hw_04_shell.qmd)
 - [data](/homework/data/hw_04_data.csv)
-- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw4_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw4_key.qmd)
+- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw_04_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw_04_key.qmd)
 
 ## Week 05: No application assignment.  Application exam week!
 
@@ -30,7 +30,7 @@
 
 - [shell](/homework/week_06/hw_06_shell.qmd)
 - [data](/homework/data/hw_06_data.csv)
-- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw6_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw6_key.qmd)
+- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw_06_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw_06_key.qmd)
 
 ## Week 07: Due Friday, 10/24 at 8:30 am
 
