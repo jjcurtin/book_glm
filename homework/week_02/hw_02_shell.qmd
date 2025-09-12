@@ -63,9 +63,9 @@ At the end of the study, participants’ learning was assessed using three postt
 
 * `sub_id` (Subject ID number) 
 
-* `science_aptitude` (pretest score on knowledge of the physics concept)
+* `pretest` (pretest score on knowledge of the physics concept)
 
-* `condition` (0 = Teach; 1 = Explore)
+* `condition` (teach; explore)
 
 * `physics_con` (conceptual understanding score)
 
@@ -245,6 +245,6 @@ Take a minute to reflect on the materials covered in this homework.
 
 If rendering is successful, RStudio will also output a single HTML file of your homework. Please submit your .qmd file, your .html file in Canvas.
 
-If you have trouble rendering your file, please contact LiChen, Claire, or Coco.
+If you have trouble rendering your file, please contact Coco, Jamie, or Shanti.
 
 **Congrats on finishing your second application assignment!**

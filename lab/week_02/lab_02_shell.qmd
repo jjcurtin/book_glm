@@ -18,9 +18,8 @@ Install the below package if you have not already!
 What is this package for? When you do not understand a package or a specific function, `??` and `?` functions are here to help! Use `??` to look up help pages for all functions in a package and use `?` to look up help pages for specific functions. You could also google...
 
 ```{r}
-# install.packages("RXKCD",repos = "http://cran.us.r-project.org")
-??RXKCD
-?getXKCD
+#install.packages("RXKCD",repos = "http://cran.us.r-project.org") 
+
 ```
 
 It seems that this package is really for getting XKCD comic strips! Let's try one. Hit the zoom button for a better view of the comic. 
@@ -28,7 +27,7 @@ It seems that this package is really for getting XKCD comic strips! Let's try on
 Note that we used the `getXKCD()` function from the RXKCD package without loading the package (i.e., without running `library(RXKCD)`)? You can source a specific function from a package by adding `packagename::` before the function you want to use.
 
 ```{r}
-RXKCD::getXKCD(552)
+
 ```
 
 ***What is the statistical issue that this comic raises?***
@@ -43,18 +42,17 @@ Make sure your `psych_610` project is open!
 
 Set conflict policy
 ```{r}
-options(conflicts.policy = "depends.ok")
+
 ```
 
 Load packages
 ```{r}
-library(tidyverse)
-library(skimr)
+
 ```
 
 Set `data_path` - this will be the relative path from your project directory (`psych_610`) to where you saved your lab files. Ideally this should be the same path for everyone!
 ```{r}
-path_data <- "lab/data"
+
 ```
 
 
@@ -65,9 +63,7 @@ In this class, we will often use ` |> ` (native R pipes) to write code. Pipes he
 Basically, ` |> ` ports whatever is on its left hand side (could be an R object, output from a function, or output from a previous pipe operation) into ***the first argument*** of the function on its right hand side. For example, the two lines of code below do the same thing:
 
 ```{r}
-class(path_data)
 
-# use pipe to achieve the same
 ```
 
 For the purpose of this class, we will by default use pipes to code.
@@ -77,11 +73,10 @@ For the purpose of this class, we will by default use pipes to code.
 We will use data collected from you all for today's lab.
 
 - section: Which section are you in?
-  * Morning (9-11 on Friday) with Claire, Brogden rm 228
-  * Afternoon (1:30-3:30 on Friday) with Coco, Brogden rm 228
-  * Morning (9-11 on Friday) with LiChen, Brogden rm 311
-- dpmt: What department, program, or area are you in?
-- age: What is your age in years (if you are willing to share)?
+  * Morning (9-11 on Friday) with Coco, Brogden rm 228
+  * Afternoon (1:30-3:30 on Friday) with Shanti, Brogden rm 138
+  * Morning (9-11 on Friday) with Jamie, Brogden rm 138
+- fake_age: What is your fake age in years?
 - stats_before: Have you taken a statistics course before?
   * Yes/No
 - stats_course: How many statistics courses have you taken?
@@ -102,50 +97,56 @@ We will use data collected from you all for today's lab.
 
 Which of these variables are unordered categorical?
 
+- section
+- stats_before
+- r_before 
+- pineapple_pizza
 
 ... are ordered categorical?
 
-
-... are binary?
-
+- stats_exp
+- stats_conf
+- prog_exp
+- r_exp
+- r_conf
 
 ... are numeric?
 
+- fake_age, stats_course
 
-Remember, variables have different classes. When reading data into R, functions like `read_csv()` makes its best guess on variable classes, but variables could be misclassified. Thus, it is important to look at your data dictionary/documentation and correct any misclassified variables. For example, variables like stats_exp were likert scale items. Although likert scales can be expressed in numeric terms, they are still factorial in nature. Treating likert scale items as numeric variables should be a deliberate decision that you make!
+Remember, variables have different classes. When reading data into R, functions like `read_csv()` makes its best guess on variable classes, but variables could be misclassified. Thus, it is important to look at your data dictionary/documentation and correct any misclassified variables. For example, variables like stats_exp were likert scale items. Although likert scales can be expressed in numeric terms, they are still factors in nature. Treating likert scale items as numeric variables should be a deliberate decision that you make!
 
 For today's purpose, we skip variable classing.
 
 # Structure of the data
 
-There is no statistics without data. Most of the time, we want to work with some data in R. Data come in many different formats.  Most of these formats are like spreadsheets, but they use a special character to separate cells horizontally. This special character is called a "delimiter".  Two of the most common formats are "tab-delimited" (cells in a row are separated by `  `; usually ending with ".dat", as in "data.dat") and "comma-delimited" (cells in a row are separated by a `,`; usually ending with ".csv", as in "data.csv"). We will also cover other less typical file formats (e.g., .xlsx) later this semester. 
+There are no statistics without data. Most of the time, we want to work with some data in R. Data come in many different formats.  Most of these formats are like spreadsheets, but they use a special character to separate cells horizontally. This special character is called a "delimiter".  Two of the most common formats are "tab-delimited" (cells in a row are separated by `  `; usually ending with ".dat", as in "data.dat") and "comma-delimited" (cells in a row are separated by a `,`; usually ending with ".csv", as in "data.csv"). We will also cover other less typical file formats (e.g., .xlsx) later this semester. 
 
 
 Usually, the data we want to use are saved as a file somewhere on your computer. Thus, we need to tell R where the data file is located so as to read it into R. 
 
 
-Today we will use data from psych610_survey_data.csv. Now, let's try to read in the data using relative paths.
+Today we will use data from lab_02_data.csv. Now, let's try to read in the data using relative paths.
 
 
 Remember, by opening the psych_610 Rproject, our *psych_610* folder is treated as the root folder. We can double check that this is root folder by running `getwd()`. 
 
 ```{r}
-# check the current work directory
+
 ```
 
 
 We will use the `here()` function in the `here` package (`here::here()`). If you provide the path of a target file relative to the project root directory (i.e., the *psych_610* folder), `here::here()` will help print out the full path to that target file. In our case, we can specify the relative path as the following:
 
 ```{r}
-# complete path for the data file
+
 ```
 
 
 Next, we can use the `read_csv()` function to read in the data and save it as an R object. Note that you can give your data object whatever name you want, and you still get the same data object.
 
 ```{r}
-whatever_name <- read_csv(here::here(path_data, "psych610_survey_data.csv"),
-                 show_col_types = FALSE) # this suppresses read_csv from printing out column types (variable classes)
+
 ```
 
 
@@ -155,19 +156,21 @@ However, we will default to data_something (i.e., data_raw) for clarity when we 
 You can use the `rm()` command to remove things from your R environment (see the environment window in RStudio). The environment is R's short-term memory, where things you create using R code are temporarily stored. R (and your computer) can become very slow if you environment is full. It is important to maintain a clean R environment and keep useful R objects only.
 
 ```{r}
-# remove whatever_name
+
 ```
 
 Next, we will read in the .csv file. Remember, we will stick to *snake case* as our naming convention for clarity and consistency. A function from package `janitor` helps turn the column (variable) names of our tibble into snake case.
 
 ```{r}
-data_raw <- read_csv(here::here(path_data, "psych610_survey_data.csv"),
-                 show_col_types = FALSE) |> 
-            janitor::clean_names() # forcing variable names to be snake case
-
-# What's the class for data_raw
 
 ```
+
+Quickly look at the column names. There's one variable name (`rbefore`) that still looks weird. Let's fix it!
+
+```{r}
+
+```
+
 
 Now data_raw should appear in under the environment tab. That .csv data file is now loaded into R. Once it's in R we'll refer to it as a "tibble" (`tbl`). A tibble is a special kind of dataframe (i.e., spreadsheet) with some extra properties. We will not get into the details today.
 
@@ -187,7 +190,7 @@ By convention, each row in a tibble usually represents an observation, while eac
 You can eyeball the whole tibble by clicking on its name (i.e., data_raw) under the environment tab (to the right) or run the following command:
 
 ```{r}
-data_raw |> view()
+
 ```
 
 ### Printing in console
@@ -195,7 +198,7 @@ data_raw |> view()
 Remember, your tibble is stored in your R environment just like any other R objects. Thus, you could print out the tibble in the R console by calling its object name. Note that this is not ideal, especially when the tibble has too many rows and columns.
 
 ```{r}
-data_raw
+
 ```
 
 
@@ -248,10 +251,13 @@ What if we only want to look at certain columns or variables of interest? We can
 
 ```{r}
 # variable pineapple_pizza
+
 # all variables except pineapple_pizza and r_conf
+
 # all variables from stats_exp to r_exp
 
 # all variables ending with exp
+
 # all character variables
 ```
 
@@ -260,9 +266,7 @@ What if we only want to look at certain columns or variables of interest? We can
 One limitation of `select()` is that its output is always a tibble, even if only one column is selected. This is inconvenient if we want to extract one particular variable and use it to do some vector operation (i.e., calculate its mean). In this case, `pull()` allows you to select a variable and, since its output is always a vector, do vector operations.
 
 ```{r}
-# Code below will not run
 # data_raw |> select(stats_exp) |> mean()
-
 
 ```
 
@@ -274,14 +278,13 @@ In addition, `glimpse()` does somewhat the same thing as `slice_head` but `glimp
 Importantly, `glimpse()` returns the input tibble as its output, thus making it easy to glimpse the data when you read it into R. This is not possible with other eyeballing functions.
 
 ```{r}
-# glimpse the tibble that was read in
 
 ```
 
 
 ## Descriptive statistics
 
-Instead of looking at the data row by row and column by column, a better way to get a sense about your data is to inspect descriptive statistics. Descriptive statistics describe features of a tibble by generating summaries (e.g., mean, standard deviation) about each of the variables.
+Instead of looking at the data row-by-row and column-by-column, a better way to get a sense about your data is to inspect descriptive statistics. Descriptive statistics describe features of a tibble by generating summaries (e.g., mean, standard deviation) about each of the variables.
 
 
 ### Package skimr
@@ -295,22 +298,20 @@ The output of `skim()`consists of multiple sections: a data summary section, and
 ??skimr
 ?skim
 
+
 ```
 
 
 `skim()` is compatible with the tidyverse function `select()` if descriptive statistics for specific variables are of interest.
 
 ```{r}
-# skim variables whose name starts with an "r"
+
 ```
 
 
 The output of skimr functions like `skim()` is in fact a tibble. You can save this tibble and further manipulate it.
 
 ```{r}
-# skim numeric variables and save it as skim_raw
-
-# What's the class of skim_raw?
 
 ```
 
@@ -320,22 +321,14 @@ The output of skimr functions like `skim()` is in fact a tibble. You can save th
 You can also create your own summary statistics using `summarise`. 
 
 ```{r}
-data_raw |> summarise(n = n(),
-                      mean_stats_exp = mean(stats_exp),
-                      sd_stats_exp = sd(stats_exp))
+
 ```
 
 
 It is also possible to get complicated with `summarise`. For example, this is more or less what `skim()` is doing under the hood.
 
 ```{r}
-data_raw |> 
-  pivot_longer(where(is.numeric), names_to = "var") |> 
-  group_by(var) |> 
-  summarise(mean = mean(value),
-            sd = sd(value),
-            min = min(value),
-            max = max(value)) 
+
 ```
 
 
@@ -360,10 +353,6 @@ Note that the same is possible with `skim()`.
 Sometimes you may be interested in knowing all possible responses on a variable and the number of observations that go with each possible response. The function `table()` helps build a contingency table of the counts at each combination of factor level.
 
 ```{r}
-# all possible responses and number of observations for "stats_before"
-
-
-# all possible responses and number of observations for "stats_before" and "r_before"
 
 ```
 
@@ -380,8 +369,6 @@ Let's try to mean center stats_exp. In the code below, we subtract the mean of s
 Remember to assign the output from `mutate()` back to data_raw, or the new variable will not be saved.
 
 ```{r}
-
-
 
 ```
 
@@ -411,13 +398,12 @@ How can we check that it's standardized? It should have mean 0 and sd 1. Check i
 
 ## Recoding
 
-Factorial variables can come with text labels. For example, our r_before variable has two possible values: "Yes" and "No". These labels cannot be used directly in data analysis, and we need to recode these labels into numeric variables. We will use post-fix "_01" to denote text values we recode to numeric.
+Factor variables can come with text labels. For example, our r_before variable has two possible values: "Yes" and "No". These labels cannot be used directly in data analysis, and we need to recode these labels into numeric variables. We will use post-fix "_01" to denote text values we recode to numeric.
 
 
 One way to do this is using `case_match()`.
 ```{r}
 ?case_match 
-
 
 ```
 
@@ -444,10 +430,8 @@ We will use the post-fix "_m" to denote composite average scores.
 ```
 
 
-
 Check out some descriptive statistics of the new variable
 ```{r}
-# use summarise to find the mean and sd of conf_m
 
 ```
 
@@ -476,6 +460,5 @@ Generates a histogram where the x-axis represents all possible values at which a
 ## Basic scatter plot (x-axis data, y-axis data)
 
 ```{r}
-
 
 ```
