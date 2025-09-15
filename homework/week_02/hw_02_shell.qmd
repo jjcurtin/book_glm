@@ -219,7 +219,7 @@ These data look strange because there seems to be no relationship between partic
 
 ```
 
-It seems that those in Explore condition scored higher on the mean posttest score than those in Teach condition, suggesting active exploration promotes learning compared to passive teaching.
+It seems that those in Teach condition scored higher on the mean posttest score than those in Explore condition, suggesting passive teaching promotes learning compared to active exploration.
 
 # Part II: Reading Questions (Chapters 1 and 2)
 Answer the following questions in a few sentences directly in your qmd file (not within a code chunk).
