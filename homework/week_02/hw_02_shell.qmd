@@ -42,6 +42,7 @@ To keep in line with best practices, we ask you do the following things in a cod
 
 ```{r}
 # suppress messages
+#| message: false
 
 # setup code goes here
 
