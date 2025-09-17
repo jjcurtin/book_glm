@@ -26,7 +26,7 @@ $\hat{FPS}= \beta_0$
 \
 
 - However, we measured their FPS in the context of an experiment where some of the participants were sober and some were given alcohol.   
-- And although we standardized the alcoho dose, particpants given alcohol achieved varying blood alcohol concentrations (BAC)
+- And although we standardized the alcohol dose, participants who were given alcohol achieved varying blood alcohol concentrations (BAC)
 - Luckily, we measured their BAC as part of the experiment.
 
 -----
@@ -40,17 +40,17 @@ How could we uses their BACs to build a better model of the FPS scores?  What wo
 :::{.fragment}
 [**DATA = MODEL + ERROR**]{style="color:blue;"}
 
-$Y_i= \beta_0+\beta_1*X_1+\varepsilon_i$
+- $Y_i= \beta_0+\beta_1*X_1+\varepsilon_i$
 
-$\hat{Y}_i=\beta_0+\beta_1*X_1$
+- $\hat{Y}_i=\beta_0+\beta_1*X_1$
 
-$\varepsilon_i = Y_i - \hat{Y}_i$
+- $\varepsilon_i = Y_i - \hat{Y}_i$
 
 \
 
 $\hat{FPS}_i=\beta_0+\beta_1*BAC_i$
 
-[We could use this model to test the relationship between BAC and FPS scores AND the typical FPS scors for participants with a specific value for BAC (default is BAC = 0)]{style="color:blue;"}
+[We could use this model to test the relationship between BAC and FPS scores AND the typical FPS scores for participants with a specific value for BAC (default is BAC = 0)]{style="color:blue;"}
 :::
 
 -----
@@ -68,7 +68,6 @@ path_data <- "data_lecture"
 
 data <- read_csv(here::here(path_data, "04_single_quantitative_bac_fps.csv"),
                  show_col_types = FALSE)
-
 ```
 
 ```{r}
@@ -125,7 +124,6 @@ $\hat{Y}_i=b_0+b_1*X_1$
 \
 
 - To derive these parameter estimates you must solve a series of simultaneous equations using linear algebra and matrices (see supplemental reading).    
-
 - Or use R!
 
 -----
@@ -151,9 +149,8 @@ plot_mean + plot_x
 
 $\hat{Y}_i=b_0+b_1*X_1$    
 
-\
-
-$b_0$ is predicted value for $Y$ when $X_1$ = 0. Graphically, this is the $Y$ intercept for the regression line (value of $Y$ where regression line crosses Y-axis at $X_1$ = 0).  
+- $b_0$ is predicted value for $Y$ when $X_1$ = 0. 
+- Graphically, this is the $Y$ intercept for the regression line (value of $Y$ where regression line crosses Y-axis at $X_1$ = 0).  
 
 
 ```{r}
@@ -166,7 +163,6 @@ plot_x
 
 ::: {.callout-important}
 # Question
-
 Approximately what is $b_0$ in this example?
 :::
 
@@ -197,7 +193,6 @@ plot_x +
 
 ::: {.callout-important}
 # Question
-
 Notice that $b_0$ is very different in the two parameter model (42.5) than in the previous one parameter model (32.2).  Why?
 :::
 
@@ -238,7 +233,6 @@ $\hat{FPS}_i=\beta_0+\beta_1*BAC_i$
 
 ::: {.callout-important}
 # Question
-
 What are your null and alternative hypotheses about a model parameter to evaluate this question?
 :::
 
@@ -248,7 +242,9 @@ $H_a: \beta_1 \neq 0$
 
 \
 
-[If $\beta_1 = 0$, this means that FPS does not change with changes in BAC. In other words, there is no effect of BAC on FPS. If $\beta_1 < 0$, this means that FPS decreases with increasing BAC (people are less anxious when drunk).]{style="color:blue;"}
+[If $\beta_1 = 0$, this means that FPS does not change with changes in BAC. In other words, there is no effect of BAC on FPS.]{style="color:blue;"}
+
+[If $\beta_1 < 0$, this means that FPS decreases with increasing BAC (people are less anxious when drunk).]{style="color:blue;"}
 
 [If $\beta_1 > 0$, this means FPS increases with increasing BAC (people are more anxious when drunk).]{style="color:blue;"}
 :::
@@ -266,6 +262,7 @@ Set up our environment
 
 options(conflicts.policy = "depends.ok") 
 library(tidyverse)
+library(broom)
 library(patchwork)
 
 theme_set(theme_classic()) 
@@ -297,35 +294,30 @@ Note that the `1` is not needed but I include it for now to make it clear that w
 m_2 <- lm(fps ~ 1 + bac, data = data)
 
 m_2 |> 
-  broom::tidy()
+  tidy()
 ```
 
 -----
 
 ```{r}
 m_2 |> 
-  broom::tidy()
+  tidy()
 ```
 
 ::: {.callout-important}
 # Question
-
 Does BAC affect FPS? Explain this conclusion in terms of the parameter estimate, $b_1$ and its standard error.
 :::
 
 :::{.fragment}
-[Under the $H_0: \beta_1 = 0$, the sampling distribution for $b_1$ will have a mean of 0 with an estimated standard deviation `r round(subset(broom::tidy(m_2), term == "bac")$std.error, 2)`]{style="color:blue;"}
+[Under the $H_0: \beta_1 = 0$, the sampling distribution for $b_1$ will have a mean of 0 with an estimated standard deviation `r round(subset(tidy(m_2), term == "bac")$std.error, 2)`]{style="color:blue;"}
 
-\
+- [$t (`r nrow(data)` - 1) = \frac{`r round(subset(tidy(m_2), term == "bac")$estimate, 2)` - 0}{`r round(subset(tidy(m_2), term == "bac")$std.error, 2)` } = `r round(subset(tidy(m_2), term == "bac")$estimate/subset(tidy(m_2), term == "bac")$std.error, 2)`$]{style="color:blue;"}
 
-$t (`r nrow(data)` - 1) = \frac{`r round(subset(broom::tidy(m_2), term == "bac")$estimate, 2)` - 0}{`r round(subset(broom::tidy(m_2), term == "bac")$std.error, 2)` } = `r round(subset(broom::tidy(m_2), term == "bac")$estimate/subset(broom::tidy(m_2), term == "bac")$std.error, 2)`$     
-
-[Our value of the parameter estimate, $b_1$, is `r abs(round(subset(broom::tidy(m_2), term == "bac")$estimate/subset(broom::tidy(m_2), term == "bac")$std.error, 2))` standard deviations below the expected mean of the sampling distribution for $b_0$ given $H_0$.]{style="color:blue;"}
-
-\
+[Our value of the parameter estimate, $b_1$, is `r abs(round(subset(tidy(m_2), term == "bac")$estimate/subset(tidy(m_2), term == "bac")$std.error, 2))` standard deviations below the expected mean of the sampling distribution for $b_0$ given $H_0$.]{style="color:blue;"}
 
 ```{r}
-pt(-1.92, 94, lower.tail = TRUE)*2
+pt(-1.92, 94, lower.tail = TRUE) * 2
 ```
 
 [A $b_1$ of this size is not unlikely under the null, therefore you fail to reject the null and conclude that BAC has no effect on FPS.]{style="color:blue;"}
@@ -337,7 +329,7 @@ pt(-1.92, 94, lower.tail = TRUE)*2
 
 ```{r}
 m_2 |> 
-  broom::tidy()
+  tidy()
 ```
 
 \
@@ -348,7 +340,7 @@ $H_0: \beta_1 = 0$
 $H_1: \beta_1 \neq 0$
 
 ```{r}
-pt(-1.92, 94, lower.tail = TRUE)*2
+pt(-1.92, 94, lower.tail = TRUE) * 2
 ```
 
 -----
@@ -361,12 +353,12 @@ pt(-1.92, 94, lower.tail = TRUE)*2
 #| code-fold: true
  
 tibble(b1 = seq(-400,400,.01),
-       probability = dt(b1/subset(broom::tidy(m_2), term == "bac")$std.error, m_2$df.residual)) |> 
+       probability = dt(b1/subset(tidy(m_2), term == "bac")$std.error, m_2$df.residual)) |> 
   ggplot(aes(x = b1, y = probability)) +
   geom_line() +
-  geom_vline(xintercept = subset(broom::tidy(m_2), term == "bac")$estimate, 
+  geom_vline(xintercept = subset(tidy(m_2), term == "bac")$estimate, 
              color = "red") +
-  geom_vline(xintercept = -subset(broom::tidy(m_2), term == "bac")$estimate, 
+  geom_vline(xintercept = -subset(tidy(m_2), term == "bac")$estimate, 
              color = "red") +
   labs(title = "Sampling Distribution for b1")
 ```
@@ -385,10 +377,10 @@ pt(-1.92, 94, lower.tail = TRUE)
 #| code-fold: true
 
 tibble(b1 = seq(-400,400,.01),
-       probability = dt(b1/subset(broom::tidy(m_2), term == "bac")$std.error, m_2$df.residual)) |> 
+       probability = dt(b1/subset(tidy(m_2), term == "bac")$std.error, m_2$df.residual)) |> 
   ggplot(aes(x = b1, y = probability)) +
   geom_line() +
-  geom_vline(xintercept = subset(broom::tidy(m_2), term == "bac")$estimate, 
+  geom_vline(xintercept = subset(tidy(m_2), term == "bac")$estimate, 
              color = "red") +
   labs(title = "Sampling Distribution for b1")
 ```
@@ -403,7 +395,6 @@ $H_1: \beta_1 \neq 0$
 
 ::: {.callout-important}
 # Question
-
 What two models are you comparing when you test hypotheses about $\beta_1$? Describe the logic.
 :::
 
@@ -446,7 +437,6 @@ anova(m_1, m_2)
 
 ::: {.callout-important}
 # Question
-
 If there is a perfect relationship between $X_1$ and $Y$ in your sample, what will the SSE be in the two parameter model (augmented) and why?
 :::
 
@@ -458,7 +448,6 @@ If there is a perfect relationship between $X_1$ and $Y$ in your sample, what wi
 
 ::: {.callout-important}
 # Question
-
 If there is no relationship at all between $X_1$ and $Y$ in your sample ($b_1$ = 0), what will the SSE be in the two parameter model (augmented) and why?
 :::
 
@@ -472,12 +461,11 @@ If there is no relationship at all between $X_1$ and $Y$ in your sample ($b_1$ =
 
 ```{r}
 m_2 |> 
-  broom::tidy()
+  tidy()
 ```
 
 ::: {.callout-important}
 # Question
-
 What is the interpretation of $b_0$ in this two parameter model?
 :::
 
@@ -493,7 +481,6 @@ What is the interpretation of $b_0$ in this two parameter model?
 
 ::: {.callout-important}
 # Question
-
 What two models are being compared?
 :::
 
@@ -549,15 +536,14 @@ data |>
 
 ```{r}
 m_2 |> 
-  broom::tidy()
+  tidy()
 ```
 
 \
 
 ::: {.callout-important}
 # Question
-
-How would the parameter estimate values and interpretations change if I mean centered BAC?
+How would the parameter estimates and interpretations change if I mean centered BAC?
 :::
 
 :::{.fragment}
@@ -566,7 +552,7 @@ How would the parameter estimate values and interpretations change if I mean cen
 m_2_c <- lm(fps ~ 1 + bac_c, data = data)  
 
 m_2_c |> 
-  broom::tidy()
+  tidy()
 ```
 
 \
@@ -582,7 +568,6 @@ m_2_c |>
 
 ::: {.callout-important}
 # Question
-
 How would the graphs look different when using raw vs. mean-centered BAC? Connect this to your understanding of how centering BAC affects the parameter estimates
 :::
 
@@ -638,7 +623,6 @@ confint(m_2)
 
 ::: {.callout-important}
 # Question
-
 How can we tell if a parameter is **significant** from the confidence interval?
 :::
 
@@ -656,14 +640,12 @@ How can we tell if a parameter is **significant** from the confidence interval?
 
 ::: {.callout-important}
 # Question
-
 How can you calculate the effect size estimate $\eta_p^2$ (PRE) for $\beta_1$?
 :::
 
 :::{.fragment}
 [Compare the SSE across the two relevant models.]{style="color:blue;"}
 
-\
 
 **Compact model:** 
 
@@ -673,7 +655,6 @@ How can you calculate the effect size estimate $\eta_p^2$ (PRE) for $\beta_1$?
 **Augmented model:** 
 
 - $\hat{FPS}_i= \beta_0 + \beta_1* BAC_i$  
-
 - $SSE_a =  `r round(sse(m_2), 1)`$    
 
 \
@@ -696,7 +677,6 @@ $\frac{SSE_c - SSE_a}{SSE_c}=\frac{`r round(sse(m_1), 1)`- `r round(sse(m_2), 1)
 
 ::: {.callout-important}
 # Question
-
 How can you calculate the effect size estimate $\eta_p^2$ (PRE) for $\beta_0$?
 :::
 
@@ -750,17 +730,15 @@ DATA = MODEL + ERROR
 
 For individuals:    
 
-$Y_i=Y_i+e_i$
+- $Y_i=Y_i+e_i$
 
 \
 
 With respect to variance:   
 
-$S_{Y_i}^2=S_{\hat{Y}_i}^2+S_{e_i}^2$    
+- $S_{Y_i}^2=S_{\hat{Y}_i}^2+S_{e_i}^2$    
 
-\
-
-$R^2=\frac{S_{\hat{Y}_i}^2}{S_{Y_i}^2}$   
+- $R^2=\frac{S_{\hat{Y}_i}^2}{S_{Y_i}^2}$   
 
 -----
 
@@ -774,23 +752,28 @@ var(predict(m_2)) / var(data$fps)
 
 -----
 
-We can also use the `glance()` function in the `broom` package to return various model fit indices.   
-
-\
+We can also use the `glance()` function in the `broom` package to return various model fit indices.  `glance()` returns a dataframe that we can `glimpse()`
 
 ```{r}
-broom::glance(m_2) |>
+m_2 |> 
+  glance() |>
   glimpse()
 ```
 
-\
+-----
 
 Since we are only interested in $R^2$ we can use the following code to pull out this single value.
 
-\
+```{r}
+glance(m_2)$r.squared
+```
+
+or more tidy....
 
 ```{r}
-broom::glance(m_2)$r.squared
+m_2 |> 
+  glance() |>
+  pull(r.squared)
 ```
 
 -----
@@ -799,33 +782,25 @@ broom::glance(m_2)$r.squared
 
 ::: {.callout-important}
 # Question?
-
 Why did the mean-only model not have an $R^2$?
 :::
 
 :::{.fragment}
 [It did but it was just 0. It explained no variance in $Y_i$ because it predicted the same value (mean) for every person. The variance of the predicted values is 0 in the mean-only model.]{style="color:blue;"}
 
-\
-
-$R^2=\frac{S_{\hat{Y}_i}^2}{S_{Y_i}^2}$  
+- $R^2=\frac{S_{\hat{Y}_i}^2}{S_{Y_i}^2}$  
 
 ```{r}
 m_1 <- lm(fps ~ 1, data = data)  
 
-broom::glance(m_1)$r.squared
+glance(m_1)$r.squared
 ```
 
-\
 
 [In fact, the SSE for the mean-only model is the numerator of the formula for the variance for $Y_i$.]{style="color:blue;"}
 
-\
-
-$SSE=\frac{\sum(Y_i-\hat{Y_i})^2}{}$   
-
-\
-$S^2 = \frac{\sum(Y_i-\overline{Y})^2}{N-1}$
+- $SSE=\frac{\sum(Y_i-\hat{Y_i})^2}{}$   
+- $S^2 = \frac{\sum(Y_i-\overline{Y})^2}{N-1}$
 :::
 
 -----
@@ -838,13 +813,12 @@ $R^2=\frac{SSE_{mean-only}-SSE_a}{SSE_{mean-only}}$
 
 Mean-only model: $\hat{FPS}_i=\beta_0$    
 
-$SSE_{mean-only} = `r round(sse(m_1), 1)`$    
+- $SSE_{mean-only} = `r round(sse(m_1), 1)`$    
 
-\
 
 Augmented model: $\hat{FPS}_i=\beta_0 + \beta_1*BAC_i$     
  
-$SSE_a = `r round(sse(m_2), 1)`$   
+- $SSE_a = `r round(sse(m_2), 1)`$   
 
 \
 $R^2= \frac{`r round(sse(m_1), 1)` - `r round(sse(m_2), 1)`}{`r round(sse(m_1), 1)`} = `r round((sse(m_1) - sse(m_2)) / sse(m_1), 5)`$    
@@ -859,10 +833,8 @@ In this augmented model, $R^2$ is fully accounted for by BAC. In more complex mo
 
 ::: {.callout-important}
 # Question
-
 When both the predictor variable and the dependent variable are quantitative, the test of $\beta_1$ = 0 is statistically equivalent to the what other common statistical test?  
 :::
-
 
 :::{.fragment}
 [The test of the Pearson’s correlation coefficient]{style="color:blue;"}
@@ -969,7 +941,6 @@ The confidence intervals for each predicted FPS score use the standard error for
 
 ::: {.callout-important}
 # Question
-
 Why are the error bands not linear?
 :::
 
@@ -993,6 +964,8 @@ Lets compare the SE for $b_1$ to $b_0$.
 $SE_\hat{Y_i}=\sqrt{\frac{SSE}{N-P}}*\sqrt{\frac{1}{N}+\frac{(X_i-\overline{X})^2}{(N-1)s_x^2}}$  
 
 $SE_{b_0}=\sqrt{\frac{SSE}{N-P}}*\sqrt{\frac{1}{N}+\frac{(\overline{X})^2}{(N-1)s_x^2}}$   
+
+\
 
 - $b_0$ is simply the predicted value for $Y$ when $X$ = 0.
 

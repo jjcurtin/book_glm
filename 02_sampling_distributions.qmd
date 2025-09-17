@@ -1014,7 +1014,7 @@ probability_1sd + probability_2sd + probability_3sd
 
 ## Probability of Parameter Estimate Given $H_0$
 
-How could you use the $z$ distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of $N=10$ from a population of Ocean Liking scores with a population mean (parameter) of 0 and population standard deviation of 10?
+How could you use the $z$ distribution to determine the probability of obtaining a sample mean (parameter estimate) of 2.40 if you draw a sample of $N=10$ from a population of Ocean Liking scores with a population mean (parameter) of 0 and population standard deviation of 23.7?
 
 \
 
