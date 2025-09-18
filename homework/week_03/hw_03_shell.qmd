@@ -10,8 +10,7 @@ format:
 editor_options: 
   chunk_output_type: console
 ---
-
-Due <!--Friday, September 27, 2023, 9:00pm--> on Canvas.   
+Due Friday, September 26, 2025, 8:30AM on Canvas.   
 
 -	Select the Assignments menu and find HW Week 3
 -	Submit both an HTML file and a .qmd file
@@ -38,7 +37,7 @@ Due <!--Friday, September 27, 2023, 9:00pm--> on Canvas.
 ## Part B. Data Analysis
 
 
-For this homework, we will use the `hw_03_data..csv` file. This data set contains (fictitious) statistics about the number of stray animals in each of the 50 US states. The data set also specifies whether the state participated in a nation-wide TNR (trap-neuter-return) program that was launched in an attempt to reduce the number of stray cats and the number of animal shelters in each state.   
+For this homework, we will use the `hw_03_data.csv` file. This data set contains (fictitious) statistics about the number of stray animals in each of the 50 US states. The data set also specifies whether the state participated in a nation-wide TNR (trap-neuter-return) program that was launched in an attempt to reduce the number of stray cats and the number of animal shelters in each state.   
 
 **Codebook:**    
 
@@ -106,7 +105,7 @@ For this homework, we will use the `hw_03_data..csv` file. This data set contain
 
 ```
 
-#### b. Create a new variable `stray_z`, that is the standardized score of `stray_total`.
+#### b. Create a new variable `stray_z`, that is the standardized score (i.e., has a mean of 0 and a standard deviation of 1) of `stray_total`.
 
 ```{r}
 
