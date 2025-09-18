@@ -26,6 +26,7 @@ Load packages
 #| message: false 
 
 library(tidyverse)
+library(broom)
 library(skimr)
 ```
 
@@ -162,7 +163,7 @@ sse_null
 ### The mean-only model
 
 Specification of the mean-only model:   
-We are *buying* one piece of information (the mean) so we're estimating one parameter ($P = 1$).   
+We are *buying* one piece of information (the mean) to estimate one parameter ($P = 1$).
 
 
 $distance_i = b_0 + e_i$
@@ -259,7 +260,7 @@ We are using the `pf()` function to calculate our p-value from `f_stat`. We are 
 pf(f_stat, (p_a - p_c), (n - p_a), lower.tail = FALSE)
 ```
 
-Because $p = .002$, which is < .05, the additional precision was *worth* the addition of the parameter. The mean of the sample is a better predictor than 0.
+Because $p = .002$, which is < .05, the additional precision was *worth* the addition of the parameter. The mean of the sample is a better predictor than 0.  Alternatively, we can say that it is unlikely ($p = .002$) that we would have observed this much of a reduction in error from estimating $b_0$ (using the sample mean) if the population mean were actually 0.
 
 
 #### Models & model comparison the easy way
@@ -297,13 +298,13 @@ $t = (b - \beta) / SE(b)$
 
 $t$ essentially represents how many standard deviations of the sampling distribution our estimated sample mean ($b_0$) sits away from the expected population mean, assuming the null hypothesis is true (i.e., $\beta_0$ = 0).
 
-`broom::tidy()` will provide you with the t-statistic and p-value corresponding to each parameter in your model. 
+`tidy()` from the broom package will provide you with the t-statistic and p-value corresponding to each parameter in your model.
 ```{r}
 m_mean |> 
 
 ```
 
-To calculate $t$ by hand, we need the parameter estimate and its standard error from the augmented model. Next, we can obtain the p-value for $t$ using `pt()`. Note that you need to double the number you get if you wanted two-tailed p-value.
+To calculate $t$ by hand, we need the parameter estimate and its standard error from the augmented model. We also need the value of the population paramenter if the null hypothesis is true (0 in this instance).  Next, we can obtain the p-value for $t$ using `pt()`. Note that you need to double the number you get if you wanted two-tailed p-value.
 
 ```{r}
 t <- 
