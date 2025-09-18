@@ -709,6 +709,9 @@ How could you test an $H_0$ regarding $B_0$ = some value other than 0 (e.g., 10)
 :::{.fragment}
 [**Option 1:** Compare SSE for the augmented model ($\hat{Y}_i= \beta_0$) to SSE from a different compact model for this new $H_0$ ($\hat{Y}_i= 10$).]{style="color:blue;"}
 
+- [compact model: $\hat{\text{FPS}_i}=10$]{style="color:blue;"}
+- [augmented model: $\hat{\text{FPS}_i}=\beta_0)$]{style="color:blue;"}
+
 \
 
 [**Option 2:** Recalculate t-statistic using this new $H_0$.]{style="color:blue;"}

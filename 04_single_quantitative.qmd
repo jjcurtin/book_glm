@@ -50,7 +50,12 @@ How could we uses their BACs to build a better model of the FPS scores?  What wo
 
 $\hat{FPS}_i=\beta_0+\beta_1*BAC_i$
 
-[We could use this model to test the relationship between BAC and FPS scores AND the typical FPS scores for participants with a specific value for BAC (default is BAC = 0)]{style="color:blue;"}
+[We could use this model to test two questions:]{style="color:blue;"}
+
+- [The relationship between BAC and FPS scores]{style="color:blue;"}
+- [The typical FPS scores for participants with a specific value for BAC (default is BAC = 0)]{style="color:blue;"}
+
+[Each of these questions will be linked to a test of a specific parameter in the model.]{style="color:blue;"}
 :::
 
 -----
@@ -422,6 +427,7 @@ F(1,94) = 3.685, p = 0.058
 
 -----
 
+You can use the `anova()` function to explicitly compare the two models and calculate the F-statistic and p-value for the comparison
 ```{r}
 m_1 <- lm(fps ~ 1, data = data)   
 m_2 <- lm(fps ~ 1 + bac, data = data) 
@@ -431,6 +437,14 @@ m_2 <- lm(fps ~ 1 + bac, data = data)
 anova(m_1, m_2)
 ```
 
+but this comparison is statistically equivalent to the t-test of $b_1$ = 0 (and that takes less code to write!)
+
+```{r}
+m_2 |> 
+  tidy()
+```
+
+  
 -----
 
 ## Sum of Squared Errors
@@ -478,6 +492,18 @@ What is the interpretation of $b_0$ in this two parameter model?
 :::
 
 -----
+
+```{r}
+#| echo: false
+
+plot_x
+```
+
+-----
+
+
+
+
 
 ::: {.callout-important}
 # Question
