@@ -155,7 +155,7 @@ Check that your new variable is indeed mean-centered using code.
 
 
 ## 4. Center condition 
-Recode `condition` into a new numeric variable where teach = -.5 and explore = -0.5 
+Recode `condition` into a new numeric variable where teach = 0.5 and explore = -0.5 
 
 
 
