@@ -501,10 +501,6 @@ plot_x
 
 -----
 
-
-
-
-
 ::: {.callout-important}
 # Question
 What two models are being compared?
@@ -756,7 +752,7 @@ DATA = MODEL + ERROR
 
 For individuals:    
 
-- $Y_i=Y_i+e_i$
+- $Y_i=\hat{Y_i}+e_i$
 
 \
 
