@@ -983,7 +983,7 @@ $CI_\hat{Y_i}=\hat{Y_i}\pm t(\alpha; N-k-1)SE_\hat{Y_i}$
 
 -----
 
-Lets compare the SE for $b_1$ to $b_0$.
+Lets compare the SE for $b_0$ to the standard error for $\hat{Y_i}$ at different values of $X_i$.
 
 \
 
@@ -1081,3 +1081,20 @@ pred_plot <- ggplot() +
 
 pred_plot 
 ```
+
+-----
+
+## Look at what we now know!!!
+
+
+- We now understand how to create a two parameter model of $\hat{Y}$ based on a single predictor variable coded as $X$
+- We understand how to interpret the parameter estimates in this model ($b_0$ and $b_1$)
+- We understand that these parameters are estimated such that the minimize the SSE in our sample
+- We understand how to form null and alternative hypotheses about these parameters
+- We can test those hypotheses using either a t-test based on the sampling distribution for the parameter estimate or an F-test comparing the augmented model to a compact model
+- We understand how to interpret the t-statistic in terms of standard deviations from the mean of the sampling distribution under the null
+- For the model comparison approach, we can specify the form of the compact model and augmented model for tests of $\Beta_0$ and $\Beta_1$
+- We know how to calculate and interpret confidence intervals for these parameters
+- We know how to calculate and interpret an effect size estimate ($\eta_p^2$ or PRE) for these parameters
+- We know how to calculate and interpret $R^2$ for the overall model both in terms of variance explained and in terms of reduction in SSE from the mean-only model
+- We know how to visualize these models
