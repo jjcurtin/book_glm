@@ -22,6 +22,7 @@ We will also need the `readxl()` to read in an excel data file -- install this p
 
 options(conflicts.policy = "depends.ok") 
 library(tidyverse)
+library(broom)
 library(readxl)
 
 theme_set(theme_classic()) 
@@ -81,7 +82,7 @@ Prorating is a strategy to *impute* missing data. It is done by using the mean o
 
 Hmm... this seems useful if we had a subject who had completed most of the mpf task except for the last item, but 10 seems too high of a score to assign to a child who refused to do the task! We probably want to have some sort of tolerance threshold for when we want to prorate (e.g., the participant must have completed 3/4ths of the task).
 
-These are three different ways that missing data can be handled. It's important to know your data well so you can make informed decisions about handling NAs.
+These are three different ways that missing data can be handled. It's important to know your data well so you can make informed decisions about handling NAs. *Remember that there is no one right answer for how to handle missing data, and there are other ways than the ones we have covered here.*
 
 Now, let's remove that extra observation. This removes the last row from our tibble.
 ```{r}
