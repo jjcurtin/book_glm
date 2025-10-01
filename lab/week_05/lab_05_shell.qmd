@@ -345,12 +345,14 @@ broom::tidy(m)
 
 The summary tells us if there is a relationship between the number of crime offenses per million people (`crime_rate`) and whether or not a state is Southern (`southern`). There is no significant difference in crime rate between northern and southern states, b1 = -3.23, t(46) = -.36, p = .72.
 
+
 #### e. Create a quick and dirty plot of the relationship between `crime_rate` and `southern`.
 
 ```{r}
 plot(d$southern, d$crime_rate) + 
   abline(lm(d$crime_rate ~ d$southern))
 ```
+
 
 #### f. In just three steps, set up a new dataframe called `d_plot`. This dataframe should contain predicted values for the outcome variable, SE, lower and upper confidence intervals, centered numeric values for northern and southern states, and character values that can serve as labels for northern and southern states.
 
@@ -365,6 +367,7 @@ preds <- predict() |>
 d_plot <- d_new |> 
   bind_cols(preds)
 ```
+
 
 #### g. Build a bar graph in ggplot using the dataframe `d_plot`.
 
