@@ -133,8 +133,6 @@ Describe the interpretation of $b_1$ (coefficient for BAC) and its significance 
 m_2 |> tidy()
 ```
 
---------------------------------------------------------------------------------
-
 :::{.callout-important}
 # Question
 $H_0: \beta_1 = 0$  
@@ -143,7 +141,8 @@ $H_a: \beta_1 \neq 0$
 What could we change about the sampling distribution that would make this $b_1$ be less probable given $H_0$ so that we reject the Null?
 :::
 
-:::{.fragment}
+-------------------------------------------------------------------------------
+
 [If the standard deviation of the sampling distribution (its standard error) was smaller so that the distribution was narrower, $b_1$ would be less probable given $H_0$.]{style="color:blue;"}`
 
 ```{r}
@@ -173,9 +172,12 @@ $SE_{bj} = \frac{s_y}{s_j}*\frac{\sqrt{(1-R^2_y)}}{\sqrt{(N-P)}}*\frac{1}{\sqrt{
 
 :::{.callout-note}
 # Note 
-Formula for the standard error for $b_0$ is different than for $b_j$.  For the two parameter model $SE_{b0}$ is (need matrix notation for $P > 2$):  
+Formula for the standard error for $b_0$ is different than for $b_j$.  For the two parameter model $SE_{b0}$ is 
 
 $\sqrt {\frac{SSE}{N-P}}*\sqrt{\frac{1}{N}+\frac{X^2}{(N-1)s_x^2}}$
+
+
+(we need matrix notation for $P > 2$)
 :::
 
 --------------------------------------------------------------------------------
@@ -339,7 +341,7 @@ data |>
 
 ## The Two Predictor and General Linear Models
 
-The two (and $k$) are simple generalizations of the models you have already learned
+The two (and $k$) predictor models are simple generalizations of the models you have already learned
 
 - Simply add more $X$s to the model 
 - Estimate parameters for these $X$s

@@ -1,8 +1,3 @@
---- 
-editor_options:  
-  chunk_output_type: console
---- 
-
 # Unit 5: Inferences about a Single Dichotomous Predictor
 
 ```{r}
@@ -570,18 +565,11 @@ How do you use this information to calculate $R^2$ for the augmented model?
 
 ::: {.callout-important}
 # Question
-Why?
+Why does $R^2$ equal PRE for $\beta_1$ for this two parameter model?
 :::
 
 :::{.fragment}
-[At this point it equals PRE b/c $SSE_c$ is the mean only model!]{style="color:blue;"}
-
-```{r}
-#| echo: false
-m_mo <- lm(fps ~ 0 + bg_d, data = data) 
-```
-
-$\frac{SSE_{mean}-SSE_a}{SSE_{mean}}$ = $\frac{`r round(sse(m_mo), 2)` - `r round(sse(m_aug), 2)`}{`r round(sse(m_mo), 2)`}$ = `r round((sse(m_mo) - sse(m_aug)) / sse(m_mo), 4)`
+[In the two parameter model, only $X_1$ and its associated parameter estimate, $b_1$ contribute to making different predicted values for each participant.  Therefore reduction in SSE due to $\beta_1$ is the same as the increase in variance explained by the full model.  Only $\beta_1$ * $X_1$ explain variance in predictions.]{style="color:blue;"}
 :::
 
 ## Effect Sizes in R
@@ -668,66 +656,86 @@ Is $b_0$ (`r round(coef(m_c)[1], 2)`) the mean of FPS in the sample?
 :::
 
 :::{.fragment}
-[It is the unweighted mean.]{style="color:blue;"}
+[It is the unweighted mean. An unweighted mean is simply the mean of the group means]{style="color:blue;"}
 
-[Weighted and unweighted means emerge as concepts with grouped data.   An unweighted mean is the mean of the group means, ignoring the $N$ in each group.]{style="color:blue;"}
+Here are the group means
+```{r}
+#| code-fold: true
+
+data |> 
+  group_by(bg) |> 
+  summarise(mean = mean(fps))
+```
+
+Here is the mean of the means
+```{r}
+(30.5 + 37.1) / 2
+```
+
+This can be thought of as giving equal weight to the two group means when combining into a single mean.
+```{r}
+(.5 * 30.5) + (.5 * 37.1)
+```
 :::
 
 -----
 
-```{r}
-data |> 
-  summarise(mean = mean(fps),
-            sd = sd(fps))
-```
+## Unweighted vs. Weighted Means
 
+The concept of weighted and unweighted means emerges with grouped data.
+
+\
+
+An **unweighted** mean is the mean of the group means, ignoring the $N$ in each group.  It gives equal weight to each group mean regardless of the sample size in each group.
+
+\
+
+A **weighted** mean is the mean of the groups *weighted* or proportional to their sample sizes. It is also equal to the grand mean of the DV ignoring group.
+
+-----
+
+Again, here is the mean FPS in the two groups
 ```{r}
+#| code-fold: true
+
 data |> 
   group_by(bg) |> 
   summarise(mean = mean(fps),
             sd = sd(fps))
 ```
 
+A weighted mean would weight those two means by their relative sample sizes
+```{r}
+(.75 * 30.5) + (.25 * 37.1)
+```
+
+And this is equivalent to the mean of the DV when you ignore the groups
+```{r}
+data |> summarise(mean = mean(fps))
+```
+
 -----
 
 ## $b_0$ as Weighted Mean
 
-A weighted mean is the mean of the groups *weighted* or proportional to their sample sizes. It is also equal to the grand mean of the DV ignoring group.  
+To get $b_0$ to reflect the weighted mean of the two groups, you simply need to mean center the regressor you calculated for the group variable $X$. 
 
-::: {.callout-important}
-# Question
+This is the same as we did with a quantitative variable to make $b_0$ equal the grand mean.  You can mean center either a dummy coded regressor or a regressor that uses centered coefficients]{style="color:blue;"}
 
-How can you get $b_0$ to reflect the weighted mean?
-:::
-
-:::{.fragment}
-[Mean center $X$. This is the same as we did with a quantitative variable to make $b_0$ equal the grand mean.]{style="color:blue;"}
-:::
-
------
-
+Here we do this using the previously calculated dummy coded regressor `bg_d`
 ```{r}
 data <- data |> 
   mutate(bg_mc = bg_d - mean(bg_d))
 ```
 
-\
-
+The new codes are still unit weighted but they are no longer centered on 0.
 ```{r}
-data |> 
-  pull(bg_mc)
-```
-
-\
-
-```{r}
-mean(data$bg_mc)
+data |> slice_sample(n = 8)
 ```
 
 -----
 
-## $b_0$ as Weighted Mean
-
+And here are the parameter estimates for this model.  Notice the new value for $b_0$
 ```{r}
 m_mc <- lm(fps ~ 1 + bg_mc, data = data)
 
@@ -735,9 +743,13 @@ m_mc |>
   tidy()
 ```
 
-\
+-----
 
-NOTE:  Mean centered vs. centered coefficients are less commonly used with categorical variables.  But it is important to understand because it deepens your intuition about how these models work.   
+Mean centered coefficients are less commonly used with dichotomous or other categorical variables.  
+
+Typically, you will only see them used where the sample sizes of the groups reflect something about the real world rather than just the researchers decision to regarding group size.  This happens mostly when you are randomly sampling from the population (or some other representive sampling method), rather than using convenience samples or experimental work where you assign participants to groups.
+
+But it is important to understand because it deepens your intuition about how these models work.   
 
 You can use transformations of your predictors (into regressors) in many different ways depending on your goals and questions in many different ways depending on your goals and questions.
 
@@ -869,4 +881,14 @@ plot_pub <- ggplot() +
 plot_pub
 ```
 
+## Summary
 
+We now know....
+
+- How to code a dichotomous predictor into a regressor ($X$ in a glm) using dummy coding and centered coefficients
+- How to interpret $b_0$ and $b_1$ in these models
+- How to test hypotheses about $b_0$ and $b_1$ using NHST using either the sampling distribution or model comparisons perspectives
+- How to calculate PRE ($\eta_p^2$) for $b_0$ and $b_1$
+- How to calculate $R^2$ for the full model
+- The difference between weighted and unweighted means and how to get each using different coding schemes
+- How to make publication quality figures of these models with dicotomous predictors
