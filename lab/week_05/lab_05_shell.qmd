@@ -1,5 +1,5 @@
 ---
-title: "Lab 5 TA Script" 
+title: "Lab 6 TA Script" 
 author: "TAs" 
 date: "`r lubridate::today()`"
 format: 
@@ -11,363 +11,23 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Questions about the application exam or other material?
+## Housekeeping
 
-## Conventions for decimals ("sig. Figs") when reporting statistics
-b and F values: 
+Thank you all for your valuable feedback/comments on hw3:D! Based on your answers, we have decided to make following changes to our workflow in future lab sections:
 
-- Always include the digit(s) preceding the decimal
-- If the number is less than one, report 0.xxx (e.g., 0.852)
-- Otherwise, report two decimal places after the decimal (e.g., 2.85)
+- At the beginning of each lab, we'll take a few minutes to answer questions about lecture content
 
+- We'll now include some simple content-related exercises during lab (in addition to coding!)
 
-p values:
+- Some of you suggested releasing the TA script before lab. After some serious discussions between John and the TAs, we were hesitant to do so. We still think it's best practice to write out code by hand and to debug when errors occur. We do understand your concerns about falling behind during lab when some lines of codes don't work. So alternatively, we have decided to implement minor checkpoints throughout each lab where we will stop and make sure everyone is caught up. Of course, we can help you debug outside of these points, too. :^)
 
-- Because p values are bounded by 0 and 1, *do not* report the digit before the decimal place
-- Report 3 digits after the decimal
-- Although you can just report the most stringent level of significance which the p value falls under (e.g., p = .003 --> p < .005), it is good practice to report exact p values to the 3rd decimal place, for transparency of your results...
-- ...Except for p values smaller than .001, just report p < .001!
+## Concept Question Excercise
 
+What is our measurement of the total prediction error associated with a given model? In the context of testing statistical models, what does it mean to "reduce error"?
 
-## Set up    
+> You answer here.
 
-Today we are going to use a few new packages. The first is called `GGally`. Since we are only interested in one function from `GGally` we are only going to load that function (`ggpairs()`).    
-
-We are also going to use the `corr.test()` function in the `psych` package. We will also load only this one function to avoid increasing the chance of package conflicts.   
-
-We are also going to be using a dataset that is part of the `car` package. To use these data we do not need to load the library, but you will need to have the package installed in Quarto. Note that because of this, we won't be assigning our `path_data` object today!
-
-```{r}
-#| message: false
-#| warning: false
-
-options(conflicts.policy = "depends.ok") 
-library(tidyverse)
-library(GGally, include.only = "ggpairs")
-library(psych, include.only = "corr.test")
-
-theme_set(theme_classic()) 
-```
-
-
-## Prestige dataset
-
-Today we're going to use a dataset called `Prestige` that is part of the car package.    
-
-**How do we get the documentation for the Prestige dataset?**
-```{r}
-#| eval: false
-
-
-```
-
-**How do we load data that are included in an R package?** 
-```{r}
-
-
-```
-
-
-We'll drop one of the three categories in the `type` variable so we have a dichotomous predictor. We'll learn how to deal with categorical predictors with three or more levels later in the class. After the `filter` statement, our type variable should only have blue and white collar jobs.    
-
-Remember our Boolean logical operators: ! is for "not," so != is "not equal to" 
-```{r}
-d <- d_raw |> 
-  filter(type != "prof")
-```
-
-**How can we check that we do in fact have only two levels?**
-```{r}
-
-
-
-```
-
-
-**Wait... Why is 'prof' still in the output of `table()` `skim()` functions?**    
-
-**What is the data type of the "type" variable?**
-```{r}
-
-
-```
-
-Factor! A factor variable stores the possible levels of the categorical variable. Because "type" is a factor, Quarto assumes that 'prof' is still a possible response, although no observation in the dataframe `d` belongs to that group.    
-
-**How do we fix this?**   
-The `forcats` function `fct_drop()` will drop any unused factor levels. We will be using a few other `forcats` functions today. Here is a handy cheatsheet - [https://rstudio.github.io/cheatsheets/factors.pdf](https://rstudio.github.io/cheatsheets/factors.pdf).
-```{r}
-d <- d |> 
-  mutate(
-    
-  )
-
-table(d$type) 
-```
-
-## Descriptive statistics 
-
-Take a quick look at the data using several of the functions we learned.
-```{r}
-glimpse(d) 
-
-```
-
-
-**What does each row in our data represent?**
-
-```{r}
-
-```
-
-
-**Here is a new function - `ggpairs()`, from the package `GGally`. What does it do? **
-
-```{r}
-#| eval: false
-
-
-```
-
-Use it on our data. 
-```{r}
-#| message: false
-
-
-```
-
-
-Recode the `type` variable to a centered numeric variable (-0.5 and 0.5).   
-```{r}
-d <- d |> 
-  mutate(
-    
-  )
-```
-
-
-Use `mutate()` and `fct_recode()` to make `type` factor labels more descriptive (e.g., what do bc and wc each stand for?).
-```{r}
-d <- d |> 
-  mutate(
-    
-  )
-
-table(d$type)
-```
-
-## Correlation matrix for focal variables: `education`, `income`, `women`, `type_c` 
-```{r}
-d |> 
-  select(education:women, type_c) |> 
-
-```
-
-
-**Advanced question: How can we compute the $\eta_p^2$ for a simple linear relationship between a pair of variables, using only the information from the correlation table? **
-
-```{r}
-(d |> 
-  select(education:women, type_c) |> 
-
-```
-
-
-**What if we also want p values for these correlations? (Is the correlation between two variables significantly different from 0?)**   
-```{r}
-#| eval: false
-
-?corr.test
-```
-
-Well that's kind of annoying to not have them next to each other, especially if we had more variables. 
-```{r}
-corr_results <- d |> 
-  select(education:women, type_c) |> 
-
-  
-corr_results
-```
-
-If we want to see just the correlation magnitudes (r) 
-```{r}
-corr_results$
-```
- 
-If we want to see just the p-values 
-```{r}
-corr_results$
-```
-
-**Click on your `corr_results` object in your environment. What other things can we pull out?**
-
-```{r}
-
-
-
-```
-
-
-You can make it look nicer (or more APA) using functions from the kableExtra package.
-```{r}
-corr_results$stars |>  
-  kableExtra::kbl(caption = "Table 1") |>  
-  kableExtra::kable_classic(full_width = F, html_font = "Cambria") 
-```
-
-----
-
-## Group Exercise
-Group up with 1-2 of your lab-mates!
-
-### Part 1: Models with a single continuous predictor
-
-Suppose we are interested in whether jobs that require more years of education are also the ones in which people earn, on average, a higher income.
-
-### Fit the model to test our hypothesis and save it as `m_1`. Explain how this model answers our research question above.
-```{r}
-
-```
-
-
-### Obtain and report a t-statistic and p-value for each parameter.
-```{r}
-
-```
-
-### What are your degrees of freedom?
-```{r}
-
-
-
-```
-
-
-### How do we convert the t-statistic to the F-statistic?
-```{r}
-
-
-
-```
-
-
-### Interpret the intercept 
-
-
-### Is the intercept meaningful?
-
-
-### Interpret the regression coefficient for education 
-
-
-### Is the association between education and income statistically significant? 
-
-
-### How large is the effect? Obtain the effect size for education.
-
-```{r}
-
-
-
-```
-
-
-### How much variance of `income` is explained by `education`?
-
-
-### Let's graph! First, make a dataframe for plotting that contains the predictor.  
-```{r}
-
-
-
-```
-
-### Generate predictions for `d_graph_1` based on `m_1` using `predict()`. Remember to use `se.fit = TRUE` to return the standard error for error bars and to coerce your list into a `tibble`.
-```{r}
-
-```
-
-### Calculate `upper` and `lower` values for error bars and add your predictor back in.
-```{r}
-
-
-
-```
-
-
-### Make the plot in `ggplot2()`. Add raw data points.
-```{r}
-ggplot() + 
-  
-  
-  
-  
-  
-```
-
-
-
-## Part 2: Models with a single dichotomous predictor
-
-Suppose we are interested in whether white collar jobs on average require more years of education than blue collar jobs.
-
-### Fit the model and save it as `m_2`. Explain how this model answers our research question above.
-```{r}
-
-```
-
-### Obtain and report the t-statistic and p-value for each parameter.
-```{r}
-
-```
-
-### Interpret the intercept 
-
-
-### Interpret the regression coefficient for type_c
-
-
-### Let's graph! First, make a dataframe for plotting that contains the predictor.  
-```{r}
-
-```
-
-### Generate predictions for `d_graph_2` based on `m_2` using `predict()`. Remember to use `se.fit = TRUE` to return the standard error for error bars and to coerce your list into a `tibble`.
-```{r}
-
-
-```
-
-### Calculate `upper` and `lower` values for error bars and add your predictor back in. Create a new factor variable called `type` that provides meaningful labels for your dichotomous predictor.
-```{r}
-
-
-
-
-```
-
-
-### Make the plot in `ggplot2()`. Add raw data points.
-```{r}
-ggplot() + 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-```
-
-
-**End of exercise!**
-
-----
-
-## Models with 2 Predictors
+## Models with 2 Predictors (from Week 5)
 
 Representation of women in a job is measured by `women`, a variable in the `Prestige` dataset that records the percentage of a job's incumbents who are women.    
 
@@ -375,13 +35,35 @@ Consider adding the representation of women as a covariate to model 1 (i.e., use
 
 **In general, why might it make sense to add a covariate?** 
 
+- To explain variance and increase statistical power. 
+- To statistically control for the effect of another variable and look at the unique effect of the focal variable.
+- Also, for efficiency, for testing complex mechanisms like mediation, and for better prediction, as mentioned in lecture.
 
-Now we will fit a model, `m_3`, to predict `income` from `education` and `women`.    
-Note that education is still the focal predictor.
+First, let's set-up our script. We will also set up our path object because we will need that later on!
 ```{r}
-m_3 <- lm(income ~ education + women, data = d) 
+#| message: false
+#| warning: false
 
-broom::tidy(m_3)
+options(conflicts.policy = "depends.ok") 
+library(tidyverse)
+library(skimr)
+
+path_data <- "lab/data"
+
+theme_set(theme_classic()) 
+```
+
+Now, let's load in the Prestige dataset...
+```{r}
+d <- carData::Prestige |>
+  filter(type != "prof") |> # remember, we dropped these observations
+  mutate(type = fct_drop(type)) |> # and then we made sure to drop that level of our factor
+  glimpse()
+```
+
+...and refit our models from last week! Remember, m_1 was our model regressing income on education and m_3 was our model regressing income on education and representation of women in a career (m_2 was with a single dichotomous predictor, so we are not replicating that here).
+```{r}
+
 ```
 
 **How does adding women representation as a covariate influence the sampling distribution for the effect of education?**    
@@ -403,48 +85,417 @@ tibble(b1 = seq(-400,400,.01),
        y = "Probability")
 ```
 
-
 **How does adding women representation as a covariate influence the (variance-based) effect size of education?**    
 
 Compare $\eta_p^2$ in the models with and without the covariate. 
 
 Without covariate
 ```{r}
-sse_c <- sum(residuals(lm(income ~ 1, data = d))^2)
-sse_a <- sum(residuals(m_1)^2)
+sse_c <- 
+sse_a <- 
 
-(peta <- (sse_c - sse_a)/sse_c)
+(peta <- )
 ```
 
 With covariate 
 ```{r}
-sse_c <- sum(residuals(lm(income ~ women, data = d))^2)
-sse_a <- sum(residuals(m_3)^2)
+sse_c <- 
+sse_a <- 
 
-(peta <- (sse_c - sse_a)/sse_c)
+(peta <- )
 ```
 
 **Describe that comparison**    
-
+The effect of education is now much larger: When statistically controlling for representation of women, education explains 33% of the variance in income!  
 
 **What does the $\eta_p^2$ for education represent?**    
+$\eta_p^2$ shows the percentage of the residual variance that is explained by education, after we have removed the variance explained by women representation. 
+
+**Did our parameter estimate for education change between our two models? Is that surprising?**    
+```{r}
+#| eval: FALSE
+
+```
+
+**What is the interpretation of the intercept for the model where women representation is included as a covariate?**     
+The income predicted by the model when the variables `education` and `women` equal zero is $1,807 CAD. In other words, the income for a job with no women representation for which you need no education.    
+
+This isn't particularly meaningful. One way to make the parameter estimate for the intercept more meaningful is to mean-center our predictor variables, and refit the model.   
+
+Go ahead and do that now!
+```{r}
+#| eval: FALSE
+d <- d |> 
+  mutate(education_c = ,
+         women_c = )
+
+m_3_c <- lm() 
+
+broom::tidy(m_3_c)
+broom::tidy(m_3)
+```
+
+**What changed and what didn't? Why?**   
 
 
+**What is the interpretation of the intercept after mean-centering?**      
+The predicted income for a job with average percent women and average education is `YOUR ANSWER HERE`.
+
+**Why is the standard error for the intercept so much larger for the model with uncentered predictors as compared to the model with centered predictors?**     
+Our predictions are much more precise around the mean values of our predictors, as compared to extreme values of our predictors. A visual example of this is how our error bars "fan out" on the edges of our plots, but are much closer to our regression line around the mean of our sample.    
+
+**Do any of the effect sizes change between the centered and uncentered models? Why?**     
+No, because how we code our variables has no bearing on the amount of error they reduce/variance they explain!
+```{r}
+#| eval: FALSE
+sse_c <- 
+sse_a <- 
+sse_a_c <- 
+
+(peta <- )
+(peta_c <- )
+```
+
+**What is the interpretation of the coefficient for education and what does the coefficient tell us?**    
+  
+
+**What does the total R-squared for model m3_c mean?**    
+
+
+```{r}
+#| eval: FALSE
+broom::glance(m_3_c)$r.squared
+```
 
 Now let's calculate **$\Delta R^2$**.    
 We can do this by calculating $R^2$ for the augmented model (`m_3`) and the compact model (i.e., with the focal variable [education] removed) and then getting the difference.
 ```{r}
-r_sq_c <- broom::glance(lm(income ~ women, data = d)) |> 
-  pull(r.squared)
-r_sq_a <- broom::glance(m_3) |> 
-  pull(r.squared)
+r_sq_c <- 
+r_sq_a <- 
 
 r_sq_a - r_sq_c
 ```
 
 **What does the $\Delta R^2$ for education represent?**    
+It represents the percent of total variance in `income` that is explained uniquely by education.
+
+`CHECKPOINT`
 
 
+## Exercise Week!
+
+### Exercise 1: Calculating Parameter Estimates   
+
+Abdul is running a study to see if listening to classical music before going to sleep leads to more restful sleep. He assigns one group of participants to listen to classical music before bed and another group to listen to no music before bed. He then asks participants to report how restful their sleep was each night.    
+
+Abdul runs a simple regression analysis (`sleep` ~ `group_c`) and reports the following results:   
+$b_0 = 3.01, \text{SE} = .08, b_1 = 1.15, \text{SE} = .16, F(1, 197) = 53.01, p < .001, \eta_p^2 = .21.$   
 
 
-## We will stop here today and answer any questions you have so to prepare you all for the application exam. We will pick up from this 2 predictor example next time.
+#### a. Note above that Abdul centered the `group` variable (-.5/no music, .5/music). What would the value of $b_0$ and $b_1$, and the SE for $b_1$ be if `group` had been dummy coded (0/no music, 1/music)?   
+
+$b_0 = $   
+$b_1 = $ 
+$b_1 \text{ SE} = $   
+
+
+#### b. What would the value of $b_0$ and $b_1$, and the SE for $b_1$ be if `group` had been coded as 1 (no music) and 0 (music)?
+
+$b_0 = $
+$b_1 = $ 
+$b_1 \text{ SE} = $ 
+
+#### c. What would the value of $b_0$ and $b_1$, and the SE for $b_0$ and $b_1$ be if `group` had been coded as -1 (no music) and 1 (music)?
+
+$b_0 = $   
+$b_0 \text{ SE} = $  
+$b_1 = $  
+$b_1 \text{ SE} = $    
+
+Note that the df numerator and denominator do not change and so $F$ and $p$ do not change. $\eta_p^2$ does not change either. The fact that $F$ and $t$ do not change illustrates why the new SE for $b_1$ is half of the old SE. Remember that $t = b_1/\text{SE}_{b_1}$. If the new $b_1$ is half of the old $b_1$, then the new SE for $b_1$ needs to be half of the old SE for the $t$ to remain the same.
+
+#### d. Using the original values provided above, calculate the $t$-value for $b_1$.
+
+t = 
+
+
+#### e. What was the sample size in this study?
+
+$n = $
+
+`CHECKPOINT`
+
+
+### Exercise 2: Model Predictions
+
+For this exercise, we will be working some more with the Prestige dataset. Since we loaded it in above and already set up our script, we don't have to do that again here. Yay!
+
+#### a. The variables `education` and `income` were calculated based on averages from the year 1971 in Canada. The average income in Canada in 1970 was estimated at $5,000 exactly. Conduct a test to determine if the average income in 1971 is significantly different from the average income in 1970.   
+
+Calculate sum of squared errors for our compact model using average income in 1970.
+```{r}
+d <- d |> 
+  mutate(squ_err_c= )
+
+(sse_c <- d |> 
+  summarise(sse_c = ) |> 
+  pull(sse_c))
+```
+
+Calculate sum of squared errors for our augmented model using average income in 1971.
+```{r}
+d <- d |> 
+  mutate(squ_err_a = )
+
+(sse_a <- d |> 
+  summarise(sse_a = ) |> 
+  pull(sse_a))
+```
+
+Let's now practice defining a function to calculate the sum of squared errors.
+```{r}
+
+
+(sse_a <- sse(lm(income ~ 1, data = d))) 
+```
+
+
+Define `n`, `n_param_a`, and `n_param_c` and manually calculate the F-statistic and p-value.
+```{r}
+n <- 
+n_param_a <- 
+n_param_c <- 
+
+(f_stat <- )
+
+df_n <- 
+df_d <- 
+
+pf()
+```
+
+
+**Was the average income in 1971 significantly different from the average income in 1970?**    
+
+
+*You want to know if there is a relationship between `income` and job `type` (blue versus white collar). Specifically, you hypothesize that blue collar jobs will have a lower income than white collar jobs. However, you suspect that the prestige of an occupation also has a relationship with income and should be controlled for.*
+
+#### b. Recode `type` and mean-center `prestige` to prepare our dataset for analysis.
+
+
+Recode `type` so that `bc` is 0 and `wc` is 1. Call this variable `type_bc`.
+```{r}
+d <- d |> 
+  mutate(type_bc = ) 
+
+```
+
+Recode `type` so that `bc` is 1 and `wc` is 0. Call this variable `type_wc`.
+```{r}
+d <- d |> 
+  mutate(type_wc = )
+
+```
+
+Recode `type` so that `bc` is -.5 and `wc` is .5. Call this variable `type_c`.
+```{r}
+d <- d |> 
+  mutate(type_c = )
+
+```
+
+Mean center `prestige`. Call this variable `prestige_c`.
+```{r}
+d <- d |> 
+  mutate(prestige_c = )
+```
+
+`CHECKPOINT`
+
+#### c. Fit a linear model in which `income` is regressed on `type_bc` while statistically controlling for `prestige` (uncentered). What do the estimates for $b_0$, $b_1$, and $b_2$ represent? Provide a conceptual interpretation for each parameter estimate.
+```{r}
+m <- lm() 
+broom::tidy(m)
+```
+
+$b_0$ = predicted income for an individual who works a blue collar job with no prestige. A person working a blue collar job with no prestige makes about $595 a month [a meaningless value].  
+
+$b_1$ = the predicted income difference between blue- and white-collar workers when statistically controlling for prestige. There is a significant difference in income between blue- and white-collar workers while controlling for prestige. People working blue collar jobs make $1,225 more than those working white collar jobs (as we move from 0, blue collar jobs, to 1, white collar jobs, we are seeing a decrease of 1,225 units).   
+
+$b_2$ = the slope of the (partial) relationship between prestige and income when statistically controlling for job type. There is a significant relationship between prestige and income while controlling for job type. For every one unit increase in prestige an occupation's average income increases by $135 when holding job type constant.    
+
+
+##### Fit a linear model in which income is regressed on `type_wc` while statistically controlling for `prestige` (uncentered). What do the estimates for $b_0$, $b_1$, and $b_2$ represent? Provide a conceptual interpretation for each parameter estimate.   
+```{r}
+m_2 <- lm() 
+broom::tidy(m_2)
+```
+
+$b_0$ = the predicted income for an individual who works a white-collar job with no prestige. A person working a white-collar job with no prestige loses about $630 month [meaningless].    
+
+$b_1$ = The difference in income between blue- and white-collar jobs (`type_wc`) while statistically controlling for prestige. There is a significant relationship between job type and income while controlling for prestige. People working white-collar jobs make $1,225 less than those working blue-collar jobs (as we move from 0, white collar jobs, to 1, blue collar jobs, we are seeing an increase of 1,225 units).    
+
+$b_2$ = the slope of the relationship between prestige and income while statistically controlling for `type_wc`. There is a significant relationship between prestige and income while controlling for job type. For every one unit increase in prestige an occupation's average income increases by $135 while holding job type constant.   
+
+
+##### Fit a linear model in which income is regressed on `type_c` while statistically controlling for `prestige_c`. What do the estimates for $b_0$, $b_1$, and $b_2$ represent? Provide a conceptual interpretation for each parameter estimate.
+```{r}
+m_3 <- lm() 
+broom::tidy(m_3)
+```
+
+$b_0$ = the predicted income for an individual who works a theoretical half-white, half-blue collar job with an average level of prestige. A person working a half-white, half-blue-collar job with average prestige has a predicted income of $5,072 a month.    
+
+$b_1$ = the difference in income between blue- and white-collar jobs (`type_c`) while statistically controlling for prestige. There is a significant relationship between job type and income while controlling for prestige. People working blue-collar jobs make $1,225 more than those working white-collar jobs (when we move from blue collar jobs, -0.5, to white collar jobs, 0.5, we see a decrease of 1,225 units).    
+
+$b_2$ = the slope of the relationship between `prestige_c` and `income` while statistically controlling for `type_c`. There is a significant relationship between prestige and income while controlling for job type. For every one unit increase in prestige an occupation's average income increases by $135.    
+
+`CHECKPOINT`
+
+#### g. If you wanted $b_0$ to reflect the predicted average income for a white-collar job that has an average level of prestige, what model would you fit? Run that model. Using code, calculate and interpret $\eta_p^2$ and $\Delta R^2$ for each parameter. Which parameter estimate(s) change across all four of these models?
+
+1) Define a function called "pre()" that takes the value of "compact" and "augmented" to calculates the pre.\
+2) Define a function called "delta_r2" that takes the value of "mean", "compact", "augmented" to calculate delta r2.
+```{r}
+pre <- function(compact, augmented) {
+
+}
+
+delta_r2 <- function(mean, compact, augmented) {
+
+}
+```
+
+```{r}
+m_4 <- lm() 
+broom::tidy(m_4)
+```
+
+$\eta_p^2$ and $\Delta R^2$ for `type_wc`
+```{r}
+pre(compact = , 
+    augmented = )
+
+delta_r2(mean = , 
+          compact = , 
+          augmented = )
+```
+
+Job type explains 13 percent of the variance in income after removing the variance explained by prestige ($\eta_p^2$ = 0.13).   
+
+Job type uniquely explains 8 percent of the total variance in income ($\Delta R^2$ = .08). 
+
+
+$\eta_p^2$ and $\Delta R^2$ for `prestige_c`
+```{r}
+pre(compact = ,
+    augmented = )
+
+delta_r2(mean = , 
+          compact = , 
+          augmented = )
+```
+
+Prestige explains 45 percent of the variance in income after removing the variance explained by job type ($\eta_p^2$ = 0.45).    
+
+Prestige uniquely explains 44 percent of the total variance in income ($\Delta R^2$ = 0.44).   
+
+
+$b_0$. $b_1$ becomes negative or positive depending on which level of type is assigned as the lower number, but the absolute value of the slope does not change otherwise.    
+
+`CHECKPOINT`
+
+### Exercise 3: Graphing
+
+There is a common belief that more crime occurs in hotter locations. Based on this belief, we might predict that southern states have greater crime rates than northern states. We will be using the free Crime dataframe from MASH to test this prediction.    
+
+
+#### a. Import `lab_06_graphing.csv`, clean the variable names, and `glimpse()` the dataframe.
+
+```{r}
+d <- read_csv(here::here(path_data, "lab_06_graphing.csv"),
+              show_col_types = FALSE) |> 
+  janitor::clean_names() |>
+  glimpse()
+```
+
+
+#### b. First, make it clear what each of level of `southern` represents. `southern` is coded such that 0 = Northern and 1 = Southern. Use `mutate()` to reflect that in a new factor variable called `southern_fac`.
+```{r}
+d <- d |> 
+  mutate(southern_fac = factor(southern, 
+                                levels = c(0, 1),
+                                labels = c("northern", "southern")))
+```
+
+
+#### c. Center the numeric `southern` variable and get descriptives on this variable. Is the mean of the centered variable 0? Why or why not?  
+```{r}
+d <- d |> 
+  mutate(southern_c = )
+
+d |> 
+  skim(southern_c)
+```
+
+We see that the mean of this centered variable is not 0. This is because we have an unequal N across groups.
+```{r}
+janitor::tabyl(d$southern_fac)
+```
+
+
+#### d. Create a linear model in which `crime_rate` is regressed on `southern_c`. Get a summary of the model. What does the summary tell us?
+
+```{r}
+m <- lm()
+broom::tidy(m)
+```
+
+The summary tells us if there is a relationship between the number of crime offenses per million people (`crime_rate`) and whether or not a state is Southern (`southern`). There is no significant difference in crime rate between northern and southern states, b1 = -3.23, t(46) = -.36, p = .72.    
+
+
+#### e. Create a quick and dirty plot of the relationship between `crime_rate` and `southern`.
+
+```{r}
+plot(d$southern, d$crime_rate) + 
+  abline(lm(d$crime_rate ~ d$southern))
+```
+
+
+#### f. In just three steps, set up a new dataframe called `d_plot`. This dataframe should contain predicted values for the outcome variable, SE, lower and upper confidence intervals, centered numeric values for northern and southern states, and character values that can serve as labels for northern and southern states.
+
+```{r}
+d_new <- tibble(southern_c = , 
+                   southern_fac = )
+
+preds <- predict() |>
+  as_tibble() |> 
+  
+
+d_plot <- d_new |> 
+  bind_cols(preds)
+```
+
+
+#### g. Build a bar graph in ggplot using the dataframe `d_plot`.    
+
+Your plot should include:   
+      
+- bars representing the dichotomous `southern` variable.
+- error bars.
+- raw data points.
+- publication quality labels
+- no legend
+
+```{r}
+d_plot |> 
+  ggplot(aes()) + 
+  geom_bar() +
+  geom_errorbar() +
+  geom_point() +
+  labs(title = "Crime Rates in the North and South",
+       x = "Region", 
+       y = "Number of Criminal Offences per Million Citizens") +
+  theme()
+```
+
