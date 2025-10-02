@@ -885,10 +885,12 @@ plot_pub
 
 We now know....
 
-- How to code a dichotomous predictor into a regressor ($X$ in a glm) using dummy coding and centered coefficients
+- How to code a dichotomous predictor into a regressor using dummy coding (0/1) and centered coefficients (-.5/.5)
+- Why you should not dichotomize quantitative predictors (lower power, higher p-values, more error)
+- The impact of using other codes for the groups
 - How to interpret $b_0$ and $b_1$ in these models
 - How to test hypotheses about $b_0$ and $b_1$ using NHST using either the sampling distribution or model comparisons perspectives
 - How to calculate PRE ($\eta_p^2$) for $b_0$ and $b_1$
 - How to calculate $R^2$ for the full model
 - The difference between weighted and unweighted means and how to get each using different coding schemes
-- How to make publication quality figures of these models with dicotomous predictors
+- How to visualize these models (both quick/dirty and publication quality)
