@@ -213,19 +213,19 @@ $b_0$ = predicted income for an individual who works a blue collar job. A person
 $b_1$ = the predicted income difference between blue- and white-collar workers. There is a significant difference in income between blue- and white-collar workers. People working blue collar jobs make $1,225 more than those working white collar jobs (as we move from 0, blue collar jobs, to 1, white collar jobs, we are seeing a decrease of 1,225 units). 
 
 
-##### Fit a linear model in which income is regressed on `type_wc`. What do the estimates for $b_0$ and $b_1$ represent? Provide a conceptual interpretation for each parameter estimate.
+#### d. Fit a linear model in which income is regressed on `type_wc`. What do the estimates for $b_0$ and $b_1$ represent? Provide a conceptual interpretation for each parameter estimate.
 
 ```{r}
 m_2 <- lm() 
 broom::tidy(m_2)
 ```
 
-$b_0$ = the predicted income for an individual who works a white-collar job. A person working a white-collar job loses about \$630 month \[meaningless\].
+$b_0$ = the predicted income for an individual who works a white-collar job. A person working a white-collar job loses about \$630 month [meaningless].
 
 $b_1$ = The difference in income between blue- and white-collar jobs (`type_wc`). There is a significant relationship between job type and income. People working white-collar jobs make \$1,225 less than those working blue-collar jobs (as we move from 0, white collar jobs, to 1, blue collar jobs, we are seeing an increase of 1,225 units).
 
 
-##### Fit a linear model in which income is regressed on `type_c`. What do the estimates for $b_0$ and $b_1$ represent? Provide a conceptual interpretation for each parameter estimate.
+#### e. Fit a linear model in which income is regressed on `type_c`. What do the estimates for $b_0$ and $b_1$ represent? Provide a conceptual interpretation for each parameter estimate.
 
 ```{r}
 m_3 <- lm() 
@@ -241,18 +241,13 @@ $b_1$ = the difference in income between blue- and white-collar jobs (`type_c`).
 
 #### g. If you wanted $b_0$ to reflect the predicted average income for a white-collar job that has an average level of prestige, what model would you fit? Run that model. Using code, calculate and interpret $\eta_p^2$ and $\Delta R^2$ for each parameter. Which parameter estimate(s) change across all four of these models?
 
-1)  Define a function called "pre()" that takes the value of "compact" and "augmented" to calculates the pre.
-
-2)  Define a function called "delta_r2" that takes the value of "mean", "compact", "augmented" to calculate delta r2.
+Define a function called "pre()" that takes the value of "compact" and "augmented" to calculates the pre.
 
 ```{r}
 pre <- function(compact, augmented) {
 
 }
 
-delta_r2 <- function(mean, compact, augmented) {
-
-}
 ```
 
 ```{r}
@@ -260,37 +255,15 @@ m_4 <- lm()
 broom::tidy(m_4)
 ```
 
-$\eta_p^2$ and $\Delta R^2$ for `type_wc`
+$\eta_p^2$ for `type_wc`
 
 ```{r}
 pre(compact = , 
     augmented = )
-
-delta_r2(mean = , 
-          compact = , 
-          augmented = )
 ```
 
 Job type explains 13 percent of the variance in income after removing the variance explained by prestige ($\eta_p^2$ = 0.13).
 
-Job type uniquely explains 8 percent of the total variance in income ($\Delta R^2$ = .08).
-
-$\eta_p^2$ and $\Delta R^2$ for `prestige_c`
-
-```{r}
-pre(compact = ,
-    augmented = )
-
-delta_r2(mean = , 
-          compact = , 
-          augmented = )
-```
-
-Prestige explains 45 percent of the variance in income after removing the variance explained by job type ($\eta_p^2$ = 0.45).
-
-Prestige uniquely explains 44 percent of the total variance in income ($\Delta R^2$ = 0.44).
-
-$b_0$. $b_1$ becomes negative or positive depending on which level of type is assigned as the lower number, but the absolute value of the slope does not change otherwise.
 
 `CHECKPOINT`
 
