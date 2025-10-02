@@ -98,6 +98,7 @@ For this exercise, we are going to be using a dataset called `Prestige` that is 
 options(conflicts.policy = "depends.ok") 
 #install.packages("car")
 library(tidyverse)
+library(skimr)
 
 theme_set(theme_classic()) 
 ```
@@ -164,7 +165,7 @@ pf()
 
 **Was the average income in 1971 significantly different from the average income in 1970?**
 
-*You want to know if there is a relationship between `income` and job `type` (blue versus white collar). Specifically, you hypothesize that blue collar jobs will have a lower income than white collar jobs. However, you suspect that the prestige of an occupation also has a relationship with income and should be controlled for.*
+*You want to know if there is a relationship between `income` and job `type` (blue versus white collar). Specifically, you hypothesize that blue collar jobs will have a lower income than white collar jobs.*
 
 #### b. Recode `type` and mean-center `prestige` to prepare our dataset for analysis.
 
@@ -275,6 +276,10 @@ There is a common belief that more crime occurs in hotter locations. Based on th
 #### a. Import `lab_05_graphing.csv`, clean the variable names, and `glimpse()` the dataframe.
 
 ```{r}
+#| message: false
+
+path_data <- "lab/data"
+
 d <- read_csv(here::here(path_data, "lab_05_graphing.csv"),
               show_col_types = FALSE) |> 
   janitor::clean_names() |>
