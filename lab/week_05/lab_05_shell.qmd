@@ -19,7 +19,7 @@ Thank you all for your valuable feedback/comments on hw3:D! Based on your answer
 
 -   We'll now include some simple content-related exercises during lab (in addition to coding!)
 
--   Some of you suggested releasing the TA script before lab. After some serious discussions between John and the TAs, we were hesitant to do so. We still think it's best practice to write out code by hand and to debug when errors occur. We do understand your concerns about falling behind during lab when some lines of codes don't work. So alternatively, we have decided to implement minor checkpoints throughout each lab where we will stop and make sure everyone is caught up. Of course, we can help you debug outside of these points, too. :\^)
+-   Some of you suggested releasing the TA script before lab. After some serious discussions between John and the TAs, we were hesitant to do so. We still think it's best practice to write out code by hand and to debug when errors occur. We do understand your concerns about falling behind during lab when some lines of codes don't work. So alternatively, we have decided to implement minor checkpoints throughout each lab where we will stop and make sure everyone is caught up. Of course, we can help you debug outside of these points, too. :^)
 
 ## Questions about the application exam or other material?
 
@@ -35,8 +35,8 @@ p values:
 
 -   Because p values are bounded by 0 and 1, *do not* report the digit before the decimal place
 -   Report 3 digits after the decimal
--   Although you can just report the most stringent level of significance which the p value falls under (e.g., p = .003 --\> p \< .005), it is good practice to report exact p values to the 3rd decimal place, for transparency of your results...
--   ...Except for p values smaller than .001, just report p \< .001!
+-   Although you can just report the most stringent level of significance which the p value falls under (e.g., p = .003 --> p < .005), it is good practice to report exact p values to the 3rd decimal place, for transparency of your results...
+- ...Except for p values smaller than .001, just report p < .001!
 
 ## Concept Question Exercise
 
@@ -50,7 +50,7 @@ What is our measurement of the total prediction error associated with a given mo
 
 Abdul is running a study to see if listening to classical music before going to sleep leads to more restful sleep. He assigns one group of participants to listen to classical music before bed and another group to listen to no music before bed. He then asks participants to report how restful their sleep was each night.
 
-Abdul runs a simple regression analysis (`sleep` \~ `group_c`) and reports the following results:\
+Abdul runs a simple regression analysis (`sleep` ~ `group_c`) and reports the following results:
 $b_0 = 3.01, \text{SE} = .08, b_1 = 1.15, \text{SE} = .16, F(1, 197) = 53.01, p < .001, \eta_p^2 = .21.$
 
 
@@ -96,9 +96,8 @@ For this exercise, we are going to be using a dataset called `Prestige` that is 
 #| warning: false
 
 options(conflicts.policy = "depends.ok") 
+#install.packages("car")
 library(tidyverse)
-library(GGally, include.only = "ggpairs")
-library(psych, include.only = "corr.test")
 
 theme_set(theme_classic()) 
 ```
@@ -209,7 +208,7 @@ m <- lm()
 broom::tidy(m)
 ```
 
-$b_0$ = predicted income for an individual who works a blue collar job. A person working a blue collar job makes about \$595 a month \[a meaningless value\].
+$b_0$ = predicted income for an individual who works a blue collar job. A person working a blue collar job makes about $595 a month [a meaningless value].
 
 $b_1$ = the predicted income difference between blue- and white-collar workers. There is a significant difference in income between blue- and white-collar workers. People working blue collar jobs make $1,225 more than those working white collar jobs (as we move from 0, blue collar jobs, to 1, white collar jobs, we are seeing a decrease of 1,225 units). 
 
