@@ -15,9 +15,9 @@ editor_options:
 
 Thank you all for your valuable feedback/comments on hw3:D! Based on your answers, we have decided to make following changes to our workflow in future lab sections:
 
--   At the beginning of each lab, we'll take a few minutes to answer questions about lecture content
+-   At the beginning of each lab, we'll take a few minutes to answer questions about lecture content.
 
--   We'll now include some simple content-related exercises during lab (in addition to coding!)
+-   We'll now include some simple content-related exercises during lab (in addition to coding)!
 
 -   Some of you suggested releasing the TA script before lab. After some serious discussions between John and the TAs, we were hesitant to do so. We still think it's best practice to write out code by hand and to debug when errors occur. We do understand your concerns about falling behind during lab when some lines of codes don't work. So alternatively, we have decided to implement minor checkpoints throughout each lab where we will stop and make sure everyone is caught up. Of course, we can help you debug outside of these points, too. :^)
 
@@ -80,6 +80,10 @@ Note that the df numerator and denominator do not change and so $F$ and $p$ do n
 
 t =
 
+
+
+
+
 #### e. What was the sample size in this study?
 
 $n = $
@@ -98,6 +102,7 @@ For this exercise, we are going to be using a dataset called `Prestige` that is 
 options(conflicts.policy = "depends.ok") 
 #install.packages("car")
 library(tidyverse)
+library(broom)
 library(skimr)
 
 theme_set(theme_classic()) 
@@ -116,7 +121,8 @@ theme_set(theme_classic())
 
 ```
 
-#### a. The variables `education` and `income` were calculated based on averages from the year 1971 in Canada. The average income in Canada in 1970 was estimated at \$5,000 exactly. Conduct a test to determine if the average income in 1971 is significantly different from the average income in 1970.
+
+#### a. The variables `education` and `income` were calculated based on averages from the year 1971 in Canada. The average income in Canada in 1970 was estimated at $5,000 exactly. Conduct a test to determine if the average income in 1971 is significantly different from the average income in 1970. At this point, let's ignore all the other variables in the file. 
 
 Calculate sum of squared errors for our compact model using average income in 1970.
 
@@ -143,12 +149,17 @@ d <- d |>
 Let's now practice defining a function to calculate the sum of squared errors.
 
 ```{r}
+# define a function to calculate sse
 
 
-(sse_a <- sse(lm(income ~ 1, data = d))) 
+
+# fit our 1 parameter (mean-only) model
+
+
 ```
 
-Define `n`, `n_param_a`, and `n_param_c` and manually calculate the F-statistic and p-value.
+
+Let's now define `n`, `n_param_a`, and `n_param_c`. We will manually calculate the F-statistic and p-value.
 
 ```{r}
 n <- 
@@ -157,213 +168,263 @@ n_param_c <-
 
 (f_stat <- )
 
+
 df_n <- 
 df_d <- 
 
 pf()
 ```
 
+
 **Was the average income in 1971 significantly different from the average income in 1970?**
 
-*You want to know if there is a relationship between `income` and job `type` (blue versus white collar). Specifically, you hypothesize that blue collar jobs will have a lower income than white collar jobs.*
 
-#### b. Recode `type` and mean-center `prestige` to prepare our dataset for analysis.
 
-Recode `type` so that `bc` is 0 and `wc` is 1. Call this variable `type_bc`.
+#### b. Now you want to know if there is a relationship between `income` and `education`. Note that `education` is a quantitative (continuous) variable. Specifically, you hypothesize that individuals with more years of education have higher income.
+
+First, let's mean-center `education` to prepare our dataset for analysis. Call this variable `edu_c`.
 
 ```{r}
-d <- d |> 
-  mutate(type_bc = ) 
+
 
 ```
 
-Recode `type` so that `bc` is 1 and `wc` is 0. Call this variable `type_wc`.
+Second, fit the model with our centered variable `edu_c`.
 
 ```{r}
-d <- d |> 
-  mutate(type_wc = )
+
 
 ```
 
-Recode `type` so that `bc` is -.5 and `wc` is .5. Call this variable `type_c`.
+$b_0$ = the predicted income for an individual who has an average number of years in education.
+
+$b_1$ = the increase in `income` for every one unit increase in `edu_c`.
+
+Third, fit the model with our uncentered variable `education`. How does this compare with our previous model `m_edu_c`?
+
+```{r}
+
+
+```
+
+$b_0$ = the predicted income for an individual who has 0 years in education.
+
+$b_1$ = the increase in `income` for every one unit increase in `edu_c`.
+
+
+#### c. Now we want to test if the average income for people with average education is different from $5000.
+
+```{r}
+coeffs <-
+  
+coeffs
+```
+
+We can calculate `t` using the formula: (B - B_Null)/SE_B
+
+```{r}
+t <- 
+
+t
+```
+
+Next, we need to find our df. 
+
+```{r}
+# If there are no missing data, we can use this: 
+
+
+# Better method:
+
+```
+
+Calculate p-value. 
+
+```{r}
+pt <-   
+```
+
+> Write answer here. 
+
+
+#### d. Calculate PRE for `edu_c`.
+
+Define a function called "pre()" that takes the values of "compact" and "augmented".
+
+```{r}
+pre <- function(compact, augmented) {
+  sse_c <- sse(compact)
+  sse_a <- sse(augmented)
+  (sse_c - sse_a)/sse_c
+}
+
+pre(compact = ,
+    augmented = )
+```
+
+> Write answer here. 
+
+
+`CHECKPOINT`
+
+
+#### e. Now let's switch to a dichotomous predictor! Now you want to know if there is a relationship between `income` and job `type` (blue collar + white collar vs. professional). Specifically, you hypothesize that professional jobs will have higher income than blue and white collar jobs.
+
+First, let's inspect what the levels of `type` variable are. 
+
+```{r}
+
+```
+
+Second, recode `type` into a 2-level predictor: collar (blue + white) vs. prof.
+
+```{r}
+d <- d |> 
+  mutate(type2 = )
+
+
+
+
+table(d$type2)
+```
+
+Notice that the class of the variable `type2` changes after using the function `case_match`.
+
+```{r}
+class(d$type)
+class(d$type2)
+```
+
+Let's recode `type2` so that `collar` is 1 and `prof` is 0. Call this variable `type_collar`.
+
+```{r}
+d <- d |> 
+  mutate(type_collar = )
+```
+
+Now, let's try recoding `type2` so that `prof` is 1 and `collar` is 0. Call this variable `type_prof`.
+
+```{r}
+d <- d |> 
+  mutate(type_prof = )
+```
+
+Finally, recode `type2` so that `collar` is -.5 and `prof` is .5. Call this variable `type_c`.
 
 ```{r}
 d <- d |> 
   mutate(type_c = )
-
 ```
 
-Mean center `prestige`. Call this variable `prestige_c`.
+
+#### f. Fit a linear model in which `income` is regressed on `type_collar`. What do the estimates for $b_0$ and $b_1$ represent? Provide a conceptual interpretation for each parameter estimate.
 
 ```{r}
-d <- d |> 
-  mutate(prestige_c = )
+m_collar <- lm()
+
+tidy(m_collar)
 ```
 
-`CHECKPOINT`
+$b_0$ = the predicted income for an individual who works a professional job.
 
-#### c. Fit a linear model in which `income` is regressed on `type_bc`. What do the estimates for $b_0$ and $b_1$ represent? Provide a conceptual interpretation for each parameter estimate.
+$b_1$ = the income difference between professional workers and collar workers.
+
+
+#### g. Fit a linear model in which income is regressed on `type_prof`. What do the estimates for $b_0$ and $b_1$ represent? Provide a conceptual interpretation for each parameter estimate.
 
 ```{r}
-m <- lm() 
-broom::tidy(m)
+m_prof <- lm()
+
+tidy(m_prof)
 ```
 
-$b_0$ = predicted income for an individual who works a blue collar job. A person working a blue collar job makes about $595 a month [a meaningless value].
+$b_0$ = the predicted income for an individual who works a collar job.
 
-$b_1$ = the predicted income difference between blue- and white-collar workers. There is a significant difference in income between blue- and white-collar workers. People working blue collar jobs make $1,225 more than those working white collar jobs (as we move from 0, blue collar jobs, to 1, white collar jobs, we are seeing a decrease of 1,225 units). 
+$b_1$ = the income difference between collar workers and professional workers.
 
 
-#### d. Fit a linear model in which income is regressed on `type_wc`. What do the estimates for $b_0$ and $b_1$ represent? Provide a conceptual interpretation for each parameter estimate.
+#### h. Fit a linear model in which income is regressed on `type_c`. What do the estimates for $b_0$ and $b_1$ represent? Provide a conceptual interpretation for each parameter estimate.
 
 ```{r}
-m_2 <- lm() 
-broom::tidy(m_2)
+m_c <- lm() 
+
+tidy(m_c)
 ```
 
-$b_0$ = the predicted income for an individual who works a white-collar job. A person working a white-collar job loses about \$630 month [meaningless].
+$b_0$ = the predicted income for an individual who works a theoretical half-collar, half-professional job.
 
-$b_1$ = The difference in income between blue- and white-collar jobs (`type_wc`). There is a significant relationship between job type and income. People working white-collar jobs make \$1,225 less than those working blue-collar jobs (as we move from 0, white collar jobs, to 1, blue collar jobs, we are seeing an increase of 1,225 units).
-
-
-#### e. Fit a linear model in which income is regressed on `type_c`. What do the estimates for $b_0$ and $b_1$ represent? Provide a conceptual interpretation for each parameter estimate.
-
-```{r}
-m_3 <- lm() 
-broom::tidy(m_3)
-```
-
-$b_0$ = the predicted income for an individual who works a theoretical half-white, half-blue collar job with an average level of prestige. A person working a half-white, half-blue-collar job with average prestige has a predicted income of \$5,072 a month.
-
-$b_1$ = the difference in income between blue- and white-collar jobs (`type_c`). There is a significant relationship between job type and income. People working blue-collar jobs make $1,225 more than those working white-collar jobs (when we move from blue collar jobs, -0.5, to white collar jobs, 0.5, we see a decrease of 1,225 units).
+$b_1$ = the difference in income between collar and professional jobs.
 
 
 `CHECKPOINT`
 
-#### g. If you wanted $b_0$ to reflect the predicted average income for a white-collar job that has an average level of prestige, what model would you fit? Run that model. Using code, calculate and interpret $\eta_p^2$ and $\Delta R^2$ for each parameter. Which parameter estimate(s) change across all four of these models?
+#### i. Calculate PRE for `type_c`.
 
-Define a function called "pre()" that takes the value of "compact" and "augmented" to calculates the pre.
+Previously, we defined a function called "pre()" that takes the value of "compact" and "augmented".
 
 ```{r}
 pre <- function(compact, augmented) {
-
+  sse_c <- sse(compact)
+  sse_a <- sse(augmented)
+  (sse_c - sse_a)/sse_c
 }
 
-```
-
-```{r}
-m_4 <- lm() 
-broom::tidy(m_4)
-```
-
-$\eta_p^2$ for `type_wc`
-
-```{r}
-pre(compact = , 
+pre(compact = ,
     augmented = )
 ```
 
-Job type explains 13 percent of the variance in income after removing the variance explained by prestige ($\eta_p^2$ = 0.13).
-
+> Write answer here. 
 
 `CHECKPOINT`
 
+
 ### Exercise 3: Graphing
 
-There is a common belief that more crime occurs in hotter locations. Based on this belief, we might predict that southern states have greater crime rates than northern states. We will be using the free Crime dataframe from MASH to test this prediction.
-
-
-#### a. Import `lab_05_graphing.csv`, clean the variable names, and `glimpse()` the dataframe.
+#### a. Create a quick and dirty plot of the relationship between `income` and `type_c`. 
 
 ```{r}
-#| message: false
 
-path_data <- "lab/data"
 
-d <- read_csv(here::here(path_data, "lab_05_graphing.csv"),
-              show_col_types = FALSE) |> 
-  janitor::clean_names() |>
-  glimpse()
 ```
 
-
-#### b. First, make it clear what each of level of `southern` represents. `southern` is coded such that 0 = Northern and 1 = Southern. Use `mutate()` to reflect that in a new factor variable called `southern_fac`.
-
-```{r}
-d <- d |> 
-  mutate(southern_fac = factor(southern, 
-                                levels = c(0, 1),
-                                labels = c("northern", "southern")))
-```
-
-
-#### c. Center the numeric `southern` variable and get descriptives on this variable. Is the mean of the centered variable 0? Why or why not?
+#### b. In just three steps, set up a new dataframe called `d_plot`. This dataframe should contain predicted values for the outcome variable, SE, lower and upper confidence intervals, centered numeric values for collar and professional workers, and character values that can serve as labels for collar and professional workers.
 
 ```{r}
-d <- d |> 
-  mutate(southern_c = )
-
-d |> 
-  skim(southern_c)
-```
-
-We see that the mean of this centered variable is not 0. This is because we have an unequal N across groups.
-
-```{r}
-janitor::tabyl(d$southern_fac)
-```
-
-#### d. Create a linear model in which `crime_rate` is regressed on `southern_c`. Get a summary of the model. What does the summary tell us?
-
-```{r}
-m <- lm()
-broom::tidy(m)
-```
-
-The summary tells us if there is a relationship between the number of crime offenses per million people (`crime_rate`) and whether or not a state is Southern (`southern`). There is no significant difference in crime rate between northern and southern states, b1 = -3.23, t(46) = -.36, p = .72.
-
-
-#### e. Create a quick and dirty plot of the relationship between `crime_rate` and `southern`.
-
-```{r}
-plot(d$southern, d$crime_rate) + 
-  abline(lm(d$crime_rate ~ d$southern))
-```
-
-
-#### f. In just three steps, set up a new dataframe called `d_plot`. This dataframe should contain predicted values for the outcome variable, SE, lower and upper confidence intervals, centered numeric values for northern and southern states, and character values that can serve as labels for northern and southern states.
-
-```{r}
-d_new <- tibble(southern_c = , 
-                   southern_fac = )
-
-preds <- predict() |>
-  as_tibble() |> 
+d_new <-
   
 
-d_plot <- d_new |> 
-  bind_cols(preds)
+  
+preds <-
+
+  
+
+
+d_plot <-
+  
 ```
 
 
-#### g. Build a bar graph in ggplot using the dataframe `d_plot`.
+#### c. Build a bar graph in ggplot using the dataframe `d_plot`.
+ 
+Your plot should include:   
+      
+- bars representing the dichotomous `type_c` variable.
+- error bars.
+- raw data points.
+- publication quality labels
+- no legend
 
-Your plot should include:
-
--   bars representing the dichotomous `southern` variable.
--   error bars.
--   raw data points.
--   publication quality labels
--   no legend
+First, make it clear what each level of `type_c` represents in the dataframe `d`. 
+```{r}
+d <- d |> 
+  mutate(type_c_fac = factor(type_c, 
+                             levels = c(-0.5, 0.5),
+                             labels = c("collar", "prof")))
+```
 
 ```{r}
 d_plot |> 
-  ggplot(aes()) + 
-  geom_bar() +
-  geom_errorbar() +
-  geom_point() +
-  labs(title = "Crime Rates in the North and South",
-       x = "Region", 
-       y = "Number of Criminal Offences per Million Citizens") +
-  theme()
+  
 ```
+
+
