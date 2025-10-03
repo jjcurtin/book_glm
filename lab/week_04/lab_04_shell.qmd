@@ -22,6 +22,7 @@ We will also need the `readxl()` to read in an excel data file -- install this p
 
 options(conflicts.policy = "depends.ok") 
 library(tidyverse)
+library(broom)
 library(readxl)
 
 theme_set(theme_classic()) 
@@ -81,7 +82,7 @@ Prorating is a strategy to *impute* missing data. It is done by using the mean o
 
 Hmm... this seems useful if we had a subject who had completed most of the mpf task except for the last item, but 10 seems too high of a score to assign to a child who refused to do the task! We probably want to have some sort of tolerance threshold for when we want to prorate (e.g., the participant must have completed 3/4ths of the task).
 
-These are three different ways that missing data can be handled. It's important to know your data well so you can make informed decisions about handling NAs.
+These are three different ways that missing data can be handled. It's important to know your data well so you can make informed decisions about handling NAs. *Remember that there is no one right answer for how to handle missing data, and there are other ways than the ones we have covered here.*
 
 Now, let's remove that extra observation. This removes the last row from our tibble.
 ```{r}
@@ -95,7 +96,7 @@ What do we do when this happens? We can use a function called `var_score()` that
 
 Let's first source the function `var_score()` - this code allows us to load the function directly from John's Github. It works similar to loading a library.
 ```{r}
-devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/var_score.R?raw=true")
+source("https://github.com/jjcurtin/lab_support/blob/main/var_score.R?raw=true")
 ```
 
 **What is Github?**
@@ -115,14 +116,11 @@ var_score
 
 Let's now use this function to recalculate our composite sum mental paper folding score. *Note that in this case, where we have no missing data/need to prorate and no reverse scored items, it is less efficient to use this function.*
 ```{r}
-f_items <- data |> 
-  select(mpf_01:mpf_10) |> 
-  names()
-```
-
-```{r}
 data <- data |> 
-  mutate(mpf_sum = var_score(data, forward_items = f_items)) |> 
+  mutate(mpf_sum = var_score(data,
+                             forward_items = data |>
+                               select(mpf_01:mpf_10) |>
+                               names())) |> 
   glimpse()
 ```
 
@@ -232,7 +230,10 @@ preds <- predict(m_1_pred, data_new, se.fit = TRUE) |>
 Lets look at our new data frame. Note that `fit` is the predicted value for `distance`.
 ```{r}
 preds |> 
-  view()
+  slice_head(n = 10)
+
+# or you could use view interactively.  View will not render in knitted documents.
+# preds |> view()
 ```
 
 Lastly, let's now make a new plot that has the **raw** data plotted (`geom_point()`) and the regression line from the model **predicted** values (`geom_line()`, `geom_ribbon()`).
@@ -243,7 +244,8 @@ ggplot() +
              alpha = .4) +
   geom_line(aes(x = data_new$mpf_sum, y = preds$fit), 
             linewidth = .75, color = "blue") +
-  geom_ribbon(aes(x = data_new$mpf_sum, ymin = preds$lower, ymax = preds$upper), alpha = .2)
+  geom_ribbon(aes(x = data_new$mpf_sum, ymin = preds$lower, ymax = preds$upper), alpha = .2) +
+  labs(x = "Composite Mental Paper Folding Scores", y = "Distance from Fold")
 ```
 
 
@@ -335,24 +337,43 @@ We are also going to make our dichotomous predictor (`condition`) numeric. If we
 
 **How would it change?**
 
-The differences in interpretation and how to select your coding scheme for dichotomous variables will become more clear with practice!
 
-For now, recode condition to -.5 and .5
+If `condition` is 1 and 2, this isn't very meaningful!
 ```{r}
 data_dich <- data_dich |> 
-  mutate(condition_c = )
+  mutate(condition_num = ) |> 
+  glimpse()
+
+lm() 
 ```
 
-
-Lets check that this looks correct.
+If `condition` is dummy-coded (i.e., 0 and 1), $b0_i$ will represent the `inclusion` score for an individual in the 0 condition (based on how we have ordered our factor variable -- 0 would represent the control condition).
 ```{r}
+data_dich <- data_dich |> 
+  mutate() |> 
+  glimpse()
 
+lm() 
 ```
+
+If `condition` is contrast-coded (i.e., centered, coded as -.5 and .5), $b_0$ will represent the `inclusion` score for an individual with a 0 on `condition`, a hypothetical "average" between our two conditions.
+```{r}
+data_dich <- data_dich |> 
+  mutate(condition_c = ) |> 
+  glimpse()
+
+lm()
+```
+
+The differences in interpretation and how to select your coding scheme for dichotomous variables will become more clear with practice!
+
+**For this lab, we will be using contrast coding (our `condition_c` variable).**
 
 
 Let's get some more descriptive statistics.   
 
-**Find the average inclusion score for each condition.**    
+**Find the average inclusion score for each condition.**   
+
 ```{r}
 data_dich |> 
 ```
@@ -467,7 +488,7 @@ Let's look at our new data frame.
 The model is predicting the group mean for each condition!
 ```{r}
 preds |> 
-  view()
+  glimpse()
 
 data_dich |> 
   filter(condition == "Control") |> 
@@ -493,7 +514,7 @@ data_plot <- data_new |>
 Lets see how that looks now.
 ```{r}
 data_plot |> 
-  view()
+  glimpse()
 ```
 
 
@@ -563,8 +584,6 @@ data_plot |>
 
 You can add this code to your *plotting toolbox* which we started building in the last lab. In the future, if you are asked to create a bar graph for a model with a dichotomous predictor and a continuous outcome variable, you can edit this code.     
 
-
-**Begin ggplot exercise in small groups!**
 
 
 
