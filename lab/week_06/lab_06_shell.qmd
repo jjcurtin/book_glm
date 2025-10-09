@@ -1,5 +1,5 @@
 ---
-title: "Lab 5 TA Script" 
+title: "Lab 6 Shell" 
 author: "TAs" 
 date: "`r lubridate::today()`"
 format: 
@@ -11,31 +11,13 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Questions about the application exam or other material?
-
-## Conventions for decimals ("sig. Figs") when reporting statistics
-b and F values: 
-
-- Always include the digit(s) preceding the decimal
-- If the number is less than one, report 0.xxx (e.g., 0.852)
-- Otherwise, report two decimal places after the decimal (e.g., 2.85)
-
-
-p values:
-
-- Because p values are bounded by 0 and 1, *do not* report the digit before the decimal place
-- Report 3 digits after the decimal
-- Although you can just report the most stringent level of significance which the p value falls under (e.g., p = .003 --> p < .005), it is good practice to report exact p values to the 3rd decimal place, for transparency of your results...
-- ...Except for p values smaller than .001, just report p < .001!
-
-
 ## Set up    
 
 Today we are going to use a few new packages. The first is called `GGally`. Since we are only interested in one function from `GGally` we are only going to load that function (`ggpairs()`).    
 
 We are also going to use the `corr.test()` function in the `psych` package. We will also load only this one function to avoid increasing the chance of package conflicts.   
 
-We are also going to be using a dataset that is part of the `car` package. To use these data we do not need to load the library, but you will need to have the package installed in Quarto. Note that because of this, we won't be assigning our `path_data` object today!
+We are going to use the `Prestige` dataset that is part of the `car` package. As a reminder, to use these data we do not need to load the library, but you will need to have the package installed in Quarto. Note that because of this, we won't be assigning our `path_data` object today!
 
 ```{r}
 #| message: false
@@ -52,7 +34,7 @@ theme_set(theme_classic())
 
 ## Prestige dataset
 
-Today we're going to use a dataset called `Prestige` that is part of the car package.    
+Today we're going to use a dataset called `Prestige` that is part of the `car` package.    
 
 **How do we get the documentation for the Prestige dataset?**
 ```{r}
@@ -63,7 +45,7 @@ Today we're going to use a dataset called `Prestige` that is part of the car pac
 
 **How do we load data that are included in an R package?** 
 ```{r}
-
+d_raw <-
 
 ```
 
@@ -72,8 +54,8 @@ We'll drop one of the three categories in the `type` variable so we have a dicho
 
 Remember our Boolean logical operators: ! is for "not," so != is "not equal to" 
 ```{r}
-d <- d_raw |> 
-  filter(type != "prof")
+d <- 
+  
 ```
 
 **How can we check that we do in fact have only two levels?**
@@ -89,7 +71,6 @@ d <- d_raw |>
 **What is the data type of the "type" variable?**
 ```{r}
 
-
 ```
 
 Factor! A factor variable stores the possible levels of the categorical variable. Because "type" is a factor, Quarto assumes that 'prof' is still a possible response, although no observation in the dataframe `d` belongs to that group.    
@@ -97,19 +78,17 @@ Factor! A factor variable stores the possible levels of the categorical variable
 **How do we fix this?**   
 The `forcats` function `fct_drop()` will drop any unused factor levels. We will be using a few other `forcats` functions today. Here is a handy cheatsheet - [https://rstudio.github.io/cheatsheets/factors.pdf](https://rstudio.github.io/cheatsheets/factors.pdf).
 ```{r}
-d <- d |> 
-  mutate(
-    
-  )
 
-table(d$type) 
+
+
+
 ```
 
 ## Descriptive statistics 
 
 Take a quick look at the data using several of the functions we learned.
 ```{r}
-glimpse(d) 
+
 
 ```
 
@@ -140,9 +119,7 @@ Use it on our data.
 Recode the `type` variable to a centered numeric variable (-0.5 and 0.5).   
 ```{r}
 d <- d |> 
-  mutate(
-    
-  )
+  mutate()
 ```
 
 
@@ -150,7 +127,6 @@ Use `mutate()` and `fct_recode()` to make `type` factor labels more descriptive 
 ```{r}
 d <- d |> 
   mutate(
-    
   )
 
 table(d$type)
@@ -183,7 +159,6 @@ d |>
 Well that's kind of annoying to not have them next to each other, especially if we had more variables. 
 ```{r}
 corr_results <- d |> 
-  select(education:women, type_c) |> 
 
   
 corr_results
@@ -191,15 +166,16 @@ corr_results
 
 If we want to see just the correlation magnitudes (r) 
 ```{r}
-corr_results$
+
 ```
  
 If we want to see just the p-values 
 ```{r}
-corr_results$
+
 ```
 
 **Click on your `corr_results` object in your environment. What other things can we pull out?**
+
 
 ```{r}
 
@@ -379,7 +355,7 @@ Consider adding the representation of women as a covariate to model 1 (i.e., use
 Now we will fit a model, `m_3`, to predict `income` from `education` and `women`.    
 Note that education is still the focal predictor.
 ```{r}
-m_3 <- lm(income ~ education + women, data = d) 
+m_3 <- 
 
 broom::tidy(m_3)
 ```
@@ -434,10 +410,8 @@ sse_a <- sum(residuals(m_3)^2)
 Now let's calculate **$\Delta R^2$**.    
 We can do this by calculating $R^2$ for the augmented model (`m_3`) and the compact model (i.e., with the focal variable [education] removed) and then getting the difference.
 ```{r}
-r_sq_c <- broom::glance(lm(income ~ women, data = d)) |> 
-  pull(r.squared)
-r_sq_a <- broom::glance(m_3) |> 
-  pull(r.squared)
+r_sq_c <- 
+r_sq_a <- 
 
 r_sq_a - r_sq_c
 ```
@@ -446,5 +420,3 @@ r_sq_a - r_sq_c
 
 
 
-
-## We will stop here today and answer any questions you have so to prepare you all for the application exam. We will pick up from this 2 predictor example next time.
