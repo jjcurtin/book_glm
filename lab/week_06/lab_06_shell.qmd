@@ -25,6 +25,7 @@ We are going to use the `Prestige` dataset that is part of the `car` package. As
 
 options(conflicts.policy = "depends.ok") 
 library(tidyverse)
+library(broom)
 library(GGally, include.only = "ggpairs")
 library(psych, include.only = "corr.test")
 
@@ -43,12 +44,33 @@ Today we're going to use a dataset called `Prestige` that is part of the `car` p
 
 ```
 
-**How do we load data that are included in an R package?** 
+**How do we load data that are included in an R package?**
 ```{r}
 d_raw <-
 
 ```
 
+**What is the class of `d_raw`?**
+
+```{r}
+
+
+
+
+```
+
+This dataframe has row names, whereas a tibble would not. Row names may be problematic as they require different syntax compared to variables in columns. Let's convert row names to a column. Then, convert the dataframe to a tibble so that we can retain these job descriptions in our data file.
+
+```{r}
+d_raw <-
+
+
+
+class(d_raw)
+
+d_raw |> 
+  slice_head(n = 10)
+```
 
 We'll drop one of the three categories in the `type` variable so we have a dichotomous predictor. We'll learn how to deal with categorical predictors with three or more levels later in the class. After the `filter` statement, our type variable should only have blue and white collar jobs.    
 
@@ -90,15 +112,8 @@ Take a quick look at the data using several of the functions we learned.
 ```{r}
 
 
-```
-
-
-**What does each row in our data represent?**
-
-```{r}
 
 ```
-
 
 **Here is a new function - `ggpairs()`, from the package `GGally`. What does it do? **
 
@@ -108,9 +123,11 @@ Take a quick look at the data using several of the functions we learned.
 
 ```
 
-Use it on our data. 
+Use it on our data. But it doesn't make sense to use on character class columns. Let's exclude the job column. 
 ```{r}
 #| message: false
+
+
 
 
 ```
@@ -126,8 +143,7 @@ d <- d |>
 Use `mutate()` and `fct_recode()` to make `type` factor labels more descriptive (e.g., what do bc and wc each stand for?).
 ```{r}
 d <- d |> 
-  mutate(
-  )
+  mutate()
 
 table(d$type)
 ```
@@ -137,6 +153,7 @@ table(d$type)
 d |> 
   select(education:women, type_c) |> 
 
+  
 ```
 
 
@@ -161,6 +178,7 @@ Well that's kind of annoying to not have them next to each other, especially if 
 corr_results <- d |> 
 
   
+  
 corr_results
 ```
 
@@ -176,13 +194,15 @@ If we want to see just the p-values
 
 **Click on your `corr_results` object in your environment. What other things can we pull out?**
 
-
+Sample size
 ```{r}
-
-
 
 ```
 
+Stars gives you the correlation magnitudes (r) with stars denoting p-value significance! This is likely the most useful.
+```{r}
+
+```
 
 You can make it look nicer (or more APA) using functions from the kableExtra package.
 ```{r}
@@ -216,6 +236,7 @@ Suppose we are interested in whether jobs that require more years of education a
 
 
 
+
 ```
 
 
@@ -245,6 +266,7 @@ Suppose we are interested in whether jobs that require more years of education a
 
 
 
+
 ```
 
 
@@ -261,10 +283,12 @@ Suppose we are interested in whether jobs that require more years of education a
 ### Generate predictions for `d_graph_1` based on `m_1` using `predict()`. Remember to use `se.fit = TRUE` to return the standard error for error bars and to coerce your list into a `tibble`.
 ```{r}
 
+
 ```
 
 ### Calculate `upper` and `lower` values for error bars and add your predictor back in.
 ```{r}
+
 
 
 
@@ -274,6 +298,7 @@ Suppose we are interested in whether jobs that require more years of education a
 ### Make the plot in `ggplot2()`. Add raw data points.
 ```{r}
 ggplot() + 
+  
   
   
   
@@ -320,12 +345,17 @@ Suppose we are interested in whether white collar jobs on average require more y
 
 
 
+
+
 ```
 
 
 ### Make the plot in `ggplot2()`. Add raw data points.
 ```{r}
 ggplot() + 
+  
+  
+  
   
   
   
@@ -352,12 +382,16 @@ Consider adding the representation of women as a covariate to model 1 (i.e., use
 **In general, why might it make sense to add a covariate?** 
 
 
+
+
+
+
 Now we will fit a model, `m_3`, to predict `income` from `education` and `women`.    
 Note that education is still the focal predictor.
 ```{r}
 m_3 <- 
 
-broom::tidy(m_3)
+tidy(m_3)
 ```
 
 **How does adding women representation as a covariate influence the sampling distribution for the effect of education?**    
@@ -377,6 +411,11 @@ tibble(b1 = seq(-400,400,.01),
   labs(title = "Sampling Distribution for the Effect of Education",
        x = "Regression Coefficient (Income/Education)",
        y = "Probability")
+```
+
+**We can also see this from a model comparison perspective.**
+```{r}
+
 ```
 
 
@@ -419,4 +458,16 @@ r_sq_a - r_sq_c
 **What does the $\Delta R^2$ for education represent?**    
 
 
+
+
+
+Now let's calculate model $R^2$ to compare the full model to the mean only model. $R^2$ should be used when we are comparing models that differ by more than one parameter. 
+```{r}
+
+```
+
+Or glance using the full model. 
+```{r}
+
+```
 
