@@ -1280,7 +1280,7 @@ venn_full <- list(`SH` = c(sh, shared),
 venn_full
 ```
 
-## Visualizing Total and Direct/Unique Effects
+## Visualizing Total and Direct/Unique Effects with Venn Diagrams
 
 - The overlap among the circles represent the correlations among the variables
 - The numbers represent variability in $Y$ attributed to the $X$s.  
@@ -1290,6 +1290,8 @@ venn_full
 
 ```{r}
 #| echo: false
+#| fig-height: 4
+#| fig-width: 4
 
 venn_full
 ```
@@ -1348,6 +1350,8 @@ We can represent our understanding of the variability in `exam` scores from the 
 
 ```{r}
 #| echo: false
+#| fig-height: 5
+#| fig-width: 5
 
 venn_exam_only
 ```
@@ -1375,12 +1379,6 @@ How do we get the unexplained variability in `exam` from this one predictor mode
 [This is just the SSE from this one predictor `study_hours` model]{style="color:blue;"}
 ```{r}
 sse(m_sh) |> round()
-```
-
-[And, of course, this is just the numerator of the variance of the errors in the one predictor model]{style="color:blue;"}
-
-```{r}
-(var(residuals(m_sh)) * (200 -1)) |> round()
 ```
 :::
 
