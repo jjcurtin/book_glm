@@ -42,7 +42,10 @@ editor:
     rendering your document
 
 -   use enter to break up long pipe calls
--   comments directly relating to or explaining a single line of code can go within code chunks; longer explanations and interpretations should be outside of code chunks
+
+-   comments directly relating to or explaining a single line of code
+    can go within code chunks; longer explanations and interpretations
+    should be outside of code chunks
 
 **Class norms**
 
@@ -55,7 +58,7 @@ editor:
 -   dataframe-type objects should be kept in tibble form unless
     otherwise specified
 
--   Error bands are always +- 1 SE
+-   Error bands are +- 1 SE
 
 -   use theme_classic() for ggplot
 
@@ -82,9 +85,6 @@ editor:
 
 **What does a test statistic, with associated df and p values tell
 you?**
-
-**If I tell you that a new variable has a PRE of .28, what can you
-conclude?**
 
 ## Set up for the week!
 
@@ -184,46 +184,7 @@ $b_1$:
 
 $b_2$:
 
-`CHECKPOINT`
-
-### c. If you wanted $b_0$ to reflect the predicted average income for a white-collar job that has an average level of prestige, what model would you fit? Run that model. Using code, calculate and interpret $\eta_p^2$ and $\Delta R^2$ for each parameter. Which parameter estimate(s) change across all four of these models?
-
-1)  We have replicated our SSE function from last week so that we can
-    use it again here!
-2)  Define a function called "pre()" that takes the value of "compact"
-    and "augmented" to calculates the pre.
-3)  Define a function called "delta_r2" that takes the value of "mean",
-    "compact", "augmented" to calculate delta r2.
-
-```{r}
-sse <- function(model) {
-  sum(residuals(model)^2)
-}
-
-pre <- function(compact, augmented) {
-
-}
-
-delta_r2 <- function(compact, augmented) {
-
-}
-```
-
-```{r}
-
-```
-
-$\eta_p^2$ and $\Delta R^2$ for `type_wc`
-
-```{r}
-
-```
-
-$\eta_p^2$ and $\Delta R^2$ for `prestige_c`
-
-```{r}
-
-```
+### c. If you wanted $b_0$ to reflect the predicted average income for a white-collar job that has an average level of prestige, what model would you fit?
 
 `CHECKPOINT`
 
