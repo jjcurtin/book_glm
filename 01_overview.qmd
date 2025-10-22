@@ -35,7 +35,7 @@ I was born on a small island...
 
 ![](./pics/long_island.jpg){width=80%}
 
------
+-------------------------------------------------------------------------------
 
 - My family  
   - Melody, Jacob (14 years old) and Hana (11 years old)
@@ -43,7 +43,7 @@ I was born on a small island...
 
 ![](./pics/sail_family.jpg){width=80%}
 
------
+-------------------------------------------------------------------------------
 
 - My/our passions
   - Trail running, mountain and road biking, nordic skiing, all things mountain...
@@ -64,13 +64,13 @@ I was born on a small island...
 
 :::
 
------
+-------------------------------------------------------------------------------
 
 - My other family.....
 
 ![](./pics/lab2025.jpg)
 
------
+-------------------------------------------------------------------------------
 
 - "John", he/him
 
@@ -78,7 +78,7 @@ I was born on a small island...
 
 - Your first name/nickname
 
------
+-------------------------------------------------------------------------------
 
 ## Materials 
 
@@ -87,6 +87,8 @@ I was born on a small island...
 - And Canvas for application assignments and exams
 - [Syllabus](syllabus.pdf) (Slack us if you need a printed copy!!)
 
+
+-------------------------------------------------------------------------------
 
 ## Assignments
 
@@ -103,7 +105,7 @@ I was born on a small island...
 
 - Slack DM to John and TAs with preferred name/nickname and pronouns.  
 
------
+-------------------------------------------------------------------------------
 
 ## The General Linear Model
 
@@ -115,7 +117,7 @@ I was born on a small island...
 
 **Bottom level:** Single Mean Models   
 
------
+-------------------------------------------------------------------------------
 
 ### Single Mean (intercept-only) Models (Bottom level)
 
@@ -145,7 +147,7 @@ What is this GLM special case analysis often called?
 [one sample t-test]{style="color:blue;"}
 :::
 
------
+------------------------------------------------------------------------------
 
 ### Simple Regression Models (2nd level)
 
@@ -163,7 +165,7 @@ What is the relationship between a predictor variable and a dependent variable?
 
 Is trait level of positive emotionality related to satisfaction with a romantic relationship?   
 
------
+------------------------------------------------------------------------------
 
 $\widehat{Y} = \beta_0 + \beta_1*X_1$  
 
@@ -176,7 +178,7 @@ What is the special case analysis when both $X$ and $Y$ are quantitative?
 [Pearson's correlation]{style="color:blue;"}
 :::
 
------
+-------------------------------------------------------------------------------
 
 $\widehat{Y} = \beta_0 + \beta_1*X_1$  
 
@@ -191,8 +193,7 @@ What is the special case analysis when $X$ is a regressor coding for a dichotomo
 [Between groups (independent samples) t-test (or one-way ANOVA with two groups)]{style="color:blue;"}
 :::
 
------
-
+-------------------------------------------------------------------------------
 
 ### Multiple Regression Models (3rd level)
 
@@ -210,7 +211,7 @@ What are the relationships between a linear combination of predictors and a depe
 
 How well do the predictors: (a) number of absences, (b) time spent studying, and (c) interest predict final exam scores?    
 
------
+-------------------------------------------------------------------------------
 
 $\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
@@ -225,8 +226,7 @@ What is the special case analysis when $X$s are regressors coding for categorica
 :::
 
 
------
-
+-------------------------------------------------------------------------------
 
 **Basic Question for (one-way) ANOVA**  
 
@@ -242,7 +242,7 @@ What are the mean differences in the dependent variable between the groups repre
 
 Are there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock?
   
------
+-------------------------------------------------------------------------------
 
 $\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
@@ -256,7 +256,7 @@ What is the special case analysis when $X$s are regressors coding for categorica
 :::
 
 
------
+-------------------------------------------------------------------------------
 
 $\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
@@ -273,7 +273,7 @@ What are the mean differences in the dependent variable between the groups repre
 
 Are there differences among control, placebo and alcohol groups on mean fear response to threat of electric shock, after equating the groups on trait anxiety scores?     
 
------
+-------------------------------------------------------------------------------
 
 $\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
@@ -289,7 +289,7 @@ What is the special case analysis when $X$s are regressors coding for categorica
 :::
 
 
------
+-------------------------------------------------------------------------------
  
 $\widehat{Y} = \beta_0 + \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
@@ -305,7 +305,7 @@ Are the magnitudes of the contrasts among groups different across different leve
 
 Does the effect of CBT treatment (i.e., contrast of CBT vs. wait list control) on subsequent alcohol related problems differ dependent upon level of intelligence?
   
------
+-------------------------------------------------------------------------------
 
 ### General Linear Models (Top level)
 
@@ -324,7 +324,7 @@ What are the relationships between linear combinations of two sets of variables?
 What are relationships between (a) Personality and temperamental variables, and (b) frequency/quantity of substance use, problems, and motives for use?   
   
 
------
+-------------------------------------------------------------------------------
 
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
@@ -340,7 +340,7 @@ What is this GLM special case analysis called when all the regressors for $X$ an
 :::
 
 
------
+-------------------------------------------------------------------------------
 
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
@@ -355,7 +355,7 @@ What is the special GLM case when $X$s are regressors coding for categorical var
 [Multivariate Analysis of Variance (MANOVA)]{style="color:blue;"}
 :::
 
------
+-------------------------------------------------------------------------------
 
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
@@ -371,7 +371,7 @@ What linear combination of dependent variables ($Y$s) maximally differentiates g
 
 Do children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning?    
 
------
+-------------------------------------------------------------------------------
 
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
@@ -387,7 +387,7 @@ What is the special GLM case when $X$s are regressors coding for categorical and
 :::
 
 
------
+-------------------------------------------------------------------------------
 
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
@@ -403,7 +403,7 @@ What linear combination of dependent variables ($Y$s) maximally differentiates g
 
 Do children with ADHD who receive (a) medication, (b) parent behavioral training, or (c) both, differ in indices of academic and behavioral functioning, when equated for parental expectations? 
 
------
+-------------------------------------------------------------------------------
 
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
@@ -418,8 +418,7 @@ What is the special GLM case when $X$s are regressors coding for quantitative va
 [Discriminant Analysis]{style="color:blue;"}
 :::
 
-
------
+-------------------------------------------------------------------------------
 
 **Basic Question for Discriminant Analysis**  
 
@@ -431,7 +430,7 @@ What linear combination of independent variables ($X$s) maximally differentiates
 
 What combination of sociocultural, personality, and intellectual variables best differentiates repeat juvenile offenders and non-repeat juvenile offenders upon completion of boot-camp?   
 
------
+-------------------------------------------------------------------------------
 
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
@@ -447,7 +446,7 @@ What is the special GLM case when $X$s are regressors coding for categorical var
 :::
 
 
------
+-------------------------------------------------------------------------------
 
 $\beta_{Y1}*Y_1 + \beta_{Y2}*Y_2 + \beta_{Y3}*Y_3 = \beta_1*X_1 + \beta_2*X_2 + \beta_3*X_3$    
 
@@ -463,7 +462,7 @@ What are the mean differences across $Y$s, overall or between the groups represe
 
 Does affective response differ when viewing pleasant, neutral vs. unpleasant slides? Does this slide type effect differ among participants in two beverage groups (alcohol vs. no-alcohol)?   
 
------
+-------------------------------------------------------------------------------
 
 ## Survey of GLM Landscape with One Y
 
@@ -487,7 +486,7 @@ tibble::tibble(Xs = c("0", "1", ">1"),
 ```
 
 
------
+-------------------------------------------------------------------------------
 
 ### Final, Mind-blowing Wrinkles
 
