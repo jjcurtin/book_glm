@@ -182,8 +182,16 @@ my_skim <- skim_with(base = sfl(n_complete = ~ sum(!is.na(.), na.rm = TRUE),
                      factor = sfl(ordered = NULL))
 ```
 
+:::{.callout-tip}
+see `?skim_with` and `?sfl` for details on customizing `skim()` 
+
+This function can be sourced from lab_support repository:
+`source("https://github.com/jjcurtin/lab_support/blob/main/my_skim.R?raw=true")`
+:::
+
 ---------------------------------------------------------------------------
 
+Skim the data (excluding `subid`)
 ```{r}
 data |> my_skim(-subid)
 ```
@@ -194,7 +202,7 @@ data |> my_skim(-subid)
 
 Histograms, density plots, and rug plots are all useful/common visualization for numeric variables.   
 
-As always, lets by DRY by writing functions (and add to your personal function library?)
+As always, lets be "DRY" by writing functions (and add to your personal function library?)
 
 ```{r}
 #| code-fold: true
@@ -212,7 +220,7 @@ plot_univariate <- function(data, x_name, n_bins = 10) {
 :::{.callout-tip}
 # Programming Tip
 All of the case analysis functions can be sourced at once from a script in my lab_support repository.
-`devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/case_analysis.R?raw=true")`
+`source("https://github.com/jjcurtin/lab_support/blob/main/case_analysis.R?raw=true")`
 :::
 
 ---------------------------------------------------------------------------
@@ -220,8 +228,8 @@ All of the case analysis functions can be sourced at once from a script in my la
 And now use it (making four plots together with `patchwork`)
 ```{r}
 #| code-fold: true
-#| fig-height: 8
-#| fig-width: 10
+#| out-height: 5in
+#| out-width: auto 
 
 (plot_univariate(data, "fps") + plot_univariate(data, "bac")) / 
   (plot_univariate(data, "ta") + plot_univariate(data, "sex_c"))
@@ -275,7 +283,6 @@ plot_box(data, "fps") +
 
 ---------------------------------------------------------------------------
 
-
 ## Bivariate Correlations
 
 The next step in case analysis is to review the bivariate correlations among the predictors and the outcome.  
@@ -300,6 +307,8 @@ We also can add a simple line and a LOWESS line (Locally Weighted Scatterplot Sm
 How about another function?
 ```{r}
 #| code-fold: true
+#| out-height: 3.5in
+#| out-width: auto
 
 plot_bivariate <- function(data, x_name, y_name, loess = TRUE) {
   plot <- data |> 
@@ -315,11 +324,6 @@ plot_bivariate <- function(data, x_name, y_name, loess = TRUE) {
   
   return(plot)
 }
-```
-
-
-```{r}
-#| code-fold: true
 
 plot_bivariate(data, "bac", "fps") + plot_bivariate(data, "ta_c", "fps") + 
   plot_bivariate(data, "sex_c", "fps", loess = FALSE)
@@ -340,6 +344,8 @@ A grouped version of the combined box and violin plot is our preferred visualiza
 Lets look at an example of this with sex.
 ```{r}
 #| code-fold: true
+#| out-height: 4in
+#| out-width: auto
 
  data |>
     ggplot(aes(x = sex, y = fps)) +
@@ -385,8 +391,8 @@ plot_cartoon <- data_cartoon |>
 ```{r}
 #| echo: false
 #| warning: false
-#| fig-height: 6
-#| fig-width: 8
+#| out-height: 3in
+#| out-width: auto
 
 plot_cartoon
 ```
@@ -447,7 +453,7 @@ Why?
 
 $R^2 = \frac{\text{SSE}_{\text{mean-only}}- \text{SSE}_a}{\text{SSE}_{\text{mean-only}}}$  
 
-$\text{SE}_{bi} = \frac{s_y}{s_i} = \frac{\sqrt{(1-R^2_y)}}{\sqrt{(N - k - 1)}}*\frac{1}{\sqrt{(1-R^2_i)}}$
+$\text{SE}_{bj} = \frac{s_y}{s_j} = \frac{\sqrt{(1-R^2_y)}}{\sqrt{(N - k - 1)}}*\frac{1}{\sqrt{(1-R^2_j)}}$
 
 [High leverage points that are fit well by the model increase the difference between $\text{SSE}_{\text{mean-only}}$ and $\text{SSE}_a$, which increases $R^2$.]{style="color:blue;"}   
 
@@ -487,14 +493,20 @@ plot_leverage <- function(model) {
       geom_rug(color = "blue") +
       labs(x = "hat values",
            y = "Frequency") +
-      geom_vline(xintercept = 2 * mean(hatvalues(model)), color = "yellow", linewidth = .75) +
-      geom_vline(xintercept = 3 * mean(hatvalues(model)), color = "red", linewidth = .75) +
+      geom_vline(xintercept = 2 * mean(hatvalues(model)), color = "yellow", 
+                 linewidth = .75) +
+      geom_vline(xintercept = 3 * mean(hatvalues(model)), color = "red", 
+                 linewidth = .75) +
       labs(subtitle = "") +
-      labs(subtitle = "Red: 3 * mean(hat) for N < 100;  Yellow: 2 * mean(hat) for N >= 100")
+      labs(subtitle = 
+             "Red: 3 * mean(hat) for N < 100;  Yellow: 2 * mean(hat) for N >= 100")
 }
 ```
 
 ```{r}
+#| out-height: 4.5in
+#| out-width: auto
+
 plot_leverage(m)
 ```
 
@@ -507,8 +519,8 @@ In essence, a regression outlier is a discrepant score with a large residual ($e
 ```{r}
 #| echo: false
 #| warning: false
-#| fig-height: 6
-#| fig-width: 8
+#| out-height: 2.75in
+#| out-width: auto
 
 plot_cartoon
 ```
@@ -603,6 +615,9 @@ plot_residuals <- function(model){
 ```
 
 ```{r}
+#| out-height: 4.5in
+#| out-width: auto
+
 plot_residuals(m)
 ```
 
@@ -617,8 +632,8 @@ An observation is *influential* if it substantially alters the fitted regression
 ```{r}
 #| echo: false
 #| warning: false
-#| fig-height: 6
-#| fig-width: 8
+#| out-height: 2.6in
+#| out-width: auto
  
 plot_cartoon
 ```
@@ -737,6 +752,7 @@ plot_dfbetas <- function(model, x_name){
 plot_dfbetas(m, "bac")
 ```
 
+-----------------------------------------------------------------------------
 
 ## Added Variable Plot
 
@@ -775,8 +791,13 @@ plot_av <- function(data, model, label_name = "subid"){
 ```
 
 ```{r}
+#| out-height: 4.5in
+#| out-width: auto
+
 data |> plot_av(model = m, label_name = "subid")
 ```
+
+-----------------------------------------------------------------------------
 
 ## Impact on SEs
 
@@ -814,6 +835,7 @@ plot_covratio <- function(model){
 plot_covratio(m)
 ```
 
+-----------------------------------------------------------------------------
 
 ## Four Examples with Fake Data
 
@@ -875,6 +897,7 @@ plot_lev_outlier <- tibble(x = c(1, 2, 3, 4, 5, 5),
 (plot_orig + plot_lev_wellfit)/(plot_outlier + plot_lev_outlier)
 ```
 
+-----------------------------------------------------------------------------
 
 ## Enter the Real World
 

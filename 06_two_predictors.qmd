@@ -1804,7 +1804,6 @@ Following this conceptual understanding of $\Delta R^2$, we can use SSEs from mo
 
 - $\Delta R^2 = \frac{SSE_c - SSE_a}{SSE_{\text{mean-only}}}$
 - Use the compact and augmented model associated with the test of the parameter estimate
-:::
 
 --------------------------------------------------------------------------------
 
