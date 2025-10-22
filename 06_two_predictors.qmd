@@ -2563,9 +2563,13 @@ What would you do and why if you had also measured sex at birth in any of these 
 ## Summary: New and Familiar Concepts
 
 - Interpretation of $b_0$, $b_1$, and $b_2$, in 2+ predictor model with continuous and dichotomous focal predictor.  
+- how to indicate the location of $b_0$, $b_1$, and $b_2$ in figures regardless of how $X$s are coded.
 - Impact of centering $X_1$ or $X_2$ on $b_0$, $b_1$, and $b_2$.  
 - What affects standard errors of $b_j$.  
 - What is Multicollinearity, how to detect, what are implications if high, and what are solutions.  
 - Model effect size ($R^2$).  
 - Effect sizes for $X$s ($b_j$s, $\Delta R^2$, $\eta_p^2$).  
+- How to understand $R^2$, $\Delta R^2$, and $\eta_p^2$ in terms of venn diagrams of variance.
+- How to define compact and augmented models for model comparisons to test hypotheses about $R^2$ and parameter estimates. 
+- How to define $R^2$, $\Delta R^2$, and $\eta_p^2$ in terms of SSE from compact, augmented models and mean-only models.
 - Text, table, and figure descriptions of results.  

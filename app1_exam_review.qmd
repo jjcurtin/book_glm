@@ -81,14 +81,16 @@
 - What is $R^2_j$?
 - What is the problem of multicolinearity?
 - How do you identify if multicolinarity is a problem in a model?
+- What are some solutions to deal with multicolinearity?
 - What are the appropriate compact and augmented models for testing any parameter estimate in a model with multiple predictors?
+- What are the appropriate compact and augmented models for testing model $R^2$?
 - What is the relationship between the SE for a parameter estimate and power to test the null hypothesis about that parameter estimate?  Connect this to your understanding of the sampling distribution for a parameter estimate
 - What is the relationship between the SE for a parameter estimate and the precision of the parameter estimate?  Connect this to your understanding of the confidence interval and the sampling distribution for a parameter estimate. 
 - What are the total, direct, and indirect/spurious effects of $X$s in a two predictor model?  How do you calculate each?  What models do you use to calculate each?
 - What are the three variance based effect size estimates for models with two or more predictors?
   - Define them in terms of the variances of $Y_i$, $\hat{Y}_i$, and $e_i$
   - Define them in terms of sums of squares and models/model comparisons
-  - What is the interpreation of each?
+  - What is the interpretation of each?
   - Link them to the areas of the Venn diagrams
   - Calculate them from sums of squares in Venn diagrams
   - How are they similar and different from each other?
