@@ -147,8 +147,8 @@ What could we change about the sampling distribution that would make this $b_1$ 
 
 ```{r}
 #| code-fold: true
-#| fig-height: 4
-#| fig-width: 8
+#| out-height: 4in
+#| out-width: auto
 
 tibble(b1 = seq(-400,400,.01),
        probability = dt(b1/subset(broom::tidy(m_2), term == "bac")$std.error, m_2$df.residual)) |> 
@@ -970,8 +970,8 @@ We can show this total effect of `study_hours` on `exam` using the parameter est
 
 ```{r}
 #| echo: false 
-#| fig-height: 4
-#| fig-width: 6
+#| out-height: 4in
+#| out-width: auto
 
 DiagrammeR::grViz("
 digraph{
@@ -1011,8 +1011,8 @@ And here is the path diagram for our updated causal model
 
 ```{r}
 #| code-fold: true
-#| fig-height: 4
-#| fig-width: 6
+#| out-height: 4in
+#| out-width: auto 
 
 DiagrammeR::grViz("
 digraph{
@@ -1043,8 +1043,8 @@ The total effect of study hours on exam scores is the sum of the direct effect o
 - The decision about which is the most plausible explanation is a theoretical one and/or a function of your research design
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 6
+#| out-height: 4in
+#| out-width: auto 
 
 DiagrammeR::grViz("
 digraph{
@@ -1073,8 +1073,8 @@ m_iq |> tidy()
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 6
+#| out-height: 4in
+#| out-width: auto 
 
 DiagrammeR::grViz("
 digraph{
@@ -1101,8 +1101,8 @@ digraph{
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 6
+#| out-height: 4in
+#| out-width: auto
 
 DiagrammeR::grViz("
 digraph{
@@ -1117,8 +1117,8 @@ digraph{
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 6
+#| out-height: 4in
+#| out-width: auto 
 
 DiagrammeR::grViz("
 digraph{
@@ -1143,8 +1143,8 @@ In what situation would $b_j$ for a focal predictor (e.g., $X1$ below) not chang
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 6
+#| out-height: 4in
+#| out-width: auto
 
 DiagrammeR::grViz("
 digraph{
@@ -1159,8 +1159,8 @@ digraph{
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 6
+#| out-height: 4in
+#| out-width: auto
 
 DiagrammeR::grViz("
 digraph{
@@ -2228,8 +2228,8 @@ We want
 - Individual data points? (raw or rawish?)
 ```{r}
 #| code-fold: true
-#| fig-height: 4
-#| fig-width: 6
+#| out-height: 4in
+#| out-width: auto 
 
 ggplot() +
   geom_col(aes(x = as.factor(preds$intervention_group), y = preds$fit),
@@ -2294,8 +2294,8 @@ var(res$depress_post_res)
 
 ```{r}
 #| code-fold: true
-#| fig-height: 4
-#| fig-width: 6
+#| out-height: 4in
+#| out-width: auto 
 
 ggplot() +
   geom_col(aes(x = as.factor(preds$intervention_group), y = preds$fit),
@@ -2360,8 +2360,8 @@ preds |> head()
 
 ```{r}
 #| code-fold: true
-#| fig-height: 4
-#| fig-width: 6
+#| out-height: 4in
+#| out-width: auto
 
 ggplot() +
   geom_point(aes(x = data$bac, y = data$fps), alpha = .6, size = 2) +
@@ -2431,13 +2431,13 @@ m_3_c |> tidy()
 What would have changed from previous model with uncentered TA?
 
 --------------------------------------------------------------------------------
+
 :::{.callout-important}
 # Question
 What do you report and why?
 :::
 
 --------------------------------------------------------------------------------
-
 
 $\eta_p^2$ effect size for BAC
 ```{r}
