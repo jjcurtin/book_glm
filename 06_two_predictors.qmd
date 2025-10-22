@@ -1218,14 +1218,14 @@ digraph{
 ")
 ```
 
-## Visualizing Total and Direct/Unique Effects
+--------------------------------------------------------------------------------
 
-In the previous slides, we displayed the relationships between correlated predictors and $Y$ in a path model
-
-We can also visualize these relationships between correlated predictors and $Y$ using Venn diagrams
+## Visualizing Total and Direct/Unique Effects with Venn Diagrams
 
 ```{r}
 #| echo: false
+#| out-height: 2.5in
+#| out-width: auto
 
 # models
 m_mo <- lm(exam ~ 1, data = data_exam)
@@ -1280,25 +1280,35 @@ venn_full <- list(`SH` = c(sh, shared),
 venn_full
 ```
 
-## Visualizing Total and Direct/Unique Effects with Venn Diagrams
+In the previous slides, we displayed the relationships between correlated predictors and $Y$ in a path model
 
-- The overlap among the circles represent the correlations among the variables
-- The numbers represent variability in $Y$ attributed to the $X$s.  
-- This variability can be partitioned into unique and shared variance among the predictors
-- And there will also be unexplained variability in $Y$ that cannot be explained by either predictor
-- We will build up to understanding this display conceptually over the next several (many) slides!
+We can also visualize these relationships between correlated predictors and $Y$ using Venn diagrams
+
+--------------------------------------------------------------------------------
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 4
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_full
 ```
 
-## The Relevant Models
+- The overlap among the circles represent the correlations among the variables
+- The numbers represent variability8 (in SS) in $Y$ attributed to the $X$s.  
+- This variability can be partitioned into unique and shared variance among the predictors
+- And there will also be unexplained variability in $Y$ that cannot be explained by either predictor
+- We will build up to understanding this display conceptually over the next several (many) slides!
 
-All of these variabilities can be defined in terms of differences in SSE or $var(\hat{Y_i})$ between various models.  Lets fit all the relevant models here
+
+--------------------------------------------------------------------------------
+
+- All of these variabilities can be quantified as differences in SSE or $var(\hat{Y_i})$ between various models.  
+- This will help us think more carefully about the model comparisons we are using to test the effects of our predictors.  
+
+\
+
+Lets fit all the relevant models here
 
 - Mean only model
 ```{r}
@@ -1320,55 +1330,33 @@ m_iq <- lm(exam ~ 1 + iq_c, data = data_exam)
 m_full <- lm(exam ~ 1 + study_hours_c + iq_c, data = data_exam)
 ```
 
-## Total Variability in Y 
-
-The formula for the variance of $Y$ is
-
-- $s^2 = \frac{\Sigma{(Y_i - \bar{Y})^2}}{N - 1}$
-
-The numerator of this term is the SSE of the mean-only model for $Y$
-
-- $SSE_{mean-only} = \Sigma{(Y_i - \hat{Y})^2}$
-- because $\hat{Y} = \bar{Y}$ in the mean-only model
-
-So we can think of SSE from the mean only model as an index of the total variability in $Y$ (just without the $N-1$)
-
-```{r}
-(var(data_exam$exam) * (200 - 1)) |> round() 
-```
-
-```{r}
-sse(m_mo) |> round()
-```
-
 --------------------------------------------------------------------------------
+
+```{r}
+#| echo: false
+#| out-height: 2.5in
+#| out-width: auto
+
+venn_exam_only
+```
 
 We can represent our understanding of the variability in `exam` scores from the mean-only model as a single circle of a Venn diagram.  
 
 - There are no circles other than for `exam` because there are no predictors in the mean-only model
 - The full variability of `exam` is currently unexplained.  The mean-only model predicts a single value for all observations so it cannot explain why the scores on `exam` differ.
+- Remember that the SSE of the mean-only model is the numerator of the variance of `exam`: $SSE_{mean-only} = \Sigma{(Y_i - \hat{Y})^2}$ where $\hat{Y} = \bar{Y}$ 
+
+--------------------------------------------------------------------------------
 
 ```{r}
 #| echo: false
-#| fig-height: 5
-#| fig-width: 5
-
-venn_exam_only
-```
-
-## The One Predictor Study Hours Model 
-
-Now we can add the variability in `exam` explained by `study_hours` to the Venn diagram
-
-```{r}
-#| echo: false
-#| fig-height: 5
-#| fig-width: 5
-#| out-height: 5in
-#| out-width: 5in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_sh_only
 ```
+
+The diagram above represents the explained and unexplained variability in `exam` from the `study_hours` one predictor model.
 
 :::{.callout-important}
 # Question
@@ -1386,52 +1374,38 @@ sse(m_sh) |> round()
 
 ```{r}
 #| echo: false
-#| fig-height: 5
-#| fig-width: 5
-#| out-height: 5in
-#| out-width: 5in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_sh_only
 ```
 
 :::{.callout-important}
 # Question
-There are two ways to get the variability in `exam` explained by `study_hours` in this one predictor model.  What are they?
+How can we get the variability in `exam` explained by `study_hours` in this one predictor model using SSEs from two models (hint, think about the relevant model comparison)?
 :::
 
 :::{.fragment}
-[1.  A model comparison between the mean-only model and the one predictor study hours model.  Error is reduced in the study hours model because study hours explained variability that was previously unexplained in the mean-only model.]{style="color:blue;"}
+[We use a model comparison between the mean-only model and the one predictor study hours model to test the parameter estimate for study hours. The reduction in error across these two models is the variability that is "explained" (predicted) by study hours. ]{style="color:blue;"}
 
 - $SSE_{m\_mo} - SSE_{m\_sh}$
 
 ```{r}
 (sse(m_mo) - sse(m_sh)) |> round()
 ```
-
-[2. The variability in `exam` explained by `study_hours` is also contained in the variance of that model's predicted values.]{style="color:blue;"}
-
-
-- $Data = Model + Error$
-- $Var(Y_i) = Var(\hat{Y_i}) + Var(\epsilon_i)$
-
-```{r}
-(var(predict(m_sh)) * (200 -1)) |> round()
-```
 :::
 
-## The One Predictor IQ Model 
-
-We can do the same thing for the one predictor model with IQ
+--------------------------------------------------------------------------------
 
 ```{r}
 #| echo: false
-#| fig-height: 5
-#| fig-width: 5
-#| out-height: 5in
-#| out-width: 5in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_iq_only
 ```
+
+We can do the same thing for the `iq` one predictor model
 
 :::{.callout-important}
 # Question
@@ -1444,73 +1418,54 @@ How do we get the unexplained variability in `exam` in the one predictor model `
 ```{r}
 sse(m_iq) |> round()
 ```
-
-[Or the numerator of the variance of the errors in this one predictor model]{style="color:blue;"}
-
-```{r}
-(var(residuals(m_iq)) * (200 -1)) |> round()
-```
 :::
 
 --------------------------------------------------------------------------------
 
 ```{r}
 #| echo: false
-#| fig-height: 5
-#| fig-width: 5
-#| out-height: 5in
-#| out-width: 5in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_iq_only
 ```
 
 :::{.callout-important}
 # Question
-There are two ways to get the variability in `exam` explained by `iq` in this one predictor model.  What are they?
+How do we get the variability in `exam` explained/predicted by `iq` in this one predictor model.
 :::
 
 :::{.fragment}
-[1.  A model comparison between the mean only model and the one predictor study hours model. Error is reduced in the iq model because iq explains variability that was previously unexplained in the mean-only model.]{style="color:blue;"}
+[A model comparison between the mean only model and the one predictor study hours model. Error is reduced in the `iq` model because `iq` explains variability that was previously unexplained in the mean-only model.]{style="color:blue;"}
 
 - $SSE_{m\_mo} - SSE_{m\_sh}$
 
 ```{r}
 (sse(m_mo) - sse(m_sh)) |> round()
 ```
-
-[2. The variability in `exam` explained by `iq` is also contained in the variance of that model's predicted values.]{style="color:blue;"}
-
-```{r}
-(var(predict(m_iq)) * (200 -1)) |> round()
-```
 :::
 
+--------------------------------------------------------------------------------
 
-## The Two Predictor Model
+```{r}
+#| echo: false
+#| out-height: 2.5in
+#| out-width: auto
+
+venn_full
+```
 
 We can represent how `study_hours` and `iq` combine to explain variability in `exam`
 
 - `study_hours` and `iq` each explain some variance in `exam` that can not be explained by the other  (their unique, partial, direct effects)
 - But given the correlation between them, they also both predict some of the same variability in `exam`.  This shared variance in `exam` can be predicted by either of these predictors.
 
-```{r}
-#| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
-
-venn_full
-```
-
 --------------------------------------------------------------------------------
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_full
 ```
@@ -1528,21 +1483,19 @@ sse(m_full) |> round()
 ```
 :::
 
-## The Two Predictor Model: Unique Effect of Study Hours
+--------------------------------------------------------------------------------
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_full
 ```
 
 :::{.callout-important}
 # Question
-How do we get the unique variability in `exam` explained by `study_hours`, controlling for `iq` by comparing SSE across two models?
+How do we get the **unique** variability in `exam` explained by `study_hours`, controlling for `iq` by comparing SSE across two models?
 :::
 
 :::{.fragment}
@@ -1560,46 +1513,15 @@ How do we get the unique variability in `exam` explained by `study_hours`, contr
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_full
 ```
 
 :::{.callout-important}
 # Question
-What is a second way to get the unique variability in `exam` explained by `study_hours` controlling for `iq`?
-:::
-
-:::{.fragment}
-[Using the variability of predicted scores from the two predictor model minus the variability of the predicted scores from the one predictor model with `iq`.]{style="color:blue;"}
-
-- $(Var(\hat{Y}_{m\_full}) - Var(\hat{Y}_{m\_iq})) * (N - 1)$
-- [Same model comparison but in terms of the variance of the predicted values (corrected for N-1 put in units of sums of squares)]{style="color:blue;"}
-- [We simply focus on the explained vs. unexplained variability.  The variability in the predicted values is sometimes called $SS_{regression}$ or if $X$ is categorical, $SS_{between}$ in ANOVA.]{style="color:blue;"}
-
-```{r}
-((var(predict(m_full)) - var(predict(m_iq))) * (200 - 1))  |> round()
-```
-:::
-
-## The Two Predictor Model: Unique Effect of IQ
-
-```{r}
-#| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
-
-venn_full
-```
-
-:::{.callout-important}
-# Question
-How do we get the unique variability in `exam` explained by `iq`, controlling for `study_hours` using SSEs from a model comparison?
+How do we get the **unique variability** in `exam` explained by `iq`, controlling for `study_hours` using SSEs from a model comparison?
 :::
 
 :::{.fragment}
@@ -1607,21 +1529,18 @@ The SSE from the one predictor model with `study_hours` minus the SSE from the t
 
 - $SSE_{m\_sh} - SSE_{m\_full}$
 - This is also the model comparison that is used to test the significance of the effect of `iq` in the two predictor model.
-- Of course, we could also get this value focusing on the variability of the predicted scores from the two models.
 
 ```{r}
 (sse(m_sh) - sse(m_full)) |> round()
 ```
 :::
 
-## The Two Predictor Model: Shared effects
+--------------------------------------------------------------------------------
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_full
 ```
@@ -1638,6 +1557,8 @@ There are many different ways to get this value. The most straightforward (IMO) 
 - Subtract the SSE of the two predictor model (the unexplained variability in `exam` from that model)
 - Then subtract the unique variances for `study_hours` and `iq` that we calculated on the previous slides
 :::
+
+----------------------------------------------------------------------------------
 
 ## Effect Sizes: Raw Parameter Estimates
 
@@ -1680,10 +1601,8 @@ You can quantify and test the overall performance of the model (with all $X$s) u
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_full
 ```
@@ -1776,10 +1695,8 @@ glance(m_full)$r.squared
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_full
 ```
@@ -1803,10 +1720,8 @@ $R^2_{full} = \frac{643 + 4066 + 3726}{643 + 3726 + 4066 + 18609}$
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_full
 ```
@@ -1855,10 +1770,8 @@ Conceptually, $\Delta R^2$ for an $X$ is the unique (incremental) variability in
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_full
 ```
@@ -1881,10 +1794,8 @@ for `iq`
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_full
 ```
@@ -1899,10 +1810,8 @@ Following this conceptual understanding of $\Delta R^2$, we can use SSEs from mo
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_full
 ```
@@ -1920,10 +1829,8 @@ for `study_hours`
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_full
 ```
@@ -1941,10 +1848,8 @@ for `iq`
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_full
 ```
@@ -1968,10 +1873,8 @@ $R^2_{full} = \frac{643 + 4066 + 3726}{643 + 3726 + 4066 + 18609}$
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_full
 ```
@@ -2022,10 +1925,8 @@ For `iq`
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_full
 ```
@@ -2046,10 +1947,8 @@ Define $\Delta R^2$ and $PRE$ for `study_hours` in the two predictor model
 
 ```{r}
 #| echo: false
-#| fig-height: 4
-#| fig-width: 4
-#| out-height: 4in
-#| out-width: 4in
+#| out-height: 2.5in
+#| out-width: auto
 
 venn_full
 ```
