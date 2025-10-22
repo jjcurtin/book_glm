@@ -271,7 +271,8 @@ What is the interpretation of $b_1$ (parameter estimate for `bg_d`) in this mode
 
 ```{r}
 #| code-fold: true
-#| fig-height: 4
+#| out-height: 4in
+#| out-width: auto
 
 plot_d <- data |> 
   ggplot(aes(x = bg_d, y = fps)) +
@@ -339,7 +340,8 @@ What is the interpretation of $b_0$ in this model?
 
 ```{r}
 #| code-fold: true
-#| fig-height: 4
+#| out-height: 4in
+#| out-width: auto
 
 plot_d
 ```

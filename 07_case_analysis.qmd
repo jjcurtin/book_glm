@@ -264,8 +264,8 @@ plot_box <- function(data, x_name) {
 
 ```{r}
 #| code-fold: true
-#| fig-height: 6
-#| fig-width: 10
+#| out-height: 6in
+#| out-width: auto
 
 plot_box(data, "fps") + plot_box(data, "bac") + plot_box(data, "ta")
 ```

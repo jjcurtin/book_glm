@@ -1003,8 +1003,8 @@ annotate("text", x = 0, y = .2, label = "99%", size = 4, color = "blue")
 ```{r}
 #| echo: false
 #| warning: false
-#| fig-height: 4
-#| fig-width: 8
+#| out-height: 4in
+#| out-width: auto
 
 probability_1sd + probability_2sd + probability_3sd
 ```

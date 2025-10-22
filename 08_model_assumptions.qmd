@@ -260,8 +260,8 @@ m_2 <- lm(fps ~ bac + ta + sex_c, data = data_rm_outliers)
 
 We can use a density plot to plot the model's residuals against a normal distribution.   
 ```{r}
-#| fig-width: 6 
-#| fig-height: 4
+#| out-width: 6in 
+#| out-height: auto
 
 ggplot() +
   geom_density(aes(x = value), data = enframe(rstudent(m_2), name = NULL)) +
