@@ -29,7 +29,7 @@ path_data <- "lab/data"
 theme_set(theme_classic()) 
 ```
 
-## Finishing up Week 7 exercises (2+ predictor models & VIF)
+## Finishing up Week 7 exercises (2+ predictor models & figures) 
 
 We're going to continue using some spectacularly sPoOkY data this lab. As a reminder, it's on Halloween consumer behavior. 
 
@@ -39,7 +39,7 @@ The survey included many items, including the following:
 
 `costume`: In the past, you have often celebrated Halloween by wearing a costume.    
 
-`decorate`: In the past, you have often celebrated Halloween by decorating your home.    
+`decorate`: In the past, you have often celebrated Halloween by decorating your home.       
 
 `plan_buy_costume`: For Halloween this year, it is likely that you will buy some costumes.    
 
@@ -49,11 +49,13 @@ The participants responded using a Likert scale: -2 = strongly disagree, -1 = mi
 
 ### Analyses
 
-You are a small-scale Halloween retailer. To prepare for the early Halloween market (pre-september), you hope to gain some insights on what the market will look like using these data.
+You are a small-scale Halloween retailer. To prepare for the early Halloween market (pre-September), you hope to gain some insights on what the market will look like using these data.
 
 Let's load in these data. We've already cleaned this dataset for you, but we will come back to these data later on for an in-depth overview of data wrangling and cleaning.
 ```{r}
-d <- 
+d <- read_csv(here::here(path_data, "lab_08_data.csv"),
+              show_col_types = FALSE) |> 
+  glimpse()
 ```
 
 Practice viewing correlations, distributions, and scatterplots all in one step using `GGally::ggpairs()`.
@@ -63,10 +65,26 @@ Practice viewing correlations, distributions, and scatterplots all in one step u
 ```
 
 **Which 2 variables are most weakly correlated?**    
-   
+     
 
 **Most strongly correlated?**   
-   
+
+
+#### Quick Overview: Regression with 1 predictor
+
+Celebrating by wearing a costume predicts shopping before September.
+
+```{r}
+m_costume <- 
+
+```
+
+Celebrating by decorating predicts shopping before September. 
+
+```{r}
+m_decorate <- 
+
+```
 
 ### Exercise Time!
 
@@ -78,9 +96,10 @@ You wonder if celebrating by wearing a costume predicts shopping before Septembe
 
 i.e., Do people who often celebrate by wearing a costume tend to shop early for Halloween, after accounting for how often they celebrate by decorating their home.     
  
-**Run a model to see if `costume` predicts shopping before September (`shop_early`).**
+**Run a model to see if `costume` predicts shopping before September (`shop_early`), when controlling for decorating.**
 ```{r}
 m_1 <- 
+
 ```
 
 In a group of 2-3, discuss how you would interpret $b_0$, $b_1$, and $b_2$. 
@@ -92,9 +111,9 @@ In a group of 2-3, discuss how you would interpret $b_0$, $b_1$, and $b_2$.
 
 
 **1c. What's the interpretation of b_2?**    
- 
+   
 
-**How would the model comparison (using anova) differ if `decorate` was our focal predictor?**
+**How would the model comparison (using anova) differ if you wanted to test the effect of `decorate`, controlling for the costume predictor?**
 
 ```{r}
 
@@ -124,97 +143,41 @@ $\Delta R^2$ for `decorate`
 
 ```
 
+Both are extremely low.    
 
 ### Plotting
 
 In a group of 2-3, practice creating a plot showing the effect of `costume` on `shop_early` when controlling for `decorate` (i.e., m_1).
 
-Since `costume` is the focal predictor, we will set `decorate` to their mean for our predictions. 
+Since `costume` is the focal predictor, we will set `decorate` to 0 for our predictions. You could also choose to set `decorate` to another meaningful and interpretable value. 
 
 ```{r}
 d_new <- 
 
 preds <- 
 
-ggplot()
+ggplot() 
 ```
 
 Class Exercise: Conceptual Questions 
 **Identify $b_0$ and $b_1$ in the figure.**
 
 **Interpret $b_0$ and $b_1$ in the figure.**
-$b_0$: 
-
-$b_1$: 
-
-**How would the interpretation of $b_0$ and $b_1$ change if the Likert scale for `costume` was the following: 0 = strongly disagree, 1 = mildly disagree, 2 = neither agree nor disagree, 3 = mildly agree, and 4 = strongly agree.**
 
 $b_0$: 
 
 $b_1$: 
 
+**How would the interpretation of $b_0$ and $b_1$ change if you fit a  new model where the Likert scale for `costume` was the following: 0 = strongly disagree, 1 = mildly disagree, 2 = neither agree nor disagree, 3 = mildly agree, and 4 = strongly agree.**
 
-In a group of 2-3, practice creating a plot showing the effect of `decorate` on `shop_early` when controlling for `costume` (i.e., m_1).
-
-Since `decorate` is the focal predictor, we will set `costume` to their mean for our predictions.
-
-```{r}
-d_new_2 <- 
-
-preds_2 <- 
-
-ggplot()
-```
-
-Class Exercise: Conceptual Questions
-**Identify $b_0$ and $b_1$ in the figure.**
-
-**Interpret $b_0$ and $b_1$ in the figure.**
 $b_0$: 
 
 $b_1$: 
 
-**How would the interpretation of $b_0$ and $b_1$ change if the Likert scale for `decorate` was the following: 0 = strongly disagree, 1 = mildly disagree, 2 = neither agree nor disagree, 3 = mildly agree, and 4 = strongly agree.**
-
-$b_0$:
-
-$b_1$: 
 
 **End of exercise!**
 
 `CHECKPOINT`
-
-### VIF
-
-Let's revisit the correlation between the variables. 
-```{r}
-
-```
-
-`costume` and `decorate` are strongly correlated (r = .866)! **Why might that be?**    
-People who tend to celebrate Halloween with costumes also tend to be into decorating their house.
-```{r}
-
-```
-
-In fact, `decorate` accounts for 75% of the variance in `costume`!   
-
-Because of the strong correlation between `costume` and `decorate`, it's likely that a lot of the variance in `shop_early` explained by `costume` overlaps with the variance explained by `decorate`.    
-
-When variables in the model are very highly correlated, this is called *multicollinearity*. When multicollinearity occurs, it inflates standard errors and changes the magnitude of regression coefficients.    
-
-We can directly test the multicollinearity of each predictor in our model using the `vif()` function in the `car` package.
-```{r}
-
-```
-
-VIF stands for **variance inflation factor**. A conventional cutoff for vif is 5, such that if you have a VIF value >= 5 for your focal predictor, then multicollinearity is a problem.    
-
-Good-to-know knowledge:   
-$VIF_j = 1 / (1–R_j^2)$     
-$R_j^2$: percent variance in predictor j that is explained by all other predictors.    
-
-**What level of $R_j^2$ is problematic, given the conventional cutoff for vif = 5?**    
 
 
 #### Regression with 3 Predictors
@@ -230,17 +193,17 @@ m_2 <-
 ```
 
 **What is the interpretation of the intercept for `m_2`?**    
- 
+   
 
 **What is the interpretation of the coefficient for `plan_buy_costume` and what does the coefficient tell us?**   
-   
+ 
 
 **After removing the variance explained by `costume` and `decorate`, how much of the residual variance in `shop_early` does `plan_buy_costume` account for?**   
 
 
 ```{r}
-sse_a <- 
-sse_c <- 
+sse_a <- sum(residuals(m_2)^2)
+sse_c <- sum(residuals(lm(shop_early ~ costume + decorate, data = d))^2)
 
 (sse_c - sse_a)/sse_c
 
@@ -255,13 +218,64 @@ pre <- function(m_comp, m_alt){
 
 ```
 
+### VIF in a 3 predictor model
+
+Let's revisit the correlation between the variables. 
+```{r}
+d |> 
+  select(-id) |> 
+  GGally::ggpairs()
+```
+
+Let's see how much variance in `plan_buy_costume` is accounted for by `costume` and `decorate`
+```{r}
+m_plan_buy_costume <- 
+
+
+```
+
+In fact, `costume` and `decorate` accounts for 6% of the variance in `plan_buy_costume`!   
+
+As a reminder, when variables in the model are very highly correlated, this is called *multicollinearity*. When multicollinearity occurs, it inflates standard errors and changes the magnitude of regression coefficients.    
+
+We can directly test the multicollinearity of each predictor in our model using the `vif()` function in the `car` package.
+```{r}
+
+```
+
+VIF stands for **variance inflation factor**. A conventional cutoff for vif is 5, such that if you have a VIF value >= 5 for your focal predictor, then multicollinearity is a problem.    
+
+Good-to-know knowledge:   
+$VIF_j = 1 / (1–R_j^2)$     
+$R_j^2$: percent variance in predictor j that is explained by all other predictors.    
+
+**What level of $R_j^2$ is problematic, given the conventional cutoff for vif = 5?**    
+When $R_j^2$ > 0.8
+
 ### Plotting
 
 Create a plot showing the effect of `plan_buy_costume` on `shop_early` when controlling for `costume` and `decorate` (i.e., `m_2`).    
 
-Since `plan_buy_costume` is the focal predictor, we will just set the other covariates to their mean for our predictions.   
+Since `plan_buy_costume` is the focal predictor, we will just set the other covariates to 0 for our predictions. We could also set these covariates to another meaningful, interpretable value.
 ```{r}
+#Using raw data points. When using the raw data points, the variance of `shop_early` comes from `costume`, `decorate`, `plan_buy_costume` and noise. 
+d_new_2 <- 
+
+preds_2 <- 
+
+ggplot()
+```
+
+```{r}
+#Using residualized data points. When using residualized data points, the variance of `shop_early` comes from `plan_buy_costume` and noise only.
 d_new_3 <- 
+
+res = 
+
+#We are adding noise back in when adding residuals(m_2)
+res <- res |> mutate()
+
+view(res)
 
 preds_3 <- 
 
@@ -280,4 +294,4 @@ $b_1$:
 
 $b_0$: 
 
-$b_1$:  
+$b_1$: 
