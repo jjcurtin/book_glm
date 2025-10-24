@@ -1,0 +1,257 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Suppression {.unnumbered}
+
+In the following examples, we will explore suppression using path diagrams and regression models.   
+
+- We use two related examples to illustrate when suppression will not vs. will occur.
+- In both examples, we have two predictors (X1 and X2) that positively predict an outcome (Y).
+- In the first example, the predictors are positively correlated.  In the second example, the predictors are negatively correlated.
+- We have folded some of the code to avoid having it distract from the main points.  However, you may want to look at the code to see how the data were generated and also how we use `ggdiagram` to create the path diagrams.
+```{r}
+#| echo: false 
+#| message: false
+#| warning: false
+
+options(conflicts.policy = "depends.ok") 
+library(tidyverse)
+library(broom) 
+library(ggdiagram)
+
+path_data <- "data_lecture"
+theme_set(theme_classic()) 
+options(scipen = 999) # turns off scientific notation
+```
+
+-------------------------------------------------------------------------------
+
+## Example 1: No suppression
+
+Generate positively correlated predictors with positive effect on y 
+
+- Study hours (x1)
+- IQ (x2)
+- predict academic performance (y)
+
+```{r}
+#| code-fold: true
+
+set.seed(123)
+mu <- c(0, 0, 10)
+sigma <- matrix(c(1, 0.4, 0.6,
+                  0.4, 1, 0.3,
+                  0.6, 0.3, 1), nrow = 3)
+
+d_pos <- MASS::mvrnorm(n = 100, mu = mu, Sigma = sigma,
+                       empirical = TRUE)
+colnames(d_pos) <- c("x1", "x2", "y")
+d_pos <- as_tibble(d_pos)
+```
+
+```{r}
+cor(d_pos)
+```
+
+-------------------------------------------------------------------------------
+
+Overall effect of x1 on y
+```{r}
+m_yx1 <- lm(y ~ x1, data = d_pos)
+m_yx1 |> tidy()
+```
+
+Overall effect of x2 on y
+```{r}
+m_yx2 <- lm(y ~ x2, data = d_pos) 
+m_yx2 |> tidy()
+```
+
+Partial (direct, unique) effects of x1 and x2 on y.  NOTICE: Partial effects are SMALLER than OVERALL effects.  This is typical.
+```{r}
+m_yx12 <- lm(y ~ x1 + x2, data = d_pos)
+m_yx12 |> tidy()
+```
+
+-------------------------------------------------------------------------------
+
+## Path diagrams: X1 focus
+
+```{r}
+#| code-fold: true 
+
+x1 <- ob_rectangle(width = 3, height = 1, label = "X1", color = "black",
+                   x = 0, y = 3, fill = "lightblue")
+x2 <- ob_rectangle(width = 3, height = 1, label = "X2", color = "black",
+                   x = 0, y = -3, fill = "lightblue")
+y1 <- ob_rectangle(width = 3, height = 1, label = "Y", color = "black",
+                   x = 6, y = 3, fill = "lightgreen")
+y2 <- ob_rectangle(width = 3, height = 1, label = "Y", color = "black",
+                   x = 6, y = -3, fill = "lightgreen")
+y12 <- ob_rectangle(width = 3, height = 1, label = "Y", color = "black",
+                    x = 6, y = 0, fill = "lightgreen") 
+  
+pd_x1 <- ggdiagram() +
+  x1 +
+  y1 +
+  connect(x1, y1, label = 0.6, resect = 2)
+
+pd_x2 <- ggdiagram() +
+  x2 +
+  y2 +
+  connect(x2, y2, label = 0.3, resect = 2)
+
+pd_x12 <- ggdiagram() +
+  x1 +
+  x2 +
+  y12 +
+  connect(x1, y12, label = 0.571, resect = 2) +
+  connect(x2, y12, label = 0.071, resect = 2) +
+  ob_covariance(x1, x2, label = 0.4)
+
+cowplot::plot_grid(pd_x1, pd_x12, nrow = 2)
+```
+
+X1 effects on Y
+
+- Total effect: 0.6
+- Direct effect of X1 on Y controlling for X2: 0.571
+- Spurious/Indirect effect of X1 on Y through X2: 0.029 (0.4 * 0.071)
+- 0.6 = 0.571 + 0.029
+
+Direct effect of X1 < total effect of X1 (because spurious/indirect effect is non-zero and in same direction as direct effect)
+
+-------------------------------------------------------------------------------
+
+## Path diagrams: X2 focus
+
+```{r}
+#| echo: false
+
+cowplot::plot_grid(pd_x2, pd_x12, nrow = 2)
+```
+
+X2 effects on Y
+
+- Total effect of X2: 0.3
+- Direct effect of X2 on Y controlling for X1: 0.071
+- Spurious/Indirect effect of X1 on Y through X2: 0.229 (0.4 * 0.571)
+- 0.3 = 0.071+ 0.229
+
+Direct effect of X2 < total effect of X2 (because spurious/indirect effect is non-zero and in same direction as direct effect)
+
+-------------------------------------------------------------------------------
+
+## Example 2: Suppression
+
+Negatively correlated predictors with positive effects on y
+
+- Study hours (x1)
+- Social confidence (x2)
+- predict academic performance (y)
+
+```{r}
+#| code-fold: true
+
+mu <- c(0, 0, 10)
+sigma <- matrix(c(1, -0.4, 0.6,
+                  -0.4, 1, 0.3,
+                  0.6, 0.3, 1), nrow = 3)
+
+d_mixed <- MASS::mvrnorm(n = 100, mu = mu, Sigma = sigma,
+                    empirical = TRUE)
+colnames(d_mixed) <- c("x1", "x2", "y")
+d_mixed <- as_tibble(d_mixed)
+```
+
+```{r}
+cor(d_mixed)
+```
+
+-------------------------------------------------------------------------------
+
+Overall effect of x1 on y
+```{r}
+m2_yx1 <- lm(y ~ x1, data = d_mixed)
+m2_yx1 |> tidy()
+```
+
+Overall effect of x2 on y
+```{r}
+m2_yx2 <- lm(y ~ x2, data = d_mixed) 
+m2_yx2 |> tidy()
+```
+
+Partial (direct, unique) effects of x1 and x2 on y.  NOTICE: Partial effects are BIGGER than OVERALL effects.  This is referred to as suppression.
+```{r}
+m2_yx12 <- lm(y ~ x1 + x2, data = d_mixed)
+m2_yx12 |> tidy()
+```
+
+-------------------------------------------------------------------------------
+
+## Path diagrams: X1 focus
+
+```{r}
+#| echo: false
+pd2_x1 <- ggdiagram() +
+  x1 +
+  y1 +
+  connect(x1, y1, label = 0.6, resect = 2)
+
+pd2_x2 <- ggdiagram() +
+  x2 +
+  y2 +
+  connect(x2, y2, label = 0.3, resect = 2)
+
+pd2_x12 <- ggdiagram() +
+  x1 +
+  x2 +
+  y12 +
+  connect(x1, y12, label = 0.857, resect = 2) +
+  connect(x2, y12, label = 0.643, resect = 2) +
+  ob_covariance(x1, x2, label = -0.4)
+
+cowplot::plot_grid(pd2_x1, pd2_x12, nrow = 2)
+```
+
+X1 effects on Y
+
+- Total effect of X1: 0.6
+- Direct effect of X1 on Y controlling for X2: 0.857
+- Spurious/Indirect effect of X1 on Y through X2: -0.257 (-0.4 * 0.643)
+- 0.6 = 0.857 + -0.257
+
+Direct effect of X1 > total effect of X1 (because spurious/indirect effect is non-zero and in opposite direction as direct effect)
+
+-------------------------------------------------------------------------------
+
+## Path diagrams: X2 focus
+
+```{r}
+#| echo: false
+
+cowplot::plot_grid(pd2_x2, pd2_x12, nrow = 2)
+```
+
+X2 effects on Y
+
+- Total effect of X2 on Y: 0.3
+- Direct effect of X2 on Y controlling for X1: 0.643
+- Spurious/Indirect effect of X1 on Y through X2: -0.343 (-0.4 * 0.857)
+- 0.3 = 0.643 + -0.343
+
+Direct effect of X2 > total effect of X2 (because spurious/indirect effect is non-zero and in opposite direction as direct effect)
+
+-------------------------------------------------------------------------------
+
+## Suppression
+
+Suppression exists when partial (direct, unique) predictor effects are (1) larger in magnitude or (2) opposite in sign relative to their overall effects
+
+\
+
+This occurs when the direct and indirect effects of a predictor on the outcome work in opposite directions.

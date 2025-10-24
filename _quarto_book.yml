@@ -38,3 +38,4 @@ book:
         - app3_contrasts.qmd
         - app4_logistic_se.qmd
         - app5_noise.qmd
+        - app6_suppression.qmd
