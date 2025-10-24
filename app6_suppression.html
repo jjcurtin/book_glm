@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Application Assignments – Introduction to the General Linear Model</title>
+<title>Suppression – Introduction to the General Linear Model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./web5_labs.html" rel="next">
-<link href="./web3_required_readings.html" rel="prev">
+<link href="./app5_noise.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -111,7 +144,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./web4_application_assignments.html">Application Assignments</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app1_exam_review.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app6_suppression.html">Suppression</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -164,7 +197,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./web4_application_assignments.html" class="sidebar-item-text sidebar-link active">
+  <a href="./web4_application_assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Application Assignments</span></a>
   </div>
 </li>
@@ -227,7 +260,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app6_suppression.html" class="sidebar-item-text sidebar-link">
+  <a href="./app6_suppression.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Suppression</span></a>
   </div>
 </li>
@@ -243,30 +276,22 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#week-01-due-friday-912-at-830-am" id="toc-week-01-due-friday-912-at-830-am" class="nav-link active" data-scroll-target="#week-01-due-friday-912-at-830-am">Week 01: Due Friday, 9/12 at 8:30 am</a></li>
-  <li><a href="#week-02-due-friday-0919-at-830-am" id="toc-week-02-due-friday-0919-at-830-am" class="nav-link" data-scroll-target="#week-02-due-friday-0919-at-830-am">Week 02: Due Friday, 09/19 at 8:30 am</a></li>
-  <li><a href="#week-03-due-friday-0926-at-830-am" id="toc-week-03-due-friday-0926-at-830-am" class="nav-link" data-scroll-target="#week-03-due-friday-0926-at-830-am">Week 03: Due Friday, 09/26 at 8:30 am</a></li>
-  <li><a href="#week-04-due-friday-1003-at-830-am" id="toc-week-04-due-friday-1003-at-830-am" class="nav-link" data-scroll-target="#week-04-due-friday-1003-at-830-am">Week 04: Due Friday, 10/03 at 8:30 am</a></li>
-  <li><a href="#week-05-no-application-assignment.-application-exam-week" id="toc-week-05-no-application-assignment.-application-exam-week" class="nav-link" data-scroll-target="#week-05-no-application-assignment.-application-exam-week">Week 05: No application assignment. Application exam week!</a></li>
-  <li><a href="#week-06-due-friday-1017-at-830-am" id="toc-week-06-due-friday-1017-at-830-am" class="nav-link" data-scroll-target="#week-06-due-friday-1017-at-830-am">Week 06: Due Friday, 10/17 at 8:30 am</a></li>
-  <li><a href="#week-07-due-friday-1024-at-830-am" id="toc-week-07-due-friday-1024-at-830-am" class="nav-link" data-scroll-target="#week-07-due-friday-1024-at-830-am">Week 07: Due Friday, 10/24 at 8:30 am</a></li>
-  <li><a href="#week-08-due-friday-1031-at-830-am" id="toc-week-08-due-friday-1031-at-830-am" class="nav-link" data-scroll-target="#week-08-due-friday-1031-at-830-am">Week 08: Due Friday, 10/31 at 8:30 am</a></li>
-  <li><a href="#week-09-due-friday-1107-at-830-am" id="toc-week-09-due-friday-1107-at-830-am" class="nav-link" data-scroll-target="#week-09-due-friday-1107-at-830-am">Week 09: Due Friday, 11/07 at 8:30 am</a></li>
-  <li><a href="#week-10-no-application-assignnment.-application-exam-week" id="toc-week-10-no-application-assignnment.-application-exam-week" class="nav-link" data-scroll-target="#week-10-no-application-assignnment.-application-exam-week">Week 10: No application assignnment. Application exam week!</a></li>
-  <li><a href="#week-11-due-friday-1121-at-830-am" id="toc-week-11-due-friday-1121-at-830-am" class="nav-link" data-scroll-target="#week-11-due-friday-1121-at-830-am">Week 11: Due Friday, 11/21 at 8:30 am</a></li>
-  <li><a href="#week-12-due-friday-1128-at-830-am" id="toc-week-12-due-friday-1128-at-830-am" class="nav-link" data-scroll-target="#week-12-due-friday-1128-at-830-am">Week 12: Due Friday 11/28 at 8:30 am</a></li>
-  <li><a href="#week-13-no-application-assignment.-thanksgiving-break" id="toc-week-13-no-application-assignment.-thanksgiving-break" class="nav-link" data-scroll-target="#week-13-no-application-assignment.-thanksgiving-break">Week 13: No application assignment. Thanksgiving Break</a></li>
-  <li><a href="#week-14-due-friday-1212-at-830-am" id="toc-week-14-due-friday-1212-at-830-am" class="nav-link" data-scroll-target="#week-14-due-friday-1212-at-830-am">Week 14: Due Friday 12/12 at 8:30 am</a></li>
-  <li><a href="#week-15-no-application-assignment.-application-exam-week" id="toc-week-15-no-application-assignment.-application-exam-week" class="nav-link" data-scroll-target="#week-15-no-application-assignment.-application-exam-week">Week 15: No application assignment. Application exam week!</a></li>
+  <li><a href="#example-1-no-suppression" id="toc-example-1-no-suppression" class="nav-link active" data-scroll-target="#example-1-no-suppression">Example 1: No suppression</a></li>
+  <li><a href="#path-diagrams-x1-focus" id="toc-path-diagrams-x1-focus" class="nav-link" data-scroll-target="#path-diagrams-x1-focus">Path diagrams: X1 focus</a></li>
+  <li><a href="#path-diagrams-x2-focus" id="toc-path-diagrams-x2-focus" class="nav-link" data-scroll-target="#path-diagrams-x2-focus">Path diagrams: X2 focus</a></li>
+  <li><a href="#example-2-suppression" id="toc-example-2-suppression" class="nav-link" data-scroll-target="#example-2-suppression">Example 2: Suppression</a></li>
+  <li><a href="#path-diagrams-x1-focus-1" id="toc-path-diagrams-x1-focus-1" class="nav-link" data-scroll-target="#path-diagrams-x1-focus-1">Path diagrams: X1 focus</a></li>
+  <li><a href="#path-diagrams-x2-focus-1" id="toc-path-diagrams-x2-focus-1" class="nav-link" data-scroll-target="#path-diagrams-x2-focus-1">Path diagrams: X2 focus</a></li>
+  <li><a href="#suppression" id="toc-suppression" class="nav-link" data-scroll-target="#suppression">Suppression</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/web4_application_assignments.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/app6_suppression.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app1_exam_review.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app6_suppression.html">Suppression</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Application Assignments</h1>
+<h1 class="title">Suppression</h1>
 </div>
 
 
@@ -283,107 +308,265 @@ window.Quarto = {
 </header>
 
 
-<section id="week-01-due-friday-912-at-830-am" class="level2">
-<h2 class="anchored" data-anchor-id="week-01-due-friday-912-at-830-am">Week 01: Due Friday, 9/12 at 8:30 am</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">conflicts.policy =</span> <span class="st">"depends.ok"</span>) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.1     ✔ stringr   1.5.2
+✔ ggplot2   4.0.0     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.1.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom) </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdiagram)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>path_data <span class="ot">&lt;-</span> <span class="st">"data_lecture"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_classic</span>()) </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>) <span class="co"># turns off scientific notation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<section id="example-1-no-suppression" class="level2">
+<h2 class="anchored" data-anchor-id="example-1-no-suppression">Example 1: No suppression</h2>
+<p>Generate positively correlated predictors with positive effect on y</p>
 <ul>
-<li><a href="./homework/week_01/hw_01.pdf">instructions</a></li>
-<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw_01_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw_01_key.qmd">qmd</a></li>
+<li>Study hours (x1)</li>
+<li>IQ (x2)</li>
+<li>predict academic performance (y)</li>
 </ul>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">0.4</span>, <span class="dv">1</span>, <span class="fl">0.3</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">0.6</span>, <span class="fl">0.3</span>, <span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">3</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>d_pos <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">mu =</span> mu, <span class="at">Sigma =</span> sigma,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">empirical =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(d_pos) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"x1"</span>, <span class="st">"x2"</span>, <span class="st">"y"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>d_pos <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(d_pos)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(d_pos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>    x1  x2   y
+x1 1.0 0.4 0.6
+x2 0.4 1.0 0.3
+y  0.6 0.3 1.0</code></pre>
+</div>
+</div>
+<hr>
+<p>Overall effects of x1 and x2 on y</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>m_yx1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x1, <span class="at">data =</span> d_pos)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>m_yx1 <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)   10        0.0804    124.   1.15e-109
+2 x1             0.600    0.0808      7.42 4.19e- 11</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>m_yx2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x2, <span class="at">data =</span> d_pos) </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>m_yx2 <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)     10      0.0959    104.   3.13e-102
+2 x2               0.3    0.0964      3.11 2.43e-  3</code></pre>
+</div>
+</div>
+<p>Partial (direct, unique) effects of x1 and x2 on y. NOTICE: Partial effects are SMALLER than OVERALL effects. This is typical.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>m_yx12 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data =</span> d_pos)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>m_yx12 <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)  10         0.0805   124.    1.05e-108
+2 x1            0.571     0.0883     6.47  4.01e-  9
+3 x2            0.0714    0.0883     0.809 4.21e-  1</code></pre>
+</div>
+</div>
+<hr>
 </section>
-<section id="week-02-due-friday-0919-at-830-am" class="level2">
-<h2 class="anchored" data-anchor-id="week-02-due-friday-0919-at-830-am">Week 02: Due Friday, 09/19 at 8:30 am</h2>
+<section id="path-diagrams-x1-focus" class="level2">
+<h2 class="anchored" data-anchor-id="path-diagrams-x1-focus">Path diagrams: X1 focus</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="app6_suppression_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Total effect of X1 on Y: 0.6 Direct effect of X1 on Y controlling for X2: 0.571 Spurious/Indirect effect of X1 on Y through X2: 0.029 (0.4 * 0.071)</p>
+<p>0.6 = 0.571 + 0.029</p>
+<p>Direct effect of X1 &lt; total effect of X1 (because spurious/indirect effect in non-zero and in same direction as direct effect)</p>
+<hr>
+</section>
+<section id="path-diagrams-x2-focus" class="level2">
+<h2 class="anchored" data-anchor-id="path-diagrams-x2-focus">Path diagrams: X2 focus</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="app6_suppression_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Total effect of X2 on Y: 0.3 Direct effect of X2 on Y controlling for X1: 0.071 Spurious/Indirect effect of X1 on Y through X2: 0.229 (0.4 * 0.571)</p>
+<p><br>
+</p>
+<p>0.3 = 0.071+ 0.229</p>
+<p><br>
+</p>
+<p>Direct effect of X2 &lt; total effect of X2 (because spurious/indirect effect in non-zero and in same direction as direct effect)</p>
+<hr>
+</section>
+<section id="example-2-suppression" class="level2">
+<h2 class="anchored" data-anchor-id="example-2-suppression">Example 2: Suppression</h2>
+<p>Negatively correlated predictors with positive effects on y</p>
 <ul>
-<li><a href="homework/week_02/hw_02_shell.qmd">shell</a></li>
-<li><a href="homework/data/hw_02_data.csv">data</a></li>
-<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw_02_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw_02_key.qmd">qmd</a></li>
+<li>Study hours (x1)</li>
+<li>Social confidence (x2)</li>
+<li>predict academic performance (y)</li>
 </ul>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.4</span>, <span class="fl">0.6</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                  <span class="sc">-</span><span class="fl">0.4</span>, <span class="dv">1</span>, <span class="fl">0.3</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">0.6</span>, <span class="fl">0.3</span>, <span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">3</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>d_mixed <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">mu =</span> mu, <span class="at">Sigma =</span> sigma,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">empirical =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(d_mixed) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"x1"</span>, <span class="st">"x2"</span>, <span class="st">"y"</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>d_mixed <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(d_mixed)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(d_mixed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     x1   x2   y
+x1  1.0 -0.4 0.6
+x2 -0.4  1.0 0.3
+y   0.6  0.3 1.0</code></pre>
+</div>
+</div>
+<hr>
+<p>Overall effects of x1 and x2 on y</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>m2_yx1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x1, <span class="at">data =</span> d_mixed)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>m2_yx1 <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)   10        0.0804    124.   1.15e-109
+2 x1             0.600    0.0808      7.42 4.19e- 11</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>m2_yx2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x2, <span class="at">data =</span> d_mixed) </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>m2_yx2 <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)     10      0.0959    104.   3.13e-102
+2 x2               0.3    0.0964      3.11 2.43e-  3</code></pre>
+</div>
+</div>
+<p>Partial (direct, unique) effects of x1 and x2 on y. NOTICE: Partial effects are BIGGER than OVERALL effects. This is referred to as suppression.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>m2_yx12 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data =</span> d_mixed)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>m2_yx12 <span class="sc">|&gt;</span> <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)   10        0.0547     183.  5.86e-125
+2 x1             0.857    0.0600      14.3 1.29e- 25
+3 x2             0.643    0.0600      10.7 3.71e- 18</code></pre>
+</div>
+</div>
+<hr>
 </section>
-<section id="week-03-due-friday-0926-at-830-am" class="level2">
-<h2 class="anchored" data-anchor-id="week-03-due-friday-0926-at-830-am">Week 03: Due Friday, 09/26 at 8:30 am</h2>
+<section id="path-diagrams-x1-focus-1" class="level2">
+<h2 class="anchored" data-anchor-id="path-diagrams-x1-focus-1">Path diagrams: X1 focus</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="app6_suppression_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Total effect of X1 on Y: 0.6 Direct effect of X1 on Y controlling for X2: 0.857 Spurious/Indirect effect of X1 on Y through X2: -0.257 (-0.4 * 0.643)</p>
+<p>0.6 = 0.857 + -0.257</p>
+<p>Direct effect of X1 &gt; total effect of X1 (because spurious/indirect effect in non-zero and in opposite direction as direct effect)</p>
+<hr>
+</section>
+<section id="path-diagrams-x2-focus-1" class="level2">
+<h2 class="anchored" data-anchor-id="path-diagrams-x2-focus-1">Path diagrams: X2 focus</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="app6_suppression_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Total effect of X2 on Y: 0.3 Direct effect of X2 on Y controlling for X1: 0.643 Spurious/Indirect effect of X1 on Y through X2: -0.343 (-0.4 * 0.857)</p>
+<p><br>
+</p>
+<p>0.3 = 0.643 + -0.343</p>
+<p><br>
+</p>
+<p>Direct effect of X2 &gt; total effect of X2 (because spurious/indirect effect in non-zero and in opposite direction as direct effect)</p>
+<hr>
+</section>
+<section id="suppression" class="level2">
+<h2 class="anchored" data-anchor-id="suppression">Suppression</h2>
+<p>When partial (direct, unique) predictor effects are</p>
 <ul>
-<li><a href="./homework/week_03/ggplot2_cheatsheet.pdf">ggplot cheatsheet</a></li>
-<li><a href="./homework/week_03/hw_03_shell.qmd">shell</a></li>
-<li><a href="./homework/data/hw_03_data.csv">data</a></li>
-<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw_03_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw_03_key.qmd">qmd</a></li>
+<li>larger in magnitude or</li>
+<li>opposite in sign</li>
 </ul>
-</section>
-<section id="week-04-due-friday-1003-at-830-am" class="level2">
-<h2 class="anchored" data-anchor-id="week-04-due-friday-1003-at-830-am">Week 04: Due Friday, 10/03 at 8:30 am</h2>
-<ul>
-<li><a href="./homework/week_04/hw_04_shell.qmd">shell</a></li>
-<li><a href="./homework/data/hw_04_data.csv">data</a></li>
-<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw_04_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw_04_key.qmd">qmd</a></li>
-</ul>
-</section>
-<section id="week-05-no-application-assignment.-application-exam-week" class="level2">
-<h2 class="anchored" data-anchor-id="week-05-no-application-assignment.-application-exam-week">Week 05: No application assignment. Application exam week!</h2>
-</section>
-<section id="week-06-due-friday-1017-at-830-am" class="level2">
-<h2 class="anchored" data-anchor-id="week-06-due-friday-1017-at-830-am">Week 06: Due Friday, 10/17 at 8:30 am</h2>
-<ul>
-<li><a href="./homework/week_06/hw_06_shell.qmd">shell</a></li>
-<li><a href="./homework/data/hw_06_data.csv">data</a></li>
-<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw_06_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw_06_key.qmd">qmd</a></li>
-</ul>
-</section>
-<section id="week-07-due-friday-1024-at-830-am" class="level2">
-<h2 class="anchored" data-anchor-id="week-07-due-friday-1024-at-830-am">Week 07: Due Friday, 10/24 at 8:30 am</h2>
-<ul>
-<li><a href="./homework/week_07/hw_07_shell.qmd">shell</a></li>
-<li><a href="./homework/data/hw_07_iq">iq data</a></li>
-<li><a href="./homework/data/hw_07_brain">brain data</a></li>
-<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw_07_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw_07_key.qmd">qmd</a></li>
-</ul>
-</section>
-<section id="week-08-due-friday-1031-at-830-am" class="level2">
-<h2 class="anchored" data-anchor-id="week-08-due-friday-1031-at-830-am">Week 08: Due Friday, 10/31 at 8:30 am</h2>
-<ul>
-<li><a href="./homework/week_08/hw_08_shell.qmd">shell</a></li>
-<li><a href="./homework/data/hw_08_data.csv">data</a></li>
-<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw_08_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw_08_key.qmd">qmd</a></li>
-</ul>
-</section>
-<section id="week-09-due-friday-1107-at-830-am" class="level2">
-<h2 class="anchored" data-anchor-id="week-09-due-friday-1107-at-830-am">Week 09: Due Friday, 11/07 at 8:30 am</h2>
-<ul>
-<li><a href="./homework/week_09/hw_09_shell.qmd">shell</a></li>
-<li><a href="./homework/data/hw_09_data.csv">data</a></li>
-<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw_09_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw_09_key.qmd">qmd</a></li>
-</ul>
-</section>
-<section id="week-10-no-application-assignnment.-application-exam-week" class="level2">
-<h2 class="anchored" data-anchor-id="week-10-no-application-assignnment.-application-exam-week">Week 10: No application assignnment. Application exam week!</h2>
-</section>
-<section id="week-11-due-friday-1121-at-830-am" class="level2">
-<h2 class="anchored" data-anchor-id="week-11-due-friday-1121-at-830-am">Week 11: Due Friday, 11/21 at 8:30 am</h2>
-<ul>
-<li><a href="./homework/week_11/hw_11_shell.qmd">shell</a></li>
-<li><a href="./homework/data/hw_11_data.csv">data</a></li>
-<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw_11_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw_11_key.qmd">qmd</a></li>
-</ul>
-</section>
-<section id="week-12-due-friday-1128-at-830-am" class="level2">
-<h2 class="anchored" data-anchor-id="week-12-due-friday-1128-at-830-am">Week 12: Due Friday 11/28 at 8:30 am</h2>
-<ul>
-<li><a href="./homework/week_12/hw_12_shell.qmd">shell</a></li>
-<li><a href="./homework/data/hw_12_data.csv">data</a></li>
-<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw_12_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw_12_key.qmd">qmd</a></li>
-</ul>
-</section>
-<section id="week-13-no-application-assignment.-thanksgiving-break" class="level2">
-<h2 class="anchored" data-anchor-id="week-13-no-application-assignment.-thanksgiving-break">Week 13: No application assignment. Thanksgiving Break</h2>
-</section>
-<section id="week-14-due-friday-1212-at-830-am" class="level2">
-<h2 class="anchored" data-anchor-id="week-14-due-friday-1212-at-830-am">Week 14: Due Friday 12/12 at 8:30 am</h2>
-<ul>
-<li><a href="./homework/week_14/hw_14_shell.qmd">shell</a></li>
-<li><a href="./homework/data/hw_14_glm.dat">data1</a></li>
-<li><a href="./homework/data/hw_14_three_level.dat">data2</a></li>
-<li>key: <a href="https://dionysus.psych.wisc.edu/610/homework/hw_14_key.html">html</a>; <a href="https://dionysus.psych.wisc.edu/610/homework/hw_14_key.qmd">qmd</a></li>
-</ul>
-</section>
-<section id="week-15-no-application-assignment.-application-exam-week" class="level2">
-<h2 class="anchored" data-anchor-id="week-15-no-application-assignment.-application-exam-week">Week 15: No application assignment. Application exam week!</h2>
+<p>relative to their overall effects</p>
+<p><br>
+</p>
+<p>This occurs when the direct and indirect effects of a predictor on the outcome work in opposite directions.</p>
 
 
 </section>
@@ -811,14 +994,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./web3_required_readings.html" class="pagination-link" aria-label="Readings">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Readings</span>
+      <a href="./app5_noise.html" class="pagination-link" aria-label="Simulate Noise Added to $X$ vs. $Y$">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Simulate Noise Added to <span class="math inline">\(X\)</span> vs.&nbsp;<span class="math inline">\(Y\)</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./web5_labs.html" class="pagination-link" aria-label="Lab Materials">
-        <span class="nav-page-text">Lab Materials</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -826,4 +1006,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/web4_application_assignments.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jjcurtin/book_glm/edit/main/app6_suppression.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

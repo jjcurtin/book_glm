@@ -1,0 +1,162 @@
+---
+title: "hw_08_key" 
+author: "TAs" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+
+## Part A: Reading Questions
+
+### 1. Judd, McClelland, & Ryan talk of a “paradox” in using standardized residuals to detect outliers. Describe this paradox, present what the authors recommend using to solve it, and list the three reasons they recommend this solution. 
+
+> Your answer here.
+
+
+## Part B: Data Analysis
+
+The data for this homework were adapted from a dataframe in the `car` package. You will be using the `hw_08_data.csv` data file provided to you.   
+
+Each row in the data represents a country in the United Nations (`Country`). Infant mortality (`infantMortality`) is the rate of death in infancy among live births. Per capita GDP (`ppgdp`) is a measure of a country’s wealth that takes gross domestic product (GDP) and divides it by the number of people in the country. Both GDP and per capita GDP should be positive numbers. 
+
+- `Country`: Name of the country (unique string variable)    
+- `infantMortality`: Log-transformed Infant deaths/1000 live births	(range 0.94 – 6.96)   
+- `ppgdp`: Log-transformed GDP per capita, in US dollars (range 6.84 – 16.68)   
+
+
+### 1. Explore the data! 
+
+#### a. Read in the raw data and change the variable names to snake case.
+
+```{r}
+#| message: false
+
+# set conflict policy and load packages
+
+# set theme to classic
+
+# set data path
+
+# source John's case analysis package
+
+```
+
+```{r}
+# Read in data and clean up variable names
+
+```
+
+
+#### b. Remove unrelated variables, keep only `infant_mortality`, `ppgdp`, and `country`.
+```{r}
+
+```
+
+#### c. Obtain descriptive statistics for numeric variables using `skim()` and `yank()`.
+```{r}
+
+```
+
+#### d. Create quick-and-dirty histograms of `infant_mortality` and `ppgdp`. 
+```{r}
+
+```
+
+#### e. There are two obvious outliers with implausible values on variable `infant_mortality` and `ppgdp`. Find them and assign NA to replace the implausible values.
+
+```{r}
+
+```
+
+
+### 2. Conduct the following analysis **without** case analysis.
+
+#### a.	Fit a model to predict `infant_mortality` from `ppgdp`. 
+```{r}
+
+```
+
+#### b.	Report the results in one sentence, including relevant statistics. 
+
+> Your answer here.
+
+### 3. Using the model you fit to answer question 2a, conduct a full case analysis. Specify which countried you would consider to have high leverage, to be model/regression outliers, to have excessive influence on the model as a whole, and to have excessive influence on the parameter estimate for log-transformed per capita GDP specifically.
+
+Which country has high leverage?
+
+> Your answer here.
+
+```{r}
+
+```
+
+Which country is a regression outlier?
+
+> Your answer here.
+
+```{r}
+
+```
+
+Which country has excessive influence on the model as a whole?
+
+> Your answer here.
+
+```{r}
+
+```
+
+Which country has excessive influence on the parameter estimate for log-transformed per capita GDP specifically?
+
+> Your answer here.
+
+```{r}
+
+```
+
+
+### 9. Remove outlier(s).
+
+#### a.	Remove any observations of countries which you think are outliers. 
+```{r}
+
+```
+
+#### b.	Justify why you removed the observation(s). How would it/they impact your conclusion regarding the relationship between infant mortality rate and per capita GDP, should it/they be kept in your model?
+
+> Your answer here.
+
+
+### 10. Refit the model you fit in 2a but with the outlier(s) removed. What changed in your results?
+
+```{r}
+
+```
+
+> Your answer here.
+
+
+### 11.	Make a publication-quality graph that show the effect of GDP on infant mortality, using the model you fit in question 2a.
+
+```{r}
+
+```
+
+
+### 12.	Write a short paragraph reporting these results. Explain your case analysis, and why you chose to exclude the data that you did. Finally, interpret your model using all stats in APA format (i.e., report the effect of GDP on infant mortality, the F value, degrees of freedom, a variance-based effect size, and the p value).
+
+> Your answer here.
+
+### 13. How long did this week’s homework take you? 
+
+> Your answer here.
+ 
+### 14. In prevous labs, we've completed a few group exercises. How do you feel about the group exercises? Do you feel like you're learning more or less from them? Is there anything you'd like to change about them?
+
+> Your answer here.
