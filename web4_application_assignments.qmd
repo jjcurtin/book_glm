@@ -41,9 +41,7 @@
 
 ## Week 08: Due Friday, 10/31 at 8:30 am
 
-- [shell](/homework/week_08/hw_08_shell.qmd)
-- [data](/homework/data/hw_08_data.csv)
-- key: [html](https://dionysus.psych.wisc.edu/610/homework/hw_08_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw_08_key.qmd)
+No homework this week. Happy Halloween!
 
 ## Week 09: Due Friday, 11/07 at 8:30 am
 
