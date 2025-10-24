@@ -934,7 +934,7 @@
     "href": "app6_suppression.html#path-diagrams-x1-focus",
     "title": "Suppression",
     "section": "Path diagrams: X1 focus",
-    "text": "Path diagrams: X1 focus\n\n\nCode\nx1 &lt;- ob_rectangle(width = 3, height = 1, label = \"X1\", color = \"black\",\n                   x = 0, y = 3, fill = \"lightblue\")\nx2 &lt;- ob_rectangle(width = 3, height = 1, label = \"X2\", color = \"black\",\n                   x = 0, y = -3, fill = \"lightblue\")\ny1 &lt;- ob_rectangle(width = 3, height = 1, label = \"Y\", color = \"black\",\n                   x = 6, y = 3, fill = \"lightgreen\")\ny2 &lt;- ob_rectangle(width = 3, height = 1, label = \"Y\", color = \"black\",\n                   x = 6, y = -3, fill = \"lightgreen\")\ny12 &lt;- ob_rectangle(width = 3, height = 1, label = \"Y\", color = \"black\",\n                    x = 6, y = 0, fill = \"lightgreen\") \n  \npd_x1 &lt;- ggdiagram() +\n  x1 +\n  y1 +\n  connect(x1, y1, label = 0.6, resect = 2)\n\npd_x2 &lt;- ggdiagram() +\n  x2 +\n  y2 +\n  connect(x2, y2, label = 0.3, resect = 2)\n\npd_x12 &lt;- ggdiagram() +\n  x1 +\n  x2 +\n  y12 +\n  connect(x1, y12, label = 0.571, resect = 2) +\n  connect(x2, y12, label = 0.071, resect = 2) +\n  ob_covariance(x1, x2, label = 0.4)\n\ncowplot::plot_grid(pd_x1, pd_x12, nrow = 2)\n\n\n\n\n\n\n\n\n\nX1 effects on Y\n\nTotal effect: 0.6\nDirect effect of X1 on Y controlling for X2: 0.571\nSpurious/Indirect effect of X1 on Y through X2: 0.029 (0.4 * 0.071)\n0.6 = 0.571 + 0.029\n\nDirect effect of X1 &lt; total effect of X1 (because spurious/indirect effect in non-zero and in same direction as direct effect)",
+    "text": "Path diagrams: X1 focus\n\n\nCode\nx1 &lt;- ob_rectangle(width = 3, height = 1, label = \"X1\", color = \"black\",\n                   x = 0, y = 3, fill = \"lightblue\")\nx2 &lt;- ob_rectangle(width = 3, height = 1, label = \"X2\", color = \"black\",\n                   x = 0, y = -3, fill = \"lightblue\")\ny1 &lt;- ob_rectangle(width = 3, height = 1, label = \"Y\", color = \"black\",\n                   x = 6, y = 3, fill = \"lightgreen\")\ny2 &lt;- ob_rectangle(width = 3, height = 1, label = \"Y\", color = \"black\",\n                   x = 6, y = -3, fill = \"lightgreen\")\ny12 &lt;- ob_rectangle(width = 3, height = 1, label = \"Y\", color = \"black\",\n                    x = 6, y = 0, fill = \"lightgreen\") \n  \npd_x1 &lt;- ggdiagram() +\n  x1 +\n  y1 +\n  connect(x1, y1, label = 0.6, resect = 2)\n\npd_x2 &lt;- ggdiagram() +\n  x2 +\n  y2 +\n  connect(x2, y2, label = 0.3, resect = 2)\n\npd_x12 &lt;- ggdiagram() +\n  x1 +\n  x2 +\n  y12 +\n  connect(x1, y12, label = 0.571, resect = 2) +\n  connect(x2, y12, label = 0.071, resect = 2) +\n  ob_covariance(x1, x2, label = 0.4)\n\ncowplot::plot_grid(pd_x1, pd_x12, nrow = 2)\n\n\n\n\n\n\n\n\n\nX1 effects on Y\n\nTotal effect: 0.6\nDirect effect of X1 on Y controlling for X2: 0.571\nSpurious/Indirect effect of X1 on Y through X2: 0.029 (0.4 * 0.071)\n0.6 = 0.571 + 0.029\n\nDirect effect of X1 &lt; total effect of X1 (because spurious/indirect effect is non-zero and in same direction as direct effect)",
     "crumbs": [
       "Appendices",
       "Suppression"
@@ -945,7 +945,7 @@
     "href": "app6_suppression.html#path-diagrams-x2-focus",
     "title": "Suppression",
     "section": "Path diagrams: X2 focus",
-    "text": "Path diagrams: X2 focus\n\n\n\n\n\n\n\n\n\nX2 effects on Y\n\nTotal effect of X2: 0.3\nDirect effect of X2 on Y controlling for X1: 0.071\nSpurious/Indirect effect of X1 on Y through X2: 0.229 (0.4 * 0.571)\n0.3 = 0.071+ 0.229\n\nDirect effect of X2 &lt; total effect of X2 (because spurious/indirect effect in non-zero and in same direction as direct effect)",
+    "text": "Path diagrams: X2 focus\n\n\n\n\n\n\n\n\n\nX2 effects on Y\n\nTotal effect of X2: 0.3\nDirect effect of X2 on Y controlling for X1: 0.071\nSpurious/Indirect effect of X1 on Y through X2: 0.229 (0.4 * 0.571)\n0.3 = 0.071+ 0.229\n\nDirect effect of X2 &lt; total effect of X2 (because spurious/indirect effect is non-zero and in same direction as direct effect)",
     "crumbs": [
       "Appendices",
       "Suppression"
@@ -967,7 +967,7 @@
     "href": "app6_suppression.html#path-diagrams-x1-focus-1",
     "title": "Suppression",
     "section": "Path diagrams: X1 focus",
-    "text": "Path diagrams: X1 focus\n\n\n\n\n\n\n\n\n\nX1 effects on Y\n\nTotal effect of X1: 0.6\nDirect effect of X1 on Y controlling for X2: 0.857\nSpurious/Indirect effect of X1 on Y through X2: -0.257 (-0.4 * 0.643)\n0.6 = 0.857 + -0.257\n\nDirect effect of X1 &gt; total effect of X1 (because spurious/indirect effect in non-zero and in opposite direction as direct effect)",
+    "text": "Path diagrams: X1 focus\n\n\n\n\n\n\n\n\n\nX1 effects on Y\n\nTotal effect of X1: 0.6\nDirect effect of X1 on Y controlling for X2: 0.857\nSpurious/Indirect effect of X1 on Y through X2: -0.257 (-0.4 * 0.643)\n0.6 = 0.857 + -0.257\n\nDirect effect of X1 &gt; total effect of X1 (because spurious/indirect effect is non-zero and in opposite direction as direct effect)",
     "crumbs": [
       "Appendices",
       "Suppression"
@@ -978,7 +978,7 @@
     "href": "app6_suppression.html#path-diagrams-x2-focus-1",
     "title": "Suppression",
     "section": "Path diagrams: X2 focus",
-    "text": "Path diagrams: X2 focus\n\n\n\n\n\n\n\n\n\nX2 effects on Y\n\nTotal effect of X2 on Y: 0.3\nDirect effect of X2 on Y controlling for X1: 0.643\nSpurious/Indirect effect of X1 on Y through X2: -0.343 (-0.4 * 0.857)\n0.3 = 0.643 + -0.343\n\nDirect effect of X2 &gt; total effect of X2 (because spurious/indirect effect in non-zero and in opposite direction as direct effect)",
+    "text": "Path diagrams: X2 focus\n\n\n\n\n\n\n\n\n\nX2 effects on Y\n\nTotal effect of X2 on Y: 0.3\nDirect effect of X2 on Y controlling for X1: 0.643\nSpurious/Indirect effect of X1 on Y through X2: -0.343 (-0.4 * 0.857)\n0.3 = 0.643 + -0.343\n\nDirect effect of X2 &gt; total effect of X2 (because spurious/indirect effect is non-zero and in opposite direction as direct effect)",
     "crumbs": [
       "Appendices",
       "Suppression"

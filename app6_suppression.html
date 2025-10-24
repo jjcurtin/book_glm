@@ -313,7 +313,7 @@ window.Quarto = {
 <li>We use two related examples to illustrate when suppression will not vs.&nbsp;will occur.</li>
 <li>In both examples, we have two predictors (X1 and X2) that positively predict an outcome (Y).</li>
 <li>In the first example, the predictors are positively correlated. In the second example, the predictors are negatively correlated.</li>
-<li>We have folded the code to avoid having it distract from the main points. However, you may want to look at the code to see how the data were generated and also how we use <code>ggdiagram</code> to create the path diagrams.</li>
+<li>We have folded some of the code to avoid having it distract from the main points. However, you may want to look at the code to see how the data were generated and also how we use <code>ggdiagram</code> to create the path diagrams.</li>
 </ul>
 <hr>
 <section id="example-1-no-suppression" class="level2">
@@ -451,7 +451,7 @@ y  0.6 0.3 1.0</code></pre>
 <li>Spurious/Indirect effect of X1 on Y through X2: 0.029 (0.4 * 0.071)</li>
 <li>0.6 = 0.571 + 0.029</li>
 </ul>
-<p>Direct effect of X1 &lt; total effect of X1 (because spurious/indirect effect in non-zero and in same direction as direct effect)</p>
+<p>Direct effect of X1 &lt; total effect of X1 (because spurious/indirect effect is non-zero and in same direction as direct effect)</p>
 <hr>
 </section>
 <section id="path-diagrams-x2-focus" class="level2">
@@ -472,7 +472,7 @@ y  0.6 0.3 1.0</code></pre>
 <li>Spurious/Indirect effect of X1 on Y through X2: 0.229 (0.4 * 0.571)</li>
 <li>0.3 = 0.071+ 0.229</li>
 </ul>
-<p>Direct effect of X2 &lt; total effect of X2 (because spurious/indirect effect in non-zero and in same direction as direct effect)</p>
+<p>Direct effect of X2 &lt; total effect of X2 (because spurious/indirect effect is non-zero and in same direction as direct effect)</p>
 <hr>
 </section>
 <section id="example-2-suppression" class="level2">
@@ -576,7 +576,7 @@ y   0.6  0.3 1.0</code></pre>
 <li>Spurious/Indirect effect of X1 on Y through X2: -0.257 (-0.4 * 0.643)</li>
 <li>0.6 = 0.857 + -0.257</li>
 </ul>
-<p>Direct effect of X1 &gt; total effect of X1 (because spurious/indirect effect in non-zero and in opposite direction as direct effect)</p>
+<p>Direct effect of X1 &gt; total effect of X1 (because spurious/indirect effect is non-zero and in opposite direction as direct effect)</p>
 <hr>
 </section>
 <section id="path-diagrams-x2-focus-1" class="level2">
@@ -597,7 +597,7 @@ y   0.6  0.3 1.0</code></pre>
 <li>Spurious/Indirect effect of X1 on Y through X2: -0.343 (-0.4 * 0.857)</li>
 <li>0.3 = 0.643 + -0.343</li>
 </ul>
-<p>Direct effect of X2 &gt; total effect of X2 (because spurious/indirect effect in non-zero and in opposite direction as direct effect)</p>
+<p>Direct effect of X2 &gt; total effect of X2 (because spurious/indirect effect is non-zero and in opposite direction as direct effect)</p>
 <hr>
 </section>
 <section id="suppression" class="level2">
