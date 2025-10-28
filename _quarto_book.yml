@@ -35,7 +35,7 @@ book:
       chapters:
         - app1_exam_review.qmd
         - app2_terminology.qmd
-        - app3_contrasts.qmd
-        - app4_logistic_se.qmd
+        - app3_suppression.qmd
+        - app4_contrasts.qmd
         - app5_noise.qmd
-        - app6_suppression.qmd
+        - app6_logistic_se.qmd
