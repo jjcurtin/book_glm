@@ -1,5 +1,5 @@
 ---
-title: "Lab 9 TA Script" 
+title: "Lab 9 Student Shell" 
 author: "TAs" 
 date: "`r lubridate::today()`"
 format: 
@@ -11,14 +11,23 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Conceptual exercise
+## Housekeeping!
 
-**What are two methods to inspect the influence of individual data points on the model? How are these two methods different?**
+Welcome to Week 9!
 
+**Let's take a moment to pause and review any questions from lecture this past week.**
 
+## Conceptual Question
 
-## Setup 
+### What does it mean to have "redundancy between predictors" in multiple regression? What is the consequence of having redundant predictors? Answer in 2-3 sentences.
 
+> Your answer here.
+
+## Case Analysis 
+
+We're going to work with the `Prestige` data set again, but we've modified it, so download the file from the course website.    
+
+Set up your script and import the data. 
 ```{r}
 #| message: false
 
@@ -27,333 +36,443 @@ library(tidyverse)
 library(skimr)
 library(broom)
 
-# exclude some functions that conflict with tidyverse
-library(car, exclude = c("recode", "some")) theme_set(theme_classic()) 
+theme_set(theme_classic()) 
 
 path_data <- "lab/data"
 ```
 
-
-## Read in data
-
-We are going to return to the modified `prestige` dataset from previous labs. Load `lab_09_data.csv`.
-
 ```{r}
 d <- read_csv(here::here(path_data, "lab_09_data.csv"),
-              show_col_types = FALSE) |>
+              show_col_types = FALSE) |> 
   glimpse()
-
-d |> 
-  skim(-c(sub_id, name))
 ```
 
 
-## Data Cleaning
-
-Remember we had a value in `education` that was clearly a data entry error. So, let's remove it! Get descriptives on `education` variable after removing the error.   
+When you import these data, you'll see a column name called `sub_id`. Rename this to something more sensible (`job_id`), given that the observations aren't subjects, but rather occupations. 
 ```{r}
 d <- d |> 
-
   
-d |> 
-  skim(education) |> 
-  focus(n_missing, complete_rate, mean = numeric.mean, sd = numeric.sd, 
-        min = numeric.p0, median = numeric.p50, max = numeric.p100) |> 
-  yank("numeric")
 ```
 
-Say we are (again) interested in modeling `income ~ education + women`
-Lets fit the model.
-```{r}
-m_1 <- 
 
-tidy(m_1)
-```
+### Univariate Statistics
 
-In lab 07 we also had identified two observations with high influence: physicians and general managers. These observations exhibited extreme values in `income`. 
-```{r}
-d |> 
-
-```
-
-Our recent analysis reveals that both income and the percentage of women follow non-normal distributions. 
-
-```{r}
-hist(d$income)
-hist(d$women)
-```
-
-Given this, we may question whether the anomalies in our two problematic cases arise not from peculiar instances but rather from the inherent nature of our variables' distributions, potentially leading to systematic violations of the assumptions underlying the General Linear Model's expectations for our data structure.   
-
-### Model Assumptions
-
-Quick review from lecture!   
-
-**What are the 5 primary assumptions the GLM makes about the structure of the data?**   
-
-
-
-
-
-
-
-
-**Violations of assumptions can cause...?**   
-
-
-
-
-
-
-#### Assumption 1: Exact X 
-
-No measurement error in the predictors is always violated to some extent, but essentially demands that you use the most reliable measures at your disposal.  
-
-**What are the consequences of non-exact X?**
-
-
-
-
-#### Assumption 2: Independence
-
-Non-independence of residuals are usually due to data structure (e.g., repeated measures of the same individual; twins and families) and cannot be "made independent" once the data is collected. However, non-independence can be explicitly addressed by modeling approaches (e.g., mixed effect models, which you will learn in PSYCH 710).   
-
-**What are the consequences of non-independence in residuals that are not correctly modeled?**
-
-
-
-One extreme example of non-independence is when the data contains duplicates (i.e., same data points included multiple times). 
-
-For example, here we manually introduce non-independence by manipulating the Prestige data into a dataset of the same sample size but with some of its samples as duplicates (you should never do this in data analysis). Therefore, the residuals for pairs of duplicates will be correlated at r = 1.0. 
-
-```{r}
-set.seed(123)
-d_nonind <- d |> slice_sample(prop = 1, replace = TRUE)
-
-lm(income ~ education + women, data = d) |> tidy()
-lm(income ~ education + women, data = d_nonind) |> tidy()
-```
-
-Note that as a consequence of these duplicates, the standard errors of parameter estimates decreased, and the p value also decreased. This is not because the effects were more statistically significant. Rather, it is because the way we calculated error is no longer a fair way to characterize model and error variances when the residuals are correlated/non-independent (due to wrong degrees of freedom). Note that while the statistical inference about the parameters is invalidated, the model predictions (i.e., predicted values for Y at different levels of X) may still be appropriate.
-
-#### Assumption 3: Normality
-
-**Is a non-normally distributed predictor problematic? What about a non-normal outcome variable?**
-
-
-
-Plot a density plot of the residuals of our model compared to a normal distribution.   
-
-```{r}
-ggplot() +
-  geom_density(aes(x = value), data = enframe(rstudent(m_1), name = NULL)) +
-  labs(title = "Density Plot to Assess Normality of Residuals",
-       x = "Studentized Residual") +
-  geom_line(aes(x = x, y = y), data = tibble(x = seq(-4, 4, length.out = 100),
-                                      y = dnorm(seq(-4, 4, length.out = 100), 
-                                      mean=0, sd=sd(rstudent(m_1)))), 
-            linetype = "dashed", color = "blue")
-```
-
-**What does the blue dashed line represent?**
-
-
-**Are our residuals in `m_1` normally distributed?**
-
-
-
-Now we will create a quantile-comparison (Q-Q) plot. A Q-Q plot compares two distributions against each other to see if they’re similar. GLMs assume that residuals are normally distributed, so we compare the actual distribution of model residuals to the theoretical normal distribution. The closer the two distributions are, the more normal the residuals are. Use the function in the car package
+Let's start with some basic data exploration. This should be the first step in any analysis.
 ```{r}
 
 ```
 
+`skim()` provides a lot of useful information, but sometimes we want to focus on just a few key statistics. `skim()` can be highly customizable to return just what you want. Let's see a few examples here!
 
-**What's on the X-axis in this plot?**   
+Using the `yank()` function from `skimr`, we can pull out specific statistics. This function separates a big skim dataframe into smaller data frames by type. For example, let's say if we only want the subtable of numeric variables.
 
+**Get descriptives again for just `education`**
 
-**What about the Y-axis?**    
-
-
-**What are we looking for?**    
-
-
-**How are we doing for normality of errors?**   
-
-
-**What is the problem?**    
-
-
-
-***ASIDE: The logic of the QQ plot***    
-These plots are difficult to understand. You should think of the X-axis as representing "where I'm looking for it" and the Y-axis as representing "where I found it."    
-
-For example, look at the lower end of the X-axis on this QQ plot. We're going to look for the error we'd expect to occur at a t-value of 2.25 (2.25 on X-axis). As we move up the Y-axis, we encounter that error at something more like 4.5. Put differently, this case is farther from the center of the data (i.e., t of 0) than we would expect it to be if the distribution of errors were normal. Because we're encountering data farther from the center of the distribution than we should be, we can infer that we have thin tails, which indeed seems to be the case based on our density plot figure.    
-
-For another example, say we want to look for the error we'd expect to occur at a t-value of 1 (1 on the X-axis). Moving up the Y-axis, we "find" this error at about 0.5, closer to the center of the distribution than we'd expect. Because we found this error closer to a t of 0 than we'd expect in a perfectly normal distribution, we can infer we have a steep, skinny peak of our error distribution, which indeed we do! I encourage practicing this!    
-
-
-**So, should we be concerned at this point?** 
-
-
-
-#### Assumption 4: Constant Variance
-
-The constant variance assumption implies that, for any given predicted value of the dependent variable, the residuals will have the same variance.    
-
-One easy way to assess the viability of this assumption is to plot the predicted values against the observed values and assess visually whether the residuals have more scatter at some predicted values than at others.   
-```{r}
-tibble(x = fitted.values(m_1),
-       y = rstudent(m_1)) |> 
-  ggplot(aes(x = x, y = y)) +
-  geom_point(alpha = .6) +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "blue", linewidth = 1) +
-  labs(title = "Studentized Residuals vs. Fitted Values",
-       x = "Fitted Values",
-       y = "Studentized Residuals")
-```
-
-We can also generate a spread-level plot to assess the constant variance assumption. This plot shows the absolute residuals against the predicted values.
-```{r}
-#| warning: false
-
-spreadLevelPlot(m_1)
-```
-
-***ASIDE: the logic of these plots***      
-These two plots differ in 2 important ways.   
-
-1. The Y-axis on the spread-level plot has the absolute value of the studentized residuals. (Imagine you took the first plot and folded it bottom to top along the y = 0 line. If the variance is not constant, the regression line plotted on the spread-level plot will deviate more from a slope of 0.   
-2. Look at the tick marks on the Y-axes of these plots. The first plot is linear, while the spread-level plot is logarithmic. This is why the two don't match up perfectly based on the "folding" idea.   
-
-**What are we looking for here?**   
-
-
-
-
-
-**So... are we concerned now?**     
-
-
-
-#### Assumption 5: Linearity
-
-If the modeled relationships are linear, then the slope of the best fitting line should be approximately the same no matter what sub-sample of the data you consider. Imagine sorting your dataframe on one of your predictor variables, and sliding a window down the dataframe and fitting little models for each window. If the relationship is linear, the solutions for the sub models should be very similar, deviating from each other randomly. On the other hand, if the relationship of X and Y is non-linear, then the estimate of the slope will differ systematically at different points along X.   
-
-`car::crPlots()` will plot such lines (summarized in pink), overlayed on the residual scores and in addition to the best linear fit (blue-dashed).    
 ```{r}
 
 ```
 
-This plot is referred to as a component+residual/partial residual plots. It shows you the residuals from the full model, plotted against the effect of a particular predictor.
-
-If the relationship isn’t a line, then we are concerned about the assumption of linearity of predictors (i.e., their relationship with Y). All that detail aside, if the dotted blue line and the pink line look similar, then the relation between that X and Y is relatively linear. Otherwise, there may be a non-linear relationship.
-
-So, we're actually doing pretty well in terms of the linearity assumption. There aren't any places where the blue and pink lines radically diverge.
-
-
-### So... what next?
-
-
-
-
-## Finally, unrelated to model assumptions...
-
-At the end of today, we would like to take a minute to review one special scenario we might see in multiple regression: suppression. 
-
-Back then we dropped all occupations that were professional jobs.
-
-```{r}
-d_prof_rm <- d |> filter(type != "prof")
-```
-
-
-Remember when we predicted `income` from `education` alone in the prestige dataset, the regression coefficient for `education` was b = 234 And the R-squared associated with education was 3.93%.
-
-```{r}
-m_0_1 <- lm(income ~ education, data = d_prof_rm)
-broom::tidy(m_0_1)
-broom::glance(m_0_1)
-```
-
-
-When we predicted `income` from `women` alone, the regression coefficient for `women` was b = -39.9. And the R-squared associated with education was 43.5%.
-
-```{r}
-m_0_2 <- lm(income ~ women, data = d_prof_rm)
-broom::tidy(m_0_2)
-broom::glance(m_0_2)
-```
-
-
-And when we predicted `income` from both `education` and `women`, the regression coefficient for `education` became b = 533, and the effect of `women` became b = -48.4. The model R-squared is 62.1%.
-
-```{r}
-m_0_3 <- lm(income ~ education + women, data = d_prof_rm)
-broom::tidy(m_0_3)
-broom::glance(m_0_3)
-
-```
-
-**What is the interpretation of model R-squared? Delta R-squared?**
-
-
-
-**What is the delta R squared for `education` and `women`?**
-
-
-
-**What do you notice about these delta R squared?**
-
-
-This is the case where we observe a suppression effect. 
-**Let's look at the correlations among the three variables. What do you notice?**
-
-
-```{r}
-d |> select(income, education, women) |> 
-  cor(use = "pairwise") |> 
-  round(2)
-```
-
-**TA draw a path diagram on board**
-
-In this scenario, the conditional effect of `education` is stronger than its unconditional effect, because we statistically controlled for variable `women`, which correlates positively with `education` but associate with `income` in the opposite direction.
-
-This is the special case when the variance explained by individual predictors have negative covariance and when the effect size estimates like delta-R-squared may sum up larger than the model R-squared.
-
-
-## ggplot Exercise Time!
-
-Create a model where you predict `income` from `prestige` and `type` using `d_prof_rm`.
-```{r}
-
-
-```
-
-
-Create a publication quality plot with the below specifications:
-1. Show education on the x axis and income on the y axis.
-2. Plot raw data points.
-3. Show two regression lines in the same panel. One should represent the effect of `education` on `income`, holding `type` constant at white collar. The other should represent the same effect but holding `type` constant at blue collar.
-4. Show respective standard error bands for those regression lines.
-5. Include meaning labels for the axes and other aesthetic components. 
+We can also remove some stats that we don't want to see at this time. In earlier homeworks, we have used `skim_without_charts()`, but here we can customize even further. Let's say we only want to see the missing, mean, sd, min, and max for our numeric variables. We first define a function using the `skim_with()` function, then we apply it to our data.
 
 ```{r}
 
+```
+
+Now let's focus on just the `education` variable.
+
+```{r}
+
+```
+
+**Do the means look appropriate?**    
+
+> Your answer here.
+
+**Do the SDs make sense?**    
+
+> Your answer here.
+
+**Is this the range we would expect for these variables?**     
+ 
+> Your answer here.
+
+We can create a scatterplot with `education` on the y-axis and `job_id` on the x-axis. We see that one case is far away from all others.
+```{r}
+
+```
+
+**Identify which case has this anomalous value (-10.7)**
+```{r}
+
+```
+
+**What do you think we should do with this case?**    
+There may not be a single correct option. We could:
+
+> Your answer here.
+
+Let's first check the code book to confirm that -10.7 is not a valid value for `education`. 
+```{r}
+#| eval: false
+
+```
+
+This tells us that `education` represents average years of education. Therefore, the minimum possible value cannot be below 0.   
+
+**Change this value to `NA`**   
+```{r}
+
+```
+
+**Get descriptives again for just `education`**
+```{r}
+
+```
+
+### More Quick-and-Dirty Plots
+
+Let's say that we're interested in predicting income from years of education and percent women in that occupation, with education as our focal predictor.    
+
+Let's plot education, income, and percent women, the variables we'll be working with, one at a time with each of the variables on the y-axis and `job_id` on the x-axis.
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+**Should we remove the "outliers" here?**   
+
+> Your answer here.
 
 
+`CHECKPOINT`
 
+**Practice creating a few exploratory histogram and density plots from the lecture.**
+
+First, we're going to create another function together. You can add this to your collection of functions (base R script) so that you can source it in for future assignments (or in your own work!).
+```{r}
+plot_density <- function(data, var_name) {
+  data |> 
+  ggplot(aes(x = !!sym(var_name))) +
+  geom_histogram(aes(y = after_stat(density)),
+                 color = "black", fill = "light grey", bins = 10) +
+  geom_density() +
+  geom_rug(color = "red")
+}
+```
+
+Let's unpack a few of the things we are doing in this plotting function that you might not have seen before.
+
+`!!sym(var_name)` takes in the string we are passing in as our column name and converts it to a symbol. A symbol is something that points to or represents other data. Specifically, R object names when you call the objects are good examples of symbols. An when tidyverse functions deal with dataframes, columns are treated as R objects. In this case, the "other data" is the column represented by `var_name`. The `!!` operator removes the quotes from the string we are passing in, then `sym()` evaluates the string as a column. `sym()` tells R that the string we are passing in to this function is not just any string, but actually *symbolizes* something in our dataset.
+
+`after_stat()` specifies how we want our data to be scaled. In this case, we are saying that we want the data to be scaled to the density plot that we will be overlaying on the histogram, and not the histogram. Remember that a histogram shows us count data (frequency of data), whereas a density plot shows us probability densities (proportion of data). Specifying this scale forces our histogram bars to also display the proportion (instead of the frequency) of data. It's a neat little trick so we can overlay these two types of plots!
+
+`geom_rug()` is another geom that helps us visualize the distribution of our data. Each vertical line represents one observation.
+
+Let's try out this new function across our income, education, and percentage of women variables.
+```{r}
 
 ```
 
 
-**Where can you find the intercept on the plot?**
+**Which of these variables seems like it might have some outliers? How do you know? Create a box plot for income to look at our potential outliers a bit more closely.**
+```{r}
+
+```
+
+These black dots are considered outliers because they are above the "maximum" value in our data *excluding* potential outliers. This is determined by adding the 75th percentile of our inter-quartile range (IQR) to 1.5*IQR. It's not important that you memorize all of these details, but just know that the black dots are values identified as being above the vast majority of all points. You can check out this nifty "anatomy of a boxplot" here: https://www.data-to-viz.com/caveat/boxplot.html.
 
 
-**Where can you find the regression coefficient for `prestige` on the plot?**
+### Multi-Variate Statistics
+
+Let's determine how our variables `education`, `income`, and `women` are correlated.
+```{r}
+
+```
+
+Next, let's plot the relationship between our two predictor variables (`education` and `women`) and our outcome variable (`income`). We are going to label the points with `job_id` as we look for highly influential points.    
+
+These graphs shows us that we have some high leverage points and regression outliers.
+
+First, let's plot the relationship between education and income. Let's filter out the missing value we introduced, and also add in a line displaying the mean to this plot for our own reference when trying to determine if any points have leverage!
+```{r}
+
+```
+
+`geom_text()` is the geom here that is labeling each individual observation with its corresponding job_id!
+
+**Which appear to be both high leverage and regression outliers?**    
+
+> Your answer here.
+
+**Which occupations appear to be high leverage but not regression outliers?**    
+
+> Your answer here.
+
+**Which appear to be regression outliers but not high leverage?**     
+
+> Your answer here.
 
 
-**Where can you find the regression coefficient for `type` on the plot?**
+Now, let's look at the relationship between percentage of women and income.
+```{r}
+
+```
+
+**Which appear to be both high leverage and regression outliers?**    
+
+> Your answer here.
+
+**Which occupations appear to be high leverage but not regression outliers?**    
+
+> Your answer here.
+
+**Which appear to be regression outliers but not high leverage?**     
+
+> Your answer here.
+
+Note that the disctribution of women is pretty skewed. The extreme points on the right end of the distribution have much higher leverage than the extreme points on the left end of the distribution.
+
+**Get the occupation types for `job_id` 2, 17, 24, 26**   
+```{r}
+
+```
+
+Remember that we only look at the relationship between our outcome and only one predictor at a time in these bivariate plots. When you have more than one predictors in your model, something might not look like a high leverage point might be high leverage point even not showing on a bivariate plot.
+
+It's always important to visually inspect your data, but before taking action we must look at some diagnostic functions. We will do this next.   
 
 
-## Questions?
+### Diagnostic Functions
+
+Remember, we're interested in predicting `income` from `education` and `women`. Let's fit our model:
+```{r}
+
+```
+
+**What did we find?**   
+
+> Your answer here.
+
+Next, let's read in the `case_analysis` package introduced in lecture. Go ahead and source this package from John's github.
+```{r}
+devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/case_analysis.R?raw=true")
+```
+
+#### Leverage
+
+Leverage is indicated by hat values.   
+
+**What is the hat value an index of?**    
+It's how far a given value on a predictor variable is from the centroid of the predictor variables.   
+
+
+**Create a histogram of Hat values for our model using `plot_leverage()`.**    
+```{r}
+
+```
+
+The yellow line also marks a potential cutoff for high leverage points (`r 2*mean(hatvalues(m_1))`). We can easily identify which rows are above this cutoff using the following code. However, a good rule of thumb in identifying high leverage point is to look for observations on the graph that are separated by a gap in the histogram buckets. 
+```{r}
+cutoff <- 
+
+```
+
+
+**What occupation does this row correspond to?**   
+
+> Your answer here.
+
+```{r}
+
+```
+
+**Why might this job have high leverage?**    
+They may have low education and a high percentage of women.    
+
+**So, are we ready to remove this occupation from our data?**    
+
+> Your answer here.
+
+
+#### Regression Outliers
+
+Regression outliers have large residuals. A regression outlier is an observation that is not adequately fit by the regression model (i.e., falls very far from the prediction line)  
+
+**What is the residual an index of?**   
+It indicates how much a given observation deviates from the model's prediction.   
+
+NOTE: There are multiple quantitative indicators to identify regression outliers including raw residuals (e.g., studentized residuals). We will use studentized residuals in this case.
+
+**Create a histogram of residuals for our model using `plot_residuals()`.**    
+```{r}
+
+```
+
+**Visually looking at this plot. What points do you think are regression outliers?**    
+> Your answer here.  
+
+**What type of occupations do these points correspond to?**    
+
+> Your answer here.
+
+```{r}
+
+```
+
+We can also get regression outliers using the following code.   
+```{r}
+
+```
+
+**What does it mean for these studentized residuals to be large? How could they affect our model estimates?**  
+It means the observation differs significantly from the predictions made by our model. Regression outliers can (but don't always) change our parameter estimates, but they nearly always inflate the standard error of our parameter estimates.    
+
+The next step is to look the other variables for these regression outliers. Both occupations appear to have very high incomes as compared to the rest of the occupations. 
+```{r}
+
+```
+ 
+
+**Should we remove these observations from our data?**     
+
+> Your answer here.
+
+
+#### Influence: Cook's D
+
+An observation is “influential" if it substantially alters the fitted regression model (i.e., the coefficients and/or intercept). Two commonly used assessment methods include Cook's D and df betas.
+
+**What two characteristics does Cook's D take into account?**    
+Leverage and studentized residuals. Observations with a large Cook's D are often extreme on both of these.    
+
+**Is it necessary for an influential point to have high leverage and a large studentized residual?**   
+Not necessarily, but it will have to be high on at least one of these dimensions. Remember, Cook's D is basically indicating how much our parameter estimates would change if we removed a given observation.
+
+**Create a histogram of Cook's D values for our model using `plot_cooks()`.**    
+```{r}
+
+```
+
+
+**Which points visually appear to have problematic Cook's D values?**    
+What's most important is whether or not points are part of our distribution of Cook's distance. There is a gap in the histogram buckets after about 0.1.   
+
+**Pull out these observations**    
+```{r}
+
+```
+
+Again, we are seeing general managers and physicians coming up as potentially problematic observations.     
+
+
+
+**But what are we missing here?**    
+
+> Your answer here.
+
+
+#### Influence: df betas
+
+DF Betas calculate influence on a given parameter. It helps us sort out which points affect which parameters.    
+
+**Use `plot_dfbetas()` to create a histogram of df beta values for the intercept (`(Intercept)`).**
+```{r}
+
+```
+
+**What do you notice?**   
+We have one point that is disconnected from the rest of the distribution.
+```{r}
+
+```
+
+> Your answer here. 
+
+
+**Use `plot_dfbeta()` to create a histogram of df beta values for our focal predictor (`education`).**
+
+```{r}
+
+```
+
+```{r}
+
+```
+ 
+
+Next, let's look at our covariate (`women`).
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
+
+### So Now What?
+
+Through our analyses, we found physicians and general managers are ill-fit by our model, have extreme values on the outcome variable (income), and have a large influence on our parameter estimates. Furthermore, including them inflates the standard error of our parameter estimates. We also identified one case that has high leverage (sewing operators) but is well-fit by our model.
+
+
+### Key Questions
+
+**1. Can we explain this result from some kind of error in coding? Can we correct the error(s)?**    
+
+> Your answer here.
+
+**2. What is the impact of removing the cases?**    
+```{r}
+
+```
+
+> Your answer here.
+
+**3. What changes? Conclusions? Precision?**     
+
+> Your answer here.  
+
+During pre-registration, it's important to specify how you will deal with outliers. Here are some options:
+
+- We can simply drop them.
+
+- We can bring them to the fence (i.e., change the outcome value to be the largest/ non-outlying value). For example, if we wanted to bring the income values of these two occupations to the fence, we would first need to determine what the largest income value is that is not considered an outlier.
+ 
+----
+
+Here are a couple questions you might ask before you start checking for outliers: 
+
+- What would we consider too extreme of an observation on a predictor variable? 
+You should try to answer this question in terms of practical raw values as opposed to hat values (e.g., if someone reports they are over 150 years old on an online survey, they should be removed from our data). 
+
+- Can we identify some other variable that might contribute to outliers? 
+One example is recording a subject's time spent completing a questionnaire and setting cutoff points for what 'acceptable' times are based on pilot-testing (e.g., throwing out anyone who completes the survey in under 2 mins). 
+
+- What is the process we'll use to identify outliers, and what will we do with them when we find them? 
+It's very difficult to accuse you of p-hacking if you can point to your pre-registration and show that all of the actions you took to deal with outliers are wholly consistent with what you said you were going to do. 
+
+Once you have collected your data and identified outliers, there are a few more questions you might ask about these observations that can help give justification to your decision to exclude them: 
+
+- Was there human error in entering this value? 
+In certain cases, you can go back to the source and see whether this observation is simply due to data entry error. We love situations like this (because they're pretty easy to fix)!!! 
+
+- Was anything about that participant's experimental session weird? 
+Maybe the power went out, they got a phone call, or they fell asleep. If this is a relevant concern, someone should keep a notebook where they jot down observations of strange occurrences when running a given participant. 
+
+- Does it make sense that their value is extreme? 
+If we ran the Prestige study in America in 2023, we would have an even more skewed income graph: people in top positions are paid astronomically more than working-class people. We might be able to tell a compelling story about why these extreme observations have so much influence, and our (theory-based) argument could give us reason to exclude them.  
+
+- Based on the claims we're trying to make with our research, can we exclude these observations? 
+Removing extreme observations can, in certain cases, affect the external validity of our research. For example, if we exclude top earners when we analyze the Prestige data, we can't claim that our conclusions apply to those professions. However, we will have more precise parameter estimates for the large majority of occupations we've included in our sample. We have to note these shortcomings by being precise with our conclusions. 
+
+
