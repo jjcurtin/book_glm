@@ -115,7 +115,7 @@ In simple, bivariate regression, how will reducing reliability affect the regres
 [In multiple predictor models, the bias can be either positive or negative based on the nature of the correlations among the predictors. **Use reliable variables!**.]{style="color:blue;"}
 
 ```{r}
-#| include: false
+#| echo: false
 
 plot_exact + plot_y_noise + plot_x_noise
 ```
@@ -279,6 +279,9 @@ ggplot() +
 ### Quantile-Quantile Plot
 Better still We can use `qqplot()` from the `car` package to assess normality of residuals.
 ```{r}
+#| out-width: 5in 
+#| out-height: auto
+
 car::qqPlot(m_2, id = FALSE, simulate = TRUE,
             main = "QQ Plot to Assess Normality", 
             ylab = "Studentized Residuals")
@@ -387,6 +390,8 @@ start <- 7
 ```
 
 ```{r}
+#| out-width: 4in 
+#| out-height: auto
 #| code-fold: true
 
 tibble(x = log(predict(m_2) + start), # shift to positive values
@@ -485,6 +490,9 @@ If Linearity assumption is not met, coefficients are biased.
 - Can include factors but can not include interactions with factors. Code regressors manually. 
 
 ```{r}
+#| out-width: 5in 
+#| out-height: auto
+
 car::crPlots(m_2, ask = FALSE)
 ```
 
