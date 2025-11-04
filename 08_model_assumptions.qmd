@@ -2,7 +2,6 @@
 editor_options:  
   chunk_output_type: console
 --- 
- 
 
 # Unit 8: Dealing with Messy Data II - Model Assumptions
 
@@ -109,17 +108,25 @@ Violations are caused by problems with reliability of measurement of your predic
 In simple, bivariate regression, how will reducing reliability affect the regression model?
 :::
 
-:::{.fragment}
+--------------------------------------------------------------------------------
+
+::: {.callout-important}
+# Question
+
+In simple, bivariate regression, how will reducing reliability affect the regression model?
+:::
+
 [It will reduce $b_1$. We will underestimate the strength of relationship between $X$ and $Y$.]{style="color:blue;"}    
 
 [In multiple predictor models, the bias can be either positive or negative based on the nature of the correlations among the predictors. **Use reliable variables!**.]{style="color:blue;"}
 
 ```{r}
+#| out-height: 3.5in
+#| out-width: auto
 #| echo: false
 
 plot_exact + plot_y_noise + plot_x_noise
 ```
-:::
 
 --------------------------------------------------------------------------------
 
@@ -260,8 +267,8 @@ m_2 <- lm(fps ~ bac + ta + sex_c, data = data_rm_outliers)
 
 We can use a density plot to plot the model's residuals against a normal distribution.   
 ```{r}
-#| out-width: 6in 
-#| out-height: auto
+#| out-height: 3in 
+#| out-width: auto
 
 ggplot() +
   geom_density(aes(x = value), data = enframe(rstudent(m_2), name = NULL)) +
@@ -279,8 +286,8 @@ ggplot() +
 ### Quantile-Quantile Plot
 Better still We can use `qqplot()` from the `car` package to assess normality of residuals.
 ```{r}
-#| out-width: 5in 
-#| out-height: auto
+#| out-height: 4in  
+#| out-width: auto 
 
 car::qqPlot(m_2, id = FALSE, simulate = TRUE,
             main = "QQ Plot to Assess Normality", 
@@ -390,8 +397,8 @@ start <- 7
 ```
 
 ```{r}
-#| out-width: 4in 
-#| out-height: auto
+#| out-height: 3in  
+#| out-width: auto 
 #| code-fold: true
 
 tibble(x = log(predict(m_2) + start), # shift to positive values
@@ -490,8 +497,8 @@ If Linearity assumption is not met, coefficients are biased.
 - Can include factors but can not include interactions with factors. Code regressors manually. 
 
 ```{r}
-#| out-width: 5in 
-#| out-height: auto
+#| out-height: 4in 
+#| out-width: auto 
 
 car::crPlots(m_2, ask = FALSE)
 ```
