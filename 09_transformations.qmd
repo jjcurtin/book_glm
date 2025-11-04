@@ -94,7 +94,7 @@ Descending the *ladder* of powers and roots from $p = 1$ (i.e., no transformatio
 
 Ascending the ladder of powers from $p = 1$ towards $p = 3$ has the **opposite effect**.
 
------
+-----------------------------------------------------------------------------
 
 Power transformations are sensible only when all of the values of $X$ are positive:
 
@@ -139,6 +139,8 @@ Transforming $Y$ *down the ladder* can correct positive skew in the errors (most
 Transforming $Y$ *up the ladder* corrects negative skew in the errors.
 
 ```{r}
+#| out-height: 4in
+#| out-width: auto
 #| code-fold: true
 
 set.seed(102030)
@@ -238,6 +240,9 @@ ggplot() +
 
 - Here is a plot of residuals by predicted values
 ```{r}
+#| out-height: 3in
+#| out-width: auto
+
 tibble(y_hat = predict(m),
               res = rstudent(m)) |> 
   ggplot(aes(x = y_hat, y = res)) +
@@ -291,17 +296,20 @@ data <- data |>
 m_2 <- lm(fps_27 ~ bac + ta + sex_c, data = data)
 ```
 
------
+-------------------------------------------------------------------------------
 
 Next we will pull the best lambda value from a plot of log-likelihood values by lambda power transformations of response variable.
+
 ```{r}
+#| out-height: 4in
+#| out-width: auto
+
 car::boxCox(m_2)
 
 round(car::boxCox(m_2)$x[which.max(car::boxCox(m_2)$y)],2)
 ```
 
-
------
+-------------------------------------------------------------------------------
 
 Lastly, we will use the best lambda value to conduct our power transformation and re-evaluate our model assumptions. 
 
@@ -312,7 +320,7 @@ data <- data |>
 m_3 <- lm(fps_bc ~ bac + ta + sex_c, data = data)
 ```
 
------
+-------------------------------------------------------------------------------
 
 ```{r}
 #| code-fold: true
@@ -336,7 +344,7 @@ ggplot() +
             linetype = "dashed", color = "blue")
 ```
 
------
+-------------------------------------------------------------------------------
 
 ```{r}
 #| code-fold: true
@@ -364,7 +372,7 @@ car::spreadLevelPlot(m_3)
 car::ncvTest(m_3)
 ```
 
------
+-------------------------------------------------------------------------------
 
 
 ```{r}
@@ -375,14 +383,14 @@ gvlma::gvlma(m_3)
 
 **Transformations often don't help!**
 
------
+-------------------------------------------------------------------------------
 
 ```{r}
 m_3 |> 
   broom::tidy()
 ```
 
------
+-------------------------------------------------------------------------------
 
 White (1980) Heteroscedasticity-corrected SEs and Tests
 
@@ -400,7 +408,7 @@ broom::tidy(m) |>
  
 *Maybe* the problem wasn’t bad enough to do anything?
 
------
+-------------------------------------------------------------------------------
 
 ## Transformations: Dealing with Non-linearity
 
@@ -409,10 +417,14 @@ Power transformations can make simple monotone relationships more linear (Fig A)
 
 ```{r}
 #| echo: false
+#| out-height: 5in
+#| out-width: auto
 
 knitr::include_graphics(path = here::here("figures/monotone_relationship.png"))
 ```
 
+
+-------------------------------------------------------------------------------
 
 ## Transformations: Mosteller and Tukey’s bulging rule
 
@@ -424,11 +436,13 @@ Simple monotone relationships can be corrected by transforming $X$ or $Y$.
 
 ```{r}
 #| echo: false
+#| out-height: 4in
+#| out-width: auto
 
 knitr::include_graphics(path = here::here("figures/mosteller_tukey.png"))
 ```
 
------
+-------------------------------------------------------------------------------
 
 ::: {.callout-important}
 # Question
@@ -470,7 +484,7 @@ data_nonlinear  |>
 
 :::
 
------
+-------------------------------------------------------------------------------
 
 ## General Transformations
 
@@ -482,10 +496,9 @@ data_nonlinear  |>
 
 - Transformations are a big source of research dfs. Should be pre-registered.  You may know what your DV typically *needs* from prior data. Worst case, report with and without transformations and justify.
 
------
+-------------------------------------------------------------------------------
 
 ## 5K Race Times
-
 
 ```{r}
 data_5k <- read_csv(here::here(path_data, "09_transformations_5k.csv"),
@@ -499,7 +512,7 @@ m_5k <- lm(time ~ age + miles, data = data_5k)
 broom::tidy(m_5k)
 ```
 
------
+-------------------------------------------------------------------------------
 
 ```{r}
 #| code-fold: true
@@ -523,7 +536,7 @@ ggplot() +
             linetype = "dashed", color = "blue")
 ```
 
------
+-------------------------------------------------------------------------------
 
 ```{r}
 #| code-fold: true
@@ -538,9 +551,12 @@ tibble(x = fitted.values(m_5k),
        y = "Studentized Residuals")
 ```
 
------
+-------------------------------------------------------------------------------
 
 ```{r}
+#| out-height: 4in
+#| out-width: auto
+
 car::spreadLevelPlot(m_5k)
 ```
 
@@ -548,21 +564,21 @@ car::spreadLevelPlot(m_5k)
 car::ncvTest(m_5k)
 ```
 
------
+-------------------------------------------------------------------------------
 
 ```{r}
 car::crPlots(m_5k, ask = FALSE)
 ```
 
 
------
+-------------------------------------------------------------------------------
 
 
 ```{r}
 gvlma::gvlma(m_5k)
 ```
 
------
+-------------------------------------------------------------------------------
 
 
 Let's try transforming miles using `log2()`, a binary logarithm (base 2).
@@ -575,23 +591,24 @@ m_5k_tran <- lm(time ~ age + log_miles, data = data_5k)
 broom::tidy(m_5k_tran)
 ```
 
------
+-------------------------------------------------------------------------------
 
 
 ```{r}
 car::crPlots(m_5k_tran, ask = FALSE)
 ```
 
------
+-------------------------------------------------------------------------------
 
 ```{r}
 gvlma::gvlma(m_5k_tran)
 ```
 
------
+-------------------------------------------------------------------------------
 
 ## Displaying Transformed Results With Fake Data
 
+Here are some fake data and a fitted model
 ```{r}
 data_fake <- tibble(x = 3 * rchisq(200, df=3),
                     x_sr = sqrt(x),
@@ -601,34 +618,49 @@ m_raw = lm(y ~ x, data = data_fake)
 broom::tidy(m_raw)
 ```
 
+-------------------------------------------------------------------------------
+
+This is what the model looks like over the raw data
 ```{r}
+#| out-height: 4in
+#| out-width: auto
+
 data_fake |> 
   ggplot(aes(x = x, y = y)) +
   geom_point(alpha = .4) +
   geom_abline(intercept = coef(m_raw)[1], slope = coef(m_raw)[2], color = "red")
 ```
 
------
+-------------------------------------------------------------------------------
 
-
+Lets fit the model on square root transformed $X$
 ```{r}
 m_sr = lm(y ~ x_sr, data = data_fake)
 broom::tidy(m_sr)
 ```
 
+-------------------------------------------------------------------------------
+
+And look at the model fit
 ```{r}
+#| out-height: 4in
+#| out-width: auto
+
 data_fake |> 
   ggplot(aes(x = x_sr, y = y)) +
   geom_point(alpha = .4) +
   geom_abline(intercept = coef(m_sr)[1], slope = coef(m_sr)[2], color = "red")
 ```
 
------
+-------------------------------------------------------------------------------
 
 You can display results from linear model but provide scale for raw $X$ instead of Sqrt($X$) or in addition to Sqrt($X$) on another axis.
 
 
 ```{r}
+#| out-height: 3in
+#| out-width: auto
+
 preds <- tibble(x_sr = seq(min(data_fake$x_sr),max(data_fake$x_sr), by=.01))
 y_pred = predict(m_sr, newdata = preds)
 
@@ -639,13 +671,14 @@ ggplot() +
   scale_x_continuous(name = "SQRT(X)", sec.axis = sec_axis(~.^2, name = "Raw X"))
 ```
 
-
-
------
+-------------------------------------------------------------------------------
 
 You can display results from linear model in Raw $X$ Units and use `predict()` to get the $Y$s based on transformed $X$.
 
 ```{r}
+#| out-height: 3in
+#| out-width: auto
+
 preds <- tibble(x_sr = sqrt(seq(min(data_fake$x),max(data_fake$x), by=.1)))
 y_pred = predict(m_sr, newdata = preds)
 
@@ -656,4 +689,3 @@ ggplot() +
   xlab("X")
 
 ```
-
