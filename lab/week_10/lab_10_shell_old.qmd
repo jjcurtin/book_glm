@@ -1,0 +1,224 @@
+---
+title: "Lab 10 TA Script" 
+author: "TAs" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+**Welcome to Lab 10 - Transformations!**
+
+We will be working with the Prestige dataset that we've cleaned for you again this week. Make sure you've downloaded it from the lab website!
+
+Topics for today:
+
+1. Review the bulging rule
+
+2. Applying transformations to a model
+
+3. Graphing transformed models
+
+## Conceptual Exercise: Bulging Rule
+
+Your TA will share the rendered file on the screen for us to review as a class. :^)
+
+## Set Up
+
+```{r}
+#| message: false
+
+options(conflicts.policy = "depends.ok") 
+library(tidyverse)
+library(broom)
+library(skimr)
+library(car, exclude = c("recode", "some")) # exclude some functions that conflict with tidyverse
+
+theme_set(theme_classic()) 
+
+path_data <- "lab/data"
+```
+
+First, let's load in our data.
+```{r}
+
+```
+
+
+Let's refit our model where we regress `income` on `education` and `women`.
+```{r}
+
+```
+
+Last week, we covered assumptions of the general linear model (GLM). We discovered that our data violate the constant variance and normality of errors assumptions. This week, we will learn how to (partially) correct these issues by applying transformations.
+
+Let's consider why the assumptions were violated. Both income and percentage women are strongly skewed. Remember that this in and of itself may cause model assumption violations... but it is possible that transforming skewed variables to be more normal might influence the distribution of residuals and satisfy assumptions!
+
+One place to start is by eye-balling the univariate distribution and noting the direction of the skew.
+```{r}
+
+```
+
+**General transformation rules:**
+- Log transformations will spread out the lower values and condense the higher values - in other words, it will impose a negative skew
+- Raising to a power between 0 and 1 (where raising to 1/2 is the square root, 1/3 is the cubed root, etc.) will impose a similar transformation, but may be a little less intuitive (think about trying to practically write up an interpretation of these in a manuscript!)
+- Powers greater than 1 will skew in the opposite direction 
+
+Now that we have a better understanding of what transforming data can do, let's return to our dataset and use `car::boxCox()` to help us figure out which transformation makes the most sense in our model.
+
+We will pull the best lambda value from a plot of log-likelihood values by lambda power transformations of the outcome variable (`income`).
+```{r}
+
+```
+
+**What do these results mean?**
+
+
+Create a new variable using the `car::bcPower()` Box-Cox power transformation function. The `bcPower()` function computes the scaled power transformation of x = U + gamma where gamma is set by the user so U + gamma is strictly positive for these transformations to make sense.
+```{r}
+
+```
+
+Refit model with transformed outcome. 
+```{r}
+
+```
+
+Let's take a look at our model R-squared to get a sense of how much variance in income is explained by ALL predictors in our model.
+```{r}
+
+```
+
+**What is the logic of log (base 2)? What does a 1-unit increase in a log2 variable represent?**
+A one unit increase in log2(income), represents a doubling of income. We'll apply that transformation and refit the model.   
+
+Create a new variable and model with an adjusted and transformed version of our outcome variable `income`.
+```{r}
+
+```
+
+**How do we interpret the coefficients of this model?**
+
+```{r}
+
+```
+
+
+NOTE: There are other ways to convert logs to more interpretable units, and I encourage you to look into it if this is something you encounter in your own research.
+
+#### So... did this transformation fix our model assumptions?
+
+Normality
+```{r}
+ggplot() +
+  geom_density(aes(x = value), data = enframe(rstudent(m_income_log), name = NULL)) +
+  labs(title = "Density Plot to Assess Normality of Residuals",
+       x = "Studentized Residual") +
+  geom_line(aes(x = x, y = y), data = tibble(x = seq(-4, 4, length.out = 100),
+                                      y = dnorm(seq(-4, 4, length.out = 100), 
+                                      mean=0, sd=sd(rstudent(m_income_log)))), 
+            linetype = "dashed", color = "blue")
+
+qqPlot(m_income_log, 
+            id = FALSE, 
+            simulate = TRUE,
+            main = "Quantile-Comparison Plot to Assess Normality", 
+            ylab = "Studentized Residuals")
+```
+
+Constant Variance
+```{r}
+#| warning: false
+
+tibble(x = fitted.values(m_income_log),
+       y = rstudent(m_income_log)) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_point(alpha = .6) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "blue", linewidth = 1) +
+  labs(title = "Studentized Residuals vs. Fitted Values",
+       x = "Fitted Values",
+       y = "Studentized Residuals")
+
+
+spreadLevelPlot(m_income_log)
+```
+
+Linearity
+```{r}
+crPlots(m_income_log, ask = FALSE)
+```
+
+
+Let's think of the bulging rule. We can also transform X down to help solve some issues.    
+
+Let's try transforming percent women instead by taking the square root of the variable.
+```{r}
+
+```
+
+Normality
+```{r}
+ggplot() +
+  geom_density(aes(x = value), data = enframe(rstudent(m_women_sqrt), name = NULL)) +
+  labs(title = "Density Plot to Assess Normality of Residuals",
+       x = "Studentized Residual") +
+  geom_line(aes(x = x, y = y), data = tibble(x = seq(-4, 4, length.out = 100),
+                                      y = dnorm(seq(-4, 4, length.out = 100), 
+                                      mean=0, sd=sd(rstudent(m_women_sqrt)))), 
+            linetype = "dashed", color = "blue")
+
+car::qqPlot(m_women_sqrt, 
+            id = FALSE, 
+            simulate = TRUE,
+            main = "Quantile-Comparison Plot to Assess Normality", 
+            ylab = "Studentized Residuals")
+```
+
+Constant Variance
+```{r}
+#| warning: false
+
+tibble(x = fitted.values(m_women_sqrt),
+       y = rstudent(m_women_sqrt)) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_point(alpha = .6) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "blue", linewidth = 1) +
+  labs(title = "Studentized Residuals vs. Fitted Values",
+       x = "Fitted Values",
+       y = "Studentized Residuals")
+
+
+spreadLevelPlot(m_women_sqrt)
+```
+
+Linearity
+```{r}
+crPlots(m_women_sqrt, ask = FALSE)
+```
+
+
+### Take Away Points
+
+- Remember we do not assume that predictors have a normal distribution.
+
+- Remember that violating the assumptions of linearity, equal variance, and normality do not mean a model is nonredeemable. Normality is the least concerning -- it results in inflated standard errors. Violating linearity may bias the parameter estimates. All three can often be handled through transformations.
+
+- Our next step might be to consider models of the data that make different assumptions about the distribution of residuals. It may be that the GLM is not the right tool for the job. That said, remember that GLM is quite robust to violations of normality and constant variance. Linearity is a little more troublesome, but even so, small violations are not worth panicking and running to find a more exotic method. Take a measured approach and seek advice from those with relevant expertise if you feel your data violate the GLM assumptions in an irreparable way.   
+
+- But, let us be satisfied with the model with log2(income)...after we conduct a case analysis on it! All the threats of influential data points still exist in models with transformed variables. We'll want to check if there are any points worth removing.
+
+### Graphing Models Using Transformed Data
+
+Plot the log-transformed data and model's predictions. The focal predictor is `education` so you can hold `women` constant at its mean.
+```{r}
+
+```
+
+Plot the data and the model's predictions on the original scale (raw prediction). 
+```{r}
+
+```
