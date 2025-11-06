@@ -26,6 +26,7 @@ options(conflicts.policy = "depends.ok")
 library(tidyverse)
 library(skimr)
 library(broom)
+library(gvlma)
 
 # exclude some functions that conflict with tidyverse
 library(car, exclude = c("recode", "some"))
@@ -231,6 +232,11 @@ These two plots differ in 2 important ways.
 
 
 
+**We can also statistically test this assumption**
+
+```{r}
+
+```
 
 
 **So... are we concerned now?**     
@@ -252,109 +258,18 @@ If the relationship isn’t a line, then we are concerned about the assumption o
 
 So, we're actually doing pretty well in terms of the linearity assumption. There aren't any places where the blue and pink lines radically diverge.
 
+**Let's test all the assumptions at once!**
+
+```{r}
+
+```
 
 ### So... what next?
 
 
 
+## Suppression
 
-## Finally, unrelated to model assumptions...
-
-At the end of today, we would like to take a minute to review one special scenario we might see in multiple regression: suppression. 
-
-Back then we dropped all occupations that were professional jobs.
-
-```{r}
-d_prof_rm <- d |> filter(type != "prof")
-```
+For the rest of this lab session, we're going to head over to the course website and pull up the appendix on suppression.
 
 
-Remember when we predicted `income` from `education` alone in the prestige dataset, the regression coefficient for `education` was b = 234 And the R-squared associated with education was 3.93%.
-
-```{r}
-m_0_1 <- lm(income ~ education, data = d_prof_rm)
-broom::tidy(m_0_1)
-broom::glance(m_0_1)
-```
-
-
-When we predicted `income` from `women` alone, the regression coefficient for `women` was b = -39.9. And the R-squared associated with education was 43.5%.
-
-```{r}
-m_0_2 <- lm(income ~ women, data = d_prof_rm)
-broom::tidy(m_0_2)
-broom::glance(m_0_2)
-```
-
-
-And when we predicted `income` from both `education` and `women`, the regression coefficient for `education` became b = 533, and the effect of `women` became b = -48.4. The model R-squared is 62.1%.
-
-```{r}
-m_0_3 <- lm(income ~ education + women, data = d_prof_rm)
-broom::tidy(m_0_3)
-broom::glance(m_0_3)
-
-```
-
-**What is the interpretation of model R-squared? Delta R-squared?**
-
-
-
-**What is the delta R squared for `education` and `women`?**
-
-
-
-**What do you notice about these delta R squared?**
-
-
-This is the case where we observe a suppression effect. 
-**Let's look at the correlations among the three variables. What do you notice?**
-
-
-```{r}
-d |> select(income, education, women) |> 
-  cor(use = "pairwise") |> 
-  round(2)
-```
-
-
-In this scenario, the conditional effect of `education` is stronger than its unconditional effect, because we statistically controlled for variable `women`, which correlates positively with `education` but associate with `income` in the opposite direction.
-
-This is the special case when the variance explained by individual predictors have negative covariance and when the effect size estimates like delta-R-squared may sum up larger than the model R-squared.
-
-
-## ggplot Exercise Time!
-
-Create a model where you predict `income` from `prestige` and `type` using `d_prof_rm`.
-```{r}
-
-
-```
-
-
-Create a publication quality plot with the below specifications:
-1. Show education on the x axis and income on the y axis.
-2. Plot raw data points.
-3. Show two regression lines in the same panel. One should represent the effect of `education` on `income`, holding `type` constant at white collar. The other should represent the same effect but holding `type` constant at blue collar.
-4. Show respective standard error bands for those regression lines.
-5. Include meaning labels for the axes and other aesthetic components. 
-
-```{r}
-
-
-
-
-
-```
-
-
-**Where can you find the intercept on the plot?**
-
-
-**Where can you find the regression coefficient for `prestige` on the plot?**
-
-
-**Where can you find the regression coefficient for `type` on the plot?**
-
-
-## Questions?
