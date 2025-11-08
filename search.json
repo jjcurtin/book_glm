@@ -654,7 +654,7 @@
     "href": "web6_exams.html#application-exam-2",
     "title": "Exams",
     "section": "Application Exam 2",
-    "text": "Application Exam 2\n\ndata1; data2\nexam shell",
+    "text": "Application Exam 2\n\ndata\nexam shell",
     "crumbs": [
       "Exams"
     ]
@@ -684,7 +684,7 @@
     "href": "web7_videos.html#lecture",
     "title": "Course Video Recordings",
     "section": "",
-    "text": "09/03\n09/08\n09/10\n09/15\n09/17\n09/12\n10/06\n10/08\n10/13\n10/20\n\n10/22: Part 1; Part 2\n\n10/27",
+    "text": "09/03\n09/08\n09/10\n09/15\n09/17\n09/12\n10/06\n10/08\n10/13\n10/20\n\n10/22: Part 1; Part 2\n\n10/27\n11/03\n11/05",
     "crumbs": [
       "Course Video Recordings"
     ]
@@ -694,7 +694,7 @@
     "href": "web7_videos.html#lab",
     "title": "Course Video Recordings",
     "section": "Lab",
-    "text": "Lab\n\n09/05\n09/12\n09/19\n09/26\n10/03\n10/10\n10/17\n10/24\n10/31\n11/07",
+    "text": "Lab\n\n09/05\n09/12\n09/19\n09/26\n10/03\n10/10\n10/17\n10/24\n10/31",
     "crumbs": [
       "Course Video Recordings"
     ]
