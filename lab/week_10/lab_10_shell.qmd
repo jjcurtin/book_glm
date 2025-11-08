@@ -11,214 +11,265 @@ editor_options:
   chunk_output_type: console
 ---
 
-**Welcome to Lab 10 - Transformations!**
+## Conceptual exercise
 
-We will be working with the Prestige dataset that we've cleaned for you again this week. Make sure you've downloaded it from the lab website!
+**What are two methods to inspect the influence of individual data points on the model? How are these two methods different?**
 
-Topics for today:
 
-1. Review the bulging rule
 
-2. Applying transformations to a model
-
-3. Graphing transformed models
-
-## Conceptual Exercise: Bulging Rule
-
-Your TA will share the rendered file on the screen for us to review as a class. :^)
-
-## Set Up
+## Setup 
 
 ```{r}
 #| message: false
 
 options(conflicts.policy = "depends.ok") 
 library(tidyverse)
-library(broom)
 library(skimr)
-library(car, exclude = c("recode", "some")) # exclude some functions that conflict with tidyverse
+library(broom)
+library(gvlma)
+
+# exclude some functions that conflict with tidyverse
+library(car, exclude = c("recode", "some"))
 
 theme_set(theme_classic()) 
 
 path_data <- "lab/data"
 ```
 
-First, let's load in our data.
-```{r}
 
+## Read in data
+
+We are going to return to the modified `prestige` dataset from previous labs. Load `lab_09_data.csv`.
+
+```{r}
+d <- read_csv(here::here(path_data, "lab_09_data.csv"),
+              show_col_types = FALSE) |>
+  glimpse()
+
+d |> 
+  skim(-c(sub_id, name))
 ```
 
 
-Let's refit our model where we regress `income` on `education` and `women`.
+## Data Cleaning
+
+Remember we had a value in `education` that was clearly a data entry error. So, let's remove it! Get descriptives on `education` variable after removing the error.   
 ```{r}
+d <- d |> 
+
+  
+d |> 
+  skim(education) |> 
+  focus(n_missing, complete_rate, mean = numeric.mean, sd = numeric.sd, 
+        min = numeric.p0, median = numeric.p50, max = numeric.p100) |> 
+  yank("numeric")
+```
+
+Say we are (again) interested in modeling `income ~ education + women`
+Lets fit the model.
+```{r}
+m_1 <- 
+
+tidy(m_1)
+```
+
+In lab 09 we also had identified two observations with high influence: physicians and general managers. These observations exhibited extreme values in `income`. 
+```{r}
+d |> 
 
 ```
 
-Last week, we covered assumptions of the general linear model (GLM). We discovered that our data violate the constant variance and normality of errors assumptions. This week, we will learn how to (partially) correct these issues by applying transformations.
-
-Let's consider why the assumptions were violated. Both income and percentage women are strongly skewed. Remember that this in and of itself may cause model assumption violations... but it is possible that transforming skewed variables to be more normal might influence the distribution of residuals and satisfy assumptions!
-
-One place to start is by eye-balling the univariate distribution and noting the direction of the skew.
-```{r}
-
-```
-
-**General transformation rules:**
-- Log transformations will spread out the lower values and condense the higher values - in other words, it will impose a negative skew
-- Raising to a power between 0 and 1 (where raising to 1/2 is the square root, 1/3 is the cubed root, etc.) will impose a similar transformation, but may be a little less intuitive (think about trying to practically write up an interpretation of these in a manuscript!)
-- Powers greater than 1 will skew in the opposite direction 
-
-Now that we have a better understanding of what transforming data can do, let's return to our dataset and use `car::boxCox()` to help us figure out which transformation makes the most sense in our model.
-
-We will pull the best lambda value from a plot of log-likelihood values by lambda power transformations of the outcome variable (`income`).
-```{r}
-
-```
-
-**What do these results mean?**
-
-
-Create a new variable using the `car::bcPower()` Box-Cox power transformation function. The `bcPower()` function computes the scaled power transformation of x = U + gamma where gamma is set by the user so U + gamma is strictly positive for these transformations to make sense.
-```{r}
-
-```
-
-Refit model with transformed outcome. 
-```{r}
-
-```
-
-Let's take a look at our model R-squared to get a sense of how much variance in income is explained by ALL predictors in our model.
-```{r}
-
-```
-
-**What is the logic of log (base 2)? What does a 1-unit increase in a log2 variable represent?**
-A one unit increase in log2(income), represents a doubling of income. We'll apply that transformation and refit the model.   
-
-Create a new variable and model with an adjusted and transformed version of our outcome variable `income`.
-```{r}
-
-```
-
-**How do we interpret the coefficients of this model?**
+Our recent analysis reveals that both income and the percentage of women follow non-normal distributions. 
 
 ```{r}
-
+hist(d$income)
+hist(d$women)
 ```
 
+Given this, we may question whether the anomalies in our two problematic cases arise not from peculiar instances but rather from the inherent nature of our variables' distributions, potentially leading to systematic violations of the assumptions underlying the General Linear Model's expectations for our data structure.   
 
-NOTE: There are other ways to convert logs to more interpretable units, and I encourage you to look into it if this is something you encounter in your own research.
+### Model Assumptions
 
-#### So... did this transformation fix our model assumptions?
+Quick review from lecture!   
 
-Normality
+**What are the 5 primary assumptions the GLM makes about the structure of the data?**   
+
+
+
+
+
+
+
+
+**Violations of assumptions can cause...?**   
+
+
+
+
+
+
+#### Assumption 1: Exact X 
+
+"No measurement error in the predictors" is always violated to some extent, but essentially demands that you use the most reliable measures at your disposal.  
+
+**What are the consequences of non-exact X?**
+
+
+
+
+#### Assumption 2: Independence
+
+Non-independence of residuals are usually due to data structure (e.g., repeated measures of the same individual; twins and families) and cannot be "made independent" once the data is collected. However, non-independence can be explicitly addressed by modeling approaches (e.g., mixed effect models, which you will learn in PSYCH 710).   
+
+**What are the consequences of non-independence in residuals that are not correctly modeled?**
+
+
+
+One extreme example of non-independence is when the data contains duplicates (i.e., same data points included multiple times). 
+
+For example, here we manually introduce non-independence by manipulating the Prestige data into a dataset of the same sample size but with some of its samples as duplicates (you should never do this in data analysis). Therefore, the residuals for pairs of duplicates will be correlated at r = 1.0. 
+
+```{r}
+set.seed(123)
+d_nonind <- d |> slice_sample(prop = 1, replace = TRUE)
+
+lm(income ~ education + women, data = d) |> tidy()
+lm(income ~ education + women, data = d_nonind) |> tidy()
+```
+
+Note that as a consequence of these duplicates, the standard errors of parameter estimates decreased, and the p value also decreased. This is not because the effects were more statistically significant. Rather, it is because the way we calculated error is no longer a fair way to characterize model and error variances when the residuals are correlated/non-independent (due to wrong degrees of freedom). Note that while the statistical inference about the parameters is invalidated, the model predictions (i.e., predicted values for Y at different levels of X) may still be appropriate.
+
+#### Assumption 3: Normality
+
+**Is a non-normally distributed predictor problematic? What about a non-normal outcome variable?**
+
+
+
+Plot a density plot of the residuals of our model compared to a normal distribution.   
+
 ```{r}
 ggplot() +
-  geom_density(aes(x = value), data = enframe(rstudent(m_income_log), name = NULL)) +
+  geom_density(aes(x = value), data = enframe(rstudent(m_1), name = NULL)) +
   labs(title = "Density Plot to Assess Normality of Residuals",
        x = "Studentized Residual") +
   geom_line(aes(x = x, y = y), data = tibble(x = seq(-4, 4, length.out = 100),
                                       y = dnorm(seq(-4, 4, length.out = 100), 
-                                      mean=0, sd=sd(rstudent(m_income_log)))), 
+                                      mean=0, sd=sd(rstudent(m_1)))), 
             linetype = "dashed", color = "blue")
-
-qqPlot(m_income_log, 
-            id = FALSE, 
-            simulate = TRUE,
-            main = "Quantile-Comparison Plot to Assess Normality", 
-            ylab = "Studentized Residuals")
 ```
 
-Constant Variance
-```{r}
-#| warning: false
+**What does the blue dashed line represent?**
 
-tibble(x = fitted.values(m_income_log),
-       y = rstudent(m_income_log)) |> 
+
+**Are our residuals in `m_1` normally distributed?**
+
+
+
+Now we will create a quantile-comparison (Q-Q) plot. A Q-Q plot compares two distributions against each other to see if they’re similar. GLMs assume that residuals are normally distributed, so we compare the actual distribution of model residuals to the theoretical normal distribution. The closer the two distributions are, the more normal the residuals are. Use the function in the car package
+```{r}
+
+```
+
+
+**What's on the X-axis in this plot?**   
+
+
+**What about the Y-axis?**    
+
+
+**What are we looking for?**    
+
+
+**How are we doing for normality of errors?**   
+
+
+**What is the problem?**    
+
+
+
+***ASIDE: The logic of the QQ plot***    
+These plots are difficult to understand. You should think of the X-axis as representing "where I'm looking for it" and the Y-axis as representing "where I found it."    
+
+For example, look at the lower end of the X-axis on this QQ plot. We're going to look for the error we'd expect to occur at a t-value of 2.25 (2.25 on X-axis). As we move up the Y-axis, we encounter that error at something more like 4.5. Put differently, this case is farther from the center of the data (i.e., t of 0) than we would expect it to be if the distribution of errors were normal. Because we're encountering data farther from the center of the distribution than we should be, we can infer that we have thin tails, which indeed seems to be the case based on our density plot figure.    
+
+For another example, say we want to look for the error we'd expect to occur at a t-value of 1 (1 on the X-axis). Moving up the Y-axis, we "find" this error at about 0.5, closer to the center of the distribution than we'd expect. Because we found this error closer to a t of 0 than we'd expect in a perfectly normal distribution, we can infer we have a steep, skinny peak of our error distribution, which indeed we do! I encourage practicing this!    
+
+
+**So, should we be concerned at this point?** 
+
+
+
+#### Assumption 4: Constant Variance
+
+The constant variance assumption implies that, for any given predicted value of the dependent variable, the residuals will have the same variance.    
+
+One easy way to assess the viability of this assumption is to plot the predicted values against the observed values and assess visually whether the residuals have more scatter at some predicted values than at others.   
+```{r}
+tibble(x = fitted.values(m_1),
+       y = rstudent(m_1)) |> 
   ggplot(aes(x = x, y = y)) +
   geom_point(alpha = .6) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "blue", linewidth = 1) +
   labs(title = "Studentized Residuals vs. Fitted Values",
        x = "Fitted Values",
        y = "Studentized Residuals")
-
-
-spreadLevelPlot(m_income_log)
 ```
 
-Linearity
-```{r}
-crPlots(m_income_log, ask = FALSE)
-```
-
-
-Let's think of the bulging rule. We can also transform X down to help solve some issues.    
-
-Let's try transforming percent women instead by taking the square root of the variable.
-```{r}
-
-```
-
-Normality
-```{r}
-ggplot() +
-  geom_density(aes(x = value), data = enframe(rstudent(m_women_sqrt), name = NULL)) +
-  labs(title = "Density Plot to Assess Normality of Residuals",
-       x = "Studentized Residual") +
-  geom_line(aes(x = x, y = y), data = tibble(x = seq(-4, 4, length.out = 100),
-                                      y = dnorm(seq(-4, 4, length.out = 100), 
-                                      mean=0, sd=sd(rstudent(m_women_sqrt)))), 
-            linetype = "dashed", color = "blue")
-
-car::qqPlot(m_women_sqrt, 
-            id = FALSE, 
-            simulate = TRUE,
-            main = "Quantile-Comparison Plot to Assess Normality", 
-            ylab = "Studentized Residuals")
-```
-
-Constant Variance
+We can also generate a spread-level plot to assess the constant variance assumption. This plot shows the absolute residuals against the predicted values.
 ```{r}
 #| warning: false
 
-tibble(x = fitted.values(m_women_sqrt),
-       y = rstudent(m_women_sqrt)) |> 
-  ggplot(aes(x = x, y = y)) +
-  geom_point(alpha = .6) +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "blue", linewidth = 1) +
-  labs(title = "Studentized Residuals vs. Fitted Values",
-       x = "Fitted Values",
-       y = "Studentized Residuals")
-
-
-spreadLevelPlot(m_women_sqrt)
+spreadLevelPlot(m_1)
 ```
 
-Linearity
-```{r}
-crPlots(m_women_sqrt, ask = FALSE)
-```
+***ASIDE: the logic of these plots***      
+These two plots differ in 2 important ways.   
+
+1. The Y-axis on the spread-level plot has the absolute value of the studentized residuals. (Imagine you took the first plot and folded it bottom to top along the y = 0 line. If the variance is not constant, the regression line plotted on the spread-level plot will deviate more from a slope of 0.   
+2. Look at the tick marks on the Y-axes of these plots. The first plot is linear, while the spread-level plot is logarithmic. This is why the two don't match up perfectly based on the "folding" idea.   
+
+**What are we looking for here?**   
 
 
-### Take Away Points
 
-- Remember we do not assume that predictors have a normal distribution.
+**We can also statistically test this assumption**
 
-- Remember that violating the assumptions of linearity, equal variance, and normality do not mean a model is nonredeemable. Normality is the least concerning -- it results in inflated standard errors. Violating linearity may bias the parameter estimates. All three can often be handled through transformations.
-
-- Our next step might be to consider models of the data that make different assumptions about the distribution of residuals. It may be that the GLM is not the right tool for the job. That said, remember that GLM is quite robust to violations of normality and constant variance. Linearity is a little more troublesome, but even so, small violations are not worth panicking and running to find a more exotic method. Take a measured approach and seek advice from those with relevant expertise if you feel your data violate the GLM assumptions in an irreparable way.   
-
-- But, let us be satisfied with the model with log2(income)...after we conduct a case analysis on it! All the threats of influential data points still exist in models with transformed variables. We'll want to check if there are any points worth removing.
-
-### Graphing Models Using Transformed Data
-
-Plot the log-transformed data and model's predictions. The focal predictor is `education` so you can hold `women` constant at its mean.
 ```{r}
 
 ```
 
-Plot the data and the model's predictions on the original scale (raw prediction). 
+
+**So... are we concerned now?**     
+
+
+
+#### Assumption 5: Linearity
+
+If the modeled relationships are linear, then the slope of the best fitting line should be approximately the same no matter what sub-sample of the data you consider. Imagine sorting your dataframe on one of your predictor variables, and sliding a window down the dataframe and fitting little models for each window. If the relationship is linear, the solutions for the sub models should be very similar, deviating from each other randomly. On the other hand, if the relationship of X and Y is non-linear, then the estimate of the slope will differ systematically at different points along X.   
+
+`car::crPlots()` will plot such lines (summarized in pink), overlayed on the residual scores and in addition to the best linear fit (blue-dashed).    
 ```{r}
 
 ```
+
+This plot is referred to as a component+residual/partial residual plots. It shows you the residuals from the full model, plotted against the effect of a particular predictor.
+
+If the relationship isn’t a line, then we are concerned about the assumption of linearity of predictors (i.e., their relationship with Y). All that detail aside, if the dotted blue line and the pink line look similar, then the relation between that X and Y is relatively linear. Otherwise, there may be a non-linear relationship.
+
+So, we're actually doing pretty well in terms of the linearity assumption. There aren't any places where the blue and pink lines radically diverge.
+
+**Let's test all the assumptions at once!**
+
+```{r}
+
+```
+
+### So... what next?
+
+
+
+## Suppression
+
+For the rest of this lab session, we're going to head over to the course website and pull up the appendix on suppression.
+
+
