@@ -1,5 +1,5 @@
 ---
-title: "Lab 10 TA Script" 
+title: "Lab 11 Shell" 
 author: "TAs" 
 date: "`r lubridate::today()`"
 format: 
@@ -11,7 +11,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-**Welcome to Lab 10 - Transformations!**
+**Welcome to Lab 11 - Transformations!**
 
 We will be working with the Prestige dataset that we've cleaned for you again this week. Make sure you've downloaded it from the lab website!
 
