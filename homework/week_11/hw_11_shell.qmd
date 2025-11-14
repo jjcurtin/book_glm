@@ -1,5 +1,5 @@
 ---
-title: "hw_09_shell" 
+title: "hw_11_shell" 
 author: "TAs" 
 date: "`r lubridate::today()`"
 format: 
@@ -31,7 +31,7 @@ A public health organization wants to test the importance of staying active and 
 
 The researchers in the public health organization predict that cross-country skiing and vegetable consumption both contribute to overall health. They also expect to see little to no relationship between vegetable consumption and skiing behavior.   
 
-The following variables can be found in the `hw_07_ski_veg_data.csv` dataset.    
+The following variables can be found in the `hw_11_data.csv` dataset.    
 
 - `sub_id`: Unique subject identification number (range 1 - 53).
 - `skiing`:	Number of times participant went cross-country skiing over the course of the winter (range 0 - 93).
