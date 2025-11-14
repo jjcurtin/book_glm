@@ -54,9 +54,77 @@ Let's refit our model where we regress `income` on `education` and `women`.
 
 ```
 
-Last week, we covered assumptions of the general linear model (GLM). We discovered that our data violate the constant variance and normality of errors assumptions. This week, we will learn how to (partially) correct these issues by applying transformations.
+
+Last week, we covered assumptions of the general linear model (GLM). We discovered that our data violate the normality of residuals, constant variance, and linearity assumptions. 
+
+Violation of Normality of Residuals 
+```{r}
+#density plot of the residuals of our model compared to a normal distribution
+
+ggplot() +
+  geom_density(aes(x = value), data = enframe(rstudent(m_1), name = NULL)) +
+  labs(title = "Density Plot to Assess Normality of Residuals",
+       x = "Studentized Residual") +
+  geom_line(aes(x = x, y = y), data = tibble(x = seq(-4, 4, length.out = 100),
+                                      y = dnorm(seq(-4, 4, length.out = 100), 
+                                      mean=0, sd=sd(rstudent(m_1)))), 
+            linetype = "dashed", color = "blue")
+```
+
+The blue dashed line represents the expected probability density of a normal distribution. We can see that the residuals in our model `m_1` (i.e., black line) are not normally distributed. It is quite peaky, or in other words, high kurtosis.
+
+```{r}
+#quantile-comparison (Q-Q) plot
+
+qqPlot(m_1, 
+       id = FALSE, 
+       simulate = TRUE,
+       main = "Quantile-Comparison Plot to Assess Normality", 
+       ylab = "Studentized Residuals")
+```
+
+In the Q-Q plot, we are looking for the points to fall along the diagonal, which would mean the theoretical normal distribution matches our actual distribution from our data. We can see that the thin tails have high residual values. Our residuals are not normally distributed. 
+
+Violation of Constant Variance
+```{r}
+#plot the predicted values against the observed values
+
+tibble(x = fitted.values(m_1),
+       y = rstudent(m_1)) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_point(alpha = .6) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "blue", linewidth = 1) +
+  labs(title = "Studentized Residuals vs. Fitted Values",
+       x = "Fitted Values",
+       y = "Studentized Residuals")
+```
+
+Here, you want the spread of the data at a given value of x to be similar to that at other values of x (i.e., Is the vertical width of the scatter consistent across the range of fitted values?). The residuals do not have the same variance. Rather, there is fanning of the residuals.
+
+```{r}
+#spread-level plot
+
+spreadLevelPlot(m_1)
+```
+
+Here, you want to see a regression line with a slope near 0 (i.e., flat!). There is a violation of constant variance assumption.
+
+Violation of Linearity 
+```{r}
+#component+residual/partial residual plots
+crPlots(m_1, ask = FALSE)
+
+#test all assumptions at once
+gvlma::gvlma(m_1)
+```
+
+If the relationship isn’t a line, then we are concerned about the assumption of linearity of predictors (i.e., their relationship with Y). There aren't any places where the blue and pink lines radically diverge. Although it seems like we are doing pretty well in terms of the linearity assumption, the test using `gvlma` says otherwise. 
+
+
+This week, we will learn how to (partially) correct these issues by applying transformations.
 
 Let's consider why the assumptions were violated. Both income and percentage women are strongly skewed. Remember that this in and of itself may cause model assumption violations... but it is possible that transforming skewed variables to be more normal might influence the distribution of residuals and satisfy assumptions!
+
 
 One place to start is by eye-balling the univariate distribution and noting the direction of the skew.
 ```{r}
@@ -64,8 +132,11 @@ One place to start is by eye-balling the univariate distribution and noting the 
 ```
 
 **General transformation rules:**
+
 - Log transformations will spread out the lower values and condense the higher values - in other words, it will impose a negative skew
+
 - Raising to a power between 0 and 1 (where raising to 1/2 is the square root, 1/3 is the cubed root, etc.) will impose a similar transformation, but may be a little less intuitive (think about trying to practically write up an interpretation of these in a manuscript!)
+
 - Powers greater than 1 will skew in the opposite direction 
 
 Now that we have a better understanding of what transforming data can do, let's return to our dataset and use `car::boxCox()` to help us figure out which transformation makes the most sense in our model.
@@ -88,10 +159,52 @@ Refit model with transformed outcome.
 
 ```
 
-Let's take a look at our model R-squared to get a sense of how much variance in income is explained by ALL predictors in our model.
-```{r}
+#### So... did this transformation fix our model assumptions?
 
+Normality
+```{r}
+ggplot() +
+  geom_density(aes(x = value), data = enframe(rstudent(m_income_power), name = NULL)) +
+  labs(title = "Density Plot to Assess Normality of Residuals",
+       x = "Studentized Residual") +
+  geom_line(aes(x = x, y = y), data = tibble(x = seq(-4, 4, length.out = 100),
+                                      y = dnorm(seq(-4, 4, length.out = 100), 
+                                      mean=0, sd=sd(rstudent(m_income_power)))), 
+            linetype = "dashed", color = "blue")
+
+qqPlot(m_income_power, 
+            id = FALSE, 
+            simulate = TRUE,
+            main = "Quantile-Comparison Plot to Assess Normality", 
+            ylab = "Studentized Residuals")
 ```
+
+Constant Variance
+```{r}
+#| warning: false
+
+tibble(x = fitted.values(m_income_power),
+       y = rstudent(m_income_power)) |> 
+  ggplot(aes(x = x, y = y)) +
+  geom_point(alpha = .6) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "blue", linewidth = 1) +
+  labs(title = "Studentized Residuals vs. Fitted Values",
+       x = "Fitted Values",
+       y = "Studentized Residuals")
+
+
+spreadLevelPlot(m_income_power)
+```
+
+Linearity
+```{r}
+crPlots(m_income_power, ask = FALSE)
+```
+
+**It seems like this transformation did not help. We still have some problems, particularly with normality and constant variance assumptions.**
+
+
+Clearly we want to spread out the lower values and contract the higher values, because that is what powers between 0 and 1 do. Logs do this too, so we might also transform by "log base 2" using `log2()`!
 
 **What is the logic of log (base 2)? What does a 1-unit increase in a log2 variable represent?**
 A one unit increase in log2(income), represents a doubling of income. We'll apply that transformation and refit the model.   
@@ -152,6 +265,7 @@ Linearity
 crPlots(m_income_log, ask = FALSE)
 ```
 
+**It seems to have helped with the constant variance assumption, at least when we look at a plot of the predicted values against the observed values (maybe not so much the spread-level plot), but we still have some problems.** 
 
 Let's think of the bulging rule. We can also transform X down to help solve some issues.    
 
@@ -200,6 +314,7 @@ Linearity
 crPlots(m_women_sqrt, ask = FALSE)
 ```
 
+This transformation doesn't improve the viability of our assumptions and complicates the interpretation of our regression coefficients....Probably not worthwhile.
 
 ### Take Away Points
 
