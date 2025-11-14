@@ -1,5 +1,5 @@
 ---
-title: "hw_11_key" 
+title: "hw_11_shell" 
 author: "TAs" 
 date: "`r lubridate::today()`"
 format: 
@@ -14,136 +14,42 @@ editor_options:
 
 ## Part A: Conceptual Questions
 
-### 1.	In the textbook, what do Judd and colleagues recommend in terms of reporting *simple* and *main* effects? What is their justification? Does Jaccard (2003) agree or disagree with this perspective? 
 
-
-
-### 2.	According to MacCallum and colleagues (2002), when should you dichotomize a continuous variable? Why?
+### 1. Of the assumptions of linear regression that refer to residuals, which two are the most problematic to violate in large samples? Why are these particularly concerning? What are solutions to violating these assumptions?
 
 
 
 
-### 3.	A researcher wants to determine if living in an urban versus rural area predicts anxiety. The researcher goes door to door in two towns (one urban and one rural) and asks all people living in each dwelling (home, apartment, etc.) questions to assess their anxiety. In multiple people live in the same dwelling, the researcher asks each of them to answer the questions. In two or three sentences, explain which model assumption is most directly violated by this research design.
+### 2. Explain the logic of a Q-Q plot and what normally distributed data would look like (about 3 sentences).
 
 
 
 
 ## Part B: Data Analysis
 
-Some researchers plan to examine whether alcohol consumption affects dart playing skills. Their study aims to explore the well-known placebo effect: if people believe they are consuming alcohol, or another drug, they may feel and behave as if they are actually under the influence of that substance when in reality they are not. Thus, the purpose of the study is to clarify whether it is the effect of alcohol or the expected effect of alcohol that leads to differences in performance.
+A public health organization wants to test the importance of staying active and healthy in the winter by examining links between cross-country skiing, vegetable consumption, and health, as measured by an independent doctor at the end of winter. Participants were 53 residents of the Madison, WI area who were recruited at the beginning of the winter and asked to record the number of times they went cross-country skiing over the course of the winter and their average daily vegetable consumption (in servings). At the end of the winter (i.e., the last week of March), a doctor conducted a health assessment of each participant and reported their health on a 0-10 scale, with 0 representing very poor health and 10 representing excellent health.    
 
-Sixty dart players are invited to an open-bar event where dartboards are made available. Participants were randomly assigned to either receive real alcohol or a convincing placebo. Non-alcoholic placebos were piloted beforehand and shown to be indistinguishable from alcoholic beverages. Players reported their prior experience with dart games and self-assessed coordination (rated right before the game) to control for differences in dart playing ability and to monitor for interactions with the experimental manipulation. Performance scores during the study ranged from 0-150. Blood alcohol concentration (BAC) was also determined. BAC was multiplied by 100 in this dataset.
+The researchers in the public health organization predict that cross-country skiing and vegetable consumption both contribute to overall health. They also expect to see little to no relationship between vegetable consumption and skiing behavior.   
 
-Researchers want to test their confirmatory hypothesis that the effect of BAC on game scores would be stronger for less experienced players. In addition, they also want to run exploratory analysis to test whether BAC and self-rated coordination interact to predict game scores.
+The following variables can be found in the `hw_11_data.csv` dataset.    
+
+- `sub_id`: Unique subject identification number (range 1 - 53).
+- `skiing`:	Number of times participant went cross-country skiing over the course of the winter (range 0 - 93).
+- `veggies`: Number of servings of vegetables participant consumes on an average day (range 0 - 16).
+- `fitness`: Level of health, as assessed by doctor, at the end of March (range 0-10).
 
 
-**Codebook:**   
-
-- `sub_id`: unique subject ID. (1 - 60) 
-- `condition`: alcohol condition. (placebo; alcohol)    
-- `experience`: prior experience with dart games. (novice; experienced)   
-- `bac`: blood alcohol concentration * 100. (0 - 10)   
-- `coordination`: self-assessed coordination. (0/poor - 10/good)   
-- `score`: performance scores during the study. (63 - 150)   
-
+### Setup
 ```{r}
 #| message: false
 
-options(conflicts.policy = "depends.ok") 
-library(tidyverse)
-library(broom)
-devtools::source_url("https://github.com/jjcurtin/lab_support/blob/main/case_analysis.R?raw=true")
-
-theme_set(theme_classic()) 
-
-path_data <- "homework/data"
-```
-
-### 1. Data preparation
-
-#### a. Read in the data file (`hw_11_data.csv`). 
-
-```{r}
 
 
 
 
 ```
 
-
-#### b. Explore univariate descriptive statistics for all variables. Also calculate bivariate correlations among continuous variables.
-
-```{r}
-
-
-
-
-
-
-```
-
-#### c. To test the two hypotheses, what variables should be centered to maximize the interpretability of your models? Why? 
-
-
-
-#### d. Create centered versions of the variables you named in question 1c.
-
-```{r}
-
-
-
-```
-
-
-### 2.	Group the data by all possible combinations of `condition` and `experience`. Then, run code to obtain the means and standard deviations for `score`, `coordination`, and `bac` in each of these groups.
-
-```{r}
-
-
-
-```
-
-
-### 3. Does the effect of BAC on game scores depend on experience?
-
-#### a.	Fit a model that addresses this question.
-```{r}
-
-
-```
-
-
-#### b.	Report and interpret each of the parameter estimates. Report F-value, and p-value for non-intercept estimates (one sentence each is sufficient).
-
-b0: 
-
-
-b1: 
-
-
-b2: 
-
-
-b3: 
-
-
-
-#### c.	Create a publication quality graph depicting the first model that you fit.
-```{r}
-
-
-
-
-
-
-
-
-
-
-```
-
-#### d.	Fill in the blanks for this regression equation, recording your answers as A-D in your QMD document:
-score = ___A___ + __B___ * bac_c + __C___ * experience_c + ___D____ * bac_c * experience_c
+### 1. Read in and inspect the data. Also source the functions you will use for case analysis.
 
 ```{r}
 
@@ -151,106 +57,100 @@ score = ___A___ + __B___ * bac_c + __C___ * experience_c + ___D____ * bac_c * ex
 ```
 
 
-
-#### e.	What is the magnitude of the effect of BAC for novice participants? Find the answer using the equation above, without recoding your variables in R.
-
-
-
-
-
-#### f.	What is the magnitude of the effect of experience groups for an individual with a BAC of 0? Find the answer using the equation above, without recoding your variables in R.
-
-
-
-
-
-#### g.	Test the simple effect of BAC for individuals in the novice group by fitting a model with experience groups dummy coded. Interpret the relevant coefficient and report an F-value and p-value.
+### 2. Fit a model testing the researchers’ hypothesis. Specifically, run a model testing whether skiing and vegetable consumption both uniquely explain variance in people’s health scores at the end of March (when included in the same model). Report your results (F stats, p-values, and model $R^2$) in a sentence.
 
 ```{r}
-
-
 
 
 ```
 
 
-#### h.	Test the simple effect of experience for someone with a BAC one standard deviation above the mean of that variable by fitting a model with recentered BAC. Interpret the relevant coefficient and report appropriate statistics.
+### 3. Examine whether there are violations to model assumptions for the model you fit above.
 
-```{r}
+#### a. Is the assumption of normality violated? How do you know?
 
-
-
-```
-
-
-#### i. Run code to conduct case analysis on the interaction model. 
-```{r}
-
-
-
-
-
-
-```
-
-
-#### j. Run code to examine if there are any violations to the assumption of normality and the assumption of constant variance. 
-
-**Note: Skip the assumption of linearity for now, since the component+residual plots do not accommodate interaction terms.**
-
-```{r}
-
-
-
-```
-
-#### k. Summarize the findings from your case analysis and inspection of model assumptions. Are there any issues? What can potentially be done to address these issues?
-
-
-
-
-
-### 4.	Does the effect of BAC on game scores depend on coordination?
-
-#### a.	Fit a model that addresses this question.
 ```{r}
 
 
 ```
 
-#### b.	Report and interpret each of the parameter estimates, reporting relevant statistics (one sentence each is sufficient).
-
-b0: 
-
-
-
-b1: 
-
-
-
-b2: 
-
-
-
-b3: 
-
-
-
-#### c.	Test whether there is a significant simple effect of coordination for someone who has a BAC at the legal limit (coded as 8 in this data file) by fitting a model with recentered BAC. Interpret the relevant coefficient and report appropriate statistics.
+#### b. Is the assumption of constant variance violated? How do you know?
 
 ```{r}
 
 
+```
 
+#### c. Is the assumption of linearity violated? How do yoy know?
+
+```{r}
 
 
 ```
 
 
-### 5.	What would happen to the SE of the parameter estimate of the interaction term in the previous model if you had used the uncentered versions of blood alcohol concentration and coordination? Would it increase, decrease, stay the same, or is it impossible to say what will happen to it?
+### 4. You suspect there may be outliers present in the dataset. 
+
+#### a. Identify which participants have high leverage. Note the variables on which each of these participants is extreme (i.e., why it has a large hat value). 
+
+```{r}
 
 
-### 6.	How long did this assignment take you (in hours)?
+```
 
 
+#### b. Identify participants that are regression outliers. Why are these participants regression outliers? 
+
+```{r}
+
+
+```
+
+
+#### c. Examine the Cook’s D influences of the participants. Are the participants who have extreme Cook’s D scores surprising to you or not?
+
+```{r}
+
+
+```
+
+
+### 5. Remove the 4 participants who have the highest Cook's D influence from the data and run your focal model again. What has changed? Why?
+
+```{r}
+
+
+```
+
+
+### 6. Examine whether there are violations to model assumptions for the model you just fit with outliers (i.e., high influence points) removed. 
+
+#### a. Is the assumption of normality violated? How does this model compare to the model above before removing the outliers, in terms of residual normality?
+
+```{r}
+
+
+```
+
+#### b. Is the assumption of constant variance violated? How does this model compare to the model above before removing the outliers, in terms of constant variance?
+
+```{r}
+
+
+```
+
+#### c. Is the assumption of linearity violated? How does this model compare to the model above before removing the outliers, in terms of linearity?
+
+```{r}
+
+
+```
+
+
+### 7. In the exercise above, we examined model assumptions first, conducted case analysis, and then examined model assumptions again with outliers removed. What is your take away from this exercise? How does case analysis influence your inspection of model assumptions? Write 2-3 sentences to reflect.
+
+
+
+
+### 8.	How many hours did this homework take you?
 
