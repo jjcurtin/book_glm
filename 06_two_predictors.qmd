@@ -1436,9 +1436,9 @@ How do we get the variability in `exam` explained/predicted by `iq` in this one 
 :::
 
 :::{.fragment}
-[A model comparison between the mean only model and the one predictor study hours model. Error is reduced in the `iq` model because `iq` explains variability that was previously unexplained in the mean-only model.]{style="color:blue;"}
+[A model comparison between the mean only model and the one predictor iq model. Error is reduced in the `iq` model because `iq` explains variability that was previously unexplained in the mean-only model.]{style="color:blue;"}
 
-- $SSE_{m\_mo} - SSE_{m\_sh}$
+- $SSE_{m\_mo} - SSE_{m\_iq}$
 
 ```{r}
 (sse(m_mo) - sse(m_sh)) |> round()
