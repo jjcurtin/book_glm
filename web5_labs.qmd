@@ -64,6 +64,7 @@
 
 ## Week 12: 11/21
 
+- [data](/lab/data/lab_12_data.csv)
 - [Student shell](/lab/week_12/lab_12_shell.qmd)
 - TA notebook: [qmd](https://dionysus.psych.wisc.edu/610/lab/lab_12_ta.qmd); [html](https://dionysus.psych.wisc.edu/610/lab/lab_12_ta.html)
 
