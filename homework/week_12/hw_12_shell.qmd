@@ -14,251 +14,167 @@ editor_options:
 
 ## Part A: Conceptual Questions
 
-A researcher is studying population density maps. She presents different maps to participants to indicate how many people live in each region of a made-up country. She predicts that presenting the map on a white background rather than a black background will predict higher estimates of the country’s population. She also examines whether a map that has borders (versus no borders) leads to higher estimates of the country’s population than a map that does not have borders.    
-
-### 1. Suppose the researcher showed you the following table, representing participants’ group means for estimated population density (1 = 1,000,000 people):    
-
-
-|Background|No Borders|  Borders |
-|----------|----------|----------|
-|  White   |    5.0   |    7.0   |
-|  Black   |    4.0   |    5.0   |
-
-
-#### a.	What is(are) the simple effect(s) for background? 
+### 1.	In the textbook, what do Judd and colleagues recommend in terms of reporting *simple* and *main* effects? What is their justification? Does Jaccard (2003) agree or disagree with this perspective? 
 
 
 
-#### b.	What is(are) the simple effect(s) for borders? 
+### 2.	According to MacCallum and colleagues (2002), when should you dichotomize a continuous variable? Why?
 
 
 
-#### c.	What is(are) the main effect(s) for background? 
-
-
-
-#### d.	What is(are) the main effect(s) for borders? 
-
-
-
-#### e.	What is(are) the grand mean(s) for the present study? 
-
-
-
-### 2. Forget about the table above. Suppose the researcher fit a linear model where:
-
-- `background_c` is coded `white` = -0.5 and `black` = 0.5
-- `borders_c` is coded `no borders` = -0.5 and `borders` = 0.5
-
-And the researcher got the following parameter estimates:
-$density = 10 + 2*background_c + 3*borders_c + 2*background_c*borders_c$
-
-
-Fill in the following table:
-
-|Background|No Borders|  Borders |
-|----------|----------|----------|
-|  White   |     A    |     B    |
-|  Black   |     C    |     D    |
-
-
-#### a. A = ?
-
-
-
-#### b. B = ?
-
-
-
-#### c. C = ?
-
-
-
-#### d. D = ?
+### 3.	A researcher wants to determine if living in an urban versus rural area predicts anxiety. The researcher goes door to door in two towns (one urban and one rural) and asks all people living in each dwelling (home, apartment, etc.) questions to assess their anxiety. In multiple people live in the same dwelling, the researcher asks each of them to answer the questions. In two or three sentences, explain which model assumption is most directly violated by this research design.
 
 
 
 ## Part B: Data Analysis
 
+Some researchers plan to examine whether alcohol consumption affects dart playing skills. Their study aims to explore the well-known placebo effect: if people believe they are consuming alcohol, or another drug, they may feel and behave as if they are actually under the influence of that substance when in reality they are not. Thus, the purpose of the study is to clarify whether it is the effect of alcohol or the expected effect of alcohol that leads to differences in performance.
+
+Sixty dart players are invited to an open-bar event where dartboards are made available. Participants were randomly assigned to either receive real alcohol or a convincing placebo. Non-alcoholic placebos were piloted beforehand and shown to be indistinguishable from alcoholic beverages. Players reported their prior experience with dart games and self-assessed coordination (rated right before the game) to control for differences in dart playing ability and to monitor for interactions with the experimental manipulation. Performance scores during the study ranged from 0-150. Blood alcohol concentration (BAC) was also determined. BAC was multiplied by 100 in this dataset.
+
+Researchers want to test their confirmatory hypothesis that the effect of BAC on game scores would be stronger for less experienced players. In addition, they also want to run exploratory analysis to test whether BAC and self-rated coordination interact to predict game scores.
+
+
+**Codebook:**   
+
+- `sub_id`: unique subject ID. (1 - 60) 
+- `condition`: alcohol condition. (placebo; alcohol)    
+- `experience`: prior experience with dart games. (novice; experienced)   
+- `bac`: blood alcohol concentration * 100. (0 - 10)   
+- `coordination`: self-assessed coordination. (0/poor - 10/good)   
+- `score`: performance scores during the study. (63 - 150)   
+
 ```{r}
 #| message: false
 
-options(conflicts.policy = "depends.ok") 
-library(tidyverse)
-library(skimr)
-library(broom)
-library(janitor)
-
-theme_set(theme_classic()) 
-
-path_data <- 
 ```
 
-A group of researchers were interested in how individuals with Attention-Deficit Hyperactivity Disorder (ADHD) may develop depression. Their theory posited that the comorbidity between ADHD and depressive symptoms depends on biological sex. In addition, the researchers believed that executive function of ADHD-diagnosed individuals is associated with the severity of depression symptoms, and this association becomes stronger as one gets older.
+### 1. Data preparation
 
-The researchers recruited a sample of adolescents and young adults (N = 1000) from the local community. Basic demographic information (`age`, `sex`, `income`) were solicited. In addition, the participants self-reported whether they had ever received a formal ADHD diagnosis (`adhd`). They also completed the Beck Depression Inventory (BDI; `depression`), which is a questionnaire that measures the severity of depression and has a score range of 0 to 63, with higher scores indicating endorsement of more depressive symptoms. Lastly, the participants' executive functioning was assessed using the NIH Toolbox Cognition Battery and were each assigned a T-score for their performance (`exec_func`).
-
-Specifically, the researchers aim to test the following two hypotheses: 
-
-1. ADHD is associated with depressive symptoms, more so among females than males.
-2. Among individuals diagnosed with ADHD, their level of executive function is more strongly associated with depression among older individuals.
-
-**Codebook:**    
-
-- `age`: participant age in years.
-- `sex`: biological sex.
-- `adhd`: historical diagnosis of ADHD.
-- `exec_func`: T-score for executive functioning; a higher score indicates better executive functioning relative to a same-aged normative sample.
-- `income`: annual household income in US dollars. Ignore this variable for now.
-- `depression`: total score on the BDI; a higher score indicates more severe depressive symptomatology.
-
-### 1. Read in the data (`hw_12_data.csv`), convert names to snake case, and update class categories according to our class conventions.
-
+#### a. Read in the data file (`hw_12_data.csv`). 
 
 ```{r}
 
-
-
 ```
 
 
-### 2. Create *dummy codes* for categorical predictors and *mean center* quantitative predictors. 
+#### b. Explore univariate descriptive statistics for all variables. Also calculate bivariate correlations among continuous variables.
 
 ```{r}
 
+```
 
+#### c. To test all three hypotheses, what variables should be centered to aid the interpretation of your models? Why? 
+
+
+#### d. Create centered versions of the variables you named in question 1c.
+```{r}
 
 ```
 
 
-### 3. Examine descriptive statistics.
+### 2.	Group the data by all possible combinations of `condition` and `experience`. Then, run code to obtain the means and standard deviations for `score`, `coordination`, and `bac` in each of these groups.
+```{r}
 
-#### a. Create a table that shows the number of children across levels of `adhd` and `sex` (making a total of four groups of observations).
+```
+
+
+### 3. Does the effect of BAC on game scores depend on experience?
+
+#### a.	Fit a model that addresses this question.
+```{r}
+
+```
+
+
+#### b.	Report and interpret each of the parameter estimates. Report F-value, and p-value for non-intercept estimates (one sentence each is sufficient).
+
+
+
+
+
+#### c.	Create a publication quality graph depicting the first model that you fit.
 
 ```{r}
 
-
 ```
 
+#### d.	Fill in the blanks for this regression equation, recording your answers as A-D in your QMD document:
+score = ___A___ + __B___ * bac_c + __C___ * experience_c + ___D____ * bac_c * experience_c
 
-#### b. Create a table that shows the mean of `depression` across levels of `adhd` and `sex` (making a total of four groups of observations).
+
+#### e.	What is the magnitude of the effect of BAC for novice participants? Find the answer using the equation above, without recoding your variables in R.
+
+
+
+#### f.	What is the magnitude of the effect of experience groups for an individual with a BAC of 0? Find the answer using the equation above, without recoding your variables in R.
+
+
+
+#### g.	Test the simple effect of BAC for individuals in the novice group by fitting a model with experience groups dummy coded. Interpret the relevant coefficient and report an F-value and p-value.
 
 ```{r}
 
-
-
-
 ```
 
 
-### 4. Fit a model that regresses `depression` on `adhd`, `sex`, and the `adhd`*`sex` interaction. Use dummy codes for your predictors.
+
+#### h.	Test the simple effect of experience for someone with a BAC one standard deviation above the mean of that variable by fitting a model with recentered BAC. Interpret the relevant coefficient and report appropriate statistics.
+
+*Note:* to recode so 1 SD **above** the mean is equal to 0, you **subtract** 1 SD from the mean-centered version. If you add 1 SD to the mean-centered version, that would make 1 SD below the mean = 0 (NOT what you want!)
 
 ```{r}
 
-
 ```
 
-### 5. Interpret each parameter etimate. 
 
 
-
-
-
-
-
-### 6. Recenter your predictors and refit the model to test the statistical significance of the simple effect of `adhd` for individuals whose biological sex assigned-at-birth is female. Report the statistical significance of that simple effect, along with relevant statistics (i.e., t- or F-statistics, p-value, and SE or 95% CI). Use proper formatting when reporting your statistics.
-
-
-
-
-```{r}
-
-
-
-
-
-```
-
-### 7. Make a publication-quality bar plot displaying the interaction effect of `adhd` and `sex` on BDI scores. Show predicted cell means, corresponding standard errors, and raw data points. Also appropriately label the axes, tick labels, and legend.
-
-```{r}
-
-
-
-
-
-
-
-
-
-
-```
-
-### 8. Create a subset of the data for testing the second hypothesis.
-
+#### i. Run code to conduct case analysis on the interaction model. 
 ```{r}
 
 
 ```
 
 
-### 9. Center the quantitative predictors within the subset of the data. 
+#### j. Run code to examine if there are any violations to the assumption of normality and the assumption of constant variance. 
+
+**Note: Skip the assumption of linearity for now, since the component+residual plots do not accommodate interaction terms.**
 
 ```{r}
 
+```
+
+#### k. Summarize the findings from your case analysis and inspection of model assumptions. Are there any issues? What can potentially be done to address these issues?
+
+
+
+```{r}
 
 ```
 
 
-### 10. Fit a model that regresses `depression` on `age_c`, `exec_func_c`, and the `age_c`*`exec_func_c` interaction.
+### 4.	Does the effect of BAC on game scores depend on coordination?
+
+#### a.	Fit a model that addresses this question.
 
 ```{r}
 
+```
+
+#### b.	Report and interpret each of the parameter estimates, reporting relevant statistics (one sentence each is sufficient).
+
+
+#### c.	Test whether there is a significant simple effect of coordination for someone who has a BAC at the legal limit (coded as 8 in this data file) by fitting a model with recentered BAC. Interpret the relevant coefficient and report appropriate statistics.
+
+```{r}
 
 ```
 
 
-### 11. Interpret each parameter etimate regardless of their statistical significance. 
+### 5.	What would happen to the SE of the parameter estimate of the interaction term in the previous model if you had used the uncentered versions of blood alcohol concentration and coordination? Would it increase, decrease, stay the same, or is it impossible to say what will happen to it?
 
 
+### 6.	How long did this assignment take you (in hours)?
 
-
-
-
-
-
-### 12. Without refitting the model, calculate the following simple effects: 
-
-#### a. The simple effect of executive functions for individuals who are 21 years old: 
-
-
-
-
-#### b. The simple effect of age for individuals whose executive functioning is two standard deviations above the mean
-
-
-
-  
-### 13. Make a publication-quality bar plot displaying the interaction effect of `age` and `exec_func` on BDI scores. Plot multiple regression lines representing the effect of `exec_func` at ages 16, 20, and 24. Include corresponding standard error bands, but do not include raw data points. Appropriately label the axes and any other aesthetics you use.
-
-```{r}
-
-
-
-
-
-
-
-
-
-
-
-```
-
-
-### 14.	How long did this assignment take you (in hours)?
-
-
-### 15. (OPTIONAL) Next semester, 2/3 of your TAs will be new. Is there anything in particular you would like to make sure your new TAs do (or don't) do? Things you have liked this semester that you want to make sure we keep doing in lab?
 
 
