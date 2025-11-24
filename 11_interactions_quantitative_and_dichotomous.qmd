@@ -571,15 +571,15 @@ Quantify effect of bias from model formula (can use any model).
 
 [For White defendants:]{style="color:blue;"}
     
-Bias effect = $0.6*\text{bias}_c + .4*\text{black defend}*\text{bias}_c$  
-Bias effect = $0.6*\text{bias}_c + .4*0*\text{bias}_c$  
-Bias effect = $0.6*\text{bias}_c$
+Bias effect = $0.6 + .4*\text{black defend}$  
+Bias effect = $0.6 + .4*0$  
+Bias effect = $0.6$
 
 [For Black defendants:]{style="color:blue;"}     
 
-Bias effect = $0.6*\text{bias}_c + .4*\text{black defend}*\text{bias}_c$  
-Bias effect = $0.6*\text{bias}_c + .4*1*\text{bias}_c$  
-Bias effect = $1.0*\text{bias}_c$
+Bias effect = $0.6 + .4*\text{black defend}$  
+Bias effect = $0.6 + .4*1$  
+Bias effect = $1.0$
     
 --------------------------------------------------------------------------------
 
@@ -777,21 +777,21 @@ Quantify effect of defendant race from model formula (can use any model).
 
 [Mean:]{style="color:blue;"}
     
-Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*\text{bias}_c$  
-Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*0$  
-Defendant race effect = $8.5*\text{black defend}_c$
+Defendant race effect = $8.5 + .4*\text{bias}_c$  
+Defendant race effect = $8.5 + .4*0$  
+Defendant race effect = $8.5$
 
 [-1 SD:]{style="color:blue;"}
 
-Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*\text{bias}_c$  
-Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*-16.2$  
-Defendant race effect = $1.8*\text{black defend}_c$ (w/rounding error)
+Defendant race effect = $8.5 + .4*\text{bias}_c$  
+Defendant race effect = $8.5 + .4*-16.2$  
+Defendant race effect = $1.8$ (w/rounding error)
 
 [+1 SD:]{style="color:blue;"}
 
-Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*\text{bias}_c$  
-Defendant race effect = $8.5*\text{black defend}_c + .4*\text{black defend}_c*16.2$  
-Defendant race effect = $15.2*\text{black defend}_c$ (w/rounding error)
+Defendant race effect = $8.5 + .4*\text{bias}_c$  
+Defendant race effect = $8.5 + .4*16.2$  
+Defendant race effect = $15.2$ (w/rounding error)
 
 --------------------------------------------------------------------------------
 
