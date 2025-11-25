@@ -567,8 +567,8 @@ What model comparison will get you the test of the main effect of `group`?
 :::{.fragment}
 [You will compare the full model with `group` and `age` to the compact model with only `age`.]{style="color:blue;"}
 
-- Compact: $health ~ b_0 + 0*alcohol_{d3} + 0* depress_{d3} + b_3*age$
-- Augmented: $health ~ b_0 + b_1*alcohol_{d3} + b_2*depress_{d3} + b_3*age$
+- Compact: $\hat{health} = b_0 + 0*alcohol_{d3} + 0* depress_{d3} + b_3*age$
+- Augmented: $\hat{health} = b_0 + b_1*alcohol_{d3} + b_2*depress_{d3} + b_3*age$
 
 This is an F test with 2 df ($P_a - P_c$) in the numerator and 38 ($N-P_a$) in the denominator
 
