@@ -558,29 +558,39 @@ What are the interpretations of $b$ for product term in each model (from a bias 
 
 - $\text{guilt} = 48.1 + -8.5*\text{white defend} + 1.0*\text{bias}_c + -.4*\text{white defend}*\text{bias}_c$   
 
-::: {.callout-important}
-# Exercise
-Quantify effect of bias from model formula (can use any model).
-:::
-
 --------------------------------------------------------------------------------
 
-**From Dummy, White = 0 model**  
+::: {.callout-important}
+# Exercise
+Quantify effect of bias from an appropriate linear model.
+:::
 
-- $\text{guilt} = 39.6 + 8.5*\text{black defend} + 0.6*\text{bias}_c + .4*\text{black defend}*\text{bias}_c$  
+:::{.fragment}
+[You can use any linear model.  I prefer one that is raw on quant predictors and dummy coded for dichotomous predictors]{style="color:blue;"}
+```{r}
+#| code-fold: true
+  
+lm (guilt ~ black_defend * bias, data = data) |> 
+  tidy()
+```
+
+- $\text{guilt} = 19.2 + -5.9*\text{black defend} + 0.6*\text{bias} + .4*\text{black defend}*\text{bias}$  
+
 
 [For White defendants:]{style="color:blue;"}
     
-Bias effect = $0.6 + .4*\text{black defend}$  
-Bias effect = $0.6 + .4*0$  
-Bias effect = $0.6$
+- Bias effect = $0.6 + .4*\text{black defend}$  
+- Bias effect = $0.6 + .4*0$  
+- Bias effect = $0.6$
 
 [For Black defendants:]{style="color:blue;"}     
 
-Bias effect = $0.6 + .4*\text{black defend}$  
-Bias effect = $0.6 + .4*1$  
-Bias effect = $1.0$
-    
+- Bias effect = $0.6 + .4*\text{black defend}$  
+- Bias effect = $0.6 + .4*1$  
+- Bias effect = $1.0$
+   
+:::
+
 --------------------------------------------------------------------------------
 
 ## Quantitative & Dichotomous: Dichotomous simple effects   
@@ -764,33 +774,40 @@ What are the interpretations of $b$ for product term in each model (from a defen
 
 - $\text{guilt} = 56.7 + 15.2*\text{black defend}_c + 0.8*\text{bias}_h + .4*\text{black defend}_c*\text{bias}_h$  
 
+--------------------------------------------------------------------------------
+
 ::: {.callout-important}
 # Exercise
 Quantify effect of defendant race from model formula (can use any model).
 :::
 
---------------------------------------------------------------------------------
+::{.fragment}
+[You can use any linear model.  I prefer one that is raw on quant predictors and dummy coded for dichotomous predictors]{style="color:blue;"}
+```{r}
+#| code-fold: true
+  
+lm (guilt ~ black_defend * bias, data = data) |> 
+  tidy()
+```
 
-**From centered model**  
-
-- $\text{guilt} = 43.9 + 8.5*\text{black defend}_c + 0.8*\text{bias}_c + .4*\text{black defend}_c*\text{bias}_c$  
+- $\text{guilt} = 19.2 + -5.9*\text{black defend} + 0.6*\text{bias} + .4*\text{black defend}*\text{bias}$  
 
 [Mean:]{style="color:blue;"}
     
-Defendant race effect = $8.5 + .4*\text{bias}_c$  
-Defendant race effect = $8.5 + .4*0$  
-Defendant race effect = $8.5$
+Defendant race effect = $-5.9 + .4*\text{bias}$  
+Defendant race effect = $-5.9 + .4*35$  [NOTE: mean of bias = ~35]
+Defendant race effect = $8.5$ (w/rounding error)
 
 [-1 SD:]{style="color:blue;"}
 
-Defendant race effect = $8.5 + .4*\text{bias}_c$  
-Defendant race effect = $8.5 + .4*-16.2$  
+Defendant race effect = $-5.9 + .4*\text{bias}$  
+Defendant race effect = $-5.9 + .4*51$  [NOTE: +1 SD above mean of bias = ~51]
 Defendant race effect = $1.8$ (w/rounding error)
 
 [+1 SD:]{style="color:blue;"}
 
-Defendant race effect = $8.5 + .4*\text{bias}_c$  
-Defendant race effect = $8.5 + .4*16.2$  
+Defendant race effect = $-5.9 + .4*\text{bias}$  
+Defendant race effect = $-5.9 + .4*19$  [NOTE: -1 SD above mean of bias = ~19]
 Defendant race effect = $15.2$ (w/rounding error)
 
 --------------------------------------------------------------------------------
