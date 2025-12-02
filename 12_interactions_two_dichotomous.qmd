@@ -290,6 +290,8 @@ Link parameter estimates $b_0$, $b_1$, & $b_2$ to the figure below.
 
 ```{r}
 #| echo: false
+#| out-height: 3in
+#| out-width: auto
 
 data <- data |> 
   mutate(sex_c = if_else(sex == "male", -.5, .5),
@@ -528,6 +530,8 @@ Link all coefficients to the figure below.
 
 ```{r}
 #| echo: false
+#| out-height: 3in
+#| out-width: auto
 
 m_int <- lm(att ~ sex_c*rel_c, data)
 
@@ -593,6 +597,8 @@ Link parameter estimates $b_0$, $b_1$, & $b_2$ to the table of means below.
 :::
 
 ```{r}
+#| out-height: 3in
+#| out-width: auto
 #| echo: false
 
 ex_tbl
@@ -676,6 +682,8 @@ Link all coefficients to the figure below.
 
 ```{r}
 #| echo: false
+#| out-height: 3in
+#| out-width: auto
 
 data <- data |> 
   mutate(sex_d = if_else(sex == "male", 0, 1),
@@ -835,6 +843,8 @@ The main effect of sex was significant, 95% CI($b$)=[2.22, 3.78], $\eta_p^2= 0.4
 
 ```{r}
 #| code-fold: true
+#| out-height: 2in
+#| out-width: auto
 
 data_plot <-  expand.grid(sex_c = c(-.5, .5), rel_c = c(-.5, .5)) |> 
   mutate(att = predict(m_int,
