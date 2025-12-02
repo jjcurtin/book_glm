@@ -5,10 +5,6 @@
 
 - Judd et a., Chapter 1, Introduction to Data Analysis
 
-### Supplemental
-
-- None
-
 
 ## Unit 2: Sampling Distributions
 ### Required
@@ -26,10 +22,6 @@
 
 - Judd et al. Chapter 4. Simple Models: Statistical Inferences about Parameter Values
 
-### Supplemental
-
-- None
-
 
 ## Unit 4: One Quantitative Predictor
 ### Required
@@ -46,9 +38,6 @@
 
 - Judd, C. M., McClelland, G. H., & Ryan, C. S. (2017). Chapter 8. One-Way ANOVA (pp. 168-178). In Data Analysis: A Model Comparison Approach.
 
-### Supplemental
-
-- None
 
 
 ## Unit 6: Two Predictors
@@ -83,9 +72,8 @@
 
 ### Required
 
-- [Fox, J. (2008). Transforming Data (Chapter 4).](/readings/fox2008.pdf)
+- [Fox, J. (2008). Transforming Data (Chapter 4).](/readings/fox2008ch4.pdf)
 
-### Supplemental
 
 
 # Unit 10: Interactions between Two Quantitative Predictors
@@ -94,10 +82,6 @@
 
 - [Jaccard, J. & Turissi, R. (2003). Interaction effects in multiple regression (2nd Edition). SAGE Series (#72): Quantitative Applications in the Social Science. pp. 16-43.](/readings/jaccard2003.pdf)
 
-### Supplemental
-
-- None
-
 
 # Unit 11: Interactions between One Quantitative and One Dichotomous Predictor
 
@@ -105,7 +89,6 @@
 
 - Judd, C. M., McClelland, G. H., & Ryan, C. S. (2017). Chapter 7. Moderated and Nonlinear Regression Models (pp. 135-158). In Data Analysis: A Model Comparison Approach.
 
-### Supplemental
 
 
 # Unit 12: Interactions between Two Dichotomous Predictors
@@ -118,31 +101,34 @@
 
 - Rosnow, R. & Rosenthal, R. (1989) Definition and Interpretation of Interaction Effects.  Psychological Bulletin, 105, 143-146.
 - [Brauer, M. & Judd, C. M. (2000) Defining variables in relationship to other variables: When interactions suddenly turn out to be main effects. Journal of Experimental Social Psychology, 36, 410-423.](/readings/brauer2000.pdf)
-- Garcia-Marques, L., Garcia-Marques, T., & Brauer, M. (2014). Buy three but get only two: The smallest effect in a 2 x 2 ANOVA is always uninterpretable. Psychonomic
-Bulletin & Review, 21, 1415-1430.
+- Garcia-Marques, L., Garcia-Marques, T., & Brauer, M. (2014). Buy three but get only two: The smallest effect in a 2 x 2 ANOVA is always uninterpretable. Psychonomic Bulletin & Review, 21, 1415-1430.
 
 # Unit 13: Categorical Predictors with > 2 Levels
 
 ### Required
 
-- UPDATE
+- NONE 
 
 ### Supplemental
 
+- [Kirk R. (1995). Multiple Comparison Tests. In Experimental design: Procedures for the behavioral sciences (3rd Ed.), p. 154-201. Paciﬁc Grove (CA): Brooks/Cole.](/readings/kirk1995.pdf)
 
-# Unit 14: Statistical Power
+
+# Unit 14: The Generalized Linear Model
 
 ### Required
 
-- UPDATE
+- Judd, C. M., McClelland, G. H., & Ryan, C. S. (2017). Chapter 14. Logistic Regression: Dependent Categorical Variables (pp. 339 - 353). In Data Analysis: A Model Comparison Approach.
 
 ### Supplemental
 
+- [Tate, R. (1993). Logistic Regression. Unpublished chapter.](/readings/tate1993.pdf)
+- [Fox, J. (2008). Chapter 14. Logit and Probit models for categorical response variables. In Applied Regression Analysis and Generalized Linear Models (2nd Ed.), p. 335-369.](/readings/fox2008_ch14.pdf)
+- [Fox, J. (2008) Chapter 15. Generalized Linear Models. In Applied Regression Analysis and Generalized Linear Models (2nd Ed.), p. 379-424.](/readings/fox2008_ch15.pdf)
 
-# Unit 15: The Generalized Linear Model
+# Unit 15 Statistical Power
 
 ### Required
 
-
-### Supplemental
-
+- [Button, K. S., Ioannidis, J. P., Mokrysz, C., Nosek, B. A., Flint, J., Robinson, E. S., & Munafò, M. R. (2013). Power failure: why small sample size undermines the reliability of neuroscience. Nature Reviews Neuroscience, 14(5), 365-376.](/readings/button2013.pdf)
+- [Cohen, J. (1992). A power primer. Psychological Bulletin, 112, 155-159.](/readings/cohen1992.pdf)
