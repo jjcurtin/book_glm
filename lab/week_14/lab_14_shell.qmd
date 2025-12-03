@@ -11,27 +11,51 @@ editor_options:
   chunk_output_type: console
 ---
 
-Welcome to lab 14!
-
 ## Objectives
 
-Today we will cover:
-1. Dummy Coding & Contrast Coding
-2. Generalized linear model
+Today we will cover: 
+1. Conceptual exercise: understanding effects from a regression equation through manual calculations.
+2. Continuous-by-continuous interactions
+3. 2-by-2 ANOVA
+4. Dummy Coding & Contrast Coding for multi-level categorical variables
 
-## Predictor with Three Levels
+## Conceptual Exercise
 
-We'll go back to the prestige dataset again!
+Suppose you sampled 400 participants and asked them to report whether or not they read for pleasure (a score of -0.5 indicates they do not read for pleasure and a score of 0.5 indicates they do read for pleasure), the number of hours spent outside per week (ranging from 0 to 20), and happiness (measured on a 50-point scale with greater numbers indicating greater happiness). There are the same number of people who read for pleasure as there are people who do not read for pleasure. On average, participants in your sample spend 10 hours outside per week. You obtain the following results:    
 
-In this example, we want to test the hypothesis that average income will differ by the type of occupation. We control for education as a covariate.
 
-**education** (numeric): average education of occupational incumbents, years, in 1971
+### 1. What is the magnitude of the simple effect of time spent outside on happiness for participants who read for pleasure?
 
-**income** (numeric): average income of incumbents, dollars, in 1971
 
-**type** (factor): Type of occupation. A factor with levels: bc, Blue Collar; prof, Professional, Managerial, and Technical; wc, White Collar.
+### 2. What is the magnitude of the simple effect of time spent outside on happiness for participants who do not read for pleasure?   
 
-### Setup
+
+### 3. What is the effect of reading on happiness for participants with an average number of hours spent outside? Is this a simple or main effect?   
+
+
+### 4. Describe in words how the effect of reading on happiness varies by the number of hours spent outside.    
+
+
+### 5. How many hours does a person spend outside if they have a score of -3 on the outside_c predictor?   
+
+
+### 6. What is the predicted happiness for a person who spends 14 hours outside per week and does not read for pleasure?   
+
+
+### 7. Change the coding of reading to 0 = does not read and 1 = reads for pleasure and fill in the resulting equation:    
+
+
+### 8. How (if at all) will the standard errors for the parameter estimates for the interaction terms of the two models (one with read_c and one with read) differ?  
+
+
+### 9. Write the augmented and compact model for the model comparison which tests whether the read_c * outside_c interaction effect is significant.    
+
+
+**End of exercise!**   
+
+`CHECKPOINT`
+
+### 10. Setup 
 
 ```{r}
 #| message: false
@@ -46,20 +70,243 @@ theme_set(theme_classic())
 path_data <- "lab/data"
 ```
 
-Read in `lab_14.csv` and inspect the data
+## Continuous x continuous interaction
+
+Remember, the data was from a hypothetical study where the researcher examined whether preschoolers benefit from collaborative learning (vs. passive learning) when they are learning about the external world. We also tested whether older preschoolers learn better in collaboration, such that the benefit would be considerably smaller for younger preschoolers. We had three variables:
+
+- `age` (continuous; months since birth)
+- `condition` (dichotomous; Observe [0] or Collaborate [1])
+- `learning` (sponge uses in percentage indicative of preschoolers' learning)
+
+In addition, parents of the preschooler also indicated the extent to which the preschooler engage in social behaviors that are intended to benefit others (e.g., sharing).
+
+- `prosociality` (7-point Likert scale; a higher score indicates being more prosocial)   
+
+###  11. Within the collaborate condition, it is possible that preschoolers benefit from developmental maturity (i.e., being older) only if they like interacting with and helping other kids (i.e., are prosocial). Thus, the researcher now wants to test the below exploratory hypothesis: *within the Collaborate condition*, the effect of age is moderated by preschooler prosociality. Load in the data (from week 12's file).
+
 ```{r}
-data <- read_csv(here::here(path_data, "lab_14_data.csv")) |> 
+d <- 
+```
+
+
+### 12. Explore the univariate statistics and distributions related to `age` and `prosociality`.
+
+```{r}
+
+```
+
+### 13. Subset the data and get observations in the Collaborate condition only.
+
+```{r}
+d_collab <- 
+```
+
+### 14. Prepare your data for analysis by centering quantitative variables.
+
+```{r}
+
+```
+
+### 15. Fit the appropriate model to test the hypothesis.
+
+```{r}
+
+```
+
+
+### 16. Interpret the coefficients.
+
+```{r}
+
+```
+
+1. Intercept: 
+
+2. age_c: 
+
+3. prosociality_c: 
+
+4. interaction: 
+
+
+### 17. Publication-quality graph for this model.
+
+```{r}
+m_graph <- lm(learning ~ age*prosociality, data = d_collab)
+
+d_graph <- expand_grid(age = seq(from = min(d_collab$age),
+                                 to = max(d_collab$age),
+                                 length.out = 100),
+                       prosociality = c(mean(d_collab$prosociality) - sd(d_collab$prosociality),
+                                        mean(d_collab$prosociality),
+                                        mean(d_collab$prosociality) + sd(d_collab$prosociality))
+                       )
+
+preds <- predict(m_graph, newdata = d_graph, se.fit = TRUE) |> 
+  as_tibble() |> 
+  mutate(upper = fit + se.fit, 
+         lower = fit - se.fit) |> 
+  bind_cols(d_graph)
+
+preds <- preds |> mutate(prosociality_lab = factor(prosociality,
+                              c(mean(d_collab$prosociality)- sd(d_collab$prosociality),
+                                mean(d_collab$prosociality),
+                                mean(d_collab$prosociality)+ sd(d_collab$prosociality)),
+                              c("-1 SD", "Mean", "+1 SD")))
+
+ggplot() +
+  geom_smooth(data = preds, stat = "identity", 
+              aes(x = age, y = fit, ymin = lower, ymax = upper,
+                  color = prosociality_lab, fill = prosociality_lab)) + 
+  labs(x = "Age (months)", 
+       y = "Learning (percentage)", 
+       main = "Collaborative learning is beneficial in older preschoolers",
+       color = "Prosociality", 
+       fill = "Prosociality") + 
+  scale_color_brewer(palette = "Set1") + 
+  scale_fill_brewer(palette = "Set1") 
+
+```
+
+`CHECKPOINT`
+
+## 2 x 2 ANOVA   
+
+**Clean up your R environment.**
+
+```{r}
+rm(list = ls())
+path_data <- "lab/data"
+```
+
+A researcher is testing whether watching a video about the benefits of a new tax policy moderates the relationship between political affiliation and support for that policy. The researcher recruits participants and randomly assigns them to either watch or not watch a short video. The researcher then measures whether they support the policy and determines the participant's political affiliation with a continuous and dichotomous measure, respectively.   
+
+The codebook for this dataset:   
+- `cond`: Assigned condition; 0 = no video, 1 = video    
+- `support`: Support for the new tax policy;  0 (do not support at all) to 10 (strongly support)   
+- `political_dichot`: Political affiliation measured dichotomously; 0 (Republican), 1 (Democrat)   
+
+
+### 18. Run the code below to simulate this dataset.
+```{r}
+set.seed(123)
+
+d <- tibble(cond = sample(0:1, 600, replace = TRUE),
+            political_cont = sample(1:7, 600, replace = TRUE)) |>
+  mutate(political_dichot = if_else(political_cont %in% c(1, 2, 3), 0,
+                                    if_else(political_cont %in% c(5, 6, 7), 1, 
+                                            sample(0:1, 600, replace = TRUE))),
+         interact = political_cont * cond,
+         support = round(pmax(0, pmin(10, rnorm(600, mean = 5, sd = 2) + 0.2 * interact)))) |> 
+  select(-interact, -political_cont) |> 
   glimpse()
 ```
 
+### 19. Examine the univariate and bivariate summary statistics for the variables in the dataframe, `d`.
 ```{r}
-skim(data)
+
 ```
 
-Our type variable has three different categories. It would be most appropriate to class type as a factor. Let's define the levels!
+
+### 20. Create two tables reporting the number of people at each level of the predictor variables (`cond` and `political_dichot`).
 ```{r}
-data <- data |> 
-  mutate()
+
+```
+
+### 21. Create a table reporting the average support score for each level of the predictor variables.
+```{r}
+
+```
+
+### 22. Create a contingency table reporting the average support score for all combinations of condition and political affiliation (measured dichotomously).    
+
+
+```{r}
+table_avg<- d |> 
+  mutate(cond = factor(cond, c(0,1), c("No Video (0)", "Video (1)")),
+         political_dichot = factor(political_dichot, c(0,1), c("Republican (0)" , "Democrat (1)"))) |> 
+  group_by(cond, political_dichot) |> 
+  summarise(mean=mean(support)) |> 
+  ungroup() |> 
+  pivot_wider(names_from = political_dichot, values_from = mean) 
+
+print(table_avg)
+```
+
+Based on the table you created, are the means consistent with a model in which the interaction between `cond` and `political_dichot` is significant? How can you tell?   
+
+  
+
+**If you were to fit a linear model such that:**
+$support = b0 + b1*cond + b2*political + b3*cond*political$
+**...what values will b0, b1, b2, and b3 be, by just looking at the table you created above?**
+
+
+
+### 23. Fit a linear model to test whether condition and political affiliation (measured dichotomously) interact to predict support for the tax policy. Use contrast coded variables. 
+```{r}
+d <- d |> 
+  mutate(cond_c = recode(cond, "0" = -0.5, "1" = 0.5),
+         political_dichot_c = recode(political_dichot, "0" = -0.5, "1" = 0.5))
+
+m_1 <- lm(support ~ cond_c * political_dichot_c, data = d)
+tidy(m_1)
+
+anova(lm(support ~ cond_c + political_dichot_c, data = d), m_1)
+```
+
+
+### 24. Create a publication quality bar graph depicting the cell means with error bars representing the standard error of the point estimates from the model you just tested.  
+```{r}
+d <- d |> 
+  mutate(cond_str = as.factor(if_else(cond == 0, "No Video", "Video")),
+         political_dichot_str = as.factor(if_else(political_dichot == 0, 
+                                                 "Republican", "Democrat")))
+
+m_graph <- lm(support ~ cond_str * political_dichot_str, data = d)
+
+x <- expand.grid(cond_str = c("No Video", "Video"), 
+                 political_dichot_str = c("Republican", "Democrat"))
+
+preds <- predict(m_graph, x, se.fit = TRUE) |> 
+  as_tibble() |> 
+  mutate(upper = fit + se.fit,
+         lower = fit - se.fit) |> 
+  bind_cols(x)
+
+ggplot(preds, aes(x = cond_str, y = fit, fill = political_dichot_str)) +
+  geom_bar(stat = "identity",  
+           position = position_dodge(width = .5), 
+           width = .5) + 
+  geom_point(data = d, aes(y = support, x = cond_str, 
+                           group = political_dichot_str), 
+             position = position_jitterdodge(.22, 0, .5), 
+             alpha = .5) + 
+  geom_errorbar(aes(ymin = lower, ymax = upper), 
+                position = position_dodge(width = .5), 
+                width = .25) +
+  labs(x = "Condition", 
+       y = "Support for Tax Policy",
+       fill = "Political Affiliation") +
+  scale_fill_manual(values = c("#851924", "#3160b0"))
+```
+
+## Predictor with Three Levels
+
+We'll go back to the prestige dataset again! Remember how we kept on removing type = "prof" occupations because we didn't know how to deal with a 3-level categorical predictor? Now we can!
+
+In this example, we want to test the hypothesis that average income will differ by the type of occupation. We control for education as a covariate.
+
+**education** (numeric): average education of occupational incumbents, years, in 1971
+
+**income** (numeric): average income of incumbents, dollars, in 1971
+
+**type** (factor): Type of occupation. A factor with levels: bc, Blue Collar; prof, Professional, Managerial, and Technical; wc, White Collar.
+
+
+Read in `lab_14_data.csv` and inspect the data
+```{r}
+data <- 
 ```
 
 
@@ -67,35 +314,31 @@ data <- data |>
 
 First, let's mean center the covariate education.
 ```{r}
-data <- data |> 
-  mutate()
+
 ```
 
 Create dummy variables using professional as a reference group
 ```{r}
-data <- data |> 
-  mutate()
+
 ```
 
 Now let's fit the model and see what the output is
 ```{r}
-m_1 <- 
-tidy(m_1)
+
 ```
 
-income = 7639 + (-102) * blue_d3 + (-2788) * white_d3 + 888 * education_m
 
 **What's the predicted income for someone with average levels of education in blue collar jobs?**
 
-> Your response here.
+
 
 **What's the predicted income for someone with average levels of education in professional jobs?**
 
-> Your response here.
+
 
 **What's the predicted income for someone with average levels of education in white collar jobs?**
 
-> Your response here.
+
 
 ``CHECKPOINT``
 
@@ -104,52 +347,30 @@ income = 7639 + (-102) * blue_d3 + (-2788) * white_d3 + 888 * education_m
 Let's try another method to dummy code our predictor using R's native function
 
 ```{r}
+data <- data |> 
+  mutate(type = fct(type, levels = c("Blue Collar", "Professional",
+                                     "White Collar")))
 
+contrasts(data$type)
 ```
 
 We see that the default reference group for contrasts() is the first level of the factor variable. Let's change the reference group to `Professional` by changing the base argument
-
 ```{r}
-
+contrasts(data$type) <- contr.treatment(levels(data$type), base = 2)
+contrasts(data$type)
 ```
 
 Compare the results to the hand-coded version. Is there any difference?
 ```{r}
-lm() |> tidy()
+lm(income ~ type + education_m, data) |> tidy()
 ```
 
-**What model comparison will get you the test of the main effect of group?**
+**What model comparison will get you the test of the main effect of group? Run that comparison**
 
-*Compact*: ???????
+
 
 ```{r}
 
-```
-
-Now let's calculate delta_r2
-
-```{r}
-delta_r2 <- function(compact, augmented) {
-  broom::glance(augmented)$r.squared - broom::glance(compact)$r.squared
-}
-```
-
-**$\Delta R^2$ for the full model:**
-
-```{r}
-delta_r2(lm(), m_1)
-```
-
-**$\Delta R^2$ for the blue collar vs. professional:**
-
-```{r}
-delta_r2(lm(), m_1)
-```
-
-**$\Delta R^2$ for the white collar vs. professional:**
-
-```{r}
-delta_r2(lm(), m_1)
 ```
 
 ### Contrast Coding
@@ -158,25 +379,26 @@ We want to test a more specific hypothesis that Professional workers earn more t
 
 **What contrasts are we testing?**
 
-> Your answer here.
+1) White & Blue Collar vs. Professional; 2) White vs. Blue Collar
 
 Let's manually create a unit-weighted contrast.
 ```{r}
-data <- data |> 
-  mutate(
 
-  )
 ```
 
 Fit our model
 ```{r}
-m_2 <- lm()
-tidy(m_2)
+
 ```
 
 We can also use the `matrix` function to create contrast coding
 ```{r}
-our_contrasts <- matrix()
+our_contrasts <- matrix(c(1/3, -2/3, 1/3,
+                            -.5,  0, .5), 
+                        ncol = 2,
+                        dimnames = list(c("Blue Collar", "Professional", 
+                                          "White Collar"),
+                                        c("prof_other", "bc_wc")))
 
 our_contrasts
 contrasts(data$type) <- our_contrasts
@@ -184,266 +406,13 @@ contrasts(data$type) <- our_contrasts
 
 Fit the model again. Are the results different?
 ```{r}
-m_3 <- lm()
-tidy(m_3)
+
 ```
 
 **How to test the main effect of type?**
 
-We compare it to a model that includes the covariate only!
-
 ```{r}
-anova(lm(), m_3)
-```
-
-**Plotting**: Create a publication quality graph that depicts a bar graph representing mean income of different occupation types with standard error bars
-```{r}
-d_graph <- tibble(
-  type = ,
-  education = 
-)
-
-m_graph <- lm()
-
-preds <- predict(m_graph, d_graph, se.fit = TRUE) |> 
-  as_tibble() |> 
-  mutate(upper = fit + se.fit,
-         lower = fit - se.fit) |> 
-  bind_cols(d_graph)
-```
-
-```{r}
-ggplot()
 
 ```
 
-``CHECKPOINT``
-
-## GLM
-
-**What type of data requires logistic regression?**
-
-> Your answer here.
-
-**What are odds? What is the formula to use to get from probabilities to odds?**
-
-Odds are generally defined as the ratio of an event occurring vs not occurring. So, if an event occurs with a probability of .5, the odds are even (1:1)
-
-.5 / (1 - .5) = 1
-
-If an event occurs with a probability of .33, then the odds of that event occurring are .33 / (1 - .33) \# .5 or 1:2 (rather low). That is, out of three times, the event is likely to happen once, so the odds are the 1 time it happens: the 2 times it doesn't, 1:2 or .5
-
-You don't need a formula to convert from odds to probabilities if you understand what they are! For instance, if a race horse has 3:2 odds of winning, we expect it to win 3 times for every 2 losses. In other words, it should win 3 out of 5 (3/5) races, or 60% of the time. It can be helpful when converting from odds to probability to map out the sample space of possible outcomes and their frequencies of occurrence, and then you just need to count.
-
-``EXCERCISE``
-
-**1.  What is the probability that an event has 3:1 odds of occurring?**
-
-> Your answer here.
-
-**2.  What are the odds that an event with 80% chance of occurring will occur?**
-
-> Your answer here.
-
-**3.  What is the probability that an event has an odds of 5?**
-
-> Your answer here.
-
-``CHECKPOINT``
-
-For questions 4, 5, and 6, refer to the following table:
-
-Table 1. A 2 x 2 design with a dichotomous outcome. Each cell has 12 participants. Note a value of x represents x/12 participants in that cell had an outcome score of 1 (all  other participants in that cell had a score of 0).
-
-|             | Group A | Group B |
-|-------------|---------|---------|
-| Condition 1 | 6       | 2       |
-| Condition 2 | 8       | 4       |
-
-**4. Calculate the probability that someone in Group A Condition 1 will have an outcome score of 1**
-
-> Your answer here.
-
-**5. Calculate the odds that someone in Group B Condition 1 will have an outcome score of 1**
-
-> Your answer here.
-
-**6. Calculate the probability someone in Group B will have an outcome score of 1 **
-
-> Your answer here.
-
-**7. Calculate the odds that someone in Group B will have an outcome score of 1**
-
-> Your answer here.
-
-**8. Calculate the odds ratio that someone in Group A, compared to Group B will have a score of 1.**
-
-> Your answer here.
-
-**9. Interpret the odds ratio you found in part 8**
-
-> Your answer here.
-
---------
-
-Let's look at a more specific example.
-
-**First, clean your workspace!**
-
-Fitting a generalized linear model is straightforward.  You merely use the glm() function and specify a family with which you wish to model the error. You can also specify a link function by doing family = binomial("logit"), for example. However, the default link for the binomial family is the logit (log-odds), so the extra bit of typing is unnecessary.
-
-We'll be using the Cowles dataset from carData package. These data come from a study of the personality determinants of volunteering for psychological research.
-
-**extraversion**: scale from Eysenck personality inventory\
-**sex at birth**: a factor with two levels: female; male\
-**volunteer**: volunteering, a factor with levels: no; yes
-
-Read and inspect your data.
-```{r}
-data <- carData::Cowles |> 
-  glimpse()
-
-skim_without_charts(data)
-```
-
-Center our predictors.
-```{r}
-data <- data |> 
-  mutate(
-    sex_c = if_else(sex == "male", .5, -.5),
-    extraversion_m = extraversion - mean(extraversion)
-  )
-```
-
-We are interested in understanding the effect of extraversion and sex at birth on volunteering for psychological studies. Fit the model.
-```{r}
-m_1 <- glm()
-tidy(m_1)
-```
-
-Some exploration: The outcome `volunteer` is now coded as a factor. Let's transform it into a numeric variable of 0-1. Does the recoding change our results?
-```{r}
-data <- data |> 
-  mutate()
-```
-
-Refit the model!
-```{r}
-m_2 <- glm()
-tidy(m_2)
-```
-
-It appears that the results are the same. Why is that? The default of glm model is to take the lowest level (in this case, no volunteering) as 0.
-
-### Interpret the parameter estimates
-
-How do we interpret these parameter estimates? Each of our parameter estimates makes predictions on the log-odds scale instead of on the probability scale.
-
-Intercept: The log-odds of a person volunteering in a study when they are averaged on extraversion and are in hypothetically in between female and male. 
-
-What does that mean??? It's very hard to interpret!
-
-Instead, we can interpret our parameter estimates using the more interpretable odds scale. To do this, we need to "undo the log" by exponentiating each of the coefficients.
-
-estimated coefficient = log(odds)
-
-e^(estimated coefficient) = odds
-
-`exp(coef(m_1))` gives us e ^ b0 and e^ b1
-
-Intercept: The predicted odds of person volunteering in a study when they are averaged on extraversion and are in hypothetically in between female and male. In this case, these odds are `exp(coef(m_1)[1])`. To make this more interpretable, it probably makes most sense to convert this into a probability: `exp(coef(m_1)[1])/(1 + exp(coef(m_1)[1]))`
-
-For a person with a score of 0 on both predictors, there is a 41.56% probability of volunteering in a study.
-
-The other parameter estimates are odds ratios (now that we have converted them from log odds to odds). Odds ratios are ratios of two odds. The interpretation for an odds ratio is different from other parameters for effects we have discussed before:
-
-The odds increase by a factor of ... for a one unit increase in X.
-
-Effect of e1: Sex influences one's chance of volunteering in a study for someone of averaged extraversion
-exp(coef(m_1)[3])
-
-In this case, the odds of volunteering increase by a factor of 0.78 from females to males for someone of averaged extraversion.
-
------
-
-### Interpret the statistics
-
-R reports z tests of these parameters in the default tidy output.
-
-**What's the problem with a z test, and what's an alternative?**
-
-> Your answer here.
-
-likelihood ratio test on extraversion:
-```{r}
-compact <- 
-anova(compact, m_1)
-```
-
-### Interpreting the Graphs (Can skip if you're running out of time!!)
-
-Now let's see how the graph will change as our regression coefficients change. What do you observe?
-```{r}
-# simulate data
-d <- tibble(
-  x = -200:200,
-  "0" = exp(2 + x * 0),
-  "0.03" = exp(2 + x * 0.03),
-  "0.05" = exp(2 + x * 0.05),
-  "0.08" = exp(2 + x * 0.08)
-) |> 
-  pivot_longer(!x, names_to = "coefficient", values_to = "y")
-
-# plots
-ggplot(d, aes(x = x, y = y / (1 + y), color = coefficient)) +
-  geom_line() +
-  labs(y = "probability")
-```
-
-Larger coefficients lead to steeper slopes, meaning that the probability of y = 1 changes more quickly as x increases.
-
-What if we get negative regression coefficients?
-```{r}
-# simulate data
-d <- tibble(
-  x = -200:200,
-  "0" = exp(2 + x * 0),
-  "-0.03" = exp(2 + x * -0.03),
-  "-0.05" = exp(2 + x * -0.05),
-  "-0.08" = exp(2 + x * -0.08)
-) |> 
-  pivot_longer(!x, names_to = "coefficient", values_to = "y")
-
-# plots
-ggplot(d, aes(x = x, y = y / (1 + y), color = coefficient)) +
-  geom_line() +
-  labs(y = "probability")
-```
-
-Again, larger absolute value in coefficients lead to steeper slopes. The probability of y = 1 drops now more quickly as x increases.
-
-### Plotting Exercise
-
-Create a publication quality graph where you depict the probability of volunteering as extraversion changes for each sex.
-
-```{r}
-
-m_graph <- glm()
-
-d_graph <- expand.grid(
-  sex = 
-  extraversion = 
-)
-
-preds <- predict(m_graph, newdata = d_graph, se.fit = TRUE) |> 
-  as_tibble() |> 
-  mutate(
-
-  ) |> 
-  bind_cols(d_graph)
-
-ggplot()
-
-```
-
-**Congratulations on finishing your last lab:D!!**
+**Good luck on the finals, everyone!**
