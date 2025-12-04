@@ -17,7 +17,7 @@ Today we will cover:
 1. Conceptual exercise: understanding effects from a regression equation through manual calculations.
 2. Continuous-by-continuous interactions
 3. 2-by-2 ANOVA
-4. Dummy Coding & Contrast Coding for multi-level categorical variables
+4. Dummy Coding for multi-level categorical variables
 
 ## Conceptual Exercise
 
@@ -373,46 +373,5 @@ lm(income ~ type + education_m, data) |> tidy()
 
 ```
 
-### Contrast Coding
-
-We want to test a more specific hypothesis that Professional workers earn more than White Collar workers and Blue Collar workers. We expect no differences between White Collar and Blue Collar workers in terms of income. In other words, Professionals make more money than White and Blue Collar workers, while White and Blue Collar workers do not differ in their income. 
-
-**What contrasts are we testing?**
-
-1) White & Blue Collar vs. Professional; 2) White vs. Blue Collar
-
-Let's manually create a unit-weighted contrast.
-```{r}
-
-```
-
-Fit our model
-```{r}
-
-```
-
-We can also use the `matrix` function to create contrast coding
-```{r}
-our_contrasts <- matrix(c(1/3, -2/3, 1/3,
-                            -.5,  0, .5), 
-                        ncol = 2,
-                        dimnames = list(c("Blue Collar", "Professional", 
-                                          "White Collar"),
-                                        c("prof_other", "bc_wc")))
-
-our_contrasts
-contrasts(data$type) <- our_contrasts
-```
-
-Fit the model again. Are the results different?
-```{r}
-
-```
-
-**How to test the main effect of type?**
-
-```{r}
-
-```
 
 **Good luck on the finals, everyone!**

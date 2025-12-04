@@ -1,0 +1,203 @@
+---
+title: "hw_14_key" 
+author: "TAs" 
+date: "`r lubridate::today()`"
+format: 
+  html:
+    toc: true 
+    toc_depth: 4
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Part A: Conceptual Questions
+
+### 1. Imagine you run a study with three groups, the red group, the yellow group, and the blue group. You have two hypotheses: (1) The red group is reliably different from the yellow group, and (2) the red group is reliably different from the blue group. Create a series of contrasts that allow you to test the two hypotheses. Imagine you regress your outcome variable on the contrasts you just generated. What will the intercept in the resulting regression equation be equivalent to? 
+
+> Your answer here.
+
+## Part B: Data Analysis - Dummy/Contrast Coding
+
+```{r}
+#| message: false
+
+options(conflicts.policy = "depends.ok") 
+library(tidyverse)
+library(skimr)
+library(broom)
+library(janitor)
+
+theme_set(theme_classic()) 
+
+path_data <- "homework/data"
+```
+
+A group of educational psychologists devises an intervention that they believe will help boost the performance of students in a large University class. They also wonder if this intervention is more effective for minority students in the class (though they don’t have any previous data suggesting whether this would be the case). The codebook for this dataset is given below.
+
+| Variable name | Description                     | Values                       |
+|-------------------|----------------------------|--------------------------|
+| id            | Student ID                      | 1 – 120                      |
+| condition     | Experimental condition          | “control”, “intervention”    |
+| race          | Student race                    | “black”, “hispanic”, “white” |
+| perf          | Student’s classroom performance | 0 - 100                      |
+
+### 1. Data Exploration
+
+#### a. Read in and inspect data (`hw_14_three_level.dat`). Drop the ID column. Class appropriate variables as factors, specifying their levels.
+
+```{r}
+
+```
+
+
+#### b. Obtain descriptive statistics for the performance variable (n, mean, sd, min, max) broken down by ...
+
+**condition**
+
+```{r}
+
+```
+
+**race**
+
+```{r}
+
+```
+
+**condition and race**
+
+```{r}
+
+```
+
+### 2. You now want to test whether the performance scores differ for any pairwise comparisons of racial groups (i.e., Black vs. Hispanic, Black vs. White, Hispanic vs. White). Add condition as a covariate (do not test any interaction effects).
+
+#### a. What type of coding for `race` is most suited to test this effect?
+
+> Your answer here.
+
+#### b. Mean center `condition` and transform `race` to desired coding scheme. Follow the naming convention we covered in the lab script.
+
+```{r}
+
+```
+
+#### c. Fit the model
+
+```{r}
+
+```
+
+#### d. Give a brief interpretation of each coefficient in these models (intercept included).
+
+> Your answer here.
+
+#### e. Test the main effect of race. Report the F-statistic in one sentence.
+
+```{r}
+
+```
+
+> Your answer here.
+
+### 3. We want to test the hypothesis that 1) Averaging across experimental conditions, White children have higher scores than non-White children on the performance test; and 2) averaging across experimental conditions, Black children have higher scores than Hispanic children on the performance test. Add condition_c as a covariate in your model.
+
+#### a. Create the appropriate coding for `race` to test this hypothesis.
+
+```{r}
+
+```
+
+#### b. Fit the model
+
+```{r}
+
+```
+
+#### c. Do the results support our hypothesis?
+
+```{r}
+
+```
+
+> Your answer here.
+
+#### Create a publication quality graph that shows performance broken down by race and experimental condition. Put `race` on the x-axis.
+
+```{r}
+
+```
+
+## Part C: Data Analysis - GLM
+
+You will be working with the data file “HelpingData.dat,” which is loosely based on a famous social psychology study by Darley and Batson (1973).
+
+The researchers were interested in the situational and personality factors related to helping behavior, and conducted their study with senior seminary students. The researchers told the seminary students that the study was about public speaking, and informed the students that they would be asked to deliver a speech to a group of fellow seminary students. The seminary students were randomly assigned to deliver a speech either on ways to find jobs after the seminary (control) or on the parable of the Good Samaritan (Samaritan).
+
+(For reference: The parable of the Good Samaritan is a parable in the Bible in which a Jewish man is beaten and left on the side of the road. A priest and a Levite pass by and don’t help him. However, a Samaritan, a member of a group that generally dislikes Jews, does help the beaten Jewish man. This parable is supposed to be a message on the importance of helping others.)
+
+After telling the seminary students about the topic of the speech, the researchers gave the students some time to prepare their speech. Afterwards, the researchers retrieved the students and told them that they were either a few minutes late to their speech (hurry condition) or they had extra time before the speech would start (no hurry condition).
+
+On the way to the speech, the students passed through a hallway where a confederate (i.e., an actor in a study) dressed in ragged clothes sat in a doorway. As the seminary students passed, the confederate would cough twice and groan as if in pain. The dependent measure was whether the participants chose to help the confederate. After the experiment was over, the participants completed a questionnaire which contained a measure of trait altruism. The purpose of the study was to examine whether thinking about issues relevant to helping (i.e., the parable of the Good Samaritan), hurrying, and/or personality characteristics influence the probability of helping. 
+
+**SubID** (numeric; 1 - 200): Participant ID#
+
+**helping** (dichotomous; 0 = did not help, 1 = helped): Whether the participant helped the confederate in the hallway
+
+**hurry** (dichotomous; 0 = no hurry, 1= hurry): Whether the participant was induced to hurry to the speech
+
+**message** (dichotomous; 0 = control, 1 = samaritan): The type of message the participant was asked to deliver
+
+**altruism** (numerous; 1 (low) – 7 (high)): Trait altrusim
+
+### 1. Read in `hw_14_glm.dat` and inspect data
+
+```{r}
+
+```
+
+### 2. Fit a model that tests the researchers’ hypothesis that hurry condition, message condition, and trait altruism predict helping. Don't include interaction terms.
+
+#### a. Center the predictors
+
+```{r}
+
+```
+
+#### b. Fit the model
+
+```{r}
+
+```
+
+#### c. Interpret the parameter estimates for intercept, hurry_c, and altruism_c
+
+> Your answer here.
+
+#### d. Conduct a likelihood ratio test for each parameter estimate. Write a sentence reporting your results.
+
+on hurry_c
+```{r}
+
+```
+
+on message_c
+```{r}
+
+```
+
+on altruism_c
+```{r}
+
+```
+
+#### e. Create a publication quality graph that shows the probability of helping as a function of altruism, broken down by hurry and message condition. Google facet_wrap() and learn how to use it!
+
+```{r}
+
+```
+
+## How long did it take to finish this homework?
+
+> Your answer here.
