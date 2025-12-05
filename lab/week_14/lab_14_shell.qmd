@@ -23,32 +23,77 @@ Today we will cover:
 
 Suppose you sampled 400 participants and asked them to report whether or not they read for pleasure (a score of -0.5 indicates they do not read for pleasure and a score of 0.5 indicates they do read for pleasure), the number of hours spent outside per week (ranging from 0 to 20), and happiness (measured on a 50-point scale with greater numbers indicating greater happiness). There are the same number of people who read for pleasure as there are people who do not read for pleasure. On average, participants in your sample spend 10 hours outside per week. You obtain the following results:    
 
+$happiness = 10 + 3 * read_c + 2 * outside_c + 0.5 * read_c * outside_c$   
+
 
 ### 1. What is the magnitude of the simple effect of time spent outside on happiness for participants who read for pleasure?
 
+    Plug 0.5 into our equation for read_c   
+    $10 + 3 * 0.5 + 2 * outside_c + 0.5 * 0.5 * outside_c$    
+    $11.5 + 2.25 * outside_c$   
+    The simple effect is 2.25   
+
+    (If students ask) We can use our regression equation to find the slope at two levels of outside_c   
+    $10 + 3 * 0.5 + 2 * 0 + 0.5 * 0.5 * 0 = 11.5$   
+    $10 + 3 * 0.5 + 2 * 1 + 0.5 * 0.5 * 1 = 13.75$   
+    13.75 - 11.5 = 2.25
 
 ### 2. What is the magnitude of the simple effect of time spent outside on happiness for participants who do not read for pleasure?   
 
+    Plug -0.5 into our equation for read_c    
+    $10 + 3 * -0.5 + 2 * outside_c + 0.5 * -0.5 * outside_c$   
+    $8.5 + 1.75 * outside_c$   
+    The simple effect is 1.75   
+
+    (If students ask) We can use our regression equation to find the slope at two levels of outside_c    
+    $10 + 3 * -0.5 + 2 * 0 + 0.5 * -0.5 * 0 = 8.5$   
+    $10 + 3 * -0.5 + 2 * 1 + 0.5 * -0.5 * 1 = 10.25$    
+    10.25 - 8.5 = 1.75    
 
 ### 3. What is the effect of reading on happiness for participants with an average number of hours spent outside? Is this a simple or main effect?   
 
+    This is b1.    
+
+    (If students ask) We can also demonstrate this algebraically:     
+    $10 + 3 * 0.5 + 2 * 0 + 0.5 * 0.5 * 0 = 11.5$   
+    $10 + 3 * -0.5 + 2 * 0 + 0.5 * -0.5 * 0 = 8.5$    
+    11.5 - 8.5 = 3    
+
+    This is the simple effect of reading, but since the number of hours spent outside is a centered continuous predictor, it is conceptually equivalent to the main effect of reading.   
 
 ### 4. Describe in words how the effect of reading on happiness varies by the number of hours spent outside.    
 
+    This value is b3. For every one-unit increase in time spent outside, the (simple) effect of reading increase by 0.5 units.     
 
 ### 5. How many hours does a person spend outside if they have a score of -3 on the outside_c predictor?   
 
+    Since our average is 10 hours spent outside, participants with a score of -3 spend 7 hours outside per week.   
 
 ### 6. What is the predicted happiness for a person who spends 14 hours outside per week and does not read for pleasure?   
 
+    outside_c = 4, read_c = -0.5
+    outside_c = 4 because our intercept represents the average amount of time outside, 10 hours (10 + 4 = 14!)
+    $10 + 3 * -0.5 + 2 * 4 + 0.5 * -0.5 * 4 = 15.5$   
 
 ### 7. Change the coding of reading to 0 = does not read and 1 = reads for pleasure and fill in the resulting equation:    
 
+    happiness = ___ + ___ * read + ___ * outside_c + ___ * read * outside_c    
+
+    b0 = $10 + 3 * -0.5 + 2 * 0 + 0.5 * -0.5 * 0$    
+    b1 = the simple effect of reading on time spent outside for participants with an average amount of time spent outside. b1 does not change (b1 = 3).   
+    b2 = the simple effect of spending time outside for participants who do not read for pleasure. We found this in a previous question (b2 = 1.75).    
+    b3 = the interaction effect which has also not changed (b3 = 0.5).   
+
+    happiness = 8.5 + 3 * read + 1.75 * outside_c + 0.5 * read * outside_c    
 
 ### 8. How (if at all) will the standard errors for the parameter estimates for the interaction terms of the two models (one with read_c and one with read) differ?  
 
+    Our parameter estimates and the associated SE will remain unchanged between the two models. The highest-order interaction is not affected by recoding of the variables that constitute it.    
 
 ### 9. Write the augmented and compact model for the model comparison which tests whether the read_c * outside_c interaction effect is significant.    
+
+    Compact: $happiness = b0 + b1 * read_c + b2 * outside_c$    
+    Augmented: $happiness = b0 + b1 * read_c + b2 * outside_c + b3 * read_c * outside_c$
 
 
 **End of exercise!**   
@@ -85,49 +130,60 @@ In addition, parents of the preschooler also indicated the extent to which the p
 ###  11. Within the collaborate condition, it is possible that preschoolers benefit from developmental maturity (i.e., being older) only if they like interacting with and helping other kids (i.e., are prosocial). Thus, the researcher now wants to test the below exploratory hypothesis: *within the Collaborate condition*, the effect of age is moderated by preschooler prosociality. Load in the data (from week 12's file).
 
 ```{r}
-d <- 
+d <- read_csv(here::here(path_data, "lab_12_data.csv"),
+              show_col_types = FALSE) |> 
+  glimpse()
 ```
 
 
 ### 12. Explore the univariate statistics and distributions related to `age` and `prosociality`.
 
 ```{r}
+d |> skim_without_charts(age, prosociality)
 
+plot(density(d$age))
+plot(density(d$prosociality))
 ```
 
 ### 13. Subset the data and get observations in the Collaborate condition only.
 
 ```{r}
-d_collab <- 
+d_collab <- d |> filter(condition == 1)
 ```
 
 ### 14. Prepare your data for analysis by centering quantitative variables.
 
 ```{r}
-
+d_collab <- d_collab |> mutate(
+  age_c = age - mean(age),
+  prosociality_c = prosociality - mean(prosociality)
+)
 ```
 
 ### 15. Fit the appropriate model to test the hypothesis.
 
 ```{r}
-
+m_1 <- lm(learning ~ age_c*prosociality_c, data = d_collab)
 ```
 
 
 ### 16. Interpret the coefficients.
 
 ```{r}
-
+tidy(m_1)
 ```
 
-1. Intercept: 
+1. Intercept: b0 = 0.417  
+The preschoolers who are of average age (M_age = `r mean(d_collab$age)` in months) and and average prosociality (M_prosociality = `r mean(d_collab$prosociality)`) are predicted to use the sponge to help clean up the water on 41.7% of the trials.
 
-2. age_c: 
+2. age_c: b = 0.025     
+Preschoolers with average prosociality are predicted to use the sponge to help clean up the water on 2.5% more trials if they are 1 month older, controlling for the effects of prosociality and its interaction with age.
 
-3. prosociality_c: 
+3. prosociality_c: b = 0.022   
+Preschoolers with average age are predicted to use the sponge to help clean up the water on 2.2% more trials if they scored 1 point higher on the prosociality scale, controlling for the effects of age and its interaction with prosociality.
 
-4. interaction: 
-
+4. interaction: b = 0.013   
+The effect of age is stronger in magnitude for preschoolers with higher prosociality, such that the increased likelihood of using the sponge to help is associated with being 1 month older is 1.3 units larger if the preschooler scored 1 point higher on the prosociality scale. 
 
 ### 17. Publication-quality graph for this model.
 
@@ -204,22 +260,35 @@ d <- tibble(cond = sample(0:1, 600, replace = TRUE),
 
 ### 19. Examine the univariate and bivariate summary statistics for the variables in the dataframe, `d`.
 ```{r}
+skim(d) |> 
+  yank("numeric")
 
+d |> select(where(is.numeric)) |>  
+  cor() |> 
+  round(2)
 ```
 
 
 ### 20. Create two tables reporting the number of people at each level of the predictor variables (`cond` and `political_dichot`).
 ```{r}
-
+table(d$cond)
+table(d$political_dichot)
 ```
 
 ### 21. Create a table reporting the average support score for each level of the predictor variables.
 ```{r}
+d |> 
+  group_by(cond) |> 
+  summarize(mean_support = mean(support))
 
+d |> 
+  group_by(political_dichot) |> 
+  summarize(mean_support = mean(support))
 ```
 
 ### 22. Create a contingency table reporting the average support score for all combinations of condition and political affiliation (measured dichotomously).    
 
+TAs, walk through each step of the code to remind students what each line is doing, but note that they have not learned pivot yet so they will not be writing this code themselves. 
 
 ```{r}
 table_avg<- d |> 
@@ -235,15 +304,21 @@ print(table_avg)
 
 Based on the table you created, are the means consistent with a model in which the interaction between `cond` and `political_dichot` is significant? How can you tell?   
 
-  
+The simple effect of political affiliation differs at each level of condition as do the simple effects of condition at each level of political affiliation. An interaction means that the magnitude of the simple effects differs. Thus, these data are so far consistent with the proposed interaction. However, we will not know for sure until we test the model.   
 
 **If you were to fit a linear model such that:**
 $support = b0 + b1*cond + b2*political + b3*cond*political$
 **...what values will b0, b1, b2, and b3 be, by just looking at the table you created above?**
 
+b0 = prediction when `cond` and `political_dichot` both are 0 = 5.09
+b1 = simple effect of `cond` when `political_dichot` is 0 = `r 5.26 - 5.09`
+b2 = simple effect of `political_dichot` when `cond` is 0 = `r 4.90 - 5.09`
+b3 = difference in simple effects of `cond` across `political_dichot` 
+   = `r (6.01 - 4.90) - (5.26 - 5.09)`
 
 
-### 23. Fit a linear model to test whether condition and political affiliation (measured dichotomously) interact to predict support for the tax policy. Use contrast coded variables. 
+### 23. Fit a linear model to test whether condition and political affiliation (measured dichotomously) interact to predict support for the tax policy. Use contrast coded variables.
+
 ```{r}
 d <- d |> 
   mutate(cond_c = recode(cond, "0" = -0.5, "1" = 0.5),
@@ -306,7 +381,8 @@ In this example, we want to test the hypothesis that average income will differ 
 
 Read in `lab_14_data.csv` and inspect the data
 ```{r}
-data <- 
+data <- read_csv(here::here(path_data, "lab_14_data.csv")) |> 
+  glimpse()
 ```
 
 
@@ -314,31 +390,36 @@ data <-
 
 First, let's mean center the covariate education.
 ```{r}
-
+data <- data |> 
+  mutate(education_c = education - mean(education, na.rm = TRUE))
 ```
 
 Create dummy variables using professional as a reference group
 ```{r}
-
+data <- data |> 
+  mutate(blue_d3 = if_else(type == "Blue Collar", 1, 0),
+         white_d3 = if_else(type == "White Collar", 1, 0))
 ```
 
 Now let's fit the model and see what the output is
 ```{r}
-
+m_1 <- lm(income ~ blue_d3 + white_d3 + education_c, data = data)
+tidy(m_1)
 ```
 
+income = 7639 + (-102) * blue_d3 + (-2788) * white_d3 + 888 * education_c
 
 **What's the predicted income for someone with average levels of education in blue collar jobs?**
 
-
+7639 + (-102) = 7537
 
 **What's the predicted income for someone with average levels of education in professional jobs?**
 
-
+7639
 
 **What's the predicted income for someone with average levels of education in white collar jobs?**
 
-
+7639 + (-2788) = 4851
 
 ``CHECKPOINT``
 
@@ -362,15 +443,15 @@ contrasts(data$type)
 
 Compare the results to the hand-coded version. Is there any difference?
 ```{r}
-lm(income ~ type + education_m, data) |> tidy()
+lm(income ~ type + education_c, data) |> tidy()
 ```
 
 **What model comparison will get you the test of the main effect of group? Run that comparison**
 
-
+compact: income ~ education_c; augmented: income ~ blue_d3 + white_d3 + education_m
 
 ```{r}
-
+anova(lm(income ~ education_m, data), m_1)
 ```
 
 
