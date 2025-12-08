@@ -68,7 +68,7 @@ No homework this week. Happy Halloween!
 ## Week 14: Due Friday 12/12 at 8:30 am
 
 - [shell](/homework/week_14/hw_14_shell.qmd)
-- [data1](/homework/data/hw_14_glm.dat)
+- [data1](/homework/data/hw_14_interactions.csv)
 - [data2](/homework/data/hw_14_three_level.dat)
 - key: [html](https://dionysus.psych.wisc.edu/610/homework/hw_14_key.html); [qmd](https://dionysus.psych.wisc.edu/610/homework/hw_14_key.qmd)
 
