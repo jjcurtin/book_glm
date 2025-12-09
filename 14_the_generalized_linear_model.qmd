@@ -299,6 +299,8 @@ m_glm |> tidy()
 
 ```{r}
 #| code-fold: true
+#| out-height: 4in
+#| out-width: auto
 
 x <- tibble(gpa = seq(0, 6, length.out = 500))
 
@@ -322,6 +324,8 @@ NOTE: I plotted GPA from 0 to 6 to show the full range of the logistic function.
 ```{r}
 #| echo: false
 #| warning: false
+#| out-height: 4in
+#| out-width: auto
 
 # warning indicates perfect separation.  This was intentional for this example
 ex_data <- tibble(x = c(rep(1:4, 10), rep(5, 10), rep(6:10, 10)),
@@ -360,6 +364,8 @@ What other non-linear shapes do you know how to model in the general linear mode
 Simple monotone
 ```{r}
 #| echo: false
+#| out-height: 4in
+#| out-width: auto
 
 tibble(x = 1:100,
        y = sqrt(x)) |> 
@@ -374,6 +380,10 @@ tibble(x = 1:100,
 Quadradic
 
 ```{r}
+#| echo: false
+#| out-height: 4in
+#| out-width: auto
+
 tibble(x = -100:100,
        y = x + x^2) |> 
   ggplot(aes(x = x, y = y)) +
@@ -387,6 +397,10 @@ tibble(x = -100:100,
 Cubic
 
 ```{r}
+#| echo: false
+#| out-height: 4in
+#| out-width: auto
+
 tibble(x = -100:100,
        y = x + x^2 + x^3) |> 
   ggplot(aes(x = x, y = y)) +
@@ -401,6 +415,8 @@ Not simple monotone (logistic function has two bends)
 Not cubic (cubic is unbounded)
 ```{r}
 #| echo: false
+#| out-height: 4in
+#| out-width: auto
 
 m_glm |> tidy()
 
@@ -500,7 +516,7 @@ This is the model we are fitting for logistic regression.
 We can manipulate the formula to isolate $\pi$ on one side such that it predicts the probability ($\pi$) of $Y = 1$ as a function of $X$s.
 
 - $\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$    
-- $\pi_Y$ = $\frac{1}{1 + e^{-(b_0 + b_1X_1 + ... + b_kX_k)}}$}
+- $\pi$ = $\frac{1}{1 + e^{-(b_0 + b_1X_1 + ... + b_kX_k)}}$
 - This is often how we will use the model for prediction (and plots)
 - Probability is non-linear on $X$ (as we saw in the previous plot) 
 
@@ -510,7 +526,7 @@ We can manipulate the formula to isolate $\pi$ on one side such that it predicts
 m_glm |> tidy()
 ```
 
-$\pi = \frac{e^{-14.5 + 4.1}}{1 + e^{-14.5 + 4.1X_1}}$   
+$\pi$ = $\frac{1}{1 + e^{-(14.5 + 4.1*X_1)}}$
 
 --------------------------------------------------------------------------------
 
@@ -522,14 +538,17 @@ But lets consider simple (one $X$) logistic regression to understand what the in
 
 - $\pi = \frac{1}{1 + e^{-(b_0 + b_1X_1)}}$    
 
-First 
+Over the next several slides, we will work through variations of $b_0$ and $b_1$ to understand how they affect the shape and location of the logistic function.
 
-- $b_0 = 0$    
-- $b_1 = 0$
+------------------------------------------------------------------------------
 
-No relationship between $X$ and $\pi$.  $\pi$ is always .5.
+$b_0 = 0$; $b_1 = 0$
+
+- No relationship between $X$ and $\pi$.  $\pi$ is always .5.
 ```{r}
 #| echo: false
+#| out-height: 4in
+#| out-width: auto
 
 tibble(x = -10:10,
        b0 = 0,
@@ -543,20 +562,16 @@ tibble(x = -10:10,
 
 --------------------------------------------------------------------------------
 
-$\pi = \frac{1}{1 + e^{-(b_0 + b_1X_1)}}$    
+$b_0 = 0$; $b_1 = 0 \text{ to }1$   
 
-- $b_0 = 0$    
-
-- $b_1 = 0 \text{ to }1$   
-
-As $b_1$ becomes more positive, the slope of the logistic function increases.  
-
+- As $b_1$ becomes more positive, the slope of the logistic function increases.  
 - The steeper the slope, the more quickly the probability of $y = 1$ changes as $x$ changes.  
 - As $X$ increases, the probability of $Y = 1$ increases.
-
-$\pi$ is 0.5 at mean of $x$ (because $b_0 = 0$).  
+- $\pi$ is 0.5 at mean of $x$ (because $b_0 = 0$).  
 ```{r}
 #| echo: false
+#| out-height: 4in
+#| out-width: auto
 
 expand.grid(x = -10:10,
             b0 = 0,
@@ -571,21 +586,17 @@ expand.grid(x = -10:10,
 
 --------------------------------------------------------------------------------
 
-$\pi = \frac{1}{1 + e^{-(b_0 + b_1X_1)}}$    
+$b_0 = 0$; $b_1 = -1 \text{ to }0$   
 
-- $b_0 = 0$    
-- $b_1 = -1 \text{ to }0$   
-
-As $b_1$ becomes more negative (relative to 0), the negative slope of the logistic function increases.  
-
+- As $b_1$ becomes more negative (relative to 0), the negative slope of the logistic function increases.  
 - The steeper the slope, the more quickly the probability of $y = 1$ changes as $x$ changes.  
 - As $X$ increases, the probability of $Y = 1$ decreases.
-
-$\pi$ is 0.5 at mean of $x$ (because $b_0 = 0$).  
-
+- $\pi$ is 0.5 at mean of $x$ (because $b_0 = 0$).  
 
 ```{r}
 #| echo: false
+#| out-height: 4in
+#| out-width: auto
 
 expand.grid(x = -10:10,
             b0 = 0,
@@ -600,13 +611,17 @@ expand.grid(x = -10:10,
 
 --------------------------------------------------------------------------------
 
-$\pi = \frac{1}{1 + e^{-(b_0 + b_1X_1)}}$    
+$b_0 = -5 \text{ to } 5$; $b_1 = 0$   
 
-- $b_0 = -5 \text{ to } 5$    
-- $b_1 = 0$   
+- When $b_0 = 0$, the model predicts $\pi = 0.5$ at the mean of $X$.
+- As $b_0$ becomes more positive, the model predicts higher probabilites for $Y = 1$ at the mean of $X$.  
+- As $b_0$ becomes more negative, the model predicts lower probabilites for $Y = 1$
+- This is clearest when $b_1 = 0$.   
 
 ```{r}
 #| echo: false
+#| out-height: 4in
+#| out-width: auto
 
 expand.grid(x = -10:10,
             b0 = c(-5, 0, 5),
@@ -619,25 +634,19 @@ expand.grid(x = -10:10,
   scale_y_continuous(limits = c(0, 1))
 ```
 
-When $b_0 = 0$, the model predicts $\pi = 0.5$ at the mean of $X$.
-
-- As $b_0$ becomes more positive, the model predicts higher probabilites for $Y = 1$ at the mean of $X$.  
-- As $b_0$ becomes more negative, the model predicts lower probabilites for $Y = 1$
-- This is clearest when $b_1 = 0$.   
 
 --------------------------------------------------------------------------------
 
-$\pi = \frac{1}{1 + e^{-(b_0 + b_1X_1)}}$    
+$b_0 = -5 \text{ to } 5$; $b_1 = 1$   
 
-- $b_0 = -5 \text{ to } 5$    
-- $b_1 = 1$   
-
-But the same is true for non-zero values for $b_1$.  
-
+- But the same is true for non-zero values for $b_1$.  
 - Increases in probability for $Y = 1$ result in left shift of the logistic function.
 - Decreases in probability for $Y = 1$ result in right shift of the logistic function.
+
 ```{r}
 #| echo: false
+#| out-height: 4in
+#| out-width: auto
 
 expand.grid(x = -10:10,
             b0 = c(-5, 0, 5),
@@ -697,14 +706,10 @@ $\pi = \frac{3}{3 + 1} = .75$
 
 Odds = $\frac{\pi}{1-\pi}$  
 
-::: {.callout-important}
-# Question
-What are the approximate odds of getting into grad school with a GPA of 3.5?
-:::   
-
-
 ```{r}
 #| echo: false
+#| out-height: 3in
+#| out-width: auto
 
 ggplot(data = data, aes(x = gpa, y = admit)) +
   geom_jitter(width = 0, height = .04) +
@@ -716,6 +721,11 @@ ggplot(data = data, aes(x = gpa, y = admit)) +
   geom_vline(xintercept = 3.5, color = "dark green", linewidth = .75) +
   geom_hline(yintercept = .49, color = "dark green", linewidth = .75)
 ```
+
+::: {.callout-important}
+# Question
+What are the approximate odds of getting into grad school with a GPA of 3.5?
+:::   
 
 :::{.fragment}
 Odds = $\frac{0.5}{1-0.5} = 1[1:1]$  
@@ -826,6 +836,8 @@ We transform the logit function to either odds or probability functions to conve
 
 ```{r}
 #| echo: false
+#| out-height: 4in
+#| out-width: auto
 
 plot_logit <- preds |> 
   mutate(value = log(value/(1-value))) |> 
@@ -871,6 +883,8 @@ The log-odds of admission increases by 4.1 units for every 1 point increase on G
 
 ```{r}
 #| echo: false
+#| out-height: 4in
+#| out-width: auto
 
 plot_logit +
   labs(title = NULL)
@@ -888,6 +902,8 @@ $\pi = \frac{1}{1 + e^{-(b_0 + b_1X_1 + ... + b_kX_k)}}$
 
 ```{r}
 #| echo: false
+#| out-height: 4in
+#| out-width: auto
 
 plot_logit + plot_odds + plot_prob
 ```
@@ -1099,6 +1115,8 @@ odds1
 ```
 :::
 
+--------------------------------------------------------------------------------
+
 ::::{.fragment}
 :::{.callout-important}
 # Question 
@@ -1218,6 +1236,8 @@ The effect of GPA was significant, $b = 4.26, SE = 0.45, \chi^2(1) = 142.97, p <
 
 ```{r}
 #| code-fold: true
+#| out-height: 4in
+#| out-width: auto
 
 ranks <- tibble(rank = fct(rep(c("1", "2", "3", "4"), 50), 
                            levels = c("1", "2", "3", "4")),
