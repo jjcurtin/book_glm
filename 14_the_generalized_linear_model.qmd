@@ -767,7 +767,7 @@ Remember that we said the link function for logistic regression is the logit fun
 
 **Logistic function (probability Y = 1):**   
 
-- $\pi = \frac{e^{b_0 + b_1X_1 + ... + b_kX_k}}{1 + e^{b_0 + b_1X_1 + ... + b_kX_k}}$  
+- $\pi$ = $\frac{1}{1 + e^{-(b_0 + b_1X_1 + ... + b_kX_k)}}$}
 - $0 \le\pi \le 1$   
 
 **Convert $\pi$ to odds (odds of Y = 1):**    
@@ -1183,7 +1183,7 @@ anova(glm(admit ~ d_rank1 + d_rank2 + d_rank3, data = data, family = binomial(lo
 
 What about interactions?  This is a more complicated story.
 
-Interactions with respect to log-odds($Y$) are handled exactly in the linear model
+Interactions with respect to log-odds($Y$) are handled exactly as in the linear model
 
 - Use product terms for regressors
 - Center regressors for overall/marginal effects
@@ -1196,7 +1196,7 @@ Interactions with respect to log-odds($Y$) are handled exactly in the linear mod
 However, we often want to consider interactions with respect to changes in the probability of $Y = 1$.
 
 - This is NOT what is tested and an interaction for log-odds ($Y$) is not the same as an interaction for probability ($Y$).
-- The interaction can be significant in log-odds($Y$) but not for probsbility ($Y$) and vice versa!
+- The interaction can be significant in log-odds($Y$) but not for probability ($Y$) and vice versa!
 - Also, the interaction is not constant across values of other covariates/predictors in the model!
 - Use interactions sparingly if at all in logistic regression.
 - Maybe linear probability model?
