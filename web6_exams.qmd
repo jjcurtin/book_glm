@@ -13,6 +13,7 @@
 
 ## Application Exam 3
 
-- [data1](https://dionysus.psych.wisc.edu/610/exams/Stepping2.dat)
-- [data2](https://dionysus.psych.wisc.edu/610/exams/donation.csv)
+- [data1](https://dionysus.psych.wisc.edu/610/exams/diamond.dat)
+- [data2](https://dionysus.psych.wisc.edu/610/exams/coffee_sleep.csv)
+- [data3](https://dionysus.psych.wisc.edu/610/exams/study_genre_data.csv)
 - [exam shell](https://dionysus.psych.wisc.edu/610/exams/app_exam_3_shell.qmd)
